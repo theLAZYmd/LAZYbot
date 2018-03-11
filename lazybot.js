@@ -38,6 +38,7 @@ client.on("message", (message) => {
     }});
   } else
 
+    
   if(message.content.startsWith("r/")) {
     message.channel.send({embed: {
       color: 53380,
