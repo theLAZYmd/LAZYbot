@@ -68,11 +68,11 @@ client.on("message", (message) => {
 
   if (command === "tf") {
 
-  let [tgames,ttime,tincrement] = args
+  let [games,time,increment] = args
   message.channel.send({embed: {
     title: "House Tournament Reward",
     color: 53380,
-    description: Math.floor(1/10 * parseInt(tgames) * (parseInt(ttime) + 2/3 * parseInt(tincrement))) + " :cherry_blossom:"
+    description: Math.floor(1/10 * parseInt(games) * (parseInt(time) + 2/3 * parseInt(increment))) + " :cherry_blossom:"
   }});
 
   }
