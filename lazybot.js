@@ -11,38 +11,19 @@ const prefix = config.prefix;
 
 client.on("message", (message) => {
 
-  if (!message.content.startsWith(config.prefix) || message.author.bot) return;
-
-  if (message.content.startsWith(config.prefix + "prefix" || config.prefix + "lazybotprefix")) {
-
-    if(message.author.id !== config.ownerID) return;
-    let newPrefix = message.content.split(" ").slice(1, 2)[0];
-    config.prefix = newPrefix;
-  
-    fs.writeFile("./config.json", JSON.stringify(config), (err) => console.error);
-
-    message.channel.send("Prefix has been updated to **" + newPrefix + "** !");
-    console.log(message.author.username + " [" + message.author.id + "] has updated the prefix to " + newPrefix);
-  }
-  
-});
-
-client.on("message", (message) => {
-
   if (!message.content.startsWith("/r/" || "r/") || message.author.bot) return;
 
   if(message.content.startsWith("/r/")) {
     message.channel.send({embed: {
       color: 53380,
-      description: "[**" + message.content +"**](http://www.reddit.com" + message.content + ")"
+      description: `[**${message.content}**](http://www.reddit.com/${message.content})`
     }});
   } else
 
-    
   if(message.content.startsWith("r/")) {
     message.channel.send({embed: {
       color: 53380,
-      description: "[**/" + message.content +"**](http://www.reddit.com/" + message.content + ")"
+      description: `[**${message.content}**](http://www.reddit.com/${message.content})`
     }});
   }
   
@@ -52,8 +33,25 @@ client.on("message", (message) => {
 
   if (!message.content.startsWith(config.prefix) || message.author.bot) return;
 
-  const args = message.content.slice(prefix.length).trim().split(/ +/g);
+  const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
+
+  if(command === "asl") {
+    let [age,sex,location] = args;
+    message.channel.send(`Hello **${message.author.username}**, I see you're a **${age}** year old **${sex}** from **${location}**.`);
+  } else
+
+  if (command === "prefix") {
+
+    if(message.author.id !== config.ownerID) return;
+
+    let [newPrefix] = args;  
+    config.prefix = newPrefix
+    fs.writeFile("./config.json", JSON.stringify(config), (err) => console.error);
+
+    message.channel.send(`Prefix has been updated to **${newPrefix}** !`);
+    console.log(`${message.author.username} [${message.author.id}] has updated the prefix to ${newPrefix}`);
+  } else
 
   if(command === "blah") {
     message.channel.send("Meh.");
@@ -86,3 +84,4 @@ client.on("message", (message) => {
 });
 
 client.login(config.token);
+
