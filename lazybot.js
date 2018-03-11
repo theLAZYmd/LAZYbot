@@ -29,6 +29,26 @@ client.on("message", (message) => {
 
 client.on("message", (message) => {
 
+  if (!message.content.startsWith("/r/" || "r/") || message.author.bot) return;
+
+  if(message.content.startsWith("/r/")) {
+    message.channel.send({embed: {
+      color: 53380,
+      description: "[**" + message.content +"**](http://www.reddit.com" + message.content + ")"
+    }});
+  } else
+
+  if(message.content.startsWith("r/")) {
+    message.channel.send({embed: {
+      color: 53380,
+      description: "[**/" + message.content +"**](http://www.reddit.com/" + message.content + ")"
+    }});
+  }
+  
+});
+
+client.on("message", (message) => {
+
   if (!message.content.startsWith(config.prefix) || message.author.bot) return;
 
   const args = message.content.slice(prefix.length).trim().split(/ +/g);
@@ -52,6 +72,10 @@ client.on("message", (message) => {
 
   if(command === "owner") {
     message.channel.send("theLAZYmd#2353");
+  } else
+
+  if(command === "help") {
+    message.channel.send("This is a pretty basic bot, there isn't much it can help you with.");
   } else
 
   if(command === "who") {
