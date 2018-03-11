@@ -1,5 +1,6 @@
 {
     "token":"Bot Token Here",
     "prefix":"!",
+    "nadekoprefix":".",
     "ownerID":"Owner Id Here"
 }
