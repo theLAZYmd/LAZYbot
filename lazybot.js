@@ -3,6 +3,20 @@ const client = new Discord.Client();
 const config = require("./config.json");
 const fs = require("fs");
 
+//pinging glitch.com
+
+const http = require('http');
+const express = require('express');
+const app = express();
+app.get("/", (request, response) => {
+  console.log(Date.now() + " Ping Received");
+  response.sendStatus(200);
+});
+app.listen(process.env.PORT);
+setInterval(() => {
+  http.get(`http://${process.env.lazybot}.glitch.me/`);
+}, 280000);
+
 //console startup section
 
 client.on("ready", () => {
@@ -18,17 +32,20 @@ client.on("message", (message) => {
 
   if (!(message.content.startsWith("/r/") || message.content.startsWith("r/")) || message.author.bot) return;
 
-  if(message.content.startsWith("/r/")) {
+  const args = message.content.split(/ +/g);
+  const command = args.shift().toLowerCase();
+
+  if(command.startsWith("/r/")) {
     message.channel.send({embed: {
       color: 53380,
-      description: `[**${message.content}**](http://www.reddit.com${message.content})`
+      description: `[**${command}**](http://www.reddit.com${command})`
     }});
   } else
 
-  if(message.content.startsWith("r/")) {
+  if(command.startsWith("r/")) {
     message.channel.send({embed: {
       color: 53380,
-      description: `[**/${message.content}**](http://www.reddit.com/${message.content})`
+      description: `[**/${command}**](http://www.reddit.com/${command})`
     }});
   }
   
