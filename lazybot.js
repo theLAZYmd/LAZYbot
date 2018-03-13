@@ -25,6 +25,9 @@ client.on("ready", () => {
 
 const nadekoprefix = config.nadekoprefix;
 const prefix = config.prefix;
+var i;
+var j;
+var k;
 
 //reddit links section
 
@@ -38,14 +41,14 @@ client.on("message", (message) => {
   if(command.startsWith("/r/")) {
     message.channel.send({embed: {
       color: 53380,
-      description: `[**${command}**](http://www.reddit.com${command})`
+      description: `[${command}](http://www.reddit.com${command})`
     }});
   } else
 
   if(command.startsWith("r/")) {
     message.channel.send({embed: {
       color: 53380,
-      description: `[**/${command}**](http://www.reddit.com/${command})`
+      description: `[/${command}](http://www.reddit.com/${command})`
     }});
   }
   
@@ -59,6 +62,33 @@ client.on("message", (message) => {
 
   const args = message.content.slice(config.nadekoprefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
+
+  //@here command
+   
+  var notifycommand = [
+    "notify",
+    "here",
+    "tournamentstarting"
+  ];
+
+  var domain = [
+    "http://lichess.org",
+    "http://www.chess.com",
+    "http://bughousetest.com",
+    "https://lichess.org",
+    "https://www.chess.com",
+    "https://bughousetest.com"
+  ];
+
+  for (i = 0; i < 3; i++) {
+    for (j = 0; j < 6; j++) {
+        if(message.content.startsWith (config.nadekoprefix + notifycommand[i] + " " + domain[j])) {
+          message.channel.send("@here");
+        let [link] = args;
+          console.log(`${message.author.username} has sent out a ping for ${link}.`);
+  }}}
+
+  //change nadekoprefix
 
   if (command === "nadekoprefix") {
 
@@ -92,6 +122,10 @@ client.on("message", (message) => {
     description: Math.floor(1/10 * parseInt(games) * (parseInt(time) + 2/3 * parseInt(increment))) + " :cherry_blossom:"
   }});
 
+  } else
+
+  if(command === "everyone") {
+    message.channel.send("Why would you try and do that tho");
   }
 
 });
@@ -120,10 +154,6 @@ client.on("message", (message) => {
     message.channel.send(`Hello **${message.author.username}**, I see you're a **${age}** year old **${sex}** from **${location}**.`);
   } else
 
-  if(command === "blah") {
-    message.channel.send("Meh.");
-  } else
-
   if(command === "ping") {
     message.channel.send("pong!");
   } else
@@ -140,15 +170,14 @@ client.on("message", (message) => {
     message.channel.send("theLAZYmd#2353");
   } else
 
-  if(command === "help") {
-    message.channel.send("This is a pretty basic bot, there isn't much it can help you with.");
-  } else
-
   if(command === "who") {
     message.channel.send("I am LAZYbot#2309");
+  } else
+
+  if(command === "help") {
+    message.channel.send("This is a pretty basic bot, there isn't much it can help you with.");
   }
 
 });
 
 client.login(config.token);
-
