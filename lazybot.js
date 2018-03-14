@@ -123,6 +123,58 @@ client.on("message", (message) => {
   }});
 
   } else
+    
+//Conversion functions
+
+  if (command === "decimaltous") {
+
+    let [decimalodds] = args
+
+    if (decimalodds < 1) {
+      message.channel.send({embed: {
+        title: "Decimal to US Odds",
+        color: 431075,
+        description: "Error: Decimal odds must be greater or than 1."
+      }});
+    } else
+
+    if (1 <= decimalodds && decimalodds < 2) {
+      message.channel.send({embed: {
+        title: "Decimal to US Odds",
+        color: 431075,
+        description: parseInt(-100/(decimalodds-1))
+      }});
+    } else
+
+    if (2 < decimalodds) {
+      message.channel.send({embed: {
+        title: "Decimal to US Odds",
+        color: 431075,
+        description: "+" + parseInt(100*(decimalodds-1))
+      }});
+    }
+  } else
+
+  if (command === "ustodecimal") {
+
+    let [usodds] = args
+
+    if (usodds < 0) {
+      message.channel.send({embed: {
+        title: "US to Decimal Odds",
+        color: 16738560,
+        description: "" + Math.round(100*(1 - 100/usodds))/100
+      }});
+    } else
+
+    if (0 < usodds) {
+      message.channel.send({embed: {
+        title: "US to Decimal Odds",
+        color: 16738560,
+        description: "" + Math.round(100*(1 + usodds/100))/100
+      }});
+    }
+  } else
 
   if(command === "everyone") {
     message.channel.send("Why would you try and do that tho");
