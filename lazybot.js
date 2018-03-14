@@ -25,34 +25,10 @@ client.on("ready", () => {
 
 const nadekoprefix = config.nadekoprefix;
 const prefix = config.prefix;
+const nadekoid = config.nadekoid;
 var i;
 var j;
 var k;
-
-//reddit links section
-
-client.on("message", (message) => {
-
-  if (!(message.content.startsWith("/r/") || message.content.startsWith("r/")) || message.author.bot) return;
-
-  const args = message.content.split(/ +/g);
-  const command = args.shift().toLowerCase();
-
-  if(command.startsWith("/r/")) {
-    message.channel.send({embed: {
-      color: 53380,
-      description: `[${command}](http://www.reddit.com${command})`
-    }});
-  } else
-
-  if(command.startsWith("r/")) {
-    message.channel.send({embed: {
-      color: 53380,
-      description: `[/${command}](http://www.reddit.com/${command})`
-    }});
-  }
-  
-});
 
 //section for commands that integrate with Nadeko
 
@@ -123,8 +99,8 @@ client.on("message", (message) => {
   }});
 
   } else
-    
-//Conversion functions
+
+  //Conversion functions
 
   if (command === "decimaltous") {
 
@@ -230,6 +206,75 @@ client.on("message", (message) => {
     message.channel.send("This is a pretty basic bot, there isn't much it can help you with.");
   }
 
+});
+
+//misc commands
+
+client.on('message', (message) => {
+
+  if (message.author.bot || !message.content.includes ("Trivia Game Ended")) return;
+
+var args  = message.content.split("\n");
+    name = [];
+var payoutoptions = [6,4,2,0];
+var claimoptions = [null,13,11,9,5,0]
+
+for (i = 2; i < args.length; i++) {
+  name[i-2] = args[i].split(/ +/g).shift();
+}
+
+if (name.length < 1) return;
+
+if (5 < name.length) {
+  message.channel.send(`.give 8 ` + name[0]);
+  for (k = 1; k < 4; k++) {
+  var payout = (parseInt(payoutoptions[k]) + 1) + "";
+  message.channel.send(`.give ` + payout + ` ` + name[k])
+}} else
+
+if (name.length < 2) {
+  message.channel.send(`.give 1 housebank#5970`)
+} else {
+
+for (j = 0; j < Math.ceil(0.5 + name.length/2); j++) {
+
+var payout = (parseInt(name.length) + parseInt(payoutoptions[j]) - 5) + "";
+
+message.channel.send(`.give ` + payout + ` ` + name[j])
+
+}}
+
+if (5 < name.length) {
+  message.channel.send(`.give 0 housebank#5970`)
+} else {
+
+message.channel.send(`.give ` + claimoptions[name.length] + ` housebank#5970`)
+
+}});
+
+client.on("message", (message) => {
+
+//reddit links section
+
+  if (!(message.content.startsWith("/r/") || message.content.startsWith("r/")) || message.author.bot) return;
+
+  const args = message.content.split(/ +/g);
+  const command = args.shift().toLowerCase();
+
+  if(command.startsWith("/r/")) {
+    message.channel.send({embed: {
+      color: 53380,
+      description: `[${command}](http://www.reddit.com${command})`
+    }});
+  } else
+
+  if(command.startsWith("r/")) {
+    message.channel.send({embed: {
+      color: 53380,
+      description: `[/${command}](http://www.reddit.com/${command})`
+    }});
+  }
+  
 });
 
 client.login(config.token);
