@@ -1,0 +1,32 @@
+{
+  "name": "LAZYbot",
+  "version": "1.1.6",
+  "description": "Discord bot operating in the House server http://dscrd.me/housechessvariants just to further lazy's understanding of basic js. ",
+  "main": "lazybot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node lazybot.js"
+  },
+  "keywords": [
+    "lazy",
+    "discord",
+    "house",
+    "lazybot",
+    "glitch"
+  ],
+  "homepage": "https://github.com/theLAZYmd/LAZYbot/blob/master/README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theLAZYmd/LAZYbot/.git"
+  },
+  "author": "theLAZYmd",
+  "license": "ISC",
+  "preinstall": "rm package-lock.json",
+  "dependencies": {
+    "discord.js": "^11.2.1",
+    "enmap": "^0.3.2",
+    "moment": "^2.18.1",
+    "moment-duration-format": "^1.3.0",
+    "express": "^4.16.0"
+  }
+}
