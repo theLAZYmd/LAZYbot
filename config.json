@@ -1,6 +1,8 @@
 {
-    "token":"Bot Token Here",
+    "token":"token_here",
+    "token2":"beta_bot_token_here",
     "prefix":"!",
     "nadekoprefix":".",
-    "ownerID":"Owner Id Here"
+    "ownerID":185412969130229760,
+    "nadekoID":365933164725534722
 }
