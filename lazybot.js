@@ -25,7 +25,7 @@ client.on("ready", () => {
 
 const nadekoprefix = config.nadekoprefix;
 const prefix = config.prefix;
-const nadekoid = config.nadekoid;
+const nadekoid = config.nadekoID;
 var i;
 var j;
 var k;
@@ -208,72 +208,9 @@ client.on("message", (message) => {
 
 });
 
-//trivia give commands
-
-client.on('message', (message) => {
-
-  if (message.author.bot || !message.content.includes ("Trivia Game Ended")) return;
-
-  var args  = message.content.split("\n");
-    name = [];
-  var payoutoptions = [6,4,2,0];
-  var claimoptions = [null,null,13,11,9,5,0];
-  var payoutmsg = ["--","--","--","--"];
-
-  for (i = 2; i < args.length; i++)
-
-    {name[i-2] = args[i].split(/ +/g).shift()}
-
-    if (name.length < 1) return;
-
-    if (5 < name.length) {
-      for (k = 1; k < 4; k++) {
-      var payout = (parseInt(payoutoptions[k]) + 1) + "";
-      payoutmsg[k-1] = `.give ` + payout + ` ` + name[k]
-      }} else
-
-    for (j = 0; j < Math.ceil(0.5 + name.length/2); j++) {
-
-      var payout = (parseInt(name.length) + parseInt(payoutoptions[j]) - 5) + "";
-      payoutmsg[j] = `.give ` + payout + ` ` + name[j]
-      }
-
-  if (name.length < 2) {
-    message.channel.send({embed: {
-    title: `House Trivia ${name.length}-player Game`,
-    color: 53380,
-    description:  `.give 13 housebank#5970`,
-      }});
-    } else
-
-  if (5 < name.length) {
-    message.channel.send({embed: {
-    title: `House Trivia ${name.length}-player Game`,
-    color: 53380,
-    description:  `.give 8 ` + name[0] + `\n` + 
-                  payoutmsg[0] + `\n` + 
-                  payoutmsg[1] + `\n` + 
-                  payoutmsg[2] + `\n` + 
-                  `.give 0 housebank#5970`,
-  
-      }});
-    } else {
-
-    message.channel.send({embed: {
-      title: `House Trivia ${name.length}-player Game`,
-      color: 53380,
-      description:  payoutmsg[0] + `\n` + 
-                    payoutmsg[1] + `\n` + 
-                    payoutmsg[2] + `\n` + 
-                    `.give ` + claimoptions[name.length] + ` housebank#5970`,
-    
-        }});
-      }
-  });
+  //reddit links section
 
 client.on("message", (message) => {
-
-  //reddit links section
 
   if (!(message.content.startsWith("/r/") || message.content.startsWith("r/")) || message.author.bot) return;
 
@@ -296,6 +233,148 @@ client.on("message", (message) => {
   
 });
 
+//trivia give commands
+
+client.on('message', (message) => {
+
+  if (message.author.bot || !message.content.startsWith ("Trivia Game Ended")) return;
+
+  var args  = message.content.split("\n");
+      name = [];
+  var payoutoptions = [6,4,2,0];
+  var claimoptions = [null,17,13,11,9,5,0];
+  var payoutmsg = ["--","--","--","--"];
+
+  for (i = 2; i < args.length; i++)
+
+    {name[i-2] = args[i].split(/ +/g).shift()}
+
+    if (name.length < 1) return;
+
+    if (5 < name.length) {
+      for (k = 1; k < 4; k++) {
+      var payout = (parseInt(payoutoptions[k]) + 1) + "";
+      payoutmsg[k-1] = `.give ` + payout + ` **` + name[k] + `**`
+      }} else
+
+    for (j = 0; j < Math.ceil(0.5 + name.length/2); j++) {
+
+      var payout = (parseInt(name.length) + parseInt(payoutoptions[j]) - 5) + "";
+      payoutmsg[j] = `.give ` + payout + ` **` + name[j] + `**`
+      }
+
+  if (name.length < 2) {
+    message.channel.send({embed: {
+    title: `House Trivia ${name.length}-player Game`,
+    color: 53380,
+    description:  `.give 17 **housebank#5970**`,
+      }});
+    } else
+
+  if (5 < name.length) {
+    message.channel.send({embed: {
+    title: `House Trivia ${name.length}-player Game`,
+    color: 53380,
+    description:  `.give 8 ` + name[0] + `\n` + 
+                  payoutmsg[0] + `\n` + 
+                  payoutmsg[1] + `\n` + 
+                  payoutmsg[2] + `\n` + 
+                  `.give 0 **housebank#5970**`,
+  
+      }});
+    } else {
+
+    message.channel.send({embed: {
+      title: `House Trivia ${name.length}-player Game`,
+      color: 53380,
+      description:  payoutmsg[0] + `\n` + 
+                    payoutmsg[1] + `\n` + 
+                    payoutmsg[2] + `\n` + 
+                    `.give ` + claimoptions[name.length] + ` **housebank#5970**`,
+    
+        }});
+      }
+  });
+
+client.on('message', (message) => {
+
+  if (!(message.author.id == config.nadekoID)) return;
+  if (message.embeds.length == 0) return;
+
+  if (message.embeds[0].author == undefined
+  ||  message.embeds[0].title == undefined
+  ||  message.embeds[0].description == undefined
+  ) return;
+
+  var test = {};
+  name = [];
+
+  test.header = message.embeds[0].author.name;
+  test.title = message.embeds[0].title;
+  test.description = message.embeds[0].description;
+
+  if (!((test.title === "Final Results") || (test.title === "Final Results"))) return;
+
+  var args  = test.description.split("\n"); 
+  var payoutoptions = [6,4,2,0];
+  var claimoptions = [null,17,13,11,9,5,0];
+  var payoutmsg = ["--","--","--","--"];
+
+  for (i = 0; i < args.length; i++)
+
+    {name[i] = args[i].split(/ +/g).shift();
+    name [i] = name[i].split("*").join("");}
+
+    if (name.length < 1) return;
+
+    if (5 < name.length) {
+      for (k = 1; k < 4; k++) {
+      var payout = (parseInt(payoutoptions[k]) + 1) + "";
+      payoutmsg[k-1] = `.give ` + payout + ` **` + name[k] + `**`
+      }} else
+
+    for (j = 0; j < Math.ceil(0.5 + name.length/2); j++) {
+
+      var payout = (parseInt(name.length) + parseInt(payoutoptions[j]) - 5) + "";
+      payoutmsg[j] = `.give ` + payout + ` **` + name[j] + `**`
+      }
+
+  if (name.length < 2) {
+    message.channel.send({embed: {
+    title: `House Trivia ${name.length}-player Game`,
+    color: 53380,
+    description:  `.give 17 **housebank#5970**`,
+      }});
+    } else
+
+  if (5 < name.length) {
+    message.channel.send({embed: {
+    title: `House Trivia ${name.length}-player Game`,
+    color: 53380,
+    description:  `.give 8 ` + name[0] + `\n` + 
+                  payoutmsg[0] + `\n` + 
+                  payoutmsg[1] + `\n` + 
+                  payoutmsg[2] + `\n` + 
+                  `.give 0 **housebank#5970**`,
+  
+      }});
+    } else {
+
+    message.channel.send({embed: {
+      title: `House Trivia ${name.length}-player Game`,
+      color: 53380,
+      description:  payoutmsg[0] + `\n` + 
+                    payoutmsg[1] + `\n` + 
+                    payoutmsg[2] + `\n` + 
+                    `.give ` + claimoptions[name.length] + ` **housebank#5970**`,
+    
+        }});
+      }
+
+  });
+
+
+
 /*client.on("presence", function (pUser, pStatus, pGameID) {
 
   if (!pUser === "116275390695079945") return;
@@ -309,4 +388,3 @@ client.on("message", (message) => {
 });*/
 
 client.login(config.token);
-
