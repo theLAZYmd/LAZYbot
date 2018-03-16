@@ -237,12 +237,13 @@ client.on("message", (message) => {
 
 client.on('message', (message) => {
 
-  if (message.author.bot || !message.content.startsWith ("Trivia Game Ended")) return;
+  if (message.author.bot) return;
+  if (!((message.content.startsWith ("Final Results")) || (message.content.startsWith ("Trivia Game Ended")))) return;
 
   var args  = message.content.split("\n");
       name = [];
   var payoutoptions = [6,4,2,0];
-  var claimoptions = [null,17,13,11,9,5,0];
+  var claimoptions = [null,17,13,11,8,5,0];
   var payoutmsg = ["--","--","--","--"];
 
   for (i = 2; i < args.length; i++)
@@ -264,6 +265,7 @@ client.on('message', (message) => {
       }
 
   if (name.length < 2) {
+    if (args[2] === "No results") return;
     message.channel.send({embed: {
     title: `House Trivia ${name.length}-player Game`,
     color: 53380,
@@ -275,11 +277,14 @@ client.on('message', (message) => {
     message.channel.send({embed: {
     title: `House Trivia ${name.length}-player Game`,
     color: 53380,
-    description:  `.give 8 ` + name[0] + `\n` + 
+    description:  `.give 8 **` + name[0] + `**\n` + 
                   payoutmsg[0] + `\n` + 
                   payoutmsg[1] + `\n` + 
                   payoutmsg[2] + `\n` + 
                   `.give 0 **housebank#5970**`,
+    footer: {
+      text: "Please remember to check for ties."
+        } 
   
       }});
     } else {
@@ -291,6 +296,9 @@ client.on('message', (message) => {
                     payoutmsg[1] + `\n` + 
                     payoutmsg[2] + `\n` + 
                     `.give ` + claimoptions[name.length] + ` **housebank#5970**`,
+      footer: {
+        text: "Please remember to check for ties."
+          } 
     
         }});
       }
@@ -306,18 +314,18 @@ client.on('message', (message) => {
   ||  message.embeds[0].description == undefined
   ) return;
 
-  var test = {};
+  var triviagame = {};
   name = [];
 
-  test.header = message.embeds[0].author.name;
-  test.title = message.embeds[0].title;
-  test.description = message.embeds[0].description;
+  triviagame.header = message.embeds[0].author.name;
+  triviagame.title = message.embeds[0].title;
+  triviagame.description = message.embeds[0].description;
 
-  if (!((test.title === "Final Results") || (test.title === "Final Results"))) return;
+  if (!((triviagame.title === "Final Results") || (triviagame.title === "Trivia Game Ended"))) return;
 
-  var args  = test.description.split("\n"); 
+  var args  = triviagame.description.split("\n"); 
   var payoutoptions = [6,4,2,0];
-  var claimoptions = [null,17,13,11,9,5,0];
+  var claimoptions = [null,17,13,11,8,5,0];
   var payoutmsg = ["--","--","--","--"];
 
   for (i = 0; i < args.length; i++)
@@ -340,6 +348,7 @@ client.on('message', (message) => {
       }
 
   if (name.length < 2) {
+    if (triviagame.description === "No results") return;
     message.channel.send({embed: {
     title: `House Trivia ${name.length}-player Game`,
     color: 53380,
@@ -351,11 +360,14 @@ client.on('message', (message) => {
     message.channel.send({embed: {
     title: `House Trivia ${name.length}-player Game`,
     color: 53380,
-    description:  `.give 8 ` + name[0] + `\n` + 
+    description:  `.give 8 **` + name[0] + `**\n` + 
                   payoutmsg[0] + `\n` + 
                   payoutmsg[1] + `\n` + 
                   payoutmsg[2] + `\n` + 
                   `.give 0 **housebank#5970**`,
+    footer: {
+      text: "Please remember to check for ties."
+        }
   
       }});
     } else {
@@ -367,9 +379,12 @@ client.on('message', (message) => {
                     payoutmsg[1] + `\n` + 
                     payoutmsg[2] + `\n` + 
                     `.give ` + claimoptions[name.length] + ` **housebank#5970**`,
-    
-        }});
-      }
+    footer: {
+      text: "Please remember to check for ties."
+        }   
+        
+      }});
+    }
 
   });
 
