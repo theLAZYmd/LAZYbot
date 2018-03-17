@@ -26,7 +26,10 @@ client.on("ready", () => {
 const nadekoprefix = config.nadekoprefix;
 const prefix = config.prefix;
 const nadekoid = config.nadekoID;
-    messageID = [];
+  var i;
+  var j;
+  var k;
+      messageID = [];
 
 //section for commands that integrate with Nadeko
 
@@ -251,7 +254,9 @@ client.on("message", (message) => {
 
 client.on("message", (message) => {
 
-  if (!(message.content.includes("r/")) || message.author.bot) return;
+  if (message.author.bot) return;
+
+  if (!message.content.includes("r/")) return;
 
   const args = message.content.split(/ +/g);
 
