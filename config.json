@@ -3,8 +3,8 @@
     "token2":"beta_bot_token_here",
     "prefix":"!",
     "nadekoprefix":".",
-    "ownerID":185412969130229760,
-    "nadekoID":365933164725534722
+    "ownerID":"185412969130229760",
+    "nadekoID":"365933164725534722".
     "background":{
         "icons":"212225",
         "markdown":"2f3136",
