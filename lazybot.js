@@ -258,11 +258,12 @@ client.on("message", (message) => {
 
   if (!message.content.includes("r/")) return;
 
-  const args = message.content.split(/ +/g);
+  var args = message.content.split(/ +/g);
 
   for(let i = 0;i < args.length; i++) {
 
     if(args[i].startsWith("/r/")) {
+      args[i] = args[i].replace(/[.,#!$%\^&;:{}=-_`~()]/g,"");
       message.channel.send({embed: {
         color: 53380,
         description: `[${args[i]}](http://www.reddit.com${args[i]})`
@@ -270,6 +271,7 @@ client.on("message", (message) => {
       } else
 
     if(args[i].startsWith("r/")) {
+      args[i] = args[i].replace(/[.,#!$%\^&;:{}=-_`~()]/g,"");
       message.channel.send({embed: {
         color: 53380,
         description: `[/${args[i]}](http://www.reddit.com/${args[i]})`
