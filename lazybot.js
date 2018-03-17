@@ -26,9 +26,6 @@ client.on("ready", () => {
 const nadekoprefix = config.nadekoprefix;
 const prefix = config.prefix;
 const nadekoid = config.nadekoID;
-var i;
-var j;
-var k;
     messageID = [];
 
 //section for commands that integrate with Nadeko
@@ -57,8 +54,8 @@ client.on("message", (message) => {
     "https://bughousetest.com"
   ];
 
-  for (i = 0; i < 3; i++) {
-    for (j = 0; j < 6; j++) {
+  for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < 6; j++) {
         if(message.content.startsWith (config.nadekoprefix + notifycommand[i] + " " + domain[j])) {
           message.channel.send("@here");
         let [link] = args;
@@ -242,11 +239,15 @@ client.on("message", (message) => {
 
   if(command === "help") {
     message.channel.send("This is a pretty basic bot, there isn't much it can help you with.");
+  } else
+
+  if(command === "party") {
+    message.channel.send(`:tada:`)
   }
 
 });
 
-  //reddit links section
+//reddit links section
 
 client.on("message", (message) => {
 
@@ -254,7 +255,7 @@ client.on("message", (message) => {
 
   const args = message.content.split(/ +/g);
 
-  for(i = 0;i < args.length; i++) {
+  for(let i = 0;i < args.length; i++) {
 
     if(args[i].startsWith("/r/")) {
       message.channel.send({embed: {
@@ -275,155 +276,92 @@ client.on("message", (message) => {
 //trivia give commands
 
 client.on('message', (message) => {
-
-  if (message.author.bot) return;
-  if (!((message.content.startsWith ("Final Results")) || (message.content.startsWith ("Trivia Game Ended")))) return;
-
-  var args  = message.content.split("\n");
-      name = [];
-  var payoutoptions = [6,4,2,0];
-  var claimoptions = [null,17,13,11,8,5,0];
-  var payoutmsg = ["--","--","--","--"];
-
-  for (i = 2; i < args.length; i++)
-
-    {name[i-2] = args[i].split(/ +/g).shift()}
-
-    if (name.length < 1) return;
-
-    if (5 < name.length) {
-      for (k = 1; k < 4; k++) {
-      var payout = (parseInt(payoutoptions[k]) + 1) + "";
-      payoutmsg[k-1] = `.give ` + payout + ` **` + name[k] + `**`
-      }} else
-
-    for (j = 0; j < Math.ceil(0.5 + name.length/2); j++) {
-
-      var payout = (parseInt(name.length) + parseInt(payoutoptions[j]) - 5) + "";
-      payoutmsg[j] = `.give ` + payout + ` **` + name[j] + `**`
-      }
-
-  if (name.length < 2) {
-    if (args[2] === "No results") return;
-    message.channel.send({embed: {
-    title: `House Trivia ${name.length}-player Game`,
-    color: 53380,
-    description:  `.give 17 **housebank#5970**`,
-      }});
-    } else
-
-  if (5 < name.length) {
-    message.channel.send({embed: {
-    title: `House Trivia ${name.length}-player Game`,
-    color: 53380,
-    description:  `.give 8 **` + name[0] + `**\n` + 
-                  payoutmsg[0] + `\n` + 
-                  payoutmsg[1] + `\n` + 
-                  payoutmsg[2] + `\n` + 
-                  `.give 0 **housebank#5970**`,
-    footer: {
-      text: "Please remember to check for ties."
-        } 
   
-      }});
-    } else {
-
-    message.channel.send({embed: {
-      title: `House Trivia ${name.length}-player Game`,
-      color: 53380,
-      description:  payoutmsg[0] + `\n` + 
-                    payoutmsg[1] + `\n` + 
-                    payoutmsg[2] + `\n` + 
-                    `.give ` + claimoptions[name.length] + ` **housebank#5970**`,
-      footer: {
-        text: "Please remember to check for ties."
-          } 
-    
-        }});
-      }
-  });
-
-client.on('message', (message) => {
-
-  if (!(message.author.id == config.nadekoID)) return;
-  if (message.embeds.length == 0) return;
-
-  if (message.embeds[0].author == undefined
-  ||  message.embeds[0].title == undefined
-  ||  message.embeds[0].description == undefined
-  ) return;
-
-  var triviagame = {};
-  name = [];
-
-  triviagame.header = message.embeds[0].author.name;
-  triviagame.title = message.embeds[0].title;
-  triviagame.description = message.embeds[0].description;
-
-  if (!((triviagame.title === "Final Results") || (triviagame.title === "Trivia Game Ended"))) return;
-
-  var args  = triviagame.description.split("\n"); 
+  var args = [];
+  var verifier = [];
   var payoutoptions = [6,4,2,0];
   var claimoptions = [null,17,13,11,8,5,0];
-  var payoutmsg = ["--","--","--","--"];
+  var payout = '';
+  var payoutaggregate = '';
+      triviagame = {};
+      payoutmsg = [];
+      name = [];
+      args = [];
 
-  for (i = 0; i < args.length; i++)
+  // copy + paste input
 
-    {name[i] = args[i].split(/ +/g).shift();
-    name [i] = name[i].split("*").join("");}
+  if (!message.author.bot) {
 
-    if (name.length < 1) return;
+    if (!((message.content.startsWith ("Final Results")) || (message.content.startsWith ("Trivia Game Ended")))) return;
 
-    if (5 < name.length) {
-      for (k = 1; k < 4; k++) {
-      var payout = (parseInt(payoutoptions[k]) + 1) + "";
-      payoutmsg[k-1] = `.give ` + payout + ` **` + name[k] + `**`
-      }} else
+    verifier = message.content.split("\n");
 
-    for (j = 0; j < Math.ceil(0.5 + name.length/2); j++) {
+    for (let i = 0; i < 2; i++) {
+    if (verifier[i] == undefined) return; }
+  
+    triviagame.header = verifier[0];
+    triviagame.title = verifier[1];
 
-      var payout = (parseInt(name.length) + parseInt(payoutoptions[j]) - 5) + "";
-      payoutmsg[j] = `.give ` + payout + ` **` + name[j] + `**`
-      }
+    for (i = 2; i < verifier.length; i++)
+      {args[i-2] = verifier [i]}
 
+    }
+
+  // automatic bot embed input
+
+  else if (message.author.bot) {
+    if (!(message.author.id == config.nadekoID)) return;
+    if (message.embeds.length == 0) return;
+
+    if (message.embeds[0].author == undefined
+    ||  message.embeds[0].title == undefined
+    ||  message.embeds[0].description == undefined
+      ) return;
+
+    triviagame.header = message.embeds[0].author.name;
+    triviagame.title = message.embeds[0].title;
+    triviagame.description = message.embeds[0].description;
+
+    if (!((triviagame.title === "Final Results") || (triviagame.title === "Trivia Game Ended"))) return;
+
+    args = triviagame.description.split("\n");
+
+    };
+
+  // give messages output
+
+  for (let i = 0; i < args.length; i++) {
+    name[i] = args[i].split(/ +/g).shift();
+    name[i] = name[i].split("*").join("");
+    }
+
+  if (name[0] === "No results") return;
+  if (name.length < 1) return;
+  if (name.length > 6) {name.length = 6};
+  
+  name.ceiling = Math.ceil(0.5 + name.length/2);
+
+  for (let i = 0; i < name.ceiling; i++) {
+    payout = (parseInt(name.length) + parseInt(payoutoptions[i]) - 5) + "";
+    payoutmsg[i] = `.give ` + payout + ` **` + name[i] + `**`;
+    }
+  if (name.length === 6) {payoutmsg[0] = `.give 8 **` + name[0] + `**`}
+  payoutmsg.push(`.give ${claimoptions[name.length]} **housebank#5970**`);
+
+  for (let i = 0; i < name.ceiling + 1;i++) {
+    payoutaggregate +=  payoutmsg[i] + (i < payoutmsg.length -1 ? `\n` : ``)}
   if (name.length < 2) {
-    if (triviagame.description === "No results") return;
-    message.channel.send({embed: {
+    payoutaggregate = `.give 17 **housebank#5970**`
+    }
+    
+  message.channel.send({embed: {
     title: `House Trivia ${name.length}-player Game`,
     color: 53380,
-    description:  `.give 17 **housebank#5970**`,
-      }});
-    } else
-
-  if (5 < name.length) {
-    message.channel.send({embed: {
-    title: `House Trivia ${name.length}-player Game`,
-    color: 53380,
-    description:  `.give 8 **` + name[0] + `**\n` + 
-                  payoutmsg[0] + `\n` + 
-                  payoutmsg[1] + `\n` + 
-                  payoutmsg[2] + `\n` + 
-                  `.give 0 **housebank#5970**`,
+    description: payoutaggregate,
     footer: {
       text: "Please remember to check for ties."
         }
-  
       }});
-    } else {
-
-    message.channel.send({embed: {
-      title: `House Trivia ${name.length}-player Game`,
-      color: 53380,
-      description:  payoutmsg[0] + `\n` + 
-                    payoutmsg[1] + `\n` + 
-                    payoutmsg[2] + `\n` + 
-                    `.give ` + claimoptions[name.length] + ` **housebank#5970**`,
-    footer: {
-      text: "Please remember to check for ties."
-        }   
-        
-      }});
-    }
 
   });
 
