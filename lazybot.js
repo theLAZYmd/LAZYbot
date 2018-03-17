@@ -29,6 +29,7 @@ const nadekoid = config.nadekoID;
 var i;
 var j;
 var k;
+    messageID = [];
 
 //section for commands that integrate with Nadeko
 
@@ -80,7 +81,7 @@ client.on("message", (message) => {
 
   if (command === "mf") {
 
-  let [games,time,increment] = args
+  let [games,time,increment] = args;
   message.channel.send({embed: {
     title: "House Match Reward",
     color: 53380,
@@ -91,7 +92,7 @@ client.on("message", (message) => {
 
   if (command === "tf") {
 
-  let [games,time,increment] = args
+  let [games,time,increment] = args;
   message.channel.send({embed: {
     title: "House Tournament Reward",
     color: 53380,
@@ -102,9 +103,9 @@ client.on("message", (message) => {
 
   //Conversion functions
 
-  if (command === "decimaltous") {
+    if (command === "decimaltous") {
 
-    let [decimalodds] = args
+    let [decimalodds] = args;
 
     if (decimalodds < 1) {
       message.channel.send({embed: {
@@ -133,7 +134,7 @@ client.on("message", (message) => {
 
   if (command === "ustodecimal") {
 
-    let [usodds] = args
+    let [usodds] = args;
 
     if (usodds < 0) {
       message.channel.send({embed: {
@@ -152,9 +153,46 @@ client.on("message", (message) => {
     }
   } else
 
-  if(command === "everyone") {
+  if (command === "everyone") {
     message.channel.send("Why would you try and do that tho");
-  }
+  } /* else
+
+ if (command === "search") {
+
+  if (!(args[1] == undefined)) return;
+  if (!(args[0].length == 18)) return;
+
+  let userID = args[0];
+    
+  message.guild.search({
+    author: args[0],
+  })
+    .then(res => {
+      const hit = res.messages[0].find(m => m.hit).content;
+      console.log(`I found: **${hit}**, total results: ${res.totalResults}`);
+    })
+    .catch(console.error);
+
+ } */
+
+/*  if (command === "fetch") {
+
+    let channel = message.channel;
+    var newObject;
+
+    if (!(args[1] == undefined)) return;
+
+    if (!(args[0].length == 18)) return;
+
+    message.channel.fetchMessage(args[0])
+      .then (newObject + "")
+      .catch (console.error);
+
+    console.log (newObject);
+
+  };
+
+  // getMessage(channel, messageID, callback) */
 
 });
 
@@ -212,25 +250,26 @@ client.on("message", (message) => {
 
 client.on("message", (message) => {
 
-  if (!(message.content.startsWith("/r/") || message.content.startsWith("r/")) || message.author.bot) return;
+  if (!(message.content.includes("r/")) || message.author.bot) return;
 
   const args = message.content.split(/ +/g);
-  const command = args.shift().toLowerCase();
 
-  if(command.startsWith("/r/")) {
-    message.channel.send({embed: {
-      color: 53380,
-      description: `[${command}](http://www.reddit.com${command})`
-    }});
-  } else
+  for(i = 0;i < args.length; i++) {
 
-  if(command.startsWith("r/")) {
-    message.channel.send({embed: {
-      color: 53380,
-      description: `[/${command}](http://www.reddit.com/${command})`
-    }});
-  }
-  
+    if(args[i].startsWith("/r/")) {
+      message.channel.send({embed: {
+        color: 53380,
+        description: `[${args[i]}](http://www.reddit.com${args[i]})`
+        }});
+      } else
+
+    if(args[i].startsWith("r/")) {
+      message.channel.send({embed: {
+        color: 53380,
+        description: `[/${args[i]}](http://www.reddit.com/${args[i]})`
+        }});
+      }
+    }
 });
 
 //trivia give commands
@@ -387,8 +426,6 @@ client.on('message', (message) => {
     }
 
   });
-
-
 
 /*client.on("presence", function (pUser, pStatus, pGameID) {
 
