@@ -1,7 +1,18 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
-const config = require("./config.json");
 const fs = require("fs");
+
+const config = require("./config.json");
+const settings = require("./settings.js");
+
+const nadekoprefix = config.nadekoprefix;
+const prefix = config.prefix;
+const nadekoid = config.nadekoID;
+  var i;
+  var j;
+  var k;
+      messageID = [];
+      embedobject = [];
 
 //pinging glitch.com
 
@@ -22,14 +33,6 @@ setInterval(() => {
 client.on("ready", () => {
   console.log("bleep bloop! It's showtime.");
 });
-
-const nadekoprefix = config.nadekoprefix;
-const prefix = config.prefix;
-const nadekoid = config.nadekoID;
-  var i;
-  var j;
-  var k;
-      messageID = [];
 
 //section for commands that integrate with Nadeko
 
@@ -69,7 +72,7 @@ client.on("message", (message) => {
 
   if (command === "nadekoprefix") {
 
-    if(message.author.id !== config.ownerID) return;
+    if(message.author.id != config.ownerID) return;
 
     let [newNadekoPrefix] = args;  
     config.nadekoprefix = newNadekoPrefix
@@ -155,44 +158,27 @@ client.on("message", (message) => {
 
   if (command === "everyone") {
     message.channel.send("Why would you try and do that tho");
-  } /* else
-
- if (command === "search") {
-
-  if (!(args[1] == undefined)) return;
-  if (!(args[0].length == 18)) return;
-
-  let userID = args[0];
-    
-  message.guild.search({
-    author: args[0],
-  })
-    .then(res => {
-      const hit = res.messages[0].find(m => m.hit).content;
-      console.log(`I found: **${hit}**, total results: ${res.totalResults}`);
-    })
-    .catch(console.error);
-
- } */
-
-/*  if (command === "fetch") {
+  } else
+  
+  if (command === "fetch") {
 
     let channel = message.channel;
-    var newObject;
 
     if (!(args[1] == undefined)) return;
 
     if (!(args[0].length == 18)) return;
 
+    function store(messagecontent) {
+      return messagecontent;
+      }
+    
     message.channel.fetchMessage(args[0])
-      .then (newObject + "")
-      .catch (console.error);
-
-    console.log (newObject);
+      .then ((message) => {
+        let newembed = message.content;
+        message.channel.send(newembed);
+      });
 
   };
-
-  // getMessage(channel, messageID, callback) */
 
 });
 
@@ -205,7 +191,11 @@ client.on("message", (message) => {
 
   if (command === "prefix" || command === "lazybotprefix") {
 
-    if(message.author.id !== config.ownerID) return;
+    console.log("I made it less far!");
+
+    if(message.author.id != config.ownerID) return;
+
+    console.log("I made it this far!");
 
     let [newPrefix] = args;
     config.prefix = newPrefix
@@ -221,7 +211,8 @@ client.on("message", (message) => {
   } else
 
   if(command === "ping") {
-    message.channel.send("pong!");
+    embedobject.description = `** ${message.author.tag}** :ping_pong: ${client.ping}ms`;
+    embedbuilder (message, embedobject)
   } else
 
   if(command === "marco") {
@@ -385,3 +376,90 @@ client.on('message', (message) => {
 });*/
 
 client.login(config.token);
+
+function embedbuilder (message, embedobject) {
+
+  if (!embedobject.field == undefined) {
+
+    for (i = 0; i < embedobject.field.length; i++) {
+      embed.object.field = `{
+        name: ${embed.object.field[i].name},\n
+        value: ${embed.object.field[i].value}\n
+      }`
+    }
+
+    for (i = 0; i < embedobject.field.length; i++) {
+      embedobject.fields += embedobject.field[i] + (i < embedobject.field.length -1 ? `,\n` : ``)
+      }
+    };
+
+    embedobject.color = (embedobject.color == undefined ? config.color : embedobject.color )
+
+  message.channel.send({embed: {
+    author: {
+      name: embedobject.name,
+      icon_url: client.user.avatarURL
+    },
+    title: embedobject.title,
+    url: embedobject.url,
+    color: embedobject.color,
+    description: embedobject.description,
+    fields: embedobject.fields,
+    timestamp: embedobject.timestamp,
+    footer: {
+      icon_url: embedobject.footertimestamp,
+      text: embedobject.footer
+    }
+  }
+});
+};
+
+/*
+
+function EMBEDtoJSON(object); {
+
+  if (!(message.author.id == config.nadekoID)) return;
+    if (message.embeds.length == 0) return;
+
+    if (message.embeds[0].author == undefined
+    ||  message.embeds[0].title == undefined
+    ||  message.embeds[0].description == undefined
+      ) return;
+
+    embedobject.name = message.embeds[0].author.name;
+    embedobject.title = message.embeds[0].title;
+    embedobject.description = message.embeds[0].description;
+
+  message.channel.send("
+  ```json
+    color: 3447003,
+    author: {
+      name: client.user.username,
+      icon_url: client.user.avatarURL
+    },
+    title: "This is an embed",
+    url: "http://google.com",
+    description: "This is a test embed to showcase what they look like and what they can do.",
+    fields: [{
+        name: "Fields",
+        value: "They can have different fields with small headlines."
+      },
+      {
+        name: "Masked links",
+        value: "You can put [masked links](http://google.com) inside of rich embeds."
+      },
+      {
+        name: "Markdown",
+        value: "You can put all the *usual* **__Markdown__** inside of them."
+      }
+    ],
+    timestamp: new Date(),
+    footer: {
+      icon_url: client.user.avatarURL,
+      text: "© Example"
+    }
+  }
+})";
+}
+
+*/
