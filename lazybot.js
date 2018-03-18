@@ -3,7 +3,7 @@ const client = new Discord.Client();
 const fs = require("fs");
 
 const config = require("./config.json");
-const settings = require("./settings.js");
+const package = require("./package.json")
 
 const nadekoprefix = config.nadekoprefix;
 const prefix = config.prefix;
@@ -12,7 +12,8 @@ const nadekoid = config.nadekoID;
   var j;
   var k;
       messageID = [];
-      embedobject = [];
+      embedoutput = [];
+      embedoutput.footer = [];
 
 //pinging glitch.com
 
@@ -184,6 +185,9 @@ client.on("message", (message) => {
 
 client.on("message", (message) => {
 
+  embedoutput = {};
+  embedoutput.footer = {};
+
   if (!message.content.startsWith(config.prefix) || message.author.bot) return;
 
   const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
@@ -191,11 +195,7 @@ client.on("message", (message) => {
 
   if (command === "prefix" || command === "lazybotprefix") {
 
-    console.log("I made it less far!");
-
     if(message.author.id != config.ownerID) return;
-
-    console.log("I made it this far!");
 
     let [newPrefix] = args;
     config.prefix = newPrefix
@@ -211,8 +211,9 @@ client.on("message", (message) => {
   } else
 
   if(command === "ping") {
-    embedobject.description = `** ${message.author.tag}** :ping_pong: ${client.ping}ms`;
-    embedbuilder (message, embedobject)
+    console.log(embedoutput.title);
+    embedoutput.description = `** ${message.author.tag}** :ping_pong: ${parseInt(client.ping)}ms`
+    embedbuilder (message, embedoutput)
   } else
 
   if(command === "marco") {
@@ -255,18 +256,14 @@ client.on("message", (message) => {
 
     if(args[i].startsWith("/r/")) {
       args[i] = args[i].replace(/[.,#!$%\^&;:{}=-_`~()]/g,"");
-      message.channel.send({embed: {
-        color: 53380,
-        description: `[${args[i]}](http://www.reddit.com${args[i]})`
-        }});
+      embedoutput.description = `[${args[i]}](http://www.reddit.com${args[i]})`;
+      embedbuilder(message, embedoutput)
       } else
 
     if(args[i].startsWith("r/")) {
       args[i] = args[i].replace(/[.,#!$%\^&;:{}=-_`~()]/g,"");
-      message.channel.send({embed: {
-        color: 53380,
-        description: `[/${args[i]}](http://www.reddit.com/${args[i]})`
-        }});
+      embedoutput.description = `[/${args[i]}](http://www.reddit.com/${args[i]})`;
+      embedbuilder(message, embedoutput)
       }
     }
 });
@@ -328,6 +325,14 @@ client.on('message', (message) => {
 
   // give messages output
 
+  if ((
+      !message.content.startsWith ("Final Results")
+  ||  !message.content.startsWith ("Trivia Game Ended"))
+  && (message.embeds[0].author == undefined
+  ||  message.embeds[0].title == undefined
+  ||  message.embeds[0].description == undefined))
+  return;
+
   for (let i = 0; i < args.length; i++) {
     name[i] = args[i].split(/ +/g).shift();
     name[i] = name[i].split("*").join("");
@@ -350,16 +355,12 @@ client.on('message', (message) => {
     payoutaggregate +=  payoutmsg[i] + (i < payoutmsg.length -1 ? `\n` : ``)}
   if (name.length < 2) {
     payoutaggregate = `.give 17 **housebank#5970**`
-    }
-    
-  message.channel.send({embed: {
-    title: `House Trivia ${name.length}-player Game`,
-    color: 53380,
-    description: payoutaggregate,
-    footer: {
-      text: "Please remember to check for ties."
-        }
-      }});
+    };
+
+  embedoutput.title = `House Trivia ${name.length}-player Game`,
+  embedoutput.description = payoutaggregate,
+  embedoutput.footer.text = `Please remember to check for ties.`
+  embedbuilder (message, embedoutput);
 
   });
 
@@ -377,41 +378,46 @@ client.on('message', (message) => {
 
 client.login(config.token);
 
-function embedbuilder (message, embedobject) {
+function embedbuilder (message, embedoutput) {
 
-  if (!embedobject.field == undefined) {
+  if (!(embedoutput.field == undefined)) {
 
-    for (i = 0; i < embedobject.field.length; i++) {
+    for (i = 0; i < embedoutput.field.length; i++) {
       embed.object.field = `{
         name: ${embed.object.field[i].name},\n
         value: ${embed.object.field[i].value}\n
       }`
     }
 
-    for (i = 0; i < embedobject.field.length; i++) {
-      embedobject.fields += embedobject.field[i] + (i < embedobject.field.length -1 ? `,\n` : ``)
+    for (i = 0; i < embedoutput.field.length; i++) {
+      embedoutput.fields += embedoutput.field[i] + (i < embedoutput.field.length -1 ? `,\n` : ``)
       }
     };
 
-    embedobject.color = (embedobject.color == undefined ? config.color : embedobject.color )
+    embedoutput.color = (embedoutput.color == undefined ? config.color : embedoutput.color )
 
   message.channel.send({embed: {
     author: {
-      name: embedobject.name,
+      name: embedoutput.name,
       icon_url: client.user.avatarURL
     },
-    title: embedobject.title,
-    url: embedobject.url,
-    color: embedobject.color,
-    description: embedobject.description,
-    fields: embedobject.fields,
-    timestamp: embedobject.timestamp,
+    title: embedoutput.title,
+    url: embedoutput.url,
+    color: embedoutput.color,
+    description: embedoutput.description,
+    fields: embedoutput.fields,
+    timestamp: embedoutput.timestamp,
     footer: {
-      icon_url: embedobject.footertimestamp,
-      text: embedobject.footer
+      icon_url: embedoutput.footer.icon_url,
+      text: embedoutput.footer.text
     }
-  }
-});
+  }});
+
+  embedoutput = {};
+  embedoutput.footer = {};
+
+  console.log (embedoutput.title);
+
 };
 
 /*
@@ -426,9 +432,9 @@ function EMBEDtoJSON(object); {
     ||  message.embeds[0].description == undefined
       ) return;
 
-    embedobject.name = message.embeds[0].author.name;
-    embedobject.title = message.embeds[0].title;
-    embedobject.description = message.embeds[0].description;
+    embedoutput.name = message.embeds[0].author.name;
+    embedoutput.title = message.embeds[0].title;
+    embedoutput.description = message.embeds[0].description;
 
   message.channel.send("
   ```json
