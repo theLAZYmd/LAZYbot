@@ -16,11 +16,14 @@ const nadekoid = config.nadekoID;
       messageID = [];
       embedoutput = [];
       embedoutput.footer = [];
+      sendembed = [];
       trigger = [];
       reponse = [];
       placeholder = [];
       randomboolean = [];
-      fetchedmessage = [];      
+      fetchedmessage = [];
+      lastmessage = [];
+      role = [];
 
 //pinging glitch.com
 
@@ -60,20 +63,17 @@ client.on("message", message => {
 });
 
 //leave message 
-/*
-client.on("guildMemberAdd", (member) => {
 
-  let channel = "390260363410800650";
+client.on("guildMemberRemove", (member) => {
 
-  usersearchmessages (member.id)
-
-  embedoutput.description = `**${member.tag}** has left **${guild.name}**. Had **${userData[placeholder]}** messages.`,
-  embedoutput.color = 15406156,
-  embedbuilder (message, embedoutput);
-  channel.send(embedoutput)
+  usersearchmessages (member.user.id)
+  embedoutput.description = `**${member.user.tag}** has left **${guild.name}**. Had **${userData[placeholder].messages}** messages.`;
+  embedoutput.color = 15406156;
+  embedbuilder (embedoutput);
+  channel.send (sendembed);
   embedoutput = {};
 
-}); */
+});
 
 //section for commands that integrate with Nadeko
 
@@ -108,22 +108,6 @@ client.on("message", (message) => {
         let [link] = args;
           console.log(`${message.author.username} has sent out a ping for ${link}.`);
   }}}
-
-  /*if (command === "leavemsg") {
-
-    let member = message.author;
-
-    let channel = "390260363410800650";
-
-    usersearchmessages (member.id)
-
-    embedoutput.description = `**${member.tag}** has left **${message.guild.name}**. Had **${userData[placeholder].messages}** messages.`,
-    embedoutput.color = 15406156,
-    embedbuilder (message, embedoutput);
-    message.channel.send(embedoutput)
-    embedoutput = {};
-
-  } else */
 
   //change nadekoprefix
 
@@ -259,14 +243,21 @@ client.on("message", (message) => {
 
   if(command === "ping") {
     embedoutput.description = `** ${message.author.tag}** :ping_pong: ${parseInt(client.ping)}ms`
-    embedbuilder (message, embedoutput)
+    embedsender (message, embedoutput)
   } else
 
   if (command === "messages") {
-
+    returnrole (message.member, "401836464071245826")
+    if (!(role == "Silver")) return;
     let userid = message.author.id;
-
     messagecount (message, userid);
+  } else
+
+  if (command === "lastmessage") {
+
+    getlastmessage (message.author);
+    message.channel.send(lastmessage);
+    lastmessage = [];
 
   }
 
@@ -295,13 +286,13 @@ client.on("message", (message) => {
     if(args[i].startsWith("/r/")) {
       args[i] = args[i].replace(/[.,#!$%\^&;:{}=-_`~()]/g,"");
       embedoutput.description = `[${args[i]}](http://www.reddit.com${args[i]})`;
-      embedbuilder(message, embedoutput)
+      embedsender (message, embedoutput)
       } else
 
     if(args[i].startsWith("r/")) {
       args[i] = args[i].replace(/[.,#!$%\^&;:{}=-_`~()]/g,"");
       embedoutput.description = `[/${args[i]}](http://www.reddit.com/${args[i]})`;
-      embedbuilder(message, embedoutput)
+      embedsender (message, embedoutput)
       }
     }
 });
@@ -401,7 +392,7 @@ client.on('message', (message) => {
   embedoutput.title = `House Trivia ${name.length}-player Game`,
   embedoutput.description = payoutaggregate,
   embedoutput.footer.text = `Please remember to check for ties.`
-  embedbuilder (message, embedoutput);
+  embedsender (message, embedoutput);
   embedoutput = {};
 
   });
@@ -420,6 +411,12 @@ client.on('message', (message) => {
 
 client.login(config.token);
 
+function getlastmessage (author) {
+
+  lastmessage = author.lastMessage.content;
+
+}
+
 function fetchiemessage (message, longmessageid) {
 
   message.channel.fetchMessage(longmessageid)
@@ -435,7 +432,17 @@ function fetchiemessage (message, longmessageid) {
 
 };
 
-function embedbuilder (message, embedoutput) {
+function embedsender (message, embedoutput) {
+
+  embedbuilder (embedoutput);
+
+  message.channel.send(sendembed);
+
+  embedoutput.footer = [];
+
+}
+
+function embedbuilder (embedoutput) {
 
   if (!(embedoutput.field == undefined)) {
 
@@ -443,10 +450,10 @@ function embedbuilder (message, embedoutput) {
 
       embedoutput.field[i].inline = (embedoutput.field[i].inline == undefined ? false : embedoutput.field[i].inline );
 
-      embed.object.field = `{
-        name: ${embed.object.field[i].name},\n
-        value: ${embed.object.field[i].value}\n
-        inline: ${embed.object.field[i].inline}\n
+      embedoutput.field = `{
+        name: ${embedoutput.field[i].name},\n
+        value: ${embedoutput.field[i].value}\n
+        inline: ${embedoutput.field[i].inline}\n
       }`
     }
 
@@ -459,7 +466,7 @@ function embedbuilder (message, embedoutput) {
     embedoutput.author = embedoutput.name + `, ` + client.user.avatarURL;
     embedoutput.footer = [];
 
-  message.channel.send({embed: {
+  sendembed = {embed: {
     author: {
       name: embedoutput.name,
       icon_url: client.user.avatarURL
@@ -475,11 +482,16 @@ function embedbuilder (message, embedoutput) {
       icon_url: embedoutput.footer.icon_url,
       text: embedoutput.footer.text
     }
-  }});
+  }};
 
-  embedoutput.footer = [];
 
 };
+
+function returnrole (member, rolecheck) {
+  rolecheck = rolecheck;
+  role = null;
+  if (member.roles.get(rolecheck) == null) {role = null} else {role = member.roles.get(rolecheck).name};
+}
 
 function cr (message, trigger, reponse) {
 
@@ -552,8 +564,8 @@ function messagecount (message, userid) {
 
   usersearchparameter(message, userid)
 
-  embedoutput.description = `**${message.author.tag}** has sent **${userData[placeholder].messages}** messages.`
-  embedbuilder (message, embedoutput);
+  embedoutput.description = `**${message.author.tag}** has sent **${userData[placeholder].messages.toLocaleString()}** messages.`
+  embedsender (message, embedoutput);
   embedoutput = {};
 
 }
