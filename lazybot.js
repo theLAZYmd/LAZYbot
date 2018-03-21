@@ -3,7 +3,8 @@ const client = new Discord.Client();
 const fs = require("fs");
 
 const config = require("./config.json");
-const package = require("./package.json")
+const package = require("./package.json");
+const tally = JSON.parse(fs.readFileSync("./messagelog.json", "utf8"));
 
 const nadekoprefix = config.nadekoprefix;
 const prefix = config.prefix;
@@ -11,9 +12,15 @@ const nadekoid = config.nadekoID;
   var i;
   var j;
   var k;
+      userData = [];
       messageID = [];
       embedoutput = [];
       embedoutput.footer = [];
+      trigger = [];
+      reponse = [];
+      placeholder = [];
+      randomboolean = [];
+      fetchedmessage = [];      
 
 //pinging glitch.com
 
@@ -34,6 +41,39 @@ setInterval(() => {
 client.on("ready", () => {
   console.log("bleep bloop! It's showtime.");
 });
+
+//section for message logging
+
+client.on("message", message => {
+  
+  if (message.author.bot) return;
+
+  let userid = message.author.id;
+
+  usersearchparameter (message, userid)
+
+  tally[placeholder].messages++;
+
+  fs.writeFile("./messagelog.json", JSON.stringify(tally, null, 4), (err) => {
+    if (err) console.error(err)
+  });
+});
+
+//leave message 
+/*
+client.on("guildMemberAdd", (member) => {
+
+  let channel = "390260363410800650";
+
+  usersearchmessages (member.id)
+
+  embedoutput.description = `**${member.tag}** has left **${guild.name}**. Had **${userData[placeholder]}** messages.`,
+  embedoutput.color = 15406156,
+  embedbuilder (message, embedoutput);
+  channel.send(embedoutput)
+  embedoutput = {};
+
+}); */
 
 //section for commands that integrate with Nadeko
 
@@ -69,6 +109,22 @@ client.on("message", (message) => {
           console.log(`${message.author.username} has sent out a ping for ${link}.`);
   }}}
 
+  /*if (command === "leavemsg") {
+
+    let member = message.author;
+
+    let channel = "390260363410800650";
+
+    usersearchmessages (member.id)
+
+    embedoutput.description = `**${member.tag}** has left **${message.guild.name}**. Had **${userData[placeholder].messages}** messages.`,
+    embedoutput.color = 15406156,
+    embedbuilder (message, embedoutput);
+    message.channel.send(embedoutput)
+    embedoutput = {};
+
+  } else */
+
   //change nadekoprefix
 
   if (command === "nadekoprefix") {
@@ -77,7 +133,7 @@ client.on("message", (message) => {
 
     let [newNadekoPrefix] = args;  
     config.nadekoprefix = newNadekoPrefix
-    fs.writeFile("./config.json", JSON.stringify(config), (err) => console.error);
+    fs.writeFile("./config.json", JSON.stringify(config, null, 4), (err) => console.error);
 
     message.channel.send(`Nadeko-Integration Prefix has been updated to **${newNadekoPrefix}** !`);
     console.log(`${message.author.username} [${message.author.id}] has updated NadekoPrefix to ${newNadekoPrefix}`);
@@ -169,24 +225,15 @@ client.on("message", (message) => {
 
     if (!(args[0].length == 18)) return;
 
-    function store(messagecontent) {
-      return messagecontent;
-      }
-    
-    message.channel.fetchMessage(args[0])
-      .then ((message) => {
-        let newembed = message.content;
-        message.channel.send(newembed);
-      });
+    fetchiemessage(message, args[0]);
+
+    message.channel.send(fetchedmessage);
 
   };
 
 });
 
 client.on("message", (message) => {
-
-  embedoutput = {};
-  embedoutput.footer = {};
 
   if (!message.content.startsWith(config.prefix) || message.author.bot) return;
 
@@ -199,7 +246,7 @@ client.on("message", (message) => {
 
     let [newPrefix] = args;
     config.prefix = newPrefix
-    fs.writeFile("./config.json", JSON.stringify(config), (err) => console.error);
+    fs.writeFile("./config.json", JSON.stringify(config, null, 4), (err) => console.error);
 
     message.channel.send(`Prefix has been updated to **${newPrefix}** !`);
     console.log(`${message.author.username} [${message.author.id}] has updated the prefix to ${newPrefix}`);
@@ -211,34 +258,25 @@ client.on("message", (message) => {
   } else
 
   if(command === "ping") {
-    console.log(embedoutput.title);
     embedoutput.description = `** ${message.author.tag}** :ping_pong: ${parseInt(client.ping)}ms`
     embedbuilder (message, embedoutput)
   } else
 
-  if(command === "marco") {
-    message.channel.send("polo!");
-  } else
+  if (command === "messages") {
 
-  if(command === "ready") {
-    message.channel.send("I am ready!");
-  } else
+    let userid = message.author.id;
 
-  if(command === "owner") {
-    message.channel.send("theLAZYmd#2353");
-  } else
+    messagecount (message, userid);
 
-  if(command === "who") {
-    message.channel.send("I am LAZYbot#2309");
-  } else
-
-  if(command === "help") {
-    message.channel.send("This is a pretty basic bot, there isn't much it can help you with.");
-  } else
-
-  if(command === "party") {
-    message.channel.send(`:tada:`)
   }
+
+  cr (message, "marco", "polo!");
+  cr (message, "ready", "I am ready!");
+  cr (message, "owner", "theLAZYmd#2353");
+  cr (message, "who", "I am LAZYbot#2309");
+  cr (message, "help", "This is a pretty basic bot, there isn't much it can help you with.");
+  cr (message, "party", ":tada:");
+  cr (message, "test", "I'm working!");
 
 });
 
@@ -305,6 +343,7 @@ client.on('message', (message) => {
   // automatic bot embed input
 
   else if (message.author.bot) {
+
     if (!(message.author.id == config.nadekoID)) return;
     if (message.embeds.length == 0) return;
 
@@ -330,7 +369,9 @@ client.on('message', (message) => {
   ||  !message.content.startsWith ("Trivia Game Ended"))
   && (message.embeds[0].author == undefined
   ||  message.embeds[0].title == undefined
-  ||  message.embeds[0].description == undefined))
+  ||  message.embeds[0].description == undefined
+  ||  !(message.embeds[0].title == "Trivia Game Ended" || message.embeds[0].title == "Final Results" )
+))
   return;
 
   for (let i = 0; i < args.length; i++) {
@@ -338,7 +379,7 @@ client.on('message', (message) => {
     name[i] = name[i].split("*").join("");
     }
 
-  if (name[0] === "No results") return;
+  if (name[0] == "No results") return;
   if (name.length < 1) return;
   if (name.length > 6) {name.length = 6};
   
@@ -361,6 +402,7 @@ client.on('message', (message) => {
   embedoutput.description = payoutaggregate,
   embedoutput.footer.text = `Please remember to check for ties.`
   embedbuilder (message, embedoutput);
+  embedoutput = {};
 
   });
 
@@ -378,14 +420,33 @@ client.on('message', (message) => {
 
 client.login(config.token);
 
+function fetchiemessage (message, longmessageid) {
+
+  message.channel.fetchMessage(longmessageid)
+  .then ((message) => {
+    let fetchedmessage = message.content;
+  });
+
+  function postembed (message, whichguide) {
+
+    message.channel.send(guide.whichguide)
+
+  }
+
+};
+
 function embedbuilder (message, embedoutput) {
 
   if (!(embedoutput.field == undefined)) {
 
     for (i = 0; i < embedoutput.field.length; i++) {
+
+      embedoutput.field[i].inline = (embedoutput.field[i].inline == undefined ? false : embedoutput.field[i].inline );
+
       embed.object.field = `{
         name: ${embed.object.field[i].name},\n
         value: ${embed.object.field[i].value}\n
+        inline: ${embed.object.field[i].inline}\n
       }`
     }
 
@@ -394,7 +455,9 @@ function embedbuilder (message, embedoutput) {
       }
     };
 
-    embedoutput.color = (embedoutput.color == undefined ? config.color : embedoutput.color )
+    embedoutput.color = (embedoutput.color == undefined ? config.color : embedoutput.color );
+    embedoutput.author = embedoutput.name + `, ` + client.user.avatarURL;
+    embedoutput.footer = [];
 
   message.channel.send({embed: {
     author: {
@@ -405,6 +468,7 @@ function embedbuilder (message, embedoutput) {
     url: embedoutput.url,
     color: embedoutput.color,
     description: embedoutput.description,
+    image: embedoutput.image,
     fields: embedoutput.fields,
     timestamp: embedoutput.timestamp,
     footer: {
@@ -413,59 +477,83 @@ function embedbuilder (message, embedoutput) {
     }
   }});
 
-  embedoutput = {};
-  embedoutput.footer = {};
-
-  console.log (embedoutput.title);
+  embedoutput.footer = [];
 
 };
 
-/*
+function cr (message, trigger, reponse) {
 
-function EMBEDtoJSON(object); {
+  const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
+  const command = args.shift().toLowerCase();
+  const response = reponse;
 
-  if (!(message.author.id == config.nadekoID)) return;
-    if (message.embeds.length == 0) return;
+  if(command === trigger) {message.channel.send(response)};
 
-    if (message.embeds[0].author == undefined
-    ||  message.embeds[0].title == undefined
-    ||  message.embeds[0].description == undefined
-      ) return;
+};
 
-    embedoutput.name = message.embeds[0].author.name;
-    embedoutput.title = message.embeds[0].title;
-    embedoutput.description = message.embeds[0].description;
+function usersearchparameter (message, parameter) {
 
-  message.channel.send("
-  ```json
-    color: 3447003,
-    author: {
-      name: client.user.username,
-      icon_url: client.user.avatarURL
-    },
-    title: "This is an embed",
-    url: "http://google.com",
-    description: "This is a test embed to showcase what they look like and what they can do.",
-    fields: [{
-        name: "Fields",
-        value: "They can have different fields with small headlines."
-      },
-      {
-        name: "Masked links",
-        value: "You can put [masked links](http://google.com) inside of rich embeds."
-      },
-      {
-        name: "Markdown",
-        value: "You can put all the *usual* **__Markdown__** inside of them."
-      }
-    ],
-    timestamp: new Date(),
-    footer: {
-      icon_url: client.user.avatarURL,
-      text: "© Example"
-    }
+  if (message.author.bot) return;
+
+  let checkthing  = parameter;
+  randomboolean = false;
+
+  for (let i = 0; i < tally.length; i++) {
+    
+    userData[i] = tally[i];
+
+    if (tally[i].userid == checkthing) {
+      randomboolean = true
+      placeholder = i;
+    };
   }
-})";
-}
 
-*/
+  if (randomboolean == false) {
+    tally.push ({
+      userid: parameter,
+      username: message.author.tag,
+      messages: 0,
+    })
+  fs.writeFile("./messagelog.json", JSON.stringify(tally, null, 4), (err) => {
+    if (err) console.error(err)
+  });
+
+  for (let i = 0; i < tally.length; i++) {
+    
+    userData[i] = tally[i];
+
+    if (tally[i].userid == checkthing) {
+      randomboolean = true
+      placeholder = i;
+    };
+  }
+
+}};
+
+function usersearchmessages (id) {
+
+  let checkthing  = id;
+  randomboolean = false;
+
+  for (let i = 0; i < tally.length; i++) {
+    
+    userData[i] = tally[i];
+
+    if (tally[i].userid == checkthing) {
+      randomboolean = true
+      placeholder = i;
+    };
+  }
+
+
+};
+
+function messagecount (message, userid) {
+
+  usersearchparameter(message, userid)
+
+  embedoutput.description = `**${message.author.tag}** has sent **${userData[placeholder].messages}** messages.`
+  embedbuilder (message, embedoutput);
+  embedoutput = {};
+
+}
