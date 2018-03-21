@@ -66,8 +66,10 @@ client.on("message", message => {
 
 client.on("guildMemberRemove", (member) => {
 
+  let guild = member.guild;
+  let channel = member.guild.channels.get("390260363410800650");
   usersearchmessages (member.user.id)
-  embedoutput.description = `**${member.user.tag}** has left **${guild.name}**. Had **${userData[placeholder].messages}** messages.`;
+  embedoutput.description = `**${member.user.tag}** has left **${guild.name}**. Had **${userData[placeholder].messages ? 0 : userData[placeholder].messages}** messages.`;
   embedoutput.color = 15406156;
   embedbuilder (embedoutput);
   channel.send (sendembed);
@@ -389,6 +391,7 @@ client.on('message', (message) => {
     payoutaggregate = `.give 17 **housebank#5970**`
     };
 
+  embedoutput.footer = [];
   embedoutput.title = `House Trivia ${name.length}-player Game`,
   embedoutput.description = payoutaggregate,
   embedoutput.footer.text = `Please remember to check for ties.`
