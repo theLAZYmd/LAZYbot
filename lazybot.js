@@ -68,8 +68,9 @@ client.on("guildMemberRemove", (member) => {
 
   let guild = member.guild;
   let channel = member.guild.channels.get("390260363410800650");
+  placeholder = null;
   usersearchmessages (member.user.id)
-  embedoutput.description = `**${member.user.tag}** has left **${guild.name}**. Had **${userData[placeholder].messages ? 0 : userData[placeholder].messages}** messages.`;
+  embedoutput.description = `**${member.user.tag}** has left **${guild.name}**. Had **${placeholder ? userData[placeholder].messages : 0}** messages.`;
   embedoutput.color = 15406156;
   embedbuilder (embedoutput);
   channel.send (sendembed);
