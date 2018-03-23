@@ -6,9 +6,6 @@ const config = require("./config.json");
 const package = require("./package.json");
 const tally = JSON.parse(fs.readFileSync("./messagelog.json", "utf8"));
 
-const nadekoprefix = config.nadekoprefix;
-const prefix = config.prefix;
-const nadekoid = config.nadekoID;
   var i;
   var j;
   var k;
@@ -24,6 +21,12 @@ const nadekoid = config.nadekoID;
       fetchedmessage = [];
       lastmessage = [];
       role = [];
+      rolename = [];
+      checkuser = [];
+
+      modboolean = false;
+      roleboolean = false;
+      offlineboolean = false;
 
 //pinging glitch.com
 
@@ -43,7 +46,14 @@ setInterval(() => {
 
 client.on("ready", () => {
   console.log("bleep bloop! It's showtime.");
+  guild = client.guilds.get(config.guild);
+  nadekobot = guild.members.get("116275390695079945");
 });
+
+//repeated stuff section
+/*client.on("ready", () => {
+  var interval = setInterval (checkbounceronline(), 600000);
+}); */
 
 //section for message logging
 
@@ -116,7 +126,7 @@ client.on("message", (message) => {
 
   if (command === "nadekoprefix") {
 
-    if(message.author.id != config.ownerID) return;
+    if(message.author.id !== config.ownerID) return;
 
     let [newNadekoPrefix] = args;  
     config.nadekoprefix = newNadekoPrefix
@@ -207,15 +217,34 @@ client.on("message", (message) => {
   if (command === "fetch") {
 
     let channel = message.channel;
-
     if (!(args[1] == undefined)) return;
-
     if (!(args[0].length == 18)) return;
 
     fetchiemessage(message, args[0]);
-
     message.channel.send(fetchedmessage);
 
+  } else
+  
+  if ((command === "botcontingencyplan" || command === "bcp")) {
+    checkmod (message.member);
+    if (modboolean == false) return; modboolean = false;
+    returnrole (nadekobot, "365938486534209536")
+    if (roleboolean == true) return;
+    let role = guild.roles.get("365938486534209536")
+    nadekobot.addRole(role);
+    embedoutput.description = `**${message.author.tag}** Successfully added role **${role.name}** to **Nadeko#6685**`;
+    embedsender (message, embedoutput);
+  };
+
+  if ((command === "botcontingencyover" || command === "bco")) {
+    checkmod (message.member);
+    if (modboolean == false) return; modboolean = false;
+    returnrole (nadekobot, "365938486534209536")
+    if (roleboolean == false) return; roleboolean = false;
+    let role = guild.roles.get("365938486534209536")
+    nadekobot.removeRole(role);
+    embedoutput.description = `**${message.author.tag}** Successfully removed role **${role.name}** from **Nadeko#6685**`;
+    embedsender (message, embedoutput);
   };
 
 });
@@ -229,7 +258,7 @@ client.on("message", (message) => {
 
   if (command === "prefix" || command === "lazybotprefix") {
 
-    if(message.author.id != config.ownerID) return;
+    if(message.author.id !== config.ownerID) return;
 
     let [newPrefix] = args;
     config.prefix = newPrefix
@@ -251,7 +280,7 @@ client.on("message", (message) => {
 
   if (command === "messages") {
     returnrole (message.member, "401836464071245826")
-    if (!(role == "Silver")) return;
+    if (!(rolename == "Silver")) return;
     let userid = message.author.id;
     messagecount (message, userid);
   } else
@@ -338,7 +367,7 @@ client.on('message', (message) => {
 
   else if (message.author.bot) {
 
-    if (!(message.author.id == config.nadekoID)) return;
+    if (!(message.author.id == config.bouncerID)) return;
     if (message.embeds.length == 0) return;
 
     if (message.embeds[0].author == undefined
@@ -491,10 +520,34 @@ function embedbuilder (embedoutput) {
 
 };
 
-function returnrole (member, rolecheck) {
-  rolecheck = rolecheck;
-  role = null;
-  if (member.roles.get(rolecheck) == null) {role = null} else {role = member.roles.get(rolecheck).name};
+function checkmod (member) {
+  returnrole (member, "390253470172708876")
+  if (rolename == "mods") {modboolean = true};
+  role = [];
+  rolename = [];
+};
+
+function returnrole (member, rolecheck) { //used to check if member has role
+  if (member.roles.get(rolecheck) == null) {
+    role = null;
+    roleboolean = false;
+  } else {
+    role = member.roles.get(rolecheck);
+    rolename = member.roles.get(rolecheck).name;
+    roleboolean = true;
+  };
+ 
+};
+
+function checkuseronline (checkuser) {
+  checkuser = checkuser;
+  checkuser.presence.status == "offline" ? offlineboolean = true : offlineboolean = false;
+};
+
+function checkbounceronine () {
+  guild = client.guilds.get(config.guild);
+  let bouncerbot = guild.members.get(config.bouncerID);
+  checkuseronline (bouncerbot);
 }
 
 function cr (message, trigger, reponse) {
