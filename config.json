@@ -1,16 +1,20 @@
 {
     "token":"token_here",
     "token2":"beta_bot_token_here",
-    "prefix":"!",
-    "nadekoprefix":".",
-    "ownerID":"185412969130229760",
-    "nadekoID":"365933164725534722".
-    "background":{
-        "icons":"212225",
-        "markdown":"2f3136",
-        "chat":"36393e"
+    "prefix": "!",
+    "nadekoprefix": ".",
+    "guild": "314155682033041408",
+    "ownerID": "185412969130229760",
+    "bouncerID": "365933164725534722",
+    "nadekoID": "116275390695079945",
+    "color": 53380,
+    "avatar": "https://i.imgur.com/Yl4Xoku.jpg",
+    "background": {
+        "icons": "212225",
+        "markdown": "2f3136",
+        "chat": "36393e"
     },
-    "text":{
-        "channels":"727671"
+    "text": {
+        "channels": "727671"
     }
 }
