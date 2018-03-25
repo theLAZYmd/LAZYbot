@@ -9,6 +9,7 @@ const tally = JSON.parse(fs.readFileSync("./messagelog.json", "utf8"));
   var i;
   var j;
   var k;
+      dbcounter = [];
       userData = [];
       messageID = [];
       embedoutput = [];
@@ -16,14 +17,16 @@ const tally = JSON.parse(fs.readFileSync("./messagelog.json", "utf8"));
       sendembed = [];
       trigger = [];
       reponse = [];
-      placeholder = [];
-      randomboolean = [];
       fetchedmessage = [];
       lastmessage = [];
       role = [];
       rolename = [];
       checkuser = [];
+      member = [];
+      user = [];
 
+      killboolean = false;
+      iboolean = false;
       modboolean = false;
       roleboolean = false;
       offlineboolean = false;
@@ -64,8 +67,8 @@ client.on("message", message => {
   let userid = message.author.id;
 
   usersearchparameter (message, userid)
-  if (placeholder == undefined) return;
-  tally[placeholder].messages++;
+  if (dbcounter == undefined) return;
+  tally[dbcounter].messages++;
 
   fs.writeFile("./messagelog.json", JSON.stringify(tally, null, 4), (err) => {
     if (err) console.error(err)
@@ -78,9 +81,9 @@ client.on("guildMemberRemove", (member) => {
 
   let guild = member.guild;
   let channel = member.guild.channels.get("390260363410800650");
-  placeholder = null;
+  dbcounter = null;
   usersearchmessages (member.user.id)
-  embedoutput.description = `**${member.user.tag}** has left **${guild.name}**. Had **${placeholder ? userData[placeholder].messages.toLocaleString() : 0}** messages.`;
+  embedoutput.description = `**${member.user.tag}** has left **${guild.name}**. Had **${dbcounter ? userData[dbcounter].messages.toLocaleString() : 0}** messages.`;
   embedoutput.color = 15406156;
   embedbuilder (embedoutput);
   channel.send (sendembed);
@@ -234,17 +237,33 @@ client.on("message", (message) => {
     nadekobot.addRole(role);
     embedoutput.description = `**${message.author.tag}** Successfully added role **${role.name}** to **Nadeko#6685**`;
     embedsender (message, embedoutput);
-  };
+  } else
 
   if ((command === "botcontingencyover" || command === "bco")) {
     checkmod (message.member);
     if (modboolean == false) return; modboolean = false;
     returnrole (nadekobot, "365938486534209536")
     if (roleboolean == false) return; roleboolean = false;
-    let role = guild.roles.get("365938486534209536")
     nadekobot.removeRole(role);
     embedoutput.description = `**${message.author.tag}** Successfully removed role **${role.name}** from **Nadeko#6685**`;
     embedsender (message, embedoutput);
+  } else
+
+  if ((command === "bàn") || (command === "fb")) {
+    args[0] == null ? killboolean = true : killboolean = false;
+    message.author.id !== config.ownerID ? killboolean = true : killboolean = false;
+    varclear ();
+    getuser (args[0]);
+    if (killboolean == true) return;
+    embedoutput.title = "⛔️ User Banned";
+    embedoutput.fields = [];
+    embedfielder ("Username", user.tag, true);
+    embedfielder ("ID", user.id, true);
+    embedsender (message, embedoutput);
+    returnrole (member, "390270667154784288")
+    if (roleboolean == true) return; roleboolean = false;
+    let role = guild.roles.get("390270667154784288");
+    member.addRole(role);
   };
 
 });
@@ -477,44 +496,49 @@ function fetchiemessage (message, longmessageid) {
 
 };
 
+function getuser (argument) {
+  var userid = argument.replace(/[.,#!$%\^&;:{}<>=-_`~()]/g,"");
+  if (!(userid.length == 18)) {killboolean = true};
+  guild = client.guilds.get(config.guild);
+  member = guild.members.get(userid);
+  if (member == undefined) return;
+  user = member.user;
+}
+
 function embedsender (message, embedoutput) {
 
   embedbuilder (embedoutput);
-
   message.channel.send(sendembed);
+  embedoutput = {};
 
-  embedoutput.footer = [];
+};
 
-}
+function embedfielder (name, value, inline) {
+
+  for (i = 0; i < embedoutput.fields.length; i++) {
+    embedoutput.fields[i].inline = (embedoutput.fields[i].inline == undefined ? false : embedoutput.fields[i].inline )};
+  embedoutput.fields.push({"name": name, "value": value, "inline": inline})
+
+};
+
+function embedauthor (name, icon_url) {
+
+  embedoutput.author = [];
+  embedoutput.author.name = name;
+  embedoutput.author.icon_url = icon_url;
+
+};
 
 function embedbuilder (embedoutput) {
 
-  if (!(embedoutput.field == undefined)) {
-
-    for (i = 0; i < embedoutput.field.length; i++) {
-
-      embedoutput.field[i].inline = (embedoutput.field[i].inline == undefined ? false : embedoutput.field[i].inline );
-
-      embedoutput.field = `{
-        name: ${embedoutput.field[i].name},\n
-        value: ${embedoutput.field[i].value}\n
-        inline: ${embedoutput.field[i].inline}\n
-      }`
-    }
-
-    for (i = 0; i < embedoutput.field.length; i++) {
-      embedoutput.fields += embedoutput.field[i] + (i < embedoutput.field.length -1 ? `,\n` : ``)
-      }
-    };
-
-    embedoutput.color = (embedoutput.color == undefined ? config.color : embedoutput.color );
-    embedoutput.author = embedoutput.name + `, ` + client.user.avatarURL;
-    embedoutput.footer = [];
+  embedoutput.color = (embedoutput.color == undefined ? config.color : embedoutput.color );
+  embedoutput.author = embedoutput.name + `, ` + client.user.avatarURL;
+  embedoutput.footer = [];
 
   sendembed = {embed: {
     author: {
-      name: embedoutput.name,
-      icon_url: client.user.avatarURL
+      name: embedoutput.author.name,
+      icon_url: embedoutput.author.icon_url,
     },
     title: embedoutput.title,
     url: embedoutput.url,
@@ -527,10 +551,18 @@ function embedbuilder (embedoutput) {
       icon_url: embedoutput.footer.icon_url,
       text: embedoutput.footer.text
     }
+
   }};
 
-
 };
+
+function varclear () {
+  embedoutput = {};
+  member = [];
+  user = [];
+  userid = [];
+  killboolean = false;
+}
 
 function checkmod (member) {
   returnrole (member, "390253470172708876")
@@ -578,20 +610,19 @@ function usersearchparameter (message, parameter, author) {
 
   if (message.author.bot) return;
 
-  let checkthing  = parameter;
-  randomboolean = false;
+  let checkthing = parameter;
 
   for (let i = 0; i < tally.length; i++) {
     
     userData[i] = tally[i];
 
     if (tally[i].userid == checkthing) {
-      randomboolean = true
-      placeholder = i;
+      iboolean = true
+      dbcounter = i;
     };
   }
 
-  if (randomboolean == false) {
+  if (iboolean == false) {
     if (parameter == undefined) return;
     if (author.tag == undefined) return;
     tally.push ({
@@ -610,8 +641,8 @@ function usersearchparameter (message, parameter, author) {
     userData[i] = tally[i];
 
     if (tally[i].userid == checkthing) {
-      randomboolean = true
-      placeholder = i;
+      iboolean = true
+      dbcounter = i;
     };
   }
 
@@ -620,15 +651,15 @@ function usersearchparameter (message, parameter, author) {
 function usersearchmessages (id) {
 
   let checkthing  = id;
-  randomboolean = false;
+  iboolean = false;
 
   for (let i = 0; i < tally.length; i++) {
     
     userData[i] = tally[i];
 
     if (tally[i].userid == checkthing) {
-      randomboolean = true
-      placeholder = i;
+      iboolean = true
+      dbcounter = i;
     };
   }
 
@@ -638,7 +669,7 @@ function usersearchmessages (id) {
 function messagecount (message, userid, author) {
   author ? author = author : author = message.author;
   usersearchparameter(message, userid, author)
-  embedoutput.description = `**${author.tag}** has sent **${userData[placeholder].messages.toLocaleString()}** messages.`
+  embedoutput.description = `**${author.tag}** has sent **${userData[dbcounter].messages.toLocaleString()}** messages.`
   embedsender (message, embedoutput);
   embedoutput = {};
 
