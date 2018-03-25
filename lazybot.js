@@ -64,7 +64,7 @@ client.on("message", message => {
   let userid = message.author.id;
 
   usersearchparameter (message, userid)
-
+  if (placeholder == undefined) return;
   tally[placeholder].messages++;
 
   fs.writeFile("./messagelog.json", JSON.stringify(tally, null, 4), (err) => {
@@ -80,7 +80,7 @@ client.on("guildMemberRemove", (member) => {
   let channel = member.guild.channels.get("390260363410800650");
   placeholder = null;
   usersearchmessages (member.user.id)
-  embedoutput.description = `**${member.user.tag}** has left **${guild.name}**. Had **${placeholder ? userData[placeholder].messages : 0}** messages.`;
+  embedoutput.description = `**${member.user.tag}** has left **${guild.name}**. Had **${placeholder ? userData[placeholder].messages.toLocaleString() : 0}** messages.`;
   embedoutput.color = 15406156;
   embedbuilder (embedoutput);
   channel.send (sendembed);
@@ -279,10 +279,22 @@ client.on("message", (message) => {
   } else
 
   if (command === "messages") {
-    returnrole (message.member, "401836464071245826")
-    if (!(rolename == "Silver")) return;
-    let userid = message.author.id;
-    messagecount (message, userid);
+    if (args[0] == null) {
+      returnrole (message.member, "401836464071245826")
+      if (!(rolename == "Silver")) return;
+      let userid = message.author.id;
+      messagecount (message, userid);
+    } else {
+      if(message.author.id !== config.ownerID) return;
+      var userid = args[0].replace(/[.,#!$%\^&;:{}<>=-_`~()]/g,"");
+      if (!(userid.length == 18)) return;
+      console.log (userid);
+      let member = guild.members.get(userid);
+      if (member == undefined) return;
+      let user = member.user;
+      console.log (user.username);
+      messagecount (message, userid, user);
+    }
   } else
 
   if (command === "lastmessage") {
@@ -387,22 +399,22 @@ client.on('message', (message) => {
 
   // give messages output
 
-  if ((
-      !message.content.startsWith ("Final Results")
-  ||  !message.content.startsWith ("Trivia Game Ended"))
+  if (
+    (!(message.content.startsWith ("Final Results") || message.content.startsWith ("Trivia Game Ended")))
+    && message.embeds[0] == undefined) return;
+  if (
+    (!(message.content.startsWith ("Final Results") || message.content.startsWith ("Trivia Game Ended")))
   && (message.embeds[0].author == undefined
   ||  message.embeds[0].title == undefined
   ||  message.embeds[0].description == undefined
-  ||  !(message.embeds[0].title == "Trivia Game Ended" || message.embeds[0].title == "Final Results" )
-))
-  return;
+  ||  !(message.embeds[0].title == "Trivia Game Ended" || message.embeds[0].title == "Final Results" )))  return;
 
   for (let i = 0; i < args.length; i++) {
     name[i] = args[i].split(/ +/g).shift();
     name[i] = name[i].split("*").join("");
     }
 
-  if (name[0] == "No results") return;
+  if (name[0] == "No") return;
   if (name.length < 1) return;
   if (name.length > 6) {name.length = 6};
   
@@ -560,7 +572,9 @@ function cr (message, trigger, reponse) {
 
 };
 
-function usersearchparameter (message, parameter) {
+function usersearchparameter (message, parameter, author) {
+
+  author ? author = author : author = message.author;
 
   if (message.author.bot) return;
 
@@ -578,11 +592,15 @@ function usersearchparameter (message, parameter) {
   }
 
   if (randomboolean == false) {
+    if (parameter == undefined) return;
+    if (author.tag == undefined) return;
     tally.push ({
       userid: parameter,
-      username: message.author.tag,
+      username: author.tag,
       messages: 0,
     })
+  if (tally == undefined) return;
+
   fs.writeFile("./messagelog.json", JSON.stringify(tally, null, 4), (err) => {
     if (err) console.error(err)
   });
@@ -615,13 +633,12 @@ function usersearchmessages (id) {
   }
 
 
-};
+}; 
 
-function messagecount (message, userid) {
-
-  usersearchparameter(message, userid)
-
-  embedoutput.description = `**${message.author.tag}** has sent **${userData[placeholder].messages.toLocaleString()}** messages.`
+function messagecount (message, userid, author) {
+  author ? author = author : author = message.author;
+  usersearchparameter(message, userid, author)
+  embedoutput.description = `**${author.tag}** has sent **${userData[placeholder].messages.toLocaleString()}** messages.`
   embedsender (message, embedoutput);
   embedoutput = {};
 
