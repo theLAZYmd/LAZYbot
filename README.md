@@ -10,7 +10,7 @@ Functions extremely specific to server. So far it can:
 • handle two prefixes  
 • convert plaintext subreddit comments (ex: /r/AskReddit) into hyperlinks, when posted alone in a comment  
 • handle data for specific formulae created  
-• reply to a trivia results embed with the list of required payouts
+• reply to a trivia results embed with the list of required payouts  
 • log server messages
 
 Development ongoing!
