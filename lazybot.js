@@ -10,8 +10,6 @@ const tally = JSON.parse(fs.readFileSync("./messagelog.json", "utf8"));
   var j;
   var k;
       dbcounter = [];
-      userData = [];
-      messageID = [];
       embedoutput = [];
       embedoutput.footer = [];
       sendembed = [];
@@ -19,11 +17,6 @@ const tally = JSON.parse(fs.readFileSync("./messagelog.json", "utf8"));
       reponse = [];
       fetchedmessage = [];
       lastmessage = [];
-      role = [];
-      rolename = [];
-      checkuser = [];
-      member = [];
-      user = [];
 
       killboolean = false;
       iboolean = false;
@@ -37,7 +30,7 @@ const http = require('http');
 const express = require('express');
 const app = express();
 app.get("/", (request, response) => {
-  console.log(Date.now() + " Ping Received");
+  console.log (Date.now() + " Ping Received");
   response.sendStatus(200);
 });
 app.listen(process.env.PORT);
@@ -48,28 +41,23 @@ setInterval(() => {
 //console startup section
 
 client.on("ready", () => {
-  console.log("bleep bloop! It's showtime.");
+  console.log ("bleep bloop! It's showtime.");
   guild = client.guilds.get(config.guild);
   nadekobot = guild.members.get("116275390695079945");
 });
-
-//repeated stuff section
-/*client.on("ready", () => {
-  var interval = setInterval (checkbounceronline(), 600000);
-}); */
 
 //section for message logging
 
 client.on("message", message => {
   
   if (message.author.bot) return;
+  let user = message.author;
+  let dbindex = getdbindexfromdbuser (user)
+  console.log (dbindex)
+  if (dbindex == -1) return;
 
-  let userid = message.author.id;
-
-  usersearchparameter (message, userid)
-  if (dbcounter == undefined) return;
-  tally[dbcounter].messages++;
-
+  tally[dbindex].messages++;
+  if (tally == undefined) return;
   fs.writeFile("./messagelog.json", JSON.stringify(tally, null, 4), (err) => {
     if (err) console.error(err)
   });
@@ -79,15 +67,13 @@ client.on("message", message => {
 
 client.on("guildMemberRemove", (member) => {
 
-  let guild = member.guild;
+  clearvar();
   let channel = member.guild.channels.get("390260363410800650");
-  dbcounter = null;
-  usersearchmessages (member.user.id)
-  embedoutput.description = `**${member.user.tag}** has left **${guild.name}**. Had **${dbcounter ? userData[dbcounter].messages.toLocaleString() : 0}** messages.`;
+  let dbuser = getdbuserfromuser (message, user);
+  embedoutput.description = `**${member.user.tag}** has left **${guild.name}**. Had **${dbuser.messages ? dbuser.messages.toLocaleString() : 0}** messages.`;
   embedoutput.color = 15406156;
   embedbuilder (embedoutput);
   channel.send (sendembed);
-  embedoutput = {};
 
 });
 
@@ -99,6 +85,7 @@ client.on("message", (message) => {
 
   const args = message.content.slice(config.nadekoprefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
+  const argument = message.content.slice(command.length + config.nadekoprefix.length).trim();
 
   //@here command
    
@@ -122,7 +109,7 @@ client.on("message", (message) => {
         if(message.content.startsWith (config.nadekoprefix + notifycommand[i] + " " + domain[j])) {
           message.channel.send("@here");
         let [link] = args;
-          console.log(`${message.author.username} has sent out a ping for ${link}.`);
+          console.log (`${message.author.username} has sent out a ping for ${link}.`);
   }}}
 
   //change nadekoprefix
@@ -136,7 +123,7 @@ client.on("message", (message) => {
     fs.writeFile("./config.json", JSON.stringify(config, null, 4), (err) => console.error);
 
     message.channel.send(`Nadeko-Integration Prefix has been updated to **${newNadekoPrefix}** !`);
-    console.log(`${message.author.username} [${message.author.id}] has updated NadekoPrefix to ${newNadekoPrefix}`);
+    console.log (`${message.author.username} [${message.author.id}] has updated NadekoPrefix to ${newNadekoPrefix}`);
   } else
 
   if (command === "mf") {
@@ -163,54 +150,31 @@ client.on("message", (message) => {
 
   //Conversion functions
 
-    if (command === "decimaltous") {
+  if (command === "decimaltous") {
 
-    let [decimalodds] = args;
+    let decimalodds = Number(args[0]);
+    if (decimalodds == NaN) return;
+    clearvar();
+    embedoutput.title = "Decimal to US Odds";
+    embedoutput.color = 431075;
+    if (decimalodds < 1) {embedoutput.description = "Error: Decimal odds must be greater than or equal to 1."};
+    if (1 <= decimalodds < 2) {embedoutput.description = (-100/(decimalodds-1)).toString()};
+    if (2 < decimalodds) {embedoutput.description = "+" + (100*(decimalodds-1)).toString()};
+    embedsender (message, embedoutput);
 
-    if (decimalodds < 1) {
-      message.channel.send({embed: {
-        title: "Decimal to US Odds",
-        color: 431075,
-        description: "Error: Decimal odds must be greater or than 1."
-      }});
-    } else
-
-    if (1 <= decimalodds && decimalodds < 2) {
-      message.channel.send({embed: {
-        title: "Decimal to US Odds",
-        color: 431075,
-        description: parseInt(-100/(decimalodds-1))
-      }});
-    } else
-
-    if (2 < decimalodds) {
-      message.channel.send({embed: {
-        title: "Decimal to US Odds",
-        color: 431075,
-        description: "+" + parseInt(100*(decimalodds-1))
-      }});
-    }
   } else
 
   if (command === "ustodecimal") {
 
-    let [usodds] = args;
+    let usodds = Number(args[0]);
+    if (usodds == NaN) return;
+    clearvar();
+    embedoutput.title = "US to Decimal Odds";
+    embedoutput.color = 16738560;
+    if (usodds < 0) {embedoutput.description = (1 - 100/usodds).toFixed(1)};
+    if (usodds > 0) {embedoutput.description = (1 + usodds/100).toFixed(1)};
+    embedsender (message, embedoutput);
 
-    if (usodds < 0) {
-      message.channel.send({embed: {
-        title: "US to Decimal Odds",
-        color: 16738560,
-        description: "" + Math.round(100*(1 - 100/usodds))/100
-      }});
-    } else
-
-    if (0 < usodds) {
-      message.channel.send({embed: {
-        title: "US to Decimal Odds",
-        color: 16738560,
-        description: "" + Math.round(100*(1 + usodds/100))/100
-      }});
-    }
   } else
 
   if (command === "everyone") {
@@ -229,20 +193,20 @@ client.on("message", (message) => {
   } else
   
   if ((command === "botcontingencyplan" || command === "bcp")) {
-    checkmod (message.member);
-    if (modboolean == false) return; modboolean = false;
-    returnrole (nadekobot, "365938486534209536")
+    clearvar();
+    checkrole (message.member, "mods");
+    if (roleboolean == false) return; roleboolean = false;
+    checkrole (nadekobot, "Bot-In-Use")
     if (roleboolean == true) return;
-    let role = guild.roles.get("365938486534209536")
     nadekobot.addRole(role);
     embedoutput.description = `**${message.author.tag}** Successfully added role **${role.name}** to **Nadeko#6685**`;
     embedsender (message, embedoutput);
   } else
 
   if ((command === "botcontingencyover" || command === "bco")) {
-    checkmod (message.member);
-    if (modboolean == false) return; modboolean = false;
-    returnrole (nadekobot, "365938486534209536")
+    checkrole (message.member, "mods");
+    if (roleboolean == false) return; roleboolean = false;
+    checkrole (nadekobot, "Bot-In-Use")
     if (roleboolean == false) return; roleboolean = false;
     nadekobot.removeRole(role);
     embedoutput.description = `**${message.author.tag}** Successfully removed role **${role.name}** from **Nadeko#6685**`;
@@ -250,19 +214,19 @@ client.on("message", (message) => {
   } else
 
   if ((command === "bàn") || (command === "fb")) {
+    console.log (args[0])
     args[0] == null ? killboolean = true : killboolean = false;
     message.author.id !== config.ownerID ? killboolean = true : killboolean = false;
-    varclear ();
-    getuser (args[0]);
-    if (killboolean == true) return;
+    if (killboolean) return;
+    clearvar ();
+    let user = getuser (args[0]);
     embedoutput.title = "⛔️ User Banned";
     embedoutput.fields = [];
     embedfielder ("Username", user.tag, true);
     embedfielder ("ID", user.id, true);
     embedsender (message, embedoutput);
-    returnrole (member, "390270667154784288")
-    if (roleboolean == true) return; roleboolean = false;
-    let role = guild.roles.get("390270667154784288");
+    checkrole (member, "muted")
+    if (roleboolean) return; roleboolean = false;
     member.addRole(role);
   };
 
@@ -298,22 +262,17 @@ client.on("message", (message) => {
   } else
 
   if (command === "messages") {
-    if (args[0] == null) {
-      returnrole (message.member, "401836464071245826")
-      if (!(rolename == "Silver")) return;
-      let userid = message.author.id;
-      messagecount (message, userid);
+    if (args == null || message.author.id !== config.ownerID) {
+      checkrole (message.member, "silver")
+      if (roleboolean == null) return;
+      let user = message.author;
+      messagecount (message, user);
     } else {
-      if(message.author.id !== config.ownerID) return;
-      var userid = args[0].replace(/[.,#!$%\^&;:{}<>=-_`~()]/g,"");
-      if (!(userid.length == 18)) return;
-      console.log (userid);
-      let member = guild.members.get(userid);
-      if (member == undefined) return;
-      let user = member.user;
-      console.log (user.username);
-      messagecount (message, userid, user);
-    }
+      clearvar()
+      let user = getuser(argument)
+      if (killboolean) return;
+      messagecount (message, user);
+    };
   } else
 
   if (command === "lastmessage") {
@@ -322,7 +281,39 @@ client.on("message", (message) => {
     message.channel.send(lastmessage);
     lastmessage = [];
 
+  } else
+
+  if (command === "updatemessagecount") {
+    
+    if(message.author.id !== config.ownerID) return;
+    clearvar()
+    let userid = args[0];
+    let newcount = args[1];
+  
+    usersearchparameter (message, userid)
+    if (dbcounter == undefined) return;
+    tally[dbcounter].messages++;
+  
+    fs.writeFile("./messagelog.json", JSON.stringify(tally, null, 4), (err) => {
+      if (err) console.error(err)
+    });
   }
+
+  if (command === "test") {
+
+    if (args[0] == null) return;
+    if(message.author.id !== config.ownerID) return;
+
+    getrolefromname (args[0])
+    var userid = args[0].replace(/[.,#!$%\^&;:{}<>=-_`~()]/g,"");
+    if (!(userid.length == 18)) return;
+    console.log (userid);
+    let member = guild.members.get(userid);
+    if (member == undefined) return;
+    let user = member.user;
+    console.log (user.username);
+    messagecount (message, userid, user);
+  };
 
   cr (message, "marco", "polo!");
   cr (message, "ready", "I am ready!");
@@ -330,7 +321,6 @@ client.on("message", (message) => {
   cr (message, "who", "I am LAZYbot#2309");
   cr (message, "help", "This is a pretty basic bot, there isn't much it can help you with.");
   cr (message, "party", ":tada:");
-  cr (message, "test", "I'm working!");
 
 });
 
@@ -475,35 +465,87 @@ client.on('message', (message) => {
 
 client.login(config.token);
 
-function getlastmessage (author) {
+function clearvar () {
+  embedoutput = {};
+  killboolean = false;
+};
 
-  lastmessage = author.lastMessage.content;
+function checkrole (member, rolename) { //used to check if member has role
+  getrolefromname (rolename)
+  member.roles.get(role.id) ? roleboolean = true : roleboolean = false;
+};
 
-}
+function getrolefromname (rolename) {
+  if (guild.roles.find(role => rolename.toLowerCase() == role.name.toLowerCase()) == null) {killboolean = true; return}
+  role = guild.roles.find(role => rolename.toLowerCase() == role.name.toLowerCase());
+};
 
-function fetchiemessage (message, longmessageid) {
+function getuser (searchstring) {
+  clearvar()
+  var user = getuserfromid (searchstring);
+  if (user == null) {var user = getuserfromusername (searchstring)};
+  if (user == null) {var user = getuserfromnickname (searchstring)};
+  if (user == null) {killboolean = true};
+  return user;
+};
 
-  message.channel.fetchMessage(longmessageid)
-  .then ((message) => {
-    let fetchedmessage = message.content;
-  });
+function getuserfromid (snowflake) {
+  clearvar()
+  if (client.users.find(user => snowflake.replace(/[.,#!$%\^&;:{}<>=-_`~()]/g,"") == user.id) == null) {killboolean = true; console.log ("No id found, checking username...")};
+  if (killboolean) return;
+  console.log ("ID Found!");
+  return client.users.find(user => snowflake.replace(/[.,#!$%\^&;:{}<>=-_`~()]/g,"") == user.id);
+};
 
-  function postembed (message, whichguide) {
+function getuserfromusername (string) {
+  clearvar()
+  if (client.users.find(user => string.toLowerCase() == user.username.toLowerCase()) == null) {killboolean = true; console.log ("No username found, checking nickname...")};
+  if (killboolean) return;
+  console.log ("Username found!");
+  return client.users.find(user => string.toLowerCase() == user.username.toLowerCase());
+};
 
-    message.channel.send(guide.whichguide)
+function getuserfromnickname (string) {
+  if (guild.members.find(member => string.toLowerCase() == member.nickname.toLowerCase()) == null) {killboolean = true; console.log ("No nickname found.")};
+  if (killboolean) return;
+  return guild.members.find(member => string.toLowerCase() == member.nickname.toLowerCase()).user;
+};
 
-  }
+
+function messagecount (message, user) {
+
+  user ? user = user : user = message.author;
+  console.log (user)
+  let dbuser = getdbuserfromuser (user);
+  embedoutput.description = `**${user.tag}** has sent **${dbuser.messages.toLocaleString()}** messages.`
+  embedsender (message, embedoutput);
+  embedoutput = {};
+  
+};
+
+function getdbuserfromuser (user) {
+
+  console.log ("ID Found!");
+  if (tally.find(dbuser => user.id == dbuser.userid) == null) {
+    console.log ("No dbuser found, creating one...");
+    tally.push ({
+      userid: user.id,
+      username: user.tag,
+      messages: 0,
+    });
+    fs.writeFile("./messagelog.json", JSON.stringify(tally, null, 4), (err) => {
+      if (err) console.error(err)
+    });
+  };
+  return tally.find(dbuser => user.id == dbuser.userid);
 
 };
 
-function getuser (argument) {
-  var userid = argument.replace(/[.,#!$%\^&;:{}<>=-_`~()]/g,"");
-  if (!(userid.length == 18)) {killboolean = true};
-  guild = client.guilds.get(config.guild);
-  member = guild.members.get(userid);
-  if (member == undefined) return;
-  user = member.user;
-}
+function getdbindexfromdbuser (dbuser) {
+
+  return tally.findIndex(index => dbuser.id == index.userid)
+
+};
 
 function embedsender (message, embedoutput) {
 
@@ -556,44 +598,6 @@ function embedbuilder (embedoutput) {
 
 };
 
-function varclear () {
-  embedoutput = {};
-  member = [];
-  user = [];
-  userid = [];
-  killboolean = false;
-}
-
-function checkmod (member) {
-  returnrole (member, "390253470172708876")
-  if (rolename == "mods") {modboolean = true};
-  role = [];
-  rolename = [];
-};
-
-function returnrole (member, rolecheck) { //used to check if member has role
-  if (member.roles.get(rolecheck) == null) {
-    role = null;
-    roleboolean = false;
-  } else {
-    role = member.roles.get(rolecheck);
-    rolename = member.roles.get(rolecheck).name;
-    roleboolean = true;
-  };
- 
-};
-
-function checkuseronline (checkuser) {
-  checkuser = checkuser;
-  checkuser.presence.status == "offline" ? offlineboolean = true : offlineboolean = false;
-};
-
-function checkbounceronine () {
-  guild = client.guilds.get(config.guild);
-  let bouncerbot = guild.members.get(config.bouncerID);
-  checkuseronline (bouncerbot);
-}
-
 function cr (message, trigger, reponse) {
 
   const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
@@ -604,73 +608,34 @@ function cr (message, trigger, reponse) {
 
 };
 
-function usersearchparameter (message, parameter, author) {
-
-  author ? author = author : author = message.author;
-
-  if (message.author.bot) return;
-
-  let checkthing = parameter;
-
-  for (let i = 0; i < tally.length; i++) {
-    
-    userData[i] = tally[i];
-
-    if (tally[i].userid == checkthing) {
-      iboolean = true
-      dbcounter = i;
-    };
-  }
-
-  if (iboolean == false) {
-    if (parameter == undefined) return;
-    if (author.tag == undefined) return;
-    tally.push ({
-      userid: parameter,
-      username: author.tag,
-      messages: 0,
-    })
-  if (tally == undefined) return;
-
-  fs.writeFile("./messagelog.json", JSON.stringify(tally, null, 4), (err) => {
-    if (err) console.error(err)
-  });
-
-  for (let i = 0; i < tally.length; i++) {
-    
-    userData[i] = tally[i];
-
-    if (tally[i].userid == checkthing) {
-      iboolean = true
-      dbcounter = i;
-    };
-  }
-
-}};
-
-function usersearchmessages (id) {
-
-  let checkthing  = id;
-  iboolean = false;
-
-  for (let i = 0; i < tally.length; i++) {
-    
-    userData[i] = tally[i];
-
-    if (tally[i].userid == checkthing) {
-      iboolean = true
-      dbcounter = i;
-    };
-  }
-
-
+function checkuseronline (checkuser) {
+  checkuser = checkuser;
+  checkuser.presence.status == "offline" ? offlineboolean = true : offlineboolean = false;
 }; 
 
-function messagecount (message, userid, author) {
-  author ? author = author : author = message.author;
-  usersearchparameter(message, userid, author)
-  embedoutput.description = `**${author.tag}** has sent **${userData[dbcounter].messages.toLocaleString()}** messages.`
-  embedsender (message, embedoutput);
-  embedoutput = {};
-
+function checkbounceronine () {
+  guild = client.guilds.get(config.guild);
+  let bouncerbot = guild.members.get(config.bouncerID);
+  checkuseronline (bouncerbot);
 }
+
+function getlastmessage (member) {
+
+  lastmessage = member.lastMessage.content;
+
+};
+
+function fetchiemessage (message, longmessageid) {
+
+  message.channel.fetchMessage(longmessageid)
+  .then ((message) => {
+    let fetchedmessage = message.content;
+  });
+
+  function postembed (message, whichguide) {
+
+    message.channel.send(guide.whichguide)
+
+  }
+
+};
