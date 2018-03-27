@@ -7,22 +7,19 @@ const package = require("./package.json");
 const tally = JSON.parse(fs.readFileSync("./messagelog.json", "utf8"));
 
   var i;
-  var j;
-  var k;
       dbcounter = [];
       embedoutput = [];
       embedoutput.footer = [];
       sendembed = [];
-      trigger = [];
-      reponse = [];
       fetchedmessage = [];
       lastmessage = [];
 
-      killboolean = false;
-      iboolean = false;
-      modboolean = false;
-      roleboolean = false;
-      offlineboolean = false;
+//console startup section
+
+client.on("ready", () => {
+  console.log ("bleep bloop! It's showtime.");
+  var guild = client.guilds.get(config.guild);
+});
 
 //pinging glitch.com
 
@@ -38,13 +35,16 @@ setInterval(() => {
   http.get(`http://${process.env.lazybot}.glitch.me/`);
 }, 280000);
 
-//console startup section
+const guild = client.guilds.get(config.guild);
+var acceptedlinkdomains = [
+  "http://lichess.org",
+  "http://www.chess.com",
+  "http://bughousetest.com",
+  "https://lichess.org",
+  "https://www.chess.com",
+  "https://bughousetest.com"
+];
 
-client.on("ready", () => {
-  console.log ("bleep bloop! It's showtime.");
-  guild = client.guilds.get(config.guild);
-  nadekobot = guild.members.get("116275390695079945");
-});
 
 //section for message logging
 
@@ -52,7 +52,8 @@ client.on("message", message => {
   
   if (message.author.bot) return;
   let user = message.author;
-  let dbindex = getdbindexfromdbuser (user)
+  let dbuser = getdbuserfromuser;
+  let dbindex = getdbindexfromdbuser (dbuser)
   if (dbindex == -1) return;
 
   tally[dbindex].messages++;
@@ -88,29 +89,18 @@ client.on("message", (message) => {
   const argument = message.content.slice(command.length + config.nadekoprefix.length).trim();
 
   //@here command
-   
-  var notifycommand = [
-    "notify",
-    "here",
-    "tournamentstarting"
-  ];
 
-  var domain = [
-    "http://lichess.org",
-    "http://www.chess.com",
-    "http://bughousetest.com",
-    "https://lichess.org",
-    "https://www.chess.com",
-    "https://bughousetest.com"
-  ];
+  if (command === "notify"){
 
-  for (let i = 0; i < 3; i++) {
-    for (let j = 0; j < 6; j++) {
-        if(message.content.startsWith (config.nadekoprefix + notifycommand[i] + " " + domain[j])) {
-          message.channel.send("@here");
-        let [link] = args;
-          console.log (`${message.author.username} has sent out a ping for ${link}.`);
-  }}}
+    let link = args[0]
+ 
+    for (let i = 0; i < acceptedlinkdomains.length; i++) {
+      if (link == acceptedlinkdomains[i]) {
+        message.channel.send("@here");
+        console.log (`${message.author.username} has sent out a ping for ${link}.`);
+      };
+    };
+  };
 
   //change nadekoprefix
 
@@ -128,23 +118,23 @@ client.on("message", (message) => {
 
   if (command === "mf") {
 
-  let [games,time,increment] = args;
-  message.channel.send({embed: {
-    title: "House Match Reward",
-    color: 53380,
-    description: Math.floor(7/12 * parseInt(games) * (parseInt(time) + 2/3 * parseInt(increment))) + " :cherry_blossom:"
-  }});
+    let [games,time,increment] = args;
+    message.channel.send({embed: {
+      title: "House Match Reward",
+      color: 53380,
+      description: Math.floor(7/12 * parseInt(games) * (parseInt(time) + 2/3 * parseInt(increment))) + " :cherry_blossom:"
+    }});
 
   } else
 
   if (command === "tf") {
 
   let [games,time,increment] = args;
-  message.channel.send({embed: {
-    title: "House Tournament Reward",
-    color: 53380,
-    description: Math.floor(1/10 * parseInt(games) * (parseInt(time) + 2/3 * parseInt(increment))) + " :cherry_blossom:"
-  }});
+    message.channel.send({embed: {
+      title: "House Tournament Reward",
+      color: 53380,
+      description: Math.floor(1/10 * parseInt(games) * (parseInt(time) + 2/3 * parseInt(increment))) + " :cherry_blossom:"
+    }});
 
   } else
 
@@ -176,10 +166,6 @@ client.on("message", (message) => {
     embedsender (message, embedoutput);
 
   } else
-
-  if (command === "everyone") {
-    message.channel.send("Why would you try and do that tho");
-  } else
   
   if (command === "fetch") {
 
@@ -190,7 +176,7 @@ client.on("message", (message) => {
     fetchiemessage(message, args[0]);
     message.channel.send(fetchedmessage);
 
-  }   else
+  } else
 
   if ((command === "botcontingencyplan" || command === "bcp")) {
     clearvar();
@@ -217,7 +203,7 @@ client.on("message", (message) => {
     embedsender (message, embedoutput);
   } else 
 
-  if ((command === "bàn") || (command === "fb")) {
+  if (command === "fb") {
     if ((args[0] == null) || (message.author.id !== config.ownerID)) return;
     clearvar ();
     let user = getuser (args[0]);
@@ -266,15 +252,14 @@ client.on("message", (message) => {
   } else
 
   if (command === "messages") {
-    if (args == null || message.author.id !== config.ownerID) {
-      checkrole (message.member, "silver")
-      if (roleboolean == null) return;
+    if (args == null) {
+      //let boolean1 = checkrole (message.member, "silver")
+      //if (boolean1 == null) return;
       let user = message.author;
       messagecount (message, user);
     } else {
       clearvar()
-      let user = getuser (argument)
-      if (killboolean) return;
+      let user = getuser (argument);
       messagecount (message, user);
     };
   } else
@@ -287,20 +272,24 @@ client.on("message", (message) => {
 
   } else
 
-  if (command === "updatemessagecount") {
+  if ((command === "updatemessagecount") || (command === "updatemessages")) {
     
     if(message.author.id !== config.ownerID) return;
     clearvar()
-    let userid = args[0];
+    let user = getuser (args[0])
     let newcount = args[1];
+    let dbuser = getdbuserfromuser (user)
+    console.log (dbuser);
+    if (dbuser == undefined) return;
+    let dbindex = getdbindexfromdbuser (user)
+    if (dbindex == -1) return;
   
-    usersearchparameter (message, userid)
-    if (dbcounter == undefined) return;
-    tally[dbcounter].messages++;
-  
+    tally[dbindex].messages = newcount;
+    if (tally == undefined) return;
     fs.writeFile("./messagelog.json", JSON.stringify(tally, null, 4), (err) => {
       if (err) console.error(err)
     });
+    messagecount (message, user, true);
   };
 
   cr (message, "marco", "polo!");
@@ -317,7 +306,6 @@ client.on("message", (message) => {
 client.on("message", (message) => {
 
   if (message.author.bot) return;
-
   if (!message.content.includes("r/")) return;
 
   var args = message.content.split(/ +/g);
@@ -455,7 +443,6 @@ client.login(config.token);
 
 function clearvar () {
   embedoutput = {};
-  killboolean = false;
 };
 
 function checkrole (member, rolename) { //used to check if member has role
@@ -510,12 +497,12 @@ function getmemberfromuser (user) {
   if (member == null) {return} else {return member};
 };
 
-function messagecount (message, user) {
+function messagecount (message, user, update) {
 
   user ? user = user : user = message.author;
   let dbuser = getdbuserfromuser (user);
   if (dbuser == undefined) return;
-  embedoutput.description = `**${user.tag}** has sent **${dbuser.messages.toLocaleString()}** messages.`
+  update ? embedoutput.description = `Message count for **${user.tag}** is now **${dbuser.messages.toLocaleString()}** messages.` : embedoutput.description = `**${user.tag}** has sent **${dbuser.messages.toLocaleString()}** messages.`;
   embedsender (message, embedoutput);
   embedoutput = {};
   
