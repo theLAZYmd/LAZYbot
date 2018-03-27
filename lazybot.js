@@ -53,7 +53,6 @@ client.on("message", message => {
   if (message.author.bot) return;
   let user = message.author;
   let dbindex = getdbindexfromdbuser (user)
-  console.log (dbindex)
   if (dbindex == -1) return;
 
   tally[dbindex].messages++;
@@ -70,6 +69,7 @@ client.on("guildMemberRemove", (member) => {
   clearvar();
   let channel = member.guild.channels.get("390260363410800650");
   let dbuser = getdbuserfromuser (message, user);
+  if (dbuser == undefined) return;
   embedoutput.description = `**${member.user.tag}** has left **${guild.name}**. Had **${dbuser.messages ? dbuser.messages.toLocaleString() : 0}** messages.`;
   embedoutput.color = 15406156;
   embedbuilder (embedoutput);
@@ -190,43 +190,46 @@ client.on("message", (message) => {
     fetchiemessage(message, args[0]);
     message.channel.send(fetchedmessage);
 
-  } else
-  
+  }   else
+
   if ((command === "botcontingencyplan" || command === "bcp")) {
     clearvar();
-    checkrole (message.member, "mods");
-    if (roleboolean == false) return; roleboolean = false;
-    checkrole (nadekobot, "Bot-In-Use")
-    if (roleboolean == true) return;
+    let boolean1 = checkrole (message.member, "mods");
+    if (boolean1 == false) return;
+    let role = getrolefromname ("Bot-In-Use")
+    if (role == undefined) return;
+    let boolean2 = checkrole (nadekobot, role.name)
+    if (boolean2 == true) return;
     nadekobot.addRole(role);
     embedoutput.description = `**${message.author.tag}** Successfully added role **${role.name}** to **Nadeko#6685**`;
     embedsender (message, embedoutput);
   } else
 
   if ((command === "botcontingencyover" || command === "bco")) {
-    checkrole (message.member, "mods");
-    if (roleboolean == false) return; roleboolean = false;
-    checkrole (nadekobot, "Bot-In-Use")
-    if (roleboolean == false) return; roleboolean = false;
+    let boolean1 = checkrole (message.member, "mods");
+    if (boolean1 == false) return;
+    let role = getrolefromname ("Bot-In-Use")
+    if (role == undefined) return;
+    let boolean2 = checkrole (nadekobot, role.name)
+    if (boolean2 == false) return;
     nadekobot.removeRole(role);
     embedoutput.description = `**${message.author.tag}** Successfully removed role **${role.name}** from **Nadeko#6685**`;
     embedsender (message, embedoutput);
-  } else
+  } else 
 
   if ((command === "bàn") || (command === "fb")) {
-    console.log (args[0])
-    args[0] == null ? killboolean = true : killboolean = false;
-    message.author.id !== config.ownerID ? killboolean = true : killboolean = false;
-    if (killboolean) return;
+    if ((args[0] == null) || (message.author.id !== config.ownerID)) return;
     clearvar ();
     let user = getuser (args[0]);
+    let member = getmemberfromuser (user);
     embedoutput.title = "⛔️ User Banned";
     embedoutput.fields = [];
     embedfielder ("Username", user.tag, true);
     embedfielder ("ID", user.id, true);
     embedsender (message, embedoutput);
-    checkrole (member, "muted")
-    if (roleboolean) return; roleboolean = false;
+    let role = getrolefromname ("muted")
+    let boolean1 = checkrole (member, role.name)
+    if (boolean1 == true) return;
     member.addRole(role);
   };
 
@@ -238,6 +241,7 @@ client.on("message", (message) => {
 
   const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
+  const argument = message.content.slice(command.length + config.nadekoprefix.length).trim();
 
   if (command === "prefix" || command === "lazybotprefix") {
 
@@ -248,7 +252,7 @@ client.on("message", (message) => {
     fs.writeFile("./config.json", JSON.stringify(config, null, 4), (err) => console.error);
 
     message.channel.send(`Prefix has been updated to **${newPrefix}** !`);
-    console.log(`${message.author.username} [${message.author.id}] has updated the prefix to ${newPrefix}`);
+    console.log (`${message.author.username} [${message.author.id}] has updated the prefix to ${newPrefix}`);
   } else
 
   if(command === "asl") {
@@ -269,7 +273,7 @@ client.on("message", (message) => {
       messagecount (message, user);
     } else {
       clearvar()
-      let user = getuser(argument)
+      let user = getuser (argument)
       if (killboolean) return;
       messagecount (message, user);
     };
@@ -297,22 +301,6 @@ client.on("message", (message) => {
     fs.writeFile("./messagelog.json", JSON.stringify(tally, null, 4), (err) => {
       if (err) console.error(err)
     });
-  }
-
-  if (command === "test") {
-
-    if (args[0] == null) return;
-    if(message.author.id !== config.ownerID) return;
-
-    getrolefromname (args[0])
-    var userid = args[0].replace(/[.,#!$%\^&;:{}<>=-_`~()]/g,"");
-    if (!(userid.length == 18)) return;
-    console.log (userid);
-    let member = guild.members.get(userid);
-    if (member == undefined) return;
-    let user = member.user;
-    console.log (user.username);
-    messagecount (message, userid, user);
   };
 
   cr (message, "marco", "polo!");
@@ -471,13 +459,17 @@ function clearvar () {
 };
 
 function checkrole (member, rolename) { //used to check if member has role
-  getrolefromname (rolename)
-  member.roles.get(role.id) ? roleboolean = true : roleboolean = false;
+  clearvar ()
+  console.log (rolename);
+  let parameter = getrolefromname (rolename)
+  if (member.roles.get(parameter.id)) {return true} else {return false};
 };
 
 function getrolefromname (rolename) {
-  if (guild.roles.find(role => rolename.toLowerCase() == role.name.toLowerCase()) == null) {killboolean = true; return}
-  role = guild.roles.find(role => rolename.toLowerCase() == role.name.toLowerCase());
+  if (!((typeof rolename) == "string")) return;
+  let role = guild.roles.find(role => rolename.toLowerCase() == role.name.toLowerCase())
+  if (role == null) {console.log ("No role found!")};
+  return role;
 };
 
 function getuser (searchstring) {
@@ -485,38 +477,44 @@ function getuser (searchstring) {
   var user = getuserfromid (searchstring);
   if (user == null) {var user = getuserfromusername (searchstring)};
   if (user == null) {var user = getuserfromnickname (searchstring)};
-  if (user == null) {killboolean = true};
   return user;
 };
 
 function getuserfromid (snowflake) {
   clearvar()
-  if (client.users.find(user => snowflake.replace(/[.,#!$%\^&;:{}<>=-_`~()]/g,"") == user.id) == null) {killboolean = true; console.log ("No id found, checking username...")};
-  if (killboolean) return;
-  console.log ("ID Found!");
-  return client.users.find(user => snowflake.replace(/[.,#!$%\^&;:{}<>=-_`~()]/g,"") == user.id);
+  let user = client.users.find(user => snowflake.replace(/[.,#!$%\^&;:{}<>=-_`~()]/g,"") == user.id)
+  console.log (user ? "ID Found!" : "No id found, checking username...");
+  return user;
 };
 
 function getuserfromusername (string) {
   clearvar()
-  if (client.users.find(user => string.toLowerCase() == user.username.toLowerCase()) == null) {killboolean = true; console.log ("No username found, checking nickname...")};
-  if (killboolean) return;
-  console.log ("Username found!");
-  return client.users.find(user => string.toLowerCase() == user.username.toLowerCase());
+  let user = client.users.find(user => string.toLowerCase() == user.username.toLowerCase())
+  console.log (user ? "Username found!" : "No username found, checking nickname...");
+  return user;
 };
 
 function getuserfromnickname (string) {
-  if (guild.members.find(member => string.toLowerCase() == member.nickname.toLowerCase()) == null) {killboolean = true; console.log ("No nickname found.")};
-  if (killboolean) return;
-  return guild.members.find(member => string.toLowerCase() == member.nickname.toLowerCase()).user;
+  clearvar()
+  let guild = client.guilds.get(config.guild);
+  let member = guild.members.find(member => member.nickname && string.toLowerCase() == member.nickname.toLowerCase())
+  console.log (member ? "Nickname found!" : "No nickname found.");
+  if (member == null) {return member} else {return member.user};
 };
 
+function getmemberfromuser (user) {
+  clearvar()
+  let guild = client.guilds.get(config.guild);
+  let member = guild.members.find(member => user.id == member.id)
+  console.log (member ? "Member found!" : "No member found.");
+  if (member == null) {return} else {return member};
+};
 
 function messagecount (message, user) {
 
   user ? user = user : user = message.author;
-  console.log (user)
   let dbuser = getdbuserfromuser (user);
+  if (dbuser == undefined) return;
   embedoutput.description = `**${user.tag}** has sent **${dbuser.messages.toLocaleString()}** messages.`
   embedsender (message, embedoutput);
   embedoutput = {};
@@ -526,7 +524,8 @@ function messagecount (message, user) {
 function getdbuserfromuser (user) {
 
   console.log ("ID Found!");
-  if (tally.find(dbuser => user.id == dbuser.userid) == null) {
+  let dbuser = tally.find(dbuser => user.id == dbuser.userid);
+  if (dbuser == null) {
     console.log ("No dbuser found, creating one...");
     tally.push ({
       userid: user.id,
@@ -537,7 +536,8 @@ function getdbuserfromuser (user) {
       if (err) console.error(err)
     });
   };
-  return tally.find(dbuser => user.id == dbuser.userid);
+  dbuser = tally.find(dbuser => user.id == dbuser.userid);
+  return dbuser;
 
 };
 
