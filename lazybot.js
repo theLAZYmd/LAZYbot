@@ -50,8 +50,9 @@ client.on("message", message => {
   
   if (message.author.bot) return;
   let user = message.author;
-  let dbuser = getdbuserfromuser;
+  let dbuser = getdbuserfromuser (user);
   let dbindex = getdbindexfromdbuser (dbuser)
+  console.log (dbindex);
   if (dbindex == -1) return;
 
   tally[dbindex].messages++;
@@ -67,7 +68,7 @@ client.on("guildMemberRemove", (member) => {
 
   clearvar();
   let channel = getchannelfromname ("off-topic");
-  let dbuser = getdbuserfromuser (message, user);
+  let dbuser = getdbuserfromuser (user);
   if (dbuser == undefined) return;
   embedoutput.description = `**${member.user.tag}** has left **${guild.name}**. Had **${dbuser.messages ? dbuser.messages.toLocaleString() : 0}** messages.`;
   embedoutput.color = 15406156;
@@ -527,11 +528,11 @@ function messagecount (message, user, update) {
 function getdbuserfromuser (user) {
 
   console.log ("ID Found!");
-  let dbuser = tally.find(dbuser => user.id == dbuser.userid);
+  let dbuser = tally.find(dbuser => user.id == dbuser.id);
   if (dbuser == null) {
     console.log ("No dbuser found, creating one...");
     tally.push ({
-      userid: user.id,
+      id: user.id,
       username: user.tag,
       messages: 0,
     });
@@ -539,14 +540,14 @@ function getdbuserfromuser (user) {
       if (err) console.error(err)
     });
   };
-  dbuser = tally.find(dbuser => user.id == dbuser.userid);
+  dbuser = tally.find(dbuser => user.id == dbuser.id);
   return dbuser;
 
 };
 
 function getdbindexfromdbuser (dbuser) {
 
-  return tally.findIndex(index => dbuser.id == index.userid)
+  return tally.findIndex(index => dbuser.id == index.id)
 
 };
 /*
@@ -642,4 +643,3 @@ function getlastmessage (member) {
   lastmessage = member.lastMessage.content;
 
 };
-
