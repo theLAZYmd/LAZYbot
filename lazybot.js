@@ -6,6 +6,12 @@ const config = require("./config.json");
 const package = require("./package.json");
 const tally = JSON.parse(fs.readFileSync("./messagelog.json", "utf8"));
 
+var guild;
+var bouncerbot;
+var nadekobot;
+var owner;
+var reboot;
+
   var i;
       dbcounter = [];
       embedoutput = [];
@@ -16,8 +22,16 @@ const tally = JSON.parse(fs.readFileSync("./messagelog.json", "utf8"));
 //console startup section
 
 client.on("ready", () => {
+
+  reboot = Date.now();  
   console.log ("bleep bloop! It's showtime.");
-  var guild = client.guilds.get(config.guild);
+  guild = client.guilds.get(config.guild);
+  console.log (`Loaded client server ${guild.name} in ${Date.now() - reboot}ms`);
+  bouncerbot = guild.members.get(config.bouncerID);
+  console.log (`Noticed bot user ${bouncerbot.user.tag} in ${Date.now() - reboot}ms`);
+  nadekobot = guild.members.get(config.nadekoID);
+  console.log (`Noticed bot user ${nadekobot.user.tag} in ${Date.now() - reboot}ms`);
+
 });
 
 //pinging glitch.com
@@ -34,7 +48,6 @@ setInterval(() => {
   http.get(`http://${process.env.lazybot}.glitch.me/`);
 }, 280000);
 
-const guild = client.guilds.get(config.guild);
 var acceptedlinkdomains = [
   "http://lichess.org",
   "http://www.chess.com",
@@ -52,7 +65,6 @@ client.on("message", message => {
   let user = message.author;
   let dbuser = getdbuserfromuser (user);
   let dbindex = getdbindexfromdbuser (dbuser)
-  console.log (dbindex);
   if (dbindex == -1) return;
 
   tally[dbindex].messages++;
@@ -105,7 +117,7 @@ client.on("message", (message) => {
 
   if (command === "nadekoprefix") {
 
-    if(message.author.id !== config.ownerID) return;
+    if (message.author.id !== config.ownerID) return;
 
     let [newNadekoPrefix] = args;  
     config.nadekoprefix = newNadekoPrefix
@@ -231,7 +243,7 @@ client.on("message", (message) => {
 
   if (command === "prefix" || command === "lazybotprefix") {
 
-    if(message.author.id !== config.ownerID) return;
+    if (message.author.id !== config.ownerID) return;
 
     let [newPrefix] = args;
     config.prefix = newPrefix
@@ -241,15 +253,20 @@ client.on("message", (message) => {
     console.log (`${message.author.username} [${message.author.id}] has updated the prefix to ${newPrefix}`);
   } else
 
-  if(command === "asl") {
+  if (command === "asl") {
     let [age,sex,location] = args;
     message.channel.send(`Hello **${message.author.username}**, I see you're a **${age}** year old **${sex}** from **${location}**.`);
   } else
 
-  if(command === "ping") {
+  if (command === "ping") {
     embedoutput.description = `** ${message.author.tag}** :ping_pong: ${parseInt(client.ping)}ms`
     embedsender (message, embedoutput)
   } else
+
+  if (command === "uptime") {
+    let time = gettime(Date.now() - reboot);
+    sendtime (message, time);
+  }
 
   if (command === "messages") {
     if (args == null) {
@@ -266,14 +283,13 @@ client.on("message", (message) => {
 
   if ((command === "updatemessagecount") || (command === "updatemessages")) {
     
-    if(message.author.id !== config.ownerID) return;
+    if (message.author.id !== config.ownerID) return;
     clearvar()
     let user = getuser (args[0])
     let newcount = parseInt(args[1]);
-    let dbuser = getdbuserfromuser (user)
-    console.log (dbuser);
-    if (dbuser == undefined) return;
-    let dbindex = getdbindexfromdbuser (user)
+    let dbuser = user ? getdbuserfromuser (user) : getdbuserfromusername (args[0]);
+    if (!dbuser) return;
+    let dbindex = getdbindexfromdbuser (dbuser)
     if (dbindex == -1) return;
 
     if (dbuser.messages == newcount) {
@@ -288,6 +304,28 @@ client.on("message", (message) => {
       });
       messagecount (message, user, true);
     };
+  } else
+
+  if (command === "removedbuser") {
+    
+    if (message.author.id !== config.ownerID) return;
+    clearvar()
+    let user = getuser (args[0])
+    let dbuser = user ? getdbuserfromuser (user) : getdbuserfromusername (args[0]);
+    if (!dbuser) return;
+    let dbindex = getdbindexfromdbuser (dbuser)
+    if (dbindex == -1) return;
+
+    delete tally[dbindex];
+    if (tally == undefined) return;
+    fs.writeFile("./messagelog.json", JSON.stringify(tally, null, 4), (err) => {
+      if (err) console.error(err)
+    });
+    
+    embedoutput.description = `**${dbuser.username}** has been deleted from the database.`;
+    embedoutput.color = 15406156;
+    embedsender (message, embedoutput);
+
   } else
 
   if (command === "lastmessage") {
@@ -318,13 +356,13 @@ client.on("message", (message) => {
 
   for(let i = 0;i < args.length; i++) {
 
-    if(args[i].startsWith("/r/")) {
+    if (args[i].startsWith("/r/")) {
       args[i] = args[i].replace(/[.,#!$%\^&;:{}=-_`~()]/g,"");
       embedoutput.description = `[${args[i]}](http://www.reddit.com${args[i]})`;
       embedsender (message, embedoutput)
       } else
 
-    if(args[i].startsWith("r/")) {
+    if (args[i].startsWith("r/")) {
       args[i] = args[i].replace(/[.,#!$%\^&;:{}=-_`~()]/g,"");
       embedoutput.description = `[/${args[i]}](http://www.reddit.com/${args[i]})`;
       embedsender (message, embedoutput)
@@ -457,9 +495,8 @@ function clearvar () {
 
 function checkrole (member, rolename) {
   clearvar ()
-  console.log (rolename);
-  let parameter = getrolefromname (rolename)
-  if (member.roles.get(parameter.id)) {return true} else {return false};
+  let role = getrolefromname (rolename)
+  return (member.roles.has(role.id));
 };
 
 function getchannelfromname (channelname) {
@@ -471,6 +508,7 @@ function getchannelfromname (channelname) {
 
 function getrolefromname (rolename) {
   if (!((typeof rolename) == "string")) return;
+  let guild = client.guilds.get(config.guild);
   let role = guild.roles.find(role => rolename.toLowerCase() == role.name.toLowerCase())
   if (role == null) {console.log ("No role found!")};
   return role;
@@ -481,7 +519,7 @@ function getuser (searchstring) {
   var user = getuserfromid (searchstring);
   if (user == null) {var user = getuserfromusername (searchstring)};
   if (user == null) {var user = getuserfromnickname (searchstring)};
-  return user;
+  return user ? user : null;
 };
 
 function getuserfromid (snowflake) {
@@ -527,7 +565,6 @@ function messagecount (message, user, update) {
 
 function getdbuserfromuser (user) {
 
-  console.log ("ID Found!");
   let dbuser = tally.find(dbuser => user.id == dbuser.id);
   if (dbuser == null) {
     console.log ("No dbuser found, creating one...");
@@ -541,6 +578,13 @@ function getdbuserfromuser (user) {
     });
   };
   dbuser = tally.find(dbuser => user.id == dbuser.id);
+  return dbuser;
+
+};
+
+function getdbuserfromusername (username) {
+
+  let dbuser = tally.find(dbuser => username == dbuser.username);
   return dbuser;
 
 };
@@ -623,7 +667,7 @@ function cr (message, trigger, reponse) {
   const command = args.shift().toLowerCase();
   const response = reponse;
 
-  if(command === trigger) {message.channel.send(response)};
+  if (command === trigger) {message.channel.send(response)};
 
 };
 
@@ -642,4 +686,21 @@ function getlastmessage (member) {
 
   lastmessage = member.lastMessage.content;
 
+};
+
+function gettime (ms) {
+  let time = new Date(ms);
+  time.hours = time.getUTCHours();
+  time.minutes = time.getUTCMinutes();
+  time.seconds = time.getUTCSeconds();
+  time.milliseconds = time.getUTCMilliseconds();
+  time.days = Math.floor(time.hours/24);
+  time.hours = time.hours - (24 * time.days);
+  return time;
+};
+
+function sendtime (message, time) {
+  clearvar()
+  embedoutput.description = `**${time.days}** days, **${time.hours}** hours, **${time.minutes}** minutes, and **${time.seconds}** seconds since last reboot.`
+  embedsender (message, embedoutput);
 };
