@@ -11,7 +11,6 @@ const tally = JSON.parse(fs.readFileSync("./messagelog.json", "utf8"));
       embedoutput = [];
       embedoutput.footer = [];
       sendembed = [];
-      fetchedmessage = [];
       lastmessage = [];
 
 //console startup section
@@ -45,7 +44,6 @@ var acceptedlinkdomains = [
   "https://bughousetest.com"
 ];
 
-
 //section for message logging
 
 client.on("message", message => {
@@ -68,7 +66,7 @@ client.on("message", message => {
 client.on("guildMemberRemove", (member) => {
 
   clearvar();
-  let channel = member.guild.channels.get("390260363410800650");
+  let channel = getchannelfromname ("off-topic");
   let dbuser = getdbuserfromuser (message, user);
   if (dbuser == undefined) return;
   embedoutput.description = `**${member.user.tag}** has left **${guild.name}**. Had **${dbuser.messages ? dbuser.messages.toLocaleString() : 0}** messages.`;
@@ -166,18 +164,19 @@ client.on("message", (message) => {
     embedsender (message, embedoutput);
 
   } else
-  
+  /*
   if (command === "fetch") {
 
-    let channel = message.channel;
-    if (!(args[1] == undefined)) return;
-    if (!(args[0].length == 18)) return;
+    let channel = getchannelfromname (args[1])
+    channel = channel ? channel : message.channel
 
-    fetchiemessage(message, args[0]);
+    let fetchedmessage = getmessagefromid (channel, args[0]);
+    console.log (fetchedmessage);
+    if (fetchedmessage == null) return;
     message.channel.send(fetchedmessage);
 
   } else
-
+*/
   if ((command === "botcontingencyplan" || command === "bcp")) {
     clearvar();
     let boolean1 = checkrole (message.member, "mods");
@@ -264,6 +263,32 @@ client.on("message", (message) => {
     };
   } else
 
+  if ((command === "updatemessagecount") || (command === "updatemessages")) {
+    
+    if(message.author.id !== config.ownerID) return;
+    clearvar()
+    let user = getuser (args[0])
+    let newcount = parseInt(args[1]);
+    let dbuser = getdbuserfromuser (user)
+    console.log (dbuser);
+    if (dbuser == undefined) return;
+    let dbindex = getdbindexfromdbuser (user)
+    if (dbindex == -1) return;
+
+    if (dbuser.messages == newcount) {
+      embedoutput.description = `Message count for **${user.tag}** was already **${dbuser.messages.toLocaleString()}** messages.`;
+      embedoutput.color = 15406156;
+      embedsender (message, embedoutput);
+    } else {
+      tally[dbindex].messages = newcount;
+      if (tally == undefined) return;
+      fs.writeFile("./messagelog.json", JSON.stringify(tally, null, 4), (err) => {
+        if (err) console.error(err)
+      });
+      messagecount (message, user, true);
+    };
+  } else
+
   if (command === "lastmessage") {
 
     getlastmessage (message.author);
@@ -271,26 +296,6 @@ client.on("message", (message) => {
     lastmessage = [];
 
   } else
-
-  if ((command === "updatemessagecount") || (command === "updatemessages")) {
-    
-    if(message.author.id !== config.ownerID) return;
-    clearvar()
-    let user = getuser (args[0])
-    let newcount = args[1];
-    let dbuser = getdbuserfromuser (user)
-    console.log (dbuser);
-    if (dbuser == undefined) return;
-    let dbindex = getdbindexfromdbuser (user)
-    if (dbindex == -1) return;
-  
-    tally[dbindex].messages = newcount;
-    if (tally == undefined) return;
-    fs.writeFile("./messagelog.json", JSON.stringify(tally, null, 4), (err) => {
-      if (err) console.error(err)
-    });
-    messagecount (message, user, true);
-  };
 
   cr (message, "marco", "polo!");
   cr (message, "ready", "I am ready!");
@@ -441,15 +446,26 @@ client.on('message', (message) => {
 
 client.login(config.token);
 
+//this function is to be made irrelevant as soon as possible
+
 function clearvar () {
   embedoutput = {};
 };
 
-function checkrole (member, rolename) { //used to check if member has role
+// 'get' based functions
+
+function checkrole (member, rolename) {
   clearvar ()
   console.log (rolename);
   let parameter = getrolefromname (rolename)
   if (member.roles.get(parameter.id)) {return true} else {return false};
+};
+
+function getchannelfromname (channelname) {
+  if (!((typeof channelname) == "string")) return;
+  let channel = guild.channels.find(channel => channelname.toLowerCase() == channel.name.toLowerCase())
+  if (channel == null) {console.log ("No channel found!")};
+  return channel;
 };
 
 function getrolefromname (rolename) {
@@ -502,7 +518,7 @@ function messagecount (message, user, update) {
   user ? user = user : user = message.author;
   let dbuser = getdbuserfromuser (user);
   if (dbuser == undefined) return;
-  update ? embedoutput.description = `Message count for **${user.tag}** is now **${dbuser.messages.toLocaleString()}** messages.` : embedoutput.description = `**${user.tag}** has sent **${dbuser.messages.toLocaleString()}** messages.`;
+  embedoutput.description = update ? `Message count for **${user.tag}** is now **${dbuser.messages.toLocaleString()}** messages.` : `**${user.tag}** has sent **${dbuser.messages.toLocaleString()}** messages.`;
   embedsender (message, embedoutput);
   embedoutput = {};
   
@@ -533,6 +549,21 @@ function getdbindexfromdbuser (dbuser) {
   return tally.findIndex(index => dbuser.id == index.userid)
 
 };
+/*
+function getmessagefromid (channel, id) {
+
+  console.log (channel, id);
+  channel.fetchMessage(id)
+    .then ((message) => {
+      var fetchedmessage = message.content;
+    });
+  if (!fetchedmessage) return;
+  console.log (fetchedmessage);
+  return fetchedmessage;
+
+};
+*/
+// embed section of functions
 
 function embedsender (message, embedoutput) {
 
@@ -612,17 +643,3 @@ function getlastmessage (member) {
 
 };
 
-function fetchiemessage (message, longmessageid) {
-
-  message.channel.fetchMessage(longmessageid)
-  .then ((message) => {
-    let fetchedmessage = message.content;
-  });
-
-  function postembed (message, whichguide) {
-
-    message.channel.send(guide.whichguide)
-
-  }
-
-};
