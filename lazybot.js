@@ -182,9 +182,8 @@ client.on("message", (message) => {
   
   if (command === "fetch") {
 
-    let channel = getchannelfromname (args[1])
-    channel = channel ? channel : message.channel
-    returnmessagefromid (args[0], channel);
+    let channel = message.channel;
+    returnmessagefromid (channel, args[0]);
 
   } else
 
@@ -361,6 +360,14 @@ client.on("message", (message) => {
     message.channel.send(lastmessage);
 
   } else
+
+  if ((command === "commands") || (command === "lazybotcommands")) {
+
+    embedoutput.description = "**Nadeko functions**\n```css\n.nadekoprefix        [newPrefix]    {owneronly}\n.fb                  [user]         {owneronly}\n.bcp                 [e/d]          {modsonly}\n.testingmode         [e/d]          {devonly}\n.mf                  [g,t,i]\n.tf                  [g,t,i]\n.decimaltous         [decimalodds]\n.ustodecimal         [usodds]\n.fetch               [messageid]\n.notify              [valid link]```\n**Bot functions**\n```css\n!prefix              [newPrefix]    {owneronly}\n!setusername         [newUsername]  {owneronly}\n!updatemessagecount  [user,msgs]    {owneronly}\n!removedbuser        [user]         {owneronly}\n!asl                 [a,s,l]\n!ping                []\n!uptime              []\n!messages            []\n!lastmessage         []\n!commands            []```\n**Miscellaneous Functions**\n```css\nsubreddit link       [/r/,r/]\nmessage counter      [message]\nleave message        [userLeft]\ntrivia payout msg    [embed,content]```";
+    embedthumbnail (config.avatar);
+    embedsender (message.channel, embedoutput);
+
+  };
 
   cr (message, "marco", "polo!");
   cr (message, "ready", "I am ready!");
@@ -605,21 +612,18 @@ function getdbindexfromdbuser (dbuser) {
 
 };
 
-function returnmessagefromid (id, channel) {
+function returnmessagefromid (channel, id) {
 
   channel.fetchMessage(id)
     .then (message => {
       let fulltimestamp = gettime (message.createdAt) + "";
       let timestamp = fulltimestamp.slice(0, 31)
       if (message.embeds.length !== 0) {
-        return;
-        message.channel.send (message.embeds[0].description)
-        embedoutput = embedreceiver (message.embeds[0])
+        embedoutput.description = message.embeds[0].description
+        // embedoutput = embedreceiver (message.embeds[0])
       } else {
         embedoutput.description = message.content
       };
-      console.log (message.embeds[0]);
-      console.log (embedoutput);
       embedoutput.content = `On ${timestamp}, user **${message.author.tag}** said:`;
       embedsender (channel, embedoutput);
     })
@@ -648,8 +652,22 @@ function embedfielder (name, value, inline) {
 function embedauthor (name, icon_url) {
 
   embedoutput.author = {};
-  embedoutput.author.name = embedoutput.author.name ? embedoutput.author.name : "" ;
-  embedoutput.author.icon_url = embedoutput.author.icon_url ? embedoutput.author.icon_url : "" ;
+  if (name) embedoutput.author.name = name;
+  if (icon_url) embedoutput.author.icon_url = icon_url;
+
+};
+
+function embedthumbnail (link) {
+
+  embedoutput.thumbnail = {};
+  if (link) embedoutput.thumbnail.url = link;
+
+};
+
+function embedimage (link) {
+
+  embedoutput.image = {};
+  if (link) embedoutput.image.url = link;
 
 };
 
@@ -657,7 +675,7 @@ function embedfooter (text, icon_url) {
 
   embedoutput.footer = {};
   if (text) embedoutput.footer.text = text;
-  if (icon_url) embedoutput.footer.icon_url = icon_url;;
+  if (icon_url) embedoutput.footer.icon_url = icon_url;
 
 };
 
