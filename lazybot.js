@@ -12,12 +12,12 @@ var nadekobot;
 var owner;
 var reboot;
 
+var bcpboolean;
+var testingmodeboolean;
+
   var i;
-      dbcounter = [];
-      embedoutput = [];
-      embedoutput.footer = [];
-      sendembed = [];
-      lastmessage = [];
+      embedinput = {};
+      embedoutput = {};
 
 //console startup section
 
@@ -31,6 +31,9 @@ client.on("ready", () => {
   console.log (`Noticed bot user ${bouncerbot.user.tag} in ${Date.now() - reboot}ms`);
   nadekobot = guild.members.get(config.nadekoID);
   console.log (`Noticed bot user ${nadekobot.user.tag} in ${Date.now() - reboot}ms`);
+  owner = guild.members.get(config.ownerID);
+  console.log (`Noticed bot owner ${owner.user.tag} in ${Date.now() - reboot}ms`);
+  bcpboolean = false;
 
 });
 
@@ -84,8 +87,7 @@ client.on("guildMemberRemove", (member) => {
   if (dbuser == undefined) return;
   embedoutput.description = `**${member.user.tag}** has left **${guild.name}**. Had **${dbuser.messages ? dbuser.messages.toLocaleString() : 0}** messages.`;
   embedoutput.color = 15406156;
-  embedbuilder (embedoutput);
-  channel.send (sendembed);
+  channel.send ({embed: embedoutput});
 
 });
 
@@ -117,7 +119,7 @@ client.on("message", (message) => {
 
   if (command === "nadekoprefix") {
 
-    if (message.author.id !== config.ownerID) return;
+    if (message.author.id !== owner.id) return;
 
     let [newNadekoPrefix] = args;  
     config.nadekoprefix = newNadekoPrefix
@@ -161,7 +163,7 @@ client.on("message", (message) => {
     if (decimalodds < 1) {embedoutput.description = "Error: Decimal odds must be greater than or equal to 1."};
     if (1 <= decimalodds < 2) {embedoutput.description = (-100/(decimalodds-1)).toString()};
     if (2 < decimalodds) {embedoutput.description = "+" + (100*(decimalodds-1)).toString()};
-    embedsender (message, embedoutput);
+    embedsender (message.channel, embedoutput);
 
   } else
 
@@ -174,62 +176,78 @@ client.on("message", (message) => {
     embedoutput.color = 16738560;
     if (usodds < 0) {embedoutput.description = (1 - 100/usodds).toFixed(1)};
     if (usodds > 0) {embedoutput.description = (1 + usodds/100).toFixed(1)};
-    embedsender (message, embedoutput);
+    embedsender (message.channel, embedoutput);
 
   } else
-  /*
+  
   if (command === "fetch") {
 
     let channel = getchannelfromname (args[1])
     channel = channel ? channel : message.channel
-
-    let fetchedmessage = getmessagefromid (channel, args[0]);
-    console.log (fetchedmessage);
-    if (fetchedmessage == null) return;
-    message.channel.send(fetchedmessage);
+    returnmessagefromid (args[0], channel);
 
   } else
-*/
-  if ((command === "botcontingencyplan" || command === "bcp")) {
-    clearvar();
-    let boolean1 = checkrole (message.member, "mods");
-    if (boolean1 == false) return;
-    let role = getrolefromname ("Bot-In-Use")
-    if (role == undefined) return;
-    let boolean2 = checkrole (nadekobot, role.name)
-    if (boolean2 == true) return;
-    nadekobot.addRole(role);
-    embedoutput.description = `**${message.author.tag}** Successfully added role **${role.name}** to **Nadeko#6685**`;
-    embedsender (message, embedoutput);
-  } else
-
-  if ((command === "botcontingencyover" || command === "bco")) {
-    let boolean1 = checkrole (message.member, "mods");
-    if (boolean1 == false) return;
-    let role = getrolefromname ("Bot-In-Use")
-    if (role == undefined) return;
-    let boolean2 = checkrole (nadekobot, role.name)
-    if (boolean2 == false) return;
-    nadekobot.removeRole(role);
-    embedoutput.description = `**${message.author.tag}** Successfully removed role **${role.name}** from **Nadeko#6685**`;
-    embedsender (message, embedoutput);
-  } else 
 
   if (command === "fb") {
-    if ((args[0] == null) || (message.author.id !== config.ownerID)) return;
+    if ((args[0] == null) || (message.author.id !== owner.id)) return;
     clearvar ();
+    console.log ("I'm here");
     let user = getuser (args[0]);
     let member = getmemberfromuser (user);
     embedoutput.title = "⛔️ User Banned";
     embedoutput.fields = [];
     embedfielder ("Username", user.tag, true);
     embedfielder ("ID", user.id, true);
-    embedsender (message, embedoutput);
+    embedsender (message.channel, embedoutput);
     let role = getrolefromname ("muted")
     let boolean1 = checkrole (member, role.name)
     if (boolean1 == true) return;
     member.addRole(role);
-  };
+  } else
+
+  if ((command === "botcontingencyplan" || command === "bcp")) {
+    if (!checkrole (message.member, "mods")) return;
+    console.log ("Is Mod.")
+    let role = getrolefromname ("Bot-In-Use");
+    nadekobot.removeRole(role);
+    if (!checkrole (nadekobot, role.name) || args[0] == "enable") {
+      nadekobot.addRole(role);
+      sendgenericembed (message.channel, `**Bot Contingency Plan enabled.**`)
+      bcpboolean = true;
+    } else
+    if (checkrole (nadekobot, role.name) || args[0] == "disable") {
+      nadekobot.removeRole(role);
+      sendgenericembed (message.channel, `**Bot Contingency Plan disabled.**`)
+      bcpboolean = false;
+    };
+  } else
+
+  if ((command === "testingmode") || (command === "tm")) {
+    if (client.user.id != config.betabotID) return;
+    let author = message.author;
+    let member = getmemberfromuser(author);
+    if (!checkrole (member, "dev")) return;
+    let user = getuser ("LAZYbot");
+    let channel = getchannelfromname ("devs");
+    if (!testingmodeboolean || args[0] == "enable") {
+      channel.overwritePermissions(bouncerbot, { 'SEND_MESSAGES': false })
+      channel.overwritePermissions(user, { 'SEND_MESSAGES': false })
+      channel = getchannelfromname ("spam");
+      channel.overwritePermissions(bouncerbot, { 'SEND_MESSAGES': false })
+      channel.overwritePermissions(user, { 'SEND_MESSAGES': false })
+      sendgenericembed (message.channel, `**Testing mode enabled.**`)
+      testingmodeboolean = true;
+    } else
+    if (testingmodeboolean || args[0] == "disable") {
+      channel.overwritePermissions(bouncerbot, { 'SEND_MESSAGES': true })
+      channel.overwritePermissions(user, { 'SEND_MESSAGES': true })
+      channel = getchannelfromname ("spam");
+      channel.overwritePermissions(bouncerbot, { 'SEND_MESSAGES': true })
+      channel.overwritePermissions(user, { 'SEND_MESSAGES': true })
+      sendgenericembed (message.channel, `**Testing mode disabled.**`)
+      testingmodeboolean = false;
+    };
+  }
 
 });
 
@@ -243,9 +261,9 @@ client.on("message", (message) => {
 
   if (command === "prefix" || command === "lazybotprefix") {
 
-    if (message.author.id !== config.ownerID) return;
+    if (message.author.id !== owner.id) return;
 
-    let [newPrefix] = args;
+    let newPrefix = argument;
     config.prefix = newPrefix
     fs.writeFile("./config.json", JSON.stringify(config, null, 4), (err) => console.error);
 
@@ -253,20 +271,31 @@ client.on("message", (message) => {
     console.log (`${message.author.username} [${message.author.id}] has updated the prefix to ${newPrefix}`);
   } else
 
+  if (command === "setusername") {
+    if (message.author.id !== config.ownerID) return;
+    let newUsername = args[0];
+    clearvar()
+    if (!newUsername == client.user.username) {
+      client.user.setUsername(newUsername);
+      sendgenericembed (message.channel, `Bot username has been updated to **${client.user.tag}**`);
+    } else {
+      senderrormessage (message, `Bot username was already **${client.user.tag}**!`)
+    };
+  } else
+
   if (command === "asl") {
     let [age,sex,location] = args;
-    message.channel.send(`Hello **${message.author.username}**, I see you're a **${age}** year old **${sex}** from **${location}**.`);
+    message.channel.send (`Hello **${message.author.username}**, I see you're a **${age}** year old **${sex}** from **${location}**.`);
   } else
 
   if (command === "ping") {
-    embedoutput.description = `** ${message.author.tag}** :ping_pong: ${parseInt(client.ping)}ms`
-    embedsender (message, embedoutput)
+    sendgenericembed (message.channel, `** ${message.author.tag}** :ping_pong: ${parseInt(client.ping)}ms`)
   } else
 
   if (command === "uptime") {
     let time = gettime(Date.now() - reboot);
     sendtime (message, time);
-  }
+  } else
 
   if (command === "messages") {
     if (args == null) {
@@ -293,9 +322,7 @@ client.on("message", (message) => {
     if (dbindex == -1) return;
 
     if (dbuser.messages == newcount) {
-      embedoutput.description = `Message count for **${user.tag}** was already **${dbuser.messages.toLocaleString()}** messages.`;
-      embedoutput.color = 15406156;
-      embedsender (message, embedoutput);
+      senderrormessage (message, `Message count for **${user.tag}** was already **${dbuser.messages.toLocaleString()}** messages.`);
     } else {
       tally[dbindex].messages = newcount;
       if (tally == undefined) return;
@@ -324,21 +351,20 @@ client.on("message", (message) => {
     
     embedoutput.description = `**${dbuser.username}** has been deleted from the database.`;
     embedoutput.color = 15406156;
-    embedsender (message, embedoutput);
+    embedsender (message.channel, embedoutput);
 
   } else
 
   if (command === "lastmessage") {
 
-    getlastmessage (message.author);
+    let lastmessage = getlastmessage (message.author);
     message.channel.send(lastmessage);
-    lastmessage = [];
 
   } else
 
   cr (message, "marco", "polo!");
   cr (message, "ready", "I am ready!");
-  cr (message, "owner", "theLAZYmd#2353");
+  cr (message, "owner", owner.user.tag);
   cr (message, "who", "I am LAZYbot#2309");
   cr (message, "help", "This is a pretty basic bot, there isn't much it can help you with.");
   cr (message, "party", ":tada:");
@@ -359,13 +385,13 @@ client.on("message", (message) => {
     if (args[i].startsWith("/r/")) {
       args[i] = args[i].replace(/[.,#!$%\^&;:{}=-_`~()]/g,"");
       embedoutput.description = `[${args[i]}](http://www.reddit.com${args[i]})`;
-      embedsender (message, embedoutput)
+      embedsender (message.channel, embedoutput)
       } else
 
     if (args[i].startsWith("r/")) {
       args[i] = args[i].replace(/[.,#!$%\^&;:{}=-_`~()]/g,"");
       embedoutput.description = `[/${args[i]}](http://www.reddit.com/${args[i]})`;
-      embedsender (message, embedoutput)
+      embedsender (message.channel, embedoutput)
       }
     }
 });
@@ -408,7 +434,7 @@ client.on('message', (message) => {
 
   else if (message.author.bot) {
 
-    if (!(message.author.id == config.bouncerID)) return;
+    if (message.author.id !== bouncerbot.id) return;
     if (message.embeds.length == 0) return;
 
     if (message.embeds[0].author == undefined
@@ -462,28 +488,15 @@ client.on('message', (message) => {
     payoutaggregate = `.give 17 **housebank#5970**`
     };
 
-  embedoutput.footer = [];
   embedoutput.title = `House Trivia ${name.length}-player Game`,
   embedoutput.description = payoutaggregate,
-  embedoutput.footer.text = `Please remember to check for ties.`
-  embedsender (message, embedoutput);
+  embedfooter (`Please remember to check for ties.`)
+  embedsender (message.channel, embedoutput);
   embedoutput = {};
 
   });
 
-/*client.on("presence", function (pUser, pStatus, pGameID) {
-
-  if (!pUser === "116275390695079945") return;
-
-  if (pStatus === "offline")
-  {
-      {
-          GuildMember.addrole("365938486534209536")
-      }
-  }
-});*/
-
-client.login(config.token);
+client.login(process.env.TOKEN ? process.env.TOKEN : config.token);
 
 //this function is to be made irrelevant as soon as possible
 
@@ -508,7 +521,6 @@ function getchannelfromname (channelname) {
 
 function getrolefromname (rolename) {
   if (!((typeof rolename) == "string")) return;
-  let guild = client.guilds.get(config.guild);
   let role = guild.roles.find(role => rolename.toLowerCase() == role.name.toLowerCase())
   if (role == null) {console.log ("No role found!")};
   return role;
@@ -538,7 +550,6 @@ function getuserfromusername (string) {
 
 function getuserfromnickname (string) {
   clearvar()
-  let guild = client.guilds.get(config.guild);
   let member = guild.members.find(member => member.nickname && string.toLowerCase() == member.nickname.toLowerCase())
   console.log (member ? "Nickname found!" : "No nickname found.");
   if (member == null) {return member} else {return member.user};
@@ -546,7 +557,6 @@ function getuserfromnickname (string) {
 
 function getmemberfromuser (user) {
   clearvar()
-  let guild = client.guilds.get(config.guild);
   let member = guild.members.find(member => user.id == member.id)
   console.log (member ? "Member found!" : "No member found.");
   if (member == null) {return} else {return member};
@@ -558,7 +568,7 @@ function messagecount (message, user, update) {
   let dbuser = getdbuserfromuser (user);
   if (dbuser == undefined) return;
   embedoutput.description = update ? `Message count for **${user.tag}** is now **${dbuser.messages.toLocaleString()}** messages.` : `**${user.tag}** has sent **${dbuser.messages.toLocaleString()}** messages.`;
-  embedsender (message, embedoutput);
+  embedsender (message.channel, embedoutput);
   embedoutput = {};
   
 };
@@ -594,27 +604,36 @@ function getdbindexfromdbuser (dbuser) {
   return tally.findIndex(index => dbuser.id == index.id)
 
 };
-/*
-function getmessagefromid (channel, id) {
 
-  console.log (channel, id);
+function returnmessagefromid (id, channel) {
+
   channel.fetchMessage(id)
-    .then ((message) => {
-      var fetchedmessage = message.content;
-    });
-  if (!fetchedmessage) return;
-  console.log (fetchedmessage);
-  return fetchedmessage;
+    .then (message => {
+      let fulltimestamp = gettime (message.createdAt) + "";
+      let timestamp = fulltimestamp.slice(0, 31)
+      if (message.embeds.length !== 0) {
+        return;
+        message.channel.send (message.embeds[0].description)
+        embedoutput = embedreceiver (message.embeds[0])
+      } else {
+        embedoutput.description = message.content
+      };
+      console.log (message.embeds[0]);
+      console.log (embedoutput);
+      embedoutput.content = `On ${timestamp}, user **${message.author.tag}** said:`;
+      embedsender (channel, embedoutput);
+    })
+    .catch (console.error);
 
 };
-*/
+
 // embed section of functions
 
-function embedsender (message, embedoutput) {
-
-  embedbuilder (embedoutput);
-  message.channel.send(sendembed);
-  embedoutput = {};
+function embedsender (channel, embedoutput) {
+  
+  embedoutput.color = (embedoutput.color == undefined ? config.color : embedoutput.color );
+  channel.send(embedoutput.content, {embed: embedoutput})
+  clearvar()
 
 };
 
@@ -628,36 +647,59 @@ function embedfielder (name, value, inline) {
 
 function embedauthor (name, icon_url) {
 
-  embedoutput.author = [];
-  embedoutput.author.name = name;
-  embedoutput.author.icon_url = icon_url;
+  embedoutput.author = {};
+  embedoutput.author.name = embedoutput.author.name ? embedoutput.author.name : "" ;
+  embedoutput.author.icon_url = embedoutput.author.icon_url ? embedoutput.author.icon_url : "" ;
 
 };
 
-function embedbuilder (embedoutput) {
+function embedfooter (text, icon_url) {
 
-  embedoutput.color = (embedoutput.color == undefined ? config.color : embedoutput.color );
-  embedoutput.author = embedoutput.name + `, ` + client.user.avatarURL;
-  embedoutput.footer = [];
+  embedoutput.footer = {};
+  if (text) embedoutput.footer.text = text;
+  if (icon_url) embedoutput.footer.icon_url = icon_url;;
 
-  sendembed = {embed: {
+};
+
+function embedreceiver (embed) {
+
+  console.log (embed);
+  console.log (embed.description);
+
+  if (typeof embed.title !== "undefined") {embedinput.title = embed.title};
+
+  var embedproperties = [title, url, color, description, image, fields, timestamp]
+
+  for (i = 0; i < embedproperties.length; i++) {
+    if (typeof embed[embedproperties[i]] != undefined) {
+      embedinput[embedproperties[i]] = embed[embedproperties[i]];
+    }
+  }
+
+  if (embed.author) {embedinput.author = embed.author};
+  if (embed.footer) {embedinput.author = embed.footer};
+
+/*
+  embedinput = {
     author: {
-      name: embedoutput.author.name,
-      icon_url: embedoutput.author.icon_url,
+      name: embed.author.name,
+      icon_url: embed.author.icon_url,
     },
-    title: embedoutput.title,
-    url: embedoutput.url,
-    color: embedoutput.color,
-    description: embedoutput.description,
-    image: embedoutput.image,
-    fields: embedoutput.fields,
-    timestamp: embedoutput.timestamp,
+    title: embed.title,
+    url: embed.url,
+    color: embed.color,
+    description: embed.description,
+    image: embed.image,
+    fields: embed.fields,
+    timestamp: embed.timestamp,
     footer: {
-      icon_url: embedoutput.footer.icon_url,
-      text: embedoutput.footer.text
+      icon_url: embed.footer.icon_url,
+      text: embed.footer.text
     }
 
-  }};
+  }; */
+
+  return embedinput;
 
 };
 
@@ -677,14 +719,12 @@ function checkuseronline (checkuser) {
 }; 
 
 function checkbounceronine () {
-  guild = client.guilds.get(config.guild);
-  let bouncerbot = guild.members.get(config.bouncerID);
   checkuseronline (bouncerbot);
 }
 
-function getlastmessage (member) {
+function getlastmessage (user) {
 
-  lastmessage = member.lastMessage.content;
+  return user.lastMessage.content;
 
 };
 
@@ -702,5 +742,18 @@ function gettime (ms) {
 function sendtime (message, time) {
   clearvar()
   embedoutput.description = `**${time.days}** days, **${time.hours}** hours, **${time.minutes}** minutes, and **${time.seconds}** seconds since last reboot.`
-  embedsender (message, embedoutput);
+  embedsender (message.channel, embedoutput);
+};
+
+function senderrormessage (channel, description) {
+  clearvar()
+  embedoutput.description = description;
+  embedoutput.color = 15406156;
+  embedsender (channel, embedoutput);
+};
+
+function sendgenericembed (channel, description) {
+  clearvar()
+  embedoutput.description = description;
+  embedsender (channel, embedoutput);
 };
