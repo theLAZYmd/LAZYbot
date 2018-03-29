@@ -1,6 +1,6 @@
 {
   "name": "LAZYbot",
-  "version": "1.1.14",
+  "version": "1.2.0",
   "description": "Discord bot operating in the House server http://dscrd.me/housechessvariants just to further lazy's understanding of basic js. ",
   "main": "lazybot.js",
   "scripts": {
