@@ -34,7 +34,9 @@ client.on("ready", () => {
   owner = guild.members.get(config.ownerID);
   console.log (`Noticed bot owner ${owner.user.tag} in ${Date.now() - reboot}ms`);
   bcpboolean = false;
-
+  if (client.user.id != config.betabotID) return;
+  enabletestingmode ()
+  console.log (`Enabled testing mode in ${Date.now() - reboot}ms`);
 });
 
 //pinging glitch.com
@@ -59,6 +61,12 @@ var acceptedlinkdomains = [
   "https://www.chess.com",
   "https://bughousetest.com"
 ];
+var regions = [
+  "Americas",
+  "Europe",
+  "Middle East / Africa",
+  "Asia / Australia",
+];
 
 //section for message logging
 
@@ -71,6 +79,10 @@ client.on("message", message => {
   if (dbindex == -1) return;
 
   tally[dbindex].messages++;
+  if (!((message.content.startsWith(config.prefix)) || (message.content.startsWith(config.nadekoprefix)))) {
+    tally[dbindex].lastmessage = message.content > 500 ? message.content.slice(0, 500).replace("\`") + "..." : message.content.replace("\`");
+    tally[dbindex].lastmessagedate = message.createdTimestamp;
+  };
   if (tally == undefined) return;
   fs.writeFile("./messagelog.json", JSON.stringify(tally, null, 4), (err) => {
     if (err) console.error(err)
@@ -85,7 +97,8 @@ client.on("guildMemberRemove", (member) => {
   let channel = getchannelfromname ("off-topic");
   let dbuser = getdbuserfromuser (user);
   if (dbuser == undefined) return;
-  embedoutput.description = `**${member.user.tag}** has left **${guild.name}**. Had **${dbuser.messages ? dbuser.messages.toLocaleString() : 0}** messages.`;
+  embedoutput.description = `**${member.user.tag}** has left **${guild.name}**. Had **${dbuser.messages ? dbuser.messages.toLocaleString() : 0}** messages.\n
+  Last message was \`\`\`${dbuser.lastmessage}\`\`\``;
   embedoutput.color = 15406156;
   channel.send ({embed: embedoutput});
 
@@ -190,7 +203,6 @@ client.on("message", (message) => {
   if (command === "fb") {
     if ((args[0] == null) || (message.author.id !== owner.id)) return;
     clearvar ();
-    console.log ("I'm here");
     let user = getuser (args[0]);
     let member = getmemberfromuser (user);
     embedoutput.title = "⛔️ User Banned";
@@ -206,7 +218,6 @@ client.on("message", (message) => {
 
   if ((command === "botcontingencyplan" || command === "bcp")) {
     if (!checkrole (message.member, "mods")) return;
-    console.log ("Is Mod.")
     let role = getrolefromname ("Bot-In-Use");
     nadekobot.removeRole(role);
     if (!checkrole (nadekobot, role.name) || args[0] == "enable") {
@@ -226,27 +237,19 @@ client.on("message", (message) => {
     let author = message.author;
     let member = getmemberfromuser(author);
     if (!checkrole (member, "dev")) return;
-    let user = getuser ("LAZYbot");
-    let channel = getchannelfromname ("devs");
     if (!testingmodeboolean || args[0] == "enable") {
-      channel.overwritePermissions(bouncerbot, { 'SEND_MESSAGES': false })
-      channel.overwritePermissions(user, { 'SEND_MESSAGES': false })
-      channel = getchannelfromname ("spam");
-      channel.overwritePermissions(bouncerbot, { 'SEND_MESSAGES': false })
-      channel.overwritePermissions(user, { 'SEND_MESSAGES': false })
-      sendgenericembed (message.channel, `**Testing mode enabled.**`)
-      testingmodeboolean = true;
+      enabletestingmode ()
+      sendgenericembed (channel, `**Testing mode enabled.**`)
     } else
     if (testingmodeboolean || args[0] == "disable") {
-      channel.overwritePermissions(bouncerbot, { 'SEND_MESSAGES': true })
-      channel.overwritePermissions(user, { 'SEND_MESSAGES': true })
-      channel = getchannelfromname ("spam");
-      channel.overwritePermissions(bouncerbot, { 'SEND_MESSAGES': true })
-      channel.overwritePermissions(user, { 'SEND_MESSAGES': true })
-      sendgenericembed (message.channel, `**Testing mode disabled.**`)
-      testingmodeboolean = false;
+      disabletestingmode ()
     };
-  }
+  } else
+
+  if (command === "timely") {
+    if (!testingmodeboolean) return;
+    senderrormessage (message.channel, "Testing mode is enabled, `.timely` cannot be used in this channel.")
+  };
 
 });
 
@@ -274,11 +277,11 @@ client.on("message", (message) => {
     if (message.author.id !== config.ownerID) return;
     let newUsername = args[0];
     clearvar()
-    if (!newUsername == client.user.username) {
+    if (newUsername != client.user.username) {
       client.user.setUsername(newUsername);
       sendgenericembed (message.channel, `Bot username has been updated to **${client.user.tag}**`);
     } else {
-      senderrormessage (message, `Bot username was already **${client.user.tag}**!`)
+      senderrormessage (message.channel, `Bot username was already **${client.user.tag}**!`)
     };
   } else
 
@@ -297,16 +300,8 @@ client.on("message", (message) => {
   } else
 
   if (command === "messages") {
-    if (args == null) {
-      //let boolean1 = checkrole (message.member, "silver")
-      //if (boolean1 == null) return;
-      let user = message.author;
-      messagecount (message, user);
-    } else {
-      clearvar()
-      let user = getuser (argument);
-      messagecount (message, user);
-    };
+    let user = argument ? getuser (argument) : message.author;
+    messagecount (message, user);
   } else
 
   if ((command === "updatemessagecount") || (command === "updatemessages")) {
@@ -315,20 +310,21 @@ client.on("message", (message) => {
     clearvar()
     let user = getuser (args[0])
     let newcount = parseInt(args[1]);
+    if (user = null) return;
     let dbuser = user ? getdbuserfromuser (user) : getdbuserfromusername (args[0]);
     if (!dbuser) return;
     let dbindex = getdbindexfromdbuser (dbuser)
     if (dbindex == -1) return;
 
     if (dbuser.messages == newcount) {
-      senderrormessage (message, `Message count for **${user.tag}** was already **${dbuser.messages.toLocaleString()}** messages.`);
+      senderrormessage (message.channel, `Message count for **${user.tag}** was already **${dbuser.messages.toLocaleString()}** messages.`);
     } else {
       tally[dbindex].messages = newcount;
       if (tally == undefined) return;
       fs.writeFile("./messagelog.json", JSON.stringify(tally, null, 4), (err) => {
         if (err) console.error(err)
       });
-      messagecount (message, user, true);
+      messagecount (message.channel, user, true);
     };
   } else
 
@@ -367,7 +363,174 @@ client.on("message", (message) => {
     embedthumbnail (config.avatar);
     embedsender (message.channel, embedoutput);
 
+  }  else
+
+  if (command === "profile") {
+    let user = argument ? getuser (argument) : message.author;
+    if (user == null) {
+      senderrormessage(message.channel, `No user found.`)
+    } else {
+      let embedoutput = getprofile (user);
+      embedsender (message.channel, embedoutput);
+    }
+  } else
+
+  if (command === "addfield") {
+    if (message.author.id !== config.ownerID) return;
+    clearvar()
+    let newfield = args[0].replace(/[.,#!$%\^&;:{}<>=-_`\"~()]/g,"");
+    if (!newfield) return;
+
+    if (tally[0][newfield] || (tally[0][newfield] == "")) {
+      senderrormessage (message.channel, "Field already exists!")
+    } else {
+      for (i = 0; i < tally.length; i++) {
+        tally[i][newfield] = ""};
+      if (tally == undefined) return;
+      fs.writeFile("./messagelog.json", JSON.stringify(tally, null, 4), (err) => {
+        if (err) console.error(err)
+      })
+      sendgenericembed (message, `New field **${newfield}** has been added to each user in db.`);
+    };
+    
+  } else
+
+  if (command === "setfield") {
+    if (message.author.id !== config.ownerID) return;
+    clearvar()
+    let newfield = args[0].replace(/[.,#!$%\^&;:{}<>=-_`\"~()]/g,"");
+    if (!newfield) return;
+    let content = argument.slice(args[0].length + 1);
+
+    if (!([newfield] in tally[0])) {
+      senderrormessage (message.channel, "Field does not exist!")
+    } else {
+      if (content === "array") {
+        for (i = 0; i < tally.length; i++) {
+          tally[i][newfield] = [];
+        }} else
+      if (content === "object") {
+        for (i = 0; i < tally.length; i++) {
+          tally[i][newfield] = {};
+        }
+      } else {
+          content = isNaN(parseFloat(content)) ? content : parseFloat(content);
+          for (i = 0; i < tally.length; i++) {
+            tally[i][newfield] = content ? content : "";
+          };
+        }
+        if (tally == undefined) return;
+        fs.writeFile("./messagelog.json", JSON.stringify(tally, null, 4), (err) => {
+          if (err) console.error(err)
+        })
+        sendgenericembed (message, `Field **${newfield}** has been set to **${content}** for every user in db.`);
+      };
+  } else
+
+  if (command === "removefield") {
+    if (message.author.id !== config.ownerID) return;
+    clearvar()
+    let newfield = args[0].replace(/[.,#!$%\^&;:{}<>=-_`\"~()]/g,"");
+    if (!newfield) return;
+
+    if (tally[0][newfield] == undefined) {
+      senderrormessage (message.channel, "Field does not exist!")
+    } else {
+      for (i = 0; i < tally.length; i++) {
+        delete tally[i][newfield]};
+      if (tally == undefined) return;
+      fs.writeFile("./messagelog.json", JSON.stringify(tally, null, 4), (err) => {
+        if (err) console.error(err)
+      })
+      sendgenericembed (message, `Field **${newfield}** has been deleted from each user in db.`);
+    };
+    
+  } else
+
+  if (command === "finger") {
+    clearvar()
+    let user = message.author;
+    let newfinger = inputstring (argument);
+    let dbuser = user ? getdbuserfromuser (user) : getdbuserfromusername (args[0]);
+    if (!dbuser) return;
+    let dbindex = getdbindexfromdbuser (dbuser)
+    if (dbindex == -1) return;
+
+    if (!newfinger) {
+      embedoutput.content = "Your current finger message is:"
+      embedoutput.title = user.tag;
+      if (dbuser.finger) {
+        embedoutput.description = "\`\`\`" + dbuser.finger + "\`\`\`";
+        embedfooter (`!finger clear to remove your finger message.`)
+      } else {
+        embedoutput.description = "\`\`\` \`\`\`";
+      };
+      embedsender (message.channel, embedoutput)
+    } else
+    if (newfinger.length > 500) {
+      senderrormessage (message, `Finger must be within **500** characters.`);
+    } else
+    if (dbuser.finger == newfinger) {
+      senderrormessage (message.channel, `Finger for **${user.tag}** was already as posted.`);
+    } else {
+      tally[dbindex].finger = newfinger === "clear" ? "" : newfinger;
+      if (tally == undefined) return;
+      fs.writeFile("./messagelog.json", JSON.stringify(tally, null, 4), (err) => {
+        if (err) console.error(err)
+      });
+      sendgenericembed (message.channel, `Finger for **${user.tag}** has been` + (newfinger === "clear" ? " cleared" : " updated."))
+    };
   };
+
+  if (command === "addtrophy") {
+    if (message.author.id != config.ownerID) return;
+    let user = getuser (args[0])
+    let newtrophy = argument.slice(args[0].length + 1, argument.length)
+    if (user == null) return;
+    let dbuser = getdbuserfromuser (user);
+    if (!dbuser) return;
+    let dbindex = getdbindexfromdbuser (dbuser)
+    if (dbindex == -1) return;
+    if (!dbuser.trophies) {
+      tally[dbindex].trophies.push = newtrophy;
+      if (tally == undefined) return;
+      fs.writeFile("./messagelog.json", JSON.stringify(tally, null, 4), (err) => {
+        if (err) console.error(err)
+      });
+      sendgenericembed (message.channel, `Trophy **${newtrophy}** added for **${user.tag}**.`)
+    } else
+    if (dbuser.trophies.includes (newtrophy)) {
+      senderrormessage (message.channel, `**${user.tag}** already had trophy **${newtrophy}**.`);
+    } else {
+      tally[dbindex].trophies.push(newtrophy);
+      if (tally == undefined) return;
+      fs.writeFile("./messagelog.json", JSON.stringify(tally, null, 4), (err) => {
+        if (err) console.error(err)
+      });
+      sendgenericembed (message.channel, `Trophy **${newtrophy}** added for **${user.tag}**.`)
+    };
+  } else
+
+  if (command === "updatetrophy") {
+    if (message.author.id != config.ownerID) return;
+    let user = getuser (args[0]);
+    // let oldtrophy = (args[1]);
+    let trophyindex = args[1];
+    let newtrophy = argument.slice(args[0].length + args[1].length + 2, argument.length)
+    if (user == null) return;
+    let dbuser = getdbuserfromuser (user);
+    if (!dbuser) return;
+    let dbindex = getdbindexfromdbuser (dbuser)
+    if (dbindex == -1) return;
+    if (parseInt(trophyindex) > dbuser.trophies.length - 1) return;
+    // let trophyindex = tally[dbindex].trophies.indexof(oldtrophy);
+    tally[dbindex].trophies[trophyindex] = newtrophy;
+    fs.writeFile("./messagelog.json", JSON.stringify(tally, null, 4), (err) => {
+      if (err) console.error(err)
+    });
+    sendgenericembed (message.channel, `Trophy for **${user.tag}** ${newtrophy ? "updated to **" + newtrophy + "**." : "removed."}`)
+  };
+
 
   cr (message, "marco", "polo!");
   cr (message, "ready", "I am ready!");
@@ -376,8 +539,7 @@ client.on("message", (message) => {
   cr (message, "help", "This is a pretty basic bot, there isn't much it can help you with.");
   cr (message, "party", ":tada:");
 
-});
-
+}); 
 //reddit links section
 
 client.on("message", (message) => {
@@ -390,7 +552,7 @@ client.on("message", (message) => {
   for(let i = 0;i < args.length; i++) {
 
     if (args[i].startsWith("/r/")) {
-      args[i] = args[i].replace(/[.,#!$%\^&;:{}=-_`~()]/g,"");
+      args[i] = args[i].replace(/[.,#!$%\^&;:{}<>=-_`~()]/g,"");
       embedoutput.description = `[${args[i]}](http://www.reddit.com${args[i]})`;
       embedsender (message.channel, embedoutput)
       } else
@@ -537,26 +699,31 @@ function getuser (searchstring) {
   clearvar()
   var user = getuserfromid (searchstring);
   if (user == null) {var user = getuserfromusername (searchstring)};
+  if (user == null) {var user = getuserfromtag (searchstring)};
   if (user == null) {var user = getuserfromnickname (searchstring)};
-  return user ? user : null;
+  return user;
 };
 
 function getuserfromid (snowflake) {
-  clearvar()
-  let user = client.users.find(user => snowflake.replace(/[.,#!$%\^&;:{}<>=-_`~()]/g,"") == user.id)
+  if (snowflake.startsWith (`<@!`) && snowflake.endsWith (`>`)) {snowflake = snowflake.slice(3, snowflake.length -1)};
+  let user = client.users.find(user => snowflake == user.id)
   console.log (user ? "ID Found!" : "No id found, checking username...");
   return user;
 };
 
 function getuserfromusername (string) {
-  clearvar()
   let user = client.users.find(user => string.toLowerCase() == user.username.toLowerCase())
-  console.log (user ? "Username found!" : "No username found, checking nickname...");
+  console.log (user ? "Username found!" : "No username found, checking tag...");
+  return user;
+};
+
+function getuserfromtag (string) {
+  let user = client.users.find(user => string.toLowerCase() == user.tag.toLowerCase())
+  console.log (user ? "Tag found!" : "No tag found, checking nickname...");
   return user;
 };
 
 function getuserfromnickname (string) {
-  clearvar()
   let member = guild.members.find(member => member.nickname && string.toLowerCase() == member.nickname.toLowerCase())
   console.log (member ? "Nickname found!" : "No nickname found.");
   if (member == null) {return member} else {return member.user};
@@ -614,10 +781,10 @@ function getdbindexfromdbuser (dbuser) {
 
 function returnmessagefromid (channel, id) {
 
+  clearvar();
   channel.fetchMessage(id)
     .then (message => {
-      let fulltimestamp = gettime (message.createdAt) + "";
-      let timestamp = fulltimestamp.slice(0, 31)
+      let timestamp = getISOtime (message.createdAt);
       if (message.embeds.length !== 0) {
         embedoutput.description = message.embeds[0].description
         // embedoutput = embedreceiver (message.embeds[0])
@@ -631,11 +798,59 @@ function returnmessagefromid (channel, id) {
 
 };
 
+function getmemberroles (member) {
+  var rolelist = member.roles.map(role => role.name)
+  return rolelist;  
+};
+
+function getprofile (user) {
+  let dbuser = getdbuserfromuser (user);
+  let member = getmemberfromuser (user);
+  let rolelist = getmemberroles (member);
+  let dbindex = getdbindexfromdbuser (dbuser);
+  rolelist.splice(0, 1);
+  var roles = "";
+  var trophies = "";
+  var region = "None set.";
+  var lastmessage;
+  for (let i = 0; i < rolelist.length; i++) {
+    roles +=  rolelist[i] + (i < rolelist.length -1 ? `\n` : ``)
+  };
+  for (let i = 0; i < tally[dbindex].trophies.length; i++) {
+    trophies +=  tally[dbindex].trophies[i] + (i < tally[dbindex].trophies.length -1 ? `\n` : ``)
+  };
+  for (let i = 0; i < regions.length; i++) {
+    let role = getrolefromname (regions[i]);
+    if (checkrole (member, role.name)) {
+      region = regions[i];
+    };
+  };
+  lastmessage = (dbuser.lastmessagedate ? `\nSent at ${getISOtime (dbuser.lastmessagedate)}.` : "") + (dbuser.lastmessage.startsWith("<:") && dbuser.lastmessage.endsWith (">") ? "\n" + dbuser.lastmessage : "\`\`\`" + dbuser.lastmessage + "\`\`\`")
+  embedauthor (`Profile for ${user.tag}`)
+  if (dbuser.finger) {
+    embedoutput.description = "```" + dbuser.finger + "```";
+  };
+  embedoutput.color = getrandomdecimalcolor();
+  embedthumbnail (user.avatarURL)
+  embedfielder ("User ID", user.id, member.nickname ? true : false)
+  if (member.nickname) {embedfielder ("a.k.a.", member.nickname, true)}
+  embedfielder (`Joined Discord`, getISOtime (user.createdTimestamp).slice(4, 24), true) 
+  embedfielder (`Joined ${guild.name}`, getISOtime (member.joinedTimestamp).slice(4, 24), true)
+  if (dbuser.messages) {embedfielder ("Messages Sent", dbuser.messages.toLocaleString(), true)}
+  embedfielder ("Region", region, true)
+  if (dbuser.lastmessage) {embedfielder ("Last Message", lastmessage, false)}
+  // embedfielder ("Roles", roles ? roles : "None", true)
+  if (trophies) {embedfielder ("House Trophies", trophies, true)}
+  embedfooter ("Use !finger to change your finger message.")
+  return embedoutput;
+};
+
 // embed section of functions
 
 function embedsender (channel, embedoutput) {
   
-  embedoutput.color = (embedoutput.color == undefined ? config.color : embedoutput.color );
+  channel = channel.channel ? channel.channel : channel;
+  embedoutput.color = embedoutput.color ? embedoutput.color : config.color;
   channel.send(embedoutput.content, {embed: embedoutput})
   clearvar()
 
@@ -643,6 +858,7 @@ function embedsender (channel, embedoutput) {
 
 function embedfielder (name, value, inline) {
 
+  if (!embedoutput.fields) {embedoutput.fields = []}
   for (i = 0; i < embedoutput.fields.length; i++) {
     embedoutput.fields[i].inline = (embedoutput.fields[i].inline == undefined ? false : embedoutput.fields[i].inline )};
   embedoutput.fields.push({"name": name, "value": value, "inline": inline})
@@ -680,9 +896,6 @@ function embedfooter (text, icon_url) {
 };
 
 function embedreceiver (embed) {
-
-  console.log (embed);
-  console.log (embed.description);
 
   if (typeof embed.title !== "undefined") {embedinput.title = embed.title};
 
@@ -738,12 +951,6 @@ function checkuseronline (checkuser) {
 
 function checkbounceronine () {
   checkuseronline (bouncerbot);
-}
-
-function getlastmessage (user) {
-
-  return user.lastMessage.content;
-
 };
 
 function gettime (ms) {
@@ -755,6 +962,34 @@ function gettime (ms) {
   time.days = Math.floor(time.hours/24);
   time.hours = time.hours - (24 * time.days);
   return time;
+};
+
+function getISOtime (ms) {
+  return gettime (ms).toString().slice(0, 31); 
+};
+
+function getrandomrange (min, max) {
+  return Math.floor(Math.random() * (max - min) + min);
+};
+
+function getrandomdecimalcolor () {
+  let color = getrandomrange (1, 16777215);
+  return color;
+};
+
+function getrandomhexcolor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  };
+  return color;
+};
+
+function inputstring (string) {
+  let newstring = (string.startsWith (`\"`) && string.endsWith (`\"`)) ? string.slice(1, string.length -1) : string;
+  console.log (newstring);
+  return newstring;
 };
 
 function sendtime (message, time) {
@@ -773,5 +1008,29 @@ function senderrormessage (channel, description) {
 function sendgenericembed (channel, description) {
   clearvar()
   embedoutput.description = description;
+  channel = channel.channel ? channel.channel : channel;
   embedsender (channel, embedoutput);
+};
+
+function enabletestingmode () {
+  let user = getuser ("LAZYbot");
+  let channel = getchannelfromname ("devs");
+  channel.overwritePermissions(bouncerbot, { 'SEND_MESSAGES': false })
+  channel.overwritePermissions(user, { 'SEND_MESSAGES': false })
+  channel = getchannelfromname ("spam");
+  channel.overwritePermissions(bouncerbot, { 'SEND_MESSAGES': false })
+  channel.overwritePermissions(user, { 'SEND_MESSAGES': false })
+  testingmodeboolean = true;
+};
+
+function disabletestingmode () {
+  let user = getuser ("LAZYbot");
+  let channel = getchannelfromname ("devs");
+  channel.overwritePermissions(bouncerbot, { 'SEND_MESSAGES': true })
+  channel.overwritePermissions(user, { 'SEND_MESSAGES': true })
+  channel = getchannelfromname ("spam");
+  channel.overwritePermissions(bouncerbot, { 'SEND_MESSAGES': true })
+  channel.overwritePermissions(user, { 'SEND_MESSAGES': true })
+  sendgenericembed (channel, `**Testing mode disabled.**`)
+  testingmodeboolean = false;
 };
