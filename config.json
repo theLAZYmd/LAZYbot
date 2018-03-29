@@ -1,0 +1,22 @@
+{
+    "token": "NDIyODQ3MDg2MTQ1NTY4NzY5.DYhukg.ufLcCpYSHZlfh-eepWyCkXqq0c4",
+    "token2": "MzM4NzcyNDUxNTY1NTAyNDc0.DZxhoQ.aymib8jmg7u7sO2dDu_bfugCwFg",
+    "prefix": "!",
+    "nadekoprefix": ".",
+    "guild": "314155682033041408",
+    "botID": "338772451565502474",
+    "betabotID": "422847086145568769",
+    "ownerID": "185412969130229760",
+    "bouncerID": "365933164725534722",
+    "nadekoID": "116275390695079945",
+    "color": 53380,
+    "avatar": "https://i.imgur.com/Yl4Xoku.jpg",
+    "background": {
+        "icons": "212225",
+        "markdown": "2f3136",
+        "chat": "36393e"
+    },
+    "text": {
+        "channels": "727671"
+    }
+}

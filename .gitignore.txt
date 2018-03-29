@@ -1,0 +1,16 @@
+.vscode
+DeepBlueBot-master
+modules
+node_modules
+data.dat
+datamanger.js
+db.json
+dbfull.jsondbfull2.txt
+htmlsandbox.html
+lazybotv2.js
+leaderboard.js
+main.js
+ominous.py
+package-lock.json
+settings.js
+tracker.js
