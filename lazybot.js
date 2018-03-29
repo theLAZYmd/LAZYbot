@@ -97,7 +97,8 @@ client.on("guildMemberRemove", (member) => {
   let channel = getchannelfromname ("off-topic");
   let dbuser = getdbuserfromuser (user);
   if (dbuser == undefined) return;
-  embedoutput.description = `**${member.user.tag}** has left **${guild.name}**. Had **${dbuser.messages ? dbuser.messages.toLocaleString() : 0}** messages.${dbuser.lastmessage ? `\nLast message was \`\`\`${dbuser.lastmessage}\`\`\`` : ""}`;
+  embedoutput.description = `**${member.user.tag}** has left **${guild.name}**. Had **${dbuser.messages ? dbuser.messages.toLocaleString() : 0}** messages.\n
+  Last message was \`\`\`${dbuser.lastmessage}\`\`\``;
   embedoutput.color = 15406156;
   channel.send ({embed: embedoutput});
 
