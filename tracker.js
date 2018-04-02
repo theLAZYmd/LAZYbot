@@ -1,24 +1,47 @@
-const settings = require("./settings.js");
+const config = require("./config.json");
+const guildconfig = require("./guildconfig.json");
 const request = require("request");
 const DataManagerConstructor = require("./datamanager.js");
-const DataManager = new DataManagerConstructor(settings.dataFile);
+const DataManager = new DataManagerConstructor(config.dataFile);
 const LICHESS_USERS_URL = "https://lichess.org/api/users";
 const LICHESS_USER_URL = "https://lichess.org/api/user/|";
+const BUGHOUSETEST_USERS_URL = "https://bughousetest.com/api/users";
+const BUGHOUSETEST_USER_URL = "https://bughousetest.com/api/user/|";
 const CHESS_COM_USER_URL = "https://www.chess.com/callback/member/stats/|";
 const userUpdates = {};
 const closedUsername = {};
 const cheatedUserID = {};
+const dbtemplate = config.template;
 
 function Tracker(events) {
 	this.stopUpdating = false;
 	this.updating = false;
-	this.updateDelay = settings.updateDelay;
+	this.updateDelay = guildconfig.updateDelay;
 	this.onTrackSuccess = events.onTrackSuccess || (() => {});
 	this.onRemoveSuccess = events.onRemoveSuccess || (() => {});
 	this.onRatingUpdate = events.onRatingUpdate || (() => {});
 	this.onError = events.onError || (() => {});
 	this.onModError = events.onModError || (() => {});
 	this.afterUpdate = [];
+};
+
+//section for message logging
+
+Tracker.prototype.messagelogger = function (message) {
+
+	if (message.author.bot) return;
+	let user = message.author;
+	let dbuser = getdbuserfromuser(user);
+	let dbindex = getdbindexfromdbuser(dbuser)
+	if (dbindex === -1) return;
+	let tally = DataManager.getData();
+	tally[dbindex].messages++;
+	if (!((message.content.startsWith(guildconfig.prefix)) || (message.content.startsWith(guildconfig.nadekoprefix)))) {
+		tally[dbindex].lastmessage = message.content > 500 ? message.content.slice(0, 500).replace("\`") + "..." : message.content.replace("\`");
+		tally[dbindex].lastmessagedate = message.createdTimestamp;
+	};
+	if (tally == undefined) return;
+	DataManager.setData(tally);
 }
 
 Tracker.prototype.queueForceUpdate = function(userID) {
@@ -26,10 +49,10 @@ Tracker.prototype.queueForceUpdate = function(userID) {
 };
 
 Tracker.prototype.initUpdateCycle = function() {
-	let userData = findLeastUpToDateUser();
-	if(userData && !this.stopUpdating) {
+	let user = findLeastUpToDateUser();
+	if(user && !this.stopUpdating) {
 		this.updating = true;
-		this.updateUser(userData).catch((e) => {
+		this.updateUser(user).catch((e) => {
 			console.log(e, JSON.stringify(e));
 		}).then(() => {
 			console.log("Done updating");
@@ -51,7 +74,7 @@ Tracker.prototype.initUpdateCycle = function() {
 			}
 		}).catch((e) => {
 			this.updating = false;
-			console.log("Error updating", userData, e, JSON.stringify(e));
+			console.log("Error updating", user.id, e, JSON.stringify(e));
 			setTimeout(() => this.initUpdateCycle(), this.updateDelay);
 		});
 	} else {
@@ -87,7 +110,8 @@ Tracker.prototype.processAfterUpdate = function() {
 	});
 };
 
-Tracker.prototype.track = function(serverID, userID, source, username) {
+Tracker.prototype.track = function(serverID, userID, source, testusername, message) {
+	console.log(message.content);
 	if(this.updating) {
 		this.afterUpdate.push({
 			"type": "track",
@@ -96,65 +120,67 @@ Tracker.prototype.track = function(serverID, userID, source, username) {
 		return;
 	}
 	this.stopUpdating = true;
-	username = username.replace(/[^\w\d]/g, "");
-	if(username.length === 0) {
-		return this.onError(serverID, "Invalid username.");
+	testusername = testusername.replace(/[^\w\d]/g, "");
+	if(testusername.length === 0) {
+		return this.onError(serverID, "Invalid username.", message);
 	}
 	
-	let data = DataManager.getData();
+	let tally = DataManager.getData();
+	let dbindex = getdbindexfromid (userID);
+	console.log(message.content);
 	
-	if(data[serverID] && data[serverID][userID]) {
-		let source = data[serverID][userID].source;
-		if(source === "Chesscom") {
-			source = "Chess.com";
+	if(tally[dbindex][source.toLowerCase()]) {
+		if(source === "chesscom") {
+			source = "chess.com";
 		}
-		return this.onError(serverID, "Duplicate entry. Already tracked on " + source + ".");
+		return this.onError(serverID, "Duplicate entry. Already tracked on **" + source + "**.", message);
 	}
 
-	if(source === "Lichess") {
-		getLichessDataForUser(username)
+	if(source === "lichess") {
+		getLichessDataForUser(testusername)
 		.then((lichessData) => {
 			return parseLichessUserData(lichessData, (msg) => {
-				this.onError(serverID, msg);
+				this.onError(serverID, msg, message);
 			}, (msg) => {
 				this.onModError(serverID, msg);
 			});
 		})
-		.then((ratingData) => {
+		.then(([ratingData, lichessusername]) => {
 			if(ratingData) {
-				addUser(serverID, data, ratingData, source, username, userID);
-				this.onTrackSuccess(serverID, userID, ratingData, source, username);
+				addUser(serverID, tally, ratingData, source, lichessusername, userID);
+				this.onTrackSuccess(serverID, userID, ratingData, source, lichessusername, message);
 				userUpdates[userID] = Date.now();
 			}
 			this.stopUpdating = false;
 		})
 		.catch((error) => {
 			this.stopUpdating = false;
-			this.onError(serverID, "Error adding user. " + error.toString());
+			// this.onError(serverID, "Error adding user. " + error.toString(), message);
 		});
-	} else if(source === "Chesscom") {
-		getChesscomDataForUser(username)
+	} else if(source === "chesscom") {
+		getChesscomDataForUser(testusername)
 		.then((chesscomData) => {
-			return parseChesscomUserData(chesscomData, username, (msg) => {
-				this.onError(serverID, msg);
+			console.log(message.content);
+			return parseChesscomUserData(chesscomData, testusername, (msg) => {
+				this.onError(serverID, msg, message);
 			});
 		})
-		.then((ratingData) => {
+		.then(([ratingData, chesscomusername]) => {
 			if(ratingData) {
-				addUser(serverID, data, ratingData, source, username, userID);
-				this.onTrackSuccess(serverID, userID, ratingData, source, username);
+				addUser(serverID, tally, ratingData, source, chesscomusername, userID);
+				this.onTrackSuccess(serverID, userID, ratingData, source, chesscomusername, message);
 				userUpdates[userID] = Date.now();
 			}
 			this.stopUpdating = false;
 		})
 		.catch((error) => {
 			this.stopUpdating = false;
-			this.onError(serverID, "Error adding user. " + error.toString());
+			this.onError(serverID, "Error adding user. " + error.toString(), message);
 		});
 	}
 };
 
-Tracker.prototype.remove = function(serverID, userID, nomsg) {
+Tracker.prototype.remove = function(serverID, source, userID, message, nomsg) {
 	if(this.updating) {
 		this.afterUpdate.push({
 			"type": "remove",
@@ -163,101 +189,100 @@ Tracker.prototype.remove = function(serverID, userID, nomsg) {
 		return;
 	}
 	this.stopUpdating = true;
-	let data = DataManager.getData();
-	if(data[serverID] && data[serverID][userID]) {
-		let username = data[serverID][userID].username;
-		delete data[serverID][userID];
+	let tally = DataManager.getData();
+	let dbindex = getdbindexfromid (userID)
+	let username = tally[dbindex][source.toLowerCase()];
+	if(username) {
+		tally[dbindex][source.toLowerCase()] = "";
 		delete userUpdates[userID];
-		DataManager.setData(data);
-		this.onRemoveSuccess(serverID, userID, username);
+		DataManager.setData(tally);
+		this.onRemoveSuccess(serverID, userID, source, username, message);
 	} else {
 		if(!nomsg) {
-			this.onError(serverID, "No tracking entry found to remove.");
+			this.onError(serverID, "No tracking entry found to remove.", message);
 		}
 	}
 	this.stopUpdating = false;
 };
 
-Tracker.prototype.removeByUsername = function(serverID, source, username) {
+Tracker.prototype.removeByUser = function(serverID, source, user, message) {
 	this.stopUpdating = true;
-	let data = DataManager.getData();
-	if(data[serverID]) {
-		let users = data[serverID];
-		for(userID in users) {
-			let user = users[userID];
-			if(user.username.toLowerCase() === username.toLowerCase() && 
-				source.toLowerCase() === user.source.toLowerCase()) {
-				this.remove(serverID, userID);
+	let tally = DataManager.getData();
+	if (tally) {
+		let users = tally;
+		for(id in users) {
+			let dbindex = getdbindexfromid(user.id)
+			let dbuser = users[dbindex];
+			let username = users[dbindex][source.toLowerCase()];
+			if (username) {
+				this.remove(serverID, source, user.id, message);
 				return;
 			}
 		}
 	}
-	this.onError(serverID, "No tracking entry found to remove.");
+	this.onError(serverID, "No tracking entry found to remove.", message);
 	this.stopUpdating = false;
 }
 
 function findLeastUpToDateUser() {
-	let data = DataManager.getData();
-	let foundUserData = null;
+	let tally = DataManager.getData();
+	let founduserID = null;
 	let currentLeastUpdatedValue = Infinity;
-	for(let serverID in data) {
-		for(let userID in data[serverID]) {
-			let userData = data[serverID][userID];
-			if(closedUsername[userData.username.toLowerCase()]) {
-				continue;
-			}
-			if(!userUpdates[userID] || userUpdates[userID] < currentLeastUpdatedValue) {
-				currentLeastUpdatedValue = userUpdates[userID] || 0;
-				foundUserData = {
-					"userID": userID,
-					"serverID": serverID
-				};
-			}
+	for(let id in tally) {
+		let dbindex = getdbindexfromid(id)
+		let dbuser = tally[dbindex];
+		if(closedUsername[dbuser.username.toLowerCase()]) {
+			continue;
+		}
+		if(!userUpdates[id] || userUpdates[id] < currentLeastUpdatedValue) {
+			currentLeastUpdatedValue = userUpdates[id] || 0;
+			founduserID = id;
 		}
 	}
-	return foundUserData;
+	return founduserID;
 }
 
-Tracker.prototype.updateUser = function(userData) {
-	let serverID = userData.serverID;
-	let userID = userData.userID;
-	let data = DataManager.getData();
-	let source = data[serverID][userID].source;
-	let username = data[serverID][userID].username;
-	console.log("Updating", username, "on", source);
-	if(source.toLowerCase() === "lichess") {
-		return getLichessDataForUser(username)
-		.then((lichessData) => {
-			return parseLichessUserData(lichessData, (msg) => {
-				this.onError(serverID, msg);
-			}, (msg) => {
-				this.onModError(serverID, msg);
-			});
-		})
-		.then((ratingData) => {
-			if(ratingData) {
-				userUpdates[userID] = Date.now();
-				this.onRatingUpdate(serverID, userID, data.ratings, ratingData, source, username);
-				data[serverID][userID].ratings = ratingData;
-				DataManager.setData(data);
-			}
-		})
-	} else if(source.toLowerCase() === "chesscom") {
-		return getChesscomDataForUser(username)
-		.then((chesscomData) => {
-			return parseChesscomUserData(chesscomData, username, (msg) => {
-				this.onError(serverID, msg);
-			});
-		})
-		.then((ratingData) => {
-			if(ratingData) {
-				userUpdates[userID] = Date.now();
-				this.onRatingUpdate(serverID, userID, data.ratings, ratingData, source, username);
-				data[serverID][userID].ratings = ratingData;
-				DataManager.setData(data);
-			}
-		})
-	}
+Tracker.prototype.updateUser = function(user) {
+	let tally = DataManager.getData();
+	let dbindex = getdbindexfromid(user.id)
+	let username = tally[dbindex].username;
+	for (i = 0; i < config.sources.length; i++) {
+		let source = config.sources[i].toLowerCase().replace(".","");
+		if(dbindex[source]) {
+			if (source === "lichess") {
+				console.log("Updating", username, "on", source);
+				return getLichessDataForUser(username)
+				.then((lichessData) => {
+					return parseLichessUserData(lichessData, (msg) => {
+						this.onError(serverID, msg, message);
+					}, (msg) => {
+						this.onModError(serverID, msg);
+					});
+				})
+				.then(([ratingData, lichessusername]) => {
+					if(ratingData) {
+						userUpdates[userID] = Date.now();
+						this.onRatingUpdate(serverID, userID, tally[`${source}ratings`], ratingData, source, lichessusername);
+						tally[dbindex][`${source}ratings`] = ratingData;
+						DataManager.setData(tally);
+					}
+				})
+			} else if(source.toLowerCase() === "chesscom") {
+				return getChesscomDataForUser(username)
+				.then((chesscomData) => {
+					return parseChesscomUserData(chesscomData, username, (msg) => {
+						this.onError(serverID, msg, message);
+					});
+				})
+				.then((ratingData) => {
+					if(ratingData) {
+						userUpdates[userID] = Date.now();
+						this.onRatingUpdate(serverID, userID, tally[`${source}ratings`], ratingData, source, username);
+						tally[dbindex].ratings = ratingData;
+						DataManager.setData(tally);
+					}
+				})
+		}}}
 }
 
 function getChesscomDataForUser(username) {
@@ -295,150 +320,149 @@ function getLichessDataForUser(username) {
 	});
 }
 
-function parseLichessUserData(data, errorCB, modCB) {
-	if(data.closed) {
-		if(!closedUsername[data.username.toLowerCase()]) {
-			modCB("Account " + data.username + " is closed on Lichess.");
-			errorCB("Account " + data.username + " is closed on Lichess.");
+function parseLichessUserData(lichessData, errorCB, modCB) {
+	if(lichessData.closed) {
+		if(!closedUsername[lichessData.username.toLowerCase()]) {
+			modCB("Account " + lichessData.username + " is closed on Lichess.");
+			errorCB("Account " + lichessData.username + " is closed on Lichess.");
 		}
-		closedUsername[data.username.toLowerCase()] = true;
+		closedUsername[lichessData.username.toLowerCase()] = true;
 		return;
 	}
-
-	let classical = data.perfs.classical.rating;
-	let classicalProvisional = data.perfs.classical.prov === true;
-	let rapid = data.perfs.rapid.rating;
-	let rapidProvisional = data.perfs.rapid.prov === true;
-	let blitz = data.perfs.blitz.rating;
-	let blitzProvisional = data.perfs.blitz.prov === true;
-	let bullet = data.perfs.bullet.rating;
-	let bulletProvisional = data.perfs.bullet.prov === true;
 
 	let ratings = {};
-
-	if(classicalProvisional && blitzProvisional && bulletProvisional && rapidProvisional) {
-		errorCB("All, classical, rapid, blitz and bullet ratings for " + data.username + " are provisional.");
-		return;
-	}
-
+	ratings.maxRating = 0;
+	let lichessusername = lichessData.username;
+	let killboolean = true;
 	let cheating = null;
-	if(data.engine && data.booster) {
-		cheating = "Player " + data.username + " (" + settings.lichessProfileURL.replace("|", data.username) + ")";
+
+	for (let i = 0; i < config.lichessvariants.length; i++) {
+		let array = config.lichessvariants[i];
+		let variant = array[1];
+		let APIpath = lichessData.perfs[array[2]];
+		let provisional = `${array[1]}Provisional`;
+		ratings[variant] = APIpath ? APIpath.rating : "" ;
+		ratings[provisional] = !(APIpath && !APIpath.prov);
+		if (!ratings[provisional]) {
+			killboolean = false;
+			if(ratings.maxRating < ratings[variant]) {
+				ratings.maxRating = ratings[variant];
+			}
+		};	
+	};
+
+	console.log(killboolean);
+	if (killboolean === true) {
+		errorCB("All lichess ratings for " + lichessData.username + " are provisional.");
+		return;
+	};
+
+	if(lichessData.engine && lichessData.booster) {
+		cheating = "Player " + lichessData.username + " (" + config.lichessProfileURL.replace("|", lichessData.username) + ")";
 		cheating += " uses chess computer assistance, and artificially increases/decreases their rating.";
-	} else if(data.engine) {
-		cheating = "Player " + data.username + " (" + settings.lichessProfileURL.replace("|", data.username) + ")";
+	} else if(lichessData.engine) {
+		cheating = "Player " + lichessData.username + " (" + config.lichessProfileURL.replace("|", lichessData.username) + ")";
 		cheating += " uses chess computer assistance.";
-	} else if(data.booster) {
-		cheating = "Player " + data.username + " (" + settings.lichessProfileURL.replace("|", data.username) + ")";
+	} else if(lichessData.booster) {
+		cheating = "Player " + lichessData.username + " (" + config.lichessProfileURL.replace("|", lichessData.username) + ")";
 		cheating += " artificially increases/decreases their rating.";
 	}
 	if(cheating) {
 		//Only say once
-		if(!cheatedUserID[data.username.toLowerCase()]) {
+		if(!cheatedUserID[lichessData.username.toLowerCase()]) {
 			modCB(cheating);
-			cheatedUserID[data.username.toLowerCase()] = true;
+			cheatedUserID[lichessData.username.toLowerCase()] = true;
 		}
 	}
 
-	if(!classicalProvisional) {
-		ratings.classical = classical;
-		ratings.maxRating = ratings.maxRating || classical;
-		if(ratings.maxRating < classical) {
-			ratings.maxRating = classical;
-		}
-	}
-	if(!rapidProvisional) {
-		ratings.rapid = rapid;
-		ratings.maxRating = ratings.maxRating || rapid;
-		if(ratings.maxRating < rapid) {
-			ratings.maxRating = rapid;
-		}
-	}
-	if(!blitzProvisional) {
-		ratings.blitz = blitz;
-		ratings.maxRating = ratings.maxRating || blitz;
-		if(ratings.maxRating < blitz) {
-			ratings.maxRating = blitz;
-		}
-	}
-	if(!bulletProvisional) {
-		ratings.bullet = bullet;
-		ratings.maxRating = ratings.maxRating || bullet;
-		if(ratings.maxRating < bullet) {
-			ratings.maxRating = bullet;
-		}
-	}
-
-	return ratings;
+	return [ratings, lichessusername];
 }
 
-function parseChesscomUserData(data, username, errorCB) {
-	let rapid = null;
-	let rapidProvisional = true;
-	let blitz = null;
-	let blitzProvisional = true;
-	let bullet = null;
-	let bulletProvisional = true;
-	let stats = data.stats;
-
+function parseChesscomUserData(chesscomData, username, errorCB) {
+	let stats = chesscomData.stats;
+	console.log(stats);
 	if(!stats) {
 		errorCB("Couldn't find '" + username + "' on Chess.com.");
 		return;
 	}
-
-	for(let i = 0; i < stats.length; i++) {
-		let obj = stats[i];
-		if(obj.key === "lightning") {
-			blitz = obj.stats.rating;
-			blitzProvisional = obj.gameCount < 10;
-		} else if(obj.key === "rapid") {
-			rapid = obj.stats.rating;
-			rapidProvisional = obj.gameCount < 10;
-		} else if(obj.key === "bullet") {
-			bullet = obj.stats.rating;
-			bulletProvisional = obj.gameCount < 10;
-		}
-	}
-
 	let ratings = {};
+	ratings.maxRating = 0;
+	let killboolean = true;
 
-	if(rapidProvisional && blitzProvisional && bulletProvisional) {
-		errorCB("All, rapid, blitz and bullet ratings for " + username + " are provisional.");
+	for (let i = 0; i < config.chesscomvariants.length; i++) {
+		let array = config.chesscomvariants[i];
+		let variant = array[1];
+		let APIpath = array[2];
+		let provisional = `${array[1]}Provisional`;
+		for(let i = 0; i < stats.length; i++) {
+			let obj = stats[i];
+			if(obj.key === APIpath) {
+				ratings[variant] = obj.stats.rating
+				ratings[provisional] = obj.gameCount < 10;
+			}
+		}
+		if (!ratings[provisional]) {
+			console.log(ratings.maxRating)
+			console.log(ratings[variant])
+			killboolean = false;
+			if(ratings.maxRating < ratings[variant]) {
+				ratings.maxRating = ratings[variant];
+			}
+		};	
+	};
+
+	console.log(killboolean);
+	if (killboolean === true) {
+		errorCB("All chess.com ratings for " + username + " are provisional.");
 		return;
-	}
+	};
 
-	if(!rapidProvisional) {
-		ratings.rapid = rapid;
-		ratings.maxRating = ratings.maxRating || rapid;
-		if(ratings.maxRating < rapid) {
-			ratings.maxRating = rapid;
-		}
-	}
-	if(!blitzProvisional) {
-		ratings.blitz = blitz;
-		ratings.maxRating = ratings.maxRating || blitz;
-		if(ratings.maxRating < blitz) {
-			ratings.maxRating = blitz;
-		}
-	}
-	if(!bulletProvisional) {
-		ratings.bullet = bullet;
-		ratings.maxRating = ratings.maxRating || bullet;
-		if(ratings.maxRating < bullet) {
-			ratings.maxRating = bullet;
-		}
-	}
-
-	return ratings;
+	return [ratings, username];
 }
 
-function addUser(serverID, data, ratingData, source, username, userID) {
-	data[serverID] = data[serverID] || {};
-	data[serverID][userID] = data[serverID][userID] || {};
-	data[serverID][userID].username = username;
-	data[serverID][userID].source = source;
-	data[serverID][userID].ratings = ratingData;
-	DataManager.setData(data);
+function addUser(serverID, tally, ratingData, source, sourceusername, userID) {
+	let dbindex = getdbindexfromid (userID)
+	tally[dbindex] = tally[dbindex] || {};
+	let sourceratingData = source + "ratings"
+	tally[dbindex][sourceratingData] = ratingData;
+	tally[dbindex][source.toLowerCase()] = sourceusername;
+	DataManager.setData(tally);
 }
+
+function getdbuserfromusername (username) {
+	let tally = DataManager.getData();
+	let dbuser = tally.find(dbuser => username == dbuser.username);
+	return dbuser;
+  };
+  
+function getdbindexfromdbuser (dbuser) {
+	let tally = DataManager.getData();
+	let index = tally.findIndex(index => dbuser.id === index.id)
+	return index;
+	};
+
+function getdbindexfromid (id) {
+	let tally = DataManager.getData();
+	let index = tally.findIndex(index => id === index.id)
+	return index;
+	};
+
+function getdbuserfromuser(user) {
+	let tally = DataManager.getData();
+	let dbuser = tally.find(dbuser => user.id == dbuser.id);
+	if (dbuser == null) {
+		console.log("No dbuser found, creating one...");
+		let newuser = dbtemplate;
+		newuser.id = user.id;
+		newuser.username = user.username;
+		tally.push (newuser);
+		DataManager.setData(tally);
+		console.log("User " + newuser.username + " has been logged in the database!");
+	};
+	newdbuser = tally.find(dbuser => user.id == dbuser.id);
+	return dbuser ? dbuser : newdbuser;
+	
+	};
+
 
 module.exports = Tracker;

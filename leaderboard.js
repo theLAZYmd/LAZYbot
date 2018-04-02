@@ -1,6 +1,6 @@
-const settings = require("./settings.js");
+const config = require("./config.js");
 const DataManagerConstructor = require("./datamanager.js");
-const DataManager = new DataManagerConstructor(settings.dataFile);
+const DataManager = new DataManagerConstructor(config.dataFile);
 
 function Leaderboard(config) {
 	this.data = DataManager.getData();
@@ -9,43 +9,41 @@ function Leaderboard(config) {
 }
 Leaderboard.prototype.getList = function(getNick) {
 	let collectedUsers = [];
-	for(serverID in this.data) {
-		let users = this.data[serverID];
-		for(userID in users) {
-			let ratingData = users[userID].ratings;
-			let ratingObj = {};
-			if(this.type === "Classical") {
-				ratingObj.rating = ratingData.classical;
+	let users = this.data;
+	for(userID in users) {
+		let ratingData = users[userID].ratings;
+		let ratingObj = {};
+		if(this.type === "Classical") {
+			ratingObj.rating = ratingData.classical;
+			ratingObj.type = "Classical";
+		} else if(this.type === "Rapid") {
+			ratingObj.rating = ratingData.rapid;
+			ratingObj.type = "Rapid";
+		} else if(this.type === "Blitz") {
+			ratingObj.rating = ratingData.blitz;
+			ratingObj.type = "Blitz";
+		} else if(this.type === "Bullet") {
+			ratingObj.rating = ratingData.bullet;
+			ratingObj.type = "Bullet";
+		} else {
+			ratingObj.rating = ratingData.maxRating;
+			if(ratingData.classical === ratingData.maxRating) {
 				ratingObj.type = "Classical";
-			} else if(this.type === "Rapid") {
-				ratingObj.rating = ratingData.rapid;
+			} else if(ratingData.rapid === ratingData.maxRating) {
 				ratingObj.type = "Rapid";
-			} else if(this.type === "Blitz") {
-				ratingObj.rating = ratingData.blitz;
+			} else if(ratingData.blitz === ratingData.maxRating) {
 				ratingObj.type = "Blitz";
-			} else if(this.type === "Bullet") {
-				ratingObj.rating = ratingData.bullet;
+			} else if(ratingData.bullet === ratingData.maxRating) {
 				ratingObj.type = "Bullet";
-			} else {
-				ratingObj.rating = ratingData.maxRating;
-				if(ratingData.classical === ratingData.maxRating) {
-					ratingObj.type = "Classical";
-				} else if(ratingData.rapid === ratingData.maxRating) {
-					ratingObj.type = "Rapid";
-				} else if(ratingData.blitz === ratingData.maxRating) {
-					ratingObj.type = "Blitz";
-				} else if(ratingData.bullet === ratingData.maxRating) {
-					ratingObj.type = "Bullet";
-				} 
-			}
-			ratingObj.username = users[userID].username;
-			ratingObj.source = users[userID].source;
-			ratingObj.userID = userID;
-			ratingObj.serverID = serverID;
-			
-			if(ratingObj.rating) {
-				collectedUsers.push(ratingObj);
-			}
+			} 
+		}
+		ratingObj.username = users[userID].username;
+		ratingObj.source = users[userID].source;
+		ratingObj.userID = userID;
+		ratingObj.serverID = serverID;
+		
+		if(ratingObj.rating) {
+			collectedUsers.push(ratingObj);
 		}
 	}
 
@@ -75,17 +73,18 @@ Leaderboard.prototype.getList = function(getNick) {
 	let endPos = startPos + perPage;
 	let userMaxType = null;
 	for(let i = startPos; i < collectedUsers.length && i < endPos; i++) {
-		let nick = getNick(collectedUsers[i].serverID, collectedUsers[i].userID);
-		let username = collectedUsers[i].username;
+		let user = getuser(collectedUsers[i].userID);
+		let nick = getmemberfromuser(user).nickname;
+		let username = user.username;
 		let source = collectedUsers[i].source;
 		if(this.type === null) {
 			userMaxType = collectedUsers[i].type;
 		}
 		let url = null;
-		if(source === "Chess.com") {
-			url = settings.chesscomProfileURL.replace("|", username);
+		if(source === "Chesscom") {
+			url = config.chesscomProfileURL.replace("|", username);
 		} else if(source === "Lichess") {
-			url = settings.lichessProfileURL.replace("|", username);
+			url = config.lichessProfileURL.replace("|", username);
 		}
 		let rating = collectedUsers[i].rating;
 		output.embed.description += (i + 1) + ": **" + rating + "** " + nick +
@@ -112,19 +111,7 @@ Leaderboard.prototype.getRank = function(getNick, userID) {
 	let bulletArray = [];
 	let blitzArray = [];
 	let rapidArray = [];
-	let zhArray = [];
-	let bugArray = [];
-	let threecheckArray = [];
-	let fourplayerArray = [];
-	let antiArray = [];
-	let atomicArray = [];
-	let hordeArray = [];
-	let schessArray = [];
-	let fischerArray = [];
-	let kothArray = [];
-	let racingkingsArray = [];
-	let ultraArray = [];
-	let hyperArray = [];
+	let classicalArray = [];
 	for(let uid in this.data[serverID]) {
 		if(this.data[serverID][uid].ratings.classical) {
 			classicalArray.push(this.data[serverID][uid].ratings.classical);
@@ -162,7 +149,7 @@ Leaderboard.prototype.getRank = function(getNick, userID) {
 	let maxRating = userData.ratings.maxRating ? maxArray.indexOf(userData.ratings.maxRating)+1 : null;
 	let output = {
 		"embed": {
-			"title": "Rating positions for: " + getNick(serverID, userID),
+			"title": "Rating positions for: **" + getuser(userID).tag + "**",
 			"description": ""
 		}
 	};
