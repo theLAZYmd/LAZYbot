@@ -1,0 +1,167 @@
+{
+    "token": "[YOUR_TOKEN_HERE]",
+    "token2": "[BETA_TOKEN_HERE]",
+    "clientsecret": "[0Auth_SECRET]",
+    "dataFile": "./db.json",
+    "botID": "338772451565502474",
+    "betabotID": "422847086145568769",
+    "ownerID": [
+        "185412969130229760",
+        "372355465939779595"
+    ],
+    "avatar": "https://i.imgur.com/Yl4Xoku.jpg",
+    "background": {
+        "icons": "212225",
+        "markdown": "2f3136",
+        "chat": "36393e"
+    },
+    "text": {
+        "channels": "727671"
+    },
+    "template": {
+        "id": "",
+        "username": "",
+        "messages": 0
+    },
+    "backupdb": [
+        "Thu Apr 05 2018 00:15:50 GMT+01",
+        "Thu Apr 05 2018 00:15:50 GMT+01",
+        "Mon Apr 02 2018 14:11:19 GMT+01"
+    ],
+    "lichessProfileURL": "https://lichess.org/@/|",
+    "chesscomProfileURL": "https://www.chess.com/member/|",
+    "lichessvariants": [
+        [
+            "Ultra",
+            "ultra",
+            "ultraBullet"
+        ],
+        [
+            "Bullet",
+            "bullet",
+            "bullet"
+        ],
+        [
+            "Blitz",
+            "blitz",
+            "blitz"
+        ],
+        [
+            "Rapid",
+            "rapid",
+            "rapid"
+        ],
+        [
+            "Classical",
+            "classical",
+            "classical"
+        ],
+        [
+            "Crazyhouse",
+            "crazyhouse",
+            "crazyhouse"
+        ],
+        [
+            "3-check",
+            "threecheck",
+            "threeCheck"
+        ],
+        [
+            "Antichess",
+            "antichess",
+            "antichess"
+        ],
+        [
+            "Horde",
+            "horde",
+            "horde"
+        ],
+        [
+            "Atomic",
+            "atomic",
+            "atomic"
+        ],
+        [
+            "Chess960",
+            "chess960",
+            "chess960"
+        ],
+        [
+            "King of the Hill",
+            "koth",
+            "kingOfTheHill"
+        ],
+        [
+            "Racing Kings",
+            "racingkings",
+            "racingKings"
+        ]
+    ],
+    "chesscomvariants": [
+        [
+            "Bullet",
+            "bullet",
+            "bullet"
+        ],
+        [
+            "Blitz",
+            "lightning",
+            "lightning"
+        ],
+        [
+            "Daily",
+            "chess",
+            "chess"
+        ],
+        [
+            "Rapid",
+            "rapid",
+            "rapid"
+        ],
+        [
+            "King of the Hill",
+            "koth",
+            "kingofthehill"
+        ],
+        [
+            "Crazyhouse",
+            "crazyhouse",
+            "crazyhouse"
+        ],
+        [
+            "Bughouse",
+            "bughouse",
+            "bughouse"
+        ],
+        [
+            "Daily 960",
+            "chess960",
+            "chess960"
+        ],
+        [
+            "Live 960",
+            "livechess960",
+            "liveChess960"
+        ],
+        [
+            "Tactics",
+            "tactics",
+            "tactics"
+        ],
+        [
+            "Lessons",
+            "lessons",
+            "lessons"
+        ]
+    ],
+    "sources": [
+        [
+            "Lichess",
+            "lichess"
+        ],
+        [
+            "Chess.com",
+            "chesscom"
+        ]
+    ]
+}
