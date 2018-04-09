@@ -900,7 +900,8 @@ function prefixfunctions(message, args, command, argument) {
     if(newversion) {
       package.version = newversion;
       DataManager.setData(package, "./package.json");
-      sendgenericembed(message.channel, `${package.name} version has been ${command === "upversion" ? "upped" : "modified"} to **v.${newversion}**!`)
+      getmemberfromuser(client.user).setNickname("LAZYbot v." + newversion)
+      sendgenericembed(message.channel, `${package.name} version has been ${command === "upversion" ? "upped" : "modified"} to **v.${newversion}**!`);
     } else {
       senderrormessage(message.channel, `No version specified.`);
     }
@@ -1922,12 +1923,14 @@ function getprofile(user) {
       userprofile[source] = parsesourceprofiles(dbuser, source);
     };
   };
-  let info = fieldhandler([["Age: ", dbuser.age], ["Sex: ", dbuser.sex ? (getemojifromname(dbuser.sex) ? getemojifromname(dbuser.sex) : dbuser.sex) : ""], ["Location: ", dbuser.location], ["Region: ", region]])
+  let info = fieldhandler([["Age: ", dbuser.age], ["Sex: ", dbuser.sex ? (getemojifromname(dbuser.sex) ? getemojifromname(dbuser.sex) : dbuser.sex) : ""], ["Location: ", dbuser.location], ["Region: ", region]]);
   let ids = fieldhandler([["UID: ", "`" + user.id + "`", false], ["Position in Database: ", dbindex]])
   let joined = fieldhandler([["Discord: ", getISOtime(user.createdTimestamp).slice(4, 15)],[`${guild.name}: `, getISOtime(member.joinedTimestamp).slice(4, 15)]])
   let trophies = dbuser.trophy ? fieldhandler(dbuser.trophy, ":trophy: ", true) : "";
   let roles = rolelist ? fieldhandler(rolelist, "") : "" ;
   let modnotes = dbuser.modnotes ? fieldhandler(dbuser.modnotes, "") : "" ;
+  console.log(user.username);
+  let aliases = fieldhandler([member.nickname ? member.nickname : "", dbuser.lichess && dbuser.lichess.toLowerCase() !== user.username.toLowerCase() ? dbuser.lichess : "", dbuser.chesscom && dbuser.chesscom.toLowerCase() !== user.username.toLowerCase() ? dbuser.chesscom : ""], "", true);
   if(dbindex === 1) {medal = ":first_place: **First in Database.**"}
   if(dbindex === 2) {medal = ":second_place: **Second in Database.**"}
   if(dbindex === 3) {medal = ":third_place: **Third in Database.**"}
@@ -1935,15 +1938,15 @@ function getprofile(user) {
   embedoutput.author = embedauthor(`Profile for ${user.tag}`, user.bot ? "https://i.imgur.com/9kS9kxb.png" : "")
   embedoutput.description = (dbuser.finger ? "```" + dbuser.finger + "```" : "") + (dbuser.modnotes ? "```diff\n-mod notes\n" + dbuser.modnotes + "```" : "");
   embedoutput.color = member.displayColor;
-  embedoutput.thumbnail = embedthumbnail (user.avatarURL)
-  if(member.nickname) {addfield("a.k.a.", member.nickname, false)}
+  embedoutput.thumbnail = embedthumbnail (user.avatarURL);
+  if(aliases) {addfield("a.k.a.", aliases, false)}
   if(info) {addfield((dbuser.modverified ? " " + getemojifromname(dbuser.modverified[0]) : "") + "Info", info, true)}
   addfield(`Joined Date`, joined, info ? true: false);
   addfield("Index", ids, dbuser.messages ? true : false);
   if(dbuser.messages) {addfield("Messages Sent", dbuser.messages.toLocaleString(), true)}
   for(let i = 0; i < config.sources.length; i++) {
-  let source = config.sources[i][1];
-  if(dbuser[source]) {addfield(`${getemojifromname(source)} ${config.sources[i][0]}`, `${userprofile[source]}\n${ratinglist[source]}`, true)}
+    let source = config.sources[i][1];
+    if(dbuser[source]) {addfield(`${getemojifromname(source)} ${config.sources[i][0]}`, `${userprofile[source]}\n${ratinglist[source]}`, true)}
   };
   if(dbuser.lastmessage) {addfield("Last Message", lastmessage, false)}
   // addfield ("Roles", roles ? roles : "None", true)
@@ -1971,13 +1974,13 @@ function fieldhandler(array, messageconstant, boolean) {
   if(messageconstant === undefined) {
     for(let i = 0; i < array.length; i++) {
       if(array[i][1] || array[i][1] === 0) {
-        string += array[i][2] === false ? array[i][0] + array[i][1] + (i < array.length -1 ? `\n` : `` ) : array[i][0] + "**" + array[i][1] + "**" + (i < array.length -1 ? `\n` : ``);
+        string += (array[i][2] === false ? array[i][0] + array[i][1] + (i < array.length -1 ? `\n` : `` ) : array[i][0] + "**" + array[i][1] + "**" + (i < array.length -1 ? `\n` : ``));
       }
     }
   } else {
     for(let i = 0; i < array.length; i++) {
       if(array[i]) {
-        string += boolean === true ? messageconstant + "**" + array[i] + "**" + (i < array.length -1 ? `\n` : ``) : messageconstant + array[i] + (i < array.length -1 ? `\n` : ``);
+        string += (boolean === true ? messageconstant + "**" + array[i] + "**" + (i < array.length -1 ? `\n` : ``) : messageconstant + array[i] + (i < array.length -1 ? `\n` : ``));
       }
     }
   }
