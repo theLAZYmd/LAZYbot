@@ -1,0 +1,37 @@
+{
+    "guides": {
+        "zh": {
+            "title": "House Guide to Crazyhouse",
+            "description": "\n__**ABOUT**__\n\n<#390259605529427969>\n\n**Crazyhouse** (ZH) is a chess variant in which an opponent's captured pieces can be dropped back on the board instead of moving a piece. Crazyhouse is a variant similar to bughouse chess, but with only two players.\n\nOther names for this variant are drop chess, mad chess, reinforcement chess, turnabout chess and schizo-chess. It’s also known as wild 23. \n\n__**RULES**__\n\nAll the rules and conventions of standard chess apply, with the addition of drops, as explained below.\n\n • A captured piece reverses colour and goes to the capturing player's pocket. At any time, instead of making a move with a piece on the board, a player can drop a piece from their pocket onto an empty square on the board.\n• Drops resulting in immediate checkmate are permitted.\n• Pawns may not be dropped on the players' 1st or 8th ranks.\n• Promoted but captured pawns are dropped as pawns.\n\nRules-page on lichess with video: https://lichess.org/variant/crazyhouse\n\n__**WHERE?**__\n\n● [lichess.org](https://lichess.org)\n● [chess.com](https://chess.com)\n● [Free Internet Chess Server](http://www.freechess.org/)\n● [Internet Chess Club](https://www.chessclub.com/)\n  \nYou can simply type `... zh` followed by a number to navigate through our pages, alternatively:\n\n`... zh improve` to see our complied material on how to improve.\n`... zh material` to see our explanations of zh piece material.\n`... zh strategy` to see a list of common zh strategies.\n`... zh videos` to see some of the best zh video guides.\n\nCompiled by MMichael#3973\n",
+            "color": 14841132,
+            "footer": {
+                "text": "Page 1 of 5. \"... zh material\" to see next page."
+            },
+            "thumbnail": {
+                "url": "https://i.imgur.com/pMkkATk.png"
+            }
+        }
+    },
+    "utility": {
+        "dbpositions": {
+            "title": "House Database Positions",
+            "description": "Greetings! You may have noticed on your profile there's a little database number. That corresponds to your index in the db that registers all the cool functions relating to you. When loading your DB profile, the bot takes the first 'you' it comes across. So being higher up in the db means:\n\n• **Commands are slightly more likely to work for you.**\n\nIn addition to the other advantages:\n\n**• Can be seen when someone uses `!positions`.\n• Cool medal your profile `!profile`.\n• Better, more important, unique number.\n• 'Higher' than everyone else.**\n\nBasically, people with higher-up numbers are just *better*. There is a process to change your DB position.",
+            "color": 16738560,
+            "fields": [
+                {
+                    "name": "Bid Amounts",
+                    "value": "You can bid for a position using:\n\n`.give [bid amount] theLAZYmd#2353 Database Position [desired position]`\n\nFor example:\n\n`.give 100 theLAZYmd#2353 Database Position 1`\n\nThe amount which you bid for a position is saved as your 'bid amount.'",
+                    "inline": true
+                },
+                {
+                    "name": "Buying",
+                    "value": "Using that command challenges another member for their [desired position] in the database. If successful, you will swap places.\nSuccess only comes if your total bid amount, the amount you just bid + any *consolidated* amounts, is greater than their amount. Upon success, your bid will be used to cancel out their sum and the remainder will become your new conslidated amount. If your total bid is lower, then your bid will be used to cancel out their sum and that's it."
+                },
+                {
+                    "name": "Consolidating",
+                    "value": "It is therefore wise to secure your position by consolidating your position. Do that by:\n\n`.give 100 theLAZYmd#2353 Database Consolidate`\n\nCheck anyone's consolidated amounts by `!bidamount [user]`, `!position [user]`, and `!positions`."
+                }
+            ]
+        }
+    }
+}

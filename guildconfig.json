@@ -1,0 +1,151 @@
+{
+    "guild": "314155682033041408",
+    "testingmodeboolean": true,
+    "updateDelay": 15000,
+    "ratings": [
+        1000,
+        1000,
+        1300,
+        1500,
+        1700,
+        1900,
+        2000,
+        2100,
+        2200,
+        2300,
+        2400,
+        2500
+    ],
+    "prefixes": {
+        "prefix": "!",
+        "nadeko": "."
+    },
+    "ids": {
+        "bouncer": "365933164725534722",
+        "nadeko": "116275390695079945",
+        "harmon": "160677293252018177"
+    },
+    "channels": {
+        "announcements": "announcements",
+        "bot": "spam",
+        "bot2": "devs",
+        "mod": "test-channel-in-use",
+        "log": "comment-log",
+        "join": "join",
+        "leave": "off-topic",
+        "live": "live"
+    },
+    "colors": {
+        "generic": 53380,
+        "error": 15406156,
+        "ratings": 9359868
+    },
+    "roles": {
+        "bot": "Bot-In-Use",
+        "muted": "muted",
+        "unranked": "unranked",
+        "league": "league",
+        "arena": "arena",
+        "beta": "eikabottester",
+        "livenotifications": "subs"
+    },
+    "unrankedRoleName": "Unranked",
+    "leagueRoleName": "League",
+    "arenaRoleName": "Arena",
+    "acceptedlinkdomains": [
+        "http://lichess.org",
+        "http://www.chess.com",
+        "http://bughousetest.com",
+        "https://lichess.org",
+        "https://www.chess.com",
+        "https://bughousetest.com"
+    ],
+    "regions": [
+        "Americas",
+        "Europe",
+        "Middle East / Africa",
+        "Asia / Australia"
+    ],
+    "cr": [],
+    "er": [
+        [
+            "lazy",
+            "lazy",
+            false
+        ],
+        [
+            "cubes",
+            "cubes",
+            true
+        ],
+        [
+            "obi",
+            "obi",
+            false
+        ],
+        [
+            "feelsbadman",
+            "feelsbadman",
+            false
+        ],
+        [
+            "seemsgood",
+            "seemsgood",
+            false
+        ],
+        [
+            "pogchamp",
+            "pogchamp",
+            false
+        ],
+        [
+            "lul",
+            "lul",
+            false
+        ],
+        [
+            "ban",
+            "banhammer",
+            false
+        ]
+    ],
+    "ee": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+    ],
+    "oldcount": 0,
+    "shadowbanned": [
+        [
+            "372355465939779595",
+            false
+        ]
+    ],
+    "keys": [
+        "4BoWj5iOvl",
+        "cW3dWanthf",
+        "W4FXkBlQTE",
+        "LKVSe6pNej",
+        "r2MTjadKZr",
+        "lsJlWqyZBt"
+    ],
+    "tickets": [
+        {
+            "user": "TestAccountforLAZY#6291",
+            "amount": "test",
+            "reason": "test",
+            "messageid": "432694555717140481"
+        },
+        {
+            "id": "273152076421529601",
+            "user": "bureky#7827",
+            "amount": "5",
+            "reason": "atest",
+            "messageid": "432866912960118784"
+        }
+    ]
+}
