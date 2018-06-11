@@ -1,60 +1,42 @@
-const config = require("./config.js");
+const config = require("./config.json");
 const DataManagerConstructor = require("./datamanager.js");
 const DataManager = new DataManagerConstructor(config.dataFile);
 
-function Leaderboard(config) {
+function Leaderboard(server, config) {
 	this.data = DataManager.getData();
-	this.page = config.page || 1;
-	this.type = config.type || null;
+	//this.server = server;
+	//this.page = config.page || 1;
+	//this.type = config.type || null;
 }
-Leaderboard.prototype.getList = function(getNick) {
-	let collectedUsers = [];
-	let users = this.data;
-	for(userID in users) {
-		let ratingData = users[userID].ratings;
-		let ratingObj = {};
-		if(this.type === "Classical") {
-			ratingObj.rating = ratingData.classical;
-			ratingObj.type = "Classical";
-		} else if(this.type === "Rapid") {
-			ratingObj.rating = ratingData.rapid;
-			ratingObj.type = "Rapid";
-		} else if(this.type === "Blitz") {
-			ratingObj.rating = ratingData.blitz;
-			ratingObj.type = "Blitz";
-		} else if(this.type === "Bullet") {
-			ratingObj.rating = ratingData.bullet;
-			ratingObj.type = "Bullet";
-		} else {
-			ratingObj.rating = ratingData.maxRating;
-			if(ratingData.classical === ratingData.maxRating) {
-				ratingObj.type = "Classical";
-			} else if(ratingData.rapid === ratingData.maxRating) {
-				ratingObj.type = "Rapid";
-			} else if(ratingData.blitz === ratingData.maxRating) {
-				ratingObj.type = "Blitz";
-			} else if(ratingData.bullet === ratingData.maxRating) {
-				ratingObj.type = "Bullet";
-			} 
-		}
-		ratingObj.username = users[userID].username;
-		ratingObj.source = users[userID].source;
-		ratingObj.userID = userID;
-		ratingObj.serverID = serverID;
-		
-		if(ratingObj.rating) {
-			collectedUsers.push(ratingObj);
-		}
-	}
 
-	if(collectedUsers.length === 0) {
-		return "Nobody found.";
-	}
+Leaderboard.prototype.getList = function(guild, variant, source, active) {
+  let tally = DataManager.getData();
+  console.log(variant, source, active);
+  let sourceratings = source + "ratings";
+  let leaderboard = {};
+  leaderboard.source = source;
+  leaderboard.variant = variant;
+  leaderboard.active = active;
+  leaderboard.list = [];
+	for(let i = 0; i < tally.length; i++) {
+    let dbuser = tally[i];
+    let entry = {};
+    if(active && (!dbuser.lastmessagedate || Date.now() - dbuser.lastmessagedate > 604800000)) return;
+    if(dbuser[source] && dbuser[sourceratings] && dbuser[sourceratings][variant] && !dbuser[sourceratings][variant].endsWith("?")) {
+      entry.username = dbuser[source];
+      entry.userid = dbuser.id;
+      entry.rating = dbuser[sourceratings][variant];
+      leaderboard.list.push(entry);
+    }
+  };
+  if(leaderboard.length === 0) return;
+	leaderboard.list.sort(function(a, b) {
+		return parseInt(b.rating) - parseInt(a.rating);
+  });
+  return leaderboard;
+};
 
-	collectedUsers.sort(function(a, b) {
-		return b.rating - a.rating;
-	});
-
+/*
 	let perPage = 10;
 	let pages = Math.ceil(collectedUsers.length / perPage);
 	if(this.page > pages) {
@@ -73,18 +55,17 @@ Leaderboard.prototype.getList = function(getNick) {
 	let endPos = startPos + perPage;
 	let userMaxType = null;
 	for(let i = startPos; i < collectedUsers.length && i < endPos; i++) {
-		let user = getuser(collectedUsers[i].userID);
-		let nick = getmemberfromuser(user).nickname;
-		let username = user.username;
+		let nick = getNick(collectedUsers[i].serverID, collectedUsers[i].userID);
+		let username = collectedUsers[i].username;
 		let source = collectedUsers[i].source;
 		if(this.type === null) {
 			userMaxType = collectedUsers[i].type;
 		}
 		let url = null;
 		if(source === "Chesscom") {
-			url = config.chesscomProfileURL.replace("|", username);
+			url = settings.chesscomProfileURL.replace("|", username);
 		} else if(source === "Lichess") {
-			url = config.lichessProfileURL.replace("|", username);
+			url = settings.lichessProfileURL.replace("|", username);
 		}
 		let rating = collectedUsers[i].rating;
 		output.embed.description += (i + 1) + ": **" + rating + "** " + nick +
@@ -93,6 +74,8 @@ Leaderboard.prototype.getList = function(getNick) {
 
 	return output;
 };
+
+*/
 
 Leaderboard.prototype.getRank = function(getNick, userID) {
 	let userData = null;
@@ -149,7 +132,7 @@ Leaderboard.prototype.getRank = function(getNick, userID) {
 	let maxRating = userData.ratings.maxRating ? maxArray.indexOf(userData.ratings.maxRating)+1 : null;
 	let output = {
 		"embed": {
-			"title": "Rating positions for: **" + getuser(userID).tag + "**",
+			"title": "Rating positions for: " + getNick(serverID, userID),
 			"description": ""
 		}
 	};
