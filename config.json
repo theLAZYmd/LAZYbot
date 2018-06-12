@@ -1,0 +1,283 @@
+{
+    "token": "NDIyODQ3MDg2MTQ1NTY4NzY5.DYhukg.ufLcCpYSHZlfh-eepWyCkXqq0c4",
+    "token2": "MzM4NzcyNDUxNTY1NTAyNDc0.DZxhoQ.aymib8jmg7u7sO2dDu_bfugCwFg",
+    "dataFile": "./db.json",
+    "guildFile": "./guildconfig.json",
+    "houseid": "314155682033041408",
+    "ids": {
+        "bot": "338772451565502474",
+        "betabot": "422847086145568769",
+        "bouncer": "365933164725534722",
+        "nadeko": "116275390695079945",
+        "harmon": "160677293252018177",
+        "owner": [
+            "185412969130229760",
+            "372355465939779595"
+        ]
+    },
+    "colors": {
+        "generic": 53380,
+        "error": 15406156,
+        "ratings": 9359868
+    },
+    "avatar": "https://i.imgur.com/Yl4Xoku.jpg",
+    "background": {
+        "icons": "212225",
+        "markdown": "2f3136",
+        "chat": "36393e"
+    },
+    "text": {
+        "channels": "727671"
+    },
+    "dbtemplate": {
+        "id": "313428408107532289",
+        "username": "PurelySmart#7674",
+        "messages": 0
+    },
+    "servertemplate": {
+        "id": "",
+        "testingmodeboolean": false,
+        "ratings": [],
+        "prefixes": {
+            "prefix": "!",
+            "nadeko": "."
+        },
+        "channels": {
+            "announcements": "",
+            "bot": "",
+            "bot2": "",
+            "mod": "",
+            "log": "",
+            "join": "",
+            "leave": "",
+            "live": ""
+        },
+        "colors": {
+            "generic": "",
+            "error": "",
+            "ratings": ""
+        },
+        "roles": {
+            "bot": "",
+            "muted": "",
+            "unranked": "",
+            "league": "",
+            "arena": "",
+            "beta": "",
+            "livenotifications": ""
+        },
+        "acceptedlinkdomains": [],
+        "regions": [],
+        "cr": [],
+        "er": [],
+        "oldcount": 0,
+        "shadowbanned": [],
+        "keys": []
+    },
+    "backupdb": [
+        "Tue May 22 2018 23:21:24 GMT+01",
+        "Mon Apr 16 2018 21:23:16 GMT+00",
+        "Mon Apr 16 2018 19:23:16 GMT+00"
+    ],
+    "updateDelay": 15000,
+    "lichessProfileURL": "https://lichess.org/@/|",
+    "chesscomProfileURL": "https://www.chess.com/member/|",
+    "bughousetestProfileURL": "http://bughousetest.com/@/|",
+    "lichessvariants": [
+        [
+            "Ultra",
+            "ultra",
+            "ultraBullet",
+            "ultra",
+            "ultra"
+        ],
+        [
+            "Bullet",
+            "bullet",
+            "bullet",
+            "chess",
+            "thehouse"
+        ],
+        [
+            "Blitz",
+            "blitz",
+            "blitz",
+            "blitz",
+            "thehouse"
+        ],
+        [
+            "Rapid",
+            "rapid",
+            "rapid",
+            "rapid",
+            "thehouse"
+        ],
+        [
+            "Classical",
+            "classical",
+            "classical",
+            "classical",
+            "thehouse"
+        ],
+        [
+            "Crazyhouse",
+            "crazyhouse",
+            "crazyhouse",
+            "zh",
+            "crazyhouse"
+        ],
+        [
+            "3-check",
+            "threecheck",
+            "threeCheck",
+            "3-check",
+            "3check"
+        ],
+        [
+            "Antichess",
+            "antichess",
+            "antichess",
+            "anti",
+            "anti"
+        ],
+        [
+            "Horde",
+            "horde",
+            "horde",
+            "horde",
+            "horde"
+        ],
+        [
+            "Atomic",
+            "atomic",
+            "atomic",
+            "atomic",
+            "atomic"
+        ],
+        [
+            "Chess960",
+            "chess960",
+            "chess960",
+            "960",
+            "960"
+        ],
+        [
+            "King of the Hill",
+            "koth",
+            "kingOfTheHill",
+            "koth",
+            "koth"
+        ],
+        [
+            "Racing Kings",
+            "racingkings",
+            "racingKings",
+            "racingkings",
+            "racingkings"
+        ]
+    ],
+    "chesscomvariants": [
+        [
+            "Bullet",
+            "bullet",
+            "bullet",
+            "bullet",
+            "thehouse"
+        ],
+        [
+            "Blitz",
+            "lightning",
+            "lightning",
+            "blitz",
+            "thehouse"
+        ],
+        [
+            "Daily",
+            "chess",
+            "chess",
+            "chess",
+            "thehouse"
+        ],
+        [
+            "Rapid",
+            "rapid",
+            "rapid",
+            "rapid"
+        ],
+        [
+            "King of the Hill",
+            "koth",
+            "kingofthehill",
+            "koth"
+        ],
+        [
+            "Crazyhouse",
+            "crazyhouse",
+            "crazyhouse",
+            "zh",
+            "crazyhouse"
+        ],
+        [
+            "Bughouse",
+            "bughouse",
+            "bughouse",
+            "bug",
+            "bughouse"
+        ],
+        [
+            "Daily 960",
+            "chess960",
+            "chess960",
+            "960",
+            "960"
+        ],
+        [
+            "Live 960",
+            "livechess960",
+            "liveChess960",
+            "live960",
+            "960"
+        ],
+        [
+            "Tactics",
+            "tactics",
+            "tactics",
+            "tactics",
+            "chesscom"
+        ],
+        [
+            "Lessons",
+            "lessons",
+            "lessons",
+            "lessons",
+            "chesscom"
+        ]
+    ],
+    "bughousetestvariants": [
+        [
+            "Bughouse",
+            "bughouse",
+            "bughouse",
+            "bug",
+            "bughouse"
+        ]
+    ],
+    "sources": [
+        [
+            "Lichess",
+            "lichess"
+        ],
+        [
+            "Chess.com",
+            "chesscom"
+        ],
+        [
+            "BughouseTest.com",
+            "bughousetest"
+        ]
+    ],
+    "fenBoard": "icy_sea",
+    "fenBoardPieces": "alpha",
+    "fenBoardCoords": 0,
+    "fenBoardSize": 2
+}
