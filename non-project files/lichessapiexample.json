@@ -1,0 +1,135 @@
+{
+    "id": "variantsonly",
+    "username": "VariantsOnly",
+    "online": false,
+    "perfs": {
+      "chess960": {
+        "games": 14,
+        "rating": 2159,
+        "rd": 116,
+        "prog": 104,
+        "prov": true
+      },
+      "blitz": {
+        "games": 5,
+        "rating": 1918,
+        "rd": 165,
+        "prog": 0,
+        "prov": true
+      },
+      "kingOfTheHill": {
+        "games": 158,
+        "rating": 2177,
+        "rd": 68,
+        "prog": -45
+      },
+      "crazyhouse": {
+        "games": 363,
+        "rating": 2259,
+        "rd": 76,
+        "prog": -46
+      },
+      "threeCheck": {
+        "games": 24,
+        "rating": 2216,
+        "rd": 84,
+        "prog": -98
+      },
+      "antichess": {
+        "games": 5,
+        "rating": 1799,
+        "rd": 181,
+        "prog": 0,
+        "prov": true
+      },
+      "bullet": {
+        "games": 0,
+        "rating": 1500,
+        "rd": 350,
+        "prog": 0,
+        "prov": true
+      },
+      "correspondence": {
+        "games": 0,
+        "rating": 1500,
+        "rd": 350,
+        "prog": 0,
+        "prov": true
+      },
+      "horde": {
+        "games": 9,
+        "rating": 2248,
+        "rd": 132,
+        "prog": 0,
+        "prov": true
+      },
+      "atomic": {
+        "games": 18,
+        "rating": 1856,
+        "rd": 111,
+        "prog": -106,
+        "prov": true
+      },
+      "racingKings": {
+        "games": 9,
+        "rating": 1694,
+        "rd": 154,
+        "prog": 0,
+        "prov": true
+      },
+      "classical": {
+        "games": 0,
+        "rating": 1500,
+        "rd": 350,
+        "prog": 0,
+        "prov": true
+      },
+      "rapid": {
+        "games": 0,
+        "rating": 1500,
+        "rd": 350,
+        "prog": 0,
+        "prov": true
+      },
+      "ultraBullet": {
+        "games": 643,
+        "rating": 2382,
+        "rd": 75,
+        "prog": -168
+      }
+    },
+    "createdAt": 1518017289820,
+    "profile": {
+      "country": "SC"
+    },
+    "seenAt": 1522528118833,
+    "playTime": {
+      "total": 112820,
+      "tv": 48456
+    },
+    "language": "nl-NL",
+    "url": "https:\/\/lichess.org\/@\/variantsonly",
+    "playing": "https:\/\/lichess.org\/ZrPd3LoX\/black",
+    "nbFollowing": 0,
+    "nbFollowers": 46,
+    "completionRate": 93,
+    "count": {
+      "all": 1270,
+      "rated": 1248,
+      "ai": 11,
+      "draw": 11,
+      "drawH": 11,
+      "loss": 299,
+      "lossH": 289,
+      "win": 960,
+      "winH": 959,
+      "bookmark": 3,
+      "playing": 1,
+      "import": 1,
+      "me": 1
+    },
+    "followable": true,
+    "following": false,
+    "blocking": false,
+    "followsYou": false
+  }

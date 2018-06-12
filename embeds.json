@@ -1,0 +1,435 @@
+{
+    "guides": {
+        "zh": [
+          {
+            "title": "House Guide to Crazyhouse",
+            "description": "\n__**ABOUT**__\n\n#zh\n\n**Crazyhouse** (ZH) is a chess variant in which an opponent's captured pieces can be dropped back on the board instead of moving a piece. Crazyhouse is a variant similar to bughouse chess, but with only two players.\n\nOther names for this variant are drop chess, mad chess, reinforcement chess, turnabout chess and schizo-chess. It’s also known as wild 23. \n\n__**RULES**__\n\nAll the rules and conventions of standard chess apply, with the addition of drops, as explained below.\n\n • A captured piece reverses colour and goes to the capturing player's pocket. At any time, instead of making a move with a piece on the board, a player can drop a piece from their pocket onto an empty square on the board.\n• Drops resulting in immediate checkmate are permitted.\n• Pawns may not be dropped on the players' 1st or 8th ranks.\n• Promoted but captured pawns are dropped as pawns.\n\nRules-page on lichess with video: https://lichess.org/variant/crazyhouse\n\n__**WHERE?**__\n\n● [lichess.org](https://lichess.org)\n● [chess.com](https://chess.com)\n● [Free Internet Chess Server](http://www.freechess.org/)\n● [Internet Chess Club](https://www.chessclub.com/)",
+            "color": 14841132,
+            "thumbnail": {
+              "url": "https://i.imgur.com/pMkkATk.png"
+            }
+          },
+          {
+            "title": "House Guide to Crazyhouse",
+            "description": "**__IMPROVE__**\n\nCrazyhouse is a fast-paced game that needs strong tactics and a good awareness of positional weaknesses. Unlike regular chess, draws are rare because new pieces keep being reintroduced to the board. Check out [crosky’s crazyhouse overview](http://bit.ly/2FfYYMX).\n\n• As GM Yasser Seirawan would say, **king safety** comes first and foremost. Ensure that your king's position is safe from attack; this does not necessarily imply castling – dropping pieces around your king can effectively guard it from serious threats.\n\n• **Develop** your pieces in the opening and **control key squares**, especially around your king.\n\n• Beware of **holes** in your position. A hole provides an opening for an opponent's piece which can lead to a strong attack. If pieces do enter, chase them away and secure your position. As helmsknight would say, “get out of my house!” Similarly, seek to exploit any holes your opponent leaves in their position.\n\n• Beware of **piece sacs** on [f2/f7](https://youtu.be/kZPSNF8XHQI) or [g2/g7](https://youtu.be/6Gh2n9kWdb8), especially if the opponent has many pieces in hand.\n\n• Often the best defence is **attack**, as any mating sequence threatened must be dealt; the majority of crazyhouse moves have an **attacking purpose**. As Vempele says, the best defence against @h3 might be @h6. Launch counter-attacks that are faster and cannot be ignored.\n\n• **Initiative** is more important than material. If a player has initiative they can drop their pieces in hand with check and threats and dominate the board. It’s important to utilise positional dominance because if the initiative runs out, the opponent can take back initiative with pieces in hand and reassert control.",
+            "color": 14841132,
+            "thumbnail": {
+              "url": "https://i.imgur.com/pMkkATk.png"
+            }
+          },
+          {
+            "title": "House Guide to Crazyhouse",
+            "description": "**__MATERIAL__**\n\n• **Pawns** are more valuable than in regular chess, because they can be dropped anywhere on the board including the seventh rank. A minor pieces can be happily traded for 2 pawns in most situations. Unlike chess, **Doubled Pawns** are less of a weakness because pawn structures can be fixed with pawns in hand, and a doubled pawn can even be a strength because it controls squares of both colours. \n\n• **Knights** are wonderful attackers because their threats can’t be blocked [...].\n\n• **Bishops** are strong defenders as they cover diagonals going backwards as well as forwards. A Bishop on g2, for instance, is able to take on h3 and still cover g2. They can also be good attackers because they control channels of a single colour. Pawns and Bishops are known as **\"diags”** because they can penetrate an opponent position along diagonals of a single colour. If all your pawns are on light squares for example, you must take care to defend dark square weaknesses. For more on the importance of colour complexes, check out [mastertan’s visual guide](http://bit.ly/2FQmVZn).\n\n• **Rooks** are useful to defend and attack open files. Dropping a rook on the back rank with check is a good way to force an opponent to “waste” a piece; combined with a pawn drop on the 7th exploiting the pin, this combination can have lethal effect. Rooks are often sacked on the backrank promoting a pawn to remove defenders. [Example](https://lichess.org/yUwqzUBO/black#27).\n\n• **Queens** are worth less in crazyhouse than in normal chess, because they can be hit with a tempo by minors, especially when dropped. Crazyhouse favors numeracy in pieces; a Bishop and Knight in hand have more versatility than a Queen. In general, Queens are worth about 2 minors.",
+            "color": 14841132,
+            "thumbnail": {
+              "url": "https://i.imgur.com/pMkkATk.png"
+            }
+          },
+          {
+            "title": "House Guide to Crazyhouse",
+            "description": "**__STRATEGY__**\n\n• Crazyhouse is still chess, so **common chess tactics** still apply: try not to hang pieces or block in your own pieces; trap opponent pieces and use forks, pins and discovered checks. Because pieces can land anywhere on the board, one must be even more alert.\n\n• **Defending**. Under heavy attack, it is important to evaluate your position. You usually have three options: **First**, you could take your opponent’s attackers, try to stay safe and hope the attack exhausts itself and they run out of material. You might try to limit the flow of exchanges to give time to get the king safe and not give pieces that the opponent needs to mate you. **Second**, if a sacrifice is too dangerous to take, you could focus on defending, dropping pieces near your king to cover important squares. One could also make luft, giving the king a flight path, or a safe square it can fall back or run up to. **The third option** is to ignore the threat and start an attack of your own: if you are the one getting to the opponent’s king first, go for it! Going all in can also be a last resort hoping your opponent makes a mistake.\n\n• **Attacking**. To keep initiative, it is common for mating sequences to comprise purely of checks: [drawing the king out and/or cornering it](https://goo.gl/QLp4DY), [picking up pieces needed for mate](https://goo.gl/uNPKqG), [cutting off escape squares](https://goo.gl/2okT35), [luring the king to a mating square](https://goo.gl/Dd4BvF), [deflecting defending pieces](https://goo.gl/hX6Q85), and [opening up a file, diagonal or key square](https://goo.gl/AqLN86).\n\n• It is important to be familiar with [common mating patterns](https://goo.gl/7ejioW).",
+            "color": 14841132,
+            "thumbnail": {
+              "url": "https://i.imgur.com/pMkkATk.png"
+            }
+          },
+          {
+            "title": "House Guide to Crazyhouse",
+            "description": "**__VIDEOS__**\n\nStreaming chess has become more popular in the past few years and crazyhouse has shared the fruits of this growing trend. The House presents to you the best and most famous streamers of crazyhouse.\n\n• **JannLee**: [YouTube](<https://www.youtube.com/channel/UCbo8-5AEH7u3lE-yOGeNW1Q>), [Twitch](<https://www.twitch.tv/jannleecrazyhouse>).\n• **Nikolas Theiss**: [YouTube](<https://www.youtube.com/channel/UCsjRN9g1AYODJZOPVJKzUmw/>), [Twitch](<https://www.twitch.tv/nikolastheiss>).\n• **Thomas Crosky**: [YouTube](<https://www.youtube.com/channel/UCvowgcm56sLguWxYp8oqI1w>).\n• **Helmsknight**: [YouTube](<https://www.youtube.com/channel/UCcKXwA_lo3Zpz3_Mc-WVLtw>), [Twitch](<https://www.twitch.tv/helmsknight>).\n• **Okei**: [Twitch](<https://www.twitch.tv/okeizh>).\n• **Mugwort**: [YouTube](https://www.youtube.com/channel/UCNMhNQybeLGJHWJv5qT1liQ), [Twitch](https://www.twitch.tv/mugwortcrazyhouse).\n  \nWant your stream to appear here? Let the mods know.\nWhat to create a bio page for your stream? Type `... embedex` and design yourself a page; alternatively send one of the mods the details you want to be included.",
+            "color": 14841132,
+            "thumbnail": {
+              "url": "https://i.imgur.com/pMkkATk.png"
+            }
+          }
+        ],
+        "bug": [
+          {
+            "title": "House Guide to Bughouse",
+            "description": "__**ABOUT**__\n\n**Bughouse** (Bug) chess is a chess variant played on two chessboards by four players in teams of two. The game is usually played at a fast time control; this, together with the passing and dropping of pieces, can make the game look chaotic and random to the casual onlooker; hence the name bughouse, which is slang for mental hospital.\n\nBughouse chess is often called as its abbreviation bug. Other names for this variant are exchange chess, siamese chess, tandem chess, transfer chess, double bughouse, cross chess, swap chess or simply bughouse. It’s also known as wild 24.\n\n__**RULES**__\n\nNormal chess rules apply on bughouse, except that captured pieces on one board are passed on to the teammate on the other board, who then has the option of putting these pieces on his or her board. On any given move, you can either make a normal move, or \"drop\" a piece. You can only drop pieces that you have in hand, from your partner's captures.\n\n__**WHERE?**__\n\nBughouse can be played on..\n\n● [Free Internet Chess Server](http://www.freechess.org/)\n● [bughousetest.com](http://bughousetest.com)\n● [chess.com](http://chess.com)\n\nCompiled by @MMichael#3973",
+            "color": 14841132,
+            "thumbnail": {
+              "url": "https://i.imgur.com/L3HgngE.png"
+            }
+          },
+          {
+            "title": "House Guide to Bughouse",
+            "description": "__**IMPROVE **__\n\nThe guides on the next page will tell you extensively about bughouse strategies, this is only a brief foreword. According to my own experience, the most common novice mistakes are:\n\n• Ignoring the **partner's board**: usually related to deciding whether to trade pieces or not.\n\n• Not utilizing the **uptime**: the clocks are extremely important:  to avoid trades of certain pieces or to wait for certain pieces.\n\n• Not **communicating**: it's very important to communicate with your partner, in some move the queen trade can be mating for you, in other move the trade can be fatal for you.\n\n• Missing **in-between** moves: bishop fork checking the king and attacking a hanging piece is the most common.\n\n• Giving up the **initiative/check**: if the clocks are even and both players are attacking each other, either giving checks or executing 1-move-threats are very useful in order to force your opponent on defensive foot.",
+            "color": 14841132,
+            "thumbnail": {
+              "url": "https://i.imgur.com/L3HgngE.png"
+            }
+          },
+          {
+            "title": "House Guide to Bughouse",
+            "description": "__**GUIDES**__\n\nWritten guides by some of the most prolific bughouse players. View the next page to see training videos and advice.\n\n• **Sorsi:** [Multiple blog posts](https://www.chess.com/blog/Sorsi)\n\n• **Minigreat:** [Multiplie blog posts](https://www.chess.com/blog/MiniGreat)\n\n• **420Blaziken_it:** [Bughouse concepts](http://bit.ly/2tempBu) about speed, efficiently, defending, activity, and looking at partner's board.\n\n• **ChickenCrossRoad:** [Bughouse concepts](http://bit.ly/2F8FEly) about speed, communication,  move quality, material, and timing.",
+            "color": 14841132,
+            "thumbnail": {
+              "url": "https://i.imgur.com/L3HgngE.png"
+            }
+          },
+          {
+            "title": "House Guide to Bughouse",
+            "description": "**__VIDEOS__**\n\nThe House presents to you the best and most famous streamers of bughouse.\n\n• **JannLee**: [Youtube](<https://www.youtube.com/channel/UCbo8-5AEH7u3lE-yOGeNW1Q>), [Twitch](https://www.twitch.tv/jannleecrazyhouse).\n\n• **Nikolas Theiss**: [Youtube](https://www.youtube.com/channel/UCsjRN9g1AYODJZOPVJKzUmw/), [Twitch](https://www.twitch.tv/nikolastheiss).\n\n• **Thomas Crosky**: [Youtube](https://www.youtube.com/channel/UCvowgcm56sLguWxYp8oqI1w).\n\n• **Helmsknight**: [Youtube](https://www.youtube.com/channel/UCcKXwA_lo3Zpz3_Mc-WVLtw), [Twitch](https://www.twitch.tv/helmsknight).\n\n• **okeizh**: [Twitch](https://www.twitch.tv/okeizh). \n\n• **Addy**: [Twitch](https://www.twitch.tv/drunkenmushy)\n\n• **Chuck Moulton**: [Twitch](https://www.twitch.tv/chuckmoulton)\n\nWant your stream to appear here? Let the mods know.\nWhat to create a bio page for your stream? Type `... embedex` and design yourself a page; alternatively send one of the mods the details you want to be included.",
+            "color": 14841132,
+            "thumbnail": {
+              "url": "https://i.imgur.com/L3HgngE.png"
+            }
+          }
+        ],
+        "threecheck": [
+          {
+            "title": "House Guide to Three-Check",
+            "description": "__**ABOUT**__\n\n**Three-check** (3+) chess is a chess variant in which the winner is the first player to check their opponent three times. It’s also known as wild 25. \n\n__**RULES**__\n\nAll the normal chess rules apply, but one extra rule applies in addition:\n\n• If you make a legal move that puts your opponent's king into third check for the third time in the game, you win.\n\nA few clarifications to that rule exist as follows:\n\n• The winning move has to be legal, i.e. you cannot give the third check while in check.\n• Checkmating your opponent is still a legal way to win.\n• A double check counts a single check towards the running total.\n\n[Rules page on lichess.org](https://lichess.org/variant/threeCheck)\n\n__**WHERE?**__\n\n• [lichess.org](https://lichess.org)\n• [chess.com](https://chess.com)\n• [Free Internet Chess Server](http://www.freechess.org/)\n• [Internet Chess Club](https://www.chessclub.com/)\n\nYou can simply type `... threecheck` followed by a number to navigate through our pages, alternatively:\n\n`... threecheck improve` to see our strategy suggestions.\n`... threecheck studies` to see a list of useful studies.\n`... threecheck videos` to see some of the best 3-check video guides.\n\nCompiled by MMichael#3973",
+            "color": 14841132,
+            "footer": {
+              "text": "Page 1 of 4. \"... threecheck improve\" to see next page."
+            },
+            "thumbnail": {
+              "url": "https://i.imgur.com/cyt4jyT.png"
+            }
+          },
+          {
+            "title": "House Guide to Three-Check",
+            "description": "__**IMPROVE**__\n\nJust as in chess, sacrifices are common and the opening can be filled with traps. Checking an opponent twice can create an advantage and can be equivalent to captured material in the evaluation of a position.\n\nThe theory has developed dramatically during the last year. Opening explorer on lichess will guide you regarding the theory, but remember that instead of memorizing the moves, you should figure out the meaning of each move.\n\n[Three-check guide](https://www.chess.com/article/view/the-3-check-traps-you-need-to-know).",
+            "color": 14841132,
+            "footer": {
+              "text": "Page 2 of 4. \"... threecheck studies\" to see next page."
+            },
+            "thumbnail": {
+              "url": "https://i.imgur.com/cyt4jyT.png"
+            }
+          },
+          {
+            "title": "House Guide to Three-Check",
+            "description": "__**STUDIES**__\n\n**blastoise11:** [Opening mistakes](https://lichess.org/study/p7fL3SP0)\n**Musicknight123:** [Game Analysis](https://lichess.org/study/ifFIOVSQ)",
+            "color": 14841132,
+            "footer": {
+              "text": "Page 3 of 4. \"... threecheck studies\" to see next page."
+            },
+            "thumbnail": {
+              "url": "https://i.imgur.com/cyt4jyT.png"
+            }
+          },
+          {
+            "title": "House Guide to Three-Check",
+            "description": "__**VIDEOS**__\n\n**FischyVishy:** [YouTube](http://bit.ly/2oK69mk)\n**The Lone Wolf :** [YouTube](http://bit.ly/2FNrZgZ)",
+            "color": 14841132,
+            "footer": {
+              "text": "Page 4 of 4. \"... threecheck\" to return to the introductory page."
+            },
+            "thumbnail": {
+              "url": "https://i.imgur.com/cyt4jyT.png"
+            }
+          }
+        ],
+        "anti": [
+          {
+            "title": "House Guide to Antichess",
+            "description": "__**ABOUT**__\n\n**Antichess** (anti) is a variant in which the aim  is to get rid of your own pieces. The game is also known as Losing chess, the Losing Game, Giveaway Chess, Suicide Chess, Killer Chess, Must-Kill, Take-All Chess, Capture Chess, Losums, or Take-Me. The game has recently been solved: there is a tree (called the Watkins tree) which proves a forced win for white from 1. e3. On the other other hand, many starting moves can lead to a forced loss for white which have been known throughout the history of the game, those include 1.e4, 1.d3 and 1.d4.\n\n__**RULES**__\n\nThe rules follow most standard chess rules but demand in addition that **a capture is forced if it can be played**, if more then one capture is possible, then a player is permitted to choose which one to make. In mainstream anti the king is considered a normal piece and promotion to king is allowed and often useful. Victory is achieved by losing all the pieces or getting stalemated in standard rules. When playing on FICS, victory is awarded to the player with the smaller number of pieces on the board in the case of stalemate, and an equal number of pieces is considered to be a draw.\n\n__**WHERE?**__\n\nAntichess can be played on:\n\n• [Free Internet Chess Server](http://www.freechess.org/)\n• [lichess.org](https://lichess.org/)\n\nYou can simply type `... anti` followed by a number to navigate through our pages, alternatively:\n\n`... anti pieces` to see the piece evaluations for antichess\n`... anti basic` to see a list of beginner mistakes.\n`... anti improve` to see tips on how to further.\n`... anti guides` to see anti player's helpful resources.\n\nCompiled by the-lone-wolf#4001",
+            "color": 14841132,
+            "footer": {
+              "text": "Page 1 of 5. \"... anti pieces\" to see next page."
+            },
+            "thumbnail": {
+              "url": "https://i.imgur.com/OS9cSlp.png"
+            }
+          },
+          {
+            "title": "House Guide to Antichess",
+            "description": "**__PIECES__**\n\nDetails on each piece are given. Rough valuations are shown next to each piece name.\n\n**KING** 0\n+ The most important piece. You can waste moves to avoid zugzwang and solidate key areas.\n- Too slow for other tasks.\n\n**Queen** -1\n+ Useful for middle-game tactics such as \"Queen races\", attacking opponents king and attacking weak squares.\n- Dangerous in the endgame.\n\n**Rook** -3\n+ Quick endgame piece.\n- Can easily turn into a \"loose cannon\".\n\n**Bishop** -6\n+ Good for early game tactics and drawing endgames due to opposite-colored bishops.\n- Can easily turn into a \"loose cannon\".\n\n**Knight** -5\n+ Good for destroying pawn formations and forking weak squares.\n- Immobile and bad in the endgame. Lose them before the endgame!\n\n**Pawns** -1\n+ Useful for restricting opponent's pieces and breaking pawn formations.\n- Slow, immobile. Dangerous when it comes to forced promotions.",
+            "color": 14841132,
+            "footer": {
+              "text": "Page 2 of 5. \"... anti basic\" to see next page."
+            },
+            "thumbnail": {
+              "url": "https://i.imgur.com/OS9cSlp.png"
+            }
+          },
+          {
+            "title": "House Guide to Antichess",
+            "description": "__**BASIC MISTAKES **__\n\nAntichess is a very theoretical variant and there is lot of theory in it, especially cause of lines being often forced. Opening blunders are common between beginners, so safe openings such as **1. e3** are recommended. Losing openings for White include **1.a3, 1.b4, 1.c3, 1.d3, 1.d4, 1.e4, 1.f3, 1.f4, 1.h3, 1.h4, 1.Nc3** and **1.Nf3** but many of these are not trivial. Apart from 1. e3, other playable openings are **1.c4, 1.Nh3, 1.g3** (other openings are dubious). The most common novice mistakes are:\n\n• Trying to **give away all pieces immediately** is therefore a mistake. One should carefully consider piece position; having more pieces that the opponent gives the ability to 'control' you, then give away all the pieces in one initiative.\n\n• **Not developing.** Anti isn't really about giving away pieces in the beginning; one must develop pieces and make it harder for your opponent to move. That's a good strategy some of the really good players like to use, unless you have a forced win.\n\n• Giving away **important** pieces: it is important to know which pieces to keep and which to give. Bishops are often dangerous, so it is recommended for beginners to get rid of bishops as soon as possible. On the other hand, the king is a precious ally when an opponent tries to zugzwang, giving it away early is often a mistake. It's better to keep pieces instead of pawns, because pawns have a very limited range of moves and can be easily predicted or forced into zugzwang.\n\n• Being overly **passive**: simply trying to avoid exposing yourself to taking pieces lets an opponent 'control' you, then forcing you into zugzwang to take pieces. Carefully consider when one should trade and one should not.",
+            "color": 14841132,
+            "footer": {
+              "text": "Page 3 of 5. \"... anti improve\" to see next page."
+            },
+            "thumbnail": {
+              "url": "https://i.imgur.com/OS9cSlp.png"
+            }
+          },
+          {
+            "title": "House Guide to Antichess",
+            "description": "__**FURTHER IMPROVE **__\n\nTips on how to advance your play:\n\n• **Utilise choices**. Sometimes, it is advantageous to use one piece to take a piece in the opponent's position while your opponent is taking pieces; this can be referred to as a [queen race](https://lichess.org/0vDXr9aX). Be careful about attempting this with other pieces after: [In this game](https://lichess.org/study/SqCNKpVW), Black is out of bishop moves and must take White's queen, resulting in a loss. [Another example](https://lichess.org/study/2EjMqvsp).\n\n• Be aware of so called quiet moves that can force your opponent **to take an unprotected piece**. [In this game](https://lichess.org/4FF1DBvW#4) an excellent example of such a move is 3. Bg2: preparing to take on b7, which will force Bxb7 and later Bxh1.\n\n• Do **not** be too eager to **push the h- and a-pawns** as this exposes the rooks in mid-game. Rooks can be easily controlled and this can lead to a disastrous position if your opponent forces your rook into their position and is able to give away lots of material for nothing. On the other hand, if the opponent doesn't have a **b/g-pawn** pushing the a/h-pawn is often [a good move](https://lichess.org/study/e7IRQR1f).",
+            "color": 14841132,
+            "footer": {
+              "text": "Page 4 of 5. \"... anti guides\" to see next page."
+            },
+            "thumbnail": {
+              "url": "https://i.imgur.com/OS9cSlp.png"
+            }
+          },
+          {
+            "title": "House Guide to Antichess",
+            "description": "**__GUIDES__**\n\nSome useful antichess links:\n\n• **Solved Tree**: [Mark Watkins](http://magma.maths.usyd.edu.au/~watkins/LOSING_CHESS/).\n\n• **Finlip**: [YouTube](http://bit.ly/2Hj7Tuo), [Twitch](https://www.twitch.tv/anuppokhrel).\n\n• **FKA_SooP**: [Introduction To Zugzwang](https://lichess.org/study/ad6RvpQb).\n\n• **hauptschule**: [Facing 1. e3 as black](https://lichess.org/study/C2tvnF26).\n\n• **John Beasley**: [Endgame tables: what ending pieces are winning?](http://bit.ly/2FpVkBa).\n\n• **Frestho**: [Antichess tactics](https://lichess.org/study/WLrT4U2E)\n  \nWant your stream to appear here? Let the mods know.\nWhat to create a bio page for your stream? Type `... embedex` and design yourself a page; alternatively send one of the mods the details you want to be included.",
+            "color": 14841132,
+            "footer": {
+              "text": "Page 5 of 5. \"... anti\" to return to the introductory page."
+            },
+            "thumbnail": {
+              "url": "https://i.imgur.com/OS9cSlp.png"
+            }
+          }
+        ],
+        "atomic": [
+          {
+            "title": "House Guide to Atomic",
+            "description": "__**ABOUT**__ \n\n**Atomic chess** is a chess variant in which one has to nuke their opponent’s king in order to win the game.\n\nIt’s known as wild 27 or bomb chess.\n\n__**RULES**__\n\nThe normal chess rules are valid, with the following extensions.\n\nWhenever a piece is captured, an explosion occurs on the regarding field. The explosion destroys..\n• the capturing piece\n• the captured piece\n• all pieces on the immediate horizontal, vertical and diagonal neighbour fields, except pawns. There is no chain reaction.\n\nThere are few more extra conditions compared to orthodox chess, those are:\n• A game is won by checkmate or causing explosion of the opponent’s king by an indirect hit.\n• Moves causing own king's explosion are not allowed. Any move that results in blowing up the opposite King will claim an immediate victory, overriding all checks.\n• The kings can be connected by moving one into the adjacent squares of the other sided king. When the kings are connected, checks do not apply.\n\nRules-page on lichess: https://lichess.org/variant/atomic\n\n__**WHERE?**__ \n\n● [Lichess.org](https://lichess.org/)\n● [Free Internet Chess Server](http://www.freechess.org/)\n● [Internet Chess Club](https://www.chessclub.com/).\n\nYou can simply type `... atomic` followed by a number to navigate through our pages, alternatively:\n\n`... atomic improve` to see our material on how to improve.\n`... atomic material` to see guides published by atomic players.",
+            "color": 14841132,
+            "footer": {
+              "text": "Page 1 of 4. \"... atomic improve\" to see next page."
+            },
+            "thumbnail": {
+              "url": "https://i.imgur.com/mjbalyw.png"
+            }
+          },
+          {
+          "title": "House Guide to Atomic",
+            "description": "__**IMPROVE**__\n\nThe knights, rooks, queens, bishops and pawns also develop their respective tactics in Atomic chess. Material sacrifices are more common in atomic chess than in chess. In the opening and middle-game it is common to offer a piece in order to seize an initiative enabled by the newly opened spaces captures create.",
+            "color": 14841132,
+            "footer": {
+              "text": "Page 2 of 4. \"... atomic studies\" to see next page."
+            },
+            "thumbnail": {
+              "url": "https://i.imgur.com/mjbalyw.png"
+            }
+          },
+          {
+          "title": "House Guide to Atomic",
+            "description": "**__STUDIES__**\n\n**ProgramFOX:** [Opening and midgame tactics](<https://lichess.org/study/mxYOPgI3>)\n**ProgramFOX:** [Endgame positions](<https://lichess.org/study/JYSYPQrN>)\n\n**tipau:** [Endgames level 1 ](<https://lichess.org/study/ikJM4K3L>)\n**tipau:** [Endgames level 2](<https://lichess.org/study/tCqrXrbG>)\n**tipau:** [Endgames level 3](<https://lichess.org/study/WOWizkm4>)\n\n**Ngb & co:** [Detailed opening analysis](<https://lichess.org/study/nP8wnNGJ>)\n\n**Illion:** [Multiple blog posts](<https://lichess.org/team/illions-atomic-blog>)",
+            "color": 14841132,
+            "footer": {
+              "text": "Page 3 of 4. \"... atomic videos\" to see next page."
+            },
+            "thumbnail": {
+              "url": "https://i.imgur.com/mjbalyw.png"
+            }
+          },
+          {
+          "title": "House Guide to Atomic",
+            "description": "**__VIDEOS__**\n\n• **ProgramFOX:** [YouTube](<https://www.youtube.com/channel/UCmx82Kgy9ALzAcmti0LwkJw>), [Twitch](<https://www.twitch.tv/programFOX>).\n\n• **Tipau**: [YouTube](<https://www.youtube.com/user/tipau>), [Twitch](<https://www.twitch.tv/tipau_lichess>).\n\n• **Onubense:** [Twitch](<https://www.twitch.tv/gmonubense>).\n\n• **ijh:** [Twitch](<https://www.twitch.tv/ijhchess>).",
+            "color": 14841132,
+            "footer": {
+              "text": "Page 4 of 4. \"... atomic\" to return to the introductory page."
+            },
+            "thumbnail": {
+              "url": "https://i.imgur.com/mjbalyw.png"
+            }
+          }
+        ],
+        "horde": [
+          {
+            "title": "House Guide to Horde",
+            "description": "__**ABOUT**__\n\n**Horde chess** is a chess variant where the white side starts with 36 pawns (*The Pawns*) and the black side (*The Pieces*) needs to destroy the Horde to win. \n\n__**RULES**__\n\n[Starting position](<https://i.imgur.com/Hurb8aW.png>)\n\nThe normal chess rules are valid; for example\n\n• all pawns can be promoted on the final rank\n• stalemate occurs, if either side run out of moves\n\nThe only exception is…\n\n• that white's pawns on the first and second ranks may advance one or two steps, given that the path in the file is free. Unlike in regular chess, this does not have to be the pawn's first move.\n• if a pawn advances two squares from the first to the third rank, black can not capture it with the enpassant rule\n\n[Rules page on lichess](https://lichess.org/variant/horde).\n\n__**WHERE?**__ \n\n● [Lichess.org](https://lichess.org/)\n\nYou can simply type `... horde` followed by a number to navigate through our pages, alternatively: \n\n`... horde improve` to see our strategy suggestions. \n`... horde studies` to see a list of useful studies. \n`... horde videos` to see some of the best horde videos.",
+            "color": 14841132,
+            "footer": {
+              "text": "Page 1 of 4. \"... horde improve\" to see next page."
+            },
+            "thumbnail": {
+              "url": "https://i.imgur.com/BB71aOa.png"
+            }
+          },
+          {
+            "title": "House Guide to Horde",
+            "description": "__**IMPROVE**__ \n\n**THE PAWNS**\nWhite should keep their pawns **together** and promote.\n\nThe goal for white is to checkmate. This is most easily achieved after promotion (by which time black will probably resign after all of their sacrifices). White’s weakest files are **A- and H-files** since they are only defended once. White must guard these files and the backrank. White must remember that the power is in the horde, and therefore must not spreadout his pawns in an easily permeable, checker like structure. **Accept or reject** sacrifices as the position calls for. White must also keep in mind that should black get to the back of the horde, it's not always the end of the game. It takes valuable time for black to capture all of the pawns rank by rank -- time white could be using to promote pawns.\n\n**THE PIECES** \nBlack should target the rook files and get to the back ranks.\n\nWinning with black is most easily achieved by getting to the back of the horde. The weakest files are A- and H-files, and therefore black should seek to **pressure** those files.",
+            "color": 14841132,
+            "footer": {
+              "text": "Page 2 of 4. \"... horde studies\" to see next page."
+            },
+            "thumbnail": {
+              "url": "https://i.imgur.com/BB71aOa.png"
+            }
+          },
+          {
+            "title": "House Guide to Horde",
+            "description": "**__STUDIES__**\n\n**Stubenfisch:** [Opening ideas for beginners](https://lichess.org/study/fKHAjYni)\n**FM svenos:** [My opening repertoire](https://lichess.org/study/yXTpOSfM)",
+            "color": 14841132,
+            "footer": {
+              "text": "Page 3 of 4. \"... horde videos\" to see next page."
+            },
+            "thumbnail": {
+              "url": "https://i.imgur.com/BB71aOa.png"
+            }
+          },
+          {
+            "title": "House Guide to Horde",
+            "description": "**__VIDEOS__**\n\n● **Stubenfisch**\nTwitch: <https://www.twitch.tv/stubenfisch>",
+            "color": 14841132,
+            "footer": {
+              "text": "Page 4 of 4. \"... horde\" to return to the introductory page."
+            },
+            "thumbnail": {
+              "url": "https://i.imgur.com/BB71aOa.png"
+            }
+          }
+        ],
+        "schess": [
+          {
+            "title": "House Guide to Seirawan Chess",
+            "description": "__**ABOUT**__\n\n**Seirawan Chess (s-chess)** is a chess variant, which was invented by GM Yasser Seirawan and Bruce Harper 2007. It is played on the standard 8x8 board and uses two new pieces, **the hawk** (which moves like knight and bishop) and **the elephant** (which moves like knight and rook).\n\nSeirawan chess is also known as Sharper chess (a combination of the names Seirawan and Harper). The idea of two extra pieces were adopted from the World Champons Jose Raoul Capablanca who in 1920s proposed **Capablanca chess**, adding two new pieces on a 10x10 board.\n\n__**RULES**__ \n\nThe rules are the same as in orthodox chess except that two pieces, the Elephant and the Hawk are placed in the reserve. Whenever a piece leaves its initial square, one of the extra pieces can be immediately be introduced to the vacant square. That means a player has eight opportunities to bring the Hawk and Elephant into play. If a player fails to do so, the unplaced piece remains out of play.\n\nWhen a player castles, the Hawk or the Elephant may be placed on either e1(8) or h1(8)/a1(8), but not on both.\n\n__**SITES**__\n\n• [Schess.org](https://schess.org/#/).\n\nYou can simply type `... schess` followed by a number to navigate through our pages, alternatively: \n\n`... schess improve` to see our strategy suggestions. \n`... schess videos` to see some of the best s-chess videos.",
+            "color": 14841132,
+            "footer": {
+              "text": "Page 1 of 3. \"... schess improve\" to see next page."
+            },
+            "thumbnail": {
+              "url": "https://i.imgur.com/nVeKhtG.png"
+            }
+          },
+          {
+            "description": "__**IMPROVE**__ \n\nThe extra pieces give players more firepower, hence they make the game more tactical and deadly attacks occur more often than in orthodox chess.",
+            "color": 14841132,
+            "footer": {
+              "text": "Page 2 of 3. \"... schess videos\" to see next page."
+            },
+            "thumbnail": {
+              "url": "https://i.imgur.com/nVeKhtG.png"
+            }
+          },
+          {
+            "description": "**__VIDEOS__**\n\n**GMs Seirawan**, **Van Kampen** and **Hansen:** [Seirawan Chess Introduction](<https://www.youtube.com/watch?v=tSXZbbeR-kU>)\n\n**IM Shahade** vs. **GM Seirawan:** [S-Chess match](<https://www.youtube.com/watch?v=97Jfv1U997M>)",
+            "color": 14841132,
+            "footer": {
+              "text": "Page 3 of 3. \"... schess\" to return to the introductory page."
+            },
+            "thumbnail": {
+              "url": "https://i.imgur.com/nVeKhtG.png"
+            }
+          }
+        ],
+        "960": [
+          {
+            "title": "House Guide to Chess960",
+            "description": "__**ABOUT**__\n\n**Chess960 (960)** is a chess variant, which uses the same board and pieces as orthodox chess, but the starting position of the pieces is randomized. However, the pieces on the both sides will be placed symmetrical. The random starting position is to hinder players from memorizing the opening lines and it forces them to rely more on their talent and creativity. \n\nOther names for this variant are Fischer Random Chess and **Fischerandom**, both named after Bobby Fischer, who invented the variant. It's also known as it’s also known as wild 22.\n\n__**RULES**__ \n\nThe rules are the same as in orthodox chess. However, the castling may seem different because the king and the rooks might have a different starting square than in standard chess.\n\n[Rules page on lichess](<https://lichess.org/variant/chess960>).\n         \n__**SITES**__\n\n● [lichess.org](https://lichess.org)\n● [chess.com](https://chess.com)\n● [Free Internet Chess Server](http://www.freechess.org/)\n● [Internet Chess Club](https://www.chessclub.com/)\n\nYou can simply type `... 960` followed by a number to navigate through our pages, alternatively: \n\n`... 960 improve` to see our strategy suggestions. \n`... 960 videos` to see some of the 960 videos.",
+            "color": 14841132,
+            "footer": {
+              "text": "Page 1 of 3. \"... 960 improve\" to see next page."
+            },
+            "thumbnail": {
+              "url": "https://i.imgur.com/YMgh4dH.png"
+            }
+          },
+          {
+            "title": "House Guide to Chess960",
+            "description": "__**IMPROVE**__\n\nNow that you know the rules, you may wonder how to get better at Fischerandom. Since there are no opening theory, I would recommend to focus on these four points:\n\n• Follow the normal opening **principles**: control center, develop your pieces and get your king in safety.\n• Know your middlegame plans: identify **the weaknesses** in your and your opponent's camp, ask yourself how you can get rid of them and how you can exploit them.\n• Be sharp with the **tactics**: It's been said that chess is 99% about tactics, you can work on your tactics in chesstempo or lichess. The tactical success requires an understanding of strategy.\n• Master **the endgame**: Most of your 960 games will reach the endgame stage, be prepared to grind the victory in rook or other kind of endgames.\n\n[How To Get Better At Chess article](<https://www.chess.com/article/view/how-to-get-better-at-chess>).",
+            "color": 14841132,
+            "footer": {
+              "text": "Page 2 of 3. \"... 960 videos\" to see next page."
+            },
+            "thumbnail": {
+              "url": "https://i.imgur.com/YMgh4dH.png"
+            }
+          },
+          {
+            "title": "House Guide to Chess960",
+            "description": "**__VIDEOS__**\n\n**IM John Batholomew:** [Chess960 introduction video](<https://www.youtube.com/watch?v=fUypgJQy7O8>)\n**NM Chess-Network:** [10 ways to improve your chess](<https://www.youtube.com/watch?v=m--LuusPfwA>)",
+            "color": 14841132,
+            "footer": {
+              "text": "Page 3 of 3. \"... 960\" to return to the introductory page."
+            },
+            "thumbnail": {
+              "url": "https://i.imgur.com/YMgh4dH.png"
+            }
+          }
+        ],
+        "koth": [
+          {
+            "title": "House Guide to King Of The Hill",
+            "description": "__**ABOUT**__\n\n**King of the Hill (KOTH)** is a chess variant, in which you win by checkmating your opponent or by bringing your king to the centre of the board.\n\n__**RULES**__ \n\nThe rules are the same as in orthodox chess with the addition of one simple rule:\n• Move your king to one of the centre squares (d4, d5, e4 or e5) and you win.\n\nThe winning move must be legal, i.e. the king can’t move into check. Checkmating your opponent is also a legit way to win.\n\n__**SITES**__\n\n● [lichess.org](https://lichess.org)\n● [chess.com](https://chess.com)\n\nYou can simply type `... koth` followed by a number to navigate through our pages, alternatively: \n\n`... koth improve` to see our strategy suggestions. \n`... koth videos` to see some of the 960 videos.\n",
+            "color": 14841132,
+            "footer": {
+              "text": "Page 1 of 3. \"... koth improve\" to see next page."
+            },
+            "thumbnail": {
+              "url": "https://i.imgur.com/7raWC9F.png"
+            }
+          },
+          {
+            "title": "House Guide to King Of The Hill",
+            "description": "__**IMPROVE**__\n\nThe additional rule tends to decoy novice players into running their king to the centre at the beginning of the game. This can be a fatal mistake as it may result in loss in development, material loss or checkmate on the running king.",
+            "color": 14841132,
+            "footer": {
+              "text": "Page 2 of 3. \"... koth videos\" to see next page."
+            },
+            "thumbnail": {
+              "url": "https://i.imgur.com/7raWC9F.png"
+            }
+          },
+          {
+            "title": "House Guide to King Of The Hill",
+            "description": "**__VIDEOS__**\n\n**NM Chess-Network:** [KOTH games](<https://www.youtube.com/watch?v=kneXmnH_zGM>).",
+            "color": 14841132,
+            "footer": {
+              "text": "Page 3 of 3. \"... koth\" to return to the introductory page."
+            },
+            "thumbnail": {
+              "url": "https://i.imgur.com/7raWC9F.png"
+            }
+          }
+        ],
+        "racingkings": [
+          {
+            "title": "House Guide to Racing Kings",
+            "description": "__**ABOUT**__\n\n**Racing Kings (RK)** is a chess variant. The objective of the game is to move one’s own king to the last rank and do it faster than the opponent.\n\n__**RULES**__ \n\nAll pieces are positioned at the first two ranks and both players see the board from the same perspective. The starting position is [following](<https://i.imgur.com/sdnJ3Jz.png>).\n\nStandard chess rules apply, with the following restrictions:\n\n• It is not allowed to attack the opponent’s king. The concept of check is entirely forbidden.\n• The king is not allowed to move to a square which is attacked by an opponent’s piece (just like in standard chess).\n\nThe game is finished if one player moves their own king to the last rank. However, if white moves his king to the last row, and black moves immediately that their king to the last rank, the game is draw (in order to compensate the fact that white player started the game.)\n\n[Rules page on lichess](<https://lichess.org/variant/racingKings>).\n         \n__**SITES**__\n\n● [Lichess.org](https://lichess.org/)\n\nYou can simply type `... racingkings` followed by a number to navigate through our pages, alternatively: \n\n`... racingkings improve` to see our strategy suggestions. \n`... racingkings videos` to see some of the best horde videos.",
+            "color": 14841132,
+            "footer": {
+              "text": "Page 1 of 3. \"... racingkings improve\" to see next page."
+            },
+            "thumbnail": {
+              "url": "https://i.imgur.com/2YAoPMG.png"
+            }
+          },
+          {
+            "title": "House Guide to Racing Kings",
+            "description": "\n__**IMPROVE**__\n\nThis variant isn't studied widely, but some opening theory do exist. Tactics usually involve the fact that giving checks is not allowed, for example pieces may seem to be hanging, but they can't be captured because that would be a check to the enemy king.",
+            "color": 14841132,
+            "footer": {
+              "text": "Page 2 of 3. \"... racingkings videos\" to see next page."
+            },
+            "thumbnail": {
+              "url": "https://i.imgur.com/2YAoPMG.png"
+            }
+          },
+          {
+            "title": "House Guide to Racing Kings",
+            "description": "**__VIDEOS__**\n\n**NM Chess-Network:**: [Introduction to Racing Kings](<https://www.youtube.com/watch?v=GBUylnvSRYo>)",
+            "color": 14841132,
+            "footer": {
+              "text": "Page 3 of 3.  \"... racingkings\" to return to the introductory page."
+            },
+            "thumbnail": {
+              "url": "https://i.imgur.com/2YAoPMG.png"
+            }
+          }
+        ]
+      },
+    "utility": {
+        "dbpositions": {
+            "title": "House Database Positions",
+            "description": "Greetings! You may have noticed on your profile there's a little database number. That corresponds to your index in the bot's database. Being higher up in the db means:\n\n• **Commands are slightly more likely to work for you.**\n\nIn addition to the other advantages:\n\n**• Can be seen on the `.dblb`.\n• Cool medal on your profile `!profile`.\n• Better number.\n• 'Higher' than everyone else.**\n\nBasically, people with higher-up numbers are just *better*. How do you change your position?\n\u200b",
+            "color": 16738560,
+            "fields": [
+                {
+                    "name": "1. Bid an Amount and Win",
+                    "value": "You can bid for a position using:\n\n`.give [bid amount] theLAZYmd#2353 Database Position [desired position]`\n\nFor example:\n\n`.give 100 theLAZYmd#2353 Database Position 1`\n\nThe amount you give is saved as your 'bid amount.' Using the command challenges another member for their position in the database. If your total bid amount is greater than their bid amount in reserver (consolidated) your challenge will be successful and you will take their position.\n\u200b",
+                    "inline": true
+                },
+                {
+                    "name": "2. Bid an Amount and Attack",
+                    "value": "You can also underbid. If your total bid is lower than their consolidated bidamount, your bid will be used to cancel out their sum and that's it.\n\u200b"
+                },
+                {
+                    "name": "3. Consolidate",
+                    "value": "You should therefore secure your position by consolidating your position. Do that by:\n\n`.give 100 theLAZYmd#2353 Database Consolidate`\n\nCheck anyone's consolidated amounts by `!bidamount [user]`, `!position [user]`, and `.dblb`."
+                }
+            ]
+        }
+    }
+}

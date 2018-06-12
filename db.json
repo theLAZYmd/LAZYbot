@@ -1,1752 +1,3027 @@
 [
     {
         "id": "185412969130229760",
-        "messages": 41158,
-        "finger": "Yea that's right, I built LAZYbot",
-        "lastmessage": "well then just get up to 2300 again lul",
-        "trophies": [],
-        "lastmessagedate": 1522664807018,
-        "source": "chesscom",
+        "username": "theLAZYmd#2353",
+        "messages": 54222,
+        "finger": "testingbot",
+        "lastmessage": "I have no idea",
+        "lastmessagedate": 1527547722003,
+        "bidamount": 100000000000000000,
+        "location": "Toulouse",
+        "sex": "male",
+        "bughousetest": "theLAZYmd",
+        "bughousetestratings": {
+            "maxRating": "1703",
+            "bughouse": "1703"
+        },
         "chesscom": "theLAZYbot",
-        "bughousetest": "",
-        "fics": "",
-        "lichess": "TheLAZYmd",
         "chesscomratings": {
-            "maxRating": 2074,
-            "lightning": 1334,
-            "lightningProvisional": true,
-            "crazyhouse": 1365,
-            "crazyhouseProvisional": false,
-            "bughouse": 2074,
-            "bughouseProvisional": false
-        },
-        "lichessratings": {
-            "maxRating": 2255,
-            "ultra": 1723,
-            "ultraProvisional": false,
-            "bullet": 2012,
-            "bulletProvisional": false,
-            "blitz": 1906,
-            "blitzProvisional": false,
-            "rapid": 1997,
-            "rapidProvisional": false,
-            "classical": 1500,
-            "classicalProvisional": true,
-            "crazyhouse": 2255,
-            "crazyhouseProvisional": false,
-            "threecheck": 1775,
-            "threecheckProvisional": false,
-            "antichess": "",
-            "antichessProvisional": true,
-            "horde": "",
-            "hordeProvisional": true,
-            "atomic": 1563,
-            "atomicProvisional": true,
-            "chess960": "",
-            "chess960Provisional": true,
-            "koth": 1710,
-            "kothProvisional": true,
-            "racingkings": "",
-            "racingkingsProvisional": true
-        }
-    },
-    {
-        "id": "293465140739964929",
-        "username": "meneermandje",
-        "messages": 15425,
-        "finger": "Professional Gambling Loser",
-        "lastmessage": "1 april",
-        "trophies": [
-            "Biggest Gambling Loser"
-        ],
-        "lastmessagedate": 1522618244889,
-        "source": "lichess",
-        "lichess": "meneermandje",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": "",
-        "lichessratings": {
-            "crazyhouse": 2328,
-            "maxRating": 2629,
-            "ultra": 2415,
-            "threecheck": 2241,
-            "antichess": 1939,
-            "horde": 2259,
-            "atomic": 1917,
-            "chess960": 2141,
-            "koth": 2251,
-            "racingkings": 2032,
-            "rapid": 2488,
-            "blitz": 2469,
-            "bullet": 2629
-        }
-    },
-    {
-        "id": "372355465939779595",
-        "username": "theLAZYsecondtestaccount#6291",
-        "messages": 37,
-        "finger": "",
-        "lastmessage": "hi",
-        "trophies": [],
-        "lastmessagedate": 1522414519066,
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
-    },
-    {
-        "id": "390497170626707457",
-        "username": "CHIRYO#4757",
-        "messages": 8149,
-        "finger": "",
-        "lastmessage": "The idea according to the engine was to keep the g pawn stationary , win it and later sac the rook for the h -pawn",
-        "trophies": [],
-        "lastmessagedate": 1522523205248,
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
-    },
-    {
-        "id": "123574379601723392",
-        "username": "lovlas#8671",
-        "messages": 712,
-        "finger": "",
-        "lastmessage": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
-    },
-    {
-        "id": "229327425903788033",
-        "messages": 38086,
-        "finger": "❤",
-        "lastmessage": "sweeet",
-        "trophies": [],
-        "lastmessagedate": 1522636202190,
-        "source": "chesscom",
-        "chesscom": "silvershell",
-        "bughousetest": "",
-        "fics": "",
-        "lichess": "samoyd",
-        "lichessratings": {
-            "maxRating": 2024,
-            "ultra": 1817,
-            "ultraProvisional": false,
-            "bullet": 1736,
-            "bulletProvisional": false,
-            "blitz": 1638,
-            "blitzProvisional": false,
-            "rapid": 1500,
-            "rapidProvisional": true,
-            "classical": 1500,
-            "classicalProvisional": true,
-            "crazyhouse": 2024,
-            "crazyhouseProvisional": false,
-            "threecheck": 1717,
-            "threecheckProvisional": true,
-            "antichess": 1473,
-            "antichessProvisional": true,
-            "horde": "",
-            "hordeProvisional": true,
-            "atomic": 1278,
-            "atomicProvisional": true,
-            "chess960": "",
-            "chess960Provisional": true,
-            "koth": "",
-            "kothProvisional": true,
-            "racingkings": "",
-            "racingkingsProvisional": true
-        },
-        "chesscomratings": {
-            "crazyhouse": 2024,
-            "maxRating": 2024,
-            "ultra": 1817,
-            "horde": "",
-            "chess960": "",
-            "koth": "",
-            "racingkings": "",
-            "blitz": 1680,
-            "bullet": 1736
-        }
-    },
-    {
-        "id": "381241162121478164",
-        "username": "KimKardashian#2185",
-        "messages": 4730,
-        "finger": "",
-        "lastmessage": "f",
-        "trophies": [],
-        "lastmessagedate": 1522605806604,
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
-    },
-    {
-        "id": "326918898178064396",
-        "username": "penguingm1#1997",
-        "messages": 11413,
-        "finger": "",
-        "lastmessage": "hi ob i",
-        "trophies": [],
-        "lastmessagedate": 1522614851967,
-        "source": "chesscom",
-        "lichess": "",
-        "chesscom": "penguingm1",
-        "bughousetest": "",
-        "fics": "",
-        "chesscomratings": {
-            "maxRating": 2940,
-            "bullet": 2918,
-            "bulletProvisional": false,
-            "tactics": 2940,
-            "tacticsProvisional": false,
-            "lightning": 2624,
-            "lightningProvisional": false,
-            "chess": 2021,
-            "chessProvisional": false,
-            "rapid": 2488,
-            "rapidProvisional": false,
-            "chess960": 1364,
-            "chess960Provisional": true,
-            "lessons": 2804,
-            "lessonsProvisional": true,
-            "livechess960": 2557,
-            "livechess960Provisional": true,
-            "koth": 2645,
-            "kothProvisional": false,
-            "crazyhouse": 2650,
-            "crazyhouseProvisional": false,
-            "bughouse": 2637,
-            "bughouseProvisional": false
-        }
-    },
-    {
-        "id": "365933164725534722",
-        "username": "Bouncer#8585",
-        "messages": 0,
-        "finger": "",
-        "lastmessage": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
-    },
-    {
-        "id": "422847086145568769",
-        "username": "lazytestbot#0941",
-        "messages": 0,
-        "finger": "",
-        "lastmessage": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
-    },
-    {
-        "id": "367024352174145547",
-        "username": "Grindonmygrande#6203",
-        "messages": 75663,
-        "finger": "I'm the one and only famous grind, fairygirl is a queen",
-        "lastmessage": "i spy tuna",
-        "trophies": [
-            "Most messages"
-        ],
-        "lastmessagedate": 1522628072953,
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
-    },
-    {
-        "id": "340160754936184832",
-        "username": "chessguy1012",
-        "messages": 43109,
-        "finger": "I am good at losing flowers. Please don't gamble with me.",
-        "lastmessage": "Glide?",
-        "trophies": [
-            ""
-        ],
-        "lastmessagedate": 1522604194388,
-        "source": "chesscom",
-        "lichess": "",
-        "chesscom": "chessguy1012",
-        "bughousetest": "",
-        "fics": "",
-        "chesscomratings": {
-            "rapid": 1635,
-            "maxRating": 2135,
-            "blitz": 1857,
-            "bullet": 2135
-        }
-    },
-    {
-        "id": "365105589715599360",
-        "username": "Pietju_bell",
-        "messages": 43410,
-        "finger": "<3",
-        "lastmessage": "<:kreygasm:372817384458813440>",
-        "trophies": [
-            "Worst Diarrhoea"
-        ],
-        "lastmessagedate": 1522524268408,
-        "source": "lichess",
-        "lichess": "Pietju_bell",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": "",
-        "lichessratings": {
-            "bullet": 2135,
-            "maxRating": 2135
-        }
-    },
-    {
-        "id": "211569666991063040",
-        "username": "Vempele#7687",
-        "messages": 4838,
-        "finger": "",
-        "lastmessage": "No.",
-        "trophies": [],
-        "lastmessagedate": 1522597289287,
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
-    },
-    {
-        "id": "303609777756438529",
-        "username": "Andrew#5850",
-        "messages": 2723,
-        "finger": "",
-        "lastmessage": "I know. I'll show you some of my better games later. Gotta go now",
-        "trophies": [],
-        "lastmessagedate": 1522525206602,
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
-    },
-    {
-        "id": "317767348566097930",
-        "username": "PawnInTraining#5209",
-        "messages": 902,
-        "finger": "",
-        "lastmessage": "Got up to 17. Now I start again",
-        "trophies": [],
-        "lastmessagedate": 1522514912464,
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
-    },
-    {
-        "id": "340287144448884748",
-        "username": "TcubesAK#3940",
-        "messages": 41040,
-        "finger": "",
-        "lastmessage": "niceo ne antic",
-        "trophies": [
-            "House Trivia Champion"
-        ],
-        "lastmessagedate": 1522491874618,
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
-    },
-    {
-        "id": "330193848137678848",
-        "username": "PepsiNGaming",
-        "messages": 25915,
-        "finger": "",
-        "lastmessage": "okay <:lul:416599131532820492>",
-        "trophies": [],
-        "lastmessagedate": 1522664815944,
-        "source": "lichess",
-        "lichess": "PepsiNGaming",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": "",
-        "ratings": {
-            "blitz": 1238,
-            "maxRating": 1560,
-            "bullet": 1560
-        },
-        "lichessratings": {
-            "maxRating": 2293,
-            "ultra": 1427,
-            "ultraProvisional": false,
-            "bullet": 1635,
-            "bulletProvisional": false,
-            "blitz": 1238,
-            "blitzProvisional": false,
-            "rapid": 1144,
-            "rapidProvisional": true,
-            "classical": 1095,
-            "classicalProvisional": true,
-            "crazyhouse": 1753,
-            "crazyhouseProvisional": false,
-            "threecheck": 1258,
-            "threecheckProvisional": false,
-            "antichess": 2293,
-            "antichessProvisional": false,
-            "horde": 1482,
-            "hordeProvisional": false,
-            "atomic": 1707,
-            "atomicProvisional": false,
-            "chess960": 1173,
-            "chess960Provisional": true,
-            "koth": 1527,
-            "kothProvisional": true,
-            "racingkings": 1122,
-            "racingkingsProvisional": true
-        }
-    },
-    {
-        "id": "319901088557957122",
-        "username": "okei",
-        "messages": 33701,
-        "finger": "",
-        "lastmessage": "But that takes forever",
-        "trophies": [],
-        "lastmessagedate": 1522484281029,
-        "source": "lichess",
-        "lichess": "okei",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": "",
-        "lichessratings": {
-            "classical": 1900,
-            "maxRating": 1900,
-            "rapid": 1883,
-            "blitz": 1737,
-            "bullet": 1718
+            "maxRating": 2104,
+            "crazyhouse": "2104",
+            "bughouse": "2087"
         }
     },
     {
         "id": "370357539931684865",
         "username": "fairygirl#5809",
-        "messages": 18609,
-        "finger": "",
-        "lastmessage": "pericles",
-        "trophies": [],
-        "lastmessagedate": 1522530518833,
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
-    },
-    {
-        "id": "373480715276517376",
-        "messages": 33474,
-        "finger": "Look at my face",
-        "lastmessage": "No hurry",
-        "trophies": [],
-        "lastmessagedate": 1522629022775,
-        "source": "lichess",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": "",
+        "messages": 21891,
+        "lastmessage": "I wasn't able to get any more games after that because he started farming 1500's to get his provisional rtg back up lol.",
+        "lastmessagedate": 1527095971939,
+        "bidamount": 775,
+        "chesscom": "bananasp1it",
+        "chesscomratings": {
+            "maxRating": 2356,
+            "bullet": "2215",
+            "lightning": "512",
+            "rapid": "624",
+            "koth": "1764",
+            "crazyhouse": "2097",
+            "bughouse": "2356",
+            "livechess960": "1988",
+            "tactics": "686",
+            "lessons": "800?"
+        },
         "lichessratings": {
-            "crazyhouse": 1797,
-            "maxRating": 1898,
-            "ultra": 1467,
-            "threecheck": 1587,
-            "antichess": 1482,
-            "atomic": 1510,
-            "koth": "",
-            "racingkings": "",
-            "rapid": 1779,
-            "blitz": 1671,
-            "bullet": 1898
+            "maxRating": 0
         }
     },
     {
-        "id": "349930835274629120",
-        "username": "winquit#9030",
-        "messages": 8055,
-        "finger": "",
-        "lastmessage": "f",
-        "trophies": [],
-        "lastmessagedate": 1522497053062,
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
-    },
-    {
-        "id": "377227077859934208",
-        "username": "Babosos#3628",
-        "messages": 2981,
-        "finger": "",
-        "lastmessage": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
-    },
-    {
-        "id": "324082212146249730",
-        "username": "titsinablender#1754",
-        "messages": 6429,
-        "finger": "",
-        "lastmessage": "❤",
-        "trophies": [],
-        "lastmessagedate": 1522627574222,
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
-    },
-    {
-        "id": "280124361833316352",
-        "username": "crptone#1398",
-        "messages": 2473,
-        "finger": "",
-        "lastmessage": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
-    },
-    {
-        "id": "424207229231693824",
-        "username": "Kaizen#4605",
-        "messages": 23,
-        "finger": "",
-        "lastmessage": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
-    },
-    {
-        "id": "409729432236982282",
-        "messages": 38122,
-        "finger": "LAZY is awesome!",
-        "lastmessage": "I gtg",
-        "trophies": [],
-        "lastmessagedate": 1522635612884,
-        "source": "lichess",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": "",
-        "ratings": {
-            "crazyhouse": 2125,
-            "maxRating": 2227,
-            "ultra": 2001,
-            "threecheck": 2039,
-            "antichess": 1764,
-            "horde": 1783,
-            "atomic": 1927,
-            "chess960": 2227,
-            "koth": 2084,
-            "racingkings": 2011
-        },
+        "id": "367024352174145547",
+        "username": "Grindonmygrande#6203",
+        "messages": 87735,
+        "finger": "I'm the one and only famous grind, fairygirl is a queen",
+        "lastmessage": "He's probably 1800 fics skill",
+        "trophy": [
+            "Most Messages"
+        ],
+        "lastmessagedate": 1526769595943,
+        "source": "Lichess",
+        "lichess": "grindonmygrande",
         "lichessratings": {
-            "maxRating": 2227,
-            "ultra": 2001,
-            "ultraProvisional": false,
-            "bullet": 1500,
-            "bulletProvisional": true,
-            "blitz": 1500,
-            "blitzProvisional": true,
-            "rapid": 1500,
-            "rapidProvisional": true,
-            "classical": 1500,
-            "classicalProvisional": true,
-            "crazyhouse": 2125,
-            "crazyhouseProvisional": false,
-            "threecheck": 2056,
-            "threecheckProvisional": false,
-            "antichess": 1764,
-            "antichessProvisional": false,
-            "horde": 1783,
-            "hordeProvisional": false,
-            "atomic": 1927,
-            "atomicProvisional": false,
-            "chess960": 2227,
-            "chess960Provisional": false,
-            "koth": 2084,
-            "kothProvisional": false,
-            "racingkings": 2011,
-            "racingkingsProvisional": false
+            "maxRating": "2661",
+            "ultra": "2147",
+            "bullet": "2316",
+            "blitz": "2661",
+            "rapid": "2557",
+            "classical": "1500?",
+            "crazyhouse": "2539",
+            "threecheck": "2313",
+            "horde": "2098",
+            "chess960": "2302",
+            "koth": "2110",
+            "racingkings": "2024"
         },
-        "lichess": "Musicknight123"
+        "chesscom": "grindonmygrande",
+        "chesscomratings": {
+            "maxRating": 2427,
+            "bullet": "2306",
+            "lightning": "2204",
+            "chess": "1714",
+            "rapid": "1800",
+            "koth": "2312",
+            "crazyhouse": "2427",
+            "bughouse": "2280",
+            "livechess960": "2507?",
+            "lessons": "1800?"
+        },
+        "bidamount": 500
     },
     {
-        "id": "407662597555617802",
-        "username": "moonenane#3553",
-        "messages": 2077,
-        "finger": "",
-        "lastmessage": "um um um <@370357539931684865> why aren't we friends on chess.com?",
-        "trophies": [],
-        "lastmessagedate": 1522357237399,
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "id": "390497170626707457",
+        "username": "CHIRYO#4757",
+        "messages": 9169,
+        "lastmessage": "yeah probs",
+        "lastmessagedate": 1527085209392,
+        "bidamount": 17
     },
     {
-        "id": "341618941317349376",
-        "username": "savagechess2k#4620",
-        "messages": 959,
-        "finger": "",
-        "lastmessage": "say no homo",
-        "trophies": [],
-        "lastmessagedate": 1522513874656,
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "id": "229327425903788033",
+        "username": "samoyd#2402",
+        "messages": 43107,
+        "finger": "GO LAZY",
+        "lastmessage": "was fun xD",
+        "lastmessagedate": 1527117324341,
+        "source": "Lichess",
+        "chesscom": "silvershell",
+        "chesscomratings": {
+            "maxRating": 1830,
+            "bullet": "1291",
+            "lightning": "1229",
+            "chess": "1054?",
+            "rapid": "971?",
+            "koth": "1258",
+            "crazyhouse": "1830",
+            "bughouse": "1818",
+            "livechess960": "1048",
+            "tactics": "1263",
+            "lessons": "1190"
+        },
+        "lichess": "samoyd",
+        "lichessratings": {
+            "maxRating": "2077",
+            "ultra": "1911",
+            "bullet": "1931",
+            "blitz": "1697",
+            "rapid": "1108?",
+            "classical": "1500?",
+            "crazyhouse": "2077",
+            "threecheck": "1717?",
+            "antichess": "1531?",
+            "atomic": "1336?",
+            "chess960": "1614?"
+        },
+        "location": "Here",
+        "bidamount": 6,
+        "bughousetest": "sparemate",
+        "bughousetestratings": {
+            "maxRating": "1702",
+            "bughouse": "1702"
+        }
     },
     {
-        "id": "282841374410407937",
-        "username": "ArdinB#9567",
-        "messages": 8742,
-        "finger": "too weak too slow",
-        "lastmessage": "Wha a trophy",
-        "trophies": [],
-        "lastmessagedate": 1522488968889,
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "id": "326918898178064396",
+        "username": "penguingm1#1997",
+        "messages": 12189,
+        "chesscomratings": {
+            "maxRating": 2940,
+            "bullet": "2910",
+            "lightning": "2748",
+            "chess": "2062",
+            "rapid": "2488",
+            "koth": "2645",
+            "crazyhouse": "2650",
+            "bughouse": "2637",
+            "chess960": "1364?",
+            "livechess960": "2557?",
+            "tactics": "2940",
+            "lessons": "2804?"
+        },
+        "lastmessage": "fuck",
+        "lastmessagedate": 1527382811387,
+        "bidamount": 0,
+        "chesscom": "penguingm1",
+        "bughousetest": "Kuuhaku1",
+        "bughousetestratings": {
+            "maxRating": "3738",
+            "bughouse": "3738"
+        },
+        "lichess": "CleverTacticButFail",
+        "lichessratings": {
+            "maxRating": "3002",
+            "bullet": "3002",
+            "blitz": "1500?",
+            "rapid": "1500?",
+            "classical": "1500?"
+        },
+        "trophy": [
+            "Reached 3200 Bullet"
+        ]
     },
     {
-        "id": "414816252733685760",
-        "username": "antic#0405",
-        "messages": 362,
-        "finger": "",
-        "lastmessage": "Probably",
-        "trophies": [],
-        "lastmessagedate": 1522535886070,
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
-    },
-    {
-        "id": "375203600290414595",
-        "username": "Stubenfisch#9958",
-        "messages": 154,
-        "finger": "",
-        "lastmessage": "I hate Horde",
-        "trophies": [],
-        "lastmessagedate": 1522535626254,
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
-    },
-    {
-        "id": "253347755081203713",
-        "username": "Nikolas Theiss#0362",
-        "messages": 137,
-        "finger": "",
-        "lastmessage": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
-    },
-    {
-        "id": "290049116900294656",
-        "username": "Mugwort#6375",
-        "messages": 126,
-        "finger": "",
-        "lastmessage": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
-    },
-    {
-        "id": "425719814086983690",
-        "username": "Massacre99#6655",
-        "messages": 583,
-        "finger": "",
-        "lastmessage": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
-    },
-    {
-        "id": "373833486164819970",
-        "username": "rapidplayer#6192",
-        "messages": 5421,
-        "finger": "jhulyvipfjariygfreairygfpegrhiypiy",
-        "lastmessage": "ok",
-        "trophies": [],
-        "lastmessagedate": 1522605235356,
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
-    },
-    {
-        "id": "333586342275710978",
-        "username": "MMichael#3973",
-        "messages": 15990,
-        "finger": "",
-        "lastmessage": "by the smallest things 🤔",
-        "trophies": [],
-        "lastmessagedate": 1522444453082,
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
-    },
-    {
-        "id": "179603851073028100",
-        "username": "PsyMar#2210",
-        "messages": 889,
-        "finger": "",
-        "lastmessage": "nincada",
-        "trophies": [],
-        "lastmessagedate": 1522441380266,
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
-    },
-    {
-        "id": "200638507436212224",
-        "username": "Lacreatio#6241",
-        "messages": 1944,
-        "finger": "imma finger the finger",
-        "lastmessage": "whoops",
-        "trophies": [],
-        "lastmessagedate": 1522413006749,
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
-    },
-    {
-        "id": "356192671750029313",
-        "username": "Vin€#9757",
-        "messages": 3352,
-        "finger": "",
-        "lastmessage": "gsv had a nice idea in this line 1e4d5 2exd5 Nf6 3Bb5+ c6 4dxc6 bxc6 5Be2 e5 often white players played 6d4 like me but exd4 7Nf3 e4 and if 8Nxd4?? what i played at d3 maybe white got c7 its not so clear",
-        "trophies": [],
-        "lastmessagedate": 1522527416669,
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "id": "373480715276517376",
+        "username": "ObiWanBenoni#3488",
+        "messages": 40092,
+        "finger": "Analyzing all Crazyhouse 960 starting positions",
+        "lastmessage": "give us unlimited acess isaac 😛",
+        "lastmessagedate": 1527547654748,
+        "source": "Lichess",
+        "lichess": "andreijl",
+        "lichessratings": {
+            "maxRating": "1833",
+            "ultra": "1472",
+            "bullet": "1800",
+            "blitz": "1721",
+            "rapid": "1793",
+            "classical": "1788?",
+            "crazyhouse": "1833",
+            "threecheck": "1587",
+            "antichess": "1483",
+            "horde": "1574?",
+            "atomic": "1476",
+            "chess960": "1572?",
+            "koth": "1761?",
+            "racingkings": "1715?"
+        },
+        "chesscom": "andreijl",
+        "chesscomratings": {
+            "maxRating": 1445,
+            "lightning": "1000?",
+            "bughouse": "1445",
+            "tactics": "851?"
+        },
+        "age": "24",
+        "sex": "jedi",
+        "location": "Tatooine",
+        "bidamount": 140,
+        "bughousetest": "ObiWanBenoni",
+        "bughousetestratings": {
+            "maxRating": "1114",
+            "bughouse": "1114"
+        }
     },
     {
         "id": "291123072919011348",
         "username": "24601#0449",
-        "messages": 16673,
-        "finger": "",
-        "lastmessage": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "messages": 19964,
+        "lastmessage": "HA",
+        "lastmessagedate": 1525237826093,
+        "chesscom": "bugging_lie",
+        "chesscomratings": {
+            "maxRating": 2171,
+            "bullet": "2015",
+            "tactics": "2171",
+            "lightning": "1913",
+            "chess": "1098?",
+            "lessons": "1704",
+            "livechess960": "1783?",
+            "koth": "1848",
+            "crazyhouse": "1945",
+            "bughouse": "2103"
+        },
+        "lichess": "yatinagarwal",
+        "lichessratings": {
+            "maxRating": "2246",
+            "ultra": "1856",
+            "bullet": "2029",
+            "blitz": "1877",
+            "rapid": "1500?",
+            "classical": "1500?",
+            "crazyhouse": "2246",
+            "threecheck": "1861",
+            "antichess": "1641",
+            "horde": "1279?",
+            "atomic": "1674",
+            "chess960": "1891",
+            "koth": "1704",
+            "racingkings": "1507?"
+        },
+        "bidamount": 6
     },
     {
-        "id": "273152076421529601",
-        "username": "bureky#7827",
-        "messages": 10927,
-        "finger": "i'm the surviv.io champ",
-        "lastmessage": "trying the bot",
-        "trophies": [],
-        "lastmessagedate": 1522621872443,
-        "source": "lichess",
-        "lichess": "BurakYarol",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": "",
+        "id": "340160754936184832",
+        "username": "chessguy101#2066",
+        "messages": 49000,
+        "finger": "I am good at losing flowers. Please don't gamble with me.",
+        "lastmessage": "<@373480715276517376> lazy should give u my stuff, i declared banrupt also grind will pay u 20 im canceling a bet",
+        "lastmessagedate": 1524522656556,
+        "source": "Chesscom",
+        "lichess": "chesssky2",
+        "chesscom": "chessguy1012",
         "lichessratings": {
-            "crazyhouse": 1559,
-            "maxRating": 1791,
-            "ultra": 1545,
-            "koth": "",
-            "rapid": 1645,
-            "blitz": 1791,
-            "bullet": 1765
+            "maxRating": "2023",
+            "ultra": "1914",
+            "bullet": "2023",
+            "blitz": "1896",
+            "rapid": "1957",
+            "classical": "1801",
+            "crazyhouse": "1926",
+            "threecheck": "1734",
+            "antichess": "1757",
+            "horde": "1700",
+            "atomic": "1731",
+            "chess960": "1757",
+            "koth": "1899",
+            "racingkings": "1700"
+        },
+        "chesscomratings": {
+            "maxRating": 2103,
+            "bullet": "2103",
+            "lightning": "1860",
+            "chess": "1358",
+            "rapid": "1635",
+            "koth": "1880",
+            "crazyhouse": "1911",
+            "bughouse": "1731",
+            "chess960": "1018",
+            "livechess960": "1974",
+            "tactics": "2011",
+            "lessons": "1858"
+        },
+        "bidamount": 1,
+        "age": "12",
+        "sex": "male",
+        "location": "U.s"
+    },
+    {
+        "id": "299721792350846977",
+        "username": "rice master#4329",
+        "messages": 79,
+        "lastmessage": "good luck",
+        "lastmessagedate": 1526832415979,
+        "bidamount": 0
+    },
+    {
+        "id": "319901088557957122",
+        "username": "okei#1207",
+        "messages": 41630,
+        "lastmessagedate": 1527545851882,
+        "source": "Lichess",
+        "lastmessage": "Where's okei?",
+        "finger": "Check out zhchess.blogspot.com",
+        "chesscom": "okeizh",
+        "chesscomratings": {
+            "maxRating": 1851,
+            "bullet": "1652",
+            "lightning": "1614",
+            "crazyhouse": "1851",
+            "bughouse": "1751",
+            "tactics": "1320"
+        },
+        "lichess": "okei",
+        "lichessratings": {
+            "maxRating": "1991",
+            "ultra": "1514?",
+            "bullet": "1749",
+            "blitz": "1670",
+            "rapid": "1863",
+            "classical": "1906",
+            "crazyhouse": "1991",
+            "threecheck": "1750",
+            "antichess": "1769",
+            "horde": "1525",
+            "atomic": "1518",
+            "chess960": "1727"
+        },
+        "bidamount": 6,
+        "bughousetest": "okeizh",
+        "bughousetestratings": {
+            "maxRating": "1317",
+            "bughouse": "1317"
         }
+    },
+    {
+        "id": "422847086145568769",
+        "username": "LAZYbotbeta#0941",
+        "messages": 0,
+        "bidamount": 0
+    },
+    {
+        "id": "365933164725534722",
+        "username": "Bouncer#8585",
+        "messages": 0,
+        "bidamount": 0
+    },
+    {
+        "id": "211569666991063040",
+        "username": "Vempele#7687",
+        "messages": 5640,
+        "lastmessage": "1. Ne6",
+        "lastmessagedate": 1527423141289,
+        "lichess": "kbmouse",
+        "lichessratings": {
+            "maxRating": "2488",
+            "ultra": "2105?",
+            "bullet": "2488",
+            "blitz": "2338",
+            "rapid": "1500?",
+            "classical": "1500?",
+            "crazyhouse": "2474",
+            "horde": "1472?",
+            "racingkings": "1478?"
+        }
+    },
+    {
+        "id": "303609777756438529",
+        "username": "Andrew#5850",
+        "messages": 5049,
+        "lastmessage": "not tonight",
+        "lastmessagedate": 1527397136243
+    },
+    {
+        "id": "317767348566097930",
+        "username": "PawnInTraining#5209",
+        "messages": 1721,
+        "lastmessage": "😜",
+        "lastmessagedate": 1527393947612
+    },
+    {
+        "id": "340287144448884748",
+        "username": "TcubesAK#3940",
+        "messages": 45411,
+        "lastmessage": "👍",
+        "trophy": [
+            "House Trivia Champion"
+        ],
+        "lastmessagedate": 1527300473089,
+        "lichess": "TcubesAK",
+        "lichessratings": {
+            "maxRating": "2354",
+            "ultra": "1999",
+            "bullet": "2035",
+            "blitz": "1817",
+            "rapid": "1500?",
+            "classical": "1500?",
+            "crazyhouse": "2354",
+            "threecheck": "1420?",
+            "antichess": "1751",
+            "koth": "1657"
+        },
+        "chesscom": "TcubesAK",
+        "chesscomratings": {
+            "maxRating": 2301,
+            "bullet": "1947",
+            "lightning": "1903",
+            "chess": "1270?",
+            "rapid": "1000?",
+            "crazyhouse": "2301",
+            "bughouse": "2275",
+            "tactics": "1927",
+            "lessons": "1103?"
+        }
+    },
+    {
+        "id": "330193848137678848",
+        "username": "Raven#9079",
+        "messages": 50259,
+        "lastmessage": "<:lul:416599131532820492>",
+        "trophy": [
+            "April Fools 2018 Survivor 'bye'"
+        ],
+        "lastmessagedate": 1527545672560,
+        "source": "Lichess",
+        "lichess": "PepsiNGaming",
+        "lichessratings": {
+            "maxRating": "2169",
+            "ultra": "1481",
+            "bullet": "1654",
+            "blitz": "1596",
+            "rapid": "1233?",
+            "classical": "1178",
+            "crazyhouse": "1802",
+            "threecheck": "1284",
+            "antichess": "2169",
+            "horde": "1542",
+            "atomic": "1741",
+            "chess960": "1173?",
+            "koth": "1494",
+            "racingkings": "1763"
+        },
+        "chesscom": "PepsiNGaming",
+        "chesscomratings": {
+            "maxRating": 1540,
+            "bullet": "1200",
+            "lightning": "962",
+            "chess": "1029?",
+            "rapid": "1175",
+            "koth": "1041",
+            "crazyhouse": "1388",
+            "bughouse": "1518",
+            "tactics": "779",
+            "lessons": "1540"
+        }
+    },
+    {
+        "id": "293465140739964929",
+        "username": "MeneerMandje#9220",
+        "messages": 18659,
+        "finger": "I suck at chess",
+        "lastmessage": "But ok don't wanna gamble",
+        "trophy": [
+            "Biggest Gambling Loser"
+        ],
+        "lastmessagedate": 1527425480562,
+        "source": "Lichess",
+        "chesscom": "kleinebeer98",
+        "chesscomratings": {
+            "maxRating": 2718,
+            "bullet": "2618",
+            "lightning": "2449",
+            "chess": "1824",
+            "rapid": "800",
+            "koth": "2504",
+            "crazyhouse": "1978",
+            "bughouse": "2127",
+            "chess960": "1662",
+            "livechess960": "2567?",
+            "tactics": "2718",
+            "lessons": "1715"
+        },
+        "bidamount": 1,
+        "lichess": "NicolaiJorgensen",
+        "lichessratings": {
+            "maxRating": "2508",
+            "ultra": "2243",
+            "bullet": "2508",
+            "blitz": "2417",
+            "rapid": "1500?",
+            "classical": "1500?"
+        }
+    },
+    {
+        "id": "365105589715599360",
+        "username": "Simba7#0506",
+        "messages": 46974,
+        "finger": "<3",
+        "lastmessage": "seeya <3",
+        "trophy": [
+            "Worst Diarrhoea",
+            "surviv.io beast"
+        ],
+        "lastmessagedate": 1526568835639,
+        "source": "Lichess",
+        "chesscom": "siemba",
+        "chesscomratings": {
+            "maxRating": 2201,
+            "bullet": "2201",
+            "lightning": "1838",
+            "crazyhouse": "1803",
+            "bughouse": "2125"
+        },
+        "age": "14",
+        "sex": "genderneutral",
+        "location": "Netherlands",
+        "bidamount": 10,
+        "lichess": "Pietju_Bell",
+        "lichessratings": {
+            "maxRating": "2308",
+            "ultra": "2004",
+            "bullet": "2308",
+            "blitz": "2207",
+            "rapid": "1500?",
+            "classical": "1500?",
+            "crazyhouse": "2067"
+        },
+        "bughousetest": "ShellyIsTheBest",
+        "bughousetestratings": {
+            "maxRating": "2033",
+            "bughouse": "2033"
+        }
+    },
+    {
+        "id": "381241162121478164",
+        "username": "KylieJenner#2185",
+        "messages": 5259,
+        "lastmessage": "i read that too...",
+        "lastmessagedate": 1527363145104,
+        "bidamount": 0,
+        "sex": "genderneutral",
+        "location": "Fiji",
+        "age": "3"
+    },
+    {
+        "id": "349930835274629120",
+        "username": "winquit#9030",
+        "messages": 8234,
+        "lastmessage": "thank you",
+        "lastmessagedate": 1522704118501
+    },
+    {
+        "id": "377227077859934208",
+        "username": "Babosos#3628",
+        "messages": 9589,
+        "lastmessage": "Hey <@363519664875372556> just type !update",
+        "lastmessagedate": 1527392307452,
+        "lichess": "Babosos",
+        "lichessratings": {
+            "maxRating": "2252",
+            "ultra": "1358",
+            "bullet": "1513",
+            "blitz": "1368",
+            "rapid": "1548",
+            "classical": "1634?",
+            "crazyhouse": "1351",
+            "threecheck": "1487",
+            "antichess": "1844",
+            "horde": "1956",
+            "atomic": "1640",
+            "chess960": "1415",
+            "koth": "1581",
+            "racingkings": "2252"
+        },
+        "age": "23",
+        "sex": "male",
+        "location": "Usa"
+    },
+    {
+        "id": "324082212146249730",
+        "username": "titsinablender#1754",
+        "messages": 12732,
+        "finger": "i love thelazymd",
+        "lastmessage": "kk i'll leave",
+        "lastmessagedate": 1527373371187,
+        "source": "Lichess",
+        "lichess": "littleplotkin",
+        "lichessratings": {
+            "maxRating": "2803",
+            "ultra": "2435",
+            "bullet": "2803",
+            "blitz": "2358",
+            "rapid": "2511",
+            "classical": "1938",
+            "crazyhouse": "2435",
+            "threecheck": "2281",
+            "antichess": "2087",
+            "horde": "2201",
+            "atomic": "2239",
+            "chess960": "2503",
+            "koth": "2254",
+            "racingkings": "2215"
+        }
+    },
+    {
+        "id": "280124361833316352",
+        "username": "crptone#1398",
+        "messages": 2492,
+        "lastmessage": "awesome!",
+        "lastmessagedate": 1526554496654,
+        "lichess": "crptone",
+        "lichessratings": {
+            "maxRating": "2482",
+            "ultra": "1892",
+            "bullet": "2482",
+            "blitz": "2405",
+            "rapid": "2404",
+            "classical": "1500?",
+            "crazyhouse": "2270",
+            "threecheck": "2153",
+            "antichess": "1836?",
+            "horde": "1811?",
+            "atomic": "1816",
+            "chess960": "2286",
+            "koth": "1915",
+            "racingkings": "1821?"
+        }
+    },
+    {
+        "id": "424207229231693824",
+        "username": "Kaizen#4605",
+        "messages": 28,
+        "lastmessage": "does anyone have a chesscafe.com account they dont use anymore that I could use to read the articles? Shoot me a pm, thank you.",
+        "lastmessagedate": 1523133182895
+    },
+    {
+        "id": "409729432236982282",
+        "username": "Musickn#8622",
+        "messages": 53566,
+        "finger": "LAZY You can do IT!",
+        "lastmessage": "10 🌸 if <@330193848137678848> Can beat me 30-0 in a series of 30 games of anti (played over many days)",
+        "lastmessagedate": 1527380609095,
+        "source": "Lichess",
+        "sex": "❤",
+        "location": "Lazy",
+        "lichess": "Musicknight123",
+        "lichessratings": {
+            "maxRating": "2227",
+            "ultra": "1924",
+            "bullet": "1500?",
+            "blitz": "1500?",
+            "rapid": "1500?",
+            "classical": "1500?",
+            "crazyhouse": "2153",
+            "threecheck": "2001",
+            "antichess": "1799",
+            "horde": "1785",
+            "atomic": "1949",
+            "chess960": "2227",
+            "koth": "2006",
+            "racingkings": "2011"
+        }
+    },
+    {
+        "id": "407662597555617802",
+        "username": "moonenane#3553",
+        "messages": 4003,
+        "lastmessage": "then write .iam zh",
+        "lastmessagedate": 1527406040785,
+        "finger": "bug",
+        "chesscom": "hydrosuit",
+        "chesscomratings": {
+            "maxRating": 1943,
+            "bullet": "1494",
+            "lightning": "1307",
+            "chess": "1130",
+            "rapid": "1268",
+            "koth": "1448",
+            "crazyhouse": "1924",
+            "bughouse": "1943",
+            "chess960": "1147?",
+            "livechess960": "1651",
+            "tactics": "1637",
+            "lessons": "1662"
+        },
+        "lichess": "moonenane",
+        "lichessratings": {
+            "maxRating": "2115",
+            "ultra": "1295",
+            "bullet": "1690",
+            "blitz": "1599",
+            "rapid": "1628",
+            "classical": "1445?",
+            "crazyhouse": "2115",
+            "threecheck": "1578",
+            "antichess": "1645?",
+            "horde": "1495?",
+            "atomic": "1432",
+            "chess960": "1703",
+            "koth": "1697?",
+            "racingkings": "1399?"
+        },
+        "bughousetest": "moonenane",
+        "bughousetestratings": {
+            "maxRating": "1777",
+            "bughouse": "1777"
+        }
+    },
+    {
+        "id": "341618941317349376",
+        "username": "savagechess2k#4620",
+        "messages": 986,
+        "lastmessage": "greecekid123 is %99 dim456 aka scaenivvolgreece",
+        "lastmessagedate": 1527413594285
+    },
+    {
+        "id": "282841374410407937",
+        "username": "ArdinB#9567",
+        "messages": 10216,
+        "finger": "too weak too slow",
+        "lastmessage": "what is this",
+        "lastmessagedate": 1527271529575,
+        "chesscom": "wildfiresa",
+        "chesscomratings": {
+            "maxRating": 2095,
+            "bullet": "2052",
+            "lightning": "2095",
+            "chess": "1886",
+            "rapid": "1698",
+            "bughouse": "1507",
+            "chess960": "1424",
+            "tactics": "1973",
+            "lessons": "2024"
+        },
+        "lichess": "Sonata2",
+        "lichessratings": {
+            "maxRating": "2215",
+            "ultra": "1901",
+            "bullet": "2193",
+            "blitz": "2193",
+            "rapid": "2171",
+            "classical": "2215",
+            "crazyhouse": "1911",
+            "threecheck": "1852",
+            "antichess": "1883",
+            "horde": "2016",
+            "atomic": "1829",
+            "chess960": "2016",
+            "koth": "2044",
+            "racingkings": "1868"
+        },
+        "age": "21",
+        "sex": "wolfkin",
+        "location": "Netherlands"
+    },
+    {
+        "id": "414816252733685760",
+        "username": "antic#0405",
+        "messages": 1235,
+        "lastmessage": "nah youre not",
+        "lastmessagedate": 1527386647319
+    },
+    {
+        "id": "375203600290414595",
+        "username": "Stubenfisch#9958",
+        "messages": 263,
+        "lastmessage": "Fair enough",
+        "lastmessagedate": 1527374483784
+    },
+    {
+        "id": "253347755081203713",
+        "username": "Nikolas Theiss#0362",
+        "messages": 150,
+        "lastmessage": "Want to play them, <@333586342275710978> ?",
+        "lastmessagedate": 1526504088632
+    },
+    {
+        "id": "290049116900294656",
+        "username": "Mugwort#6375",
+        "messages": 380,
+        "lastmessage": "do you wait a while before moving the same piece twice in a row in zh?",
+        "lastmessagedate": 1527418956650
+    },
+    {
+        "id": "425719814086983690",
+        "username": "Massacre99#6655",
+        "messages": 2545,
+        "lastmessage": "felt how it works",
+        "lastmessagedate": 1526476559409
+    },
+    {
+        "id": "373833486164819970",
+        "username": "rapidplayer#6192",
+        "messages": 6497,
+        "finger": "Hi all! Join please https://discord.gg/Wf8Dsxp",
+        "lastmessage": "A",
+        "lastmessagedate": 1527020450209,
+        "source": "Lichess",
+        "lichess": "rapidplayer",
+        "lichessratings": {
+            "maxRating": "2279",
+            "ultra": "1761",
+            "bullet": "1970",
+            "blitz": "1859",
+            "rapid": "1652?",
+            "classical": "1500?",
+            "crazyhouse": "1856?",
+            "threecheck": "1990?",
+            "antichess": "1939",
+            "horde": "1716?",
+            "atomic": "2279",
+            "chess960": "1728?",
+            "koth": "1974?",
+            "racingkings": "1765?"
+        },
+        "age": "11",
+        "sex": "male",
+        "location": "Pontault-combault",
+        "modverified": [
+            "modverified"
+        ],
+        "chesscom": "atomicbullet",
+        "chesscomratings": {
+            "maxRating": 1925,
+            "bullet": "1547?",
+            "lightning": "1652",
+            "chess": "1228",
+            "koth": "1925",
+            "chess960": "1151?",
+            "tactics": "1761",
+            "lessons": "1646"
+        }
+    },
+    {
+        "id": "333586342275710978",
+        "username": "MMichael#3973",
+        "messages": 17672,
+        "lastmessage": "Lazybot and Lazybotbeta both posting FENs after !fen, see <#390259605529427969> btw",
+        "lastmessagedate": 1527425725663,
+        "lichess": "MMichael",
+        "lichessratings": {
+            "maxRating": "2663",
+            "bullet": "2503",
+            "blitz": "2337",
+            "rapid": "2369",
+            "classical": "2245?",
+            "crazyhouse": "2663",
+            "chess960": "2314"
+        },
+        "chesscom": "MMichael",
+        "chesscomratings": {
+            "maxRating": 2501,
+            "bullet": "2397",
+            "lightning": "2313",
+            "chess": "1494",
+            "rapid": "1762",
+            "crazyhouse": "2433",
+            "bughouse": "2501",
+            "tactics": "2311",
+            "lessons": "1946"
+        }
+    },
+    {
+        "id": "179603851073028100",
+        "username": "PsyMar#2210",
+        "messages": 1604,
+        "finger": "You know what I hate about the bloody obvious? Missing it.",
+        "lastmessage": "you're in remission.  good luck staying there",
+        "trophy": [
+            "April Fools 2018 Survivor 'open the doors'"
+        ],
+        "lastmessagedate": 1527305542538,
+        "source": "Chesscom",
+        "lichessratings": {
+            "maxRating": "1648",
+            "bullet": "1500?",
+            "blitz": "1477?",
+            "rapid": "1587?",
+            "classical": "1647?",
+            "antichess": "1648"
+        },
+        "lichess": "PsyMar2",
+        "chesscom": "PsyMar2",
+        "chesscomratings": {
+            "maxRating": 1789,
+            "lightning": "875?",
+            "chess": "1526",
+            "rapid": "1394",
+            "chess960": "1369",
+            "tactics": "1273",
+            "lessons": "1789"
+        }
+    },
+    {
+        "id": "200638507436212224",
+        "username": "Lacreatio#6241",
+        "messages": 2011,
+        "finger": "imma finger the finger",
+        "lastmessage": "and i pull off a swindle due to many crappy mistakes we both made",
+        "lastmessagedate": 1526819529817,
+        "source": "Lichess",
+        "lichess": "Lacreatio",
+        "lichessratings": {
+            "maxRating": "1419",
+            "bullet": "1214",
+            "blitz": "1379",
+            "rapid": "1380",
+            "classical": "1419"
+        },
+        "chesscom": "Lacreatio",
+        "chesscomratings": {
+            "maxRating": 1570,
+            "tactics": "1413",
+            "lightning": "832",
+            "chess": "1342",
+            "rapid": "1017",
+            "lessons": "1570"
+        }
+    },
+    {
+        "id": "356192671750029313",
+        "username": "kapparov#9757",
+        "messages": 6788,
+        "lastmessage": "even before Nb5 he must be much better",
+        "lastmessagedate": 1527425609094
+    },
+    {
+        "id": "123574379601723392",
+        "username": "lovlas#8671",
+        "messages": 980,
+        "lastmessage": ",timely",
+        "lastmessagedate": 1525644305859,
+        "bidamount": 0,
+        "lichess": "lovlas",
+        "lichessratings": {
+            "maxRating": "2480",
+            "ultra": "2300",
+            "bullet": "2480",
+            "blitz": "2458",
+            "rapid": "2404",
+            "classical": "2479",
+            "crazyhouse": "2184",
+            "threecheck": "2098",
+            "antichess": "1725",
+            "horde": "2112",
+            "atomic": "1892",
+            "chess960": "2138",
+            "koth": "2225",
+            "racingkings": "2000"
+        },
+        "chesscom": "lovlas",
+        "chesscomratings": {
+            "maxRating": 2381,
+            "bullet": "2381",
+            "lightning": "2343",
+            "chess": "1781",
+            "rapid": "2420?",
+            "bughouse": "2275",
+            "chess960": "1345?",
+            "tactics": "2069",
+            "lessons": "1285"
+        }
+    },
+    {
+        "id": "372355465939779595",
+        "username": "TestAccountforLAZY#6291",
+        "messages": 41744,
+        "lastmessage": "4",
+        "lastmessagedate": 1523292957030,
+        "bidamount": 2
     },
     {
         "id": "325736595980288010",
         "username": "Kyle#4287",
-        "messages": 1730,
-        "finger": "",
-        "lastmessage": "sorry guys marathon starts in less than a minute gtg",
-        "trophies": [],
-        "lastmessagedate": 1522490353707,
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "messages": 8427,
+        "lastmessage": "lol how long does that take?",
+        "lastmessagedate": 1527547716437,
+        "lichess": "KyleLegion",
+        "lichessratings": {
+            "maxRating": "2449",
+            "ultra": "1919",
+            "bullet": "2038",
+            "blitz": "1761",
+            "rapid": "1500?",
+            "classical": "1906?",
+            "crazyhouse": "2449",
+            "threecheck": "1791",
+            "antichess": "1872",
+            "horde": "1642",
+            "atomic": "1779",
+            "chess960": "1569",
+            "koth": "1773",
+            "racingkings": "1765"
+        },
+        "chesscom": "KyleLegion",
+        "chesscomratings": {
+            "maxRating": 2098,
+            "bullet": "1228",
+            "lightning": "1174",
+            "rapid": "1377?",
+            "crazyhouse": "2098",
+            "bughouse": "1869",
+            "tactics": "1291"
+        },
+        "bughousetest": "Kyle",
+        "bughousetestratings": {
+            "maxRating": "1500",
+            "bughouse": "1500"
+        }
     },
     {
         "id": "319235482619740160",
         "username": "LegionDestroyer#1652",
-        "messages": 163,
-        "finger": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "messages": 588,
+        "lastmessage": "wtf we worse DansGame",
+        "lastmessagedate": 1527386733617,
+        "lichess": "LegionDestroyer",
+        "lichessratings": {
+            "maxRating": "2350",
+            "ultra": "1723",
+            "bullet": "1837",
+            "blitz": "1647",
+            "rapid": "1672",
+            "classical": "1671",
+            "crazyhouse": "2350",
+            "threecheck": "1757",
+            "horde": "1446?",
+            "chess960": "1439",
+            "koth": "1825?",
+            "racingkings": "1631?"
+        }
     },
     {
         "id": "339587935458557963",
         "username": "retardedplatypus123#0264",
-        "messages": 490,
-        "finger": "",
-        "trophies": [],
-        "lastmessagedate": 1522438774343,
-        "lastmessage": "hehe thanks opper",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "messages": 1057,
+        "lastmessagedate": 1527386747579,
+        "lastmessage": "<:lul:416599131532820492>",
+        "lichess": "retardedplatypus123",
+        "lichessratings": {
+            "maxRating": "2426",
+            "ultra": "1779",
+            "bullet": "2164",
+            "blitz": "1994",
+            "rapid": "2047",
+            "classical": "2047",
+            "crazyhouse": "2426",
+            "threecheck": "1780",
+            "antichess": "1321?",
+            "horde": "1399",
+            "atomic": "1707",
+            "chess960": "1701",
+            "koth": "1813?",
+            "racingkings": "1387?"
+        },
+        "finger": "zh noob"
     },
     {
         "id": "163325840136863744",
         "username": "ProgramFOX#1012",
-        "messages": 866,
-        "finger": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "messages": 1644,
+        "lastmessage": "anyway I'm going to sleep, good luck",
+        "lastmessagedate": 1527367844637,
+        "lichess": "ProgramFOX",
+        "lichessratings": {
+            "maxRating": "2249",
+            "ultra": "1933",
+            "bullet": "2101",
+            "blitz": "1803",
+            "rapid": "1718",
+            "classical": "1729?",
+            "crazyhouse": "1869",
+            "threecheck": "1814",
+            "antichess": "2240",
+            "horde": "1833",
+            "atomic": "2249",
+            "chess960": "1841",
+            "koth": "1896",
+            "racingkings": "1827"
+        }
     },
     {
         "id": "299119819985518592",
         "username": "Guaore#6999",
-        "messages": 206,
-        "finger": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "messages": 389,
+        "lastmessagedate": 1527144095901,
+        "lastmessage": "<:GWpingSock:400765764682121226>"
     },
     {
         "id": "346485544848457728",
         "username": "the-loone-woolf#4001",
-        "messages": 18494,
-        "finger": "",
-        "trophies": [],
-        "lastmessagedate": 1522527610058,
-        "lastmessage": "you can proof that head is more likely then cross or the inverse?",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "messages": 23348,
+        "lastmessagedate": 1527392495009,
+        "lastmessage": "😉",
+        "lichess": "the-lone-wolf",
+        "lichessratings": {
+            "maxRating": "2100",
+            "bullet": "1472?",
+            "blitz": "1570?",
+            "rapid": "1351?",
+            "classical": "1500?",
+            "crazyhouse": "2077",
+            "threecheck": "1864",
+            "antichess": "2100",
+            "horde": "1526?",
+            "atomic": "1927",
+            "koth": "1582",
+            "racingkings": "1430?"
+        },
+        "chesscom": "The-Lone-Wolf",
+        "chesscomratings": {
+            "maxRating": 2173,
+            "lightning": "770?",
+            "chess": "1189?",
+            "crazyhouse": "2173",
+            "bughouse": "2077"
+        }
     },
     {
         "id": "413007142673711125",
         "username": "Bank of Musickn#7879",
-        "messages": 4648,
-        "finger": "",
-        "trophies": [],
-        "lastmessagedate": 1522437945306,
-        "lastmessage": "<:feelsamazingman:376492390992838666>",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "messages": 4773,
+        "lastmessagedate": 1524358536841,
+        "lastmessage": "😦"
     },
     {
         "id": "410876677963382797",
         "username": "bankofchessguy101#4015",
-        "messages": 4060,
-        "finger": "",
-        "trophies": [],
-        "lastmessagedate": 1522446003598,
-        "source": "",
-        "lastmessage": "Tuna strat",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "messages": 4121,
+        "lastmessagedate": 1522708966320,
+        "lastmessage": "rembrandt"
     },
     {
         "id": "406078647238131723",
         "username": "BankierBankje#6031",
-        "messages": 236,
-        "finger": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "messages": 237
     },
     {
         "id": "397704323976396803",
         "username": "medved9112#6965",
-        "messages": 74,
-        "finger": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "messages": 101,
+        "lastmessage": "yay",
+        "lastmessagedate": 1527290650736
     },
     {
         "id": "317034686973214720",
         "username": "Gopnik#4031",
-        "messages": 378,
+        "messages": 8256,
         "finger": "cheeki breeki iv damke",
-        "trophies": [],
-        "lastmessagedate": 1522354306381,
-        "lastmessage": "oh ok",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "lastmessagedate": 1526919038526,
+        "lastmessage": "not really",
+        "lichess": "Gopnikk",
+        "lichessratings": {
+            "maxRating": "2100",
+            "ultra": "1921",
+            "bullet": "2100",
+            "blitz": "1907",
+            "rapid": "1500?",
+            "classical": "1500?",
+            "crazyhouse": "1675",
+            "koth": "1496"
+        },
+        "age": "87",
+        "sex": "often",
+        "location": "Europe"
     },
     {
         "id": "316064197425496064",
         "username": "Sazed#8955",
-        "messages": 41,
-        "finger": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "messages": 45
     },
     {
         "id": "238054892227395584",
         "username": "JohnBenoni#0963",
-        "messages": 65,
-        "finger": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "messages": 65
     },
     {
         "id": "423980335345434624",
         "username": "BankOfBurakYarol#9728",
-        "messages": 137,
-        "finger": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "messages": 449,
+        "lastmessage": "I cant watch",
+        "lastmessagedate": 1527279490110,
+        "age": "18",
+        "sex": "male",
+        "location": "Europe",
+        "lichess": "BurakYarol",
+        "lichessratings": {
+            "maxRating": "2017",
+            "ultra": "1538",
+            "bullet": "1912",
+            "blitz": "2011",
+            "rapid": "1639",
+            "classical": "1224?",
+            "crazyhouse": "2017",
+            "threecheck": "1373?",
+            "antichess": "1597?",
+            "horde": "1908?",
+            "atomic": "1452?",
+            "chess960": "1513",
+            "koth": "1427",
+            "racingkings": "1727"
+        }
     },
     {
         "id": "291630149655330817",
         "username": "Milos99#2459",
-        "messages": 125,
-        "finger": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "messages": 138,
+        "lastmessage": "🏓",
+        "lastmessagedate": 1524063830490
     },
     {
         "id": "313522262429007873",
         "username": "Plasterhippy#0090",
-        "messages": 1790,
-        "finger": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "messages": 1838,
+        "lastmessage": "im still like 2100 zh just very rusty",
+        "lastmessagedate": 1525473689808
     },
     {
         "id": "373864486119014412",
         "username": "Lesau#6766",
-        "messages": 2319,
-        "finger": "",
-        "lastmessage": "We can do that in <#403303394196062228>",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "messages": 2366,
+        "lastmessage": "Nonononononono 😭 😭 ; 😭",
+        "lastmessagedate": 1527261340641,
+        "trophy": [
+            "Plus Jeune Dans Le Serveur"
+        ]
     },
     {
         "id": "412434401700347905",
-        "username": "bankofkardashian#1866",
+        "username": "guy2456#1866",
         "messages": 163,
-        "finger": "",
-        "trophies": [],
         "lastmessagedate": 1522522198389,
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": "",
         "lastmessage": "<@409729432236982282>"
     },
     {
         "id": "276810203809185793",
         "username": "sucksatchess132#4135",
-        "messages": 132,
-        "finger": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "messages": 132
     },
     {
         "id": "373666100791214085",
         "username": "pigeons#7309",
-        "messages": 9209,
-        "finger": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "messages": 9753,
+        "lastmessagedate": 1523058241220,
+        "lastmessage": "for what",
+        "trophy": [
+            "Banned the Most Times"
+        ]
     },
     {
         "id": "426167642177536010",
         "username": "PornFanboy69#3460",
-        "messages": 9,
-        "finger": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "messages": 9
     },
     {
         "id": "359072978375540768",
         "username": "ace_mars#7544",
-        "messages": 24,
-        "finger": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "messages": 28,
+        "lastmessagedate": 1522635142467,
+        "lastmessage": "no"
     },
     {
         "id": "251714003607355392",
         "username": "blyat#4377",
-        "messages": 19,
-        "finger": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "messages": 19
     },
     {
         "id": "163009245367894019",
         "username": "Sooya#7118",
-        "messages": 17,
-        "finger": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "messages": 17
     },
     {
         "id": "199017984528875520",
         "username": "Zach#3388",
-        "messages": 50,
-        "finger": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "messages": 54,
+        "lastmessagedate": 1524008361058,
+        "lastmessage": "1. d4 resigns is my pet line",
+        "lichess": "zdwalsh",
+        "lichessratings": {
+            "maxRating": "1948",
+            "bullet": "1599",
+            "blitz": "1645",
+            "rapid": "1710?",
+            "classical": "1668",
+            "crazyhouse": "1948",
+            "atomic": "1281?",
+            "chess960": "1711"
+        }
     },
     {
         "id": "302598408773042188",
         "username": "shadowknight#1817",
-        "messages": 15,
-        "finger": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "messages": 20,
+        "lastmessage": "Oh yeah that engine.  Haven't touched that thing in so long; tbh it might have been lost when my old laptop died on me.",
+        "lastmessagedate": 1525299090449
     },
     {
         "id": "133249411303211008",
         "username": "hauptschule#8263",
-        "messages": 197,
-        "finger": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "messages": 3131,
+        "lastmessage": "<:kappa:392195924258193410>",
+        "lastmessagedate": 1527423850698,
+        "lichess": "hauptschule",
+        "lichessratings": {
+            "maxRating": "2500",
+            "bullet": "1522?",
+            "blitz": "1598",
+            "rapid": "1541",
+            "classical": "1500?",
+            "crazyhouse": "1548?",
+            "antichess": "2500",
+            "atomic": "1428?"
+        }
     },
     {
-        "id": "267767816847884299",
-        "username": "OfficialDenyLYT#9028",
-        "messages": 1812,
-        "finger": "https://chessvariants.training",
-        "lastmessage": "snarlo",
-        "trophies": [],
-        "lastmessagedate": 1522502193003,
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "id": "273152076421529601",
+        "username": "bureky#7827",
+        "messages": 28689,
+        "finger": "Я хочу съесть твою задницу, как блин",
+        "lastmessage": "S chess is the worst variant ever",
+        "lastmessagedate": 1527278688801,
+        "source": "Chesscom",
+        "age": "19",
+        "sex": "4timesaweek",
+        "location": "Turkey",
+        "bidamount": 3,
+        "modnotes": [
+            "lab-rat if you need anything"
+        ],
+        "lichess": "BurakYarol",
+        "lichessratings": {
+            "maxRating": "2011",
+            "ultra": "1538",
+            "bullet": "1923",
+            "blitz": "2011",
+            "rapid": "1639",
+            "classical": "1224?",
+            "crazyhouse": "1798",
+            "threecheck": "1372?",
+            "antichess": "1597?",
+            "horde": "1908?",
+            "atomic": "1452?",
+            "chess960": "1510",
+            "koth": "1450",
+            "racingkings": "1727"
+        },
+        "modverified": [
+            "confirmedfalse"
+        ]
     },
     {
         "id": "235057081814614017",
         "username": "EricAbneri#2837",
-        "messages": 6235,
-        "finger": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "messages": 6272,
+        "lastmessagedate": 1525660486242,
+        "lastmessage": "Vedic what the fuck do you want"
     },
     {
         "id": "259383384109744138",
-        "username": "bakkouz",
-        "messages": 469,
-        "finger": "",
-        "trophies": [],
-        "lastmessagedate": 1522597170790,
-        "source": "lichess",
+        "username": "bakkouz#7251",
+        "messages": 1179,
+        "trophy": [
+            "April Fools 2018 Survivor 'whats the problem' + 2"
+        ],
+        "lastmessagedate": 1527272013173,
+        "source": "Lichess",
+        "lastmessage": "fu",
         "lichess": "bakkouz",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": "",
-        "lastmessage": "lazy obi obi lazy",
         "lichessratings": {
-            "classical": 1899,
-            "maxRating": 1899,
-            "rapid": 1899,
-            "blitz": 1732
+            "maxRating": "1899",
+            "bullet": "1500?",
+            "blitz": "1732",
+            "rapid": "1899",
+            "classical": "1899",
+            "antichess": "1505",
+            "horde": "1530?",
+            "atomic": "1865",
+            "koth": "1838?"
         }
     },
     {
         "id": "426491483101593608",
         "username": "hiya#0828",
-        "messages": 4,
-        "finger": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "messages": 4
     },
     {
         "id": "410999653035802636",
         "username": "selflessduck#2119",
-        "messages": 2579,
-        "finger": "",
-        "trophies": [],
-        "lastmessagedate": 1522531720745,
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": "",
-        "lastmessage": "stfu tuna idc"
+        "messages": 2884,
+        "lastmessagedate": 1524183040008,
+        "lastmessage": "😦"
     },
     {
         "id": "417651871415664640",
         "username": "Samurai#2164",
-        "messages": 9,
-        "finger": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "messages": 9
     },
     {
         "id": "391042702722203649",
         "username": "JannLee#4233",
-        "messages": 15,
-        "finger": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "messages": 15
     },
     {
         "id": "353632747530485763",
         "username": "Deadban#6999",
-        "messages": 314,
-        "finger": "",
-        "lastmessage": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "messages": 329,
+        "lastmessage": "Btw I'm back over 2000! Really happy 😀",
+        "lastmessagedate": 1525289069832
     },
     {
         "id": "303746725292539916",
         "username": "TheM492017#5103",
-        "messages": 213,
-        "finger": "",
-        "lastmessage": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "messages": 301,
+        "lichess": "TheM492017",
+        "lichessratings": {
+            "maxRating": "1892",
+            "ultra": "1405",
+            "bullet": "1500",
+            "blitz": "1433",
+            "rapid": "1604",
+            "classical": "1500?",
+            "crazyhouse": "1519",
+            "threecheck": "1498",
+            "antichess": "1801",
+            "horde": "1413?",
+            "atomic": "1892",
+            "chess960": "1447?",
+            "koth": "1458",
+            "racingkings": "1631"
+        },
+        "chesscom": "TheM492017",
+        "chesscomratings": {
+            "maxRating": 1446,
+            "bullet": "1220?",
+            "lightning": "1257",
+            "crazyhouse": "1086",
+            "bughouse": "818",
+            "tactics": "917",
+            "lessons": "1446"
+        },
+        "lastmessage": "joddle",
+        "lastmessagedate": 1526734774261
     },
     {
         "id": "341611207062716418",
         "username": "hidden _expert#8350",
-        "messages": 395,
-        "finger": "",
-        "lastmessage": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "messages": 395
     },
     {
         "id": "323331814267682816",
         "username": "Koutsalogo#9133",
-        "messages": 8,
-        "finger": "",
-        "lastmessage": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "messages": 241,
+        "lastmessage": "canımızın istediği gibi seçebiliyosak direkt ateist olsunlar niye christian müstad",
+        "lastmessagedate": 1526005136303
     },
     {
         "id": "165597013507964928",
         "username": "tinyds#7501",
-        "messages": 2,
-        "finger": "",
-        "lastmessage": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "messages": 5,
+        "lastmessage": "ILY",
+        "lastmessagedate": 1523920883087
     },
     {
         "id": "371693025702838285",
         "username": "420Blaziken_it#9136",
-        "messages": 0,
-        "finger": "",
-        "lastmessage": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "messages": 4,
+        "lastmessage": "whats your rating now wolf?",
+        "lastmessagedate": 1526323125829
     },
     {
         "id": "258998411284447232",
         "username": "Gira#7810",
-        "messages": 0,
-        "finger": "",
-        "lastmessage": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "messages": 46,
+        "lastmessage": "faker",
+        "lastmessagedate": 1524420548803
     },
     {
         "id": "314398658063892488",
         "username": "mathace#6115",
-        "messages": 0,
-        "finger": "",
-        "lastmessage": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "messages": 2
     },
     {
         "id": "320694669925154826",
         "username": "yaswine#1786",
-        "messages": 0,
-        "finger": "",
-        "lastmessage": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
-    },
-    {
-        "id": "320694669925154826",
-        "username": "yaswine#1786",
-        "messages": 0,
-        "finger": "",
-        "lastmessage": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "messages": 0
     },
     {
         "id": "256159307677171714",
         "username": "TCOdelt#5906",
-        "messages": 0,
-        "finger": "",
-        "lastmessage": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "messages": 0
     },
     {
         "id": "338772451565502474",
-        "username": "LAZYbot",
-        "messages": 0,
-        "finger": "",
-        "lastmessage": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
-    },
-    {
-        "id": "338772451565502474",
-        "username": "LAZYbot",
-        "messages": 0,
-        "finger": "",
-        "lastmessage": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "username": "LAZYbot#2309",
+        "messages": 0
     },
     {
         "id": "412685971763494912",
-        "username": "Chessster",
-        "messages": 0,
-        "finger": "",
-        "lastmessage": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
-    },
-    {
-        "id": "412685971763494912",
-        "username": "Chessster",
-        "messages": 0,
-        "finger": "",
-        "lastmessage": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
-    },
-    {
-        "id": "412685971763494912",
-        "username": "Chessster",
-        "messages": 0,
-        "finger": "",
-        "lastmessage": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "username": "Chessster#2551",
+        "messages": 0
     },
     {
         "id": "415520360784461836",
-        "username": "Geometry Scheme",
-        "messages": 2,
-        "finger": "",
-        "lastmessage": "OMG",
-        "trophies": [],
-        "lastmessagedate": 1522441129689,
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "username": "Geometry Scheme#3717",
+        "messages": 11,
+        "lastmessage": "kappa",
+        "lastmessagedate": 1523890864406
     },
     {
         "id": "429424582303154177",
         "username": "ItsJustaPrankBro",
-        "messages": 16,
-        "finger": "",
-        "lastmessage": "ok kick this",
-        "trophies": [],
-        "lastmessagedate": 1522453623106,
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": ""
+        "messages": 101,
+        "lastmessage": "Cya",
+        "lastmessagedate": 1527539366314
     },
     {
         "id": "295488468245544970",
-        "username": "3mirhan",
+        "username": "3mirhan#6155",
         "messages": 0,
-        "finger": "",
-        "lastmessage": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": "",
-        "ratings": {}
+        "chesscomratings": {}
     },
     {
         "id": "336948121659637761",
         "username": "Bonexq",
         "messages": 0,
-        "finger": "",
-        "lastmessage": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": "",
-        "ratings": {}
+        "chesscomratings": {}
     },
     {
         "id": "412688795390181377",
-        "username": "chhan",
+        "username": "chhan#3348",
         "messages": 0,
-        "finger": "",
-        "lastmessage": "",
-        "trophies": [],
-        "lastmessagedate": "",
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": "",
-        "ratings": {}
+        "chesscomratings": {}
     },
     {
         "id": "317375246388953089",
-        "username": "TheUnknownGuyReborn",
-        "messages": 21,
-        "finger": "",
-        "lastmessage": "raicosta",
-        "trophies": [],
-        "lastmessagedate": 1522529514090,
-        "source": "",
-        "lichess": "",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": "",
-        "ratings": {}
+        "username": "TheUnknownGuyReborn#8226",
+        "messages": 307,
+        "lastmessage": "be quiet",
+        "lastmessagedate": 1527278144889,
+        "chesscomratings": {},
+        "lichess": "TheUnknownGuyReborn",
+        "lichessratings": {
+            "maxRating": "2160",
+            "ultra": "1533",
+            "bullet": "1756",
+            "blitz": "1624",
+            "rapid": "1611",
+            "classical": "1500?",
+            "crazyhouse": "1749",
+            "threecheck": "1621",
+            "antichess": "2160",
+            "horde": "1369?",
+            "atomic": "1699",
+            "chess960": "1619",
+            "koth": "1716?",
+            "racingkings": "1495"
+        }
     },
     {
         "id": "309899030651994112",
-        "username": "Aurichalcite",
-        "messages": 23,
-        "finger": "",
-        "lastmessage": "does timely not work?",
-        "trophies": [],
-        "lastmessagedate": 1522634777536,
-        "source": "lichess",
+        "username": "Aurichalcite#2190",
+        "messages": 527,
+        "lastmessage": "<@317375246388953089>  Ye, that's what i meant",
+        "lastmessagedate": 1526958826903,
+        "source": "Lichess",
         "lichess": "Aurichalcite",
-        "chesscom": "Aurichalcite",
-        "bughousetest": "",
-        "fics": "",
-        "ratings": {
-            "maxRating": 1229,
-            "ultra": "",
-            "UltraProvisional": true,
-            "bullet": 1500,
-            "BulletProvisional": true,
-            "blitz": 1186,
-            "BlitzProvisional": true,
-            "rapid": 1229,
-            "RapidProvisional": false,
-            "classical": 1500,
-            "ClassicalProvisional": true,
-            "crazyhouse": "",
-            "CrazyhouseProvisional": true,
-            "threecheck": "",
-            "3-checkProvisional": true,
-            "antichess": "",
-            "AntichessProvisional": true,
-            "horde": "",
-            "HordeProvisional": true,
-            "atomic": "",
-            "AtomicProvisional": true,
-            "chess960": "",
-            "Chess960Provisional": true,
-            "koth": "",
-            "KotHProvisional": true,
-            "racingkings": "",
-            "Racing KingsProvisional": true
+        "lichessratings": {
+            "maxRating": "1323",
+            "bullet": "1500?",
+            "blitz": "1264?",
+            "rapid": "1323",
+            "classical": "1500?"
         },
+        "chesscom": "Aurichalcite",
         "chesscomratings": {
             "maxRating": 1047,
-            "bullet": 665,
-            "bulletProvisional": false,
-            "tactics": 793,
-            "tacticsProvisional": false,
-            "lightning": 689,
-            "lightningProvisional": false,
-            "chess": 1047,
-            "chessProvisional": false,
-            "rapid": 920,
-            "rapidProvisional": false,
-            "lessons": 864,
-            "lessonsProvisional": false
-        },
-        "lichessratings": {
-            "maxRating": 1229,
-            "ultra": "",
-            "ultraProvisional": true,
-            "bullet": 1500,
-            "bulletProvisional": true,
-            "blitz": 1186,
-            "blitzProvisional": true,
-            "rapid": 1229,
-            "rapidProvisional": false,
-            "classical": 1500,
-            "classicalProvisional": true,
-            "crazyhouse": "",
-            "crazyhouseProvisional": true,
-            "threecheck": "",
-            "threecheckProvisional": true,
-            "antichess": "",
-            "antichessProvisional": true,
-            "horde": "",
-            "hordeProvisional": true,
-            "atomic": "",
-            "atomicProvisional": true,
-            "chess960": "",
-            "chess960Provisional": true,
-            "koth": "",
-            "kothProvisional": true,
-            "racingkings": "",
-            "racingkingsProvisional": true
+            "bullet": "665",
+            "lightning": "689",
+            "chess": "1047",
+            "rapid": "920",
+            "tactics": "793",
+            "lessons": "864"
         }
     },
     {
         "id": "240786679873404938",
-        "username": "andrey2888",
-        "messages": 4,
-        "finger": "",
-        "lastmessage": "you mean tournament points? Not much. But I played for not too long.",
-        "trophies": [],
-        "lastmessagedate": 1522534958562,
-        "source": "lichess",
-        "lichess": "andrey2888",
-        "chesscom": "",
-        "bughousetest": "",
-        "fics": "",
+        "username": "Andrey#2914",
+        "messages": 67,
+        "lastmessage": "lol https://lichess.org/gF5CorAq/black#16",
+        "trophy": [
+            "April Fools 2018 Survivor 'do you read me'"
+        ],
+        "lastmessagedate": 1523701076416,
+        "chesscomratings": {}
+    },
+    {
+        "id": "406477568317980674",
+        "username": "DirtyScammer#0355",
+        "messages": 296,
+        "lastmessage": "https://lichess.org/nj2PMU8n lol paired me with number 36th",
+        "lastmessagedate": 1522551475494,
+        "chesscomratings": {}
+    },
+    {
+        "id": "398124387645128714",
+        "username": "aniket9c",
+        "messages": 59,
+        "lastmessage": "K",
+        "lastmessagedate": 1522573160090,
+        "chesscomratings": {}
+    },
+    {
+        "id": "241131278945091584",
+        "username": "GamePerFrame (Pkay)#5559",
+        "messages": 15,
+        "lastmessage": "<@&390253470172708876> Could anyone remove this, please? Thank you 😃",
+        "lastmessagedate": 1524150452349,
+        "chesscomratings": {}
+    },
+    {
+        "id": "312824560602841089",
+        "username": "DuskyMountain#2584",
+        "messages": 205,
+        "finger": "NOOOOO! LAZYBOT!",
+        "lastmessage": "if playing on their server didn't feel like dragging a fork though drying concrete I would play there more",
+        "lastmessagedate": 1527239183236,
+        "source": "Chesscom",
+        "lichess": "corridor",
         "lichessratings": {
-            "crazyhouse": 1989,
-            "maxRating": 1989,
-            "classical": 1895,
-            "rapid": 1938,
-            "blitz": 1604,
-            "bullet": 1768
+            "maxRating": "2101",
+            "ultra": "1719",
+            "bullet": "2101",
+            "blitz": "2018",
+            "rapid": "2073",
+            "classical": "2017?",
+            "crazyhouse": "2037",
+            "threecheck": "1806",
+            "antichess": "1623",
+            "atomic": "1471",
+            "chess960": "1817",
+            "koth": "1855",
+            "racingkings": "1634?"
+        },
+        "chesscom": "wildllama",
+        "chesscomratings": {
+            "maxRating": 2030,
+            "bullet": "2030",
+            "lightning": "1910",
+            "chess": "1336?",
+            "rapid": "1633?",
+            "koth": "1684",
+            "crazyhouse": "1866",
+            "bughouse": "1629",
+            "livechess960": "2018?",
+            "tactics": "1951",
+            "lessons": "1792"
         }
     },
     {
-        "id": "168239196849438721",
-        "username": "flourish",
+        "id": "278828709975162882",
+        "username": "Doug",
         "messages": 0,
-        "finger": "",
-        "lastmessage": "",
-        "trophies": [],
-        "lastmessagedate": ""
+        "chesscomratings": {}
+    },
+    {
+        "id": "323170274503557121",
+        "username": "Dhiren_GM#8055",
+        "messages": 29,
+        "lastmessage": "latest video was ultrabullet",
+        "lastmessagedate": 1523888669215,
+        "chesscomratings": {},
+        "lichess": "DynamoAlchemyst",
+        "lichessratings": {
+            "maxRating": "1907",
+            "ultra": "1828",
+            "bullet": "1869",
+            "blitz": "1746",
+            "rapid": "1907",
+            "classical": "1500?",
+            "antichess": "1592?",
+            "chess960": "1882?"
+        },
+        "finger": "I have  a chess YT channel btw!"
+    },
+    {
+        "id": "128940476282830848",
+        "username": "Andy#0035",
+        "messages": 0,
+        "chesscomratings": {}
+    },
+    {
+        "id": "214371770797522945",
+        "username": "tetzki#8924",
+        "messages": 82,
+        "lastmessage": "the bot is yours?",
+        "lastmessagedate": 1522595212440,
+        "chesscomratings": {}
+    },
+    {
+        "id": "168239196849438721",
+        "username": "flourish#5667",
+        "messages": 117,
+        "chesscomratings": {},
+        "lastmessage": "he ascended",
+        "lastmessagedate": 1526064502685
+    },
+    {
+        "id": "373803387705098250",
+        "username": "TheBigNico#7881",
+        "messages": 178,
+        "lastmessage": "which obstacle ?",
+        "lastmessagedate": 1527280733320,
+        "chesscomratings": {}
     },
     {
         "id": "282805573173379072",
         "username": "LinusO",
         "messages": 0,
-        "finger": "",
-        "lastmessage": "",
-        "trophies": [],
-        "lastmessagedate": ""
-    },
-    {
-        "id": "304406888555085824",
-        "username": "JAMESYBOY",
-        "messages": 0,
-        "finger": "",
-        "lastmessage": "",
-        "trophies": [],
-        "lastmessagedate": ""
+        "chesscomratings": {}
     },
     {
         "id": "392031018313580546",
-        "username": "housebank",
-        "messages": 2,
-        "finger": "",
-        "lastmessage": "test",
-        "trophies": [],
-        "lastmessagedate": 1522618796192
+        "username": "housebank#5970",
+        "messages": 84,
+        "lastmessage": "hi obi",
+        "lastmessagedate": 1527034037852,
+        "source": "Lichess",
+        "lichess": "HouseDiscord",
+        "lichessratings": {
+            "crazyhouse": "",
+            "maxRating": "",
+            "ultra": "",
+            "threecheck": "",
+            "antichess": "",
+            "horde": "",
+            "atomic": "",
+            "chess960": "",
+            "koth": "",
+            "racingkings": ""
+        }
     },
     {
         "id": "332463677544595456",
         "username": "ChrisCashman",
         "messages": 0,
-        "finger": "",
-        "lastmessage": "",
-        "trophies": [],
-        "lastmessagedate": ""
+        "chesscomratings": {}
+    },
+    {
+        "id": "388560143555624970",
+        "username": "nowayouwin#1285",
+        "messages": 559,
+        "lastmessage": "froozing*",
+        "lastmessagedate": 1527344505940,
+        "chesscomratings": {
+            "maxRating": 1892,
+            "bullet": "1533",
+            "lightning": "1565",
+            "crazyhouse": "1774",
+            "bughouse": "1653",
+            "tactics": "1892",
+            "lessons": "1250?"
+        },
+        "lichess": "Nowayouwin",
+        "lichessratings": {
+            "maxRating": "2045",
+            "ultra": "2005",
+            "bullet": "2045",
+            "blitz": "1814",
+            "rapid": "1877",
+            "classical": "1810?",
+            "crazyhouse": "2007",
+            "threecheck": "1722",
+            "antichess": "1351?",
+            "horde": "1353?",
+            "atomic": "1568",
+            "chess960": "1809",
+            "koth": "1817",
+            "racingkings": "1692?"
+        },
+        "chesscom": "Nowayouwin"
+    },
+    {
+        "id": "428398365504438272",
+        "username": "Falcon#6391",
+        "messages": 440,
+        "lastmessage": "You will never win the tk shield",
+        "lastmessagedate": 1527383753432,
+        "lichess": "FalconPower",
+        "lichessratings": {
+            "maxRating": "2054",
+            "ultra": "1331?",
+            "bullet": "1543",
+            "blitz": "1583",
+            "rapid": "1459",
+            "classical": "1896?",
+            "crazyhouse": "1682",
+            "threecheck": "1612?",
+            "antichess": "1748",
+            "horde": "1740?",
+            "koth": "1520?",
+            "racingkings": "2054"
+        }
+    },
+    {
+        "id": "85064597119197184",
+        "username": "pydlv#9320",
+        "messages": 301,
+        "lastmessage": "/help",
+        "lastmessagedate": 1522987679356,
+        "lichess": "PMethod",
+        "lichessratings": {
+            "maxRating": "1667",
+            "ultra": "1145?",
+            "bullet": "1409",
+            "blitz": "1545",
+            "rapid": "1667",
+            "classical": "1667?",
+            "crazyhouse": "1386",
+            "threecheck": "1292?",
+            "antichess": "1314?",
+            "horde": "1632?",
+            "atomic": "1582",
+            "chess960": "1597",
+            "koth": "1340?"
+        }
+    },
+    {
+        "id": "402189273127976962",
+        "username": "atomicbullet#5855",
+        "messages": 4,
+        "lastmessage": "oops",
+        "lastmessagedate": 1524729587032
+    },
+    {
+        "id": "215903333561401345",
+        "username": "Citaz",
+        "messages": 0
+    },
+    {
+        "id": "386649194582245380",
+        "username": "Whitedancingrockstar#8646",
+        "messages": 25,
+        "lastmessage": "i just saw some caps lock and thats it <:kappa:392195924258193410>",
+        "lastmessagedate": 1526808029733
+    },
+    {
+        "id": "315133605619957760",
+        "username": "Michael.134096",
+        "messages": 0
+    },
+    {
+        "id": "377920849883168769",
+        "username": "Blunderwaffe",
+        "messages": 0
+    },
+    {
+        "id": "391250711297392640",
+        "username": "Kai",
+        "messages": 0
+    },
+    {
+        "id": "424996897451933716",
+        "username": "Chessmat3#4762",
+        "messages": 11,
+        "lastmessage": "He is disconnected",
+        "lastmessagedate": 1523104038424
+    },
+    {
+        "id": "364388430412513281",
+        "username": "JannLee#6802",
+        "messages": 29,
+        "lastmessage": "Keep up the crazyhouse!!",
+        "lastmessagedate": 1526900008991
+    },
+    {
+        "id": "151196126748475394",
+        "username": "CrossOnline#6043",
+        "messages": 11,
+        "lastmessage": "he just logged",
+        "lastmessagedate": 1526304174358
+    },
+    {
+        "id": "399869263512469505",
+        "username": "Leonardo#0547",
+        "messages": 0
+    },
+    {
+        "id": "427287368287125516",
+        "username": "(ᏠᏒ) ᎮᎧᎮ",
+        "messages": 23,
+        "lastmessage": "bughouse.test doesn't work still",
+        "lastmessagedate": 1524006501448
+    },
+    {
+        "id": "365177031224459264",
+        "username": "Truthdoc",
+        "messages": 167,
+        "lastmessage": "<@!356192671750029313> 3+ starting position needs to be changed",
+        "lastmessagedate": 1527104207004,
+        "lichess": "FischyVishy",
+        "lichessratings": {
+            "maxRating": "2428",
+            "ultra": "1953",
+            "bullet": "2428",
+            "blitz": "2256",
+            "rapid": "2122",
+            "classical": "2140?",
+            "crazyhouse": "2212",
+            "threecheck": "2252",
+            "antichess": "1827",
+            "horde": "1921",
+            "atomic": "2187",
+            "chess960": "2097",
+            "koth": "2039",
+            "racingkings": "1816"
+        }
+    },
+    {
+        "id": "360801859461447700",
+        "username": "Support-Manager#3578",
+        "messages": 0
+    },
+    {
+        "id": "382091409379033089",
+        "username": "Nethic",
+        "messages": 4,
+        "lastmessage": "I heard that s-chess might be coming to chess.com soon...would be amazing if it did.",
+        "lastmessagedate": 1523725809163
+    },
+    {
+        "id": "432945443878600705",
+        "username": "Pied#0251",
+        "messages": 49,
+        "lastmessage": "I got to go now, bye!",
+        "lastmessagedate": 1523296789113
+    },
+    {
+        "id": "120617221864030211",
+        "username": "Ender Tyrell#2161",
+        "messages": 1,
+        "lastmessage": "hello",
+        "lastmessagedate": 1523318862944
+    },
+    {
+        "id": "199893032382758912",
+        "username": "tailow#5181",
+        "messages": 2,
+        "lastmessage": "HOW AM I SUPOSE TO MAKE ANALYSIS NOW???",
+        "lastmessagedate": 1523385917672
+    },
+    {
+        "id": "183852444474671104",
+        "username": "Martin0#8361",
+        "messages": 5,
+        "lastmessage": "K = white castling kingside",
+        "lastmessagedate": 1527095666220
+    },
+    {
+        "id": "213092222466260992",
+        "username": "badukdestroyer#0844",
+        "messages": 0
+    },
+    {
+        "id": "267767816847884299",
+        "username": "OfficialDenyLYT#9028",
+        "messages": 2194,
+        "finger": "I allow you to tag me, as long as it is for a reason. You will be blocked if you don't respect that 🤔",
+        "lastmessage": "so, why not!",
+        "lastmessagedate": 1527276364572,
+        "bidamount": 0,
+        "lichess": "OpenInventory",
+        "lichessratings": {
+            "maxRating": "1619",
+            "ultra": "1524",
+            "bullet": "1346",
+            "blitz": "1465",
+            "rapid": "1500?",
+            "classical": "1500?",
+            "crazyhouse": "2115?",
+            "threecheck": "1385?",
+            "antichess": "2202?",
+            "atomic": "1619",
+            "koth": "1543",
+            "racingkings": "1481?"
+        },
+        "chesscom": "Indomega6000",
+        "chesscomratings": {
+            "maxRating": 1666,
+            "bullet": "1661?",
+            "lightning": "1446?",
+            "crazyhouse": "1666",
+            "bughouse": "1021"
+        }
+    },
+    {
+        "id": "379344516785766410",
+        "username": "Jarl#2245",
+        "messages": 8,
+        "lastmessage": "give moonename 10",
+        "lastmessagedate": 1523416764258,
+        "bidamount": 0
+    },
+    {
+        "id": "334451010166849537",
+        "username": "Grim Reaper#1925",
+        "messages": 1,
+        "lastmessage": "Greet",
+        "lastmessagedate": 1523501269268
+    },
+    {
+        "id": "388973807152398339",
+        "username": "Philippe Saner#5977",
+        "messages": 6,
+        "lastmessage": "And thanks, Stubenfisch. Old or not, that looks useful to me.",
+        "lastmessagedate": 1523605202324
+    },
+    {
+        "id": "402122806063529984",
+        "username": "Aloysius#3994",
+        "messages": 2
+    },
+    {
+        "id": "433988454393839626",
+        "username": "Crimsonite#8077",
+        "messages": 5,
+        "lastmessage": "But it seems neat",
+        "lastmessagedate": 1523542150684
+    },
+    {
+        "id": "281582031899590658",
+        "username": "Alduto#8125",
+        "messages": 46,
+        "lastmessage": "He got me to join the server",
+        "lastmessagedate": 1527035712513,
+        "lichess": "Alduto",
+        "lichessratings": {
+            "maxRating": "2113",
+            "bullet": "1500?",
+            "blitz": "1500?",
+            "rapid": "1500?",
+            "classical": "1500?",
+            "crazyhouse": "2113"
+        }
+    },
+    {
+        "id": "408030597035065364",
+        "username": "stevis5#7413",
+        "messages": 9,
+        "lastmessage": "I'm stevis5 on lichess and chess com <@185412969130229760>",
+        "lastmessagedate": 1523576063021
+    },
+    {
+        "id": "410629501018570763",
+        "username": "DamnDaniel#7292",
+        "messages": 8,
+        "lastmessage": "there is a more efficient way of doing it",
+        "lastmessagedate": 1523584281365
+    },
+    {
+        "id": "353684597940420609",
+        "username": "crimsonvortex#6313",
+        "messages": 9,
+        "lastmessage": "Opper is streaming? Can you post the link?",
+        "lastmessagedate": 1527279459113
+    },
+    {
+        "id": "426027768128733185",
+        "username": "ilmonarca#6448",
+        "messages": 20,
+        "lastmessage": "some  bug?",
+        "lastmessagedate": 1523777979397
+    },
+    {
+        "id": "205430202656882689",
+        "username": "lasz1#0150",
+        "messages": 4,
+        "lastmessage": "\"!lichess\" followed by username right ?",
+        "lastmessagedate": 1523803443541,
+        "lichess": "lasz1",
+        "lichessratings": {
+            "maxRating": "2286",
+            "ultra": "1690?",
+            "bullet": "2063",
+            "blitz": "1889",
+            "rapid": "1500?",
+            "classical": "1500?",
+            "crazyhouse": "2286",
+            "threecheck": "1611?",
+            "antichess": "1448?",
+            "horde": "2017",
+            "atomic": "1412?",
+            "chess960": "1376?",
+            "koth": "1632?"
+        }
+    },
+    {
+        "id": "293457973039071232",
+        "username": "V2chess#4302",
+        "messages": 23,
+        "lastmessage": "gtg now",
+        "lastmessagedate": 1526604166585
+    },
+    {
+        "id": "411340403871055872",
+        "username": "no_hyper_thanks#3982",
+        "messages": 965,
+        "lastmessage": "?",
+        "lastmessagedate": 1527342583690
+    },
+    {
+        "id": "250054301559291905",
+        "username": "isaac#0701",
+        "messages": 4,
+        "lastmessage": "no",
+        "lastmessagedate": 1527347923581
+    },
+    {
+        "id": "313428408107532289",
+        "username": "PurelySmart#7674",
+        "messages": 0
+    },
+    {
+        "id": "314910196776304640",
+        "username": "Viking88#8222",
+        "messages": 21,
+        "lastmessage": "oh right",
+        "lastmessagedate": 1523918924052,
+        "lichess": "FireWorks",
+        "lichessratings": {
+            "maxRating": "1986",
+            "ultra": "1686",
+            "bullet": "1986",
+            "blitz": "1669",
+            "rapid": "1713",
+            "classical": "1681",
+            "crazyhouse": "1522",
+            "threecheck": "1355?",
+            "antichess": "1153?",
+            "horde": "1445?",
+            "atomic": "1421",
+            "chess960": "1524",
+            "koth": "1583?",
+            "racingkings": "1458"
+        }
+    },
+    {
+        "id": "425376766085824512",
+        "username": "Tomitau#0423",
+        "messages": 56,
+        "lastmessage": "I think that account is quite recent one. I remeber seeing him in only last two-three  weeks",
+        "lastmessagedate": 1524438020727,
+        "lichess": "tomitau",
+        "lichessratings": {
+            "maxRating": "1877",
+            "bullet": "1500?",
+            "blitz": "1635",
+            "rapid": "1719?",
+            "classical": "1500?",
+            "crazyhouse": "1877",
+            "chess960": "1522"
+        }
+    },
+    {
+        "id": "140248025263112192",
+        "username": "Creed#6901",
+        "messages": 0
+    },
+    {
+        "id": "216243145665413120",
+        "username": "Digvalley#8512",
+        "messages": 0
+    },
+    {
+        "id": "387727799823368199",
+        "username": "DragonMateZ#8959",
+        "messages": 2351,
+        "lastmessage": "https://lichess.org/tournament/BZiujc9y",
+        "lastmessagedate": 1526945458682,
+        "trophy": [
+            "Unbanned the Most Times"
+        ]
+    },
+    {
+        "id": "351500734077992961",
+        "username": "battleaxe#3796",
+        "messages": 0
+    },
+    {
+        "id": "202560559046983681",
+        "username": "qwerty#6768",
+        "messages": 0
+    },
+    {
+        "id": "373770768938434570",
+        "username": "fins#5553",
+        "messages": 1433,
+        "lastmessage": "It was me",
+        "lastmessagedate": 1527326986514
+    },
+    {
+        "id": "394194603391320065",
+        "username": "antonio#0237",
+        "messages": 17,
+        "lastmessage": "Zh in Spanish hype",
+        "lastmessagedate": 1524620334798
+    },
+    {
+        "id": "436918441874685954",
+        "username": "unjournakamura#5762",
+        "messages": 1,
+        "lastmessage": "ah so , thanks for the tipps",
+        "lastmessagedate": 1524240599659
+    },
+    {
+        "id": "421195336778776578",
+        "username": "sdf#8138",
+        "messages": 38,
+        "lastmessage": "bbl",
+        "lastmessagedate": 1524294219784,
+        "chesscom": "shift3",
+        "chesscomratings": {
+            "maxRating": 2361,
+            "bullet": "1809",
+            "lightning": "2026",
+            "chess": "1242?",
+            "rapid": "1829",
+            "koth": "2040",
+            "crazyhouse": "1925",
+            "bughouse": "1798",
+            "livechess960": "2075?",
+            "tactics": "2361"
+        }
+    },
+    {
+        "id": "390362016176668674",
+        "username": "aNOnyMOUSE#0801",
+        "messages": 11,
+        "lichess": "HopelessWanderer",
+        "lichessratings": {
+            "maxRating": "2143",
+            "bullet": "1500?",
+            "blitz": "1500?",
+            "rapid": "1500?",
+            "classical": "1500?",
+            "crazyhouse": "2143",
+            "antichess": "2001"
+        },
+        "chesscom": "AHopelessWanderer",
+        "chesscomratings": {
+            "maxRating": 2121,
+            "crazyhouse": "1937",
+            "bughouse": "2121"
+        },
+        "lastmessage": "a good one",
+        "lastmessagedate": 1524358792992
+    },
+    {
+        "id": "267707152418865153",
+        "username": "MeleeSniper#5509",
+        "messages": 10,
+        "lastmessage": "hi",
+        "lastmessagedate": 1524360900395
+    },
+    {
+        "id": "115691005197549570",
+        "username": "Harmon758#0004",
+        "messages": 5,
+        "lastmessage": "oh",
+        "lastmessagedate": 1524445519730
+    },
+    {
+        "id": "427265142359588874",
+        "username": "Ellie#5701",
+        "messages": 7,
+        "lastmessage": "Caca",
+        "lastmessagedate": 1524447401344
+    },
+    {
+        "id": "238372041265381377",
+        "username": "Ein#9537",
+        "messages": 0
+    },
+    {
+        "id": "331143952528965648",
+        "username": "rrhyddhad#5398",
+        "messages": 20,
+        "lastmessage": "seems peng has a better chance of winning this than Magnus",
+        "lastmessagedate": 1525465669057
+    },
+    {
+        "id": "425397119315214336",
+        "username": "Chronatog#2674",
+        "messages": 10,
+        "lastmessage": "well, there's your problem",
+        "lastmessagedate": 1524535271946
+    },
+    {
+        "id": "135835860741390336",
+        "username": "Tom/Souq#1139",
+        "messages": 8
+    },
+    {
+        "id": "335877728945569792",
+        "username": "neravan#2588",
+        "messages": 2,
+        "lastmessage": "Sorry about that",
+        "lastmessagedate": 1524602146700
+    },
+    {
+        "id": "374828671086886914",
+        "username": "agaliana#4181",
+        "messages": 5,
+        "lastmessage": "just to know",
+        "lastmessagedate": 1524660432564
+    },
+    {
+        "id": "421728969377972244",
+        "username": "tusharkamde#0894",
+        "messages": 0
+    },
+    {
+        "id": "251889421618642944",
+        "username": "lfpnub#4477",
+        "messages": 0
+    },
+    {
+        "id": "363519664875372556",
+        "username": "chuckmoulton#2381",
+        "messages": 192,
+        "lastmessage": "Thanks!",
+        "lastmessagedate": 1527392486224,
+        "lichess": "chuckmoulton",
+        "lichessratings": {
+            "maxRating": "2052",
+            "bullet": "1637?",
+            "blitz": "1634",
+            "rapid": "1317?",
+            "classical": "1500?",
+            "crazyhouse": "2052"
+        },
+        "chesscom": "chuckmoulton",
+        "chesscomratings": {
+            "maxRating": 2402,
+            "bughouse": "2402"
+        }
+    },
+    {
+        "id": "95048365607223296",
+        "username": "esken#8592",
+        "messages": 1,
+        "lastmessage": "private",
+        "lastmessagedate": 1524829991482
+    },
+    {
+        "id": "439254453258813470",
+        "username": "PokemonClown#1696",
+        "messages": 276,
+        "lastmessage": "Who pinged",
+        "lastmessagedate": 1525897961773
+    },
+    {
+        "id": "439629632531333141",
+        "username": "kevin w#7952",
+        "messages": 49,
+        "lastmessage": "nvm I got it",
+        "lastmessagedate": 1524887314639
+    },
+    {
+        "id": "423184609006583820",
+        "username": "kevin w#9175",
+        "messages": 49,
+        "lastmessage": "and if im good its 90",
+        "lastmessagedate": 1525232961782
+    },
+    {
+        "id": "366082360002871316",
+        "username": "crankinhaus#3365",
+        "messages": 11,
+        "lastmessage": "<@373480715276517376>",
+        "lastmessagedate": 1524900890098
+    },
+    {
+        "id": "409099831072522241",
+        "username": "poriluk#3839",
+        "messages": 174,
+        "lastmessage": "wheel 6",
+        "lastmessagedate": 1526477335578,
+        "lichess": "Brokula",
+        "lichessratings": {
+            "maxRating": "2101",
+            "bullet": "1853",
+            "blitz": "1730",
+            "rapid": "1900",
+            "classical": "1500?",
+            "crazyhouse": "2101",
+            "antichess": "1458?",
+            "horde": "1709",
+            "atomic": "1591",
+            "chess960": "1532?",
+            "koth": "1753",
+            "racingkings": "1685?"
+        }
+    },
+    {
+        "id": "300644131284189184",
+        "username": "GamingWithScott#3830",
+        "messages": 2,
+        "lastmessage": "?",
+        "lastmessagedate": 1524960900560
+    },
+    {
+        "id": "440050555394719755",
+        "username": "rezacz#4829",
+        "messages": 3,
+        "lastmessage": "tahnk you and thank you;D",
+        "lastmessagedate": 1524986811374
+    },
+    {
+        "id": "331873233974591499",
+        "username": "domr#2190",
+        "messages": 20,
+        "lastmessage": "😄",
+        "lastmessagedate": 1525025477165
+    },
+    {
+        "id": "281279153125326850",
+        "username": "Pogan Laul#1057",
+        "messages": 2,
+        "lastmessage": "This is my best",
+        "lastmessagedate": 1525916919676
+    },
+    {
+        "id": "440301560484855818",
+        "username": "lionfish#0914",
+        "messages": 4,
+        "lastmessage": "yeah i think i did that",
+        "lastmessagedate": 1525047708640
+    },
+    {
+        "id": "377998495434539008",
+        "username": "helmsknight#8191",
+        "messages": 4,
+        "lastmessage": "+++ mais",
+        "lastmessagedate": 1526435536981
+    },
+    {
+        "id": "403982925303119874",
+        "username": "Crepuscular#8460",
+        "messages": 2
+    },
+    {
+        "id": "297631484624371726",
+        "username": "Raymond#5532",
+        "messages": 4,
+        "lastmessage": "anyone available to partner?",
+        "lastmessagedate": 1525083337812
+    },
+    {
+        "id": "339491170486976512",
+        "username": "Sulvyfex#3779",
+        "messages": 0
+    },
+    {
+        "id": "188079464284946432",
+        "username": "Yuso#9228",
+        "messages": 0
+    },
+    {
+        "id": "404478835631849483",
+        "username": "rrtyui#5455",
+        "messages": 0
+    },
+    {
+        "id": "377736677105467395",
+        "username": "townes-paycheck#4884",
+        "messages": 1292,
+        "lastmessage": "No",
+        "lastmessagedate": 1527410718450,
+        "lichess": "townes-paycheck",
+        "lichessratings": {
+            "maxRating": "2440",
+            "ultra": "1688?",
+            "bullet": "1422",
+            "blitz": "1395",
+            "rapid": "1453?",
+            "classical": "1500?",
+            "crazyhouse": "1426",
+            "threecheck": "1513",
+            "antichess": "2440",
+            "horde": "1662?",
+            "atomic": "1804",
+            "chess960": "1413?",
+            "koth": "1370?",
+            "racingkings": "1523?"
+        }
+    },
+    {
+        "id": "441509219393470480",
+        "username": "HighContrast#2584",
+        "messages": 28,
+        "lastmessage": "cheers",
+        "lastmessagedate": 1525335280610,
+        "lichess": "HighContrast",
+        "lichessratings": {
+            "maxRating": "2421",
+            "ultra": "1345?",
+            "bullet": "2249",
+            "blitz": "2335",
+            "rapid": "1500?",
+            "classical": "1500?",
+            "crazyhouse": "2421",
+            "horde": "1720?"
+        }
+    },
+    {
+        "id": "441613698214133780",
+        "username": "Flex#1606",
+        "messages": 11,
+        "lastmessage": "<:anti:404307997142024193>",
+        "lastmessagedate": 1525367998935
+    },
+    {
+        "id": "153938824274116608",
+        "username": "Jux#5356",
+        "messages": 30,
+        "lastmessage": "sounds awesome I can't wait!",
+        "lastmessagedate": 1525369872291
+    },
+    {
+        "id": "378628590075641866",
+        "username": "no#4880",
+        "messages": 235,
+        "lastmessage": "😦",
+        "lastmessagedate": 1527030836844,
+        "lichessratings": {
+            "maxRating": 0
+        },
+        "chesscom": "thepiercingarrow",
+        "chesscomratings": {
+            "maxRating": 1640,
+            "bullet": "952",
+            "lightning": "912",
+            "chess": "1305?",
+            "rapid": "1203?",
+            "koth": "1063",
+            "crazyhouse": "1360",
+            "bughouse": "1640",
+            "livechess960": "1258?",
+            "tactics": "1186",
+            "lessons": "1172?"
+        }
+    },
+    {
+        "id": "366653947907276810",
+        "username": "crosky#0935",
+        "messages": 6,
+        "lastmessage": "jfc chesscom bughouse has been on your server how long and there are still a thousand glitches",
+        "lastmessagedate": 1525531716287
+    },
+    {
+        "id": "435646919738654720",
+        "username": "h-bar#6114",
+        "messages": 1
+    },
+    {
+        "id": "193500486500876288",
+        "username": "IainLim#2639",
+        "messages": 0
+    },
+    {
+        "id": "408721932721061899",
+        "username": "JooJ CeeC's Last bank#2562",
+        "messages": 36,
+        "lastmessage": "omegalul",
+        "lastmessagedate": 1525618742444
+    },
+    {
+        "id": "421512591169421314",
+        "username": "BankofLink#1689",
+        "messages": 0
+    },
+    {
+        "id": "443091181081985024",
+        "username": "Sisif#2796",
+        "messages": 1,
+        "lastmessage": "Hi ObiWan, thank you",
+        "lastmessagedate": 1525712273330
+    },
+    {
+        "id": "162945222966247425",
+        "username": "Braaden#0001",
+        "messages": 0
+    },
+    {
+        "id": "443303493298683914",
+        "username": "Friend#9340",
+        "messages": 109,
+        "lastmessage": "keep modin",
+        "lastmessagedate": 1525767043431
+    },
+    {
+        "id": "443492072150794261",
+        "username": "7xSlalom#2058",
+        "messages": 7
+    },
+    {
+        "id": "383776817384783892",
+        "username": "The_Cardens#6822",
+        "messages": 20,
+        "lastmessage": "ill be on lichess",
+        "lastmessagedate": 1525809615383
+    },
+    {
+        "id": "443585853541842954",
+        "username": "AtheistFuck#6346",
+        "messages": 7
+    },
+    {
+        "id": "294599700147863552",
+        "username": "Marc l'humil#1602",
+        "messages": 6,
+        "lastmessage": "Nots phishing but ok",
+        "lastmessagedate": 1527090594945
+    },
+    {
+        "id": "280146598632095745",
+        "username": "GummiBear64#1913",
+        "messages": 0
+    },
+    {
+        "id": "178931463092305920",
+        "username": "iglookid#7794",
+        "messages": 3,
+        "lastmessage": "cool, thanks. i just realized that i play nearly all of them anyway :)",
+        "lastmessagedate": 1525946891162
+    },
+    {
+        "id": "160677293252018177",
+        "username": "Harmonbot#4049",
+        "messages": 0
+    },
+    {
+        "id": "373803771106689054",
+        "username": "mayoss#0450",
+        "messages": 5,
+        "lastmessage": "Wassup guys",
+        "lastmessagedate": 1525976820450
+    },
+    {
+        "id": "356355632166600724",
+        "username": "Donutbot#2603",
+        "messages": 0
+    },
+    {
+        "id": "163887417705627648",
+        "username": "Donut#1337",
+        "messages": 80,
+        "lastmessage": "¯\\_(ツ)_/¯",
+        "lastmessagedate": 1525988122566
+    },
+    {
+        "id": "372891881006170122",
+        "username": "apapneja#1762",
+        "messages": 0
+    },
+    {
+        "id": "332973717451702272",
+        "username": "Faranfa Muggles#9418",
+        "messages": 0
+    },
+    {
+        "id": "151146676244054016",
+        "username": "Nytik#8709",
+        "messages": 6,
+        "lastmessage": "Good plan",
+        "lastmessagedate": 1527109721351
+    },
+    {
+        "id": "391144389197430796",
+        "username": "gbtami#8292",
+        "messages": 0
+    },
+    {
+        "id": "422494551010443274",
+        "username": "MangoTownTravis#2559",
+        "messages": 8,
+        "lastmessage": "😄",
+        "lastmessagedate": 1527213814052
+    },
+    {
+        "id": "203514432180060161",
+        "username": "Aerial#1304",
+        "messages": 1,
+        "lastmessage": "https://imgur.com/a/BXNFqLw",
+        "lastmessagedate": 1526160612173
+    },
+    {
+        "id": "413436239891660800",
+        "username": "BankOfRaven#6847",
+        "messages": 0
+    },
+    {
+        "id": "445589708362350593",
+        "username": "schwinggggg#6422",
+        "messages": 77,
+        "lastmessage": "ok thx",
+        "lastmessagedate": 1526311276416,
+        "lichess": "schwinggggg",
+        "lichessratings": {
+            "maxRating": "2452",
+            "ultra": "1917",
+            "bullet": "2303",
+            "blitz": "2291",
+            "rapid": "1500?",
+            "classical": "1500?",
+            "crazyhouse": "2452",
+            "threecheck": "2247",
+            "horde": "1962",
+            "chess960": "2047?",
+            "koth": "2140"
+        }
+    },
+    {
+        "id": "414167343401402389",
+        "username": "Wilsen#9521",
+        "messages": 0
+    },
+    {
+        "id": "425360854096150549",
+        "username": "schwinggggg#3371",
+        "messages": 0
+    },
+    {
+        "id": "227521505137917964",
+        "username": "nicolasflamel#5880",
+        "messages": 49,
+        "lastmessage": "i will play on my berserk acc and wait them to unban me cause i  didn nothing wrong exept choosing my opponent ^^",
+        "lastmessagedate": 1527232571600,
+        "lichess": "NicolasFlamel",
+        "lichessratings": {
+            "maxRating": "949",
+            "bullet": "1500?",
+            "blitz": "1234?",
+            "rapid": "1500?",
+            "classical": "949"
+        }
+    },
+    {
+        "id": "214291895969513473",
+        "username": "KaiserChief#3900",
+        "messages": 33,
+        "lastmessage": "wow",
+        "lastmessagedate": 1526799689624
+    },
+    {
+        "id": "403086563535355925",
+        "username": "BankOfCubica#8914",
+        "messages": 1,
+        "lastmessage": "+play https://www.youtube.com/watch?v=xkFZn4oPMqE",
+        "lastmessagedate": 1526454319770
+    },
+    {
+        "id": "208101972686012417",
+        "username": "Risviltsov#6088",
+        "messages": 109,
+        "lastmessage": "anti960 lol",
+        "lastmessagedate": 1527022349070,
+        "lichess": "Defeating_The_Best",
+        "lichessratings": {
+            "maxRating": "1533",
+            "bullet": "1406?",
+            "blitz": "978?",
+            "rapid": "1138",
+            "classical": "1500?",
+            "threecheck": "1173?",
+            "antichess": "1533",
+            "horde": "1154?",
+            "chess960": "1368?",
+            "racingkings": "1353?"
+        }
+    },
+    {
+        "id": "230299460624842752",
+        "username": "Ayrton#1365",
+        "messages": 6,
+        "lastmessage": "hi",
+        "lastmessagedate": 1526522728523
+    },
+    {
+        "id": "353627177729785856",
+        "username": "schwinggggg#3468",
+        "messages": 18,
+        "lastmessage": "wrigley field",
+        "lastmessagedate": 1526597294004
+    },
+    {
+        "id": "446604525847969792",
+        "username": "ForNow#8652",
+        "messages": 110,
+        "lastmessage": "i'd rather have my old acc back",
+        "lastmessagedate": 1526605830159
+    },
+    {
+        "id": "446669339631026197",
+        "username": "Wannabe_niktolp#0504",
+        "messages": 37,
+        "lastmessage": "tears your rooklift to pieces 😉",
+        "lastmessagedate": 1526593522640
+    },
+    {
+        "id": "278941339809218561",
+        "username": "hiiiiiiiiiiiii#7381",
+        "messages": 3,
+        "lastmessage": "Heyy",
+        "lastmessagedate": 1526569128292
+    },
+    {
+        "id": "426042549136916480",
+        "username": "fdzvd#5674",
+        "messages": 2,
+        "lastmessage": "No",
+        "lastmessagedate": 1526595617009
+    },
+    {
+        "id": "388766110704730116",
+        "username": "CrazyHome#4560",
+        "messages": 5,
+        "lastmessage": "Hey <@325736595980288010>",
+        "lastmessagedate": 1527358060020
+    },
+    {
+        "id": "442994645375647744",
+        "username": "InvalidityComplex#1783",
+        "messages": 8,
+        "lastmessage": "https://discord.gg/53SRpjK",
+        "lastmessagedate": 1526660363186,
+        "lichess": "InvalidityComplex",
+        "lichessratings": {
+            "maxRating": "2214",
+            "bullet": "1500?",
+            "blitz": "2209",
+            "rapid": "2214",
+            "classical": "2198"
+        }
+    },
+    {
+        "id": "197343982131478529",
+        "username": "Kanav (Markev)#4504",
+        "messages": 11,
+        "lastmessage": "hi !",
+        "lastmessagedate": 1526772416561
+    },
+    {
+        "id": "160944646472728576",
+        "username": "Flamewolf27#6256",
+        "messages": 0
+    },
+    {
+        "id": "432595946774331422",
+        "username": "rezacz#6935",
+        "messages": 10,
+        "lastmessage": "strange game;p",
+        "lastmessagedate": 1527279367807
+    },
+    {
+        "id": "447723359317262336",
+        "username": "Fumitoks#3763",
+        "messages": 19,
+        "lastmessage": "start a petition",
+        "lastmessagedate": 1527294533757
+    },
+    {
+        "id": "364311701979529217",
+        "username": "Luthorien#3628",
+        "messages": 7,
+        "lastmessage": "Ty again",
+        "lastmessagedate": 1526910143191,
+        "lichess": "Luthorien",
+        "lichessratings": {
+            "maxRating": "1902",
+            "ultra": "1482?",
+            "bullet": "1294?",
+            "blitz": "1500?",
+            "rapid": "1366?",
+            "classical": "1500?",
+            "crazyhouse": "1108?",
+            "antichess": "1902",
+            "horde": "1277",
+            "atomic": "1773",
+            "koth": "1353",
+            "racingkings": "1785"
+        }
+    },
+    {
+        "id": "446584319683723274",
+        "username": "Kleerkast#5711",
+        "messages": 3,
+        "lastmessage": "an Kyle 😉",
+        "lastmessagedate": 1526917943916
+    },
+    {
+        "id": "403397402662535179",
+        "username": "fmchesskid#1354",
+        "messages": 3,
+        "lastmessage": "https://www.chess.com/member/tigers2017",
+        "lastmessagedate": 1526952127373
+    },
+    {
+        "id": "448523472730324993",
+        "username": "Atamek#9914",
+        "messages": 15,
+        "lastmessage": "thanks for help with this btw 😃",
+        "lastmessagedate": 1527008001687,
+        "lichess": "atamek",
+        "lichessratings": {
+            "maxRating": "2401",
+            "ultra": "1942",
+            "bullet": "2201",
+            "blitz": "2170",
+            "rapid": "2140",
+            "classical": "1500?",
+            "crazyhouse": "2401",
+            "threecheck": "1915",
+            "antichess": "1826?",
+            "chess960": "2105"
+        }
+    },
+    {
+        "id": "448564960834879498",
+        "username": "requiemzh#9062",
+        "messages": 34,
+        "lastmessage": "je jouais en cachette sur le minitel ............",
+        "lastmessagedate": 1527020683102
+    },
+    {
+        "id": "390567232658341888",
+        "username": "xuanet#7264",
+        "messages": 0
+    },
+    {
+        "id": "166996362716512258",
+        "username": "Raven#2937",
+        "messages": 66,
+        "lastmessage": "gn",
+        "lastmessagedate": 1527368788329
+    },
+    {
+        "id": "206164687321038849",
+        "username": "BarryBoswick#0490",
+        "messages": 19,
+        "lastmessage": "Sometimes I'll glance up and watch, multi-monitor and all.",
+        "lastmessagedate": 1527031851859
+    },
+    {
+        "id": "112841983680077824",
+        "username": "charliehorse55#2689",
+        "messages": 2,
+        "lastmessage": "/ has anyone done or discussed this before?",
+        "lastmessagedate": 1527045208539
+    },
+    {
+        "id": "442633705081667597",
+        "username": "Fex#8657",
+        "messages": 50,
+        "lastmessage": "<@!373480715276517376> wenn es beim Lotto nicht klappt...",
+        "lastmessagedate": 1527167175233
+    },
+    {
+        "id": "278989822503288833",
+        "username": "Fuck you#8892",
+        "messages": 0
+    },
+    {
+        "id": "404078318711865357",
+        "username": "mathstover#7012",
+        "messages": 2
+    },
+    {
+        "id": "290926344093696001",
+        "username": "Wkurogane#6960",
+        "messages": 2,
+        "lastmessage": "(?)",
+        "lastmessagedate": 1527286104751
+    },
+    {
+        "id": "367704394818387991",
+        "username": "Theo#1188",
+        "messages": 3,
+        "lastmessage": "😃",
+        "lastmessagedate": 1527297443493
+    },
+    {
+        "id": "155688951066132480",
+        "username": "IsaVulpes#5970",
+        "messages": 6,
+        "lastmessage": "top trap",
+        "lastmessagedate": 1527355014930
+    },
+    {
+        "id": "374322818797666306",
+        "username": "andrew#7356",
+        "messages": 1,
+        "lastmessage": "CH!",
+        "lastmessagedate": 1527405989647
+    },
+    {
+        "id": "263716135801847808",
+        "username": "ChuckPhil#7357",
+        "messages": 0
     }
 ]
