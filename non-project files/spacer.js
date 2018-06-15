@@ -1,11 +1,9 @@
 const fs = require('fs');
 
 class PrintBoi {
-
     static start() {
-        fs.readFile('dbfull.json', (err, data) => {
-            if (err) throw err;
-
+        fs.readFile('message.json', (err, data) => {
+            if(err) throw err;
             let db = [{
                 Seed: 'Seed',
                 Username: 'Username',
@@ -19,8 +17,7 @@ class PrintBoi {
             let nameLength = StringFitter.getLength(db, 'Username');
             let rtgLength = StringFitter.getLength(db, 'Rating');
             let ret = '';
-
-            for (var i = 0; i < db.length; i++) {
+            for (let i = 0; i < db.length; i++) {
                 let seedStr = StringFitter.setLength(db[i].Seed + '', '-', seedLength);
                 let nameStr = StringFitter.setLength(db[i].Username, '-', nameLength);
                 let rtgStr = StringFitter.setLength(db[i].Rating + '', '-', rtgLength);
@@ -35,7 +32,6 @@ class PrintBoi {
 
         })
     }
-
 }
 
 class StringFitter {

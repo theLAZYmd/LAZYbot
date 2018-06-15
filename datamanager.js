@@ -27,6 +27,7 @@ DataManager.prototype.getGuildData = function(serverid) {
   };
   return server;
 };
+
 DataManager.prototype.setGuildData = function(serverdata) {
   let guildconfig = this.getData("./guildconfig.json");
   guildconfig[serverdata.id] = serverdata;

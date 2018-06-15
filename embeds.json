@@ -430,6 +430,46 @@
                     "value": "You should therefore secure your position by consolidating your position. Do that by:\n\n`.give 100 theLAZYmd#2353 Database Consolidate`\n\nCheck anyone's consolidated amounts by `!bidamount [user]`, `!position [user]`, and `.dblb`."
                 }
             ]
-        }
+        },
+        "join":[
+          {
+            "content": "**Welcome to The House %user.mention%!** Let's get the party started @welcome squad.\n",
+            "description": "**We're the home of chess variants across lichess.org, chess.com, FICS, and anywhere else.**\n\u200b",
+            "color": 9359868,
+            "footer": {
+              "text": "Have fun!"
+            },
+            "thumbnail": {
+              "url": "https://i.imgur.com/VId4nJT.png"
+            },
+            "fields": [
+              {
+                "name": "View our channels",
+                "value": "You won't be able to see most of our channels until you're a **Member.**\nFirstly, familiarise yourself with the rules in #welcome.\nThen, head to #role-assignment and assign yourself permissions to see the chat channels and your favourite variant channels.\n\u200b",
+                "inline": false
+              },
+              {
+                "name": "How the hell do I use Discord?",
+                "value": "First time? type `... discord` for our guide on navigating this place.\n\u200b",
+                "inline": false
+              },
+              {
+                "name": "Link your accounts",
+                "value": "Type `!lichess` followed by your account name.\nType `!chess.com` followed by your account name.\n\u200b",
+                "inline": false
+              },
+              {
+                "name": "Crazyhouse World Championships",
+                "value": "Type `.iam CWC` to see the CWC channels on the left.\n\u200b",
+                "inline": false
+              },
+              {
+                "name": "Developers",
+                "value": "If you're a dev, type `@mods I'm a dev` and you'll be added to #devs.",
+                "inline": false
+              }
+            ]
+          }
+        ]
     }
 }

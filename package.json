@@ -2,7 +2,7 @@
     "name": "LAZYbot",
     "description": "Discord bot operating in the House server http://dscrd.me/housechessvariants just to further lazy's understanding of basic js. ",
     "main": "lazybot.js",
-    "version": "1.4.7",
+    "version": "1.4.11",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "node lazybot.js"
@@ -34,6 +34,7 @@
         "moment-duration-format": "^1.3.0",
         "request": "^2.87.0",
         "simple-oauth2": "^1.5.2",
+        "tesseract.js": "^1.0.10",
         "yarn": "^1.5.1"
     }
 }
