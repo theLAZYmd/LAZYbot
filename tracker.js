@@ -7,15 +7,14 @@ const LICHESS_USER_URL = "https://lichess.org/api/user/|";
 const BUGHOUSETEST_USERS_URL = "http://bughousetest.com/api/users";
 const BUGHOUSETEST_USER_URL = "http://bughousetest.com/api/user/|";
 const CHESS_COM_USER_URL = "https://www.chess.com/callback/member/stats/|";
-const userUpdates = {};
 const closedUsername = {};
 const cheatedUserID = {};
+let updatequeue = {};
 
 function Tracker(events) {
   this.stopUpdating = false;
   this.updating = false;
   this.updateDelay = config.updateDelay;
-  this.afterUpdate = [];
   this.onTrackSuccess = events.onTrackSuccess;
   this.onRemoveSuccess = events.onRemoveSuccess;
   this.onRatingUpdate = events.onRatingUpdate;
@@ -27,33 +26,35 @@ function Tracker(events) {
   this.getdbuserfromusername = events.getdbuserfromusername;
   this.getsourcetitle = events.getsourcetitle;
   this.getsourcefromtitle = events.getsourcefromtitle;
+  this.getonlinemembers = events.getonlinemembers;
 };
 
-Tracker.prototype.messagelogger = function (message, server) { //section for message logging
-  if (message.author.bot) return;
+Tracker.prototype.updatepresence = function(member, nowonline) {
+  if(nowonline === true) {
+    updatequeue[member.id] = true;
+  } else
+  if(nowonline === false) {
+    delete updatequeue[member.id];
+  }
+};
+
+Tracker.prototype.messagelogger = function(message, server) { //section for message logging
+  if(message.author.bot) return;
   let user = message.author;
   let dbuser = this.getdbuserfromuser(user);
   let dbindex = this.getdbindexfromdbuser(dbuser)
   if (dbindex === -1) return;
   let tally = DataManager.getData();
   tally[dbindex].messages++;
-  if (!message.content.startsWith(server.prefixes.prefix) && !message.content.startsWith(server.prefixes.nadeko)) {
+  if(!message.content.startsWith(server.prefixes.prefix) && !message.content.startsWith(server.prefixes.nadeko)) {
     tally[dbindex].lastmessage = message.content > 500 ? message.content.slice(0, 500).replace("`", "") + "..." : message.content.replace("\`");
     tally[dbindex].lastmessagedate = message.createdTimestamp;
+    if(tally[dbindex].username !== user.tag) tally[dbindex].username = user.tag; 
   };
-  if (tally == undefined) return;
   DataManager.setData(tally);
 };
 
 Tracker.prototype.track = function(serverID, user, source, username, message) {
-  if(this.updating) {
-    this.afterUpdate.push({
-      "type": "track",
-      "arguments": arguments
-    });
-    return;
-  }
-  this.stopUpdating = true;
   username = username.replace(/["`']+/g, "");
   if (username.length < 2) {
     return this.onError(serverID, "Invalid username.", message);
@@ -63,16 +64,16 @@ Tracker.prototype.track = function(serverID, user, source, username, message) {
     let sourcetitle = this.getsourcetitle(source);
     return this.onError(serverID, `Duplicate from **${sourcetitle}**. You have already linked **${dbuser[source]}** to your profile.\nUse \`!remove [${source}]\` to unlink your account.`, message);
   }
-
   if(source === "lichess") {
     handleLichessData(dbuser, username)
     .then((dbuser) => {
+      this.stopUpdating = true;
       let tally = DataManager.getData();
       let dbindex = this.getdbindexfromdbuser(dbuser);
       tally[dbindex] = dbuser;
       DataManager.setData(tally);
       this.onTrackSuccess(serverID, dbuser.id, source, dbuser[source], message);
-      userUpdates[user.id] = Date.now();
+      dbuser.lastupdate = Date.now();
       this.stopUpdating = false;
     })
     .catch((error) => {
@@ -82,12 +83,13 @@ Tracker.prototype.track = function(serverID, user, source, username, message) {
   if(source === "chesscom") {
     handleChesscomData(dbuser, username)
     .then((dbuser) => {
+      this.stopUpdating = true;
       let tally = DataManager.getData();
       let dbindex = this.getdbindexfromdbuser(dbuser);
       tally[dbindex] = dbuser;
       DataManager.setData(tally);
       this.onTrackSuccess(serverID, dbuser.id, source, dbuser[source], message);
-      userUpdates[user.id] = Date.now();
+      dbuser.lastupdate = Date.now();
       this.stopUpdating = false;
     })
     .catch((error) => {
@@ -97,25 +99,26 @@ Tracker.prototype.track = function(serverID, user, source, username, message) {
   if(source === "bughousetest") {
     handleBughousetestData(dbuser, username)
     .then((dbuser) => {
+      this.stopUpdating = true;
       let tally = DataManager.getData();
       let dbindex = this.getdbindexfromdbuser(dbuser);
       tally[dbindex] = dbuser;
       DataManager.setData(tally);
       this.onTrackSuccess(serverID, dbuser.id, source, dbuser[source], message);
-      userUpdates[user.id] = Date.now();
+      dbuser.lastupdate = Date.now();
       this.stopUpdating = false;
     })
     .catch((e) => {
-      console.log(e, JSON.stringify(e));
+      this.onError(serverID, "Error adding user. " + error, message);
     })
   }
 };
 
 Tracker.prototype.updateUser = function(message, user) {
-  if (!message || !user) return;
-  let dbuser = this.getdbuserfromuser(user);
-  if (!dbuser.lichess && !dbuser.chesscom && !dbuser.bughousetest) {
-    return this.onError(serverID, `No linked accounts found.\nPlease link an account to your profile through \`!lichess\` or \`!chess.com\``, message);
+  let dbuser = message ? this.getdbuserfromuser(user) : user;
+  if(!dbuser.lichess && !dbuser.chesscom && !dbuser.bughousetest) {
+    this.onError(serverID, `No linked accounts found.\nPlease link an account to your profile through \`!lichess\` or \`!chess.com\``, message);
+    return;
   } else {
     handleLichessData(dbuser, dbuser.lichess)
     .then((dbuser) => {
@@ -123,21 +126,22 @@ Tracker.prototype.updateUser = function(message, user) {
       .then((dbuser) => {
         handleBughousetestData(dbuser, dbuser.bughousetest)
         .then((dbuser) => {
-          userUpdates[dbuser.id] = Date.now();
+          this.stopUpdating = true;
+          dbuser.lastupdate = Date.now();
           let tally = DataManager.getData();
           let dbindex = this.getdbindexfromdbuser(dbuser);
           tally[dbindex] = dbuser;
           DataManager.setData(tally);
-          this.onRatingUpdate(message, user);
+          console.log(`Updated ${dbuser.username} on ${dbuser.lichess ? `lichess, ` : ``}${dbuser.chesscom ? `chess.com, ` : ``}${dbuser.bughousetest ? `bughousetest, ` : ``}with no errors.`);
+          if(message) this.onRatingUpdate(message, user);
+          this.stopUpdating = false;
         })
         .catch((error) => {
-          this.onError(serverID, "Error adding user. " + error.toString());
-          console.log(e, JSON.stringify(e));
+          this.onError(serverID, "Error adding user. " + error, message);
         })
       })
       .catch((error) => {
-        this.onError(serverID, "Error adding user. " + error.toString());
-        console.log(e, JSON.stringify(e));
+        this.onError(serverID, "Error adding user. " + error, message);
       })
     })
     .catch((error) => {
@@ -147,15 +151,56 @@ Tracker.prototype.updateUser = function(message, user) {
   return;
 };
 
+Tracker.prototype.buildUpdateQueue = function() {
+  let onlinemembers = this.getonlinemembers();
+  onlinemembers.forEach(function(member) {
+    updatequeue[member.id] = true;
+  })
+  return updatequeue;
+};
+
+Tracker.prototype.initUpdateCycle = function() {
+  let dbuser = findLeastUpToDateUser();
+  if(dbuser && !this.stopUpdating) {
+    this.updating = true;
+    this.updateUser(false, dbuser);
+    setTimeout(() => this.initUpdateCycle(), 15000);
+  } else {
+    setTimeout(() => this.initUpdateCycle(), 15000);
+  }
+};
+
+function findLeastUpToDateUser() {
+  let tally = DataManager.getData();
+  let founddbuser = null;
+  let currentvalue = Infinity;
+  for(let i = 0; i < tally.length; i++) {
+    if(updatequeue[tally[i].id] && !tally[i].lastupdate) {
+      let killboolean = true;
+      for(let j = 0; j < config.sources.length; j++) {
+        if(tally[i][config.sources[j][1]]) killboolean = false;
+      };
+      if(!killboolean) {
+        currentvalue = 0;
+        founddbuser = tally[i];
+        break;
+      };
+    } else 
+    if((updatequeue[tally[i].id] && tally[i].lastupdate && tally[i].lastupdate < currentvalue && tally[i].lastupdate < Date.now() - 1800000)) {
+      let killboolean = true;
+      for(let j = 0; j < config.sources.length; j++) {
+        if(tally[i][config.sources[j][1]]) killboolean = false;
+      };
+      if(!killboolean) {
+        currentvalue = tally[i].lastupdate || 0;
+        founddbuser = tally[i];
+      }
+    }
+  };
+  return founddbuser;
+};
 
 Tracker.prototype.remove = function (serverID, source, userID, message, nomsg) {
-  if (this.updating) {
-    this.afterUpdate.push({
-      "type": "remove",
-      "arguments": arguments
-    });
-    return;
-  }
   this.stopUpdating = true;
   let tally = DataManager.getData();
   let dbindex = this.getdbindexfromid(userID)
@@ -164,11 +209,10 @@ Tracker.prototype.remove = function (serverID, source, userID, message, nomsg) {
   if (username) {
     delete tally[dbindex][source];
     delete tally[dbindex][sourceratings];
-    delete userUpdates[userID];
     DataManager.setData(tally);
     this.onRemoveSuccess(serverID, userID, source, username, message);
   } else {
-    if (!nomsg) {
+    if(!nomsg) {
       this.onError(serverID, "No tracking entry found to remove.", message);
     }
   }
@@ -191,7 +235,7 @@ function handleLichessData(dbuser, username) {
     })
     .then(([ratingData, username]) => {
       if(ratingData) {
-        userUpdates[dbuser.id] = Date.now();
+        dbuser.lastupdate = Date.now();
         dbuser[source] = username;
         dbuser[sourceratings] = ratingData;
       }
@@ -219,7 +263,7 @@ function handleChesscomData(dbuser, username) {
       })
       .then(([ratingData, username]) => {
         if(ratingData) {
-          userUpdates[dbuser.id] = Date.now();
+          dbuser.lastupdate = Date.now();
           dbuser[source] = username;
           dbuser[sourceratings] = ratingData;
         }
@@ -248,7 +292,7 @@ function handleBughousetestData(dbuser, username, retError) {
       })
       .then(([ratingData, username]) => {
         if(ratingData) {
-          userUpdates[dbuser.id] = Date.now();
+          dbuser.lastupdate = Date.now();
           dbuser[source] = username;
           dbuser[sourceratings] = ratingData;
         }
@@ -286,7 +330,6 @@ function getBughousetestDataForUser(username) {
   if (username === false) return false;
   return new Promise((resolve, reject) => {
     request.get(BUGHOUSETEST_USER_URL.replace("|", username), (error, response, body) => {
-      console.log(BUGHOUSETEST_USER_URL.replace("|", username))
       if (error) {
         return reject(error);
       }
@@ -318,29 +361,26 @@ function getChesscomDataForUser(username) {
       }
     });
   });
-}
+};
 
 function parseLichessUserData(lichessData, errorCB, modCB) {
-  
-  if (!lichessData) {
+  if(!lichessData) {
     errorCB("Couldn't find '" + username + "' on Lichess");
     return;
   } else
-    if (lichessData.closed) {
-      if (!closedUsername[lichessData.username.toLowerCase()]) {
-        modCB("Account " + lichessData.username + " is closed on Lichess.");
-        errorCB("Account " + lichessData.username + " is closed on Lichess.");
-      }
-      closedUsername[lichessData.username.toLowerCase()] = true;
-      return;
+  if(lichessData.closed) {
+    if(!closedUsername[lichessData.username.toLowerCase()]) {
+      modCB("Account " + lichessData.username + " is closed on Lichess.");
+      errorCB("Account " + lichessData.username + " is closed on Lichess.");
     }
-
+    closedUsername[lichessData.username.toLowerCase()] = true;
+    return;
+  }
   let ratings = {};
   ratings.maxRating = 0;
   let lichessusername = lichessData.username;
   let killboolean = true;
   let cheating = null;
-
   for (let i = 0; i < config.lichessvariants.length; i++) {
     let array = config.lichessvariants[i];
     let variant = array[1];
@@ -388,10 +428,10 @@ function parseLichessUserData(lichessData, errorCB, modCB) {
     delete ratings.cheating;
   }
   return [ratings, lichessusername];
-}
+};
 
 function parseBughousetestUserData(bughousetestData, errorCB, modCB) {
-  if (!bughousetestData) {
+  if(!bughousetestData) {
     errorCB("Couldn't find '" + username + "' on bughousetest");
     return;
   } else
@@ -403,13 +443,11 @@ function parseBughousetestUserData(bughousetestData, errorCB, modCB) {
       closedUsername[bughousetestData.username.toLowerCase()] = true;
       return;
     }
-
   let ratings = {};
   ratings.maxRating = 0;
   let bughousetestusername = bughousetestData.username;
   let killboolean = true;
   let cheating = null;
-
   for (let i = 0; i < config.bughousetestvariants.length; i++) {
     let array = config.bughousetestvariants[i];
     let variant = array[1];
@@ -454,18 +492,17 @@ function parseBughousetestUserData(bughousetestData, errorCB, modCB) {
   }
 
   return [ratings, bughousetestusername];
-}
+};
 
 function parseChesscomUserData(chesscomData, username, errorCB) {
   let stats = chesscomData.stats;
-  if (!stats) {
+  if(!stats) {
     errorCB("Couldn't find **'" + username + "'** on Chess.com.");
     return;
-  }
+  };
   let ratings = {};
   ratings.maxRating = 0;
   let killboolean = true;
-
   for (let i = 0; i < config.chesscomvariants.length; i++) {
     let array = config.chesscomvariants[i];
     let variant = array[1];
@@ -499,72 +536,6 @@ function parseChesscomUserData(chesscomData, username, errorCB) {
   };
 
   return [ratings, username];
-}
-
-Tracker.prototype.queueForceUpdate = function (userID) {
-  delete userUpdates[userID];
-};
-
-Tracker.prototype.initUpdateCycle = function () {
-  let user = findLeastUpToDateUser();
-  if (user && !this.stopUpdating) {
-    this.updating = true;
-    this.updateUser(user).catch((e) => {
-      console.log(e, JSON.stringify(e));
-    }).then(() => {
-      console.log("Done updating");
-      this.updating = false;
-      if (this.afterUpdate.length > 0) {
-        console.log("After update items found", this.afterUpdate);
-        this.stopUpdating = true;
-        this.processAfterUpdate()
-          .then(() => {
-            this.stopUpdating = false;
-            setTimeout(() => this.initUpdateCycle(), this.updateDelay);
-          }).catch((e) => {
-            console.log(e, JSON.stringify(e));
-            this.stopUpdating = false;
-            setTimeout(() => this.initUpdateCycle(), this.updateDelay);
-          });
-      } else {
-        setTimeout(() => this.initUpdateCycle(), this.updateDelay);
-      }
-    }).catch((e) => {
-      this.updating = false;
-      console.log("Error updating", user.id, e, JSON.stringify(e));
-      setTimeout(() => this.initUpdateCycle(), this.updateDelay);
-    });
-  } else {
-    setTimeout(() => this.initUpdateCycle(), 100);
-  }
-};
-
-Tracker.prototype.processAfterUpdate = function () {
-  return new Promise((resolve, reject) => {
-    let promises = [];
-    for (let i = 0; i < this.afterUpdate.length; i++) {
-      let item = this.afterUpdate[i];
-      if (item.type === "track") {
-        promises.push(new Promise((innerResolve, innerReject) => {
-          setTimeout(() => {
-            let p = this.track.apply(this, item.arguments);
-            if (p) {
-              p.then(innerResolve).catch(innerReject);
-            }
-          }, this.updateDelay * (i + 1));
-        }));
-      } else if (item.type === "remove") {
-        promises.push(new Promise((innerResolve, innerReject) => {
-          setTimeout(() => {
-            this.remove.apply(this, item.arguments);
-            innerResolve();
-          }, this.updateDelay * (i + 1));
-        }));
-      }
-    }
-    this.afterUpdate = [];
-    Promise.all(promises).then(resolve).catch(reject);
-  });
 };
 
 Tracker.prototype.removeByUser = function (serverID, source, user, message) {
@@ -584,26 +555,6 @@ Tracker.prototype.removeByUser = function (serverID, source, user, message) {
   }
   this.onError(serverID, "No tracking entry found to remove.", message);
   this.stopUpdating = false;
-}
-
-function findLeastUpToDateUser() {
-  let tally = DataManager.getData();
-  let founduserID = null;
-  let currentLeastUpdatedValue = Infinity;
-  for (let id in tally) {
-    let dbindex = this.getdbindexfromid(id)
-    let dbuser = tally[dbindex];
-    if (closedUsername[dbuser.username.toLowerCase()]) {
-      continue;
-    }
-    if (!userUpdates[id] || userUpdates[id] < currentLeastUpdatedValue) {
-      currentLeastUpdatedValue = userUpdates[id] || 0;
-      founduserID = id;
-    }
-  }
-  return founduserID;
-}
-
-
+};
 
 module.exports = Tracker;

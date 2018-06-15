@@ -43,7 +43,6 @@ const LICHESS_CRAZYHOUSE_FEN_URL = "https://lichess.org/analysis/crazyhouse/";
 var bouncerbot;
 var nadekobot;
 var harmonbot;
-var owner;
 var reboot;
 let embedoutput = {};
 let partymode = {};
@@ -88,6 +87,10 @@ client.on("ready", () => {
   };
   console.log("bleep bloop! It's showtime.");
   survey();
+  if(Object.keys(tracker.buildUpdateQueue()).length > 0) {
+    console.log("Beginning update cycle...");
+    tracker.initUpdateCycle();
+  };
   setInterval(function () {
     if(!checkbounceronline() && !bcpboolean) {
       bcphandler(null, ["enable"])
@@ -215,6 +218,12 @@ client.on("messageDelete", (message) => {
 
 client.on("presenceUpdate", (oldMember, newMember) => {
   if(oldMember.user.bot || oldMember.guild.id !== config.houseid) return;
+  if(oldMember.presence.status === "offline" && !!newMember.presence.status.match(/online|idle|dnd/)) {
+    tracker.updatepresence(newMember, true);
+  } else
+  if(!!oldMember.presence.status.match(/online|idle|dnd/) && newMember.presence.status === "offline" ) {
+    tracker.updatepresence(newMember, false);
+  } else
   if((!oldMember.presence.game && newMember.presence.game && newMember.presence.game.streaming) || (oldMember.presence.game && !oldMember.presence.game.streaming && newMember.presence.game && newMember.presence.game.streaming)) {
     console.log(oldMember.presence, newMember.presence);
     console.log(oldMember.user.tag);
@@ -1381,7 +1390,8 @@ function nonprefixfunctions(message, args, argument, server) {
 };
 
 function getonlinemembers(guild) {
-  return guild.members.filter(member => member.presence.status.match(/online|idle|dnd/))
+  if(!guild) guild = client.guilds.get(config.houseid);
+  return guild.members.filter(member => !!member.presence.status.match(/online|idle|dnd/));
 };
 
 function chesstitle(message, args, command, argument, server) {
@@ -3128,7 +3138,7 @@ function onModError(serverID, error) {
 
 function onTrackError(serverID, error, message) {
   console.log(error);
-  senderrormessage(message.channel, error);
+  if(message) senderrormessage(message.channel, error);
 }
 
 function canManageRoles(member) {
