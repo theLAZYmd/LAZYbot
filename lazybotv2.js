@@ -28,7 +28,8 @@ const tracker = new TrackerConstructor({
   "getdbindexfromid": getdbindexfromid,
   "getdbuserfromusername": getdbuserfromusername,
   "getsourcetitle": getsourcetitle,
-  "getsourcefromtitle": getsourcefromtitle
+  "getsourcefromtitle": getsourcefromtitle,
+  "getonlinemembers": getonlinemembers
 });
 const leaderboard = new LeaderboardConstructor({
   "getdbuserfromuser": getdbuserfromuser,
@@ -88,7 +89,12 @@ client.on("ready", () => {
   console.log("bleep bloop! It's showtime.");
   survey();
   setInterval(function () {
-    checkbounceronline();
+    if(!checkbounceronline() && !bcpboolean) {
+      bcphandler(null, ["enable"])
+    } else
+    if(checkbounceronline() && bcpboolean) {
+      bcphandler(null, ["disable"])
+    };
   }, 600000)
   setInterval(function () {
     survey();
@@ -505,24 +511,11 @@ function nadekoprefixfunctions(message, args, command, argument, server) {
     member.addRole(role);
   } else
 
-  if((command === "botcontingencyplan" || command === "bcp")) {
-    if(!checkrole(message.member, "mods")) return;
-    let role = getrolefromname(message.guild, server.roles.bot);
-    getmemberfromuser(message.guild, nadekobot).removeRole(role);
-    if(!checkrole(getmemberfromuser(message.guild, nadekobot), role.name) || args[0] === "enable") {
-      getmemberfromuser(message.guild, nadekobot).addRole(role);
-      sendgenericembed (message.channel, `**Bot Contingency Plan enabled.**`)
-      bcpboolean = true;
-    } else
-    if(checkrole(getmemberfromuser(message.guild, nadekobot), role.name) || args[0] === "disable") {
-      getmemberfromuser(message.guild, nadekobot).removeRole(role);
-      sendgenericembed (message.channel, `**Bot Contingency Plan disabled.**`)
-      bcpboolean = false;
-    };
+  if((command === "botcontingencyplan" || command === "bcp") && checkrole(message.member, "mods")) {
+    bcphandler(message, args);
   } else
 
   if((command === "testingmode") || (command === "tm")) {
-    
     let author = message.author;
     let member = getmemberfromuser(message.guild, author);
     if(!checkrole(member, "dev")) return;
@@ -1387,6 +1380,10 @@ function nonprefixfunctions(message, args, argument, server) {
   }
 };
 
+function getonlinemembers(guild) {
+  return guild.members.filter(member => member.presence.status.match(/online|idle|dnd/))
+};
+
 function chesstitle(message, args, command, argument, server) {
   if(args.length !== 1 && args.length !== 2) return;
   let user = getuser(message.guild, args[0]);
@@ -1406,9 +1403,33 @@ function chesstitle(message, args, command, argument, server) {
   DataManager.setData(tally);
 };
 
+function bcphandler(message, args) {
+  let guild = client.guilds.get(config.houseid);
+  let channel = getchannelfromname(guild, "spam");
+  let server = DataManager.getGuildData(guild.id);
+  let role = getrolefromname(guild, server.roles.bot);
+  if(message) {
+    guild = message.guild;
+    channel = message.channel;
+    server = DataManager.getGuildData(guild.id);
+    role = getrolefromname(guild, server.roles.bot);
+  };
+  getmemberfromuser(guild, nadekobot).removeRole(role);
+  if(!checkrole(getmemberfromuser(guild, nadekobot), role.name) || args && args[0] === "enable") {
+    getmemberfromuser(guild, nadekobot).addRole(role);
+    sendgenericembed(channel, `**Bot Contingency Plan enabled.**`)
+    bcpboolean = true;
+  } else
+  if(checkrole(getmemberfromuser(guild, nadekobot), role.name) || args && args[0] === "disable") {
+    getmemberfromuser(guild, nadekobot).removeRole(role);
+    sendgenericembed (channel, `**Bot Contingency Plan disabled.**`)
+    bcpboolean = false;
+  }
+};
+
 function checkbounceronline() {
-  if(bouncerbot && client.users.get(bouncerbot.id) && bouncerbot.presence.status == "online");
-  return true;
+  if(bouncerbot && client.users.get(bouncerbot.id) && bouncerbot.presence.status === "online") return true;
+  return false;
 };  
 
 String.prototype.clean = function() {
@@ -1598,7 +1619,6 @@ function survey() {
     "lm24": 0
   };
   guild.members.forEach(function(member) {
-    
     let tally = DataManager.getData();
     let dbuser = tally.find(dbuser => dbuser.id === member.id);
     if(member.presence.status === "online") online++;
