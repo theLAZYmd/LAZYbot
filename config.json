@@ -1,6 +1,6 @@
 {
-    "token": "NDIyODQ3MDg2MTQ1NTY4NzY5.DYhukg.ufLcCpYSHZlfh-eepWyCkXqq0c4",
-    "token2": "MzM4NzcyNDUxNTY1NTAyNDc0.DZxhoQ.aymib8jmg7u7sO2dDu_bfugCwFg",
+    "token": "NDIyODQ3MDg2MTQ1NTY4NzY5.DgHAUg.tgutlAlkPuqBtCg9cx62ufH1Ayk",
+    "token2": "MzM4NzcyNDUxNTY1NTAyNDc0.DgHAuA.l3xbJT3gdasuSRRM8NptfGJQWB0",
     "dataFile": "./db.json",
     "guildFile": "./guildconfig.json",
     "houseid": "314155682033041408",
@@ -30,8 +30,8 @@
         "channels": "727671"
     },
     "dbtemplate": {
-        "id": "313428408107532289",
-        "username": "PurelySmart#7674",
+        "id": "454390762185031691",
+        "username": "Illion#1918",
         "messages": 0
     },
     "servertemplate": {
@@ -75,8 +75,8 @@
         "keys": []
     },
     "backupdb": [
-        "Tue May 22 2018 23:21:24 GMT+01",
-        "Mon Apr 16 2018 21:23:16 GMT+00",
+        "Sat Jun 09 2018 22:46:09 GMT+01",
+        "Sat Jun 09 2018 20:49:46 GMT+01",
         "Mon Apr 16 2018 19:23:16 GMT+00"
     ],
     "updateDelay": 15000,
@@ -172,7 +172,7 @@
             "Racing Kings",
             "racingkings",
             "racingKings",
-            "racingkings",
+            "racing-kings",
             "racingkings"
         ]
     ],
@@ -208,6 +208,7 @@
             "King of the Hill",
             "koth",
             "kingofthehill",
+            "koth",
             "koth"
         ],
         [
@@ -264,7 +265,7 @@
     ],
     "sources": [
         [
-            "Lichess",
+            "Lichess.org",
             "lichess"
         ],
         [

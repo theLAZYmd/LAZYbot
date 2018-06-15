@@ -1,9 +1,13 @@
 const Discord = require("discord.js");
-const client = new Discord.Client();
 const http = require('http');
 const express = require('express');
 const request = require('request');
+const client = new Discord.Client();
+const EventEmitter = require('events');
+class MyEmitter extends EventEmitter {}
+const myEmitter = new MyEmitter();
 const app = express();
+//const tesseract = require('tesseract.js');
 
 require("./guildconfig.json");
 require ("./config.json");
@@ -18,26 +22,37 @@ const tracker = new TrackerConstructor({
 	"onRemoveSuccess": onRemoveSuccess, 
 	"onRatingUpdate": onRatingUpdate, 
 	"onError": onTrackError, 
-	"onModError": onModError
+  "onModError": onModError,
+  "getdbuserfromuser": getdbuserfromuser,
+  "getdbindexfromdbuser": getdbindexfromdbuser,
+  "getdbindexfromid": getdbindexfromid,
+  "getdbuserfromusername": getdbuserfromusername,
+  "getsourcetitle": getsourcetitle,
+  "getsourcefromtitle": getsourcefromtitle
 });
-
+const leaderboard = new LeaderboardConstructor({
+  "getdbuserfromuser": getdbuserfromuser,
+  "onRatingUpdate": onRatingUpdate,
+  "onError": onTrackError
+});
+const messageSplitRegExp = /[^\s]+/gi;
+const FEN_API_URL = "https://www.chess.com/dynboard";
+const LICHESS_ANALYSIS_FEN_URL = "https://lichess.org/analysis?fen=";
+const LICHESS_CRAZYHOUSE_FEN_URL = "https://lichess.org/analysis/crazyhouse/";
 var bouncerbot;
 var nadekobot;
 var harmonbot;
 var owner;
 var reboot;
-var RATINGS;
-var partymode = {};
-var puzzles = [];
-var bcpboolean = false;
+let embedoutput = {};
+let partymode = {};
+let puzzles = [];
+let notify = [];
+let bcpboolean = false;
+let [customfunction1, customfunction2, customfunction3, customfunction4, customfunction5] = ["", "", "", "", ""];
+let newarrivalsboolean = false;
 let config = DataManager.getData("./config.json");
-let packagestuff = DataManager.getData("./package.json")
-const messageSplitRegExp = /[^\s]+/gi;
-const FEN_API_URL = "https://www.chess.com/dynboard";
-const LICHESS_ANALYSIS_FEN_URL = "https://lichess.org/analysis?fen=";
-
-  var i;
-  let embedoutput = {};
+let packagestuff = DataManager.getData("./package.json");
 
 //console startup section
 
@@ -52,16 +67,14 @@ client.on("ready", () => {
     }
   }
   bouncerbot = client.users.get(config.ids.bouncer);
-  console.log(`Noticed bot user ${bouncerbot.tag} in ${Date.now() - reboot}ms`);
+  console.log(bouncerbot ? `Noticed bot user ${bouncerbot.tag} in ${Date.now() - reboot}ms` : `Bouncer#8585 is not online!`);
   nadekobot = client.users.get(config.ids.nadeko);
-  console.log(`Noticed bot user ${nadekobot.tag} in ${Date.now() - reboot}ms`);
+  console.log(nadekobot ? `Noticed bot user ${nadekobot.tag} in ${Date.now() - reboot}ms` : `Nadeko#6685 is not online!`);
   harmonbot = client.users.get(config.ids.harmon);
-  console.log(`Noticed bot user ${harmonbot.tag} in ${Date.now() - reboot}ms`);
+  console.log(harmonbot ? `Noticed bot user ${harmonbot.tag} in ${Date.now() - reboot}ms` : `Harmonbot#4049 is not online!`);
   for(let i = 0; i < config.ids.owner.length; i++) {
     let owner = client.users.get(config.ids.owner[i])
-    if(owner) {
-      console.log(`Noticed bot owner ${owner.tag} in ${Date.now() - reboot}ms`);
-    }
+    if(owner) console.log(`Noticed bot owner ${owner.tag} in ${Date.now() - reboot}ms`);
   };
   if(client.user.id === config.ids.bot) {
     client.user.setPresence({
@@ -73,6 +86,13 @@ client.on("ready", () => {
     })
   };
   console.log("bleep bloop! It's showtime.");
+  survey();
+  setInterval(function () {
+    checkbounceronline();
+  }, 600000)
+  setInterval(function () {
+    survey();
+  }, 3600000);
 });
 
 app.get("/", (request, response) => { //pinging glitch.com
@@ -80,7 +100,7 @@ app.get("/", (request, response) => { //pinging glitch.com
 });
 app.listen(process.env.PORT);
 setInterval(() => {
-  http.get(`http://${process.env.lazybot}.glitch.me/`); //pinging glitch.com
+  http.get(`http://${process.env.lazybot || "houselazybot"}.glitch.me/`); //pinging glitch.com
 }, 280000);
 backupdb("1", 3600000); //backupdb
 backupdb("2", 7200000);
@@ -88,16 +108,25 @@ backupdb("3", 14400000);
 
 client.login(process.env.TOKEN ? process.env.TOKEN : config.token); //token
 
+myEmitter.on("event", () => console.log("test"));
+
 client.on("message", (message) => { //command handler
-  if((message.channel.type === "dm" || message.channel.type === "group") && !message.author.bot) {
+  if(message.author.id === client.user.id) return;
+  if(message.content) message.content = message.content.replace(/[\u200B-\u200D\uFEFF]/g, '');
+  if(message.channel.type === "dm" || message.channel.type === "group") {
+    if(message.author.bot) return;
     DMfunctions(message);
     return;
   };
   let server = DataManager.getGuildData(message.guild.id);
-  if(message.author.id === client.user.id) return;
   if(executeshadowban(message, server)) return;
   tracker.messagelogger(message, server);
   if(message.content.length === 1) return;
+  if(customfunction1) eval(customfunction1);
+  if(customfunction2) eval(customfunction2);
+  if(customfunction3) eval(customfunction3);
+  if(customfunction4) eval(customfunction4);
+  if(customfunction5) eval(customfunction5);
   if(message.content.startsWith(server.prefixes.nadeko) && !message.author.bot) {
     let args = message.content.slice(server.prefixes.nadeko.length).match(messageSplitRegExp);
     let command = args.shift().toLowerCase();
@@ -115,7 +144,9 @@ client.on("message", (message) => { //command handler
       botfunctions(message);
     } else
     if(!message.author.bot) {
-      nonprefixfunctions(message, server);
+      let args = message.content.match(messageSplitRegExp);
+      let argument = message.content.trim();
+      nonprefixfunctions(message, args, argument, server);
     }
   } return;
 });
@@ -139,9 +170,9 @@ client.on("messageUpdate", (oldMessage, newMessage) => {
   let editlogger = {};
   editlogger.title = `:pencil: Message updated in #${oldMessage.channel.name}`;
   editlogger.description = oldMessage.author.tag;
-  editlogger.fields = embedaddfield(editlogger.fields, `Old message`, oldMessage.content, false);
-  editlogger.fields = embedaddfield(editlogger.fields, `New message`, newMessage.content, false);
-  editlogger.fields = addfield(editlogger.fields, `User ID`, newMessage.author.id, false);
+  editlogger.fields = embedfielder(editlogger.fields, `Old message`, oldMessage.content, false);
+  editlogger.fields = embedfielder(editlogger.fields, `New message`, newMessage.content, false);
+  editlogger.fields = embedfielder(editlogger.fields, `User ID`, newMessage.author.id, false);
   editlogger.footer = embedfooter(getISOtime(Date.now()));
   embedsender(getchannelfromname(newMessage.guild, "comment-log"), editlogger);
   let server = DataManager.getGuildData(newMessage.guild.id);
@@ -153,7 +184,7 @@ client.on("messageUpdate", (oldMessage, newMessage) => {
     nadekoprefixfunctions(newMessage, args, command, argument, server);
   } else
   if(newMessage.content.startsWith(server.prefixes.prefix) && !newMessage.author.bot) {
-    let args = message.content.slice(server.prefixes.prefix.length).match(messageSplitRegExp);
+    let args = newMessage.content.slice(server.prefixes.prefix.length).match(messageSplitRegExp);
     let command = args.shift().toLowerCase();
     let argument = newMessage.content.slice(command.length + server.prefixes.nadeko.length).trim();
     prefixfunctions(newMessage, args, command, argument, server);
@@ -166,43 +197,47 @@ client.on("messageDelete", (message) => {
   let server = DataManager.getGuildData(message.guild.id);
   if(message.author.bot) return;
   if(message.content.startsWith(server.prefixes.prefix) || message.content.startsWith(server.prefixes.nadeko)) return;
-  clearvar();
-  embedoutput.title = `:wastebasket: Message deleted in #${message.channel.name}`;
-  embedoutput.description = message.author.tag;
-  embedoutput.fields = [];
-  addfield(`Content`, message.content, false);
-  addfield(`User ID`, message.author.id, false);
-  embedoutput.footer = embedfooter(getISOtime(Date.now()));
-  embedsender(getchannelfromname(message.guild, "comment-log"), embedoutput);
+  let deletelogger = {};
+  deletelogger.title = `:wastebasket: Message deleted in #${message.channel.name}`;
+  deletelogger.description = message.author.tag;
+  deletelogger.fields = [];
+  embedfielder(deletelogger.fields, `Content`, message.content, false);
+  embedfielder(deletelogger.fields, `User ID`, message.author.id, false);
+  deletelogger.footer = embedfooter(getISOtime(Date.now()));
+  embedsender(getchannelfromname(message.guild, "comment-log"), deletelogger);
 });
 
 client.on("presenceUpdate", (oldMember, newMember) => {
   if(oldMember.user.bot || oldMember.guild.id !== config.houseid) return;
   if((!oldMember.presence.game && newMember.presence.game && newMember.presence.game.streaming) || (oldMember.presence.game && !oldMember.presence.game.streaming && newMember.presence.game && newMember.presence.game.streaming)) {
-    console.log(oldMember.presence, newMember.presence)
+    console.log(oldMember.presence, newMember.presence);
+    console.log(oldMember.user.tag);
     let streamersbox = getchannelfromname(oldMember.guild, "Streamers Box");
-    console.log(streamersbox);
     let server = DataManager.getGuildData(oldMember.guild.id);
-    for(let i = 0; server.regions.length; i++) {
+    for(let i = 0; i < server.regions.length; i++) {
       streamersbox.overwritePermissions(getrolefromname(newMember.guild, server.regions[i]), {
         VIEW_CHANNEL: true
       })
     }
   } else
   if((oldMember.presence.game && oldMember.presence.game.url && !newMember.presence.game) || (oldMember.presence.game && oldMember.presence.game.url && newMember.presence.game && newMember.presence.game.url)) {
-    console.log("offline" + true);
+    console.log(oldMember.presence, newMember.presence);
+    console.log(oldMember.user.tag);
     let streamersbox = getchannelfromname(oldMember.guild, "Streamers Box");
-    console.log(streamersbox);
     let server = DataManager.getGuildData(oldMember.guild.id);
-    for(let i = 0; server.regions.length; i++) {
+    console.log(server.regions);
+    for(let i = 0; i < server.regions.length; i++) {
       streamersbox.overwritePermissions(getrolefromname(newMember.guild, server.regions[i]), {
-        VIEW_CHANNEL: null
+        VIEW_CHANNEL: false
       })
     }
   }
 });
 
 function nadekoprefixfunctions(message, args, command, argument, server) {
+
+  if(command === "typeadd") typeadd(message, args, command, argument);
+
   if(command === "newpuzzle") {
     let imageurl = "";
     if(message.attachments.first()) {
@@ -234,7 +269,7 @@ function nadekoprefixfunctions(message, args, command, argument, server) {
 
   if(command === "puzzle") {
     if(!args[0]) {
-      array = [];
+      let array = [];
       for(let i = 0; i < puzzles.length; i++) {
         array[i] = [];
         array[i][0] = puzzles[i].title;
@@ -306,7 +341,7 @@ function nadekoprefixfunctions(message, args, command, argument, server) {
   } else
 
   if(command === "puzzles") {
-    array = [];
+    let array = [];
     for(let i = 0; i < puzzles.length; i++) {
       array[i] = [];
       array[i][0] = puzzles[i].title;
@@ -316,11 +351,7 @@ function nadekoprefixfunctions(message, args, command, argument, server) {
     embedoutput.title = `Active Puzzles. Use .puzzle to view a puzzle.`
     embedsender(message.channel, embedoutput);
     message.delete();
-  }
-
-  if(command === "solution") {
-    let index = !isNaN(Number(args[0])) ? Number(args[0]) : 1;
-  } else
+  };
 
   if(command === "dblb") {
     embedoutput = dbpositions(message.guild);
@@ -342,9 +373,7 @@ function nadekoprefixfunctions(message, args, command, argument, server) {
     return;
   } else
 
-  if(command === "ticket") {
-    tickethandler(message, args, command, argument, server)
-  } else
+  if(command === "ticket") tickethandler(message, args, command, argument, server);
 
   if(command === "tickets") {
     if(!checkrole(getmemberfromuser(message.guild, message.author), "mods")) return;
@@ -353,9 +382,7 @@ function nadekoprefixfunctions(message, args, command, argument, server) {
     message.delete(1000);
   } else
 
-  if(command === "bidamount") {
-    bidamount(message, args, command, argument, server);
-  } else
+  if(command === "bidamount") bidamount(message, args, command, argument, server);
 
   if(command === "give") {
     if((isNaN(args[0]) && args[0] !== "all") || !args[1]) return;
@@ -376,7 +403,7 @@ function nadekoprefixfunctions(message, args, command, argument, server) {
           command = args[0].replace(".","").toLowerCase();
           args.splice(0, 1);
           argument = argument.slice(command.length).trim();
-          chessAPI(message, args, command, argument, server)
+          botfunctions(message, args, command, argument, server)
         }
       }
     }
@@ -390,20 +417,26 @@ function nadekoprefixfunctions(message, args, command, argument, server) {
   } else
 
   if(command === "notify") {
-
+    if(!checkrole(getmemberfromuser(message.guild, message.author), "Bronze")) return;
+    for(let i = 0; i < notify.length; i++) {
+      if(notify[i][0] === message.author.id && Date.now() - notify[i][1] < 3600000) {
+        senderrormessage(message.channel, `You're using that command too frequently.\nPlease wait **${Math.ceil((3600000 - (Date.now() - notify[i][1]))/60000)}** minutes.`);
+        return;
+      }
+    }
     let link = args[0]
-    let ETA = argument.slice(args[0].length + 1, argument.length);
-    console.log("ETA is " + ETA);
- 
-    for(let i = 0; i < server.acceptedlinkdomains.length; i++) {
-      if(link.startsWith(server.acceptedlinkdomains[i])) {
-        clearvar()
-        embedoutput.content = "@here";
-        embedoutput.title = "Tournament Starting!";
-        embedoutput.description = `Greeetings ${message.channel}. You have been invited to join a tournament by **${message.author.tag}**.${ETA ? ` Tournament starts in ${ETA}!` : " Join now!"}\n${link}`;
-        embedsender(message.channel, embedoutput);      
-        console.log(`${message.author.username} has sent out a ping for ${link}.`);
-      };
+    let ETA = argument.slice(args[0].length, argument.length).trim();
+    if(ETA) console.log("ETA is " + ETA);
+    if(link.match(/(lichess.org)|(chess\.com)|(bughousetest\.com)/g)) {
+      let tournamentembed = {};
+      tournamentembed.content = "@here";
+      tournamentembed.title = "Tournament Starting!";
+      tournamentembed.description = `Greeetings ${message.channel}. You have been invited to join a tournament by **${message.author.tag}**.${ETA ? ` Tournament starts in ${ETA}!` : " Join now!"}\n${link}`;
+      embedsender(message.channel, tournamentembed);      
+      console.log(`${message.author.username} has sent out a ping for ${link}.`);
+      if(!notify[0]) {
+        notify[0] = [message.author.id, Date.now()];
+      } else notify.push([message.author.id, Date.now()])
     };
   } else
 
@@ -455,9 +488,7 @@ function nadekoprefixfunctions(message, args, command, argument, server) {
     embedsender(message.channel, embedoutput);
   } else
   
-  if(command === "fetch") {
-    returnmessagefromid(message, args, command, argument, server);
-  } else
+  if(command === "fetch") returnmessagefromid(message, args, command, argument, server);
 
   if(command === "fb") { //fakebanning
     if(!args[0] || !checkowner(message.author)) return;
@@ -513,6 +544,173 @@ function nadekoprefixfunctions(message, args, command, argument, server) {
 
 function prefixfunctions(message, args, command, argument, server) {
 
+  if(command === "title" && message.guild.id === config.houseid && checkrole(getmemberfromuser(message.guild, message.author), "mods")) chesstitle(message, args, command, argument, server);
+  /*
+  if(command === "tesseract" && !!message.attachments.first()) {
+    let streambuffers = require('stream-buffers');
+    let myWritableStreamBuffer = new streambuffers.WritableStreamBuffer({
+      initialSize: (100 * 1024),   // start at 100 kilobytes.
+      incrementAmount: (10 * 1024) // grow by 10 kilobytes each time buffer overflows.
+    });
+    let url = message.attachments.first().url;
+    request(message.attachments.first().url).pipe(myWritableStreamBuffer)
+    .on('close', function() {
+      console.log(url);
+      tesseract.recognize(myWritableStreamBuffer)
+      .progress(function(p) {
+        console.log('progress', p)
+      })
+      .catch(err => console.error(err))
+      .then(function(result) {
+        console.log(result)
+        process.exit(0)
+      });
+    });
+    return;
+  };*/
+
+  if(command === "eval" && checkowner(message.author)) {
+    if(argument.startsWith("```") &&argument.endsWith("```")) {
+      argument = argument.slice(args[0] === "```js" ? 5 : 3, -3).trim();
+      console.log(argument);
+      try {
+        let evaled = eval(argument) || "";
+        if(evaled) evaled = require("util").inspect(evaled);
+        console.log(evaled);
+      } catch (err) {
+        console.log(err);
+      }
+      return;
+    } else {
+      senderrormessage(message.channel, `Incorrect formatting! Use a code block! `)
+    };
+  } else
+
+  if(command === "myrank" || command === "getrank") {
+    let member = getmemberfromuser(message.guild, message.author);
+    if(args.length === 1 && command === "getrank" && checkrole(member, "mods")) {
+      member = getmemberfromuser(message.guild, getuser(message.guild, args[0]));
+    };
+    if(!member) return;
+    leaderboard.getRank(message, member);
+  } else
+
+  if(command === "help") {
+    if(args.length === 1) {
+      clearvar();
+      embedoutput.title = "Rating Commands " + getemojifromname("lichess") + " " + getemojifromname("chesscom");
+      embedoutput.color = server.colors.ratings;
+      addfield("!lichess [lichess.org user]", "Links you to Lichess user. Defaults to your Discord username if no profile user.");
+      addfield("!chesscom [chess.com user]", "Links you to Chess.com user. Defaults to your Discord username if no profile user.");
+      addfield("!remove [chesscom | lichess]", "Removes your profile from the rating tracker.");
+      addfield("!update", "Queues your profile to be automatically updated.");
+    //addfield("!list [variant] [page]", "Show current leaderboard. [variant] and [page] number optional.");
+    //addfield("!MyRank", "Displays your current rank.");
+      addfield("!ratinghelp", "Lists commands for configuring rating on profile.");
+      embedsender(message.channel, embedoutput)
+    }
+  } else
+
+  if(command === "remove") {
+    removesource(message, args, command, argument, server)
+  } else
+
+  if(command === "update") {
+    let user = args[0] ? getuser(message.guild, args[0]) : message.author;
+    if(!user) return;
+    tracker.updateUser(message, user)
+    // tracker.queueForceUpdate(message.member.id);
+    // message.channel.send("Queued for update.")
+    // .catch((e) => console.log(JSON.stringify(e)));
+  } else
+
+  if(command === "lichess") {
+    if(args.length === 1 || args.length === 0) {
+      //Adding sender to tracking
+      tracker.track(message.guild.id, message.author, "lichess", args[0] ? args[0] : message.author.username, message)
+    } else
+    if(args.length === 2) {
+      if(canManageRoles(message.member)) {
+        let user = getuser(message.guild, args[0])
+        if(user) {
+          tracker.track(message.guild.id, user, "lichess", args[1], message);
+        } else {
+          senderrormessage(message.channel, "Invalid user given.")
+        }
+      } else {
+        message.channel.send("You do not have permission to do this.")
+        .catch((e) => console.log(JSON.stringify(e)));
+      }
+    } else {
+      message.channel.send("Wrong amount of parameters.")
+      .catch((e) => console.log(JSON.stringify(e)));
+    }
+    return;
+  } else
+
+  if(command.replace(".","") === "bughousetestcom" || command === "bughousetest") {
+    if(args.length === 1 || args.length === 0) {
+      tracker.track(message.guild.id, message.author, "bughousetest", args[0] ? args[0] : message.author.username, message)
+    } else
+    if(args.length === 2) {
+      if(canManageRoles(message.member)) {
+        let user = getuser(message.guild, args[0])
+        if(user) {
+          tracker.track(message.guild.id, user, "bughousetest", args[1], message);
+        } else {
+          senderrormessage(message.channel, "Invalid user given.")
+        }
+      } else {
+        message.channel.send("You do not have permission to do this.")
+        .catch((e) => console.log(JSON.stringify(e)));
+      }
+    } else {
+      message.channel.send("Wrong amount of parameters.")
+      .catch((e) => console.log(JSON.stringify(e)));
+    }
+    return;
+  } else
+
+  if(command.replace(".","") === "chesscom") {
+    if(args.length === 1 || args.length === 0) {
+      //Adding sender to tracking
+      tracker.track(message.guild.id, message.author, "chesscom", args[0] ? args[0] : message.author.username, message);
+    } else
+    if(args.length === 2) {
+      if(canManageRoles(message.member)) {
+        let user = getuser(message.guild, args[0]);
+        if(!user) return;
+        let member = getmemberfromuser(message.guild, user);
+        if(member) {
+          tracker.track(message.guild.id, user, "chesscom", args[1], message);
+        } else {
+          message.channel.send("Invalid user mention given.")
+          .catch((e) => console.log(JSON.stringify(e)));
+        }
+      } else {
+        senderrormessage(message.channel, "Invalid user given.")
+      }
+    } else {
+      message.channel.send("Wrong amount of parameters.")
+      .catch((e) => console.log(JSON.stringify(e)));
+    }
+    return;
+  } else
+  
+  if(command === "leaderboard" || command === "lb") {
+    paginator(message, "parseLeaderboard(message, page)", 120000, 5);
+  } else
+
+  if(command === "updateusername") {
+    let tally = DataManager.getData();
+    let user = args[0] && checkrole(getmemberfromuser(message.guild, message.author), "mods") ? getuser(message.guild, args[0]) : message.author;
+    let dbuser = getdbuserfromuser(user);
+    let dbindex = getdbindexfromdbuser(dbuser);
+    tally[dbindex].username = user.tag;
+    DataManager.setData(tally);
+    sendgenericembed(message.channel, `Data on **username** re-registered to database for **${user.tag}**.`)
+  } else
+
   if(command === "color" || command === "colour") {
     let user = (checkrole(getmemberfromuser(message.guild, message.author), "mods") || (getuser(message.guild, args[0]) && getuser(message.guild, args[0]).id === message.author.id)) ? getuser(message.guild, args[0]) : message.author;
     let member = getmemberfromuser(message.guild, user);
@@ -532,12 +730,14 @@ function prefixfunctions(message, args, command, argument, server) {
       senderrormessage(message.channel, "Invalid FEN!");
       return;
     };
+    let fenargs = args.slice(0, 6);
     let type = args[0].occurrences("/") === 8 ? "crazyhouse" : "chess";
     let inhand = "";
     if(type === "crazyhouse") {
       inhand = args[0].split("/").splice(-1, 1)[0] + " ";
       args[0] = (args[0] + " ").replace("/" + inhand, "");
     };
+    let truefen = fenargs.join(" ")
     let fen = args.join(" ");
     let toMove = "";
     let flip = 0;
@@ -556,7 +756,7 @@ function prefixfunctions(message, args, command, argument, server) {
       "&size=" + config.fenBoardSize +
       "&flip=" + flip +
       "&ext=.png"; //make discord recognise an image
-    let lichessUrl = LICHESS_ANALYSIS_FEN_URL + encodeURIComponent(fen);
+    let lichessUrl = type === "chess" ? LICHESS_ANALYSIS_FEN_URL + encodeURIComponent(fen) : LICHESS_CRAZYHOUSE_FEN_URL + truefen.replace(/\s+/g, "_");
     request(imageUrl, function(error, response, body) {
       if(response.statusCode != "404") {
         embedsender(message.channel, getFenEmbed(imageUrl, toMove, lichessUrl, inhand))
@@ -661,21 +861,21 @@ function prefixfunctions(message, args, command, argument, server) {
     if(!checkowner(message.author)) return;
     let user = getuser(message.guild, args[0]);
     if(!user) return;
-    logshadowban(user);
+    logshadowban(server, user);
   } else
 
   if(command === "shadowban") {
     if(!checkowner(message.author)) return;
     let user = getuser(message.guild, args[0]);
     if(!user) return;
-    shadowban(user);
+    shadowban(server, user);
   } else
 
   if(command === "unshadowban") {
     if(!checkowner(message.author)) return;
     let user = getuser(message.guild, args[0]);
     if(!user) return;
-    unshadowban(user);
+    unshadowban(server, user);
   } else
 
   if(command === "name") {
@@ -713,8 +913,6 @@ function prefixfunctions(message, args, command, argument, server) {
   if(command === "bidamount") {
     bidamount(message, args, command, argument, server);
   } else
-
-  chessAPI(message, args, command, argument, server);
 
   if(command === "guideadd") {
     let guidename = args[0];
@@ -1149,7 +1347,7 @@ function prefixfunctions(message, args, command, argument, server) {
   cr(message, "who", `I am LAZYbot#2309 **v${packagestuff.version}**`);
   cr(message, "help", "This is a pretty basic bot, there isn't much it can help you with.");
   cr(message, "party", ":tada:");
-  er(message, command, args);
+  er(message, command, args, server);
 
 };
 
@@ -1171,27 +1369,263 @@ function botfunctions(message, server) {
     if(message.embeds[0].description.includes("has gifted") && message.channel.id === getchannelfromname(message.guild, "transaction-log").id) {
       message.delete(10000);
     };
-  } else {
-    pingsubs(message);
   }
 };
 
-function nonprefixfunctions(message, server) {
+function nonprefixfunctions(message, args, argument, server) {
   if(message.content.startsWith ("Final Results") || message.content.startsWith ("Trivia Game Ended")) {
     triviareaction(message);
   } else {
-    let args = message.content.match(messageSplitRegExp);
-    let argument = message.content.trim();
-    checker(message, args, argument, server)
-    if(message.content.includes("r/")) {
-      redditlinks(message, args, argument)
+    if(!argument) return;
+    if(argument.match(/not invited by [a-zA-Z0-9]+/)) invitehandler(message, args, false, argument, server);
+    if(argument.match(/invited by [a-zA-Z0-9]+/)) invitehandler(message, args, true, argument, server);
+    for(let i = 0; i < args.length; i++) {
+      let command = args[i];
+      if(command.startsWith("r/") || command.startsWith("/r/")) redditlinks(message, args, command, argument);
+    }
+  checker(message, args, argument, server)
+  }
+};
+
+function chesstitle(message, args, command, argument, server) {
+  if(args.length !== 1 && args.length !== 2) return;
+  let user = getuser(message.guild, args[0]);
+  let tally = DataManager.getData();
+  let dbuser = getdbuserfromuser(user);
+  let dbindex = getdbindexfromdbuser(dbuser);
+  if(args[1]) {
+    if(!user || !args[1].toLowerCase().match(/gm|im|fm|nm|cm|lm/)) return;
+    tally[dbindex].title = args[1].toLowerCase();
+    sendgenericembed(message.channel, `Acknowledged title **${args[1].toUpperCase()}** for **${user.tag}**.`);
+  } else {
+    if(tally[dbindex].title) {
+      delete tally[dbindex].title;
+      sendgenericembed(message.channel, `Successfully removed title for **${user.tag}**.`);
+    }
+  };
+  DataManager.setData(tally);
+};
+
+function checkbounceronline() {
+  if(bouncerbot && client.users.get(bouncerbot.id) && bouncerbot.presence.status == "online");
+  return true;
+};  
+
+String.prototype.clean = function() {
+  if (typeof(this) === "string") {
+    return this.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
+  } else return this;
+};
+
+function invitehandler(message, args, command, argument, server) {
+  if(config.inviteboolean = true) {
+    let dbauthor = getdbuserfromuser(message.author);
+    if(!dbauthor || !dbauthor.messages || !dbauthor.messages < 50) return;
+    let searchstring = argument.match(/invited by [a-zA-Z0-9]+/)[0].splice(10).trim();
+    let user = getuser(message.guild, searchstring);
+    let tally = DataManager.getData();
+    let dbuser = getdbuserfromuser(user);
+    let dbindex = getdbindexfromdbuser(dbuser);
+    if(command === true) {
+      if(dbuser.invites && dbuser.invites[0]) {
+        dbuser.invites.push(message.author.id);
+      } else {
+        dbuser.invites = [];
+        dbuser.invites[0] = message.author.id;
+      }
+      tally[dbindex] = dbuser;
+      DataManager.setData(tally);
+      sendgenericembed(message.channel, `Welcome to the server **${message.author.username}**!\nThanks for inviting them **${user.username}**.`);
+    } else
+    if(command === false) {
+      for(let i = 0; i < dbuser.invites.length; i++) {
+        if(dbuser.invites[i] === message.author.id) dbuser.invites.remove(i);
+      }
+    };
+    if(dbuser.invites.length >= 10) {
+      tally[dbindex].patron = true;
+      DataManager.setData(tally);
+      sendgenericembed(message.channel, `Thanks for inviting 10 people **${user.username}**! You have been awarded **patron** flair.\nPlease type \`!profile\` to view the flair.`)
     }
   }
 };
 
+function typeadd(message, args, command, argument, server) {
+  let argsindex = -1;
+  if(argument.match(/[^a-zA-Z0-9\.!\?'\-,;"£\$%~\+=()\s\u200B-\u200D\uFEFF]+/g)) {
+    senderrormessage(message.channel, `Invalid characters; please reformat your quote.`);
+    return;
+  };
+  for(let i = args.length -1; i >= 0; i--) {
+    if(args[i].startsWith("-")) {
+      argsindex = i;
+    }
+  };
+  if(argsindex === -1) {
+    senderrormessage(message.channel, `No source provided/Incorrect format!`);
+    return;
+  };
+  let text = args.slice(0, argsindex).join(" ").replace("“", "\"").replace("”", "\"");
+  let source = args.slice(argsindex, args.length).join(" ").slice(1);
+  if(text.startsWith(`"`) && text.endsWith(`"`)) text = text.slice(1, -1);
+  if(text.length < 265) {
+    senderrormessage(message.channel, `Entry **${265 - text.length}** characters too short! Please try again.`);
+    return;
+  };
+  if(text.length > 529) {
+    senderrormessage(message.channel, `Entry **${text.length - 529}** characters too long! Please try again.`);
+    return;
+  };
+  let newentry = {
+    "Source": source,
+    "Text": text,
+    "Submitter": message.author.tag,
+    "Approved": false
+  };
+  let typingentries = DataManager.getData("./typing_articles4.json") || [];
+  let index = typingentries.length || 0;
+  let embedoutput = {
+    "title": "#" + index + " " + newentry.Submitter + ", from " + newentry.Source,
+    "description": newentry.Text,
+    "color": config.colors.generic,
+    "footer": {
+      "text": "Submitted: " + getISOtime(Date.now()) + ", " + newentry.Text.length + " characters."
+    }
+  };
+  if(typingentries[0]) {
+    typingentries.push(newentry)
+  } else {
+    typingentries[0] = newentry;
+  };
+  DataManager.setData(typingentries, "./typing_articles4.json");
+  sendgenericembed(message.channel, "Quote added, up for review");
+  getchannelfromname(message.guild, `transaction-log`).send({embed: embedoutput}) 
+  .then(quote => {
+    quote.react(getemojifromname("true"));
+    setTimeout(() => {
+      quote.react(getemojifromname("false"));
+    }, 500);
+    let reactionsfilter = (reaction, user) => (reaction.emoji.name === "true" || reaction.emoji.name === "false") && !user.bot;
+    quote.awaitReactions(reactionsfilter, {
+      max: 1
+    })
+    .then((collected) => {
+      if(collected.first().emoji.name === "true") {
+        typingentries[index].Approved = true;
+        DataManager.setData(typingentries, "./typing_articles4.json");
+        quote.delete();
+        embedoutput.title = `Your typecontest submission has been accepted. Awaiting payment...`
+        message.author.send({embed: embedoutput})
+      };
+      if(collected.first().emoji.name === "false") {
+        typingentries.remove(index)
+        DataManager.setData(typingentries, "./typing_articles4.json");
+        quote.delete();
+        embedoutput.title = `Your typecontest submission has been denied.`
+        message.author.send({embed: embedoutput})
+      };
+    });
+  })
+  .catch(`Some error somewhere.`);
+};
+
+function parseLeaderboard(message, page) {
+  let guild = message.guild;
+  let server = DataManager.getGuildData(guild.id);
+  let args = message.content.slice(server.prefixes.prefix.length).match(messageSplitRegExp);
+  let command = args.shift().toLowerCase();
+  let argument = message.content.slice(command.length + server.prefixes.nadeko.length).trim();
+  let source = config.sources[0];
+  for(let i = 0; i < config.sources.length; i++) for(let j = 0; j < config.sources[i].length; j++) {
+    if(message.content.toLowerCase().includes(config.sources[i][j].toLowerCase())) {
+      source = config.sources[i];
+      break;
+    }
+  }
+  let sourcevariants = source[1] + "variants";
+  let sourceProfileURL = source[1] + "ProfileURL";
+  let active = message.content.includes("active") ? true : false;
+  let [m, n] = [-1, -1];
+  let emoji = "";
+  let variant = config[sourcevariants].filter(function(variant) {
+    for(let i = 0; i < args.length; i++) if(args[i] === variant[1]) {
+      m = i;
+      return variant;
+    }
+  });
+  variant = variant ? variant[0] : variant;
+  let collectedvariants = message.channel.topic ? config[sourcevariants].filter(function(variant) {
+    return message.channel.topic.includes(variant[1]);
+  }) : [] ;
+  collectedvariants = collectedvariants.concat(config[sourcevariants].filter(function(variant) {
+    return message.channel.name === variant[3];
+  }));
+  if(collectedvariants[0]) {
+    variant = collectedvariants[0];
+    for(let i = 0; i < config[sourcevariants].length; i++) {
+      if(variant[1] === config[sourcevariants][i][1]) n = i;
+    }
+  };
+  console.log(m, n);
+  if(m !== n && m !== -1 && n !== -1) {
+    senderrormessage(message.channel, "Wrong channel");
+    return;
+  }
+  if(!variant || !variant[1]) return;
+  console.log(variant[1], source[1], active);;
+  let leaderboardy = leaderboard.getList(message.guild, variant[1], source[1], active);
+  let array = [];
+  for(let i = 0; i < 10; i++) if(leaderboardy.list[i + 10 * page]) {
+    array[i] = [];
+    array[i][0] = "[" + leaderboardy.list[i + 10 * page].username + `](${(config[sourceProfileURL].replace("|", leaderboardy.list[i + 10 * page].source))}) ` + leaderboardy.list[i + 10 * page].rating;
+  };
+  let leaderboardembed = getleaderboard(array, page, false);
+  leaderboardembed.title = getemojifromname(variant[4]) + ` House Rankings on ${source[0]} for${active ? "active ": " "}${variant[0]} players`;
+  leaderboardembed.color = server.colors.generic;
+  return [leaderboardembed, Math.ceil(leaderboardy.list.length / 10)];
+};
+
+function survey() {
+  let surveydata = DataManager.getData("./survey.json");
+  let interval = 3600000;
+  let guild = client.guilds.get(config.houseid);
+  let [online, idle, dnd, total] = [0, 0, 0, 0];
+  let lm = {
+    "lm1": 0,
+    "lm2": 0,
+    "lm4": 0,
+    "lm8": 0,
+    "lm24": 0
+  };
+  guild.members.forEach(function(member) {
+    
+    let tally = DataManager.getData();
+    let dbuser = tally.find(dbuser => dbuser.id === member.id);
+    if(member.presence.status === "online") online++;
+    if(member.presence.status === "idle") idle++;
+    if(member.presence.status === "dnd") dnd++;
+    if(dbuser && dbuser.lastmessagedate) {
+      if(Date.now() - dbuser.lastmessagedate < 3600000) lm.lm1++;
+      if(Date.now() - dbuser.lastmessagedate < 7200000) lm.lm2++;
+      if(Date.now() - dbuser.lastmessagedate < 14400000) lm.lm4++;
+      if(Date.now() - dbuser.lastmessagedate < 28800000) lm.lm8++;
+      if(Date.now() - dbuser.lastmessagedate < 86400000) lm.lm24++;
+    }
+    total++;
+  });
+  surveydata[Date.now()] = {
+    "online": online,
+    "idle": idle,
+    "dnd": dnd,
+    "total": total,
+    "lm": lm
+  };
+  DataManager.setData(surveydata, "./survey.json");
+};
+
 String.prototype.occurrences = function(subString, allowOverlapping) {
   subString += "";
-  if(subString.length <= 0) return (string.length + 1);
+  if(subString.length <= 0) return (this.length + 1);
   let n = 0;
   let position = 0;
   let step = allowOverlapping ? 1 : subString.length;
@@ -1239,15 +1673,17 @@ function paginator(message, functionname, period, manualmaxpages) {
   let page = 0;
   functionname.replace("page", page); 
   let evaluated = eval(functionname);
-  if(evaluated[0]) {paginatedpage = evaluated[0]} else return;
-  if(evaluated[1]) {maxpages = evaluated[0]} else return;
+  let [paginatedpage, maxpages] = ["", ""];
+  if(evaluated && evaluated[0]) {paginatedpage = evaluated[0]} else return;
+  if(evaluated && evaluated[1]) {maxpages = evaluated[1]} else return;
   if(!paginatedpage) return;
   if(!maxpages) maxpages = manualmaxpages;
   if(!maxpages) maxpages = 1;
   console.log(maxpages);
-  paginatedpage.footer = embedfooter(`${page + 1} / ${maxpages}`);
-  message.channel.send({embed: paginatedpage})
+  paginatedpage.footer = paginatedpage.footer && maxpages === 1 ? paginatedpage.footer : embedfooter(`${page + 1} / ${maxpages}`);
+  message.channel.send(paginatedpage.content, {embed: paginatedpage})
   .then(paginatedmessage => {
+    if(maxpages < 2) return;
     let reactionsfilter = (reaction, user) => (reaction.emoji.name === "⬅" || reaction.emoji.name === "➡") && !user.bot;
     let pagetracker = 0;
     paginatedmessage.react("⬅");
@@ -1269,7 +1705,7 @@ function paginator(message, functionname, period, manualmaxpages) {
         let evaluated = eval(functionname);
         if(evaluated) [paginatedpage, maxpages] = evaluated;
         paginatedpage.footer = embedfooter(`${page + 1} / ${maxpages}`);
-        paginatedmessage.edit({embed: paginatedpage})
+        paginatedmessage.edit(paginatedpage.content, {embed: paginatedpage})
       };
       if(collected.emoji.name === "⬅") {
         if(page - 1 < 0) return;
@@ -1338,7 +1774,7 @@ function DMfunctions(message) {
     sendtoowner({embed: embedoutput});
   } else {
     if(message.content) {
-      fetchedmessage = (message.createdTimestamp ? `\nAt ${getISOtime(message.createdTimestamp)}, **${message.author.tag}** said` : "") + ("\`\`\`" + message.content + "\`\`\`");
+      let fetchedmessage = (message.createdTimestamp ? `\nAt ${getISOtime(message.createdTimestamp)}, **${message.author.tag}** said` : "") + ("\`\`\`" + message.content + "\`\`\`");
       clearvar()
       embedoutput.title = `DM received from ${message.author.tag}`;
       embedoutput.description = fetchedmessage;
@@ -1395,7 +1831,7 @@ function tickethandler(message, args, command, argument, server) {
     if(isNaN(args[0])) {
       let killboolean = false;
       let searchstring = args.shift().toLowerCase();
-      user = getuser(message.guild, searchstring)
+      let user = getuser(message.guild, searchstring)
       if(!user) {
         message.react(getemojifromname("closed"));
         killboolean = true;
@@ -1424,6 +1860,7 @@ function tickethandler(message, args, command, argument, server) {
     .catch(`Some error somewhere.`);
     embedoutput = tickets(message.guild);
     updatepinned(message.guild, "transaction-log", "435455324439183370", {embed: embedoutput});
+    return;
   } else
   if(command === "close") {
     if(!args[0]) return;
@@ -1440,7 +1877,7 @@ function tickethandler(message, args, command, argument, server) {
       updatepinned(message.guild, "transaction-log", "435455324439183370", {embed: embedoutput});
       return;
     };
-    index = [];
+    let index = [];
     if(args[1] && isNaN(args[1])) {
       if(isNaN(args[0]) || args[0] === "0"|| args[0] > server.tickets.length) {
         senderrormessage(message.channel, `Invalid ticket index!`);
@@ -1451,10 +1888,10 @@ function tickethandler(message, args, command, argument, server) {
         embed.title = `Ticket ${args[0]} closed.`;
         embed.color = server.colors.generic;
         embed.fields = [];
-        embed.fields = embedaddfield(embed.fields, `Claim`, server.tickets[index[0]].amount + " :cherry_blossom:", false);
-        embed.fields = embedaddfield(embed.fields, `Your Reason`, server.tickets[index[0]].reason, false);
-        embed.fields = embedaddfield(embed.fields, `Mod Replies`, argument.slice(args[0].length).trim(), false);
-        user = getuser(message.guild, server.tickets[index[0]].id)
+        embed.fields = embedfielder(embed.fields, `Claim`, server.tickets[index[0]].amount + " :cherry_blossom:", false);
+        embed.fields = embedfielder(embed.fields, `Your Reason`, server.tickets[index[0]].reason, false);
+        embed.fields = embedfielder(embed.fields, `Mod Replies`, argument.slice(args[0].length).trim(), false);
+        let user = getuser(message.guild, server.tickets[index[0]].id)
         user.send({embed: embed})
         let helpchannel = getchannelfromname(message.guild, "help");
         helpchannel.fetchMessage(server.tickets[index[0]].messageid)
@@ -1489,11 +1926,9 @@ function tickethandler(message, args, command, argument, server) {
       message.channel.send(`Ticket ${index[i] + 1} successfully closed!`)
       .then(mesg => {
         mesg.delete(5000);
-        console.log("mesg");
       })
       .catch(`Some error somewhere.`);
     };
-    console.log("removed");
     server.tickets = server.tickets.remove(index);
     DataManager.setGuildData(server);
     embedoutput = tickets(message.guild);
@@ -1518,7 +1953,7 @@ function ticketgivehandler(message, args, command, argument, user, server) {
       originalmessage.delete(10000)
     })
     .catch(`Some error somewhere.`);
-    filter = msg => msg.author.id === message.author.id && !isNaN(msg.content) && indexes.indexOf(Number(msg.content)) !== -1; //only accepts responses that are valid indexes
+    let filter = msg => msg.author.id === message.author.id && !isNaN(msg.content) && indexes.indexOf(Number(msg.content)) !== -1; //only accepts responses that are valid indexes
     channel.awaitMessages(filter, {
       max: 1,
       time: 30000,
@@ -1579,12 +2014,12 @@ function ticketgivehandler(message, args, command, argument, user, server) {
 function tickets(guild) {
   let server = DataManager.getGuildData(guild.id);
   let array = [];
-  for(let i = 0; i < server.tickets.length; i++) {
+for(let i = 0; i < server.tickets.length; i++) {
     array[i] = [];
     array[i][0] = `${server.tickets[i].tag ? server.tickets[i].tag : server.tickets[i].user} (${server.tickets[i].id})`;
     array[i][1] = server.tickets[i].amount + " :cherry_blossom: " + server.tickets[i].reason;
   };
-  embedoutput = getleaderboard(array, 0, false);
+  if(server.tickets[0]) embedoutput = getleaderboard(array, 0, false);
   embedoutput.title = `${getemojifromname("thehouse")} House :cherry_blossom: Claimants`
   embedoutput.footer = embedfooter(server.tickets[0] ? `Should clear automatically upon '.give x person'.` : `All tickets have been cleared!`)
   embedoutput.color = server.colors.generic;
@@ -1621,10 +2056,7 @@ function databasepositionhandler(message, args, command, argument, server) {
     if (positionstring.toLowerCase() === "position") {
       dbindex = Number(dbindex);
       let dbuser = tally[dbindex];
-      if(dbindex === 0 && !checkowner(message.author)) {
-        console.log("Position 0");
-        return;
-      } else 
+      if(dbindex === 0 && !checkowner(message.author)) return;
       if(dbindex === newdbindex) {
         clearvar()
         embedoutput.title = `Buying a Database Position`;
@@ -1635,8 +2067,8 @@ function databasepositionhandler(message, args, command, argument, server) {
       } else 
       if(!isNaN(dbindex)) {
         let previoustotal = tally[newdbindex].bidamount ? tally[newdbindex].bidamount : 0;
-        oldbidamount = tally[dbindex].bidamount ? tally[dbindex].bidamount : 0;
-        newbidamount = tally[newdbindex].bidamount ? tally[newdbindex].bidamount + bidamount : bidamount;
+        let oldbidamount = tally[dbindex].bidamount ? tally[dbindex].bidamount : 0;
+        let newbidamount = tally[newdbindex].bidamount ? tally[newdbindex].bidamount + bidamount : bidamount;
         let subtraction = oldbidamount >= newbidamount ? newbidamount : oldbidamount;
         if(oldbidamount >= newbidamount) {
           tally[newdbindex].bidamount = newbidamount - subtraction;
@@ -1685,7 +2117,7 @@ function databasepositionhandler(message, args, command, argument, server) {
       return;
     }
   })
-  .catch(function(error){
+  .catch(function(error) {
     console.log(`${message.author} introduced an error. ${error}`)
   });
 };
@@ -1695,7 +2127,7 @@ function dbpositions(guild) {
   let server = DataManager.getGuildData(guild.id);
   let array = [];
   for(let i = 1; i < 10; i++) {
-    medal = "";
+    let medal = "";
     if(i === 1) {medal = " :first_place:"}
     if(i === 2) {medal = " :second_place:"}
     if(i === 3) {medal = " :third_place:"}
@@ -1711,12 +2143,12 @@ function dbpositions(guild) {
   return embedoutput;
 };
 
-function logshadowban(user) {
+function logshadowban(server, user) {
   server.shadowbanned && server.shadowbanned[0] ? server.shadowbanned.push([user.id, false]) : server.shadowbanned = []; server.shadowbanned[0] = [user.id, false];
   DataManager.setGuildData(server);
 };
 
-function shadowban(user) {
+function shadowban(server, user) {
   for(let i = 0; i < server.shadowbanned.length; i++) {
     if(user.id === server.shadowbanned[i][0] && !server.shadowbanned[i][1]) {
       server.shadowbanned[i][1] = true;
@@ -1725,7 +2157,7 @@ function shadowban(user) {
   }
 };
 
-function unshadowban(user) {
+function unshadowban(server, user) {
   for(let i = 0; i < server.shadowbanned.length; i++) {
     if(user.id === server.shadowbanned[i][0] && server.shadowbanned[i][1]) {
       server.shadowbanned[i][1] = false;
@@ -1779,7 +2211,7 @@ function addtofield(message, user, field, newstring) {
   } else {
     tally[dbindex][field].push(newstring);
     DataManager.setData(tally);
-    sendgenericembed (message.channel, `${field.toProperCase()} **${newtrophy}** added for **${user.tag}**.`)
+    sendgenericembed (message.channel, `${field.toProperCase()} **${newstring}** added for **${user.tag}**.`)
   }
 };
 
@@ -1877,157 +2309,6 @@ function aslhandler(message, args, command, argument, server) {
       senderrormessage(message.channel, `Please specify **age**, **sex**, and **location**.`)
     }
   }
-}
-
-function chessAPI(message, args, command, argument, server) {
-
-  if(command === "help") {
-    if(args.length === 1) {
-      clearvar();
-      embedoutput.title = "Rating Commands " + getemojifromname("lichess") + " " + getemojifromname("chesscom");
-      embedoutput.color = server.colors.ratings;
-      addfield("!lichess [lichess.org user]", "Links you to Lichess user. Defaults to your Discord username if no profile user.");
-      addfield("!chesscom [chess.com user]", "Links you to Chess.com user. Defaults to your Discord username if no profile user.");
-      addfield("!remove [chesscom | lichess]", "Removes your profile from the rating tracker.");
-      addfield("!update", "Queues your profile to be automatically updated.");
-    //addfield("!list [variant] [page]", "Show current leaderboard. [variant] and [page] number optional.");
-    //addfield("!MyRank", "Displays your current rank.");
-      addfield("!ratinghelp", "Lists commands for configuring rating on profile.");
-      embedsender(message.channel, embedoutput)
-    }
-  } else
-
-  if(command === "remove") {
-    removesource(message, args, command, argument, server)
-  } else
-
-  if(command === "update") {
-    let user = args[0] ? getuser(message.guild, args[0]) : message.author;
-    if(!user) return;
-    tracker.updateUser(message.guild.id, message, user)
-    // tracker.queueForceUpdate(message.member.id);
-    // message.channel.send("Queued for update.")
-    // .catch((e) => console.log(JSON.stringify(e)));
-  } else
-
-  if(command === "lichess") {
-    if(args.length === 1 || args.length === 0) {
-      //Adding sender to tracking
-      tracker.track(message.guild.id, message.member.id, "lichess", args[0] ? args[0] : message.author.username, message)
-    } else if(args.length === 2) {
-      if(canManageRoles(message.member)) {
-        let user = getuser(message.guild, args[0])
-        if(user) {
-          let member = getmemberfromuser(message.guild, user);
-          tracker.track(message.guild.id, member.id, "lichess", args[1], message);
-        } else {
-          senderrormessage(message.channel, "Invalid user given.")
-        }
-      } else {
-        message.channel.send("You do not have permission to do this.")
-        .catch((e) => console.log(JSON.stringify(e)));
-      }
-    } else {
-      message.channel.send("Wrong amount of parameters.")
-      .catch((e) => console.log(JSON.stringify(e)));
-    }
-    return;
-  } else
-
-  if(command.replace(".","") === "bughousetestcom" || command === "bughousetest") {
-    if(args.length === 1 || args.length === 0) {
-      //Adding sender to tracking
-      tracker.track(message.guild.id, message.member.id, "bughousetest", args[0] ? args[0] : message.author.username, message)
-    } else if(args.length === 2) {
-      if(canManageRoles(message.member)) {
-        let user = getuser(message.guild, args[0])
-        if(user) {
-          let member = getmemberfromuser(message.guild, user);
-          tracker.track(message.guild.id, member.id, "bughousetest", args[1], message);
-        } else {
-          senderrormessage(message.channel, "Invalid user given.")
-        }
-      } else {
-        message.channel.send("You do not have permission to do this.")
-        .catch((e) => console.log(JSON.stringify(e)));
-      }
-    } else {
-      message.channel.send("Wrong amount of parameters.")
-      .catch((e) => console.log(JSON.stringify(e)));
-    }
-    return;
-  } else
-
-  if(command.replace(".","") === "chesscom") {
-    if(args.length === 1 || args.length === 0) {
-      //Adding sender to tracking
-      tracker.track(message.guild.id, message.member.id, "chesscom", args[0] ? args[0] : message.author.username, message);
-    } else
-    if(args.length === 2) {
-      if(canManageRoles(message.member)) {
-        let user = getuser(message.guild, args[0]);
-        if(!user) return;
-        let member = getmemberfromuser(message.guild, user);
-        if(member) {
-          tracker.track(message.guild.id, member.id, "chesscom", args[1], message);
-        } else {
-          message.channel.send("Invalid user mention given.")
-          .catch((e) => console.log(JSON.stringify(e)));
-        }
-      } else {
-        senderrormessage(message.channel, "Invalid user given.")
-      }
-    } else {
-      message.channel.send("Wrong amount of parameters.")
-      .catch((e) => console.log(JSON.stringify(e)));
-    }
-    return;
-  } else
-  
-  if(command === "leaderboard") {
-    paginator(message, "parseLeaderboard(message, page)", 60000, 5);
-  };
-/*
-  if(command === "myrank") {
-    if(args.length === 0) {
-      let leaderboard = new LeaderboardConstructor({});
-      let rank = leaderboard.getRank(getNick, message.member.id);
-      if(rank.embed) {
-        rank.embed.color = server.colors.ratings;
-      }
-      message.channel.send(rank).catch((e) => console.log(JSON.stringify(e)));
-    }
-    return;
-  } */
-
-};
-
-function parseLeaderboard(message, page) {
-  let guild = message.guild;
-  let server = DataManager.getGuildData(guild.id);
-  let args = message.content.slice(server.prefixes.prefix.length).match(messageSplitRegExp);
-  let command = args.shift().toLowerCase();
-  let argument = message.content.slice(command.length + server.prefixes.nadeko.length).trim();
-  let source = args[0] && (args[0] === "chess.com" || args[0] === "chesscom" || args[0] === "bughousetest") ? args[0] : "lichess";
-  let sourcevariants = source + "variants";
-  let active = message.content.includes("true") ? true : false;
-  let leaderboard = new LeaderboardConstructor({config});
-  let variant = args[1] ? args[1] : "";
-  let variantformalname = "";
-  let emoji = "";
-  for(let i = 0; i < config[sourcevariants].length; i++) if(message.channel.name === config[sourcevariants][i][3] || message.content.includes(config[sourcevariants][i][3])) variant = config[sourcevariants][i];
-  if(!variant) return;
-  let leaderboardy = leaderboard.getList(message.guild, variant[1], source, active);
-  let array = [];
-  for(let i = 0; i < 9; i++) if(leaderboardy.list[i + 9 * page]) {
-    array[i] = [];
-    array[i][0] = leaderboardy.list[i + 9 * page].username;
-    array[i][1] = (leaderboardy.list[i + 9 * page].rating);
-  };
-  let leaderboardembed = getleaderboard(array, page, false);
-  leaderboardembed.title = getemojifromname(variant[4]) + ` House Rankings on ${source} for ${variant[0]}`;
-  leaderboardembed.color = server.colors.generic;
-  return [leaderboardembed, Math.ceil(leaderboardy.list.length / 9)];
 };
 
 function removesource(message, args, command, argument, server) {
@@ -2099,31 +2380,23 @@ function checker(message, args, argument, server) {
   }
 }
 
-function redditlinks(message, args, argument) {
-  for(let i = 0;i < args.length; i++) {
-    if(args[i].startsWith("/r/")) {
-      clearvar()
-      args[i] = args[i].replace(/[.,#!$%\^&;:{}<>=-_`~()]/g,"");
-      embedoutput.description = `[${args[i]}](http://www.reddit.com${args[i]})`;
-      embedsender(message.channel, embedoutput)
-    } else
-    if(args[i].startsWith("r/")) {
-      clearvar()
-      args[i] = args[i].replace(/[.,#!$%\^&;:{}=-_`~()]/g,"");
-      embedoutput.description = `[/${args[i]}](http://www.reddit.com/${args[i]})`;
-      embedsender(message.channel, embedoutput)
-    }
-  }
+function redditlinks(message, args, command, argument) {
+  if(command.startsWith("/r/")) {
+    sendgenericembed(message.channel, `[${command}](http://www.reddit.com${command})`)
+  } else
+  if(command.startsWith("r/")) {
+    sendgenericembed(message.channel, `[/${command}](http://www.reddit.com/${command})`)
+  };
 };
 
 function triviareaction(message) {
   var payoutoptions = [6,4,2,0];
   var claimoptions = [null,17,13,11,8,5,0];
-      triviagame = {};
-      args = [];
-      name = [];
-      payoutmsg = [];
-      payoutaggregate = "";
+  let triviagame = {};
+  let args = [];
+  let name = [];
+  let payoutmsg = [];
+  let payoutaggregate = "";
 
   if(!message.author.bot) {
     args = message.content.split("\n");
@@ -2213,10 +2486,12 @@ function getuser(guild, searchstring, exactmode) {
   if(searchstring.length < 3) {
     return null
   } else {
-    var user = getuserfromid (searchstring);
-    if(!user) {var user = getuserfromusername (searchstring, exactmode)};
-    if(!user) {var user = getuserfromtag (searchstring)};
-    if(!user) {var user = getuserfromnickname (guild, searchstring, exactmode)};
+    let user = "";
+    user = getuserfromid(searchstring);
+    if(!user) user = getuserfromusername(searchstring, exactmode);
+    if(!user) user = getuserfromtag(searchstring);
+    if(!user) user = getuserfromnickname(guild, searchstring, exactmode);
+    if(!user) user = getuserfromaliases(searchstring);
     return user;
   }
 };
@@ -2240,8 +2515,27 @@ function getuserfromtag(string) {
 
 function getuserfromnickname(guild, string, exactmode) {
   let member = guild.members.find(member => member.nickname && (exactmode ? member.nickname.toLowerCase() === string.toLowerCase() : member.nickname.toLowerCase().startsWith(string.toLowerCase())))
-  if(!member) {return member} else {return member.user};
+  if(!member) {return member} else return member.user;
 };
+
+function getuserfromaliases(searchstring) {
+  let tally = DataManager.getData();
+  let id = "";
+  let user = "";
+  for(let i = 0; i < tally.length; i++) {
+    for(let j = 0; j < config.sources.length; j++) {
+      let dbuser = tally[i]
+      let source = config.sources[j][1];
+      if(dbuser[source] && dbuser[source].toLowerCase().startsWith(searchstring.toLowerCase())) {
+        id = dbuser.id;
+        break;
+      }
+    };
+    if(id) break;
+  };
+  if(id) user = getuserfromid(id);
+  return user;
+}
 
 function getmemberfromuser(guild, user) {
   let member = guild.members.find(member => user.id === member.id)
@@ -2249,12 +2543,13 @@ function getmemberfromuser(guild, user) {
 };
 
 function getemojifromname(name) {
-  let emoji = client.emojis.find("name", name);
-  return emoji;
+  if(name) {
+    let emoji = client.emojis.find("name", name);
+    return emoji;
+  } else return;
 };
 
 function messagecount(message, user, update) {
-
   user ? user = user : user = message.author;
   let dbuser = getdbuserfromuser (user);
   if(!dbuser) return;
@@ -2262,7 +2557,6 @@ function messagecount(message, user, update) {
   embedoutput.description = update ? `Message count for **${user.tag}** is now **${dbuser.messages.toLocaleString()}** messages.` : `**${user.tag}** has sent **${dbuser.messages.toLocaleString()}** messages.`;
   embedsender(message.channel, embedoutput);
   embedoutput = {};
-  
 };
 
 function getdbuserfromuser(user) {
@@ -2282,13 +2576,19 @@ function getdbuserfromuser(user) {
   return dbuser;
 };
 
-function getdbuserfromusername (username) {
+function getdbuserfromusername(username) {
   let tally = DataManager.getData();
   let dbuser = tally.find(dbuser => username === dbuser.username);
   return dbuser;
 };
 
-function getdbindexfromdbuser (dbuser) {
+function getdbindexfromid(id) {
+	let tally = DataManager.getData();
+	let index = tally.findIndex(index => id === index.id)
+	return index;
+};
+
+function getdbindexfromdbuser(dbuser) {
   if(!dbuser) return;
   let tally = DataManager.getData();
   return tally.findIndex(index => dbuser.id === index.id)
@@ -2308,7 +2608,7 @@ function returnmessagefromid(message, args, command, argument, server) {
         message.channel.send(embedinput.content, {embed: embedinput})
       } else {
         if(msg.content) {
-          fetchedmsg = (msg.createdTimestamp ? `\nAt ${getISOtime (msg.createdTimestamp)}, **${msg.author.tag}** said` : "") + ("\`\`\`" + msg.content + "\`\`\`");
+          let fetchedmsg = (msg.createdTimestamp ? `\nAt ${getISOtime (msg.createdTimestamp)}, **${msg.author.tag}** said` : "") + ("\`\`\`" + msg.content + "\`\`\`");
           clearvar()
           embedoutput.title = `Fetched Message for ${message.author.tag}`;
           embedoutput.description = fetchedmsg;
@@ -2346,6 +2646,8 @@ function getprofile(message, page) {
   let userprofile = {};
   let alias = {};
   let region = "None set.";
+  let sourcecount = 0;
+  let icon = "";
   var lastmessage;
   var medal;
   for(let i = 0; i < server.regions.length; i++) {
@@ -2359,6 +2661,7 @@ function getprofile(message, page) {
     if(dbuser[source]) {
       ratinglist[source] = parsesourceratingdata(dbuser, source);
       userprofile[source] = parsesourceprofiles(dbuser, source);
+      sourcecount++;
     };
   };
   let info = fieldhandler([["Age: ", dbuser.age], ["Sex: ", dbuser.sex ? (getemojifromname(dbuser.sex) ? getemojifromname(dbuser.sex) : dbuser.sex) : ""], ["Location: ", dbuser.location], ["Region: ", region]]);
@@ -2376,29 +2679,31 @@ function getprofile(message, page) {
   if(dbindex === 1) medal = ":first_place: **First in Database.**";
   if(dbindex === 2) medal = ":second_place: **Second in Database.**";
   if(dbindex === 3) medal = ":third_place: **Third in Database.**";
-  if(dbuser.lastmessage) {lastmessage = (dbuser.lastmessagedate ? `\nSent at ${getISOtime(dbuser.lastmessagedate)}.` : "") + (dbuser.lastmessage.startsWith("<:") && dbuser.lastmessage.endsWith (">") ? "\n" + dbuser.lastmessage : "\`\`\`" + dbuser.lastmessage + "\`\`\`")};
-  embedprofile.author = embedauthor(`Profile for ${user.tag}`, user.bot ? "https://i.imgur.com/9kS9kxb.png" : "");
+  if(dbuser.lastmessage) lastmessage = (dbuser.lastmessagedate ? `\nSent at ${getISOtime(dbuser.lastmessagedate)}.` : "") + (dbuser.lastmessage.startsWith("<:") && dbuser.lastmessage.endsWith (">") ? "\n" + dbuser.lastmessage : "\`\`\`" + dbuser.lastmessage + "\`\`\`");
+  if(user.bot) icon = getemojifromname("bot");
+  if(dbuser.patron) icon = getemojifromname("patron");
+  embedprofile.title = `${icon ? icon + " " : ""}Profile for ${dbuser.title ? getemojifromname(dbuser.title) + " " : ""}${user.tag}`;
   embedprofile.color = member.displayColor;
   embedprofile.thumbnail = embedthumbnail(user.avatarURL ? user.avatarURL : "https://i.imgur.com/EncsMs8.png");
   embedprofile.description = (dbuser.finger ? "```" + dbuser.finger + "```" : "") + (dbuser.modnotes ? "```diff\n-mod notes\n" + dbuser.modnotes + "```" : "");
   if(page === 0) {
-    if(alias.uniques) embedprofile.fields = embedaddfield(embedprofile.fields, "a.k.a.", alias.uniques, false);
-    if(info) embedprofile.fields = embedaddfield(embedprofile.fields, (dbuser.modverified ? " " + getemojifromname(dbuser.modverified[0]) : "") + "Info", info, true);
-    embedprofile.fields = embedaddfield(embedprofile.fields, `Joined Date`, joined, info ? true: false);
-    embedprofile.fields = embedaddfield(embedprofile.fields, "Index", ids, dbuser.messages ? true : false);
-    if(dbuser.messages) embedprofile.fields = embedaddfield(embedprofile.fields, "Messages Sent", dbuser.messages.toLocaleString(), true);
-    if(dbuser.lastmessage) embedprofile.fields = embedaddfield(embedprofile.fields, "Last Message", lastmessage, false);
+    if(alias.uniques) embedprofile.fields = embedfielder(embedprofile.fields, "a.k.a.", alias.uniques, false);
+    if(info) embedprofile.fields = embedfielder(embedprofile.fields, (dbuser.modverified ? " " + getemojifromname(dbuser.modverified[0]) : "") + "Info", info, true);
+    embedprofile.fields = embedfielder(embedprofile.fields, `Joined Date`, joined, info ? true: false);
+    embedprofile.fields = embedfielder(embedprofile.fields, "Index", ids, dbuser.messages ? true : false);
+    if(dbuser.messages) embedprofile.fields = embedfielder(embedprofile.fields, "Messages Sent", dbuser.messages.toLocaleString(), true);
+    if(dbuser.lastmessage) embedprofile.fields = embedfielder(embedprofile.fields, "Last Message", lastmessage, false);
     // addfield ("Roles", roles ? roles : "None", true)
-    if(dbuser.trophy || medal) embedprofile.fields = embedaddfield(embedprofile.fields, "House Trophies", (medal ? medal : "") + (trophies && medal ? `\n` : "") + (trophies ? trophies : ""), true);
+    if(dbuser.trophy || medal) embedprofile.fields = embedfielder(embedprofile.fields, "House Trophies", (medal ? medal : "") + (trophies && medal ? `\n` : "") + (trophies ? trophies : ""), true);
     embedprofile.footer = embedfooter("Use !finger to change your finger message.");
   } else
   if(page === 1) {
     for(let i = 0; i < config.sources.length; i++) {
       let source = config.sources[i][1];
-      if(dbuser[source]) embedprofile.fields = embedaddfield(embedprofile.fields, `${getemojifromname(source)} ${config.sources[i][0]}`, `${userprofile[source]}\n${ratinglist[source]}`, true);
+      if(dbuser[source]) embedprofile.fields = embedfielder(embedprofile.fields, `${getemojifromname(source)} ${config.sources[i][0]}`, `${userprofile[source]}\n${ratinglist[source]}`, true);
     };
   };
-  return embedprofile;
+  return [embedprofile, sourcecount > 0 ? 2 : 1];
   // + \n\u200B
 };
 
@@ -2420,9 +2725,8 @@ function embedsender(channel, embed) {
   let server = DataManager.getGuildData(channel.guild.id);
   embed.color = embed.color ? embed.color : server.colors.generic;
   channel.send(embed.content, {embed: embed})
-  return;
+  .catch((e) => console.log(JSON.stringify(e)));
   clearvar()
-  .catch ((e) => console.log(JSON.stringify(e)));
   return;
 };
 
@@ -2454,111 +2758,96 @@ function addfield(name, value, inline) {
   inline = inline ? inline : false;
   if(!embedoutput.fields) {
     embedoutput.fields = [];
-    embedoutput.fields[0] = embedfielder(name, value, inline)
+    embedoutput.fields[0] = {name, value, inline}
   } else {
     embedoutput.fields.push({name, value, inline});
   }
 };
 
-function embedaddfield(fields, name, value, inline) {
+function embedfielder(fields, name, value, inline) {
+  inline = inline ? inline : false;
   if(!fields) {
     fields = [];
-    fields[0] = embedfielder(name, value, inline)
-  } else {
-    fields.push({name, value, inline});
-  }
+    fields[0] = {name, value, inline}
+  } else fields.push({name, value, inline});
   return fields;
 };
 
-function embedfielder(name, value, inline) {
-  let embed = {};
-  embed.value = {};
-  inline = inline ? inline : false;
-  embed.field = {
-    "name": name,
-    "value": value,
-    "inline": inline,
-  }
-  return embed.field;
-};
-
 function embedauthor (name, icon_url) {
-
   let author = {};
-  if(name) {author.name = name};
-  if(icon_url) {author.icon_url = icon_url};
+  if(name) author.name = name;
+  if(icon_url) author.icon_url = icon_url;
   return author;
-
 };
 
 function embedthumbnail(link) {
-
   let thumbnail = {};
-  if(link) {thumbnail.url = link};
+  if(link) thumbnail.url = link;
   return thumbnail
-
 };
 
 function embedimage(link) {
-
   let image = {};
-  if(link) {image.url = link};
+  if(link) image.url = link;
   return image;
-
 };
 
 function embedfooter (text, icon_url) {
-
   let footer = {};
   if(text) {footer.text = text};
   if(icon_url) {footer.icon_url = icon_url};
   return footer
-
 };
 
 function embedreceiver(embed) {
-
   let embedinput = {};
   let property = ["title", "url", "description", "color", "image", "video", "timestamp"]
-  for(let i = 0; i < property.length; i++) {
-    if(embed[property[i]]) {embedinput[property[i]] = embed[property[i]]};
-  }
+  for(let i = 0; i < property.length; i++) if(embed[property[i]]) {
+    embedinput[property[i]] = embed[property[i]];
+  };
   if(embed.author) {
     let name = "";
     let icon_url = "";
-    if(embed.author.name) {name = embed.author.name};
-    if(embed.author.icon_url) {icon_url = embed.author.icon_url};
-    if(name || icon_url) {embedinput.author = embedauthor(name ? name : "", icon_url ? icon_url : "")};
+    if(embed.author.name) name = embed.author.name;
+    if(embed.author.icon_url) icon_url = embed.author.icon_url;
+    if(name || icon_url) embedinput.author = embedauthor(name ? name : "", icon_url ? icon_url : "");
   };
   if(embed.footer) {
-    if(embed.footer.text) {var text = embed.footer.text};
-    if(embed.footer.icon_url) {var icon_url = embed.footer.icon_url};
-    if(text || icon_url) {embedinput.footer = embedfooter(text ? text : "", icon_url ? icon_url : "")};
+    let text = "";
+    let icon_url = "";
+    if(embed.footer.text) text = embed.footer.text;
+    if(embed.footer.icon_url) icon_url = embed.footer.icon_url;
+    if(text || icon_url) embedinput.footer = embedfooter(text ? text : "", icon_url ? icon_url : "");
   };
   if(embed.image) {
-    if(embed.image.url) {var url = embed.image.url};
-    if(url) {embedinput.image = embedimage(url ? url : "")};
+    let url = "";
+    if(embed.image.url) url = embed.image.url;
+    if(url) embedinput.image = embedimage(url);
   };
   if(embed.thumbnail) {
-    if(embed.thumbnail.url) {var url = embed.thumbnail.url};
-    if(url) {embedinput.thumbnail = embedthumbnail(url ? url : "")};
+    let url = "";
+    if(embed.thumbnail.url) url = embed.thumbnail.url;
+    if(url) embedinput.thumbnail = embedthumbnail(url);
   };
   if(embed.fields) {
-    let name = "";
-    let value = "";
-    let inline = "";
     embedinput.fields = [];
     for(let i = 0; i < embed.fields.length; i++) {
-      if(embed.fields[i].name) {name = embed.fields[i].name};
-      if(embed.fields[i].value) {value = embed.fields[i].value};
-      if(embed.fields[i].inline) {inline = embed.fields[i].inline};
+      let name = "";
+      let value = "";
+      let inline = "";
+      if(embed.fields[i].name) name = embed.fields[i].name;
+      if(embed.fields[i].value) value = embed.fields[i].value;
+      if(embed.fields[i].inline) inline = embed.fields[i].inline;
       if(name || value || inline) {
-        embedinput.fields[i] = embedfielder(name ? name : "", value ? value : "", inline ? inline: "")
+        embedinput.fields[i] = {};
+        name = name ? name : "\u200b";
+        value = value ? value : "\u200b";
+        inline = inline ? inline : false;
+        embedinput.fields[i] = {name, value, inline}
       };
     };
   };
   return embedinput;
-
 };
 
 function cr(message, trigger, reply) {
@@ -2570,11 +2859,10 @@ function cr(message, trigger, reply) {
   };
 };
 
-function er(message, command, args) { // emoji reactions service
+function er(message, command, args, server) { // emoji reactions service
   let member = getmemberfromuser(message.guild, message.author);
   if(!checkowner(message.author)) return;
   if(!checkrole (member, "mods")) return;
-
   if(command === "aer") {
     let erca = args[2] ? true : false;
     let emoji = getemojifromname(args[1]);
@@ -2624,15 +2912,6 @@ function er(message, command, args) { // emoji reactions service
 
 };
 
-function checkuseronline (checkuser) {
-  checkuser = checkuser;
-  checkuser.presence.status === "offline" ? offlineboolean = true : offlineboolean = false;
-}; 
-
-function checkbounceronine () {
-  checkuseronline (bouncerbot);
-};
-
 function gettime (ms) {
   let time = new Date(ms);
   time.hours = time.getUTCHours();
@@ -2660,7 +2939,7 @@ function getrandomdecimalcolor() {
 function getrandomhexcolor() {
   var letters = '0123456789ABCDEF';
   var color = '#';
-  for(var i = 0; i < 6; i++) {
+  for(let i = 0; i < 6; i++) {
     color += letters[Math.floor(Math.random() * 16)];
   };
   return color;
@@ -2695,13 +2974,23 @@ function sendgenericembed(channel, description) {
 function enabletestingmode(server, message, LAZYbot, bouncer) {
   let user = getuser(message.guild, "LAZYbot", true);
   let channel = getchannelfromname(message.guild, server.channels.bot2);
-  if(bouncer != "false") {channel.overwritePermissions(bouncerbot, { 'SEND_MESSAGES': false })};
-  if(LAZYbot != "false") {channel.overwritePermissions(user, { 'SEND_MESSAGES': false })};
+  if(bouncer != "false") channel.overwritePermissions(bouncerbot, {
+    'READ_MESSAGES': false,
+    'SEND_MESSAGES': false 
+  });
+  if(LAZYbot != "false") channel.overwritePermissions(user, {
+    'READ_MESSAGES': false,
+    'SEND_MESSAGES': false
+  });
   channel = getchannelfromname(message.guild, server.channels.bot);
-  if(bouncer != "false") {channel.overwritePermissions(bouncerbot, { 'SEND_MESSAGES': false })};
-  if(LAZYbot != "false") {channel.overwritePermissions(user, {
-     'SEND_MESSAGES': false,
-    })};
+  if(bouncer != "false") channel.overwritePermissions(bouncerbot, {
+    'READ_MESSAGES': false,
+    'SEND_MESSAGES': false
+  });
+  if(LAZYbot != "false") channel.overwritePermissions(user, {
+    'READ_MESSAGES': false,
+    'SEND_MESSAGES': false
+    });
   server.testingmodeboolean = true;
   DataManager.setGuildData(server);
 };
@@ -2709,13 +2998,24 @@ function enabletestingmode(server, message, LAZYbot, bouncer) {
 function disabletestingmode(server, message, LAZYbot, bouncer) {
   let user = getuser(message.guild, "LAZYbot", "true");
   let channel = getchannelfromname(message.guild, server.channels.bot2);
-  if(bouncer != "false") {channel.overwritePermissions(bouncerbot, { 'SEND_MESSAGES': true })}
-  if(LAZYbot != "false") {channel.overwritePermissions(user, { 'SEND_MESSAGES': true })}
+  if(bouncer != "false") channel.overwritePermissions(bouncerbot, {
+    'READ_MESSAGES': true,
+    'SEND_MESSAGES': true
+  })
+  if(LAZYbot != "false") channel.overwritePermissions(user, {
+    'READ_MESSAGES': true,
+    'SEND_MESSAGES': true
+  })
+
   channel = getchannelfromname(message.guild, server.channels.bot);
-  if(bouncer != "false") {channel.overwritePermissions(bouncerbot, { 'SEND_MESSAGES': true })}
-  if(LAZYbot != "false") {channel.overwritePermissions(user, {
-    'SEND_MESSAGES': true,
-  })}
+  if(bouncer != "false") channel.overwritePermissions(bouncerbot, {
+    'READ_MESSAGES': true,
+    'SEND_MESSAGES': true
+  })
+  if(LAZYbot != "false") channel.overwritePermissions(user, {
+    'READ_MESSAGES': true,
+    'SEND_MESSAGES': true
+  })
   sendgenericembed (message.channel, `**Testing mode disabled.**`)
   server.testingmodeboolean = false;
   DataManager.setGuildData(server);
@@ -2734,7 +3034,7 @@ function backupdb(degree, interval) {
       config.backupdb[degree - 1] = getISOtime (Date.now())
       DataManager.setData(config, "./config.json");
     }, interval);
-  } else if(!interval) {
+  } else {
       DataManager.setData(tally, `./dbbackup${degree}.json`);
       console.log(`Database backed up to dbbackup${degree} at ${getISOtime(Date.now())}.`);
       config.backupdb[degree - 1] = getISOtime (Date.now())
@@ -2807,9 +3107,8 @@ function onModError(serverID, error) {
 }
 
 function onTrackError(serverID, error, message) {
-  let channel = message.channel
   console.log(error);
-  senderrormessage(channel, error);
+  senderrormessage(message.channel, error);
 }
 
 function canManageRoles(member) {
@@ -2876,36 +3175,38 @@ function onAuthenticatorSuccess(serverID, userID, source, sourceusername, messag
   return;
 };
 
-function onRatingUpdate(message, user) {
+function onRatingUpdate(message, user, rankingobject) {
   let server = DataManager.getGuildData(message.guild.id);
   let channel = message.channel
   let member = getmemberfromuser(message.guild, user);
   let dbuser = getdbuserfromuser(user);
-  let ratinglist = {};
-  let userprofile = {};
-  clearvar()
-  embedoutput.color = server.colors.ratings;
+  let ratingembed = {};
+  ratingembed.color = server.colors.ratings;
 	for(let i = 0; i < config.sources.length; i++) {
     let source = config.sources[i][1];
-    let sourceratings = source + "ratings";
-    let sourceratinglist = parsesourceratingdata(dbuser, source);
-    let sourceuserprofile = parsesourceprofiles(dbuser, source);
-    if(dbuser[source]) addfield(`${getemojifromname(source)} Updated '${dbuser[source]}'`, `${sourceuserprofile}\nCurrent highest rating is **${dbuser[sourceratings].maxRating}**                \u200B\n` + sourceratinglist, true)
+    if(dbuser[source]) {
+      let sourceratings = source + "ratings";
+      let sourceratinglist = parsesourceratingdata(dbuser, source, rankingobject);
+      let sourceuserprofile = parsesourceprofiles(dbuser, source);
+      ratingembed.fields = embedfielder(ratingembed.fields, `${getemojifromname(source)} ${rankingobject ? `${dbuser[source]} Rankings` : `Updated ${dbuser[source]}`}`, `${sourceuserprofile} ${rankingobject ? `                                \u200B\n` : `\nCurrent highest rating is **${dbuser[sourceratings].maxRating}**                     \u200B\n`}` + sourceratinglist, true)
+    }
   };
-  embedsender(channel, embedoutput);
+  embedsender(channel, ratingembed);
 };
 
-function parsesourceratingdata(dbuser, source) {
-  var sourceratingData = "";
-	let sourcevariants = source + "variants";
+function parsesourceratingdata(dbuser, source, rankingobject) {
+  let sourcevariants = source + "variants";
   let sourceratings = source + "ratings";
+  let sourcerankings = source + "rankings";
+  let sourceratingData = rankingobject ? `**${rankingobject ? "Overall" : "Highest"}: ${dbuser[sourceratings].maxRating}**\n` : ""; //${rankingobject[sourcerankings]}`;
 	for(let i = 0; i < config[sourcevariants].length; i++) {
     if(dbuser[source]) {
-      let array = config[sourcevariants][i];
-      let variant = array[0];
+      let variant = config[sourcevariants][i];
       if(dbuser[sourceratings]) {
-        let rating = dbuser[sourceratings][array[1]];
-        sourceratingData += rating ? `${variant}: ${rating.toString().endsWith("?") ? "" : "**" }${rating}${rating.toString().endsWith("?") ? "" : "**" } ${i < config[sourcevariants].length -1 ? "\n" : ""}` : "";
+        let rating = dbuser[sourceratings][variant[1]];
+        let ranking = "";
+        if(rankingobject) ranking = rankingobject[sourcerankings][variant[1]]
+        if(rating && !rankingobject || rating && !rating.toString().endsWith("?") && rankingobject) sourceratingData += `${variant[0]}: ${rating.toString().endsWith("?") ? "" : "**" }${rating}${rating.toString().endsWith("?") ? "" : "**" } ${ranking ? `(#` + ranking + `)` : ""}${i < config[sourcevariants].length -1 ? "\n" : ""}`;
       }
     };
   };
@@ -2920,7 +3221,7 @@ function parsesourceprofiles(dbuser, source) {
 };
 
 function getsourcetitle(source) {
-	var sourcetitle;
+	let sourcetitle = "";
 	for(let i = 0; i < config.sources.length; i++) {
 		if(config.sources[i][1] === source) {
 			sourcetitle = config.sources[i][0];
@@ -2939,10 +3240,10 @@ function getsourcefromtitle(sourcetitle) {
 	return source;
 }; 
 
-function getleaderboard(array, page, inline) {
+function getleaderboard(array, page, inline, pagekey) {
   let embed = {};
   embed.description = "";
-  if(!array[0]) {return embed};
+  if(!array[0]) return;
   let bivariateboolean = false;
   let limit = array.length;
   for(let i = 0; i < limit; i++) {
@@ -2955,14 +3256,10 @@ function getleaderboard(array, page, inline) {
       if(array[i][0].length > 17 && inline !== false) {
         array[i][0] = array[i][0].slice(0, 17);
       };
-      embed.fields = embedaddfield(embed.fields, `#${i + 1 + page * 9} ${array[i][0]}`, array[i][1], inline === false ? false : true)
-    } else
-    if(bivariateboolean === false) {
-      let bidamounts = "";
-      for(let i = 0; i < limit; i++) {
-        embed.description += `**#${i + 1 + page * 9}** ${array[i][0] + (i < 10 ? "\n" : "")}`;
-      }
-    }
+      embed.fields = embedfielder(embed.fields, `#${i + 1 + page * (pagekey ? pagekey : 9)} ${array[i][0]}`, array[i][1], inline === false ? false : true)
+    } else {
+      embed.description += `**#${i + 1 + page * (pagekey ? pagekey : 10)}** ${array[i][0] + (i < 10 ? "\n" : "")}`;
+    } 
   };
   return embed;
 }

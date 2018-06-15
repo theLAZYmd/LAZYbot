@@ -1,10 +1,10 @@
-.vscode
-non-project files
-node_modules
+.vscode/
+non-project files/
+node_modules/
+.history/
 authenticator.js
 backupfunctions.js
 commands.js
 config.json
 package-lock.json
-sandbox.json
 requireForce: false

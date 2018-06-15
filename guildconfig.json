@@ -1,7 +1,7 @@
 {
     "314155682033041408": {
         "id": "314155682033041408",
-        "testingmodeboolean": false,
+        "testingmodeboolean": true,
         "ratings": [
             1000,
             1000,
@@ -38,7 +38,7 @@
         "roles": {
             "bot": "Bot-In-Use",
             "muted": "muted",
-            "unranked": "unranked",
+            "unranked": "verified",
             "league": "league",
             "arena": "arena",
             "beta": "verified",
@@ -244,6 +244,13 @@
                 "amount": "20",
                 "reason": "for inviting <@427287368287125516>  to server",
                 "messageid": "434998268016197633"
+            },
+            {
+                "id": "185412969130229760",
+                "tag": "theLAZYmd#2353",
+                "amount": "1",
+                "reason": "test",
+                "messageid": "455019736753897475"
             }
         ]
     },
