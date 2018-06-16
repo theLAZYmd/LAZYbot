@@ -116,6 +116,7 @@ Tracker.prototype.track = function(serverID, user, source, username, message) {
 
 Tracker.prototype.updateUser = function(message, user) {
   let dbuser = message ? this.getdbuserfromuser(user) : user;
+  let serverID = message ? message.guild.id : "";
   if(!dbuser.lichess && !dbuser.chesscom && !dbuser.bughousetest) {
     this.onError(serverID, `No linked accounts found.\nPlease link an account to your profile through \`!lichess\` or \`!chess.com\``, message);
     return;
@@ -233,12 +234,13 @@ function handleLichessData(dbuser, username) {
         reject(msg);
       });
     })
-    .then(([ratingData, username]) => {
-      if(ratingData) {
+    .then((profile) => {
+      if(profile) {
         dbuser.lastupdate = Date.now();
-        dbuser[source] = username;
-        dbuser[sourceratings] = ratingData;
-      }
+        dbuser[source] = profile.username;
+        dbuser.title = profile.title;
+        dbuser[sourceratings] = profile.ratings;
+      };
       resolve(dbuser);
     })
     .catch((error) => {
@@ -290,12 +292,12 @@ function handleBughousetestData(dbuser, username, retError) {
           reject(msg);
         });
       })
-      .then(([ratingData, username]) => {
-        if(ratingData) {
+      .then((profile) => {
+        if(profile) {
           dbuser.lastupdate = Date.now();
-          dbuser[source] = username;
-          dbuser[sourceratings] = ratingData;
-        }
+          dbuser[source] = profile.username;
+          dbuser[sourceratings] = profile.ratings;
+        };
         resolve(dbuser);
       })
       .catch((error) => {
@@ -339,7 +341,7 @@ function getBughousetestDataForUser(username) {
       let json = null;
       try {
         json = JSON.parse(body);
-      } catch (e) {
+      } catch(e) {
         reject(e);
       }
       resolve(json);
@@ -364,6 +366,7 @@ function getChesscomDataForUser(username) {
 };
 
 function parseLichessUserData(lichessData, errorCB, modCB) {
+  let profile = {};
   if(!lichessData) {
     errorCB("Couldn't find '" + username + "' on Lichess");
     return;
@@ -381,17 +384,17 @@ function parseLichessUserData(lichessData, errorCB, modCB) {
   let lichessusername = lichessData.username;
   let killboolean = true;
   let cheating = null;
-  for (let i = 0; i < config.lichessvariants.length; i++) {
+  for(let i = 0; i < config.lichessvariants.length; i++) {
     let array = config.lichessvariants[i];
     let variant = array[1];
     let APIpath = lichessData.perfs[array[2]];
     let provisional = `${array[1]}Provisional`;
-    if (APIpath) { ratings[variant] = APIpath.rating };
+    if(APIpath) ratings[variant] = APIpath.rating;
     ratings[provisional] = !(APIpath && !APIpath.prov);
-    if (ratings[variant] && ratings[provisional] === true) {
+    if(ratings[variant] && ratings[provisional] === true) {
       ratings[variant] = ratings[variant] + "?";
     } else
-      if (ratings[variant] && ratings[provisional] === false) {
+      if(ratings[variant] && ratings[provisional] === false) {
         ratings[variant] = ratings[variant].toString();
         killboolean = false;
         if (ratings.maxRating < ratings[variant]) {
@@ -400,37 +403,44 @@ function parseLichessUserData(lichessData, errorCB, modCB) {
       }
     delete ratings[provisional];
   };
-
-  if (killboolean === true) {
+  if(killboolean === true) {
     errorCB("All lichess ratings for " + lichessData.username + " are provisional.");
     return;
   };
-
-  if (lichessData.engine && lichessData.booster) {
+  if(lichessData.engine && lichessData.booster) {
     cheating = "Player " + lichessData.username + " (" + config.lichessProfileURL.replace("|", lichessData.username) + ")";
     cheating += " uses chess computer assistance, and artificially increases/decreases their rating.";
   } else
-    if (lichessData.engine) {
-      cheating = "Player " + lichessData.username + " (" + config.lichessProfileURL.replace("|", lichessData.username) + ")";
-      cheating += " uses chess computer assistance.";
-    } else
-      if (lichessData.booster) {
-        cheating = "Player " + lichessData.username + " (" + config.lichessProfileURL.replace("|", lichessData.username) + ")";
-        cheating += " artificially increases/decreases their rating.";
-      };
-  if (cheating) {
-    if (!cheatedUserID[lichessData.username.toLowerCase()]) {
+  if (lichessData.engine) {
+    cheating = "Player " + lichessData.username + " (" + config.lichessProfileURL.replace("|", lichessData.username) + ")";
+    cheating += " uses chess computer assistance.";
+  } else
+  if (lichessData.booster) {
+    cheating = "Player " + lichessData.username + " (" + config.lichessProfileURL.replace("|", lichessData.username) + ")";
+    cheating += " artificially increases/decreases their rating.";
+  };
+  if(cheating) {
+    if(!cheatedUserID[lichessData.username.toLowerCase()]) {
       modCB(cheating);
       cheatedUserID[lichessData.username.toLowerCase()] = true;
-    }
+    };
     ratings.cheating = true;
   } else {
     delete ratings.cheating;
-  }
-  return [ratings, lichessusername];
+  };
+  profile.ratings = ratings;
+  profile.username = lichessusername;
+  if(lichessData.profile) {
+    profile.country = lichessData.profile.country;
+    profile.name = lichessData.profile.firstName + " " + lichessData.profile.lastName;
+  };
+  profile.language = lichessData.language;
+  profile.title = lichessData.title;
+  return profile;
 };
 
 function parseBughousetestUserData(bughousetestData, errorCB, modCB) {
+  let profile = {};
   if(!bughousetestData) {
     errorCB("Couldn't find '" + username + "' on bughousetest");
     return;
@@ -490,8 +500,9 @@ function parseBughousetestUserData(bughousetestData, errorCB, modCB) {
       cheatedUserID[bughousetestData.username.toLowerCase()] = true;
     }
   }
-
-  return [ratings, bughousetestusername];
+  profile.ratings = ratings;
+  profile.username = bughousetestusername;
+  return profile;
 };
 
 function parseChesscomUserData(chesscomData, username, errorCB) {
