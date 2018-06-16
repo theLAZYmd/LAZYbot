@@ -2700,7 +2700,7 @@ function getprofile(message, page) {
   let trophies = dbuser.trophy ? fieldhandler(dbuser.trophy, ":trophy: ", true) : "";
   let roles = rolelist ? fieldhandler(rolelist) : "" ;
   let modnotes = dbuser.modnotes ? fieldhandler(dbuser.modnotes, "") : "" ;
-  alias.specifiers = [member.nickname, dbuser.lichess, dbuser.chesscom, dbuser.bughousetest];
+  alias.specifiers = [member.nickname, dbuser.name, dbuser.lichess, dbuser.chesscom, dbuser.bughousetest];
   alias.list = [user.username];
   for(let i = 0; i < alias.specifiers.length; i++) {
     if(alias.specifiers[i] && !alias.list.inArray(alias.specifiers[i])) alias.list.push(alias.specifiers[i]);
@@ -2712,7 +2712,7 @@ function getprofile(message, page) {
   if(dbuser.lastmessage) lastmessage = (dbuser.lastmessagedate ? `\nSent at ${getISOtime(dbuser.lastmessagedate)}.` : "") + (dbuser.lastmessage.startsWith("<:") && dbuser.lastmessage.endsWith (">") ? "\n" + dbuser.lastmessage : "\`\`\`" + dbuser.lastmessage + "\`\`\`");
   if(user.bot) icon = getemojifromname("bot");
   if(dbuser.patron) icon = getemojifromname("patron");
-  embedprofile.title = `${icon ? icon + " " : ""}Profile for ${dbuser.title ? getemojifromname(dbuser.title) + " " : ""}${user.tag}`;
+  embedprofile.title = `${icon ? icon + " " : ""}Profile for ${dbuser.title ? getemojifromname(dbuser.title.toLowerCase()) + " " : ""}${user.tag}`;
   embedprofile.color = member.displayColor;
   embedprofile.thumbnail = embedthumbnail(user.avatarURL ? user.avatarURL : "https://i.imgur.com/EncsMs8.png");
   embedprofile.description = (dbuser.finger ? "```" + dbuser.finger + "```" : "") + (dbuser.modnotes ? "```diff\n-mod notes\n" + dbuser.modnotes + "```" : "");
