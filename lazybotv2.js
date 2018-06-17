@@ -546,6 +546,9 @@ function nadekoprefixfunctions(message, args, command, argument, server) {
 
 function prefixfunctions(message, args, command, argument, server) {
 
+  if(command === "tleaderboard" || command === "tlb") tlbhandler(message, args, command, argument);
+  if(command === "trating" || command === "trat") tratinghandler(message, args, command, argument);
+
   if(command === "title" && message.guild.id === config.houseid && checkrole(getmemberfromuser(message.guild, message.author), "mods")) chesstitle(message, args, command, argument, server);
   /*
   if(command === "tesseract" && !!message.attachments.first()) {
@@ -1354,9 +1357,10 @@ function prefixfunctions(message, args, command, argument, server) {
 };
 
 function botfunctions(message, server) {
-  if(message.author.id === bouncerbot.id && message.embeds.length !== 0 && message.embeds[0].description) {
+  if(message.author.id === bouncerbot.id || message.author.id === nadekobot.id && message.embeds.length !== 0 && message.embeds[0].description) {
     if(message.embeds[0].author && message.embeds[0].title) {
-      triviareaction(message)
+      triviareaction(message);
+      triviarating(message);
     };
     // pingsubs(message);
     if(message.embeds[0].description.includes("housebank#5970") && message.embeds[0].description.includes("has") && !message.embeds[0].description.includes("given")) {
@@ -2419,6 +2423,175 @@ function redditlinks(message, args, command, argument) {
   };
 };
 
+function tratinghandler(message, args, command, argument) {
+  if(args.length === 0) {
+    let user = message.author;
+    let dbuser = getdbuserfromuser(user);
+    message.channel.send({embed: {
+        title: "**Trivia Rating**",
+        description: `**${dbuser.username}** ${dbuser.triviarating || 1500}${!dbuser.triviaprovisional ? "?" : ""}`,
+        color: 53380
+      }
+    });
+  } else {
+    let user = getuser(message.channel, args[0]);
+    let dbuser = getdbuserfromuser(user);
+    if(dbuser) { 
+      message.channel.send({embed:{
+          title: "**Trivia Rating**",
+          description: `**${dbuser.username}** ${dbuser.triviarating}${!dbuser.triviaprovisional ? "?" : ""}`,
+          color: 53380
+        }
+      });
+    } else {
+      message.channel.send({embed:{
+          title: "**Trivia Rating**",
+          description: `**User Not Found**`,
+          color: 53380
+        }
+      });
+    }
+  }
+}
+
+function tlbhandler(message, args, command, argument) {
+  let tally = DataManager.getData();
+  let arrdatasort = [];
+  for(let i = 0; i < tally.length; i++) {
+    arrdatasort[i] = {};
+    arrdatasort[i].id = tally[i].id;
+    arrdatasort[i].username = tally[i].username;
+    arrdatasort[i].triviarating = tally[i].triviarating;
+    arrdatasort[i].triviagames = tally[i].triviagames;
+    arrdatasort[i].triviaprovisional = tally[i].triviaprovisional;
+  };
+  arrdatasort = arrdatasort.sort(function compare(a, b) {
+    return (b.triviarating || 1500) - (a.triviarating || 1500);
+  });
+  if(args.length === 0) {
+    let ratDescription = "";
+    let x = 0;
+    for(let i = 0; i < arrdatasort.length; i++) {
+      if(!arrdatasort[i].triviaprovisional) {
+        continue;
+      } else {
+        x++;
+        ratDescription += `#${x} **${arrdatasort[i].username}** ${arrdatasort[i].triviarating || 1500} ${x < 10 ? "\n" : ""}`
+      }
+      if(x === 10) {
+        break;
+      }
+    };
+    message.channel.send({embed:{
+        title: "**Trivia Leaderboard**",
+        description: ratDescription,
+        color: 53380
+      }
+    });
+  } else
+  if(args[0] === 'provisional' || args[0] === 'prov') {
+    let ratDescription = "";
+    let x = 0;
+    for(let i = 0; i < arrdatasort.length; i++){
+      x++;
+      ratDescription += `#${x} **${arrdatasort[i].username}** ${arrdatasort[i].triviarating || 1500}${!arrdatasort[i].triviaprovisional ? "?" : ""} ${x < 10 ? "\n" : ""}`;
+      if(x === 10) {
+        break;
+      }
+    };
+    console.log(ratDescription);
+    message.channel.send({embed:{
+        title: "**Trivia Leaderboard**",
+        description: ratDescription,
+        color: 53380
+      }
+    });
+    ratDescription = "";
+  }
+};
+
+function triviarating(message) {
+  if(message.embeds[0].title === 'Trivia Game Ended' || message.embeds[0].title === 'Final Results') {
+    const initialRating = 1500;
+    const ratingSpread = 1589;
+    let triviagame = {};
+    let allString = [];
+    let totalSuccessNumber = 0;
+    let continueProgram = true;
+    let runOnce = true;
+    let totalScore = 0;
+    triviagame.header = message.embeds[0].author.name;
+    triviagame.title = message.embeds[0].title;
+    triviagame.description = message.embeds[0].description;
+    const args = triviagame.description.split("\n");
+    let tally = DataManager.getData();
+    for(let i = 0; i < args.length; i++) {
+      let desArray = args[i].split(' ');
+      let name = args[i].split("*").join("").split(/ +/g).shift();
+      let user = getuser(message.guild, name);
+      let dbuser = getdbuserfromuser(user);
+      let currentRating = dbuser.triviarating || 1500;
+      let successNumber = Math.pow(10, (currentRating - initialRating) / ratingSpread);
+      totalSuccessNumber += successNumber;
+      totalScore += Number(desArray[2]);
+    };
+    for(let i = 0; i < args.length; i++) {
+      let desArray = args[i].split(' ');
+      let name = args[i].split("*").join("").split(/ +/g).shift();
+      let user = getuser(message.guild, name);
+      let dbuser = getdbuserfromuser(user);
+      let dbindex = getdbindexfromdbuser(dbuser);
+      let currentRating = dbuser.triviarating || 1500;
+      let successNumber = Math.pow(10, (currentRating - initialRating) / ratingSpread);
+      if(runOnce === true) {
+        if(desArray[2] >= 10) {
+          continueProgram = true;
+          runOnce = false;
+        } else
+        if(desArray[2] < 10) {
+          continueProgram = false;
+          runOnce = false;
+          break;
+        }
+      };
+      let successNumberShare = successNumber / totalSuccessNumber;
+      let estimatedScore = successNumberShare * totalScore;
+      let newRating = Math.max(50 - (dbuser.triviagames || 0) * 3, 10) * (desArray[2] - estimatedScore);
+      let theRating = Number(newRating) + Number(currentRating);
+      if(Math.round(newRating) < 0) {
+        var sign = "";
+      } else
+      if(Math.round(newRating) === 0) {
+        var sign = "";
+      } else {
+        var sign = "+";
+      }
+      let ratingmsg = `**${name}** ${Math.round(theRating)}${(dbuser.triviagames || 0) < 10 ? "?" : ""} (${sign}${Math.round(newRating)})`;
+      allString.push(ratingmsg);
+      tally[dbindex].triviarating = Math.round(theRating);
+      tally[dbindex].triviagames++;
+      if(tally[dbindex].triviagames >= 10 && tally[dbindex].triviaprovisional) {
+        delete tally[dbindex].triviaprovisional;
+      } else {
+        tally[dbindex].triviaprovisional = false;
+      };
+    };
+    DataManager.setData(tally);
+    if(continueProgram) {
+        message.channel.send({embed:{
+            title: "**Trivia Rating Update**",
+            description: allString.join("\n"),
+            color: 53380
+          }});
+    } else {
+      let triviaembed = {};
+      triviaembed.title = "**Trivia Update**";
+      triviaembed.description = "__**Only 10+ Point Games Are Rated**__";
+      embedsender(message.channel, triviaembed);
+    }
+  }
+};
+
 function triviareaction(message) {
   var payoutoptions = [6,4,2,0];
   var claimoptions = [null,17,13,11,8,5,0];
@@ -2954,7 +3127,7 @@ function gettime (ms) {
 };
 
 function getISOtime (ms) {
-  return gettime (ms).toString().slice(0, 31); 
+  return gettime(ms).toString().slice(0, 31); 
 };
 
 function getrandomrange (min, max) {

@@ -1,0 +1,17 @@
+.vscode/
+non-project files/
+node_modules/
+.history/
+.git/
+.gitignore
+authenticator.js
+backupfunctions.js
+commands.json
+config.json
+db.json
+dbbackup1.json
+dbbackup2.json
+dbbackup3.json
+package-lock.json
+survey.json
+requireForce: false
