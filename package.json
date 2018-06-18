@@ -5,7 +5,7 @@
     "version": "1.4.11",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "node lazybot.js"
+        "start": "node lazybotv2.js"
     },
     "keywords": [
         "lazy",

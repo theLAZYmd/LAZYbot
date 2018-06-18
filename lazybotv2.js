@@ -84,24 +84,23 @@ client.on("ready", () => {
         type: "playing"
       }
     })
+    if(Object.keys(tracker.buildUpdateQueue()).length > 0) {
+      console.log("Beginning update cycle...");
+      tracker.initUpdateCycle();
+    };
+    setInterval(function () {
+      if(!checkbounceronline() && !bcpboolean) {
+        bcphandler(null, ["enable"])
+      } else
+      if(checkbounceronline() && bcpboolean) {
+        bcphandler(null, ["disable"])
+      };
+    }, 600000)
+    setInterval(function () {
+      survey();
+    }, 3600000);
   };
   console.log("bleep bloop! It's showtime.");
-  survey();
-  if(Object.keys(tracker.buildUpdateQueue()).length > 0) {
-    console.log("Beginning update cycle...");
-    tracker.initUpdateCycle();
-  };
-  setInterval(function () {
-    if(!checkbounceronline() && !bcpboolean) {
-      bcphandler(null, ["enable"])
-    } else
-    if(checkbounceronline() && bcpboolean) {
-      bcphandler(null, ["disable"])
-    };
-  }, 600000)
-  setInterval(function () {
-    survey();
-  }, 3600000);
 });
 
 app.get("/", (request, response) => { //pinging glitch.com
@@ -121,7 +120,9 @@ myEmitter.on("event", () => console.log("test"));
 
 client.on("message", (message) => { //command handler
   if(message.author.id === client.user.id) return;
-  if(message.content) message.content = message.content.replace(/[\u200B-\u200D\uFEFF]/g, '');
+  if(message.content) {
+    message.content = message.content.replace(/[\u200B-\u200D\uFEFF]/g, '').replace("’", "'").replace("…", "...").replace("“", "\"").replace("”", "\"");
+  };
   if(message.channel.type === "dm" || message.channel.type === "group") {
     if(message.author.bot) return;
     DMfunctions(message);
@@ -374,16 +375,35 @@ function nadekoprefixfunctions(message, args, command, argument, server) {
   } else
 
   if(command === "..") {
+    if(args.length !== 1) return;
     let guidename = args[0];
     let embeds = DataManager.getData("./embeds.json");
     if(embeds.guides[guidename]) {
       let object = embeds.guides[guidename];
-      paginator(message, "getguidefrompage(message, page)", 180000, object.length)
+      if(object[0]) {
+        paginator(message, "getguidefrompage(message, page)", 180000, object.length)
+      } else {
+        if(object.thumbnail && typeof object.thumbnail === "string") {
+          object.thumbnail = embedthumbnail(object.thumbnail);
+        };
+        if(object.image && typeof object.image === "string") {
+          object.image = embedimage(object.image);
+        };
+        if(!object.color) object.color = config.colors.generic;
+        message.channel.send({embed: object});
+      }
       return;
     } else
     if(embeds.utility[guidename]) {
-      let object = embeds.guides[guidename];
-      message.channel.send({embed: object});
+      let object = embeds.utility[guidename];
+      if(object.thumbnail && typeof object.thumbnail === "string") {
+        object.thumbnail = embedthumbnail(object.thumbnail);
+      };
+      if(object.image && typeof object.image === "string") {
+        object.image = embedimage(object.image);
+      };
+      if(!object.color) object.color = config.colors.generic;
+      if(object) message.channel.send({embed: object});
     }
     return;
   } else
@@ -919,15 +939,98 @@ function prefixfunctions(message, args, command, argument, server) {
     bidamount(message, args, command, argument, server);
   } else
 
-  if(command === "guideadd") {
-    let guidename = args[0];
-    if(guidename.startsWith("{")) return;
-    let object = JSON.parse(argument.slice(args[0].length).trim());
-    if(object !== Object(object)) return;
+  if(command.match(/embed|guide|!|utility/)) {
+    if(args.length < 1) return;
+    let guidename = args[0].toLowerCase();
+    if(guidename.match(/[^a-z]+/g)) return;
+    let deleteboolean = false;
+    let objectboolean = false;
+    for(let i = 0; i < args.length; i++) {
+      if(args[i].includes("{")) {
+        args.length = i;
+        objectboolean = true;
+        break;
+      };
+      if(args[i] === "delete") deleteboolean = true;
+    };
+    let [page, type] = ["", "utility"];
+    for(let i = 1; i < args.length; i++) {
+      if(!isNaN(parseInt(args[i]))) page = parseInt(args[i]) - 1;
+      if(args[i].match(/guide|utility/)) type = args[i];
+    };
+    argument = argument.slice(args.join(" ").length).trim();
     let embeds = DataManager.getData("./embeds.json");
-    embeds.guides[guidename] = object;
+    if(deleteboolean) {
+      if(page) {
+        if(embeds[type][guidename][page]) {
+          delete embeds[type][guidename][page];
+          message.react(getemojifromname("true"));
+        }
+      } else {
+        if(embeds[type][guidename]) {
+          delete embeds[type][guidename];
+          message.react(getemojifromname("true"));
+        };
+      }
+    } else {
+      if(!objectboolean) return;
+      let killboolean = false;
+      try {
+        JSON.parse(argument);
+      } catch(e) {
+        message.channel.send({embed: {
+          "description": `Invalid JSON!`,
+          "color": config.colors.error
+        }})
+        .then(msg => msg.delete(15000));
+        killboolean = true;
+      };
+      if(killboolean) {
+        let reactionsfilter = (reaction, user) => reaction.emoji.name === "false" && user.id === message.author.id;
+        message.react(getemojifromname("false"))
+        .then((reaction) => {
+          reaction.message.awaitReactions(reactionsfilter, {
+            "max": 1,
+            "time": 10000
+          })
+          .then(function(collected) {
+            if(collected.first()) message.delete()
+          })
+          .catch((e) => console.log(e))
+        })
+        .catch((e) => console.log(e))
+        return;
+      };
+      let object = JSON.parse(argument);
+      if(object.thumbnail && typeof object.thumbnail === "string") {
+        object.thumbnail = embedthumbnail(object.thumbnail);
+      };
+      if(object.image && typeof object.image === "string") {
+        object.image = embedimage(object.image);
+      };
+      if(!object.color) object.color = config.colors.generic;
+      if(page) {
+        if(!embeds[type][guidename]) embeds.guides[guidename] = [];
+        embeds[type][guidename][page] = object;
+      } else {
+        embeds[type][guidename] = object;
+      }
+      message.channel.send({embed: object});
+    };
+    let reactionsfilter = (reaction, user) => reaction.emoji.name === "true" && user.id === message.author.id;
+    message.react(getemojifromname("true"))
+    .then((reaction) => {
+      reaction.message.awaitReactions(reactionsfilter, {
+        "max": 1,
+        "time": 10000
+      })
+      .then(function(collected) {
+        if(collected.first()) message.delete()
+      })
+      .catch((e) => console.log(e))
+    })
+    .catch((e) => console.log(e))
     DataManager.setData(embeds, "./embeds.json");
-    message.react(getemojifromname("tick"))
   } else
 
   if(command === "embedadd") {
@@ -1357,22 +1460,22 @@ function prefixfunctions(message, args, command, argument, server) {
 };
 
 function botfunctions(message, server) {
-  if(message.author.id === bouncerbot.id || message.author.id === nadekobot.id && message.embeds.length !== 0 && message.embeds[0].description) {
-    if(message.embeds[0].author && message.embeds[0].title) {
+  if((message.author.id === bouncerbot.id || message.author.id === nadekobot.id) && message.embeds.length !== 0 && message.embeds[0].description) {
+    if(message.embeds[0] && message.embeds[0].author && message.embeds[0].title) {
       triviareaction(message);
       triviarating(message);
     };
     // pingsubs(message);
-    if(message.embeds[0].description.includes("housebank#5970") && message.embeds[0].description.includes("has") && !message.embeds[0].description.includes("given")) {
+    if(message.embeds[0].description && message.embeds[0].description.includes("housebank#5970") && message.embeds[0].description.includes("has") && !message.embeds[0].description.includes("given")) {
       let start = message.embeds[0].description.indexOf("has") + 4;
       let finish = message.embeds[0].description.indexOf(":cherry_blossom:") - 1;
       let sumtotal = message.embeds[0].description.slice(start, finish);
       clearvar()
-      embedoutput.color = server.colors.generic;
+      embedoutput.color = config.colors.generic;
       embedoutput.description = `**housebank#5970** has ${sumtotal} :cherry_blossom:`;
       updatepinned(message.guild, "transaction-log", "435455324439183370", {embed: embedoutput});
     } else
-    if(message.embeds[0].description.includes("has gifted") && message.channel.id === getchannelfromname(message.guild, "transaction-log").id) {
+    if(message.embeds[0].description && message.embeds[0].description.includes("has gifted") && message.channel.id === getchannelfromname(message.guild, "transaction-log").id) {
       message.delete(10000);
     };
   }
@@ -1487,7 +1590,7 @@ function invitehandler(message, args, command, argument, server) {
 
 function typeadd(message, args, command, argument, server) {
   let argsindex = -1;
-  if(argument.match(/[^a-zA-Z0-9\.!\?'\-,;"£\$%~\+=()\s\u200B-\u200D\uFEFF]+/g)) {
+  if(argument.match(/[^a-zA-Z0-9\.!\?',;:"£\$%~\+=()\s\u200B-\u200D\uFEFF-]+/g)) {
     senderrormessage(message.channel, `Invalid characters; please reformat your quote.`);
     return;
   };
@@ -1500,8 +1603,8 @@ function typeadd(message, args, command, argument, server) {
     senderrormessage(message.channel, `No source provided/Incorrect format!`);
     return;
   };
-  let text = args.slice(0, argsindex).join(" ").replace("“", "\"").replace("”", "\"");
-  let source = args.slice(argsindex, args.length).join(" ").slice(1);
+  let text = args.slice(0, argsindex).join(" ");
+  let source = args.slice(argsindex, args.length).join(" ").slice(1).trim();
   if(text.startsWith(`"`) && text.endsWith(`"`)) text = text.slice(1, -1);
   if(text.length < 265) {
     senderrormessage(message.channel, `Entry **${265 - text.length}** characters too short! Please try again.`);
@@ -1548,9 +1651,23 @@ function typeadd(message, args, command, argument, server) {
       if(collected.first().emoji.name === "true") {
         typingentries[index].Approved = true;
         DataManager.setData(typingentries, "./typing_articles4.json");
-        quote.delete();
         embedoutput.title = `Your typecontest submission has been accepted. Awaiting payment...`
-        message.author.send({embed: embedoutput})
+        message.author.send({embed: embedoutput});
+        let embedoutput = {
+          "title": "Please type:",
+          "description": `\`.give 15 ${newentry.submitter}\``,
+          "color": config.colors.generic
+        };
+        quote.edit({embed: embedoutput});
+        quote.channel.awaitMessages(message => message.content = `.give 15 ${newentry.submitter}`, {
+          max: 1,
+          time: 30000,
+          errors: ['time'],
+        })
+        .then(function (collected) {
+          if(collected.first()) quote.delete;
+        })
+        .catch((e) => {console.log(e)})
       };
       if(collected.first().emoji.name === "false") {
         typingentries.remove(index)
@@ -1700,7 +1817,15 @@ function getguidefrompage(message, page) {
   let guidename = args[0];
   let embeds = DataManager.getData("./embeds.json");
   let guide = embeds.guides[guidename];
-  return [guide[page], guide.length];
+  let object = guide[page];
+  if(object.thumbnail && typeof object.thumbnail === "string") {
+    object.thumbnail = embedthumbnail(object.thumbnail);
+  };
+  if(object.image && typeof object.image === "string") {
+    object.image = embedimage(object.image);
+  };
+  if(!object.color) object.color = config.colors.generic;
+  return [object, guide.length];
 }
 
 function paginator(message, functionname, period, manualmaxpages) {
@@ -2499,7 +2624,6 @@ function tlbhandler(message, args, command, argument) {
         break;
       }
     };
-    console.log(ratDescription);
     message.channel.send({embed:{
         title: "**Trivia Leaderboard**",
         description: ratDescription,
