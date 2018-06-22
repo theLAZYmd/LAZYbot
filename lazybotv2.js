@@ -6,6 +6,7 @@ const client = new Discord.Client();
 const EventEmitter = require('events');
 class MyEmitter extends EventEmitter {}
 const myEmitter = new MyEmitter();
+const emojiListener = new MyEmitter();
 const app = express();
 //const tesseract = require('tesseract.js');
 
@@ -13,6 +14,11 @@ require("./guildconfig.json");
 require ("./config.json");
 require ("./package.json");
 
+let httpboolean = {
+  "lichess": false,
+  "chesscom": false,
+  "bughousetest": false
+};
 const DataManagerConstructor = require("./datamanager.js");
 const DataManager = new DataManagerConstructor("./db.json", "./guildconfig.json");
 const LeaderboardConstructor = require("./leaderboard.js");
@@ -29,7 +35,10 @@ const tracker = new TrackerConstructor({
   "getdbuserfromusername": getdbuserfromusername,
   "getsourcetitle": getsourcetitle,
   "getsourcefromtitle": getsourcefromtitle,
-  "getonlinemembers": getonlinemembers
+  "getonlinemembers": getonlinemembers,
+  "lichess": httpboolean.lichess,
+  "chesscom": httpboolean.chesscom,
+  "bughousetest": httpboolean.bughousetest
 });
 const leaderboard = new LeaderboardConstructor({
   "getdbuserfromuser": getdbuserfromuser,
@@ -88,6 +97,28 @@ client.on("ready", () => {
       console.log("Beginning update cycle...");
       tracker.initUpdateCycle();
     };
+    for(let i = 0; i < quoteidlist.length; i++) {
+      let quoteinfo = quoteidlist[i];
+      let transactionlog = client.channels.get(quoteinfo.channel);
+      if(!transactionlog) return;
+      transactionlog.fetchMessage(quoteinfo.message)
+        .then((quote) => {
+          let reactionsfilter = (reaction, user) => (reaction.emoji.name === "true" || reaction.emoji.name === "false") && !user.bot;
+          let collector = quote.createReactionCollector(reactionsfilter, {
+            "max": 1,
+          })
+          collector.on("collect", (collected) => {
+            if(collected.emoji.name === "true") emojiListener.emit("true", quoteinfo);
+            if(collected.emoji.name === "false") emojiListener.emit("false", quoteinfo);
+          });
+          collector.on("end", (collected)  => {
+            quote.clearReactions();
+          })
+        })
+        .catch((e) => {
+          console.log(e)
+        })
+    }
     setInterval(function () {
       if(!checkbounceronline() && !bcpboolean) {
         bcphandler(null, ["enable"])
@@ -99,6 +130,18 @@ client.on("ready", () => {
     setInterval(function () {
       survey();
     }, 3600000);
+  };
+  let server = DataManager.getGuildData(config.houseid);
+  let quoteidlist = server.ticketsv2;
+  for(let i = 0; i < config.sources.length; i++) {
+    request.get(config.sources[i][2], (error, response, body) => {
+      if(error) {
+        console.log(error);
+        console.log(`httpboolean.${config.sources[i][1]}: ` + httpboolean[config.sources[i][1]]);
+      } else {
+        httpboolean[config.sources[i][1]] = true;
+      }
+    });
   };
   console.log("bleep bloop! It's showtime.");
 });
@@ -118,6 +161,125 @@ client.login(process.env.TOKEN ? process.env.TOKEN : config.token); //token
 
 myEmitter.on("event", () => console.log("test"));
 
+emojiListener.on("true", (quoteinfo) => {
+  let transactionlog = client.channels.get(quoteinfo.channel);
+  let user = getuser(transactionlog.guild, quoteinfo.author);
+  let server = DataManager.getGuildData(transactionlog.guild.id);
+  let serverindex = server.ticketsv2.indexOf(quoteinfo);
+  if(!transactionlog) return;
+  transactionlog.fetchMessage(quoteinfo.message)
+    .then((quote) => {
+      let index = -1;
+      let typingentries = DataManager.getData("./typing_articles4.json") || [];
+      for(let i = 0; i < typingentries.length; i++) {
+        if(typingentries[i].Quote === quote.id) {
+          index = i;
+          break;
+        }
+      }
+      if(index !== -1) {
+        typingentries[index].Approved = true;
+      }
+      DataManager.setData(typingentries, "./typing_articles4.json");
+      let embedinput = embedreceiver(quote.embeds[0]);
+      embedinput.title = `Your TypeAdd has been accepted. Awaiting payment...`
+      user.send({embed: embedinput});
+      quote.delete();
+      let embedoutput = {
+        "title": "Please type:",
+        "description": `\`.give 15 ${user.tag}\``,
+        "color": config.colors.generic
+      };
+      transactionlog.send({embed: embedoutput})
+        .then((newquote) => {
+          testuser = searchstring => getuser(transactionlog.guild, searchstring) && getuser(transactionlog.guild, searchstring).id === user.id;
+          transactionlog.awaitMessages(message => message.content = `.give 15 ${testuser}`, {
+            max: 1,
+            time: 30000,
+            errors: ['time'],
+          })
+          .then(function (collected) {
+            if(!!collected.first()) {
+              newquote.delete();
+              if(serverindex) server.ticketsv2.remove(serverindex);
+              DataManager.setGuildData(server);
+            }
+          })
+          .catch((e) => {
+            console.log(e)
+          })
+        })
+        .catch((e) => {
+          console.log(e)
+        })
+    })
+    .catch((e) => {
+      console.log(e)
+    })
+});
+
+emojiListener.on("false", (quoteinfo) => {
+  let transactionlog = client.channels.get(quoteinfo.channel);
+  let user = getuser(transactionlog.guild, quoteinfo.author);
+  if(!transactionlog) return;
+  let server = DataManager.getGuildData(transactionlog.guild.id);
+  let serverindex = server.ticketsv2.indexOf(quoteinfo);
+  transactionlog.fetchMessage(quoteinfo.message)
+    .then((quote) => {
+      let index = -1;
+      let typingentries = DataManager.getData("./typing_articles4.json") || [];
+      for(let i = 0; i < typingentries.length; i++) {
+        if(typingentries[i].Quote === quote.id) {
+          index = i;
+          break;
+        }
+      }
+      if(index !== -1) {
+        typingentries.remove(index);
+      }
+      DataManager.setData(typingentries, "./typing_articles4.json");
+      let embedoutput = {
+        "description": `Please provide a reason.`,
+        "color": config.colors.generic
+      };
+      transactionlog.send({embed: embedoutput})
+        .then((newquote) => {
+          transactionlog.awaitMessages(message => !message.author.bot, {
+            max: 1,
+            time: 30000,
+            errors: ['time'],
+          })
+          .then((collected) => {
+            if(collected.first()) {
+              let reason = collected.first().content;
+              quote.delete();
+              newquote.delete();
+              collected.first().delete();
+              if(serverindex) server.ticketsv2.remove(serverindex);
+              DataManager.setGuildData(server);
+              return reason;
+            };
+            return "";
+          })
+          .then((reason) => {
+            let embedinput = embedreceiver(quote.embeds[0]);
+            embedinput.title = `Your TypeAdd has been denied. ${reason ? "Reason: " + reason : ""}`
+            embedinput.color = config.colors.error;
+            user.send({embed: embedinput});
+          })
+          .catch((e) => {
+            console.log(e)
+          })
+        })
+        .catch((e) => {
+          console.log(e)
+        })
+    })
+    .catch((e) => {
+      console.log(e)
+    })
+});
+
 client.on("message", (message) => { //command handler
   if(message.author.id === client.user.id) return;
   if(message.content) {
@@ -128,7 +290,7 @@ client.on("message", (message) => { //command handler
     DMfunctions(message);
     return;
   };
-  let server = DataManager.getGuildData(message.guild.id);
+  let server = message.guild ? DataManager.getGuildData(message.guild.id) : "";
   if(executeshadowban(message, server)) return;
   tracker.messagelogger(message, server);
   if(message.content.length === 1) return;
@@ -241,7 +403,6 @@ client.on("presenceUpdate", (oldMember, newMember) => {
     console.log(oldMember.user.tag);
     let streamersbox = getchannelfromname(oldMember.guild, "Streamers Box");
     let server = DataManager.getGuildData(oldMember.guild.id);
-    console.log(server.regions);
     for(let i = 0; i < server.regions.length; i++) {
       streamersbox.overwritePermissions(getrolefromname(newMember.guild, server.regions[i]), {
         VIEW_CHANNEL: false
@@ -252,7 +413,9 @@ client.on("presenceUpdate", (oldMember, newMember) => {
 
 function nadekoprefixfunctions(message, args, command, argument, server) {
 
-  if(command === "typeadd") typeadd(message, args, command, argument);
+  if(command === "buy") buyhandler(message, args, command, argument, server);
+
+  if(command === "typeadd") typeadd(message, args, command, argument, server);
 
   if(command === "newpuzzle") {
     let imageurl = "";
@@ -396,14 +559,19 @@ function nadekoprefixfunctions(message, args, command, argument, server) {
     } else
     if(embeds.utility[guidename]) {
       let object = embeds.utility[guidename];
-      if(object.thumbnail && typeof object.thumbnail === "string") {
-        object.thumbnail = embedthumbnail(object.thumbnail);
-      };
-      if(object.image && typeof object.image === "string") {
-        object.image = embedimage(object.image);
-      };
-      if(!object.color) object.color = config.colors.generic;
-      if(object) message.channel.send({embed: object});
+      if(object[0]) {
+        paginator(message, "getguidefrompage(message, page)", 180000, object.length)
+      } else {
+        let object = embeds.utility[guidename];
+        if(object.thumbnail && typeof object.thumbnail === "string") {
+          object.thumbnail = embedthumbnail(object.thumbnail);
+        };
+        if(object.image && typeof object.image === "string") {
+          object.image = embedimage(object.image);
+        };
+        if(!object.color) object.color = config.colors.generic;
+        if(object) message.channel.send({embed: object});
+      }
     }
     return;
   } else
@@ -939,7 +1107,7 @@ function prefixfunctions(message, args, command, argument, server) {
     bidamount(message, args, command, argument, server);
   } else
 
-  if(command.match(/embed|guide|!|utility/)) {
+  if(!!command.match(/embed|guide|!|utility|say/)) {
     if(args.length < 1) return;
     let guidename = args[0].toLowerCase();
     if(guidename.match(/[^a-z]+/g)) return;
@@ -989,12 +1157,15 @@ function prefixfunctions(message, args, command, argument, server) {
         let reactionsfilter = (reaction, user) => reaction.emoji.name === "false" && user.id === message.author.id;
         message.react(getemojifromname("false"))
         .then((reaction) => {
-          reaction.message.awaitReactions(reactionsfilter, {
+          reaction.message.createReactionCollector(reactionsfilter, {
             "max": 1,
-            "time": 10000
+            "time": 15000
           })
-          .then(function(collected) {
+          collector.on("collect", (collected) => {
             if(collected.first()) message.delete()
+          })
+          collector.on("end", (collected)  => {
+            message.clearReactions();
           })
           .catch((e) => console.log(e))
         })
@@ -1009,8 +1180,8 @@ function prefixfunctions(message, args, command, argument, server) {
         object.image = embedimage(object.image);
       };
       if(!object.color) object.color = config.colors.generic;
-      if(page) {
-        if(!embeds[type][guidename]) embeds.guides[guidename] = [];
+      if(page || page === 0) {
+        if(!embeds[type][guidename]) embeds[type][guidename] = [];
         embeds[type][guidename][page] = object;
       } else {
         embeds[type][guidename] = object;
@@ -1020,17 +1191,19 @@ function prefixfunctions(message, args, command, argument, server) {
     let reactionsfilter = (reaction, user) => reaction.emoji.name === "true" && user.id === message.author.id;
     message.react(getemojifromname("true"))
     .then((reaction) => {
-      reaction.message.awaitReactions(reactionsfilter, {
+      reaction.message.createReactionCollector(reactionsfilter, {
         "max": 1,
-        "time": 10000
+        "time": 15000
       })
-      .then(function(collected) {
+      collector.on("collect", (collected) => {
         if(collected.first()) message.delete()
       })
-      .catch((e) => console.log(e))
+      collector.on("end", (collected)  => {
+        message.clearReactions();
+      })
     })
     .catch((e) => console.log(e))
-    DataManager.setData(embeds, "./embeds.json");
+    if(command !== "say") DataManager.setData(embeds, "./embeds.json");
   } else
 
   if(command === "embedadd") {
@@ -1496,6 +1669,25 @@ function nonprefixfunctions(message, args, argument, server) {
   }
 };
 
+function buyhandler(message, args, command, argument, server) {
+  if(args.length ==! 1) return;
+  if(args[0] === "6" || args[0].toLowerCase() === "choosecolor") {
+    let guild = message.guild;
+    let username = message.author.username;
+    let member = getmemberfromuser(guild, message.author);
+    guild.createRole({
+      "name": username + "CustomColor",
+      "position": 70
+    })
+    .then((role) => {
+      console.log(`Created new role ${role.name} for ${message.author.tag}.`);
+      member.addRole(role)
+      .catch((e) => console.log(e));
+    })
+    .catch((e) => console.log(e));
+  };
+};
+
 function getonlinemembers(guild) {
   if(!guild) guild = client.guilds.get(config.houseid);
   return guild.members.filter(member => !!member.presence.status.match(/online|idle|dnd/));
@@ -1614,69 +1806,75 @@ function typeadd(message, args, command, argument, server) {
     senderrormessage(message.channel, `Entry **${text.length - 529}** characters too long! Please try again.`);
     return;
   };
-  let newentry = {
-    "Source": source,
-    "Text": text,
-    "Submitter": message.author.tag,
-    "Approved": false
-  };
-  let typingentries = DataManager.getData("./typing_articles4.json") || [];
-  let index = typingentries.length || 0;
   let embedoutput = {
-    "title": "#" + index + " " + newentry.Submitter + ", from " + newentry.Source,
-    "description": newentry.Text,
+    "title": "New TypeAdd, " + message.author.tag + ", from " + source,
+    "description": text,
     "color": config.colors.generic,
     "footer": {
-      "text": "Submitted: " + getISOtime(Date.now()) + ", " + newentry.Text.length + " characters."
+      "text": "Submitted: " + getISOtime(Date.now()) + ", " + text.length + " characters."
     }
   };
-  if(typingentries[0]) {
-    typingentries.push(newentry)
-  } else {
-    typingentries[0] = newentry;
-  };
-  DataManager.setData(typingentries, "./typing_articles4.json");
   sendgenericembed(message.channel, "Quote added, up for review");
   getchannelfromname(message.guild, `transaction-log`).send({embed: embedoutput}) 
+  .then(quote => {
+    let typingentries = DataManager.getData("./typing_articles4.json") || [];
+    let newentry = {
+      "Source": source,
+      "Text": text,
+      "Submitter": message.author.tag,
+      "SubmitterID": message.author.id,
+      "Quote": quote.id,
+      "Approved": false
+    };
+    if(typingentries[0]) {
+      typingentries.push(newentry)
+    } else {
+      typingentries[0] = newentry;
+    };
+    DataManager.setData(typingentries, "./typing_articles4.json");
+    return quote;
+  })
   .then(quote => {
     quote.react(getemojifromname("true"));
     setTimeout(() => {
       quote.react(getemojifromname("false"));
     }, 500);
+    let quoteinfo = {
+      "channel": quote.channel.id,
+      "message": quote.id,
+      "author": message.author.id,
+      "emoji1": true,
+      "event1": "true",
+      "emoji2": "false",
+      "event2": "false"
+    };
+    if(!server.ticketsv2 || !server.ticketsv2[0]) {
+      server.ticketsv2 = [];
+      server.ticketsv2[0] = quoteinfo;
+    } else {
+      server.ticketsv2.push(quoteinfo);
+    };
+    DataManager.setGuildData(server);
+    return [quote, quoteinfo];
+  })
+  .then(([quote, quoteinfo]) => {
     let reactionsfilter = (reaction, user) => (reaction.emoji.name === "true" || reaction.emoji.name === "false") && !user.bot;
-    quote.awaitReactions(reactionsfilter, {
-      max: 1
+    let collector = quote.createReactionCollector(reactionsfilter, {
+      "max": 1,
     })
-    .then((collected) => {
-      if(collected.first().emoji.name === "true") {
-        typingentries[index].Approved = true;
-        DataManager.setData(typingentries, "./typing_articles4.json");
-        embedoutput.title = `Your typecontest submission has been accepted. Awaiting payment...`
-        message.author.send({embed: embedoutput});
-        let embedoutput = {
-          "title": "Please type:",
-          "description": `\`.give 15 ${newentry.submitter}\``,
-          "color": config.colors.generic
+    collector.on("collect", (collected) => {
+      if(collected.emoji.name === "true") {
+        emojiListener.emit("true", quoteinfo);
+        return;
         };
-        quote.edit({embed: embedoutput});
-        quote.channel.awaitMessages(message => message.content = `.give 15 ${newentry.submitter}`, {
-          max: 1,
-          time: 30000,
-          errors: ['time'],
-        })
-        .then(function (collected) {
-          if(collected.first()) quote.delete;
-        })
-        .catch((e) => {console.log(e)})
-      };
-      if(collected.first().emoji.name === "false") {
-        typingentries.remove(index)
-        DataManager.setData(typingentries, "./typing_articles4.json");
-        quote.delete();
-        embedoutput.title = `Your typecontest submission has been denied.`
-        message.author.send({embed: embedoutput})
+      if(collected.emoji.name === "false") {
+        emojiListener.emit("false", quoteinfo);
+        return;
       };
     });
+    collector.on("end", (collected)  => {
+      quote.clearReactions();
+    })
   })
   .catch(`Some error somewhere.`);
 };
@@ -1817,7 +2015,18 @@ function getguidefrompage(message, page) {
   let guidename = args[0];
   let embeds = DataManager.getData("./embeds.json");
   let guide = embeds.guides[guidename];
-  let object = guide[page];
+  let utility = embeds.utility[guidename];
+  let object = {};
+  let length = 0;
+  if(guide) {
+    object = guide[page];
+    length = guide.length;
+  };
+  if(utility) {
+    object = utility[page];
+    length = utility.length;
+  };
+  if(!object) return;
   if(object.thumbnail && typeof object.thumbnail === "string") {
     object.thumbnail = embedthumbnail(object.thumbnail);
   };
@@ -1825,8 +2034,8 @@ function getguidefrompage(message, page) {
     object.image = embedimage(object.image);
   };
   if(!object.color) object.color = config.colors.generic;
-  return [object, guide.length];
-}
+  return [object, length];
+};
 
 function paginator(message, functionname, period, manualmaxpages) {
   let page = 0;
@@ -1850,7 +2059,7 @@ function paginator(message, functionname, period, manualmaxpages) {
       paginatedmessage.react("➡");
     }, 500);
     let collector = paginatedmessage.createReactionCollector(reactionsfilter, {
-      time: period
+      "time": period
     })
     collector.on("collect", (collected) => {
       for(let [key, value] of collected.users) {
@@ -2638,16 +2847,17 @@ function triviarating(message) {
   if(message.embeds[0].title === 'Trivia Game Ended' || message.embeds[0].title === 'Final Results') {
     const initialRating = 1500;
     const ratingSpread = 1589;
-    let triviagame = {};
+    let triviagame = {
+      "header": message.embeds[0].author.name,
+      "title": message.embeds[0].title,
+      "description": message.embeds[0].description
+    };
+    const args = triviagame.description.split("\n");
     let allString = [];
     let totalSuccessNumber = 0;
     let continueProgram = true;
     let runOnce = true;
     let totalScore = 0;
-    triviagame.header = message.embeds[0].author.name;
-    triviagame.title = message.embeds[0].title;
-    triviagame.description = message.embeds[0].description;
-    const args = triviagame.description.split("\n");
     let tally = DataManager.getData();
     for(let i = 0; i < args.length; i++) {
       let desArray = args[i].split(' ');
@@ -2694,9 +2904,10 @@ function triviarating(message) {
       allString.push(ratingmsg);
       tally[dbindex].triviarating = Math.round(theRating);
       tally[dbindex].triviagames++;
-      if(tally[dbindex].triviagames >= 10 && tally[dbindex].triviaprovisional) {
-        delete tally[dbindex].triviaprovisional;
-      } else {
+      if(tally[dbindex].triviagames >= 10 && !tally[dbindex].triviaprovisional) {
+        tally[dbindex].triviaprovisional = true;
+      } else
+      if(tally[dbindex].triviaprovisional !== false) {
         tally[dbindex].triviaprovisional = false;
       };
     };
