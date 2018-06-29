@@ -8,6 +8,7 @@ class MyEmitter extends EventEmitter {}
 const myEmitter = new MyEmitter();
 const emojiListener = new MyEmitter();
 const app = express();
+const LICHESS_STATUS_URL = "https://lichess.org/api/users/status?ids="
 //const tesseract = require('tesseract.js');
 
 require("./guildconfig.json");
@@ -19,12 +20,8 @@ let httpboolean = {
   "chesscom": false,
   "bughousetest": false
 };
-const DataManagerConstructor = require("./datamanager.js");
-const DataManager = new DataManagerConstructor("./db.json", "./guildconfig.json");
-const LeaderboardConstructor = require("./leaderboard.js");
-const TrackerConstructor = require("./tracker.js");
-const tracker = new TrackerConstructor({
-	"onTrackSuccess": onTrackSuccess, 
+const events = {
+  "onTrackSuccess": onTrackSuccess, 
 	"onRemoveSuccess": onRemoveSuccess, 
 	"onRatingUpdate": onRatingUpdate, 
 	"onError": onTrackError, 
@@ -36,15 +33,14 @@ const tracker = new TrackerConstructor({
   "getsourcetitle": getsourcetitle,
   "getsourcefromtitle": getsourcefromtitle,
   "getonlinemembers": getonlinemembers,
-  "lichess": httpboolean.lichess,
-  "chesscom": httpboolean.chesscom,
-  "bughousetest": httpboolean.bughousetest
-});
-const leaderboard = new LeaderboardConstructor({
-  "getdbuserfromuser": getdbuserfromuser,
-  "onRatingUpdate": onRatingUpdate,
-  "onError": onTrackError
-});
+  "httpboolean": gethttpboolean
+}
+const DataManagerConstructor = require("./datamanager.js");
+const DataManager = new DataManagerConstructor("./db.json", "./guildconfig.json");
+const LeaderboardConstructor = require("./leaderboard.js");
+const TrackerConstructor = require("./tracker.js");
+let tracker = new TrackerConstructor(events);
+const leaderboard = new LeaderboardConstructor(events);
 const messageSplitRegExp = /[^\s]+/gi;
 const FEN_API_URL = "https://www.chess.com/dynboard";
 const LICHESS_ANALYSIS_FEN_URL = "https://lichess.org/analysis?fen=";
@@ -85,18 +81,33 @@ client.on("ready", () => {
     let owner = client.users.get(config.ids.owner[i])
     if(owner) console.log(`Noticed bot owner ${owner.tag} in ${Date.now() - reboot}ms`);
   };
+  let server = DataManager.getGuildData(config.houseid);
+  let quoteidlist = server.ticketsv2;
+  for(let i = 0; i < config.sources.length; i++) {
+    request.get(config.sources[i][2], (error, response, body) => {
+      if(error) {
+        console.log(error);
+        console.log(`httpboolean.${config.sources[i][1]}: ` + httpboolean[config.sources[i][1]]);
+      } else {
+        httpboolean[config.sources[i][1]] = true;
+        console.log(`Set httpboolean.${config.sources[i][1]}: ` + httpboolean[config.sources[i][1]])
+      }
+    });
+  };
   if(client.user.id === config.ids.bot) {
+    if(server) nowplaying(server);
     client.user.setPresence({
       game: {
         name: "bit.ly/LAZYbot",
         url: "http://bit.ly/LAZYbot",
         type: "playing"
       }
-    })
+    });
     if(Object.keys(tracker.buildUpdateQueue()).length > 0) {
       console.log("Beginning update cycle...");
       tracker.initUpdateCycle();
     };
+    emojiListener.setMaxListeners(20);
     for(let i = 0; i < quoteidlist.length; i++) {
       let quoteinfo = quoteidlist[i];
       let transactionlog = client.channels.get(quoteinfo.channel);
@@ -120,28 +131,12 @@ client.on("ready", () => {
         })
     }
     setInterval(function () {
-      if(!checkbounceronline() && !bcpboolean) {
-        bcphandler(null, ["enable"])
-      } else
-      if(checkbounceronline() && bcpboolean) {
-        bcphandler(null, ["disable"])
-      };
-    }, 600000)
+      if(!checkbounceronline() && !bcpboolean) bcphandler(null, ["enable"]);
+      if(checkbounceronline() && bcpboolean) bcphandler(null, ["disable"]);
+      if(server) nowplaying(server);
+    }, 300000)
     setInterval(function () {
-      survey();
     }, 3600000);
-  };
-  let server = DataManager.getGuildData(config.houseid);
-  let quoteidlist = server.ticketsv2;
-  for(let i = 0; i < config.sources.length; i++) {
-    request.get(config.sources[i][2], (error, response, body) => {
-      if(error) {
-        console.log(error);
-        console.log(`httpboolean.${config.sources[i][1]}: ` + httpboolean[config.sources[i][1]]);
-      } else {
-        httpboolean[config.sources[i][1]] = true;
-      }
-    });
   };
   console.log("bleep bloop! It's showtime.");
 });
@@ -294,11 +289,11 @@ client.on("message", (message) => { //command handler
   if(executeshadowban(message, server)) return;
   tracker.messagelogger(message, server);
   if(message.content.length === 1) return;
-  if(customfunction1) eval(customfunction1);
-  if(customfunction2) eval(customfunction2);
-  if(customfunction3) eval(customfunction3);
-  if(customfunction4) eval(customfunction4);
-  if(customfunction5) eval(customfunction5);
+  if(customfunction1) customfunction1(message);
+  if(customfunction2) customfunction2(message);
+  if(customfunction3) customfunction3(message);
+  if(customfunction4) customfunction4(message);
+  if(customfunction5) customfunction5(message);
   if(message.content.startsWith(server.prefixes.nadeko) && !message.author.bot) {
     let args = message.content.slice(server.prefixes.nadeko.length).match(messageSplitRegExp);
     let command = args.shift().toLowerCase();
@@ -537,9 +532,15 @@ function nadekoprefixfunctions(message, args, command, argument, server) {
     embedsender(message.channel, embedoutput)
   } else
 
-  if(command === "..") {
-    if(args.length !== 1) return;
-    let guidename = args[0];
+  if(command.startsWith("..")) {
+    let guidename = "";
+    if(args.length === 1 && command === "..") {
+      guidename = args[0];
+    } else 
+    if(args.length === 0 && command.startsWith("..")) {
+      guidename = command.slice(2);
+    }
+    if(!guidename) return;
     let embeds = DataManager.getData("./embeds.json");
     if(embeds.guides[guidename]) {
       let object = embeds.guides[guidename];
@@ -734,9 +735,11 @@ function nadekoprefixfunctions(message, args, command, argument, server) {
 
 function prefixfunctions(message, args, command, argument, server) {
 
+  if(command === "nowplaying") nowplaying(server);
+  if(command === "addplaying") addplaying(message, args, command, argument, server);
+  if(command === "checkplaying") checkplaying(message, args, command, argument);
   if(command === "tleaderboard" || command === "tlb") tlbhandler(message, args, command, argument);
   if(command === "trating" || command === "trat") tratinghandler(message, args, command, argument);
-
   if(command === "title" && message.guild.id === config.houseid && checkrole(getmemberfromuser(message.guild, message.author), "mods")) chesstitle(message, args, command, argument, server);
   /*
   if(command === "tesseract" && !!message.attachments.first()) {
@@ -914,7 +917,18 @@ function prefixfunctions(message, args, command, argument, server) {
     };
     if(checkrole(member, "choosecolor")) {
       role = getrolefromname(message.guild, user.username + "CustomColor");
-      if(role) role.setColor(color);
+      if(role) {
+        role.setColor(color)
+        .then(role => message.channel.send({embed: {
+            "description": `Set colour for **${message.author.tag}** to **${role.color}**.`,
+            "color": role.color
+            }
+          })
+          .then((msg) => msg.delete(30000))
+          .catch((e) => console.log(e))
+        )
+        .catch((e) => console.log(e));
+      }
     }
   } else
 
@@ -1669,22 +1683,126 @@ function nonprefixfunctions(message, args, argument, server) {
   }
 };
 
+function addplaying(message, args, command, argument, server) {
+  for(let i = 0; i < args.length; i++) {
+    if(typeof args[i] !== "string" || args[i].length > 20 || !args[i].match(/[a-z0-9][\w-]*[a-z0-9]/i)) {
+      senderrormessage(message.channel, "Invalid users to check if playing!");
+      return;
+    };
+  };
+  let newplayers = [];
+  let players = server.getplaying || {};
+  let url = LICHESS_STATUS_URL + args.join(",");
+  let data = {};
+  console.log(url);
+  request.get(url, (error, response, body) => {
+    if(error) {
+      console.log(error);
+      return;
+    } else {
+      try {
+        data = JSON.parse(body);
+        for(let i = 0; i < args.length; i++) {
+          for(let j = 0; j < data.length; j++) {
+            if(data[j].id.toLowerCase() === args[i].toLowerCase()) {
+              let killboolean = false;
+              for(let k = 0; k < server.getplaying[message.channel.id].length; k++) {
+                if(server.getplaying[message.channel.id][k] === data[j].id) killboolean = true;
+              };
+              if(killboolean) break;
+              if(newplayers[0]) newplayers.push(data[j].id);
+              else newplayers[0] = data[j].id;
+              data.shift();
+              break;
+            };
+          }
+        };
+        let pnembed = {};
+        pnembed.title = getemojifromname("lichess") + " Added new tracking players on Lichess.org";
+        pnembed.description = "";
+        for(let i = 0; i < newplayers.length; i++) pnembed.description += `[${newplayers[i]}](https://lichess.org/@/${newplayers[i]}/tv)\n`;
+        if(pnembed.description) embedsender(message.channel, pnembed);
+        if(players[message.channel.id] && players[message.channel.id]) players[message.channel.id] = players[message.channel.id].concat(newplayers);
+        else players[message.channel.id] = newplayers;  
+        server.getplaying = players;
+        DataManager.setGuildData(server);
+      } catch(e) {
+        console.log(e);
+      }
+    }
+  })
+};
+
+function nowplaying(server) {
+  let players = server.getplaying || {};
+  for(let channelid in players) if(players[channelid]) getplaying(client.channels.get(channelid), players[channelid]);
+};
+
+function checkplaying(message, args, command, argument) {
+  for(let i = 0; i < args.length; i++) {
+    if(typeof args[i] !== "string" || args[i].length > 20 || !args[i].match(/[a-z0-9][\w-]*[a-z0-9]/i)) {
+      senderrormessage(message.channel, "Invalid users to check if playing!");
+      return;
+    }
+  };
+  getplaying(message.channel, args);
+};
+
+function getplaying(channel, players) {
+  let url = LICHESS_STATUS_URL + players.join(",");
+  let data = {};
+  console.log(url);
+  request.get(url, (error, response, body) => {
+    if(error) {
+      console.log(error);
+      return;
+    } else {
+      try {
+        data = JSON.parse(body);
+        let pnembed = {};
+        pnembed.content = "Hey " + getrolefromname(channel.guild, "subs");
+        pnembed.title = getemojifromname("lichess") + " Now playing on Lichess.org";
+        pnembed.description = "";
+        for(let i = 0; i < data.length; i++) {
+          if(data[i].playing) pnembed.description += `[${data[i].id}](https://lichess.org/@/${data[i].id}/tv)\n`;
+        };
+        if(pnembed.description) embedsender(channel, pnembed);
+      } catch(e) {
+        console.log(e);
+      }
+    }
+  })
+}
+
+function gethttpboolean() {
+  return httpboolean;
+}
+
 function buyhandler(message, args, command, argument, server) {
   if(args.length ==! 1) return;
   if(args[0] === "6" || args[0].toLowerCase() === "choosecolor") {
-    let guild = message.guild;
-    let username = message.author.username;
-    let member = getmemberfromuser(guild, message.author);
-    guild.createRole({
-      "name": username + "CustomColor",
-      "position": 70
+    let filter = msg => msg.author.id === bouncerbot.id && msg.embeds && msg.embeds[0] && msg.embeds[0].description.includes("successfully purchased");
+    message.channel.awaitMessages(filter, {
+      max: 1,
+      time: 20000,
+      errors: ['time'],
     })
-    .then((role) => {
-      console.log(`Created new role ${role.name} for ${message.author.tag}.`);
-      member.addRole(role)
+    .then((collected) => {
+      let guild = message.guild;
+      let username = message.author.username;
+      let member = getmemberfromuser(guild, message.author);
+      guild.createRole({
+        "name": username + "CustomColor",
+        "position": 70
+      })
+      .then((role) => {
+        console.log(`Created new role ${role.name} for ${message.author.tag}.`);
+        member.addRole(role)
+        .catch((e) => console.log(e));
+      })
       .catch((e) => console.log(e));
     })
-    .catch((e) => console.log(e));
+    .catch((e) => console.log(e))
   };
 };
 
@@ -3704,9 +3822,7 @@ function onTrackSuccess(serverID, userID, source, sourceusername, message) {
     embedoutput.description = `${sourceuserprofile}\nAdded to the role **${newRole.name}**. Current highest rating is **${dbuser[sourceratings].maxRating}**\n` + sourceratinglist;
     embedoutput.color = server.colors.ratings;
     embedsender(channel, embedoutput);
-  }).catch(function(error) {
-    console.log("Error adding new role", error);
-  });
+  }).catch((error) => console.log("Error adding new role", error));
 };
 
 function onAuthenticatorSuccess(serverID, userID, source, sourceusername, message) {
@@ -3726,7 +3842,7 @@ function onRatingUpdate(message, user, rankingobject) {
       let sourceratings = source + "ratings";
       let sourceratinglist = parsesourceratingdata(dbuser, source, rankingobject);
       let sourceuserprofile = parsesourceprofiles(dbuser, source);
-      ratingembed.fields = embedfielder(ratingembed.fields, `${getemojifromname(source)} ${rankingobject ? `${dbuser[source]} Rankings` : `Updated ${dbuser[source]}`}`, `${sourceuserprofile} ${rankingobject ? `                                \u200B\n` : `\nCurrent highest rating is **${dbuser[sourceratings].maxRating}**                     \u200B\n`}` + sourceratinglist, true)
+      ratingembed.fields = embedfielder(ratingembed.fields, `${getemojifromname(source)} ${rankingobject ? `${dbuser[source]} Rankings` : `Updated ${dbuser[source]}`}`, `${sourceuserprofile} ${rankingobject ? `                                \u200B\n` : `\nCurrent highest rating is **${dbuser[sourceratings].maxRating}**                \u200B\n`}` + sourceratinglist, true)
     }
   };
   embedsender(channel, ratingembed);

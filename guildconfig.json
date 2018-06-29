@@ -94,66 +94,69 @@
         ],
         "tickets": [
             {
-                "id": "373480715276517376",
-                "tag": "ObiWanBenoni#3488",
-                "amount": "1",
-                "reason": "test",
-                "messageid": "458354529570914304"
-            },
-            {
                 "id": "293465140739964929",
                 "tag": "MeneerMandje#9220",
                 "amount": "20",
                 "reason": "for bumping the lichess thread",
                 "messageid": "458572765549821952"
+            },
+            {
+                "id": "373480715276517376",
+                "tag": "ObiWanBenoni#3488",
+                "amount": "1",
+                "reason": "for this tournament https://lichess.org/tournament/btuCYtcY",
+                "messageid": "459009399919476747"
+            },
+            {
+                "id": "373480715276517376",
+                "tag": "ObiWanBenoni#3488",
+                "amount": "1",
+                "reason": "for this tournament https://lichess.org/tournament/btuCYtcY",
+                "messageid": "459009399919476747"
+            },
+            {
+                "id": "423980335345434624",
+                "tag": "Bureky#9728",
+                "amount": "12",
+                "reason": "bullet 22 zh with obi https://lichess.org/DdGZ0BkM",
+                "messageid": "459187136030179348"
+            },
+            {
+                "id": "423980335345434624",
+                "tag": "Bureky#9728",
+                "amount": "12",
+                "reason": "bullet 22 zh with obi https://lichess.org/DdGZ0BkM",
+                "messageid": "459187136030179348"
+            },
+            {
+                "id": "407662597555617802",
+                "tag": "moonenane#3553",
+                "amount": "20",
+                "reason": "for inviting <@441117586168610816> to the server and added bug & asia role ",
+                "messageid": "459275994998636560"
+            },
+            {
+                "id": "428398365504438272",
+                "tag": "FalconEye#6391",
+                "amount": "100",
+                "reason": "flowers because I invited Javi0111 on the server",
+                "messageid": "460948233787670539"
+            },
+            {
+                "id": "428398365504438272",
+                "tag": "FalconEye#6391",
+                "amount": "20",
+                "reason": "flowers because I invited Javi0111 on discord",
+                "messageid": "460963863173791745"
+            },
+            {
+                "id": "407662597555617802",
+                "tag": "moonenane#3553",
+                "amount": "20",
+                "reason": "for doing the worst slips possibe in bughouse o accident",
+                "messageid": "460968529403969537"
             }
         ],
-        "ticketsv2": [
-            {
-                "channel": "432932681412640779",
-                "message": "459035050751557642",
-                "author": "423980335345434624",
-                "emoji1": true,
-                "event1": "true",
-                "emoji2": "false",
-                "event2": "false"
-            },
-            {
-                "channel": "432932681412640779",
-                "message": "459035194649739265",
-                "author": "423980335345434624",
-                "emoji1": true,
-                "event1": "true",
-                "emoji2": "false",
-                "event2": "false"
-            },
-            {
-                "channel": "432932681412640779",
-                "message": "459035310668513291",
-                "author": "423980335345434624",
-                "emoji1": true,
-                "event1": "true",
-                "emoji2": "false",
-                "event2": "false"
-            },
-            {
-                "channel": "432932681412640779",
-                "message": "459035515736424450",
-                "author": "423980335345434624",
-                "emoji1": true,
-                "event1": "true",
-                "emoji2": "false",
-                "event2": "false"
-            },
-            {
-                "channel": "432932681412640779",
-                "message": "459036418279342110",
-                "author": "423980335345434624",
-                "emoji1": true,
-                "event1": "true",
-                "emoji2": "false",
-                "event2": "false"
-            }
-        ]
+        "ticketsv2": []
     }
 }
