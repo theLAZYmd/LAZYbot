@@ -2,20 +2,6 @@
     "314155682033041408": {
         "id": "314155682033041408",
         "testingmodeboolean": false,
-        "ratings": [
-            1000,
-            1000,
-            1300,
-            1500,
-            1700,
-            1900,
-            2000,
-            2100,
-            2200,
-            2300,
-            2400,
-            2500
-        ],
         "prefixes": {
             "prefix": "!",
             "nadeko": "."
@@ -38,7 +24,7 @@
         "roles": {
             "bot": "Bot-In-Use",
             "muted": "muted",
-            "unranked": "verified",
+            "unranked": "unranked",
             "league": "league",
             "arena": "arena",
             "beta": "verified",
@@ -58,7 +44,6 @@
             "Middle East / Africa",
             "Asia / Australia"
         ],
-        "cr": [],
         "er": [
             [
                 "lazy",
@@ -101,197 +86,77 @@
                 false
             ]
         ],
-        "ee": [
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false
-        ],
-        "oldcount": 0,
         "shadowbanned": [
             [
                 "402122806063529984",
                 false
             ]
         ],
-        "keys": [
-            "4BoWj5iOvl",
-            "cW3dWanthf",
-            "W4FXkBlQTE",
-            "LKVSe6pNej",
-            "r2MTjadKZr",
-            "lsJlWqyZBt"
-        ],
         "tickets": [
             {
-                "id": "325736595980288010",
-                "tag": "Kyle#4287",
-                "amount": "30",
-                "reason": "for match with obi",
-                "messageid": "433703003103559682"
-            },
-            {
-                "id": "273152076421529601",
-                "tag": "Bureky#7827",
-                "amount": "22",
-                "reason": "match with obi http://lichess.org/Vzi104fM",
-                "messageid": "433717953393983499"
+                "id": "293465140739964929",
+                "tag": "MeneerMandje#9220",
+                "amount": "20",
+                "reason": "for bumping the lichess thread",
+                "messageid": "458572765549821952"
             },
             {
                 "id": "373480715276517376",
                 "tag": "ObiWanBenoni#3488",
-                "amount": "22",
-                "reason": "9 games match 3+2 zh with bureky",
-                "messageid": "433719666599526401"
-            },
-            {
-                "id": "273152076421529601",
-                "tag": "Bureky#7827",
-                "amount": "14",
-                "reason": "http://lichess.org/ciwIkcK5",
-                "messageid": "433985212997697538"
-            },
-            {
-                "id": "365105589715599360",
-                "tag": "Simba7#0506",
-                "amount": "5",
-                "reason": "from raven because he fooled me",
-                "messageid": "434306620978102294"
-            },
-            {
-                "id": "273152076421529601",
-                "tag": "Bureky#7827",
-                "amount": "29",
-                "reason": "http://lichess.org/rkHcLcol match with simba",
-                "messageid": "434377500311683074"
-            },
-            {
-                "id": "365105589715599360",
-                "tag": "Simba7#0506",
-                "amount": "29",
-                "reason": "match with barakyhttp://lichess.org/rkHcLcol",
-                "messageid": "434377889807335425"
-            },
-            {
-                "id": "273152076421529601",
-                "tag": "Bureky#7827",
-                "amount": "10",
-                "reason": "4 games 3+2",
-                "messageid": "434378815243026456"
-            },
-            {
-                "id": "319901088557957122",
-                "tag": "okei#1207",
-                "amount": "10",
-                "reason": "4 games 3+2",
-                "messageid": "434378853788418049"
-            },
-            {
-                "id": "273152076421529601",
-                "tag": "bureky#7827",
-                "amount": "17",
-                "reason": "match with obi http://lichess.org/zf6SQAYz",
-                "messageid": "434486797645512714"
-            },
-            {
-                "id": "373480715276517376",
-                "tag": "ObiWanBenoni#3488",
-                "amount": "17",
-                "reason": "zh 3+2 match with bureky",
-                "messageid": "434487778819178497"
-            },
-            {
-                "id": "365105589715599360",
-                "tag": "Simba7#0506",
-                "amount": "15",
-                "reason": "for 9  game match with okei 3+0 https://lichess.org/sdi7hrfX/black",
-                "messageid": "434690465896595456"
-            },
-            {
-                "id": "319901088557957122",
-                "tag": "okei#1207",
-                "amount": "15",
-                "reason": "for 9 game match with Simba7 3+0 https://lichess.org/sdi7hrfX/black",
-                "messageid": "434690549984002059"
-            },
-            {
-                "id": "273152076421529601",
-                "tag": "bureky#7827",
-                "amount": "25",
-                "reason": "10 3+2 matches with kyle http://lichess.org/xcbI3EBP",
-                "messageid": "434711678462984204"
-            },
-            {
-                "id": "325736595980288010",
-                "tag": "Kyle#4287",
-                "amount": "add",
-                "reason": "25 10 3+2 matches with bureky",
-                "messageid": "434711826140495872"
-            },
-            {
-                "id": "407662597555617802",
-                "tag": "moonenane#3553",
-                "amount": "20",
-                "reason": "for inviting <@426027768128733185> to server",
-                "messageid": "434985962473259028"
-            },
-            {
-                "id": "407662597555617802",
-                "tag": "moonenane#3553",
-                "amount": "20",
-                "reason": "for inviting <@427287368287125516>  to server",
-                "messageid": "434998268016197633"
-            },
-            {
-                "id": "185412969130229760",
-                "tag": "theLAZYmd#2353",
                 "amount": "1",
-                "reason": "test",
-                "messageid": "455019736753897475"
+                "reason": "for this tournament https://lichess.org/tournament/btuCYtcY",
+                "messageid": "459009399919476747"
+            },
+            {
+                "id": "373480715276517376",
+                "tag": "ObiWanBenoni#3488",
+                "amount": "1",
+                "reason": "for this tournament https://lichess.org/tournament/btuCYtcY",
+                "messageid": "459009399919476747"
+            },
+            {
+                "id": "423980335345434624",
+                "tag": "Bureky#9728",
+                "amount": "12",
+                "reason": "bullet 22 zh with obi https://lichess.org/DdGZ0BkM",
+                "messageid": "459187136030179348"
+            },
+            {
+                "id": "423980335345434624",
+                "tag": "Bureky#9728",
+                "amount": "12",
+                "reason": "bullet 22 zh with obi https://lichess.org/DdGZ0BkM",
+                "messageid": "459187136030179348"
+            },
+            {
+                "id": "407662597555617802",
+                "tag": "moonenane#3553",
+                "amount": "20",
+                "reason": "for inviting <@441117586168610816> to the server and added bug & asia role ",
+                "messageid": "459275994998636560"
+            },
+            {
+                "id": "428398365504438272",
+                "tag": "FalconEye#6391",
+                "amount": "100",
+                "reason": "flowers because I invited Javi0111 on the server",
+                "messageid": "460948233787670539"
+            },
+            {
+                "id": "428398365504438272",
+                "tag": "FalconEye#6391",
+                "amount": "20",
+                "reason": "flowers because I invited Javi0111 on discord",
+                "messageid": "460963863173791745"
+            },
+            {
+                "id": "407662597555617802",
+                "tag": "moonenane#3553",
+                "amount": "20",
+                "reason": "for doing the worst slips possibe in bughouse o accident",
+                "messageid": "460968529403969537"
             }
-        ]
-    },
-    "430035841239220224": {
-        "id": "430035841239220224",
-        "testingmodeboolean": false,
-        "ratings": [],
-        "prefixes": {
-            "prefix": "!",
-            "nadeko": "."
-        },
-        "channels": {
-            "announcements": "",
-            "bot": "",
-            "bot2": "",
-            "mod": "",
-            "log": "",
-            "join": "",
-            "leave": "",
-            "live": ""
-        },
-        "colors": {
-            "generic": "",
-            "error": "",
-            "ratings": ""
-        },
-        "roles": {
-            "bot": "",
-            "muted": "",
-            "unranked": "",
-            "league": "",
-            "arena": "",
-            "beta": "",
-            "livenotifications": ""
-        },
-        "acceptedlinkdomains": [],
-        "regions": [],
-        "cr": [],
-        "er": [],
-        "oldcount": 0,
-        "shadowbanned": [],
-        "keys": []
+        ],
+        "ticketsv2": []
     }
 }

@@ -27,6 +27,7 @@ function Tracker(events) {
   this.getsourcetitle = events.getsourcetitle;
   this.getsourcefromtitle = events.getsourcefromtitle;
   this.getonlinemembers = events.getonlinemembers;
+  this.httpboolean = events.httpboolean;
 };
 
 Tracker.prototype.updatepresence = function(member, nowonline) {
@@ -56,17 +57,27 @@ Tracker.prototype.messagelogger = function(message, server) { //section for mess
 
 Tracker.prototype.track = function(serverID, user, source, username, message) {
   username = username.replace(/["`']+/g, "");
-  if (username.length < 2) {
+  if(username.length < 2) {
     return this.onError(serverID, "Invalid username.", message);
   };
   let dbuser = this.getdbuserfromuser(user);
   if(dbuser[source]) {
     let sourcetitle = this.getsourcetitle(source);
     return this.onError(serverID, `Duplicate from **${sourcetitle}**. You have already linked **${dbuser[source]}** to your profile.\nUse \`!remove [${source}]\` to unlink your account.`, message);
-  }
+  };
+  let data = {
+    "dbuser": dbuser,
+    "username": username,
+    "successfulupdates": "",
+    "lichess": this.httpboolean().lichess,
+    "chesscom": this.httpboolean().chesscom,
+    "bughousetest": this.httpboolean().bughousetest
+  };
   if(source === "lichess") {
-    handleLichessData(dbuser, username)
-    .then((dbuser) => {
+    handleLichessData(data)
+    .then((data) => {
+      let dbuser = data.dbuser;
+      if(!dbuser) return;
       this.stopUpdating = true;
       let tally = DataManager.getData();
       let dbindex = this.getdbindexfromdbuser(dbuser);
@@ -81,8 +92,9 @@ Tracker.prototype.track = function(serverID, user, source, username, message) {
     })
   } else
   if(source === "chesscom") {
-    handleChesscomData(dbuser, username)
-    .then((dbuser) => {
+    handleChesscomData(data)
+    .then((data) => {
+      let dbuser = data.dbuser;
       this.stopUpdating = true;
       let tally = DataManager.getData();
       let dbindex = this.getdbindexfromdbuser(dbuser);
@@ -97,8 +109,9 @@ Tracker.prototype.track = function(serverID, user, source, username, message) {
     })
   } else
   if(source === "bughousetest") {
-    handleBughousetestData(dbuser, username)
-    .then((dbuser) => {
+    handleBughousetestData(data)
+    .then((data) => {
+      let dbuser = data.dbuser;
       this.stopUpdating = true;
       let tally = DataManager.getData();
       let dbindex = this.getdbindexfromdbuser(dbuser);
@@ -114,42 +127,55 @@ Tracker.prototype.track = function(serverID, user, source, username, message) {
   }
 };
 
+function sourceHandler(data) {
+  return new Promise((resolve, reject) => {
+    resolve(data);
+    if(!data) reject(dbuser);
+  });
+}
+
 Tracker.prototype.updateUser = function(message, user) {
-  let dbuser = message ? this.getdbuserfromuser(user) : user;
+  let data = {
+    "dbuser": message ? this.getdbuserfromuser(user) : user,
+    "successfulupdates": "",
+    "lichess": this.httpboolean().lichess,
+    "chesscom": this.httpboolean().chesscom,
+    "bughousetest": this.httpboolean().bughousetest
+  };
   let serverID = message ? message.guild.id : "";
-  if(!dbuser.lichess && !dbuser.chesscom && !dbuser.bughousetest) {
+  if(!data.dbuser.lichess && !data.dbuser.chesscom && !data.dbuser.bughousetest) {
     this.onError(serverID, `No linked accounts found.\nPlease link an account to your profile through \`!lichess\` or \`!chess.com\``, message);
     return;
   } else {
-    handleLichessData(dbuser, dbuser.lichess)
-    .then((dbuser) => {
-      handleChesscomData(dbuser, dbuser.chesscom)
-      .then((dbuser) => {
-        handleBughousetestData(dbuser, dbuser.bughousetest)
-        .then((dbuser) => {
-          this.stopUpdating = true;
-          dbuser.lastupdate = Date.now();
-          let tally = DataManager.getData();
-          let dbindex = this.getdbindexfromdbuser(dbuser);
-          tally[dbindex] = dbuser;
-          DataManager.setData(tally);
-          console.log(`Updated ${dbuser.username} on ${dbuser.lichess ? `lichess, ` : ``}${dbuser.chesscom ? `chess.com, ` : ``}${dbuser.bughousetest ? `bughousetest, ` : ``}with no errors.`);
-          if(message) this.onRatingUpdate(message, user);
-          this.stopUpdating = false;
-        })
-        .catch((error) => {
-          this.onError(serverID, "Error adding user. " + error, message);
-        })
-      })
-      .catch((error) => {
-        this.onError(serverID, "Error adding user. " + error, message);
-      })
+    sourceHandler(data)
+    .then((data) => {
+      data.username = data.dbuser.lichess;
+      return handleLichessData(data)
+    })
+    .then((data) => {
+      data.username = data.dbuser.chesscom;
+      return handleChesscomData(data)
+    })
+    .then((data) => {
+      data.username = data.dbuser.bughousetest;
+      return handleBughousetestData(data)
+    })
+    .then((data) => {
+      let dbuser_ = data.dbuser;
+      this.stopUpdating = true;
+      dbuser_.lastupdate = Date.now();
+      let tally = DataManager.getData();
+      let dbindex = this.getdbindexfromdbuser(dbuser_);
+      tally[dbindex] = dbuser_;
+      DataManager.setData(tally);
+      console.log(`Updated ${dbuser_.username} on ${data.successfulupdates}with no errors.`);
+      if(message) this.onRatingUpdate(message, user);
+      this.stopUpdating = false;
     })
     .catch((error) => {
       this.onError(serverID, "Error adding user. " + error, message);
     })
-  };
-  return;
+  }
 };
 
 Tracker.prototype.buildUpdateQueue = function() {
@@ -220,89 +246,121 @@ Tracker.prototype.remove = function (serverID, source, userID, message, nomsg) {
   this.stopUpdating = false;
 };
 
-function handleLichessData(dbuser, username) {
+function handleLichessData(data) {
+  let dbuser = data.dbuser;
+  let username = data.username;
   let [source, sourceratings] = ["lichess", "lichessratings"];
   return new Promise((resolve, reject) => {
-    if(!username) {
-      resolve(dbuser);
-    };
-    getLichessDataForUser(username)
-    .then((sourceData) => {
-      return parseLichessUserData(sourceData, (msg) => {
-        reject(msg);
-      }, (msg) => {
-        reject(msg);
-      });
-    })
-    .then((profile) => {
-      if(profile) {
-        dbuser.lastupdate = Date.now();
-        dbuser[source] = profile.username;
-        dbuser.title = profile.title;
-        dbuser[sourceratings] = profile.ratings;
-      };
-      resolve(dbuser);
-    })
-    .catch((error) => {
-      reject(error.toString());
-    })
-  })
-};
-
-function handleChesscomData(dbuser, username) {
-  let [source, sourceratings] = ["chesscom", "chesscomratings"];
-  return new Promise((resolve, reject) => {
-    if(!username) {
-      resolve(dbuser);
+    if(username) {
+      if(data.lichess) {
+        getLichessDataForUser(username)
+        .then((sourceData) => {
+          return parseLichessUserData(sourceData, (msg) => {
+            reject(msg);
+          }, (msg) => {
+            reject(msg);
+          });
+        })
+        .then((profile) => {
+          if(profile) {
+            dbuser.lastupdate = Date.now();
+            dbuser[source] = profile.username;
+            if(profile.title) dbuser.title = profile.title;
+            else delete dbuser.title;
+            dbuser[sourceratings] = profile.ratings;
+            data.dbuser = dbuser;
+            data.successfulupdates += "lichess, ";
+          };
+          resolve(data);
+        })
+        .catch((error) => {
+          resolve(data);
+          reject(error);
+        })
+      } else {
+        resolve(data);
+        reject(`Couldn't connect to ${source}!`)
+      }
     } else {
-      getChesscomDataForUser(username)
-      .then((sourceData) => {
-        return parseChesscomUserData(sourceData, username, (msg) => {
-          reject(msg);
-        }, (msg) => {
-          reject(msg);
-        });
-      })
-      .then(([ratingData, username]) => {
-        if(ratingData) {
-          dbuser.lastupdate = Date.now();
-          dbuser[source] = username;
-          dbuser[sourceratings] = ratingData;
-        }
-        resolve(dbuser);
-      })
-      .catch((error) => {
-        reject(error);
-      })
+      resolve(data);
     }
   })
 };
 
-function handleBughousetestData(dbuser, username, retError) {
+function handleChesscomData(data) {
+  let dbuser = data.dbuser;
+  let username = data.username;
+  let [source, sourceratings] = ["chesscom", "chesscomratings"];
+  return new Promise((resolve, reject) => {
+    if(username) {
+      if(data.chesscom) {
+        getChesscomDataForUser(username)
+        .then((sourceData) => {
+          return parseChesscomUserData(sourceData, username, (msg) => {
+            reject(msg);
+          }, (msg) => {
+            reject(msg);
+          });
+        })
+        .then(([ratingData, username]) => {
+          if(ratingData) {
+            dbuser.lastupdate = Date.now();
+            dbuser[source] = username;
+            dbuser[sourceratings] = ratingData;
+            data.dbuser = dbuser;
+            data.successfulupdates += "chess.com, ";
+          }
+          resolve(data);
+        })
+        .catch((error) => {
+          resolve(data);
+          reject(error);
+        })
+      } else {
+        resolve(data);
+        reject(`Couldn't connect to ${source}!`)
+      }
+    } else {
+      resolve(data);
+    }
+  })
+};
+
+function handleBughousetestData(data) {
+  let dbuser = data.dbuser;
+  let username = data.username;
   let [source, sourceratings] = ["bughousetest", "bughousetestratings"];
   return new Promise((resolve, reject) => {
-    if(!username) {
-      resolve(dbuser);
+    if(username) {
+      if(data.bughousetest) {
+        getBughousetestDataForUser(username)
+        .then((sourceData) => {
+          return parseBughousetestUserData(sourceData, (msg) => {
+            reject(msg);
+          }, (msg) => {
+            reject(msg);
+          });
+        })
+        .then((profile) => {
+          if(profile) {
+            dbuser.lastupdate = Date.now();
+            dbuser[source] = profile.username;
+            dbuser[sourceratings] = profile.ratings;
+            data.dbuser = dbuser;
+            data.successfulupdates += "bughousetest, ";
+          };
+          resolve(data);
+        })
+        .catch((error) => {
+          resolve(data);
+          reject(error);
+        })
+      } else {
+        resolve(data);
+        reject(`Couldn't connect to ${source}!`);
+      }
     } else {
-      getBughousetestDataForUser(username)
-      .then((sourceData) => {
-        return parseBughousetestUserData(sourceData, (msg) => {
-          reject(msg);
-        }, (msg) => {
-          reject(msg);
-        });
-      })
-      .then((profile) => {
-        if(profile) {
-          dbuser.lastupdate = Date.now();
-          dbuser[source] = profile.username;
-          dbuser[sourceratings] = profile.ratings;
-        };
-        resolve(dbuser);
-      })
-      .catch((error) => {
-        reject(error);
-      })
+      resolve(data);
     }
   })
 };
@@ -311,7 +369,7 @@ function getLichessDataForUser(username) {
   return new Promise((resolve, reject) => {
     if (username === false) return reject("Invalid username.");
     request.get(LICHESS_USER_URL.replace("|", username), (error, response, body) => {
-      if (error) {
+      if(error) {
         return reject(error);
       }
       if (body.length === 0) {
@@ -332,7 +390,7 @@ function getBughousetestDataForUser(username) {
   if (username === false) return false;
   return new Promise((resolve, reject) => {
     request.get(BUGHOUSETEST_USER_URL.replace("|", username), (error, response, body) => {
-      if (error) {
+      if(error) {
         return reject(error);
       }
       if (body.length === 0) {
@@ -351,7 +409,7 @@ function getBughousetestDataForUser(username) {
 
 function getChesscomDataForUser(username) {
   if (username === false) return false;
-  return new Promise(function (resolve, reject) {
+  return new Promise((resolve, reject) => {
     request.get(CHESS_COM_USER_URL.replace("|", username), function (error, response, body) {
       if (error) {
         return reject(error);
