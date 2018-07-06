@@ -49,10 +49,13 @@ var bouncerbot;
 var nadekobot;
 var harmonbot;
 var reboot;
+var guilds = [];
+var owners = [];
 let embedoutput = {};
 let partymode = {};
 let puzzles = [];
 let notify = [];
+let getplayingtimeout = {};
 let bcpboolean = false;
 let [customfunction1, customfunction2, customfunction3, customfunction4, customfunction5] = ["", "", "", "", ""];
 let newarrivalsboolean = false;
@@ -66,11 +69,13 @@ client.on("ready", () => {
   let guildconfig = DataManager.getData(`./guildconfig.json`);
   let guilds = Object.keys(guildconfig);
   for(let i = 0; i < guilds.length; i++) {
-    let guild = client.guilds.get(guilds[i])
+    let guild = client.guilds.get(guilds[i]);
     if(guild) {
+      if(guilds[0]) guilds.push(guild);
+      else guilds[0] = guild;
       console.log(`Loaded client server ${guild.name} in ${Date.now() - reboot}ms`)
     }
-  }
+  };
   bouncerbot = client.users.get(config.ids.bouncer);
   console.log(bouncerbot ? `Noticed bot user ${bouncerbot.tag} in ${Date.now() - reboot}ms` : `Bouncer#8585 is not online!`);
   nadekobot = client.users.get(config.ids.nadeko);
@@ -79,7 +84,11 @@ client.on("ready", () => {
   console.log(harmonbot ? `Noticed bot user ${harmonbot.tag} in ${Date.now() - reboot}ms` : `Harmonbot#4049 is not online!`);
   for(let i = 0; i < config.ids.owner.length; i++) {
     let owner = client.users.get(config.ids.owner[i])
-    if(owner) console.log(`Noticed bot owner ${owner.tag} in ${Date.now() - reboot}ms`);
+    if(owner) {
+      if(owners[0]) owners.push(guild);
+      else owners[0] = owner;
+      console.log(`Noticed bot owner ${owner.tag} in ${Date.now() - reboot}ms`);
+    }
   };
   let server = DataManager.getGuildData(config.houseid);
   let quoteidlist = server.ticketsv2;
@@ -908,7 +917,7 @@ function prefixfunctions(message, args, command, argument, server) {
   } else
 
   if(command === "color" || command === "colour") {
-    let user = (checkrole(getmemberfromuser(message.guild, message.author), "mods") || (getuser(message.guild, args[0]) && getuser(message.guild, args[0]).id === message.author.id)) ? getuser(message.guild, args[0]) : message.author;
+    let user = ((checkrole(getmemberfromuser(message.guild, message.author), "mods") && args.length === 3) || (getuser(message.guild, args[0]) && getuser(message.guild, args[0]).id === message.author.id)) ? getuser(message.guild, args[0]) : message.author;
     let member = getmemberfromuser(message.guild, user);
     let color = getuser(message.guild, args[0]) ? argument.slice(args[0].length, argument.length).trim().toUpperCase().replace(/[^a-zA-Z0-9,]/g, "") : argument.toUpperCase().replace(/[^a-zA-Z0-9,]/g, "");
     if(color.occurrences(",") === 2) {
@@ -916,7 +925,7 @@ function prefixfunctions(message, args, command, argument, server) {
       for(let i = 0; i < color.length; i++) color[i] = parseInt(color[i]);
     };
     if(checkrole(member, "choosecolor")) {
-      role = getrolefromname(message.guild, user.username + "CustomColor");
+      let role = getrolefromname(message.guild, user.username + "CustomColor");
       if(role) {
         role.setColor(color)
         .then(role => message.channel.send({embed: {
@@ -1722,7 +1731,7 @@ function addplaying(message, args, command, argument, server) {
         pnembed.description = "";
         for(let i = 0; i < newplayers.length; i++) pnembed.description += `[${newplayers[i]}](https://lichess.org/@/${newplayers[i]}/tv)\n`;
         if(pnembed.description) embedsender(message.channel, pnembed);
-        if(players[message.channel.id] && players[message.channel.id]) players[message.channel.id] = players[message.channel.id].concat(newplayers);
+        if(players[message.channel.id]) players[message.channel.id] = players[message.channel.id].concat(newplayers);
         else players[message.channel.id] = newplayers;  
         server.getplaying = players;
         DataManager.setGuildData(server);
@@ -1733,7 +1742,31 @@ function addplaying(message, args, command, argument, server) {
   })
 };
 
-function nowplaying(server) {
+function removeplaying(message, args, command, argument, server) {
+  for(let i = 0; i < args.length; i++) {
+    if(typeof args[i] !== "string" || args[i].length > 20 || !args[i].match(/[a-z0-9][\w-]*[a-z0-9]/i)) {
+      senderrormessage(message.channel, "Invalid users to check if playing!");
+      return;
+    };
+  };
+  let players = server.getplaying || {};
+  let pnembed = {};
+  pnembed.title = getemojifromname("lichess") + " Stopped tracking players on Lichess.org";
+  pnembed.description = "";
+  for(let i = 0; i < args.length; i++) {
+    if(players[message.channel.id]) for(let j = 0; j < players[message.channel.id].length; j++) {
+      if(players[message.channel.id][j].toLowerCase() === args[i].toLowerCase()) {
+        pnembed.description += `[${args[i].toLowerCase()}](https://lichess.org/@/${args[i].toLowerCase()}/tv)\n`;
+        players[message.channel.id].clean(j);
+        break;
+      };
+    };
+  };
+  if(pnembed.description) embedsender(message.channel, pnembed);
+  DataManager.setGuildData(server);
+};
+
+function nowplaying(server) { 
   let players = server.getplaying || {};
   for(let channelid in players) if(players[channelid]) getplaying(client.channels.get(channelid), players[channelid]);
 };
@@ -1764,7 +1797,23 @@ function getplaying(channel, players) {
         pnembed.title = getemojifromname("lichess") + " Now playing on Lichess.org";
         pnembed.description = "";
         for(let i = 0; i < data.length; i++) {
-          if(data[i].playing) pnembed.description += `[${data[i].id}](https://lichess.org/@/${data[i].id}/tv)\n`;
+          let username = data[i].id;
+          if(getplayingtimeout[username] && !data[i].online) {
+            getplayingtimeout[username].online++;
+            if(getplayingtimeout[username].online++ >= 2) delete getplayingtimeout[username];
+          } else
+          if(getplayingtimeout[username] && !data[i].playing) {
+            getplayingtimeout[username].playing++;
+            if(getplayingtimeout[username].playing++ >= 5) delete getplayingtimeout[username];
+          } else
+          if(!getplayingtimeout[username] && data[i].playing) {
+            getplayingtimeout[username] = {
+              "lastfoundplaying": Date.now(),
+              "online": 0,
+              "playing": 0
+            };
+            pnembed.description += `[${username}](https://lichess.org/@/${username}/tv)\n`;
+          };
         };
         if(pnembed.description) embedsender(channel, pnembed);
       } catch(e) {
