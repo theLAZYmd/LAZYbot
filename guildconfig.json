@@ -1,162 +1,98 @@
 {
-    "314155682033041408": {
-        "id": "314155682033041408",
-        "testingmodeboolean": false,
-        "prefixes": {
-            "prefix": "!",
-            "nadeko": "."
-        },
-        "channels": {
-            "announcements": "announcements",
-            "bot": "spam",
-            "bot2": "devs",
-            "mod": "test-channel-in-use",
-            "log": "comment-log",
-            "join": "join",
-            "leave": "lounge",
-            "live": "live"
-        },
-        "colors": {
-            "generic": 53380,
-            "error": 15406156,
-            "ratings": 9359868
-        },
-        "roles": {
-            "bot": "Bot-In-Use",
-            "muted": "muted",
-            "unranked": "unranked",
-            "league": "league",
-            "arena": "arena",
-            "beta": "verified",
-            "livenotifications": "subs"
-        },
-        "acceptedlinkdomains": [
-            "http://lichess.org",
-            "http://www.chess.com",
-            "http://bughousetest.com",
-            "https://lichess.org",
-            "https://www.chess.com",
-            "https://bughousetest.com"
-        ],
-        "regions": [
-            "Americas",
-            "Europe",
-            "Middle East / Africa",
-            "Asia / Australia"
-        ],
-        "er": [
-            [
-                "lazy",
-                "lazy",
-                false
-            ],
-            [
-                "cubes",
-                "cubes",
-                true
-            ],
-            [
-                "obi",
-                "obi",
-                false
-            ],
-            [
-                "feelsbadman",
-                "feelsbadman",
-                false
-            ],
-            [
-                "seemsgood",
-                "seemsgood",
-                false
-            ],
-            [
-                "pogchamp",
-                "pogchamp",
-                false
-            ],
-            [
-                "lul",
-                "lul",
-                false
-            ],
-            [
-                "ban",
-                "banhammer",
-                false
-            ]
-        ],
-        "shadowbanned": [
-            [
-                "402122806063529984",
-                false
-            ]
-        ],
-        "tickets": [
-            {
-                "id": "293465140739964929",
-                "tag": "MeneerMandje#9220",
-                "amount": "20",
-                "reason": "for bumping the lichess thread",
-                "messageid": "458572765549821952"
-            },
-            {
-                "id": "373480715276517376",
-                "tag": "ObiWanBenoni#3488",
-                "amount": "1",
-                "reason": "for this tournament https://lichess.org/tournament/btuCYtcY",
-                "messageid": "459009399919476747"
-            },
-            {
-                "id": "373480715276517376",
-                "tag": "ObiWanBenoni#3488",
-                "amount": "1",
-                "reason": "for this tournament https://lichess.org/tournament/btuCYtcY",
-                "messageid": "459009399919476747"
-            },
-            {
-                "id": "423980335345434624",
-                "tag": "Bureky#9728",
-                "amount": "12",
-                "reason": "bullet 22 zh with obi https://lichess.org/DdGZ0BkM",
-                "messageid": "459187136030179348"
-            },
-            {
-                "id": "423980335345434624",
-                "tag": "Bureky#9728",
-                "amount": "12",
-                "reason": "bullet 22 zh with obi https://lichess.org/DdGZ0BkM",
-                "messageid": "459187136030179348"
-            },
-            {
-                "id": "407662597555617802",
-                "tag": "moonenane#3553",
-                "amount": "20",
-                "reason": "for inviting <@441117586168610816> to the server and added bug & asia role ",
-                "messageid": "459275994998636560"
-            },
-            {
-                "id": "428398365504438272",
-                "tag": "FalconEye#6391",
-                "amount": "100",
-                "reason": "flowers because I invited Javi0111 on the server",
-                "messageid": "460948233787670539"
-            },
-            {
-                "id": "428398365504438272",
-                "tag": "FalconEye#6391",
-                "amount": "20",
-                "reason": "flowers because I invited Javi0111 on discord",
-                "messageid": "460963863173791745"
-            },
-            {
-                "id": "407662597555617802",
-                "tag": "moonenane#3553",
-                "amount": "20",
-                "reason": "for doing the worst slips possibe in bughouse o accident",
-                "messageid": "460968529403969537"
-            }
-        ],
-        "ticketsv2": []
-    }
+  "314155682033041408": {
+      "id": "314155682033041408",
+      "testingmodeboolean": false,
+      "prefixes": {
+          "prefix": "!",
+          "nadeko": "."
+      },
+      "channels": {
+          "announcements": "announcements",
+          "bot": "spam",
+          "bot2": "devs",
+          "mod": "test-channel-in-use",
+          "log": "comment-log",
+          "join": "join",
+          "leave": "lounge",
+          "live": "live"
+      },
+      "colors": {
+          "generic": 53380,
+          "error": 15406156,
+          "ratings": 9359868
+      },
+      "roles": {
+          "bot": "Bot-In-Use",
+          "muted": "muted",
+          "unranked": "unranked",
+          "league": "league",
+          "arena": "arena",
+          "beta": "verified",
+          "livenotifications": "subs"
+      },
+      "acceptedlinkdomains": [
+          "http://lichess.org",
+          "http://www.chess.com",
+          "http://bughousetest.com",
+          "https://lichess.org",
+          "https://www.chess.com",
+          "https://bughousetest.com"
+      ],
+      "regions": [
+          "Americas",
+          "Europe",
+          "Middle East / Africa",
+          "Asia / Australia"
+      ],
+      "er": [
+          [
+              "lazy",
+              "lazy",
+              false
+          ],
+          [
+              "cubes",
+              "cubes",
+              true
+          ],
+          [
+              "obi",
+              "obi",
+              false
+          ],
+          [
+              "feelsbadman",
+              "feelsbadman",
+              false
+          ],
+          [
+              "seemsgood",
+              "seemsgood",
+              false
+          ],
+          [
+              "pogchamp",
+              "pogchamp",
+              false
+          ],
+          [
+              "lul",
+              "lul",
+              false
+          ],
+          [
+              "ban",
+              "banhammer",
+              false
+          ]
+      ],
+      "shadowbanned": [
+          [
+              "402122806063529984",
+              false
+          ]
+      ],
+      "tickets": [],
+      "ticketsv2": []
+  }
 }
