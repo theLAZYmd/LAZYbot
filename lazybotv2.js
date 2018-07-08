@@ -1712,8 +1712,8 @@ function addplaying(message, args, command, argument, server) {
     } else {
       try {
         data = JSON.parse(body);
+        let maxboolean = false;
         for(let i = 0; i < args.length; i++) { //for every new name added
-          let maxboolean = false;
           for(let j = 0; j < data.length; j++) { //check if exists on lichess player listing
             if(data[j].id.toLowerCase() === args[i].toLowerCase()) {
               let killboolean = false;
@@ -1723,7 +1723,7 @@ function addplaying(message, args, command, argument, server) {
                 }
               };
               if(killboolean) break; //if so nevermind
-              if(players.length + newplayers.length < 11) {
+              if(players[message.channel.id].length + newplayers.length < 11) {
                 if(newplayers[0]) newplayers.push(data[j].id); //if not add it
                 else newplayers[0] = data[j].id;
               } else {
@@ -1735,7 +1735,7 @@ function addplaying(message, args, command, argument, server) {
           };
           if(maxboolean) break; //actually stop
         };
-        if(maxboolean) senderrormessage(message.channel, `Limit exceeded! There are already $**{players.length + newplayers.length}** names being tracked.`); //let user know
+        if(maxboolean) senderrormessage(message.channel, `Limit exceeded! There are already **${players[message.channel.id].length}** names being tracked.`); //let user know
         let pnembed = {};
         pnembed.title = getemojifromname("lichess") + " Added new tracking players on Lichess.org";
         pnembed.description = "";
