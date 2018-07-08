@@ -93,6 +93,18 @@
           ]
       ],
       "tickets": [],
-      "ticketsv2": []
+      "ticketsv2": [],
+      "getplaying": {
+          "390259605529427969": [
+              "penguingim1",
+              "jkthebullfrog",
+              "mastertan",
+              "littleplotkin",
+              "jannlee",
+              "thefinnisher",
+              "mmichael",
+              "xuanet"
+          ]
+      }
   }
 }

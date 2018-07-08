@@ -85,7 +85,7 @@ client.on("ready", () => {
   for(let i = 0; i < config.ids.owner.length; i++) {
     let owner = client.users.get(config.ids.owner[i])
     if(owner) {
-      if(owners[0]) owners.push(guild);
+      if(owners[0]) owners.push(owner);
       else owners[0] = owner;
       console.log(`Noticed bot owner ${owner.tag} in ${Date.now() - reboot}ms`);
     }
@@ -161,7 +161,7 @@ backupdb("1", 3600000); //backupdb
 backupdb("2", 7200000);
 backupdb("3", 14400000);
 
-client.login(process.env.TOKEN ? process.env.TOKEN : config.token); //token
+client.login(process.env.TOKEN ? process.env.TOKEN : require("./token.json").token); //token
 
 myEmitter.on("event", () => console.log("test"));
 
@@ -743,9 +743,10 @@ function nadekoprefixfunctions(message, args, command, argument, server) {
 };
 
 function prefixfunctions(message, args, command, argument, server) {
-
-  if(command === "nowplaying") nowplaying(server);
-  if(command === "addplaying") addplaying(message, args, command, argument, server);
+  if(command === "nowplaying") nowplaying(server, true);
+  if(command === "listplaying") listplaying(message, server);
+  if(command === "addplaying") addplaying(message, args, command, argument, server); 
+  if(command === "removeplaying") removeplaying(message, args, command, argument, server);
   if(command === "checkplaying") checkplaying(message, args, command, argument);
   if(command === "tleaderboard" || command === "tlb") tlbhandler(message, args, command, argument);
   if(command === "trating" || command === "trat") tratinghandler(message, args, command, argument);
@@ -1310,7 +1311,7 @@ function prefixfunctions(message, args, command, argument, server) {
 
   if(command === "messages") {
     let user = argument ? getuser(message.guild, argument) : message.author;
-    messagecount (message, user);
+    messagecount(message, user);
   } else
 
   if((command === "updatemessagecount") || (command === "updatemessages")) {
@@ -1669,7 +1670,7 @@ function botfunctions(message, server) {
       clearvar()
       embedoutput.color = config.colors.generic;
       embedoutput.description = `**housebank#5970** has ${sumtotal} :cherry_blossom:`;
-      updatepinned(message.guild, "transaction-log", "435455324439183370", {embed: embedoutput});
+      updatepinned(message.guild, "transaction-log", "465131718404210698", {embed: embedoutput});
     } else
     if(message.embeds[0].description && message.embeds[0].description.includes("has gifted") && message.channel.id === getchannelfromname(message.guild, "transaction-log").id) {
       message.delete(10000);
@@ -1711,21 +1712,30 @@ function addplaying(message, args, command, argument, server) {
     } else {
       try {
         data = JSON.parse(body);
-        for(let i = 0; i < args.length; i++) {
-          for(let j = 0; j < data.length; j++) {
+        for(let i = 0; i < args.length; i++) { //for every new name added
+          let maxboolean = false;
+          for(let j = 0; j < data.length; j++) { //check if exists on lichess player listing
             if(data[j].id.toLowerCase() === args[i].toLowerCase()) {
               let killboolean = false;
-              for(let k = 0; k < server.getplaying[message.channel.id].length; k++) {
-                if(server.getplaying[message.channel.id][k] === data[j].id) killboolean = true;
+              if(players[message.channel.id]) { //check if already recorded
+                for(let k = 0; k < players[message.channel.id].length; k++) {
+                  if(players[message.channel.id][k] === data[j].id) killboolean = true;
+                }
               };
-              if(killboolean) break;
-              if(newplayers[0]) newplayers.push(data[j].id);
-              else newplayers[0] = data[j].id;
+              if(killboolean) break; //if so nevermind
+              if(players.length + newplayers.length < 11) {
+                if(newplayers[0]) newplayers.push(data[j].id); //if not add it
+                else newplayers[0] = data[j].id;
+              } else {
+                maxboolean = true; //but if already more than 10 added, send order to stop
+              };
               data.shift();
               break;
             };
-          }
+          };
+          if(maxboolean) break; //actually stop
         };
+        if(maxboolean) senderrormessage(message.channel, `Limit exceeded! There are already $**{players.length + newplayers.length}** names being tracked.`); //let user know
         let pnembed = {};
         pnembed.title = getemojifromname("lichess") + " Added new tracking players on Lichess.org";
         pnembed.description = "";
@@ -1740,6 +1750,18 @@ function addplaying(message, args, command, argument, server) {
       }
     }
   })
+};
+
+function listplaying(message, server) {
+  let pnembed = {};
+  let players = server.getplaying[message.channel.id] || [];
+  pnembed.title = getemojifromname("lichess") + " " + message.channel.name + " players tracked on Lichess.org";
+  console.log(players);
+  for(let i = 0; i < players.length; i++) {
+    players[i] = "[" + players[i] + "](" + config.lichessProfileURL.replace("|", players[i]) + ")";
+  };
+  pnembed.description = (players || []).join("\n");
+  if(pnembed.description) embedsender(message.channel, pnembed);
 };
 
 function removeplaying(message, args, command, argument, server) {
@@ -1766,9 +1788,9 @@ function removeplaying(message, args, command, argument, server) {
   DataManager.setGuildData(server);
 };
 
-function nowplaying(server) { 
+function nowplaying(server, sendmessage) { 
   let players = server.getplaying || {};
-  for(let channelid in players) if(players[channelid]) getplaying(client.channels.get(channelid), players[channelid]);
+  for(let channelid in players) if(players[channelid]) getplaying(client.channels.get(channelid), players[channelid], sendmessage);
 };
 
 function checkplaying(message, args, command, argument) {
@@ -1781,7 +1803,7 @@ function checkplaying(message, args, command, argument) {
   getplaying(message.channel, args);
 };
 
-function getplaying(channel, players) {
+function getplaying(channel, players, sendmessage) {
   let url = LICHESS_STATUS_URL + players.join(",");
   let data = {};
   console.log(url);
@@ -1800,13 +1822,13 @@ function getplaying(channel, players) {
           let username = data[i].id;
           if(getplayingtimeout[username] && !data[i].online) {
             getplayingtimeout[username].online++;
-            if(getplayingtimeout[username].online++ >= 2) delete getplayingtimeout[username];
+            if(getplayingtimeout[username].online++ >= 4) delete getplayingtimeout[username];
           } else
           if(getplayingtimeout[username] && !data[i].playing) {
             getplayingtimeout[username].playing++;
-            if(getplayingtimeout[username].playing++ >= 5) delete getplayingtimeout[username];
+            if(getplayingtimeout[username].playing++ >= 12) delete getplayingtimeout[username];
           } else
-          if(!getplayingtimeout[username] && data[i].playing) {
+          if((!getplayingtimeout[username] || sendmessage) && data[i].playing) {
             getplayingtimeout[username] = {
               "lastfoundplaying": Date.now(),
               "online": 0,
@@ -2955,16 +2977,25 @@ function tratinghandler(message, args, command, argument) {
   }
 }
 
-function tlbhandler(message, args, command, argument) {
-  let tally = DataManager.getData();
+function tlbhandler(message, page) {
+  let guild = message.guild;
+  let server = DataManager.getGuildData(guild.id);
+  let args = message.content.slice(server.prefixes.prefix.length).match(messageSplitRegExp);
+  let command = args.shift().toLowerCase();
+  let argument = message.content.slice(command.length + server.prefixes.prefix.length).trim();
   let arrdatasort = [];
+  let tally = DataManager.getData();
   for(let i = 0; i < tally.length; i++) {
-    arrdatasort[i] = {};
-    arrdatasort[i].id = tally[i].id;
-    arrdatasort[i].username = tally[i].username;
-    arrdatasort[i].triviarating = tally[i].triviarating;
-    arrdatasort[i].triviagames = tally[i].triviagames;
-    arrdatasort[i].triviaprovisional = tally[i].triviaprovisional;
+    if(tally[i].triviagames && tally[i].triviagames > 0) {
+      let object = {};
+      object.id = tally[i].id;
+      object.username = tally[i].username;
+      object.triviarating = tally[i].triviarating;
+      object.triviagames = tally[i].triviagames;
+      object.triviaprovisional = tally[i].triviaprovisional;
+      if(arrdatasort[0]) arrdatasort.push(object);
+      else arrdatasort[0] = object;
+    }
   };
   arrdatasort = arrdatasort.sort(function compare(a, b) {
     return (b.triviarating || 1500) - (a.triviarating || 1500);
@@ -3027,9 +3058,10 @@ function triviarating(message) {
     let totalScore = 0;
     let tally = DataManager.getData();
     for(let i = 0; i < args.length; i++) {
-      let desArray = args[i].split(' ');
+      let desArray = args[i].split(' '); 
       let name = args[i].split("*").join("").split(/ +/g).shift();
       let user = getuser(message.guild, name);
+      console.log(user.username);
       let dbuser = getdbuserfromuser(user);
       let currentRating = dbuser.triviarating || 1500;
       let successNumber = Math.pow(10, (currentRating - initialRating) / ratingSpread);
@@ -3046,12 +3078,12 @@ function triviarating(message) {
       let successNumber = Math.pow(10, (currentRating - initialRating) / ratingSpread);
       if(runOnce === true) {
         if(desArray[2] >= 10) {
+          runOnce = false;
           continueProgram = true;
           runOnce = false;
         } else
         if(desArray[2] < 10) {
           continueProgram = false;
-          runOnce = false;
           break;
         }
       };
@@ -3059,24 +3091,16 @@ function triviarating(message) {
       let estimatedScore = successNumberShare * totalScore;
       let newRating = Math.max(50 - (dbuser.triviagames || 0) * 3, 10) * (desArray[2] - estimatedScore);
       let theRating = Number(newRating) + Number(currentRating);
-      if(Math.round(newRating) < 0) {
-        var sign = "";
-      } else
-      if(Math.round(newRating) === 0) {
-        var sign = "";
-      } else {
-        var sign = "+";
-      }
+      let sign = "";
+      if(Math.round(newRating) > 0) sign = "+";
       let ratingmsg = `**${name}** ${Math.round(theRating)}${(dbuser.triviagames || 0) < 10 ? "?" : ""} (${sign}${Math.round(newRating)})`;
       allString.push(ratingmsg);
       tally[dbindex].triviarating = Math.round(theRating);
-      tally[dbindex].triviagames++;
-      if(tally[dbindex].triviagames >= 10 && !tally[dbindex].triviaprovisional) {
-        tally[dbindex].triviaprovisional = true;
-      } else
-      if(tally[dbindex].triviaprovisional !== false) {
-        tally[dbindex].triviaprovisional = false;
-      };
+      if(tally[dbindex].triviagames) tally[dbindex].triviagames++;
+      else tally[dbindex].triviagames = 1;
+      if(!!tally[dbindex].triviagames && tally[dbindex].triviagames >= 10) tally[dbindex].triviaprovisional = true;
+      else tally[dbindex].triviaprovisional = false;
+      console.log(tally[dbindex].triviaprovisional)
     };
     DataManager.setData(tally);
     if(continueProgram) {
@@ -3133,8 +3157,9 @@ function triviareaction(message) {
   if(name.length === 6) {payoutmsg[0] = `.give 8 **` + name[0] + `**`}
   payoutmsg.push(`.give ${claimoptions[name.length]} **housebank#5970**`);
 
-  for(let i = 0; i < name.ceiling + 1;i++) {
-    payoutaggregate +=  payoutmsg[i] + (i < payoutmsg.length -1 ? `\n` : ``)}
+  for(let i = 0; i < name.ceiling + 1; i++) {
+    payoutaggregate +=  payoutmsg[i] + (i < payoutmsg.length -1 ? `\n` : ``)
+  };
   if(name.length < 2) {
     payoutaggregate = `.give 17 **housebank#5970**`
   };
@@ -3326,7 +3351,7 @@ function returnmessagefromid(message, args, command, argument, server) {
 };
 
 function getmemberroles(member) {
-  var rolelist = member.roles.map(role => role.name)
+  var rolelist = (member.roles || []).map(role => role.name)
   return rolelist;  
 };
 
