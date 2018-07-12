@@ -948,6 +948,7 @@ function prefixfunctions(message, args, command, argument, server) {
       senderrormessage(message.channel, "Invalid FEN!");
       return;
     };
+    let fenargs = args.slice(0, 7);
     let threecheckRegex = /\+([0-3])\+([0-3])/;
     let checks = args[args.length-1].match(threecheckRegex);
     let threeCheck = !!checks;
@@ -960,15 +961,17 @@ function prefixfunctions(message, args, command, argument, server) {
       args[0] += checks;
       args.pop();
     }
-    if (args.length < 6) 
-      args = args.concat("0", "1");
-    let fenargs = args.slice(0, 6);
    
-    let type = args[0].occurrences("/") === 8 ? "crazyhouse" : "chess";
+    let haspocket = (args[0].occurrences("/") === 8);
+    let type;
     if (threeCheck)
       type = "threecheck";
+    else if (haspocket)
+      type = "crazyhouse";
+    else
+      type = "chess";
     let inhand = "";
-    if(type === "crazyhouse") {
+    if(haspocket) {
       inhand = args[0].split("/").splice(-1, 1)[0] + " ";
       args[0] = (args[0] + " ").replace("/" + inhand, "");
     };
