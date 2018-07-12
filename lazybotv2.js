@@ -2,13 +2,12 @@ const Discord = require("discord.js");
 const http = require('http');
 const express = require('express');
 const request = require('request');
-const client = new Discord.Client();
 const EventEmitter = require('events');
 class MyEmitter extends EventEmitter {}
+const client = new Discord.Client();
 const myEmitter = new MyEmitter();
 const emojiListener = new MyEmitter();
 const app = express();
-const LICHESS_STATUS_URL = "https://lichess.org/api/users/status?ids="
 //const tesseract = require('tesseract.js');
 
 require("./guildconfig.json");
@@ -34,7 +33,7 @@ const events = {
   "getsourcefromtitle": getsourcefromtitle,
   "getonlinemembers": getonlinemembers,
   "httpboolean": gethttpboolean
-}
+};
 const DataManagerConstructor = require("./datamanager.js");
 const DataManager = new DataManagerConstructor("./db.json", "./guildconfig.json");
 const LeaderboardConstructor = require("./leaderboard.js");
@@ -42,10 +41,6 @@ const TrackerConstructor = require("./tracker.js");
 let tracker = new TrackerConstructor(events);
 const leaderboard = new LeaderboardConstructor(events);
 const messageSplitRegExp = /[^\s]+/gi;
-const FEN_API_URL = "https://www.chess.com/dynboard";
-const LICHESS_ANALYSIS_FEN_URL = "https://lichess.org/analysis?fen=";
-const LICHESS_CRAZYHOUSE_FEN_URL = "https://lichess.org/analysis/crazyhouse/";
-const LICHESS_THREECHECK_FEN_URL = "https://lichess.org/analysis/threeCheck/";
 var bouncerbot;
 var nadekobot;
 var harmonbot;
@@ -77,12 +72,12 @@ client.on("ready", () => {
       console.log(`Loaded client server ${guild.name} in ${Date.now() - reboot}ms`)
     }
   };
-  bouncerbot = client.users.get(config.ids.bouncer);
-  console.log(bouncerbot ? `Noticed bot user ${bouncerbot.tag} in ${Date.now() - reboot}ms` : `Bouncer#8585 is not online!`);
-  nadekobot = client.users.get(config.ids.nadeko);
-  console.log(nadekobot ? `Noticed bot user ${nadekobot.tag} in ${Date.now() - reboot}ms` : `Nadeko#6685 is not online!`);
-  harmonbot = client.users.get(config.ids.harmon);
-  console.log(harmonbot ? `Noticed bot user ${harmonbot.tag} in ${Date.now() - reboot}ms` : `Harmonbot#4049 is not online!`);
+  bouncerbot = client.users.get(config.ids.bouncer) || {"id": ""};
+  console.log(bouncerbot.id ? `Noticed bot user ${bouncerbot.tag} in ${Date.now() - reboot}ms` : `Bouncer#8585 is not online!`);
+  nadekobot = client.users.get(config.ids.nadeko) || {"id": ""};
+  console.log(nadekobot.id ? `Noticed bot user ${nadekobot.tag} in ${Date.now() - reboot}ms` : `Nadeko#6685 is not online!`);
+  harmonbot = client.users.get(config.ids.harmon)|| {"id": ""};
+  console.log(harmonbot.id ? `Noticed bot user ${harmonbot.tag} in ${Date.now() - reboot}ms` : `Harmonbot#4049 is not online!`);
   for(let i = 0; i < config.ids.owner.length; i++) {
     let owner = client.users.get(config.ids.owner[i])
     if(owner) {
@@ -287,9 +282,7 @@ emojiListener.on("false", (quoteinfo) => {
 
 client.on("message", (message) => { //command handler
   if(message.author.id === client.user.id) return;
-  if(message.content) {
-    message.content = message.content.replace(/[\u200B-\u200D\uFEFF]/g, '').replace("’", "'").replace("…", "...").replace("“", "\"").replace("”", "\"");
-  };
+  if(message.content) message.content = message.content.replace(/[\u200B-\u200D\uFEFF]/g, '').replace("’", "'").replace("…", "...").replace("“", "\"").replace("”", "\"");
   if(message.channel.type === "dm" || message.channel.type === "group") {
     if(message.author.bot) return;
     DMfunctions(message);
@@ -418,8 +411,8 @@ client.on("presenceUpdate", (oldMember, newMember) => {
 
 function nadekoprefixfunctions(message, args, command, argument, server) {
 
+  if(command === "award" && message.author.id === "392031018313580546") message.delete();
   if(command === "buy") buyhandler(message, args, command, argument, server);
-
   if(command === "typeadd") typeadd(message, args, command, argument, server);
 
   if(command === "newpuzzle") {
@@ -744,7 +737,7 @@ function nadekoprefixfunctions(message, args, command, argument, server) {
 };
 
 function prefixfunctions(message, args, command, argument, server) {
-  if(command === "nowplaying") nowplaying(server, true);
+  if(command === "nowplaying") nowplaying(DataManager.getGuildData(message.guild.id), true);
   if(command === "listplaying") listplaying(message, server);
   if(command === "addplaying") addplaying(message, args, command, argument, server); 
   if(command === "removeplaying") removeplaying(message, args, command, argument, server);
@@ -943,7 +936,7 @@ function prefixfunctions(message, args, command, argument, server) {
     }
   } else
 
-  if(command === "fen") {
+ if(command === "fen") {
     if(args.length < 4 || (args[1].toLowerCase() !== "w" && args[1].toLowerCase() !== "b") || !args[2].toLowerCase().match(/^[kq-]+$/g)) {
       senderrormessage(message.channel, "Invalid FEN!");
       return;
@@ -953,9 +946,9 @@ function prefixfunctions(message, args, command, argument, server) {
     let checks = args[args.length-1].match(threecheckRegex);
     let threeCheck = !!checks;
     if (checks) {
-      wchecks = parseInt(checks[1]);
-      bchecks = parseInt(checks[2]);
-      checks = "K".repeat(wchecks) + "k".repeat(bchecks);
+      let wchecks = parseInt(checks[1]);
+      let bchecks = parseInt(checks[2]);
+      let checks = "K".repeat(wchecks) + "k".repeat(bchecks);
       if (args[0].occurrences("/") < 8)
         args[0] += "/";
       args[0] += checks;
@@ -986,14 +979,15 @@ function prefixfunctions(message, args, command, argument, server) {
       toMove = "White to move.";
     };
     inhand += (type === "crazyhouse" ? flip : "");
-    let imageUrl = FEN_API_URL +
+    let imageUrl = config.url.fen.board.replace("|",
       "?fen=" + encodeURIComponent(fen) +
       "&board=" + config.fenBoard +
       "&piece=" + config.fenBoardPieces +
       "&coordinates=" + config.fenBoardCoords +
       "&size=" + config.fenBoardSize +
       "&flip=" + flip +
-      "&ext=.png"; //make discord recognise an image
+      "&ext=.png"
+    ); //make discord recognise an image
     let lichessUrl;
     if (type === "chess")
       lichessUrl = LICHESS_ANALYSIS_FEN_URL + encodeURIComponent(fen);
@@ -1007,6 +1001,7 @@ function prefixfunctions(message, args, command, argument, server) {
       };
     });
   } else
+
 
   if(command === "membercount") {
     let tally = DataManager.getData();
@@ -1686,7 +1681,7 @@ function prefixfunctions(message, args, command, argument, server) {
 function botfunctions(message, server) {
   if((message.author.id === bouncerbot.id || message.author.id === nadekobot.id) && message.embeds.length !== 0 && message.embeds[0].description) {
     if(message.embeds[0] && message.embeds[0].author && message.embeds[0].title) {
-      triviareaction(message);
+      //triviareaction(message);
       triviarating(message);
     };
     // pingsubs(message);
@@ -1729,7 +1724,7 @@ function addplaying(message, args, command, argument, server) {
   };
   let newplayers = [];
   let players = server.getplaying || {};
-  let url = LICHESS_STATUS_URL + args.join(",");
+  let url = config.url.lichess.status.replace("|", args.join(","));
   let data = {};
   console.log(url);
   request.get(url, (error, response, body) => {
@@ -1750,7 +1745,7 @@ function addplaying(message, args, command, argument, server) {
                 }
               };
               if(killboolean) break; //if so nevermind
-              if(players[message.channel.id].length + newplayers.length < 11) {
+              if(players[message.channel.id].length + 1 < 11) {
                 if(newplayers[0]) newplayers.push(data[j].id); //if not add it
                 else newplayers[0] = data[j].id;
               } else {
@@ -1785,7 +1780,7 @@ function listplaying(message, server) {
   pnembed.title = getemojifromname("lichess") + " " + message.channel.name + " players tracked on Lichess.org";
   console.log(players);
   for(let i = 0; i < players.length; i++) {
-    players[i] = "[" + players[i] + "](" + config.lichessProfileURL.replace("|", players[i]) + ")";
+    players[i] = "[" + players[i] + "](" + config.url.lichess.profile.replace("|", players[i]) + ")";
   };
   pnembed.description = (players || []).join("\n");
   if(pnembed.description) embedsender(message.channel, pnembed);
@@ -1806,12 +1801,13 @@ function removeplaying(message, args, command, argument, server) {
     if(players[message.channel.id]) for(let j = 0; j < players[message.channel.id].length; j++) {
       if(players[message.channel.id][j].toLowerCase() === args[i].toLowerCase()) {
         pnembed.description += `[${args[i].toLowerCase()}](https://lichess.org/@/${args[i].toLowerCase()}/tv)\n`;
-        players[message.channel.id].clean(j);
+        players[message.channel.id].remove(j);
         break;
       };
     };
   };
   if(pnembed.description) embedsender(message.channel, pnembed);
+  server.getplaying = players;
   DataManager.setGuildData(server);
 };
 
@@ -1831,7 +1827,7 @@ function checkplaying(message, args, command, argument) {
 };
 
 function getplaying(channel, players, sendmessage) {
-  let url = LICHESS_STATUS_URL + players.join(",");
+  let url = config.url.lichess.status.replace("|", players.join(","));
   let data = {};
   console.log(url);
   request.get(url, (error, response, body) => {
@@ -2109,7 +2105,6 @@ function parseLeaderboard(message, page) {
     }
   }
   let sourcevariants = source[1] + "variants";
-  let sourceProfileURL = source[1] + "ProfileURL";
   let active = message.content.includes("active") ? true : false;
   let [m, n] = [-1, -1];
   let emoji = "";
@@ -2143,7 +2138,7 @@ function parseLeaderboard(message, page) {
   let array = [];
   for(let i = 0; i < 10; i++) if(leaderboardy.list[i + 10 * page]) {
     array[i] = [];
-    array[i][0] = "[" + leaderboardy.list[i + 10 * page].username + `](${(config[sourceProfileURL].replace("|", leaderboardy.list[i + 10 * page].source))}) ` + leaderboardy.list[i + 10 * page].rating;
+    array[i][0] = "[" + leaderboardy.list[i + 10 * page].username + `](${(config.url[source[1]].profile.replace("|", leaderboardy.list[i + 10 * page].source))}) ` + leaderboardy.list[i + 10 * page].rating;
   };
   let leaderboardembed = getleaderboard(array, page, false);
   leaderboardembed.title = getemojifromname(variant[4]) + ` House Rankings on ${source[0]} for${active ? "active ": " "}${variant[0]} players`;
@@ -3088,8 +3083,7 @@ function triviarating(message) {
       let desArray = args[i].split(' '); 
       let name = args[i].split("*").join("").split(/ +/g).shift();
       let user = getuser(message.guild, name);
-      console.log(user.username);
-      let dbuser = getdbuserfromuser(user);
+      let dbuser = getdbuserfromuser(user) || { "triviarating": 1500  };
       let currentRating = dbuser.triviarating || 1500;
       let successNumber = Math.pow(10, (currentRating - initialRating) / ratingSpread);
       totalSuccessNumber += successNumber;
@@ -3100,6 +3094,7 @@ function triviarating(message) {
       let name = args[i].split("*").join("").split(/ +/g).shift();
       let user = getuser(message.guild, name);
       let dbuser = getdbuserfromuser(user);
+      if(!dbuser) break;
       let dbindex = getdbindexfromdbuser(dbuser);
       let currentRating = dbuser.triviarating || 1500;
       let successNumber = Math.pow(10, (currentRating - initialRating) / ratingSpread);
@@ -3127,7 +3122,6 @@ function triviarating(message) {
       else tally[dbindex].triviagames = 1;
       if(!!tally[dbindex].triviagames && tally[dbindex].triviagames >= 10) tally[dbindex].triviaprovisional = true;
       else tally[dbindex].triviaprovisional = false;
-      console.log(tally[dbindex].triviaprovisional)
     };
     DataManager.setData(tally);
     if(continueProgram) {
@@ -3140,11 +3134,11 @@ function triviarating(message) {
       let triviaembed = {};
       triviaembed.title = "**Trivia Update**";
       triviaembed.description = "__**Only 10+ Point Games Are Rated**__";
-      embedsender(message.channel, triviaembed);
+      setTimeout(embedsender(message.channel, triviaembed), 5000);
     }
   }
 };
-
+/*
 function triviareaction(message) {
   var payoutoptions = [6,4,2,0];
   var claimoptions = [null,17,13,11,8,5,0];
@@ -3196,7 +3190,7 @@ function triviareaction(message) {
   embedoutput.description = payoutaggregate,
   embedoutput.footer = embedfooter (`Please remember to check for ties.`)
   embedsender(message.channel, embedoutput);
-}
+}*/
 
 function clearvar () {
   embedoutput = {};
@@ -3295,15 +3289,13 @@ function getuserfromaliases(searchstring) {
 }
 
 function getmemberfromuser(guild, user) {
-  let member = guild.members.find(member => user.id === member.id)
-  if(!member) {return} else {return member};
+  let member = guild.members.find(member => user.id === member.id) || "";
+  return member;
 };
 
 function getemojifromname(name) {
-  if(name) {
-    let emoji = client.emojis.find("name", name);
-    return emoji;
-  } else return;
+  let emoji = name ? client.emojis.find("name", name) : "";
+  return emoji;
 };
 
 function messagecount(message, user, update) {
@@ -3970,8 +3962,7 @@ function parsesourceratingdata(dbuser, source, rankingobject) {
 
 function parsesourceprofiles(dbuser, source) {
   var userprofile = "";
-  let sourceProfileURL = source + "ProfileURL";
-  userprofile = `[${dbuser[source]}](${(config[sourceProfileURL].replace("|", dbuser[source]))})`;
+  userprofile = `[${dbuser[source]}](${(config.url[source].profile.replace("|", dbuser[source]))})`;
   return userprofile;
 };
 
