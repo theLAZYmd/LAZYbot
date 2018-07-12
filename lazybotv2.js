@@ -45,6 +45,7 @@ const messageSplitRegExp = /[^\s]+/gi;
 const FEN_API_URL = "https://www.chess.com/dynboard";
 const LICHESS_ANALYSIS_FEN_URL = "https://lichess.org/analysis?fen=";
 const LICHESS_CRAZYHOUSE_FEN_URL = "https://lichess.org/analysis/crazyhouse/";
+const LICHESS_THREECHECK_FEN_URL = "https://lichess.org/analysis/threeCheck/";
 var bouncerbot;
 var nadekobot;
 var harmonbot;
@@ -943,12 +944,29 @@ function prefixfunctions(message, args, command, argument, server) {
   } else
 
   if(command === "fen") {
-    if(args.length < 6 || (args[1].toLowerCase() !== "w" && args[1].toLowerCase() !== "b") || !args[2].toLowerCase().match(/^[kq-]+$/g) || (isNaN(parseInt(args[4])) || args[4] === "-") || ((isNaN(parseInt(args[5])) || args[4] === "-"))) {
+    if(args.length < 4 || (args[1].toLowerCase() !== "w" && args[1].toLowerCase() !== "b") || !args[2].toLowerCase().match(/^[kq-]+$/g)) {
       senderrormessage(message.channel, "Invalid FEN!");
       return;
     };
+    let threecheckRegex = /\+([0-3])\+([0-3])/;
+    let checks = args[args.length-1].match(threecheckRegex);
+    let threeCheck = !!checks;
+    if (checks) {
+      wchecks = parseInt(checks[1]);
+      bchecks = parseInt(checks[2]);
+      checks = "K".repeat(wchecks) + "k".repeat(bchecks);
+      if (args[0].occurrences("/") < 8)
+        args[0] += "/";
+      args[0] += checks;
+      args.pop();
+    }
+    if (args.length < 6) 
+      args = args.concat("0", "1");
     let fenargs = args.slice(0, 6);
+   
     let type = args[0].occurrences("/") === 8 ? "crazyhouse" : "chess";
+    if (threeCheck)
+      type = "threecheck";
     let inhand = "";
     if(type === "crazyhouse") {
       inhand = args[0].split("/").splice(-1, 1)[0] + " ";
@@ -964,7 +982,7 @@ function prefixfunctions(message, args, command, argument, server) {
     } else {
       toMove = "White to move.";
     };
-    inhand += (type = "crazyhouse" ? flip : "");
+    inhand += (type === "crazyhouse" ? flip : "");
     let imageUrl = FEN_API_URL +
       "?fen=" + encodeURIComponent(fen) +
       "&board=" + config.fenBoard +
@@ -973,7 +991,13 @@ function prefixfunctions(message, args, command, argument, server) {
       "&size=" + config.fenBoardSize +
       "&flip=" + flip +
       "&ext=.png"; //make discord recognise an image
-    let lichessUrl = type === "chess" ? LICHESS_ANALYSIS_FEN_URL + encodeURIComponent(fen) : LICHESS_CRAZYHOUSE_FEN_URL + truefen.replace(/\s+/g, "_");
+    let lichessUrl;
+    if (type === "chess")
+      lichessUrl = LICHESS_ANALYSIS_FEN_URL + encodeURIComponent(fen);
+    else if (type === "crazyhouse")
+      lichessUrl = LICHESS_CRAZYHOUSE_FEN_URL + truefen.replace(/\s+/g, "_");
+    else if (type === "threecheck")
+      lichessUrl = LICHESS_THREECHECK_FEN_URL + truefen.replace(/\s+/g, "_");
     request(imageUrl, function(error, response, body) {
       if(response.statusCode != "404") {
         embedsender(message.channel, getFenEmbed(imageUrl, toMove, lichessUrl, inhand))
