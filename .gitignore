@@ -15,6 +15,5 @@ alt-script/
 lazybotv2.js
 commands.json
 token.json
-db.json
 package-lock.json
 requireForce: false
