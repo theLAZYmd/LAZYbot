@@ -1,0 +1,20 @@
+$ cat .gitignore
+src/util/config.json
+node_modules/
+
+src/.vscode/
+src/.history
+src/data/dbbackup1.json
+src/data/dbbackup2.json
+src/data/dbbackup3.json
+non-project files/
+node_modules/
+alt-script/
+.history/
+.git/
+lazybotv2.js
+commands.json
+token.json
+db.json
+package-lock.json
+requireForce: false

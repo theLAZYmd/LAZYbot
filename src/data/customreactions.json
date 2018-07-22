@@ -1,0 +1,68 @@
+{
+    "314155682033041408": {
+        "text": [
+            {
+                "trigger": "!marco",
+                "reaction": "polo!",
+                "anyword": false
+            },
+            {
+                "trigger": "!ready",
+                "reaction": "I am ready!",
+                "anyword": false
+            },
+            {
+                "trigger": "!marco",
+                "reaction": "polo!",
+                "anyword": false
+            },
+            {
+                "trigger": "!owner",
+                "reaction": "theLAZYmd#2353",
+                "anyword": false
+            },
+            {
+                "trigger": "!party",
+                "reaction": ":tada:",
+                "anyword": false
+            }
+        ],
+        "emoji": [
+            {
+                "trigger": "lazy",
+                "reaction": "lazy",
+                "anyword": true
+            },
+            {
+                "trigger": "cubes",
+                "reaction": "cubes",
+                "anyword": true
+            },
+            {
+                "trigger": "obi",
+                "reaction": "obi",
+                "anyword": true
+            },
+            {
+                "trigger": "feelsbadman",
+                "reaction": "feelsbadman",
+                "anyword": false
+            },
+            {
+                "trigger": "seemsgood",
+                "reaction": "seemsgood",
+                "anyword": false
+            },
+            {
+                "trigger": "lul",
+                "reaction": "lul",
+                "anyword": true
+            },
+            {
+                "trigger": "ban",
+                "reaction": "banhammer",
+                "anyword": true
+            }
+        ]
+    }
+}
