@@ -455,7 +455,9 @@ class Vote extends Parse {
         let vote = args[i].match(/(?:\[([1-9]?)\]\s([a-zA-Z0-9_\s]+#(?:[0-9]{4})|Write-In|Blank Vote))/);
         if(vote[1]) {
           vote[1] = parseInt(vote[1]);
-          let user = this.Search.get(vote[2]);
+          let user = vote[2] === "Blank Vote" ? {
+            "id": "blank"
+          } : this.Search.get(vote[2]);
           if(user) {
             this.votingData[this.id][0] = Date.now();
             this.votingData[this.id][vote[1]] = user.id;
