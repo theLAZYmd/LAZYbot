@@ -1,0 +1,768 @@
+[
+  {
+    "aliases": [
+        "profile"
+    ],
+    "description": "Generates a profile for the user summoned. Has customisable elements through the commands `${generic}finger` and `${generic}asl`. Supports linking to lichess, chess.com, and bughousetest.com accounts on second page.",
+    "usage": [
+        "profile",
+        "profile theLAZYmd",
+        "profile 338772451565502474",
+        "profile littleplotkin"
+    ],
+    "module": "Profile",
+    "file": "profile",
+    "method": "get",
+    "arguments": [],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
+        "asl"
+    ],
+    "description": "Sets user age, sex, and location information. Requires three arguments. Use `-` to set null. Simply write `clear` to set all to null. Information appears on `${generic}profile`.",
+    "usage": [
+        "asl",
+        "asl 18 male Toulouse",
+        "asl - female -",
+        "asl clear"
+    ],
+    "module": "Profile",
+    "file": "asl",
+    "method": "run",
+    "arguments": [],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
+        "setusername"
+    ],
+    "description": "Sets bot client's username to a the single argument given.",
+    "usage": [
+        "setusername LAZYbot"
+    ],
+    "module": "Administration",
+    "file": "set",
+    "method": "username",
+    "arguments": ["args"],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
+        "setprefix"
+    ],
+    "description": "Sets the default prefix for commands for this server to the argument given. Prefixes are followed by spaces.",
+    "usage": [
+        "setprefix =="
+    ],
+    
+    "module": "Administration",
+    "file": "set",
+    "method": "genericprefix",
+    "arguments": ["argument"],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
+        "setprefix"
+    ],
+    "description": "Sets the prefix for commands emulating Nadeko comands for this server. Prefixes are followed by spaces.",
+    "usage": [
+        "setprefix !"
+    ],
+    
+    "module": "Administration",
+    "file": "set",
+    "method": "nadekoprefix",
+    "arguments": ["argument"],
+    "prefix": "nadeko"
+  },
+  {
+    "aliases": [
+        "UStoDecimal",
+        "toDecimal"
+    ],
+    "description": "Takes betting odds in the form of US numbers and converts them to Decimal odds.",
+    "usage": [
+        "UStoDecimal -160"
+    ],
+    
+    "module": "Utility",
+    "file": "conversion",
+    "method": "todecimal",
+    "arguments": ["args"],
+    "prefix": "nadeko"
+  },
+  {
+    "aliases": [
+        "DecimaltoUS",
+        "toUS"
+    ],
+    "description": "Takes betting odds in the form of decimal numbers and converts them to the American odds system.",
+    "usage": [
+        "DecimaltoUS 1.7"
+    ],
+    "module": "Utility",
+    "file": "conversion",
+    "method": "tous",
+    "arguments": ["args"],
+    "prefix": "nadeko"
+  },
+  {
+    "aliases": [
+        "fetch",
+        "fetchmessage"
+    ],
+    "description": "Fetches a message from that channel from the id. Enable developer mode, then click on message options get its id. Have second argument of channel name if desired message is not in that channel.",
+    "usage": [
+        "fetch 468744017912528917",
+        "fetch 468727229359325184 general"
+    ],
+    "module": "Utility",
+    "file": "utility",
+    "method": "fetch",
+    "arguments": ["message", "args"],
+    "prefix": "nadeko"
+  },
+  {
+    "aliases": [
+      "addcustomreaction",
+      "acr"
+    ],
+    "description": "Addes add a new text custom reaction to react to keywords in new messages.",
+    "usage": [
+      "acr marco? polo!",
+      "acr party :tada:"
+    ],
+    "module": "Custom Reactions",
+    "file": "customreactions",
+    "method": "add",
+    "arguments": ["args", "argument"],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
+      "editcustomreaction",
+      "ecr"
+    ],
+    "description": "Edits an existing text custom reaction.",
+    "usage": [
+      "ecr party It's party time!"
+    ],
+    "module": "Custom Reactions",
+    "file": "customreactions",
+    "method": "edit",
+    "arguments": ["args", "argument"],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
+      "togglecustomreaction",
+      "tcr"
+    ],
+    "description": "Toggles whether an existing text reaction is triggered from a keyword anywhere in the message.",
+    "usage": [
+      "tcr party"
+    ],
+    "module": "Custom Reactions",
+    "file": "customreactions",
+    "method": "toggle",
+    "arguments": [],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
+      "deletecustomreaction",
+      "dcr"
+    ],
+    "description": "Deletes a emssage reaction.",
+    "usage": [
+      "dcr no"
+    ],
+    "module": "Custom Reactions",
+    "file": "customreactions",
+    "method": "delete",
+    "arguments": [],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
+      "addemojireaction",
+      "aer"
+    ],
+    "description": "Addes add a new emoji to react to messages containing keywords.",
+    "usage": [
+      "aer lazy lazy"
+    ],
+    "module": "Custom Reactions",
+    "file": "customreactions",
+    "method": "add",
+    "arguments": ["args", "argument"],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
+      "editemojireaction",
+      "eer"
+    ],
+    "description": "Edits an existing emoji custom reaction.",
+    "usage": [
+      "ecr cri lul"
+    ],
+    "module": "Custom Reactions",
+    "file": "customreactions",
+    "method": "edit",
+    "arguments": ["args", "argument"],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
+      "toggleemojireaction",
+      "ter"
+    ],
+    "description": "Toggles whether an existing emoji reaction is triggered from a keyword anywhere in the message.",
+    "usage": [
+      "ter party"
+    ],
+    "module": "Custom Reactions",
+    "file": "customreactions",
+    "method": "toggle",
+    "arguments": [],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
+      "deleteemojireaction",
+      "der"
+    ],
+    "description": "Deletes an emoji reaction.",
+    "usage": [
+      "der obi"
+    ],
+    "module": "Custom Reactions",
+    "file": "customreactions",
+    "method": "delete",
+    "arguments": [],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
+      "messages",
+      "messagecount"
+    ],
+    "description": "Returns number of messages for a given user. If none provided, defaults to self.",
+    "usage": [
+      "messages",
+      "messages littleplotkin"
+    ],
+    "module": "Profile",
+    "file": "messagecount",
+    "method": "get",
+    "arguments": ["args", "user"],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
+      "updatemessages",
+      "updatemessagecount"
+    ],
+    "description": "Edits the number of messages for a given user. If none provided, defaults to self.",
+    "usage": [
+      "updatemessages 63430",
+      "updatemessgecount obi 42000"
+    ],
+    "module": "Profile",
+    "file": "messagecount",
+    "method": "update",
+    "arguments": ["user"],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
+      "uptime",
+      "sincebleepbloop"
+    ],
+    "description": "Returns the time elapsed since last bot restart. Note that host server glitch.com auto-restarts every 12 hours.",
+    "usage": [
+      "uptime"
+    ],
+    "module": "Utility",
+    "file": "utility",
+    "method": "uptime",
+    "arguments": [],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
+      "award"
+    ],
+    "description": "Awards currency through the Nadeko bot. Bot owner only!",
+    "usage": [
+      "award 100 Kyle"
+    ],
+    "module": "Currency",
+    "file": "award",
+    "method": "on",
+    "arguments": [],
+    "prefix": "nadeko"
+  },
+  {
+    "aliases": [
+      "puzzleadd"
+    ],
+    "description": "Adds a new puzzle to be presented formally to the channel and added to a temporary db of puzzles.",
+    "usage": [
+      "puzzleadd https://lichess.org/@/puzzlename.jpg",
+      "puzzleadd [with image attached]"
+    ],
+    "module": "Chess",
+    "file": "puzzle",
+    "method": "add",
+    "arguments": ["message", "argument", "author", "channel"],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
+      "puzzles"
+    ],
+    "description": "View currently active puzzles. Puzzles stay active for a maximum of 12 hours or until they are closed by the author.",
+    "usage": [
+      "puzzles"
+    ],
+    "module": "Chess",
+    "file": "puzzle",
+    "method": "view",
+    "arguments": [],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
+      "puzzle"
+    ],
+    "description": "Fetches an active puzzle by its index. If no arguments provided, displays all puzzles and awaits index input.",
+    "usage": [
+      "puzzle",
+      "puzzle 1"
+    ],
+    "module": "Chess",
+    "file": "puzzle",
+    "method": "view",
+    "arguments": [],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
+      "puzzleclose"
+    ],
+    "description": "Closes an active puzzle by index. Only possible if you created the puzzle.",
+    "usage": [
+      "puzzleclose 1"
+    ],
+    "module": "Chess",
+    "file": "puzzle",
+    "method": "view",
+    "arguments": [],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
+      "lb",
+      "leaderboard"
+    ],
+    "description": "Posts the leaderboard for House Members of that variant on a given source. Based on linked accounts through the ${generic}lichess and ${generic}chesscom commands.",
+    "usage": [
+      "lb",
+      "lb zh chesscom",
+      "lb bug"
+    ],
+    "module": "Chess",
+    "file": "leaderboard",
+    "method": "getVariant",
+    "arguments": [],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
+      "tm",
+      "testingmode"
+    ],
+    "description": "Toggles testing mode, which disables LAZYbot and Bouncer's permissions in the #spam and #devs channels. Specify 'true false' to just apply to one or the other.",
+    "usage": [
+      "tm",
+      "tm true false",
+      "tm false true"
+    ],
+    "module": "Utility",
+    "file": "states",
+    "method": "tm",
+    "arguments": ["args"],
+    "prefix": "nadeko"
+  },
+  {
+    "aliases": [
+      "bcp",
+      "botcontingencyplan"
+    ],
+    "description": "Switches whether Nadeko or Bouncer has 'Bot-in-Use' role (full permission for server). To be used when Bouncer is offline, triggers automaticalyl.",
+    "usage": [
+      "bcp"
+    ],
+    "module": "Utility",
+    "file": "states",
+    "method": "bcp",
+    "arguments": [],
+    "prefix": "nadeko"
+  },
+  {
+    "aliases": [
+      "finger"
+    ],
+    "description": "Sets finger message. Can be viewed through `${generic}profile` or `${generic}finger`. Use `${generic}finger clear` to clear finger message. Otherwise just type `${generic}finger [your message here]` to set your message. Feel free to advertise your favourite things. Max limit of 500 characters",
+    "usage": [
+      "finger",
+      "finger chuckmoulton",
+      "finger clear",
+      "finger twitch.tv/thelazymd"
+    ],
+    "module": "Profile",
+    "file": "finger",
+    "method": "run",
+    "arguments": ["args", "argument", "user"],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
+      "notify",
+      "tournamentnotify"
+    ],
+    "description": "Alerts the players in the chanel to a new tournament you have created. Only accessible to Bronze++ members once every hour to prevent spam.",
+    "usage": [
+      "notify https://lichess.org/tournament/Cr4NUyl2"
+    ],
+    "module": "Utility",
+    "file": "notifications",
+    "method": "run",
+    "arguments": ["args", "argument"],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
+      "fakeban",
+      "bann"
+    ],
+    "description": "A fake ban. You're not really banned. Jokes.",
+    "usage": [
+      "fb DragonMateZ"
+    ],
+    "module": "Administration",
+    "file": "ban",
+    "method": "fake",
+    "arguments": ["args"],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
+      "ban"
+    ],
+    "description": "Bans a user. Only to be used in extrenuating circumstances. First argument given is the user. Second, if provided is the number of days for which to delete their messages. Anything else is given as the reason for the ban.",
+    "usage": [
+      "ban pigeons",
+      "ban TrumpMAGA2020 7 Spamming inappropriately."
+    ],
+    "module": "Administration",
+    "file": "ban",
+    "method": "real",
+    "arguments": ["args"],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
+      "color",
+      "colour"
+    ],
+    "description": "Sets your personal role colour to anything you want. Requires you to have bought the feature using `${nadeko}shop`. A colour is anything that fits [this criteria](https://discord.js.org/#/docs/main/stable/typedef/ColorResolvable).",
+    "usage": [
+      "color #36393F",
+      "color 255, 26, 26",
+      "color NAVY_BLUE"
+    ],
+    "module": "Administration",
+    "file": "color",
+    "method": "run",
+    "arguments": ["member"],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
+      "fen"
+    ],
+    "description": "Renders a position from an fen string.",
+    "usage": [
+      "fen 8/p7/7p/1k3pp1/1P2pP2/2K1P1PP/8/8 w - - 0 41",
+      "fen r1b2rk1/ppppBp1p/7p/8/4Q3/P1q5/P1P1KPPP/R4B1R/NPBnnppn b - - 37 19",
+      "fen 5r2/pp2Q1pk/4pr1p/5p1P/3N1P2/2P1q1PK/PP6/3R4 w - - 0 1 +0+1"
+    ],
+    "module": "Chess",
+    "file": "fen",
+    "method": "run",
+    "arguments": [],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
+      "addcandidate"
+    ],
+    "description": "Adds a new eligble candidate to the ballot for upcoming elections.",
+    "usage": [
+      "addcandidate titsinablender zh"
+    ],
+    "module": "Election",
+    "file": "election",
+    "method": "candidates.add",
+    "arguments": ["args"],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
+      "generatevoters",
+      "genvoters"
+    ],
+    "description": "Registers the eligible voters to the database.",
+    "usage": [
+      "genvoters zh"
+    ],
+    "module": "Election",
+    "file": "election",
+    "method": "voters.add",
+    "arguments": ["args"],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
+      "disqualify",
+      "disqualifyvoters"
+    ],
+    "description": "Disqualifies user from voting in a channel.",
+    "usage": [
+      "disqualify zh moonenaneBETA eekarf"
+    ],
+    "module": "Election",
+    "file": "election",
+    "method": "voters.disqualify",
+    "arguments": ["args"],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
+      "getvoters",
+      "voters"
+    ],
+    "description": "Gets the list of eligble voters for a channel. To be used in #spam only.",
+    "usage": [
+      "voters zh"
+    ],
+    "module": "Election",
+    "file": "election",
+    "method": "voters.get",
+    "arguments": ["argument"],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
+      "eligible",
+      "eligibletovote"
+    ],
+    "description": "Returns if you are eligible to vote in a given channel.",
+    "usage": [
+      "eligible anti"
+    ],
+    "module": "Election",
+    "file": "election",
+    "method": "voters.eligible",
+    "arguments": ["argument"],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
+      "genballot",
+      "generateballot"
+    ],
+    "description": "Generates a mock ballot for the author for a given channel.",
+    "usage": [
+      "genballot zh"
+    ],
+    "module": "Election",
+    "file": "election",
+    "method": "ballot.run",
+    "arguments": ["args"],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
+      "InitiateElection",
+      "electioninit"
+    ],
+    "description": "Use once. Sends everybody their ballots, triggers the election boolean to begin accepting votes.",
+    "usage": [
+      "initiateElection"
+    ],
+    "module": "Election",
+    "file": "election",
+    "method": "init",
+    "arguments": [],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
+      "ConfigElection"
+    ],
+    "description": "Transfers across data for the election. Use once.",
+    "usage": [
+      "configElection"
+    ],
+    "module": "Election",
+    "file": "election",
+    "method": "config",
+    "arguments": [],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
+      "initOne"
+    ],
+    "description": "Restarts the election cycle for a single user.",
+    "usage": [
+      "initOne hauptschule"
+    ],
+    "module": "Election",
+    "file": "election",
+    "method": "res",
+    "arguments": [],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
+      "voteCount"
+    ],
+    "description": "Returns the total vote count for an ongoing election.",
+    "usage": [
+      "voteCount"
+    ],
+    "module": "Election",
+    "file": "election",
+    "method": "countnow",
+    "arguments": [],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
+      "genMockAV"
+    ],
+    "description": "Generates a mock AV array. First argument is number of candidates, second is number of voters.",
+    "usage": [
+      "genMockAV 2 15"
+    ],
+    "module": "Election",
+    "file": "election",
+    "method": "votes.gen",
+    "arguments": ["args"],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
+      "cleanVotes"
+    ],
+    "description": "Error fixing. Removes null values from election database.",
+    "usage": [
+      "cleanVotes"
+    ],
+    "module": "Election",
+    "file": "election",
+    "method": "clean",
+    "arguments": [],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
+      "consolidateVotes"
+    ],
+    "description": "Data handling. Transfers all voted for candidates to 'candidates' section and assigns them an index.",
+    "usage": [
+      "consolidateVotes"
+    ],
+    "module": "Election",
+    "file": "election",
+    "method": "consol",
+    "arguments": [],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
+      "votingClose"
+    ],
+    "description": "Ends the voting stage of an election. To be used in conjunction with ${generic}",
+    "usage": [
+      "votingClose"
+    ],
+    "module": "Election",
+    "file": "election",
+    "method": "end",
+    "arguments": [],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
+      "countVotes",
+      "beginCount"
+    ],
+    "description": "Triggers the vote count for a recent election.",
+    "usage": [
+      "consolidateVotes"
+    ],
+    "module": "Election",
+    "file": "election",
+    "method": "count",
+    "arguments": [],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
+      "parseVotes"
+    ],
+    "module": "Election",
+    "file": "election",
+    "method": "votes.parse",
+    "arguments": [],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
+      "t",
+      "trivia"
+    ],
+    "description": "Initiates new trivia game on Bouncer; begins process of registering rating on LAZYbot. Pokemon games are invalid.",
+    "usage": [
+      "t",
+      "t --timeout 5 -w 3 -q 10"
+    ],
+    "module": "Trivia",
+    "file": "trivia",
+    "method": "init",
+    "arguments": ["args"],
+    "prefix": "nadeko"
+  },
+  {
+    "aliases": [
+      "tq"
+    ],
+    "description": "Ends a trivia game on Bouncer.",
+    "usage": [
+      "tq"
+    ],
+    "module": "Trivia",
+    "file": "trivia",
+    "method": "end",
+    "arguments": [],
+    "prefix": "nadeko"
+  }
+]

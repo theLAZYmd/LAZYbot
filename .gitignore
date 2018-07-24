@@ -13,7 +13,6 @@ alt-script/
 .history/
 .git/
 lazybotv2.js
-commands.json
 token.json
 package-lock.json
 requireForce: false
