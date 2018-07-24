@@ -2,19 +2,20 @@ const Parse = require("../util/parse.js");
 const DataManager = require("../util/datamanager.js");
 const config = require("../config.json");
 
-class BotPermissions extends Parse {
+class States extends Parse {
 
   constructor(message) {
     super(message);
   }
 
   tm (args) {
+    if(this.client.user.id === config.ids.bot) return;
     if(!args || args.length !== 2) args = [true, true]; //default for selectivity not specified
     let [LAZYbot, bouncer] = [args[0] !== "false", args[1] !== "false"]; //.tm true false, evaltes to [true, false]
     this.server.states.tm = !this.server.states.tm; //invert testingmode state 
     let channels = [
-      this.Search.getChannel(this.server.channels.bot),
-      this.Search.getChannel(this.server.channels.bot2)
+      this.Search.channels.get(this.server.channels.bot),
+      this.Search.channels.get(this.server.channels.bot2)
     ];
     for(let i = 0; i < channels.length; i++) { //selective toggle is only possible when enabling
       if(LAZYbot || !this.server.states.tm) channels[i].overwritePermissions(config.ids.bot, {
@@ -36,10 +37,10 @@ class BotPermissions extends Parse {
   bcp () {
     let channel = this.channel ? this.channel : this.Search.getChannel(this.server.channels.bot);
     let members = [
-      this.Search.getMember(this.Search.get(config.ids.bouncer)), //bouncer member
-      this.Search.getMember(this.Search.get(config.ids.nadeko)) //nadeko member
+      this.Search.members.get(this.Search.get(config.ids.bouncer)), //bouncer member
+      this.Search.members.get(this.Search.get(config.ids.nadeko)) //nadeko member
     ];
-    let role = this.Search.getRole(this.server.roles.bot);
+    let role = this.Search.roles.get(this.server.roles.bot);
     let activeboolean = this.Check.role(members[1], this.server.roles.bot); //does nadeko already have the role?
     members[activeboolean ? 0 : 1].addRole(role)
     .catch(e => console.log(e));
@@ -50,4 +51,4 @@ class BotPermissions extends Parse {
 
 }
 
-module.exports = BotPermissions;
+module.exports = States;

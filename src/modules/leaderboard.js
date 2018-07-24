@@ -32,7 +32,7 @@ class Leaderboard extends Parse {
       array[i - 1][1] = (tally[i].bidamount ? tally[i].bidamount : 0) + " :cherry_blossom:" + medal;
     }; //generate standard double array used for Embed.leaderboard()
     let embed = Embed.leaderboard(array, page);
-    embed.title = `${this.Search.getEmoji("thehouse")} House Database Positions`;
+    embed.title = `${this.Search.emojis.get("thehouse")} House Database Positions`;
     embed.footer = Embed.footer(`... dbpositions to see how this all works. ${tally.length - 1} positions available.`);
     if(fromPaginator) return embed; //Constructor, method, embed, maxpages, timeout on pages
     else this.Output.paginator(this, "getDatabase", embed, Math.ceil((tally.length - 1) / 9), 30000);
@@ -74,7 +74,7 @@ class Leaderboard extends Parse {
   }
 
   getTriviaRank () {
-    this.member = this.args.length === 1 ? this.Search.getMember(this.Search.get(this.args[0])) : this.member; 
+    this.member = this.args.length === 1 ? this.Search.members.get(this.Search.users.get(this.args[0])) : this.member; 
     Embed.sender({
       title: "Trivia Rating",
       description: `**${this.dbuser.username}** ${this.dbuser.triviarating}${this.dbuser.triviaprovisional ? "" : "?"}`
@@ -82,7 +82,7 @@ class Leaderboard extends Parse {
   }
 
   getVariantRank () {
-    let member = this.args.length === 1 ? this.Search.getMember(this.Search.get(this.args[0])) : this.member;
+    let member = this.args.length === 1 ? this.Search.members.get(this.Search.users.get(this.args[0])) : this.member;
     let rankingobject = {};
     let sourceboolean = false;
     for(let i = 0; i < config.sources.length; i++) { //for every source
@@ -202,7 +202,7 @@ class Leaderboard extends Parse {
       }
     };
     let lbembed = Embed.leaderboard(array, page); //Case 2 Leaderboard: 
-    lbembed.title = `${this.Search.getEmoji(this.vlb.variant[4])} House Rankings on ${this.vlb.source[0]} for${this.vlb.active ? "active ": " "}${this.vlb.variant[0]} players`;
+    lbembed.title = `${this.Search.emojis.get(this.vlb.variant[4])} House Rankings on ${this.vlb.source[0]} for${this.vlb.active ? "active ": " "}${this.vlb.variant[0]} players`;
     return lbembed; //Constructor, method, embed, maxpages, timeout on pages
   }
     

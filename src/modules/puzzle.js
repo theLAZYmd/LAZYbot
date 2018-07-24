@@ -24,7 +24,7 @@ class Puzzle extends Parse {
     };
     if(!Puzzle.stored) Puzzle.stored[0] = puzzle;
     else Puzzle.stored.push(puzzle); //pushh it to the stored array
-    puzzle.content = this.Search.getRole("puzzles") + ""; //ping puzzles when posted
+    puzzle.content = this.Search.roles.get("puzzles") + ""; //ping puzzles when posted
     this.Output.sender(puzzle);
   }
 

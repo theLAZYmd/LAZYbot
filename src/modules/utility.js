@@ -13,7 +13,7 @@ class Utility extends Parse { //fairly miscelanneous functions
   }
 
   fetch(message, args) { //function needs a channel input
-    let channel = args.length === 2 && this.Search.getChannel(args[1]) ? this.Search.getChannel(args[1]) : message.channel; //if second argument provided, that's the channel to look in
+    let channel = args.length === 2 && this.Search.channels.get(args[1]) ? this.Search.channels.get(args[1]) : message.channel; //if second argument provided, that's the channel to look in
     let id = args[0];
     channel.fetchMessage(id)
       .then(msg => {

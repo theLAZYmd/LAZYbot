@@ -43,10 +43,10 @@ class CustomReactions extends Parse {
       };
     };
     if(foundboolean) {
-      this.message.react(this.Search.getEmoji("true"));
+      this.message.react(this.Search.emojis.get("true"));
       this.onUpdate()
     }
-    else this.message.react(this.Search.getEmoji("false"));
+    else this.message.react(this.Search.emojis.get("false"));
   }
   
   onUpdate() {
@@ -59,7 +59,7 @@ class CustomReactions extends Parse {
   }
   
   emoji () { // applies to all messages
-    this.react (this.CRData.emoji, (emojiname) => this.message.react(this.Search.getEmoji(emojiname)))
+    this.react (this.CRData.emoji, (emojiname) => this.message.react(this.Search.emojis.get(emojiname)))
   }
 
   add (args, argument) { //acr or aer
@@ -70,7 +70,7 @@ class CustomReactions extends Parse {
     };
     if(this.CRData[this._command][0]) this.CRData[this._command].push(entry);
     else this.CRData[this._command][0] = entry;
-    this.message.react(this.Search.getEmoji("tick"));
+    this.message.react(this.Search.emojis.get("tick"));
     this.onUpdate();
   }
   

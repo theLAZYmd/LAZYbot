@@ -10,8 +10,8 @@ class Profile extends Parse {
   
   get () {
     if(this.args.length === 1) { //!profile titsinablender
-      let user = this.Search.get(this.args[0]);
-      if(user) this.member = this.Search.getMember(user);
+      let user = this.Search.users.get(this.args[0]);
+      if(user) this.member = this.Search.members.get(user);
       else return this.Output.onError(`Couldn't find user!`);
     };
     //Constructor, method, embed, maxpages, timeout on pages
@@ -25,10 +25,10 @@ class Profile extends Parse {
 
   get title () {
     let title = 
-      (this.user.bot ? this.Search.getEmoji("bot") + " " : "") +
-      (this.dbuser.patron ? this.Search.getEmoji("patron") : "") +
+      (this.user.bot ? this.Search.emojis.get("bot") + " " : "") +
+      (this.dbuser.patron ? this.Search.emojis.get("patron") : "") +
       "Profile for " +
-      (this.dbuser.title ? this.Search.getEmoji(this.dbuser.title.toLowerCase()) + " " : "") + 
+      (this.dbuser.title ? this.Search.emojis.get(this.dbuser.title.toLowerCase()) + " " : "") + 
       this.user.tag;
     return title;
   }
@@ -61,7 +61,7 @@ class Profile extends Parse {
     if(this.page === 0) {
       return [
         ["a.k.a.", this.aliases, false],
-        [(this.dbuser.modverified ? " " + this.Search.getEmoji(this.dbuser.modverified[0]) : "") + "Info", this.info, true],
+        [(this.dbuser.modverified ? " " + this.Search.emojis.get(this.dbuser.modverified[0]) : "") + "Info", this.info, true],
         ["Joined Date", this.joined, this.info ? true: false],
         ["Index", this.ids, this.dbuser.messages ? true : false],
         ["Messages Sent", this.dbuser.messages.toLocaleString(), true],
@@ -76,7 +76,7 @@ class Profile extends Parse {
         let source = config.sources[i][1];
         if(this.dbuser[source]) {
           let entry = [
-            `${this.Search.getEmoji(source)} ${config.sources[i][0]}`,
+            `${this.Search.emojis.get(source)} ${config.sources[i][0]}`,
             `${Parse.Profiles(this.dbuser, source)}\n${Parse.RatingData(this.dbuser, source)}`,
             true
           ];
@@ -117,12 +117,12 @@ class Profile extends Parse {
   get info () {
     let region = "None set.";//default region sign if none found, measure of number of sources
     for(let i = 0; i < this.server.regions.length; i++) {
-      let role = this.Search.getRole(this.server.regions[i]);
+      let role = this.Search.roles.get(this.server.regions[i]);
       if(this.Check.role(this.member, role.name)) region = this.server.regions[i];
     };
     return Embed.getFields([
       ["Age: ", this.dbuser.age],
-      ["Sex: ", this.dbuser.sex ? (this.Search.getEmoji(this.dbuser.sex) ? this.Search.getEmoji(this.dbuser.sex) : this.dbuser.sex) : ""],
+      ["Sex: ", this.dbuser.sex ? (this.Search.emojis.get(this.dbuser.sex) ? this.Search.emojis.get(this.dbuser.sex) : this.dbuser.sex) : ""],
       //check if emoji exists, otherwise just display text
       ["Location: ", this.dbuser.location],
       ["Region: ", region]
@@ -158,7 +158,7 @@ class Profile extends Parse {
   }
 
   get roles () {
-    let rolelist = this.Search.getmemberRoles(this.member).splice(0, 1);
+    let rolelist = this.Search.members.get(this.member).splice(0, 1);
     return rolelist ? Embed.getFields(rolelist) : ""; //in case we want to display roles in the future.
   }
 

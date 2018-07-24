@@ -8,14 +8,14 @@ class Check extends Search {
   }
 
   role(member, rolename) {
-    let role = this.getRole(rolename)
+    let role = this.roles.get(rolename)
     return member.roles.has(role.id);
   }
 
-  owner(member) {
+  owner(author) {
     let ownerboolean = false;
     for(let i = 0; i < config.ids.owner.length; i++) {
-      if(member.id === config.ids.owner[i]) ownerboolean = true;
+      if(author.id === config.ids.owner[i]) ownerboolean = true;
     };
     return ownerboolean;
   }

@@ -39,10 +39,10 @@ class Output {
   } 
   
   onTrackSuccess(userID, source, sourceusername) {
-    let user = this.Search.get(userID);
-    let member = this.Search.getMember(user);
-    let dbuser = DBuser.getfromuser(user);
-    let newRole = this.Search.getRole(this.server.roles.beta);
+    let user = this.Search.users.get(userID);
+    let member = this.Search.members.get(user);
+    let dbuser = DBuser.get(user);
+    let newRole = this.Search.roles.get(this.server.roles.beta);
     member.addRole(newRole)
     .then(() => {
       let sourceratinglist = this.RatingData(dbuser, source);
@@ -57,7 +57,7 @@ class Output {
   }
 
   onRatingUpdate(user, rankingobject) {
-    let dbuser = DBuser.getfromuser(user);
+    let dbuser = DBuser.get(user);
     let embed = new Discord.RichEmbed()
       .setColor(this.server.colors.ratings)
     for(let i = 0; i < config.sources.length; i++) {
@@ -73,8 +73,8 @@ class Output {
   }
 
   onRemoveSuccess(userID, source, username) {
-    let user = this.Search.getuser(userID);
-    let member = this.Search.getmemberfromuser(user);
+    let user = this.Search.users.get(userID);
+    let member = this.Search.members.get(user);
     if(source === "chesscom") source = "chess.com";
     Embed.sender({
       "title": `Stopped tracking via !remove command`,
@@ -110,6 +110,10 @@ class Output {
   onModError(error) {
     let ModChannel = User.getChannel(server.channels.mod);
     this.onError(error, ModChannel)
+  }
+
+  doNothing(error) {
+    //do nothing
   }
 
   toOwner(message) {

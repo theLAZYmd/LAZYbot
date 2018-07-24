@@ -10,8 +10,8 @@ class Color extends Parse {
     let args = this.args;
     let argument = this.argument;
     let modboolean = false;
-    if(args[0] && this.Search.get(args[0], true)) { //if the first word summons a user then we do something different
-      member = this.Search.getMember(args[0]); //the user we use becomes the args[0] (instead of message.author);
+    if(args[0] && this.Search.users.get(args[0], true)) { //if the first word summons a user then we do something different
+      member = this.Search.members.get(args[0]); //the user we use becomes the args[0] (instead of message.author);
       args = args.slice(1); 
       argument = args.join(" ").replace(/[^a-zA-Z0-9\.!\?',;:"£\$%~\+=()\s\u200B-\u200D\uFEFF-]+/g, "");
       modboolean = true; //need permissions to change somebody else's colour.
@@ -38,7 +38,7 @@ class Color extends Parse {
       }
     };
     if(this.Check.role(member, "choosecolor")) {
-      let role = this.Search.getRole(member.user.username + "CustomColor");
+      let role = this.Search.roles.get(member.user.username + "CustomColor");
       if(role) {
         role.setColor(color)
         .then(role => this.get(member, "Set"))
