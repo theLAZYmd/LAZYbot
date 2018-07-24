@@ -24,11 +24,11 @@ class Parse {
   }
 
   get dbuser () {
-    return DBuser.getfromuser(this.user)
+    return DBuser.get(this.user)
   }
 
   get dbindex () {
-    return DBuser.getdbindex(this.dbuser)
+    return DBuser.byIndex(this.dbuser)
   }
 
   get content () {
@@ -64,8 +64,8 @@ class Parse {
   }
 /*
   get member () {
-    let user = this.Search.get(this.args[0]);
-    return user ? this.Search.getMember(user) : this.message.member;
+    let member = this.Search.members.get(this.args[0]) ;
+    return member ? member : this.message.member;
   }*/
 
   static command (message) {

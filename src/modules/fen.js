@@ -100,10 +100,10 @@ class FEN extends Parse {
       let winhand = this.inhand[1].split(""); //converts them to arrays of each character
       let binhand = this.inhand[2].split(""); //white in-hand pieces, black in-hand pieces
       for(let i = 0; i < winhand.length; i++) {
-        winhand[i] = this.Search.getEmoji("white" + winhand[i].toLowerCase());
+        winhand[i] = this.Search.emojis.get("white" + winhand[i].toLowerCase());
       };
       for(let i = 0; i < binhand.length; i++) {
-        binhand[i] = this.Search.getEmoji("black" + binhand[i]);
+        binhand[i] = this.Search.emojis.get("black" + binhand[i]);
       };
       winhandstring = winhand.join(" ");
       binhandstring = binhand.join(" ");

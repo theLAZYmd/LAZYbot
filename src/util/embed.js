@@ -296,7 +296,7 @@ class Embed {
     ex:
     [
         ["a.k.a.", this.aliases, false],
-        [(this.dbuser.modverified ? " " + this.Search.getEmoji(this.dbuser.modverified[0]) : "") + "Info", this.info, true],
+        [(this.dbuser.modverified ? " " + this.Search.emojis.get(this.dbuser.modverified[0]) : "") + "Info", this.info, true],
         ["Joined Date", this.joined, this.info ? true: false],
         ["Index", this.ids, this.dbuser.messages ? true : false],
         ["Messages Sent", this.dbuser.messages.toLocaleString(), true],

@@ -1,38 +1,59 @@
 const Parse = require("./parse.js");
+const Permissions = require("./permissions.js");
+const Commands = require("../data/commands.json");
+const allMessageCommands = require("../data/allmessagecommands.json");
+const DMCommands = require("../data/dmcommands.json");
 
 class Router {
 
-  static command (message, data) {
-
-    if(message.author.id === data.client.user.id) return;
-    if(message.content.length === 1) return;
-    if(!message.client) message.client = data.client;
-    message.client.reboot = data.reboot;
-    message.client.httpboolean = data.httpboolean;
-    if(message.channel.type === "dm" || message.channel.type === "group" || !message.guild) {
-      return Router.dmMessages(message);
-    };
-    let argsInfo = new Parse(message); //sets object with all like guild, channel (arguments for functions)
-    Router.allMessages(message);
-    if(!!data.commands[argsInfo.command]) { //checks if command appears on init-generated command listing
-      let commands = require("../commands2.json");
-      for(let i = 0; i < commands.length; i++) { //for command details breakdown
-        if(commands[i].aliases.inArray(argsInfo.command)) { //if valid command has been received
-          let cmdInfo = Object.assign({}, commands[i]); //sets object with constructor info
-          cmdInfo.prefix = argsInfo.server.prefixes[cmdInfo.prefix];
-          let args = [];
-          for(let i = 0; i < cmdInfo.arguments.length; i++) {
-            args[i] = argsInfo[cmdInfo.arguments[i]]; //the arguments we take for new Instance input are what's listed
-            if(!args[i]) return argsInfo.Output.onError(`Command **${argsInfo.command}** requires the following piece of data which you have not provided: **${cmdInfo.arguments[i]}**.`)
-          };
-          if(cmdInfo.prefix === argsInfo.prefix) {
-            console.log(Router.logCommand(argsInfo, cmdInfo))
-            Router.commandMessages(message, argsInfo, cmdInfo, args);
-            break;
+  static command (_data) {
+    Router.checkErrors(_data)
+    .then((data) => {
+      data.argsInfo = new Parse(data.message); //sets object with all like guild, channel (arguments for functions)
+      return data;
+    })
+    .then((data) => {
+      if(data.message.channel.type === "dm" || data.message.channel.type === "group" || !data.message.guild) {
+        for(let i = 0; i < DMCommands.length; i++) {
+          Router.runCommand(data.message, data.argsInfo, DMCommands[i]);
+        };
+        throw "";
+      };
+      return data;
+    })
+    .then((data) => {
+      for(let i = 0; i < allMessageCommands.length; i++) {
+        Router.runCommand(data.message, data.argsInfo, allMessageCommands[i]);
+      };
+      return data;
+    })
+    .then((data) => {
+      if(data.commands[data.argsInfo.command]) { //checks if command appears on init-generated command listing
+        for(let i = 0; i < Commands.length; i++) {
+          let cmdInfo = Object.assign({}, Commands[i]);
+          cmdInfo.prefix = data.argsInfo.server.prefixes[cmdInfo.prefix];
+          if(cmdInfo.aliases.inArray(data.argsInfo.command) && cmdInfo.prefix === data.argsInfo.prefix) { //if valid command has been received
+            Router.logCommand(data.argsInfo, Commands[i]);
+            Router.runCommand(data.message, data.argsInfo, cmdInfo);
+            throw "";
           }
         }
-      } 
-    }
+      }
+    })
+    .catch((error) => {
+      if(error) console.log(error);
+    })
+  }
+
+  static checkErrors(data) {
+    return new Promise ((resolve, reject) => {
+      if(data.message.author.id === data.client.user.id) return reject();
+      if(data.message.content.length === 1) return reject ();
+      if(!data.message.client) data.message.client = data.client;
+      data.message.client.reboot = data.reboot;
+      data.message.client.httpboolean = data.httpboolean;
+      resolve(data);
+    })
   }
 
   static logCommand(argsInfo, cmdInfo) {
@@ -41,39 +62,34 @@ class Router {
     let Constructor = cmdInfo.file.toProperCase();
     let command = cmdInfo.prefix + argsInfo.command;
     let args = argsInfo.args;
-    return time + " | " + author  + " | " + Constructor + " | " + command + " | [" + args + "]";
+    console.log(time + " | " + author  + " | " + Constructor + " | " + command + " | [" + args + "]");
   }
 
-  static dmMessages(message) {
-    if(message.author.bot) return;
-    let DMConstructor = require("../modules/dm.js");
-    let DM = new DMConstructor(message);
-    DM.route();
-  }
-
-  static allMessages(message) {
-    let Tracker = require("../modules/tracker.js");
-    let tracker = new Tracker(message);
-    tracker.messagelogger();
-    let CustomReactions = require("../modules/customreactions.js");
-    let customreactions = new CustomReactions(message);
-    customreactions.text();
-    customreactions.emoji();
-  }
-
-  static commandMessages(message, argsInfo, cmdInfo, args) {
-    if(cmdInfo && cmdInfo.file) {
-      let Constructor = require("../modules/" + cmdInfo.file + ".js"); //Profile
-      let Instance = new Constructor(message); //profile = new Profile(message);
-      if(Instance[cmdInfo.method]) Instance[cmdInfo.method](...args);
-      else {
-        try {
-          eval("Instance." + cmdInfo.method + "(...args)");
-        }
-        catch(e) {
-          console.log(e);
-          return argsInfo.Output.onError(`Couldn't find module **${cmdInfo.file}.${cmdInfo.method}()**!`);
-        }
+  static runCommand(message, argsInfo, cmdInfo) {
+    let Output = {
+      "onError": cmdInfo.command ? argsInfo.Output.onError : () => {}
+    };
+    if(cmdInfo.requires) {
+      for(let type in cmdInfo.requires) { //such as channel, guild
+        let value = cmdInfo.requires[type]; //such as mod, owner, bot, trivia
+        if(!Permissions[type](value, argsInfo)) return;
+      }
+    };
+    let args = [];
+    for(let i = 0; i < cmdInfo.arguments.length; i++) {
+      args[i] = argsInfo[cmdInfo.arguments[i]]; //the arguments we take for new Instance input are what's listed
+      if(!args[i]) return Output.onError(`Command **${argsInfo.command}** requires the following piece of data which you have not provided: **${cmdInfo.arguments[i]}**.`)
+    };
+    let Constructor = require("../modules/" + cmdInfo.file + ".js"); //Profile
+    let Instance = new Constructor(message); //profile = new Profile(message);
+    if(Instance[cmdInfo.method]) Instance[cmdInfo.method](...args);
+    else {
+      try {
+        eval("Instance." + cmdInfo.method + "(...args)");
+      }
+      catch(e) {
+        console.log(e);
+        return Output.onError(`Couldn't find module **${cmdInfo.file}.${cmdInfo.method}()**!`);
       }
     }
   }
@@ -82,18 +98,10 @@ class Router {
 
 module.exports = Router;
 
-Object.byString = function(object, string, args) {
-  string = string.replace(/\[(\w+)\]/g, '.$1'); // convert indexes to properties
-  string = string.replace(/^\./, ''); // strip a leading dot
-  let array = string.split(".");
-  let method = array.pop();
-  return method;
-}
-
 Array.prototype.inArray = function(string) { 
   for(let i = 0; i < this.length; i++) { 
-      if(string.toLowerCase().replace(/[.,#!$%\^&;:{}<>=-_`\"~()]/g,"").trim() === this[i].toLowerCase().replace(/[.,#!$%\^&;:{}<>=-_`\"~()]/g,"").trim()) return true; 
-  }
+    if(string.toLowerCase().replace(/[.,#!$%\^&;:{}<>=-_`\"~()]/g,"").trim() === this[i].toLowerCase().replace(/[.,#!$%\^&;:{}<>=-_`\"~()]/g,"").trim()) return true; 
+  };
   return false;
 }
 

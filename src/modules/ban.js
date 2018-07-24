@@ -10,7 +10,7 @@ class Ban extends Parse {
   fake (args) { //fakebanning, some features are just for fun yes
     this.generate(args)
     .then(member => {
-      member.addRole(this.Search.getRole(server.roles.muted))
+      member.addRole(this.Search.roles.get(server.roles.muted))
       .catch(e => console.log(e));
     })
     .catch(e => this.Output.onError(e));
@@ -31,7 +31,7 @@ class Ban extends Parse {
   generate (args) {
     return new Promise ((resolve, reject) => {
       if(!args[0] || !this.Check.owner(this.member)) return reject("Insufficient permissions for this action!"); //temp permissions
-      let member = this.Search.getMember(args[0], true);
+      let member = this.Search.members.get(args[0], true);
       if(!member) return reject("No member found!");
       let embed = {
         "title": "⛔️ User Banned"

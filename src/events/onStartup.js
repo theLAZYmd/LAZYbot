@@ -1,6 +1,5 @@
-const commands = require("../commands2.json");
+const commands = require("../data/commands.json");
 const config = require("../config.json");
-
 const request = require('request');
 
 class onStartup {

@@ -3,172 +3,6 @@ const DataManager = require("../util/datamanager.js");
 const DBuser = require("../util/dbuser.js");
 const Embed = require("../util/embed.js");
 
-class AV extends Parse {
-
-  constructor(message) {
-    super(message);
-
-  }
-
-  static stringifyVotes(votes) { //votes input is a double array
-    let r = [];
-    for(let i = 0; i < votes.length; i++) {
-      let r_ = '';
-      for(let j = 0; j < votes[i].length; j++) {
-        r_ += votes[i][j];
-      }
-      r.push(r_);
-    }
-    return r;
-  }
-
-  static initialResults(votes, Cs) {
-    let r = new Map();
-    for(let i = 0; i < Cs.length; i++) {
-      r.set(Cs[i], 0);
-    }
-    for(let i = 0; i < votes.length; i++) {
-      let initVote = votes[i].charAt(0);
-      if(initVote !== '') {
-        let mapGet = r.get(initVote);
-        if(mapGet === undefined) r.set(initVote, 1);
-        else r.set(initVote, mapGet+1);
-      }
-    }
-    return r;
-  }
-
-  static getNextTransfers(vs, Rs) {
-    let transfers = [];
-    for(let i = 0; i < vs.length; i++) { 
-      let next = vs[i].match(new RegExp('[^'+Rs+']['+Rs+']*[^'+Rs+']'));
-      if(next !== null) transfers.push(next[0]);
-    }
-    return transfers;
-  }
-
-  static findLowestInMap(map) {
-    let lowest = [];
-    map.forEach(function (v, k) {
-      if(lowest[1] === undefined || v < lowest[1]) lowest = [k, v];
-    });
-    return lowest[0];
-  }
-
-  static findHighestInMap(map) {
-    let highest = [];
-    map.forEach(function (v, k) {
-      if(highest[1] === undefined || v > highest[1]) highest = [k, v];
-    });
-    return highest[0];
-  }
-
-  static allInMapBool(map, eq) {
-    let r = true;
-    map.forEach(function (v, k) {
-      if(v !== eq || r === false) r = false;
-    });
-    return r;
-  }
-
-  static mapConcat(map) {
-    let r = true;
-    map.forEach(function (v, k) {
-      r += v;
-    });
-    return r;
-  }
-
-  static iterate(lowest, results, votes, removed) {
-    let transfers = AV.getNextTransfers(votes, removed);
-    console.log(transfers);
-    for(let i = 0; i < transfers.length; i++) {
-      if(transfers[i].charAt(0) === lowest) {
-        let to = transfers[i].charAt(transfers[i].length-1);
-        let mapGet = results.get(to);
-        if(mapGet === undefined) results.set(to, 1);
-        else results.set(to, mapGet+1);
-      }
-    }
-    results.delete(lowest);
-    //console.log(results, removed);
-    return lowest;
-  }
-
-  static result(votes_, Cs, Es = '') {
-    const votes = AV.stringifyVotes(votes_);
-    console.log(votes);
-    let count = votes.length;
-    let removed = '';
-    let results = AV.initialResults(votes, Cs);
-    
-    console.log(results);
-    for(let i = 0; i < Es.length; i++) {
-      let lowest = Es[i];
-      AV.iterate(lowest, results, votes, removed);
-      removed = lowest + removed;
-      console.log(results, removed);
-    } 
-    
-    if(AV.allInMapBool(results, 0)) return {finished:true, r:results};
-    results.forEach((value, key) => {
-      if(value === 0) {
-        removed = key + removed;
-        results.delete(key);
-      }
-    });
-
-    console.log(results, removed);
-    for(let i = 0; i < count && results.get(AV.findHighestInMap(results)) < Math.floor(count/2) && results.size > 1; i++ ) {
-      let lowest = AV.findLowestInMap(results);
-      AV.iterate(lowest, results, votes, removed);
-      removed = lowest + removed;
-      console.log(results, removed);
-    } 
-  return {finished: false, r: AV.findHighestInMap(results)};
-  }
-
-  static rank(votes, Cs) {
-    let order = '';
-    let finished = false;
-    for(let i = 0; i < Cs.length && !finished; i++) {
-      console.log('Cycle ' + i);
-      let next = AV.result(votes, Cs, order);
-      finished = next.finished;
-      if(finished) order += AV.mapConcat(next.r);
-      else order += next.r;
-    }
-    return order;
-  }
-
-  static genRange(n) {
-    let r = [];
-    for(let i = 0; i < n; i++) {
-      r.push(i);
-    }
-    return r;
-  }
-
-  static genOneList(n, lMax) {
-    let range = AV.genRange(n);
-    let r = [];
-    let l = (lMax === false?Math.floor(Math.random()*(n+1)):n);
-    for(let i = 0; i < l; i++) {
-      r.push(range.splice(Math.floor(Math.random()*range.length),1)[0]);
-    }
-    return r;
-  }
-
-  static genAVVotes(c, n, lMax) {
-    let r = [];
-    for(let i = 0; i < c; i++) {
-      r.push(AV.genOneList(n, lMax));
-    }
-    return r;
-  }
-
-}
-
 class Voters extends Parse {
 
   constructor(message) {
@@ -178,14 +12,14 @@ class Voters extends Parse {
   add (args) {
     if(!this.Check.role(this.member, this.server.roles.admin)) return this.Output.onError("Insufficient permissions to do this!");
     if(args.length !==1) return this.Output.onError("Incorrect format.");
-    let channel = this.Search.getChannel(args[0]);
+    let channel = this.Search.channels.get(args[0]);
     if(!channel) return this.Output.onError("Couldn't find matching channel!");
-    let role = this.Search.getRole(channel.name);
+    let role = this.Search.roles.get(channel.name);
     let voters = "", votercount = 0;
     if(!this.server.election[channel.name].voters) this.server.election[channel.name].voters = {};
     console.log(channel.name, role.name);
     for(let [key, member] of role.members) {
-      let dbuser = DBuser.getfromuser(member.user);
+      let dbuser = DBuser.get(member.user);
       if(dbuser && dbuser.messages && dbuser.messages > 50) {
         console.log(`Acknowledging voting rights for ${member.user.tag}.`)
         voters += member.user.tag + "\n";
@@ -203,10 +37,10 @@ class Voters extends Parse {
 
   get (argument) {
     if(this.channel.name !== this.server.channels.bot) return this.Output.onError("Please use the #spam channel.");
-    let channel = this.Search.getChannel(argument);
+    let channel = this.Search.channels.get(argument);
     let voters = "", votercount = 0;
     for(let voter in this.server.election[channel.name].voters) {
-      let user = this.Search.get(voter);
+      let user = this.Search.users.get(voter);
       voters += user.tag + "\n";
       votercount++;
     };
@@ -219,11 +53,11 @@ class Voters extends Parse {
 
   disqualify (args) {
     if(!this.Check.role(this.member, this.server.roles.admin)) return this.Output.onError("Insufficient permissions to do this!");
-    let channel = this.Search.getChannel(args[0]);
+    let channel = this.Search.channels.get(args[0]);
     if(!channel) return this.Output.onError("Couldn't find matching channel!");
     args = args.slice(1);
     for(let i = 0; i < args.length; i++) {
-      let user = this.Search.get(args[1]);
+      let user = this.Search.users.get(args[1]);
       if(!user) {
         this.Output.onError("Couldn't find matching user or channel!");
         continue;
@@ -237,7 +71,7 @@ class Voters extends Parse {
   }
 
   eligible(argument) {
-    let channel = this.Search.getChannel(argument);
+    let channel = this.Search.channels.get(argument);
     if(!channel) return this.Output.onError("Couldn't find matching channel!");
     else return this.Output.generic(this.server.election[channel.name].voters[this.member.id] ? "Eligble to vote." : "Not eligible to vote.")
   }
@@ -252,8 +86,8 @@ class Candidates extends Parse {
   add (args) {
     if(!this.Check.role(this.member, this.server.roles.admin)) return this.Output.onError("Insufficient permissions to do this!");
     if(args.length !== 2) return this.Output.onError("Incorrect format.");
-    let user = this.Search.get(args[0]);
-    let channel = this.Search.getChannel(args[1]);
+    let user = this.Search.users.get(args[0]);
+    let channel = this.Search.channels.get(args[1]);
     if(!user || !channel) return this.Output.onError("Couldn't find matching user or channel!")
     let election = this.server.election || {};
     let candidates = election[channel.name] || {};
@@ -273,37 +107,54 @@ class Ballot extends Parse {
   }
 
   run (args) {
-    this.Output.sender(this.generateBallot(this.user, this.Search.getChannel(args[0])));
+    this.Output.sender(this.generateBallot(this.user, this.Search.channels.get(args[0])));
+  }
+
+  sendOne (user) {
+    return new Promise ((resolve, reject) => {
+      if(!user) return reject("Invalid user!");
+      let ballotCount = 0, voterCount = 0;
+      let modChannel = this.Search.channels.get(this.server.channels.mod);
+      let [voter, channels] = [user.id, this.server.election.voters["185412969130229760"]] //test-run
+      this.sendBallots(user, channels) //this is the real deal. In the for(let loop, these will go out to every single user.
+      .then(success => {
+        console.log(success);
+        this.Output.generic(success, modChannel);
+      })
+      .catch(e => console.log(e));
+      ballotCount += channels.length;
+      voterCount++;
+      console.log(ballotCount, voterCount); //598, 109
+      resolve(`Initiatialised Election. Sending **${ballotCount}** ballots to **${voterCount}** voters.`);
+    })
   }
 
   sendAll () {
     return new Promise ((resolve, reject) => {
       let ballotCount = 0, voterCount = 0;
-      let modChannel = this.Search.getChannel(this.server.channels.mod);
-      //(let voter in this.server.election.voters) {
-        //let channels = this.server.election.voters[voter]
-        let [voter, channels] = ["185412969130229760", this.server.election.voters["185412969130229760"]] //test-run
-          let user = this.Search.get(voter);
-          if(!user) return;
-          this.sendBallots(user, channels) //this is the real deal. In the for(let loop, these will go out to every single user.
-          .then(success => {
-            console.log(success);
-            this.Output.generic(success, modChannel);
-          })
-          .catch(e => console.log(e));
-          ballotCount += channels.length;
-          voterCount++;
-      //};
+      let modChannel = this.Search.channels.get(this.server.channels.mod);
+      for(let voter in this.server.election.voters) {
+        let channels = this.server.election.voters[voter];
+        let user = this.Search.users.get(voter);
+        if(!user) return;
+        this.sendBallots(user, channels) //this is the real deal. In the for(let loop, these will go out to every single user.
+        .then(success => {
+          console.log(success);
+          this.Output.generic(success, modChannel);
+        })
+        .catch(e => console.log(e));
+        ballotCount += channels.length;
+        voterCount++;
+      };
       console.log(ballotCount, voterCount); //598, 109
-      resolve(`Initiatialised OMEGA TEST of Election. Sending **${ballotCount}** ballots to **${voterCount}** voters.`);
+      resolve(`Initiatialised Election. Sending **${ballotCount}** ballots to **${voterCount}** voters.`);
     })
-
   }
 
   runMobile (user) { //hybrid command between the two, instead of sending as field, sends 
     if(!this.server.states.election) return;
     let ballotCount = 0, voterCount = 0;
-    let modChannel = this.Search.getChannel(this.server.channels.mod);
+    let modChannel = this.Search.channels.get(this.server.channels.mod);
     let [voter, channels] = [user.id, this.server.election.voters[user.id]]
     if(!voter) return;
     this.sendMobileBallot(user, channels) //this is the real deal. In the for(let loop, these will go out to every single user.
@@ -428,8 +279,7 @@ class Ballot extends Parse {
   static parseCandidatestoVotingString(candidates) {
     let candidatesArray = [], string = "";
     for(let candidate in candidates) {
-      if(!candidatesArray[0]) candidatesArray[0] = candidate;
-      else candidatesArray.push(candidate);
+      candidatesArray.push(candidate);
     };
     candidatesArray.shuffle();
     for(let i = 0; i < candidatesArray.length; i++) {
@@ -457,7 +307,7 @@ class Vote extends Parse {
           vote[1] = parseInt(vote[1]);
           let user = vote[2] === "Blank Vote" ? {
             "id": "blank"
-          } : this.Search.get(vote[2]);
+          } : this.Search.users.get(vote[2]);
           if(user) {
             this.votingData[this.id][0] = Date.now();
             this.votingData[this.id][vote[1]] = user.id;
@@ -485,19 +335,18 @@ class Vote extends Parse {
 
   error () {
     return new Promise((resolve, reject) => {
-      console.log(this.votingData[this.id][0], Date.now() - this.votingData[this.id][0]> 1800000)
-      if(!this.server.states.election) reject();
-      else if(!this.matches) reject("Invalid Ballot! No vote counted.");
-      else if(!this.id) reject("Invalid Ballot! No vote counted.");
-      else if(this.id !== this.author.id) reject("Invalid Ballot! No vote counted.");
-      else if(!this.variant) reject("Invalid Ballot! No vote counted.");
-      else if(!this.args || !this.args.join("\n").match(/(?:\[([1-9]?)\]\s([a-zA-Z0-9_\s]+#(?:[0-9]{4})|Write-In|Blank Vote))/g)) {
+      if(!this.server.states.election) return reject();
+      if(!this.matches) return reject("Invalid Ballot! No vote counted.");
+      if(!this.id) return reject("Invalid Ballot! No vote counted.");
+      if(this.id !== this.author.id) return reject("Invalid Ballot! No vote counted.");
+      if(!this.variant) return reject("Invalid Ballot! No vote counted.");
+      if(!this.args || !this.args.join("\n").match(/(?:\[([1-9]?)\]\s([a-zA-Z0-9_\s]+#(?:[0-9]{4})|Write-In|Blank Vote))/g)) {
         this.votingData[this.id] = [Date.now(), null]
-        reject("You have successfully submitted a spoiled ballot.\nIf this was your intention, you do not need to reply.\nIf this was not your intention, you may try to resubmit your ballot for the next 30 minutes.");
+        return reject("You have successfully submitted a spoiled ballot.\nIf this was your intention, you do not need to reply.\nIf this was not your intention, you may try to resubmit your ballot for the next 30 minutes.");
       }
-      else if(!this.register) reject("You are ineligible to vote."); //not validated
-      else if(!this.register.includes(this.variant)) reject("You cannot vote for that channel."); //not validated for that channel
-      else if(this.votingData[this.id][0] && Date.now() - this.votingData[this.id][0] > 1800000) reject("You have already voted for that channel."); //half an hour timer to change vote
+      if(!this.register) return reject("You are ineligible to vote."); //not validated
+      if(!this.register.includes(this.variant)) return reject("You cannot vote for that channel."); //not validated for that channel
+      if(this.votingData[this.id][0] && Date.now() - this.votingData[this.id][0] > 1800000) return reject("You have already voted for that channel."); //half an hour timer to change vote
       else resolve(this.args);
     })
   }
@@ -537,6 +386,273 @@ class Vote extends Parse {
 
 }
 
+class Votes extends Parse {
+  constructor(message) {
+    super(message);
+  }
+
+  parseResults (resultsData) {
+    for(let channel in resultsData) { //for each channel
+      this.server.election[channel].results = [];
+      for(let i = 0; i < resultsData[channel].length; i++) { //for each placing in that channel [ '2', '1', '3', '456' ]
+        console.log(resultsData[channel])
+        let placing = {
+          "title": "House Server #" + channel + " Mod Elections",
+          "description": ""
+        };
+        for(let j = 0; j < resultsData[channel][i].length; j++) { //for each number in that result
+          for(let candidate in this.server.election[channel].candidates) { //for all the candidates
+            if(this.server.election[channel].candidates[candidate].toString() === resultsData[channel][i][j].toString()) {
+              if(!candidate) continue;
+              let user = this.Search.users.byID(candidate);
+              if(candidate === "blank") user = {
+                "tag": "A blank vote entry"
+              };
+              if(!user) continue;
+              placing.description += user.tag + " has finished in place **" + (i + 1) + "**.\n";
+            }
+          }
+        };
+        console.log(placing);
+        this.server.election[channel].results.push(placing);
+      };
+      this.server.election[channel].results.reverse();
+    };
+    DataManager.setServer(this.server);
+  }
+
+  gen (args) { //for simulations: used for generating an array of votes
+    return new Promise ((resolve, reject) => {
+      let array = Votes.genMockRange(args[0], args[1]); //[[4, 2, 3], [1, 2, 4], [1, 2], [1, 3, 4, 2]]
+      let array2 = Votes.stringifyVotes(array); //[423, 124, 12, 1342]
+      this.Output.generic(JSON.stringify(array2, null, 4));
+      resolve(array2);
+    })
+  }
+
+  clean () { //removes null values from the db. idk how they got there
+    return new Promise ((resolve, reject) => {
+      this.forEachVote((voter, votes) => {
+        for(let i = 0; i < votes.length; i++) {
+          if(!votes[i]) {
+            votes.remove(i);
+            i--;
+            console.log("Removed null values for " + voter + ".");
+          }
+        }
+      })
+      DataManager.setServer(this.server);
+      resolve("Successfully removed null values in the voting database.");
+    })
+  }
+
+  consolidate () { //tak
+    return new Promise ((resolve, reject) => {
+      for(let channel in this.server.election) {
+        if(channel === "voters") continue;
+        let array = [];
+        this.server.election[channel].candidates = {};
+        this.forEachVoteinChannel(channel, (voter, _votes) => {
+          let votes = Array.from(_votes);
+          if(votes[0] && votes[1]) { //if they voted (produced a date) and they voted for someone
+            votes.remove(0);
+            if(votes[0]) {
+              for(let i = 0; i < votes.length; i++) {
+                if(!array.inArray(votes[i])) {
+                  let user = this.Search.users.byID(votes[i]);
+                  let member = this.Search.members.get(user);
+                  if(votes[i] === "blank") user = {
+                    "tag": "blanktag",
+                    "id": "blank"
+                  };
+                  if(!user || this.Check.role(member, this.server.roles.admin)) continue;
+                  array.push(votes[i])
+                  this.server.election[channel].candidates[votes[i]] = array.indexOf(votes[i]) + 1;
+                  //this.Output.generic("Registered candidate " + user.tag + " for channel " + channel + ".", this.Search.channels.get(this.server.channels.mod));
+                  console.log("Registered candidate " + user.tag + " for channel " + channel + ".");
+                }
+              };
+            }
+          }
+        })
+      };
+      DataManager.setServer(this.server);
+      resolve("Registered candidates in database.");
+    })
+  }
+
+  parse () {
+    let votingData = {};
+    for(let channel in this.server.election) {
+      let array = [];
+      let index = 0;
+      this.forEachVoteinChannel(channel, (voter, votes) => {
+        if(votes[0] && votes[1]) {
+          votes.remove(0);
+          for(let i = 0; i < votes.length; i++) {
+            votes[i] = this.server.election[channel].candidates[votes[i]];
+          };
+          votes.clean();
+          array[index] = votes;
+          index++;
+        }
+      });
+      let voteString = Votes.stringifyVotes(array);
+      votingData[channel] = voteString;
+    };
+    return votingData;
+  }
+
+  forEachVoteinChannel (channel, voterFunction) {
+    for(let voter in this.server.election[channel].voters) {
+      voterFunction(voter, this.server.election[channel].voters[voter]);
+    }
+  }
+
+  forEachVote (voterFunction) {
+    for(let channel in this.server.election) {
+      this.forEachVoteinChannel(channel, voterFunction);
+    }
+  }
+
+  static genMockRange (candidatelimit, voterlimit) {
+    let range = [];
+    for(let i = 0; i < voterlimit; i++) {
+      //let newRange = Math.genRange(candidatelimit).shuffle()
+      //range.push(newRange.splice(0, Math.randBetween(0, newRange.length))); //[4, 2, 3]
+      range.push(Math.genRandomList(candidatelimit, true)); //alternative method
+    };
+    return range; //[[4, 2, 3], [1, 2, 4], [1, 2], [1, 3, 4, 2]]
+  }
+
+  static stringifyVotes(votes) { //votes input is a double array
+    let range = [];
+    for(let i = 0; i < votes.length; i++) {
+      let string = '';
+      for(let j = 0; j < votes[i].length; j++) {
+        string += votes[i][j];
+      }
+      range.push(string); //[423, 124, 12, 1342]
+    }
+    return range;
+  }
+
+}
+
+class AV extends Parse {
+
+  static rank(votes, candidates) { //votes = [423, 124, 12, 1342], candidates = [1, 2, 3, 4, 5, 6]
+    let data = {
+      "count": candidates.length,
+      "candidates": candidates,
+      "eliminated": [],
+      "finished": false,
+      "votes": votes,
+    }, order = "";
+    let i = 0;
+    while (!data.finished) {
+      console.log('Cycle ' + i);
+      data.cycle = i;
+      data = AV.cycle(data);
+      i++;
+    };
+    order = data.eliminated.reverse();
+    console.log(order);
+    return order;
+  }
+
+  static cycle(data) {
+    let resultsMap = AV.getMap(data.votes, data.candidates); //create a new map from votes and candidates
+    console.log(resultsMap);
+    let toRemoveList = AV.findElims(resultsMap);
+    for(let i = 0; i < toRemoveList.length; i++) { //for everyone that needs to be removed
+      let toRemove = toRemoveList[i]; //take the single person who needs to be removed
+      data.votes = AV.iterate(toRemove, data.votes);
+      let index = -1;
+      for(let j = 0; j < data.candidates.length; j++) {
+        if(data.candidates[j].toString() === toRemove.toString()) index = j;
+      };
+      data.candidates.splice(index, 1);
+    };
+    resultsMap = AV.getMap(data.votes, data.candidates); //create a new map from votes and candidates
+    console.log(resultsMap);
+    data.eliminated[data.cycle] = toRemoveList.join("");
+    if(data.eliminated.join("").length === data.count) data.finished = true;
+    return data;
+  }
+
+  static getMap(votes, candidates) { //returns a map based on first preference votes
+    let range = new Map(); //creates an map []
+    for(let i = 0; i < candidates.length; i++) {
+      range.set(candidates[i].toString(), 0); //sets array index(candidate) value(0), ex: [1: 0, 2: 0]
+    };
+    for(let i = 0; i < votes.length; i++) {
+      let initVote = votes[i].charAt(0); //first preference vote
+      if(initVote !== '') {
+        let mapGet = range.get(initVote);
+        if(mapGet === undefined) range.set(initVote, 1);
+        else range.set(initVote, mapGet + 1);
+      }
+    }
+    return range; //ex: [1: 4, 2: 7...] etc.
+  }
+
+  static iterate(toRemove, votes) {
+    for(let i = 0; i < votes.length; i++) {
+      votes[i] = votes[i].replace(toRemove, "");
+    };
+    return votes;
+  }
+
+  static findElims(map) {
+    let elims = [];
+    if(!elims[0]) elims = AV.findZeroes(map);
+    if(!elims[0]) elims = AV.findLowest(map);
+    return elims;
+  }
+
+  static findZeroes(map) { //
+    let zeroes = [];
+    map.forEach((value, key) => {
+      if(value === 0) zeroes.push(key);
+    });
+    return zeroes;
+  }
+
+  static findLowest(map) { //edited so that they return arrays now, not single instances
+    let lowest = [];
+    let lowestValue = Infinity;
+    map.forEach((value, key) => {
+      if(value < lowestValue) lowestValue = value;
+    });
+    map.forEach((value, key) => {
+      if(value === lowestValue) lowest.push(key);
+    });
+    return lowest;
+  }
+
+  static findHighest(map) { //
+    let highest = [];
+    let highestValue = 0;
+    map.forEach((value, key) => {
+      if(value < highestValue) {
+        lowest.push([key]);
+        highestValue = value;
+      }
+    });
+    return highest;
+  }
+
+  static mapConcat(map) {
+    let range = true;
+    map.forEach(function (value, key) {
+      range += value;
+    });
+    return range;
+  }
+
+}
+
 class Election extends Parse {
 
   constructor(message) {
@@ -545,13 +661,70 @@ class Election extends Parse {
     this.candidates = new Candidates(message);
     this.ballot = new Ballot(message);
     this.vote = new Vote(message);
+    this.votes = new Votes(message);
+    this.AV = AV;
+  }
+
+  count () {
+    if(!this.Check.owner(this.member)) return this.Output.onError("Insufficient permissions to run this command!");
+    this.Output.generic("Initiated vote count.");
+    this.Output.generic("Created Voting Data object to be counted... done.")
+    let data = {
+      "votingData": this.votes.parse(),
+      "results": {}
+    };
+    this.Output.generic("Counting up the votes... done.")
+    for(let channel in data.votingData) {
+      if(channel === "voters") continue;
+      let candidates = this.server.election[channel].candidates;
+      data.results[channel] = this.AV.rank(data.votingData[channel], Object.values(candidates));
+    };
+    this.Output.generic("Outputting the result...")
+    this.votes.parseResults(data.results);
+    this.Output.generic("React to this message with your variant channel's emoji.\nIf this message receives 5 reactions from eligible voters of a channel's eligible members it will post the results.")
+    .then(msg => {
+      for(let channel in this.server.election) {
+        if(channel === "voters") continue;
+        let emoji = this.Search.emojis.get(channel.replace("-", ""));
+        msg.react(emoji);
+      };   
+    })
   }
 
   init () {
     if(!this.Check.owner(this.member)) return this.Output.onError("Insufficient permissions to run this command!");
+    Election.toggleState(true);
+    this.ballot.sendAll() //initiate sending of ballots
+    .then(success => this.Output.generic(success))
+    .catch(e => console.log(e));
+  }
+
+  end () {
+    if(!this.Check.owner(this.member)) return this.Output.onError("Insufficient permissions to run this command!");
+    this.toggleState(false);
+    this.Output.generic("Closed voting functions on server " + this.guild.name + ". Please do not try to vote. Begin counting process with `!beginCount`");
+  }
+
+  clean () {
+    if(!this.Check.owner(this.member)) return this.Output.onError("Insufficient permissions to run this command!");
+    this.votes.clean()
+    .then(success => this.Output.generic(success))
+    .catch(e => console.log(e));
+  }
+
+  consol () {
+    if(!this.Check.owner(this.member)) return this.Output.onError("Insufficient permissions to run this command!");
+    this.votes.consolidate()
+    .then(success => this.Output.generic(success))
+    .catch(e => console.log(e));
+  }
+
+  res (args) {
+    if(!this.Check.owner(this.member)) return this.Output.onError("Insufficient permissions to run this command!");
     this.server.states.election = true; //set state to accept votes
     DataManager.setServer(this.server);
-    this.ballot.sendAll() //initiate sending of ballots
+    let user = this.Search.users.get(args[0]);
+    this.ballot.sendOne(user) //sends one ballot to one person
     .then(success => this.Output.generic(success))
     .catch(e => console.log(e));
   }
@@ -569,12 +742,49 @@ class Election extends Parse {
     DataManager.setServer(this.server);
   }
 
+  countnow () {
+    let string = "";;
+    for(let channel in this.server.election) {
+      if(channel === "voters") continue;
+      let count = 0;
+      for(let voter in this.server.election[channel].voters) {
+        if(this.server.election[channel].voters[voter][0]) count++;
+      };
+      string += "Registered **" + count + "** votes in **" + channel + "** channel.\n"
+    };
+    this.Output.generic(string.trim());
+  }
+
+  toggleState (set) {
+    this.server.states.election = set ? set : !this.server.states.election; //set state to accept votes
+    DataManager.setServer(this.server);
+  }
+
 }
 
 module.exports = Election;
 
 Math.randBetween = function(min, max) {
-  return Math.floor(Math.random() * (max - min) + min);
+  return Math.floor(Math.random() * (max - min + 1) + min );
+}
+
+Math.genRange = function(number) {
+  let range = [];
+  for(let i = 0; i < number; i++) {
+    range.push(i + 1);
+  }
+  return range;
+}
+
+Math.genRandomList = function(number, independentvariables) { 
+  let range = Math.genRange(number); //[1, 2, 3, 4, 5] up to number
+  let randomrange = [];
+  let limit = independentvariables ? Math.randBetween(0, number) : number; //length of randomrange is independent from number of voters
+  for(let i = 0; i < limit; i++) {
+    let randIndex = Math.randBetween(0, range.length - 1); //extract a random number from the array
+    randomrange.push(range.splice(randIndex, 1)[0]); //and push it, reducing the number of the original arrray
+  };
+  return randomrange; //[4, 2, 3]
 }
 
 Array.prototype.shuffle = function () {
@@ -586,5 +796,37 @@ Array.prototype.shuffle = function () {
     this[currentIndex] = this[randomIndex];
     this[randomIndex] = temporaryValue;
   }
+  return this.clean();
+}
+
+Array.prototype.clean = function() {
+  for(let i = 0; i < this.length; i++) {
+    if(!this[i]) {
+      this.splice(i, 1);
+      i--;
+    }
+  }
   return this;
+}
+
+Array.prototype.remove = function(index) {
+  if(index === 0) return;
+  if(Array.isArray(index)) {
+    index.sort(function(a, b) {
+      return b - a;
+    })
+    for(let i = 0; i < index.length; i++) {;
+      this.splice(index[i], 1);
+    }
+  } else {
+    this.splice(index, 1);
+  }
+  return this;
+}
+
+Array.prototype.inArray = function(string) { 
+  for(let i = 0; i < this.length; i++) { 
+    if(string.toLowerCase().replace(/[.,#!$%\^&;:{}<>=-_`\"~()]/g,"").trim() === this[i].toLowerCase().replace(/[.,#!$%\^&;:{}<>=-_`\"~()]/g,"").trim()) return true; 
+  };
+  return false;
 }

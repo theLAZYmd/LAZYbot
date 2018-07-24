@@ -136,7 +136,7 @@ class Tracker extends Parse {
 
   updateUser (user, post) {
     let data = {
-      "dbuser": DBuser.getfromuser(user),
+      "dbuser": DBuser.get(user),
       "successfulupdates": "",
       "lichess": this.httpboolean().lichess,
       "chesscom": this.httpboolean().chesscom,

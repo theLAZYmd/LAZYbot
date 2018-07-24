@@ -1,4 +1,5 @@
 const Parse = require("../util/parse.js");
+const config = require("../config.json");
 
 class Award extends Parse {
 
@@ -7,7 +8,7 @@ class Award extends Parse {
   }
 
   on() {
-    this.message.delete();
+    if(this.author.id === config.ids.bot) this.message.delete();
   }
 }
 

@@ -33,7 +33,8 @@ class Bot {
     });
     
     client.on("message", (message) => { //command handler
-      Router.command(message, data);
+      data.message = message;
+      Router.command(data);
     });
 
     express.get("/", (request, response) => { //interacting with glitch.com

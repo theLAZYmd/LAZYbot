@@ -1,0 +1,36 @@
+[
+  {
+    "module": "Tracker",
+    "file": "tracker",
+    "method": "messagelogger",
+    "arguments": []
+  },
+  {
+    "module": "CustomReactions",
+    "file": "customreactions",
+    "method": "text",
+    "arguments": []
+  },
+  {
+    "module": "CustomReactions",
+    "file": "customreactions",
+    "method": "emoji",
+    "arguments": []
+  },
+  {
+    "module": "Reddit",
+    "file": "reddit",
+    "method": "link",
+    "arguments": ["content"]
+  },
+  {
+    "module": "Trivia",
+    "file": "trivia",
+    "method": "onNewMessage",
+    "arguments": [],
+    "requires": {
+      "channel": "trivia",
+      "state": "trivia"
+    }
+  }
+]
