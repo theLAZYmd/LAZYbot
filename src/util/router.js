@@ -33,7 +33,7 @@ class Router {
           let cmdInfo = Object.assign({}, Commands[i]);
           cmdInfo.prefix = data.argsInfo.server.prefixes[cmdInfo.prefix];
           if(cmdInfo.aliases.inArray(data.argsInfo.command) && cmdInfo.prefix === data.argsInfo.prefix) { //if valid command has been received
-            Router.logCommand(data.argsInfo, Commands[i]);
+            Router.logCommand(data.argsInfo, cmdInfo);
             Router.runCommand(data.message, data.argsInfo, cmdInfo);
             throw "";
           }

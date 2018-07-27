@@ -30,6 +30,52 @@ class Bot {
         console.log(`Noticed bot owner ${data.owners[i].tag} in ${Date.now() - data.reboot}ms`);
       };
       console.log("bleep bloop! It's showtime.");
+      let tally = DataManager.getData();
+      let duplicates = {};
+      for(let i = 0; i < tally.length; i++) {
+        if(duplicates[tally[i].id]) {
+          tally.splice(i, 1);
+          i--;
+          continue;
+        };
+        duplicates[tally[i].id] = true;
+        let count = tally[i].messages;
+        tally[i].messages = {};
+        if(typeof count === "number") tally[i].messages.count = count;
+        if(tally[i].lastmessage) {
+          tally[i].messages.last = tally[i].lastmessage;
+          delete tally[i].lastmessage;
+        };
+        if(tally[i].lastmessagedate) {
+          tally[i].messages.lastSeen = tally[i].lastmessagedate;
+          delete tally[i].lastmessagedate;
+        };
+        count = 0;
+        for(let source in config.sources) {
+          if(tally[i][source]) {
+            let username = tally[i][source];
+            let updated = {};
+            updated._main = username;
+            updated[username] = tally[i][source + "ratings"];
+            if(tally[i].title) {
+              if(source === "lichess") updated._title = tally[i].title;
+              delete tally[i].title;
+            };
+            if(tally[i][source + "ratings"]) {
+              if(tally[i][source + "ratings"].cheating) {
+                updated._cheating = tally[i][source + "ratings"].cheating
+                delete tally[i][source + "ratings"].cheating;
+                console.log("Noted cheater " + tally[i].username + ".")
+              };
+              delete tally[i][source + "ratings"];
+            }
+            tally[i][source] = updated;
+            console.log("Completed for " + tally[i].username + " with source " + source + ".");
+          };
+        }
+        if(tally[i].source) delete tally[i].source;
+      };
+      DataManager.setData(tally);
     });
     
     client.on("message", (message) => { //command handler

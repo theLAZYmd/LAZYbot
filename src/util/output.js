@@ -1,9 +1,6 @@
-const Discord = require("discord.js");
 const config = require("../config.json");
-//const DataManager = require("./datamanager.js");
-//const Parse = require("./parse.js");
+const Render = require("./render.js");
 const Embed = require("./embed.js");
-const DBuser = require("../util/dbuser.js");
 
 class Output {
 
@@ -38,49 +35,73 @@ class Output {
     })
   } 
   
-  onTrackSuccess(userID, source, sourceusername) {
-    let user = this.Search.users.get(userID);
+  onTrackSuccess(dbuser, source, username) {
+    let user = this.Search.users.get(dbuser.id);
     let member = this.Search.members.get(user);
-    let dbuser = DBuser.get(user);
     let newRole = this.Search.roles.get(this.server.roles.beta);
+    let account = dbuser[source.key][username];
     member.addRole(newRole)
     .then(() => {
-      let sourceratinglist = this.RatingData(dbuser, source);
-      let sourceuserprofile = this.Profiles(dbuser, source);
-      Embed.sender(new Discord.RichEmbed()
-        .setTitle(`${getemojifromname(source.toLowerCase().replace(".",""))} Linked ${member.user.username} to '${sourceusername}'`)
-        .setDescription(`${sourceuserprofile}\nAdded to the role **${newRole.name}**. Current highest rating is **${dbuser.ratings[source].maxRating}**\n` + sourceratinglist)
-        .setColor(this.server.colors.ratings)
-      , this.channel)
+      this.sender({
+        "title": this.Search.emojis.get(source.key) + `Linked ${member.user.username} to '${username}'`,
+        "description":
+          Render.profile(dbuser, source.key, username) + "\n" +
+          `Added to the role **${newRole.name}**. Current highest rating is **${account.maxRating}**\n` +
+          Render.ratingData(dbuser, source.key, username),
+        "color": this.server.colors.ratings
+      });
     })
-    .catch((error) => console.log("Error adding new role", error));
+    .catch((e) => console.log("Error adding new role", e));
   }
 
-  onRatingUpdate(user, rankingobject) {
-    let dbuser = DBuser.get(user);
-    let embed = new Discord.RichEmbed()
-      .setColor(this.server.colors.ratings)
-    for(let i = 0; i < config.sources.length; i++) {
-      let source = config.sources[i][1];
-      if(dbuser[source]) {
+  onRatingUpdate(dbuser) {
+    let embed = {
+      "color": this.server.colors.ratings
+    };
+    let whitespace = "                                \u200B"
+    for(let source in config.sources) {
+      for(let account in dbuser[source]) {
         let sourceratings = source + "ratings";
         let sourceratinglist = Parse.RatingData(dbuser, source, rankingobject);
-        let sourceuserprofile = Parse.Profiles(dbuser, source);
-        embed.addField(`${getemojifromname(source)} ${rankingobject ? `${dbuser[source]} Rankings` : `Updated ${dbuser[source]}`}`, `${sourceuserprofile} ${rankingobject ? `                                \u200B\n` : `\nCurrent highest rating is **${dbuser[sourceratings].maxRating}**                \u200B\n`}` + sourceratinglist, true)
+        let sourceuserprofile = Parse.Profiles(dbuser, source, account);
+        embed.fields = Embed.fielder(
+          embed.fields,
+          `${this.Search.emojis.get(source)} Updated ${dbuser[source]}`,
+          sourceuserprofile + "\nCurrent highest rating is **" + dbuser[sourceratings].maxRating + "**" + whitespace + "\n",
+          true
+        )
       }
     };
-    Embed.sender(embed, this.channel);
+    this.sender(embed);
   }
 
-  onRemoveSuccess(userID, source, username) {
-    let user = this.Search.users.get(userID);
-    let member = this.Search.members.get(user);
-    if(source === "chesscom") source = "chess.com";
-    Embed.sender({
+  onRank(dbuser, rankingobject) {
+    let embed = {
+      "color": this.server.colors.ratings
+    };
+    let whitespace = "                                \u200B"
+    for(let source in config.sources) {
+      for(let account in dbuser[source]) {
+        let sourceratings = source + "ratings";
+        let sourceratinglist = require.RatingData(dbuser, source, rankingobject);
+        let sourceuserprofile = Parse.Profiles(dbuser, source, account);
+        embed.fields = Embed.fielder(
+          embed.fields,
+          `${this.Search.emojis.get(source)} ${dbuser[source]} Rankings`,
+          sourceuserprofile + "\n" + sourceratinglist,
+          true
+        )
+      }
+    };
+    this.sender(embed);
+  }
+
+  onRemoveSuccess(dbuser, source, username) {
+    this.sender({
       "title": `Stopped tracking via !remove command`,
-      "description": `Unlinked **${user.tag}** from ${source} account **${username}**.`,
+      "description": `Unlinked **${username}** from ${source.key} account **${dbuser.username}**.`,
       "color": config.colors.ratings
-    }, this.channel)
+    })
   }
 
   generic(description, NewChannel) {
@@ -167,7 +188,8 @@ class Output {
         if(collected.emoji.name === "➡") page++;
         if(collected.emoji.name === "⬅") page--;
         let embed = Constructor[method](page, true);
-        if(embed && page <= maxpages) {
+        if(page < 0) return page++;
+        if(embed && page < maxpages) {
           embed.footer = Embed.footer(`${page + 1} / ${maxpages}`);
           this.editor(embed, pmsg);
         } else page--; //if the maxpagecount is exceeded and the builder

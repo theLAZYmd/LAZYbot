@@ -665,6 +665,13 @@ class Election extends Parse {
     this.AV = AV;
   }
 
+  postResults () {
+    for(let i = 0; i < this.server.election[this.channel.name].results; i++) {
+      this.channel.send(this.server.election[this.channel.name].results[i])
+    };
+    this.message.delete();
+  }
+
   count () {
     if(!this.Check.owner(this.member)) return this.Output.onError("Insufficient permissions to run this command!");
     this.Output.generic("Initiated vote count.");

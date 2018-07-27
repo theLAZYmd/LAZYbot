@@ -1,6 +1,7 @@
 const config = require("../config.json");
 const Parse = require("../util/parse.js");
 const Embed = require("../util/embed.js");
+const Render = require("../util/render.js");
 
 class Profile extends Parse {
 
@@ -15,7 +16,7 @@ class Profile extends Parse {
       else return this.Output.onError(`Couldn't find user!`);
     };
     //Constructor, method, embed, maxpages, timeout on pages
-    this.Output.paginator(this, "build", this.sourcecount > 0 ? 2 : 1, 30000);
+    this.Output.paginator(this, "build", 1 + Math.ceil(this.chessFields.length / 4), 30000);
   }
 
   build (page) {
@@ -24,11 +25,15 @@ class Profile extends Parse {
   }
 
   get title () {
+    let chessTitle;
+    for(let source in config.sources) {
+      if(this.dbuser[source] && this.dbuser[source]._title) chessTitle = this.dbuser[source]._title;
+    };
     let title = 
       (this.user.bot ? this.Search.emojis.get("bot") + " " : "") +
       (this.dbuser.patron ? this.Search.emojis.get("patron") : "") +
       "Profile for " +
-      (this.dbuser.title ? this.Search.emojis.get(this.dbuser.title.toLowerCase()) + " " : "") + 
+      (chessTitle ? this.Search.emojis.get(chessTitle.toLowerCase()) + " " : "") + 
       this.user.tag;
     return title;
   }
@@ -53,7 +58,7 @@ class Profile extends Parse {
     let potential = this.PotentialFields;
     for(let i = 0; i < potential.length; i++) {
       if(!!potential[i][1]) fields = Embed.fielder(fields, ...potential[i]);
-    }
+    };
     return fields;
   }
 
@@ -64,29 +69,28 @@ class Profile extends Parse {
         [(this.dbuser.modverified ? " " + this.Search.emojis.get(this.dbuser.modverified[0]) : "") + "Info", this.info, true],
         ["Joined Date", this.joined, this.info ? true: false],
         ["Index", this.ids, this.dbuser.messages ? true : false],
-        ["Messages Sent", this.dbuser.messages.toLocaleString(), true],
+        ["Messages Sent", this.dbuser.messages.count.toLocaleString(), true],
         ["Last Message", this.lastMessage, false],
       //["Roles", this.roles],
         ["House Trophies", this.award, true]
       ]
-    } else
-    if(this.page === 1) {
-      let PotentialFields = [];
-      for(let i = 0; i < config.sources.length; i++) {
-        let source = config.sources[i][1];
-        if(this.dbuser[source]) {
-          let entry = [
-            `${this.Search.emojis.get(source)} ${config.sources[i][0]}`,
-            `${Parse.Profiles(this.dbuser, source)}\n${Parse.RatingData(this.dbuser, source)}`,
+    } else return this.chessFields.splice(4 * (this.page - 1), 4); //if page === 1, 1, 2, 3, 4; if page = 2, 5, 6, 7, 8
+  }
+
+  get chessFields () {
+    let accounts = [];
+    for(let source in config.sources) {
+      for(let account in this.dbuser[source]) {
+        if(!account.startsWith("_")) {
+          accounts.push([
+            this.Search.emojis.get(source) + " " + config.sources[source].name,
+            Render.profile(this.dbuser, source, account) + "\n" + Render.ratingData(this.dbuser, source, account),
             true
-          ];
-          if(!PotentialFields[0]) PotentialFields[0] = entry;
-          else PotentialFields.push(entry);
-        };
-      };
-      return PotentialFields;
-    }
-    else return [];
+          ])
+        }
+      }
+    };
+    return accounts;
   }
 
   get sourcecount () {
@@ -105,7 +109,10 @@ class Profile extends Parse {
   }
 
   get aliases () {
-    let specifiers = [this.member.nickname, this.dbuser.name, this.dbuser.lichess, this.dbuser.chesscom, this.dbuser.bughousetest];
+    let specifiers = [this.member.nickname, this.dbuser.name]
+    if(this.dbuser.lichess) specifiers.concat(Object.keys(this.dbuser.lichess).map(account => !account.startsWith("_")));
+    if(this.dbuser.chesscom) specifiers.concat(Object.keys(this.dbuser.chesscom).map(account => !account.startsWith("_")));
+    if(this.dbuser.bughousetest) specifiers.concat(Object.keys(this.dbuser.bughousetest).map(account => !account.startsWith("_")));
     let found = [this.user.username];
     for(let i = 0; i < specifiers.length; i++) {
       if(specifiers[i] && !found.inArray(specifiers[i])) found.push(specifiers[i]);
@@ -121,28 +128,34 @@ class Profile extends Parse {
       if(this.Check.role(this.member, role.name)) region = this.server.regions[i];
     };
     return Embed.getFields([
-      ["Age: ", this.dbuser.age],
-      ["Sex: ", this.dbuser.sex ? (this.Search.emojis.get(this.dbuser.sex) ? this.Search.emojis.get(this.dbuser.sex) : this.dbuser.sex) : ""],
+      ["Age", this.dbuser.age],
+      ["Sex", this.dbuser.sex ? (this.Search.emojis.get(this.dbuser.sex) ? this.Search.emojis.get(this.dbuser.sex) : this.dbuser.sex) : ""],
       //check if emoji exists, otherwise just display text
-      ["Location: ", this.dbuser.location],
-      ["Region: ", region]
-    ])
+      ["Location", this.dbuser.location],
+      ["Region", region]
+    ], {
+      "bold": true
+    })
     //4 fields stringified, "Key: value" format, no 'constant'
   }
 
   get joined () {
     return Embed.getFields([
-      ["Discord: ", Date.getISOtime(this.user.createdTimestamp).slice(4, 15)],
-      [`${this.guild.name}: `, Date.getISOtime(this.member.joinedTimestamp).slice(4, 15)]
-    ])
+      ["Discord", Date.getISOtime(this.user.createdTimestamp).slice(4, 15)],
+      [this.guild.name, Date.getISOtime(this.member.joinedTimestamp).slice(4, 15)]
+    ], {
+      "bold": true
+    })
     //2 fields stringified, "Key; value" format, no 'constant'
   }
 
   get ids () {
     return Embed.getFields([
-      ["UID: ", "`" + this.user.id + "`", false],
-      ["Position in Database: ", this.dbindex]
-    ])
+      ["UID", "`" + this.user.id + "`", false],
+      ["Position in Database", this.dbindex]
+    ], {
+      "bold": true
+    })
     //2 fields stringified, "Key; value" format, no 'constant'
   }
 
@@ -179,7 +192,10 @@ class Profile extends Parse {
   }
 
   get trophies () {
-    return (this.dbuser.trophy ? Embed.getFields(this.dbuser.trophy, ":trophy: ", true) : "");
+    return (this.dbuser.trophy ? Embed.getFields(this.dbuser.trophy, {
+      "constant": ":trophy: ",
+      "bold": true
+    }) : "");
   }
 
   get modnotes () {
