@@ -8,610 +8,348 @@ class Tracker extends Parse {
 
   constructor(message) {
     super(message);
-    this.stopUpdating = false;
-    this.updating = false;
     this.updateDelay = config.updateDelay;
+    this.updateQueue = this._updateQueue;
   }
 
-  get UpdateQueue () {
-    this.getonlinemembers().forEach(function(member) {
-      Tracker.updatequeue[member.id] = true;
-    })
-    return Tracker.updatequeue;
-  }
-
-  messagelogger () { //section for message logging
-    if(this.message.author.bot) return;
-    this.dbuser.messages++;
-    let noprefixboolean = true;
-    for(let prefix in this.server.prefixes) {
-      if(this.prefix === this.server.prefixes[prefix]) noprefixboolean = false;
-    };
-    if(noprefixboolean) {
-      this.dbuser.lastmessage = this.message.content > 500 ? this.message.content.slice(0, 500).replace("`", "") + "..." : this.message.content.replace(/\`/g,"");
-      this.dbuser.lastmessagedate = this.message.createdTimestamp;
-      if(this.dbuser.username !== this.user.tag) this.dbuser.username = user.tag; 
-    };
-    DBuser.setData(this.dbuser);
-  }
-  
-  initUpdateCycle () {
-    let dbuser = this.LeastUpToDateUser;
-    if(dbuser && !this.stopUpdating) {
-      this.updating = true;
-      this.updateUser(dbuser, false);
-      setTimeout(() => this.initUpdateCycle(), 15000);
-    } else {
-      setTimeout(() => this.initUpdateCycle(), 15000);
-    }
-  }
-
-  updatepresence (member, nowonline) {
-    if(nowonline === true) {
-      Tracker.updatequeue[member.id] = true;
-    } else
-    if(nowonline === false) {
-      delete Tracker.updatequeue[member.id];
-    }
-  }
-
-  track (serverID, user, source, username, message) {
-    username = username.replace(/["`']+/g, "");
-    if(username.length < 2) {
-      return Output.onError("Invalid username.");
-    };
-    let dbuser = this.getdbuserfromuser(user);
-    if(dbuser[source]) {
-      let sourcetitle = this.getsourcetitle(source);
-      return Output.onError(`Duplicate from **${sourcetitle}**. You have already linked **${dbuser[source]}** to your profile.\nUse \`!remove ${source}\` to unlink your account.`);
-    };
-    let data = {
-      "dbuser": dbuser,
-      "username": username,
-      "successfulupdates": "",
-      "lichess": this.httpboolean().lichess,
-      "chesscom": this.httpboolean().chesscom,
-      "bughousetest": this.httpboolean().bughousetest
-    };
-    if(source === "lichess") {
-      this.handleLichessData(data)
-      .then((data) => {
-        let dbuser = data.dbuser;
-        if(!dbuser) return;
-        this.stopUpdating = true;
-        let tally = DataManager.getData();
-        let dbindex = this.getdbindexfromdbuser(dbuser);
-        tally[dbindex] = dbuser;
-        DataManager.setData(tally);
-        Output.onTrackSuccess(dbuser.id, source, dbuser[source]);
-        dbuser.lastupdate = Date.now();
-        this.stopUpdating = false;
-      })
-      .catch((error) => {
-        Output.onError("Error adding user. " + error);
-      })
-    } else
-    if(source === "chesscom") {
-      this.handleChesscomData(data)
-      .then((data) => {
-        let dbuser = data.dbuser;
-        this.stopUpdating = true;
-        let tally = DataManager.getData();
-        let dbindex = this.getdbindexfromdbuser(dbuser);
-        tally[dbindex] = dbuser;
-        DataManager.setData(tally);
-        Output.onTrackSuccess(dbuser.id, source, dbuser[source]);
-        dbuser.lastupdate = Date.now();
-        this.stopUpdating = false;
-      })
-      .catch((error) => {
-        Output.onError("Error adding user. " + error);
-      })
-    } else
-    if(source === "bughousetest") {
-      this.handleBughousetestData(data)
-      .then((data) => {
-        let dbuser = data.dbuser;
-        this.stopUpdating = true;
-        let tally = DataManager.getData();
-        let dbindex = this.getdbindexfromdbuser(dbuser);
-        tally[dbindex] = dbuser;
-        DataManager.setData(tally);
-        Output.onTrackSuccess(dbuser.id, source, dbuser[source]);
-        dbuser.lastupdate = Date.now();
-        this.stopUpdating = false;
-      })
-      .catch((e) => {
-        Output.onError("Error adding user. " + error);
-      })
-    }
-  }
-  
-  sourceHandler(data) {
-    return new Promise((resolve, reject) => {
-      resolve(data);
-      if(!data) reject(dbuser);
+  get _updateQueue () {
+    this.Search.members.getOnline().forEach((member) => {
+      Tracker.updateQueue[member.id] = true;
     });
+    return Tracker.updateQueue;
   }
 
-  updateUser (user, post) {
-    let data = {
-      "dbuser": DBuser.get(user),
-      "successfulupdates": "",
-      "lichess": this.httpboolean().lichess,
-      "chesscom": this.httpboolean().chesscom,
-      "bughousetest": this.httpboolean().bughousetest
-    };
-    if (!data.dbuser.lichess && !data.dbuser.chesscom && !data.dbuser.bughousetest) {
-      Output.onError(`No linked accounts found.\nPlease link an account to your profile through \`!lichess\` or \`!chess.com\``);
-      return;
-    } else {
-    this.sourceHandler(data)
-      .then((data) => {
-        data.username = data.dbuser.lichess;
-        return this.handleLichessData(data)
-      })
-      .then((data) => {
-        data.username = data.dbuser.chesscom;
-        return this.handleChesscomData(data)
-      })
-      .then((data) => {
-        data.username = data.dbuser.bughousetest;
-        return this.handleBughousetestData(data)
-      })
-      .then((data) => {
-        let dbuser_ = data.dbuser;
-        this.stopUpdating = true;
-        dbuser_.lastupdate = Date.now();
-        let tally = DataManager.getData();
-        let dbindex = this.getdbindexfromdbuser(dbuser_);
-        tally[dbindex] = dbuser_;
-        DataManager.setData(tally);
-        console.log(`Updated ${dbuser_.username} on ${data.successfulupdates}with no errors.`);
-      })
-      .then(() => {
-        if(post) Output.onRatingUpdate(user);
-        this.stopUpdating = false;
-      })
-      .catch((error) => {
-        Output.onError("Error adding user. " + error);
-      })
-    }
-  }
-
-  remove (serverID, source, userID, message, nomsg) {
-    this.stopUpdating = true;
-    let tally = DataManager.getData();
-    let dbindex = this.getdbindexfromid(userID)
-    let username = tally[dbindex][source.toLowerCase()];
-    let sourceratings = source + "ratings";
-    if (username) {
-      delete tally[dbindex][source];
-      delete tally[dbindex][sourceratings];
-      DataManager.setData(tally);
-      Output.onRemoveSuccess(userID, source, username);
-    } else {
-      if(!nomsg) {
-        Output.onError("No tracking entry found to remove.");
-      }
-    }
-    this.stopUpdating = false;
-  }
-
-  getLichessDataForUser(username) {
-    return new Promise((resolve, reject) => {
-      if (username === false) return reject("Invalid username.");
-      request.get(config.url.lichess.user.replace("|", username), (error, response, body) => {
-        if(error) {
-          return reject(error);
-        }
-        if (body.length === 0) {
-          return reject("Couldn't find **'" + username + "'** on Lichess.");
-        }
-        let json = null;
-        try {
-          json = JSON.parse(body);
-        } catch (e) {
-          reject(e);
-        }
-        resolve(json);
-      });
-    });
-  }
-
-  handleLichessData(data) {
-    let dbuser = data.dbuser;
-    let username = data.username;
-    let [source, sourceratings] = ["lichess", "lichessratings"];
-    return new Promise((resolve, reject) => {
-      if(username) {
-        if(data.lichess) {
-          this.getLichessDataForUser(username)
-          .then((sourceData) => {
-            return parseLichessUserData(sourceData, (msg) => {
-              reject(msg);
-            }, (msg) => {
-              reject(msg);
-            });
-          })
-          .then((profile) => {
-            if(profile) {
-              dbuser.lastupdate = Date.now();
-              dbuser[source] = profile.username;
-              if(profile.title) dbuser.title = profile.title;
-              else delete dbuser.title;
-              dbuser[sourceratings] = profile.ratings;
-              data.dbuser = dbuser;
-              data.successfulupdates += "lichess, ";
-            };
-            resolve(data);
-          })
-          .catch((error) => {
-            resolve(data);
-            reject(error);
-          })
-        } else {
-          resolve(data);
-          reject(`Couldn't connect to ${source}!`)
-        }
-      } else {
-        resolve(data);
-      }
-    })
-  }
-  
-  handleChesscomData(data) {
-    let dbuser = data.dbuser;
-    let username = data.username;
-    let [source, sourceratings] = ["chesscom", "chesscomratings"];
-    return new Promise((resolve, reject) => {
-      if(username) {
-        if(data.chesscom) {
-          this.getChesscomDataForUser(username)
-          .then((sourceData) => {
-            return parseChesscomUserData(sourceData, username, (msg) => {
-              reject(msg);
-            }, (msg) => {
-              reject(msg);
-            });
-          })
-          .then(([ratingData, username]) => {
-            if(ratingData) {
-              dbuser.lastupdate = Date.now();
-              dbuser[source] = username;
-              dbuser[sourceratings] = ratingData;
-              data.dbuser = dbuser;
-              data.successfulupdates += "chess.com, ";
-            }
-            resolve(data);
-          })
-          .catch((error) => {
-            resolve(data);
-            reject(error);
-          })
-        } else {
-          resolve(data);
-          reject(`Couldn't connect to ${source}!`)
-        }
-      } else {
-        resolve(data);
-      }
-    })
-  }
-  
-  handleBughousetestData(data) {
-    let dbuser = data.dbuser;
-    let username = data.username;
-    let [source, sourceratings] = ["bughousetest", "bughousetestratings"];
-    return new Promise((resolve, reject) => {
-      if(username) {
-        if(data.bughousetest) {
-          this.getBughousetestDataForUser(username)
-          .then((sourceData) => {
-            return parseBughousetestUserData(sourceData, (msg) => {
-              reject(msg);
-            }, (msg) => {
-              reject(msg);
-            });
-          })
-          .then((profile) => {
-            if(profile) {
-              dbuser.lastupdate = Date.now();
-              dbuser[source] = profile.username;
-              dbuser[sourceratings] = profile.ratings;
-              data.dbuser = dbuser;
-              data.successfulupdates += "bughousetest, ";
-            };
-            resolve(data);
-          })
-          .catch((error) => {
-            resolve(data);
-            reject(error);
-          })
-        } else {
-          resolve(data);
-          reject(`Couldn't connect to ${source}!`);
-        }
-      } else {
-        resolve(data);
-      }
-    })
-  }
-
-  getBughousetestDataForUser(username) {
-    if (username === false) return false;
-    return new Promise((resolve, reject) => {
-      request.get(config.url.bughousetest.user.replace("|", username), (error, response, body) => {
-        if(error) {
-          return reject(error);
-        }
-        if (body.length === 0) {
-          return reject("Couldn't find **'" + username + "'** on bughousetest.");
-        }
-        let json = null;
-        try {
-          json = JSON.parse(body);
-        } catch(e) {
-          reject(e);
-        }
-        resolve(json);
-      });
-    });
-  }
-
-  getChesscomDataForUser(username) {
-    if (username === false) return false;
-    return new Promise((resolve, reject) => {
-      request.get(config.url.chesscom.user.replace("|", username), function (error, response, body) {
-        if (error) {
-          return reject(error);
-        }
-        try {
-          resolve(JSON.parse(body));
-        } catch (e) {
-          reject(response);
-        }
-      });
-    });
-  }
-
-  parseLichessUserData(lichessData, errorCB, modCB) {
-    let profile = {};
-    if(!lichessData) {
-      errorCB("Couldn't find '" + username + "' on Lichess");
-      return;
-    } else
-    if(lichessData.closed) {
-      if(!Tracker.closedUsername[lichessData.username.toLowerCase()]) {
-        modCB("Account " + lichessData.username + " is closed on Lichess.");
-        errorCB("Account " + lichessData.username + " is closed on Lichess.");
-      }
-      Tracker.closedUsername[lichessData.username.toLowerCase()] = true;
-      return;
-    }
-    let ratings = {};
-    ratings.maxRating = 0;
-    let lichessusername = lichessData.username;
-    let killboolean = true;
-    let cheating = null;
-    for(let i = 0; i < config.lichessvariants.length; i++) {
-      let array = config.lichessvariants[i];
-      let variant = array[1];
-      let APIpath = lichessData.perfs[array[2]];
-      let provisional = `${array[1]}Provisional`;
-      if(APIpath) ratings[variant] = APIpath.rating;
-      ratings[provisional] = !(APIpath && !APIpath.prov);
-      if(ratings[variant] && ratings[provisional] === true) {
-        ratings[variant] = ratings[variant] + "?";
-      } else
-        if(ratings[variant] && ratings[provisional] === false) {
-          ratings[variant] = ratings[variant].toString();
-          killboolean = false;
-          if (ratings.maxRating < ratings[variant]) {
-            ratings.maxRating = ratings[variant];
-          }
-        }
-      delete ratings[provisional];
-    };
-    if(killboolean === true) {
-      errorCB("All lichess ratings for " + lichessData.username + " are provisional.");
-      return;
-    };
-    if(lichessData.engine && lichessData.booster) {
-      cheating = "Player " + lichessData.username + " (" + config.url.lichess.profile.replace("|", lichessData.username) + ")";
-      cheating += " uses chess computer assistance, and artificially increases/decreases their rating.";
-    } else
-    if (lichessData.engine) {
-      cheating = "Player " + lichessData.username + " (" + config.url.lichess.profile.replace("|", lichessData.username) + ")";
-      cheating += " uses chess computer assistance.";
-    } else
-    if (lichessData.booster) {
-      cheating = "Player " + lichessData.username + " (" + config.url.lichess.profile.replace("|", lichessData.username) + ")";
-      cheating += " artificially increases/decreases their rating.";
-    };
-    if(cheating) {
-      if(!Tracker.cheatedUserID[lichessData.username.toLowerCase()]) {
-        modCB(cheating);
-        Tracker.cheatedUserID[lichessData.username.toLowerCase()] = true;
-      };
-      ratings.cheating = true;
-    } else {
-      delete ratings.cheating;
-    };
-    profile.ratings = ratings;
-    profile.username = lichessusername;
-    if(lichessData.profile) {
-      profile.country = lichessData.profile.country;
-      profile.name = lichessData.profile.firstName + " " + lichessData.profile.lastName;
-    };
-    profile.language = lichessData.language;
-    profile.title = lichessData.title;
-    return profile;
-  }
-
-  parseBughousetestUserData(bughousetestData, errorCB, modCB) {
-    let profile = {};
-    if(!bughousetestData) {
-      errorCB("Couldn't find '" + username + "' on bughousetest");
-      return;
-    } else
-      if (bughousetestData.closed) {
-        if (!Tracker.closedUsername[bughousetestData.username.toLowerCase()]) {
-          modCB("Account " + bughousetestData.username + " is closed on bughousetest.");
-          errorCB("Account " + bughousetestData.username + " is closed on bughousetest.");
-        }
-        Tracker.closedUsername[bughousetestData.username.toLowerCase()] = true;
-        return;
-      }
-    let ratings = {};
-    ratings.maxRating = 0;
-    let bughousetestusername = bughousetestData.username;
-    let killboolean = true;
-    let cheating = null;
-    for (let i = 0; i < config.bughousetestvariants.length; i++) {
-      let array = config.bughousetestvariants[i];
-      let variant = array[1];
-      let APIpath = bughousetestData.perfs[array[2]];
-      let provisional = `${array[1]}Provisional`;
-      if (APIpath) { ratings[variant] = APIpath.rating };
-      ratings[provisional] = !(APIpath && !APIpath.prov);
-      if (ratings[variant] && ratings[provisional] === true) {
-        ratings[variant] = ratings[variant] + "?";
-      } else
-        if (ratings[variant] && ratings[provisional] === false) {
-          ratings[variant] = ratings[variant].toString();
-          killboolean = false;
-          if (ratings.maxRating < ratings[variant]) {
-            ratings.maxRating = ratings[variant];
-          }
-        }
-      delete ratings[provisional];
-    };
-
-    if (killboolean === true) {
-      errorCB("All bughousetest ratings for " + bughousetestData.username + " are provisional.");
-      return;
-    };
-
-    if (bughousetestData.engine && bughousetestData.booster) {
-      cheating = "Player " + bughousetestData.username + " (" + config.url.bughousetest.profilereplace("|", bughousetestData.username) + ")";
-      cheating += " uses chess computer assistance, and artificially increases/decreases their rating.";
-    } else if (bughousetestData.engine) {
-      cheating = "Player " + bughousetestData.username + " (" + config.url.bughousetest.profilereplace("|", bughousetestData.username) + ")";
-      cheating += " uses chess computer assistance.";
-    } else if (bughousetestData.booster) {
-      cheating = "Player " + bughousetestData.username + " (" + config.url.bughousetest.profilereplace("|", bughousetestData.username) + ")";
-      cheating += " artificially increases/decreases their rating.";
-    }
-    if (cheating) {
-      //Only say once
-      if (!Tracker.cheatedUserID[bughousetestData.username.toLowerCase()]) {
-        modCB(cheating);
-        Tracker.cheatedUserID[bughousetestData.username.toLowerCase()] = true;
-      }
-    }
-    profile.ratings = ratings;
-    profile.username = bughousetestusername;
-    return profile;
-  }
-
-  parseChesscomUserData(chesscomData, username, errorCB) {
-    let stats = chesscomData.stats;
-    if(!stats) {
-      errorCB("Couldn't find **'" + username + "'** on Chess.com.");
-      return;
-    };
-    let ratings = {};
-    ratings.maxRating = 0;
-    let killboolean = true;
-    for (let i = 0; i < config.chesscomvariants.length; i++) {
-      let array = config.chesscomvariants[i];
-      let variant = array[1];
-      let APIpath = array[2];
-      let provisional = `${array[1]}Provisional`;
-      for (let i = 0; i < stats.length; i++) {
-        let obj = stats[i];
-        if (obj.key === APIpath) {
-          ratings[variant] = obj.stats.rating
-          ratings[provisional] = obj.gameCount < 10;
-        }
-      }
-      if (!ratings[provisional]) {
-        killboolean = false;
-        if (ratings.maxRating < ratings[variant]) {
-          ratings.maxRating = ratings[variant];
-        }
-      };
-      if (ratings[variant] && ratings[provisional] === true) {
-        ratings[variant] = ratings[variant] + "?";
-      } else
-        if (ratings[variant] && ratings[provisional] === false) {
-          ratings[variant] = ratings[variant].toString();
-        }
-      delete ratings[provisional];
-    };
-
-    if (killboolean === true) {
-      errorCB("All chess.com ratings for " + username + " are provisional.");
-      return;
-    };
-
-    return [ratings, username];
-  }
-
-  removeByUser (serverID, source, user, message) {
-    this.stopUpdating = true;
-    let tally = DataManager.getData();
-    if (tally) {
-      let users = tally;
-      for (id in users) {
-        let dbindex = this.getdbindexfromid(user.id)
-        let dbuser = users[dbindex];
-        let username = users[dbindex][source.toLowerCase()];
-        if (username) {
-          this.remove(serverID, source, user.id, message);
-          return;
-        }
-      }
-    }
-    Output.onError("No tracking entry found to remove.");
-    this.stopUpdating = false;
-  }
-
-  get LeastUpToDateUser() {
-    let tally = DataManager.getData();
-    let founddbuser = null;
-    let currentvalue = Infinity;
+  static getLeastUpToDateUser() {
+    const tally = DataManager.getData(), foundUser = null, currentValue = Infinity
     for(let i = 0; i < tally.length; i++) {
-      if(Tracker.updatequeue[tally[i].id] && !tally[i].lastupdate) {
-        let killboolean = true;
-        for(let j = 0; j < config.sources.length; j++) {
-          if(tally[i][config.sources[j][1]]) killboolean = false;
+      if(Tracker.updateQueue[tally[i].id]) {
+        let verified = false;
+        for(let source in config.sources) {
+          if(tally[i][source]) verified = true; 
         };
-        if(!killboolean) {
-          currentvalue = 0;
-          founddbuser = tally[i];
+        if(!verified) {
+          currentValue = 0;
+          foundUser = tally[i];
           break;
         };
       } else 
-      if((Tracker.updatequeue[tally[i].id] && tally[i].lastupdate && tally[i].lastupdate < currentvalue && tally[i].lastupdate < Date.now() - 1800000)) {
+      if((Tracker.updateQueue[tally[i].id] && tally[i].lastUpdate && tally[i].lastUpdate < currentValue && tally[i].lastUpdate < Date.now() - 1800000)) {
         let killboolean = true;
-        for(let j = 0; j < config.sources.length; j++) {
-          if(tally[i][config.sources[j][1]]) killboolean = false;
+        for(let source in config.sources) {
+          if(tally[i][source]) killboolean = false;
         };
         if(!killboolean) {
-          currentvalue = tally[i].lastupdate || 0;
-          founddbuser = tally[i];
+          currentvalue = tally[i].lastUpdate || 0;
+          foundUser = tally[i];
         }
       }
     };
-    return founddbuser;
+    return foundUser;
+  }
+  
+  initUpdateCycle () {
+    let dbuser = Tracker.getLeastUpToDateUser();
+    if(dbuser) this.update(dbuser, false);
+    setTimeout(() => this.initUpdateCycle(), 15000);
+  }
+
+  updatepresence (member, nowonline) {
+    if(nowonline) Tracker.updateQueue[member.id] = true;
+    else delete Tracker.updateQueue[member.id];
+  }
+
+  run (command, args) {
+    let _command;
+    if(command === "remove") { //it's all the same functions for `!remove just with one extra argument
+      _command = command;
+      command = args.shift();
+    };
+    let dbuser, source, username;
+    for(let _source in config.sources) {
+      if(command.replace(".", "") === _source) source = config.sources[_source];
+    };
+    if(args.length === 0) {
+      dbuser = DBuser.get(this.author);
+      username = this.author.username;
+    };
+    if(args.length === 1) {
+      dbuser = DBuser.get(this.author);
+      username = args[0];
+    };
+    if(args.length === 2) {
+      if(!this.Check.roles(this.member, this.server.roles.admin)) return this.Output.onError("Invalid user given.")
+      let user = this.Search.users.get(args[0]);
+      if(!user) return this.Output.onError("Invalid user given.")
+      dbuser = DBuser.get(user);
+      username = args[1];
+    };
+    if(!dbuser || !source || !username) return this.Output.onError("Incorrect number of parameters given.");
+    username = username.replace(/["`']+/g, "");
+    for(let _username in dbuser[source.key]) {
+      if(_username.toLowerCase() === username.toLowerCase()) username = _username;
+    };
+    if(!username.match(/[a-z0-9][\w-]*[a-z0-9]/i)) return this.Output.onError("Invalid username.");
+    this[_command === "remove" ? "remove" : "track"]({
+      "dbuser": dbuser,
+      "source": source,
+      "username": username,
+      "successfulupdates": []
+    })
+  }
+
+  track (data) {
+    new Promise((resolve, reject) => {
+      resolve(data);
+    })
+    .then((data) => {
+      for(let property in data.dbuser[data.source.key]) {
+        if(property.toLowerCase() === data.username.toLowerCase()) {
+          this.Output.onError(`Already linked ${data.source.name} account **${property}** to ${data.dbuser.username}!`);
+          throw "";
+        }
+      };
+      return data;
+    })
+    .then((data) => {
+      return Tracker.handle(data, (error) => {throw error});
+    })
+    .then((outputData) => {
+      for(let _username in outputData.dbuser[outputData.source.key]) {
+        if(_username.toLowerCase() === outputData.username.toLowerCase()) outputData.username = _username;
+      };
+      this.Output.onTrackSuccess(outputData.dbuser, outputData.source, outputData.username);
+    })
+    .catch((e) => {
+      this.Output.onError(e);
+      console.log(e);
+    })
+  }
+
+  remove (data) {
+    if(!data.dbuser[data.source.key]) return this.Output.onError("There are no linked " + data.source.name + " accounts to **" + data.dbuser.username + "**.")
+    if(data.username && data.dbuser[data.source.key][data.username]) {
+      delete data.dbuser[data.source.key][data.username];
+      let main = data.dbuser[data.source.key]._main === data.username;
+      let NoAccountsLeft = false;
+      for(let property in data.dbuser[data.source.key]) {
+        if(property.startsWith("_")) {
+          if(main) delete data.dbuser[data.source.key][property];
+        } else NoAccountsLeft = true;
+      };
+      if(!NoAccountsLeft) delete data.dbuser[data.source.key];
+      DBuser.setData(data.dbuser);
+      this.Output.onRemoveSuccess(data.dbuser, data.source, data.username);
+    } else this.Output.onError("Could not find username **" + data.username + "** linked to account **" + data.dbuser.username + "**.");
+  }
+
+  updateinput(dbuser, args) {
+    if(args[0]) dbuser = DBuser.get(this.Search.users.get(args[0]));
+    let linkedAccount = false;
+    for(let source in config.sources) {
+      if(dbuser[source]) linkedAccount = true;
+    };
+    if(!linkedAccount) return this.Output.onError("No linked accounts found.\nPlease link an account to your profile through `!lichess\`, `!chess.com`, or `!bughousetest`.");
+    this.update(dbuser, true);
+  }
+
+  update (dbuser, post) {
+    let data = {
+      "dbuser": dbuser
+    };
+    new Promise((resolve, reject) => {
+      resolve(data);
+    })
+    .then((data) => {
+      for(let sourcekey in config.sources) {
+        if(!data.dbuser[sourcekey]) continue;
+        data.source = config.sources[sourcekey];
+        for(let account in data.dbuser[sourcekey]) {
+          if(account.startsWith("_")) continue;
+          data.username = account;
+          Tracker.handle(data, (error) => {throw error})
+          .then(_data => {
+            console.log(account);
+            data = _data;
+          })
+          .catch(e => console.log(e));
+        };
+        console.log(data);
+      };
+      return data;
+    })
+    .then((outputData) => {
+      console.log(`Updated ${data.dbuser.username} on ${data.successfulupdates.join(", ") }with no errors.`);
+      if(post) this.Output.onRatingUpdate(outputData.dbuser);
+    })
+    .catch((e) => {
+      this.Output.onError(e);
+      console.log(e);
+    })
+  }
+
+  /*   {
+    "aliases": [
+      "update"
+    ],
+    "description": "Updates a user on all their accounts.",
+    "usage": [
+      "update",
+      "update theLAZYmd"
+    ],
+    "module": "Chess",
+    "file": "tracker",
+    "method": "updateinput",
+    "arguments": ["dbuser", "args"],
+    "prefix": "generic"
+  }, */
+
+  static handle (data, onError) {
+    return Tracker.request(data.source, data.username)
+    .then((sourceData) => {
+      console.log("sourceData", !!sourceData);
+      let method = "parse" + (data.source.key === "bughousetest" ? "lichess" : data.source.key);
+      return Tracker[method](sourceData, (msg) => {throw (msg)}, {
+        "source": data.source,
+        "username": data.username
+      });
+    })
+    .then((parsedData) => {
+      console.log("parsedData", !!parsedData);
+      return Tracker.assign(data, parsedData);
+    })
+    .then((data) => {
+      console.log("data", !!data);
+      if(!data.dbuser) throw "No dbuser found.";    
+      data.dbuser.lastUpdate = Date.now(); //Mark the update time
+      DBuser.setData(data.dbuser); //set it
+      return data;
+    })
+    .catch((error) => {
+      onError(error);
+      return data;
+    })
+  }
+
+  static request(source, username) {
+    return new Promise((resolve, reject) => {
+      if(!username) return reject("Invalid username.");
+      request.get(config.sources[source.key].url.user.replace("|", username), (error, response, body) => {
+        if(error) {
+          return reject(error);
+        }
+        if(body.length === 0) {
+          return reject("Couldn't find **'" + username + "'** on " + source.name + ".");
+        }
+        let json = null;
+        try {
+          json = JSON.parse(body);
+        } catch (e) {
+          reject(response, e);
+        }
+        resolve(json);
+      })
+    })
+  }
+
+  static parselichess (lichessData, onError, data) { //Parsing API Data is different for each site
+    let source = data.source;
+    if(!lichessData) return onError("Couldn't find '" + username + "' on " + source.name + "."); //if invalid username (i.e. from this.track()), return;
+    if(lichessData.closed) return onError("Account " + lichessData.username + " is closed on " + source.name + "."); //if closed return
+    let ratings = { //the sub-object
+      "maxRating": 0
+    };
+    let allProvisional = true; //if no non-provisional ratings, return an error
+    for(let key in config.variants[source.key]) { //ex: "crazyhouse"
+      let variant = config.variants[source.key][key]; //ex: {"name": "Crazyhouse", "api": "crazyhouse", "key": "crazyhouse"}
+      let variantData = lichessData.perfs[variant.api]; //lichess data, ex: {"games":1,"rating":1813,"rd":269,"prog":0,"prov":true}
+      if(variantData) {
+        ratings[key] = variantData.rating.toString(); //if it exists, take the API's number and store it as a string
+        if(!variantData || variantData.prov) ratings[key] += "?"; //if provisional, stick a question mark on it
+        else {
+          allProvisional = false; //if not provisional, allow user to link this account
+          if(Number(ratings[key]) > ratings.maxRating) ratings.maxRating = ratings[key]; //and if it's the biggest so far, set it.
+        }
+      }
+    };
+    if(allProvisional) return onError("All ratings for " + lichessData.username + " are provisional.");
+    if(lichessData.engine) ratings.cheating = "engine";
+    if(lichessData.boosting) ratings.boosting = "boosting";
+    if(ratings.cheating) onError( //if found to be cheating, log it in database and tell mods
+      `Player ${lichessData.username} (${config.sources[source.key].url.profile.replace("|", lichessData.username)}) ` + 
+      (ratings.cheating === "engine" ? "uses chess computer assistance." : "") +
+      (ratings.cheating === "engine" ? "artificially increases/decreases their rating." : "") + "."
+    );
+    else delete ratings.cheating; //in case of temporary marks
+    let profile = {
+      "ratings": ratings,
+      "username": lichessData.username,
+      "_language": lichessData.language ? lichessData.language : "",
+      "_title": lichessData.title ? lichessData.title : "",
+      "_country": lichessData.profile ? lichessData.profile.country : "",
+      "_name": lichessData.profile ? [lichessData.profile.firstName, lichessData.profile.lastName] : [],
+    }; //return a data object
+    if(profile._name) {
+      let string = "";
+      for(let i = 0; i < profile._name.length; i++) {
+        if(profile._name[i]) string += profile._name[i];
+      };
+      profile._name = string.trim();
+    };
+    for(let property in profile) {
+      if(!profile[property]) delete profile[property];
+    };
+    return profile;
+  }
+
+  static parsechesscom(chesscomData, onError) {
+    let username = data.username;
+    let stats = chesscomData.stats;
+    if(!stats) return onError("Couldn't find **'" + username + "'** on Chess.com.");
+    let ratings = {
+      "maxRating": 0
+    };
+    let allProvisional = true; //if no non-provisional ratings, return an error
+    for(let key in config.variants.chesscom) { //ex: "crazyhouse"
+      let variant = config.variants.chesscom[key]; //ex: {"name": "Crazyhouse", "api": "crazyhouse", "key": "crazyhouse"}
+      for(let i = 0; i < stats.length; i++) {
+        let chessData = stats[i];
+        if(chessData.key === variant.api) {
+          ratings[key] = chessData.stats.rating.toString();
+          if(chessData.gameCount < 10) ratings[key] += "?";
+          else {
+            allProvisional = false;
+            if(Number(ratings[key]) > ratings.maxRating) ratings.maxRating = ratings[key]; //and if it's the biggest so far, set it.
+          }
+        }
+      }
+    };
+    if(allProvisional) return onError("All chess.com ratings for " + username + " are provisional.");
+    return {
+      "ratings": ratings,
+      "username": username
+    }
+  }
+
+  static assign(data, parsedData) {
+    let profile = data.dbuser[data.source.key]; //get the "profile" set of rating data for that source
+    if(!profile) profile = { //if that source has never been assigned to before (first account)
+      "_main": parsedData.username //it's the main one
+    };
+    Object.assign(profile[parsedData.username] = {}, parsedData.ratings);
+    if(profile._main === parsedData.username) { //if it's the main one
+      let properties = ["_name", "_country", "_language", "_title"];
+      for(let i = 0; i < properties.length; i++) {
+        if(parsedData[properties[i]]) profile[properties[i]] = parsedData[properties[i]]; //grab info
+        else if(profile[properties[i]]) delete profile[properties[i]]; //keeps it in sync - if excess data, delete it
+      }
+    };
+    data.dbuser[data.source.key] = profile; //set it
+    data.successfulupdates.push(data.source.key); //and push it to the updates information
+    return data;
   }
 
 };
 
-Tracker.updatequeue = {};
-Tracker.closedUsername = {};
-Tracker.cheatedUserID = {};
+Tracker.updateQueue = {};
 
 module.exports = Tracker;

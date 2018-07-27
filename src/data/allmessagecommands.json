@@ -1,9 +1,9 @@
 [
   {
-    "module": "Tracker",
-    "file": "tracker",
-    "method": "messagelogger",
-    "arguments": []
+    "module": "Profile",
+    "file": "messagecount",
+    "method": "log",
+    "arguments": ["author", "dbuser"]
   },
   {
     "module": "CustomReactions",

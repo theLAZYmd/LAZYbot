@@ -4,7 +4,7 @@ const tally = DataManager.getData();
 const sources = config.sources;
 
 class DBuser {
-
+  
   static setData (dbuser) {
     tally[DBuser.byID(dbuser.id)] = dbuser;
     DataManager.setData(tally);

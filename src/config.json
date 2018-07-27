@@ -1,314 +1,260 @@
 {
-  "dataFile": "src/data/db.json",
-  "guildFile": "src/data/server.json",
-  "houseid": "314155682033041408",
-  "ids": {
-    "bot": "338772451565502474",
-    "betabot": "422847086145568769",
-    "bouncer": "365933164725534722",
-    "nadeko": "116275390695079945",
-    "harmon": "160677293252018177",
-    "owner": [
-      "185412969130229760",
-      "372355465939779595"
-    ]
-  },
-  "colors": {
-    "generic": 53380,
-    "error": 15406156,
-    "ratings": 9359868
-  },
-  "avatar": "https://i.imgur.com/Yl4Xoku.jpg",
-  "background": {
-    "icons": "212225",
-    "markdown": "2f3136",
-    "chat": "36393e"
-  },
-  "text": {
-    "channels": "727671"
-  },
-  "backupdb": [
-    "Wed Jul 11 2018 15:40:25 GMT+01",
-    "Sun Jun 17 2018 00:14:44 GMT+01",
-    "Sun Jun 17 2018 00:14:44 GMT+01"
-  ],
-  "updateDelay": 15000,
-  "url": {
-    "lichess": {
-      "profile": "https://lichess.org/@/|",
-      "user": "https://lichess.org/api/user/|",
-      "status": "https://lichess.org/api/users/status?ids=|",
-      "game": "https://lichess.org/api/game/|"
+    "dataFile": "src/data/db.json",
+    "guildFile": "src/data/server.json",
+    "houseid": "314155682033041408",
+    "ids": {
+        "bot": "338772451565502474",
+        "betabot": "422847086145568769",
+        "bouncer": "365933164725534722",
+        "nadeko": "116275390695079945",
+        "harmon": "160677293252018177",
+        "owner": [
+            "185412969130229760",
+            "372355465939779595"
+        ]
     },
-    "chesscom": {
-      "profile": "https://www.chess.com/member/|",
-      "info": "https://api.chess.com/pub/player/|",
-      "user": "https://www.chess.com/callback/member/stats/|",
-      "status": "https://api.chess.com/pub/player/|/is-online"
+    "colors": {
+        "generic": 53380,
+        "error": 15406156,
+        "ratings": 9359868
     },
-    "bughousetest": {
-      "profile": "http://bughousetest.com/@/|",
-      "user": "http://bughousetest.com/api/user/|",
-      "status": "http://bughousetest.com/api/users/status?ids=|",
-      "game": "http://bughousetest.com/api/game/|"
+    "avatar": "https://i.imgur.com/Yl4Xoku.jpg",
+    "background": {
+        "icons": "212225",
+        "markdown": "2f3136",
+        "chat": "36393e"
     },
+    "text": {
+        "channels": "727671"
+    },
+    "backupdb": [
+        "Wed Jul 11 2018 15:40:25 GMT+01",
+        "Sun Jun 17 2018 00:14:44 GMT+01",
+        "Sun Jun 17 2018 00:14:44 GMT+01"
+    ],
+    "updateDelay": 15000,
     "fen": {
-      "board": "https://www.chess.com/dynboard|",
-      "analysis": "https://lichess.org/analysis?fen=|",
-      "crazyhouse": "https://lichess.org/analysis/crazyhouse/|",
-      "threeCheck": "https://lichess.org/analysis/threeCheck/|"
-    }
-  },
-  "fen": {
-    "board": "icy_sea",
-    "pieces": "alpha",
-    "coords": 0,
-    "size": 2
-  },
-  "variants": {
-    "lichess": [
-      [
-        "Ultra",
-        "ultra",
-        "ultraBullet",
-        "ultra",
-        "ultra"
-      ],
-      [
-        "Bullet",
-        "bullet",
-        "bullet",
-        "chess",
-        "thehouse"
-      ],
-      [
-        "Blitz",
-        "blitz",
-        "blitz",
-        "blitz",
-        "thehouse"
-      ],
-      [
-        "Rapid",
-        "rapid",
-        "rapid",
-        "rapid",
-        "thehouse"
-      ],
-      [
-        "Classical",
-        "classical",
-        "classical",
-        "classical",
-        "thehouse"
-      ],
-      [
-        "Crazyhouse",
-        "crazyhouse",
-        "crazyhouse",
-        "zh",
-        "crazyhouse"
-      ],
-      [
-        "3-check",
-        "threecheck",
-        "threeCheck",
-        "3-check",
-        "3check"
-      ],
-      [
-        "Antichess",
-        "antichess",
-        "antichess",
-        "anti",
-        "anti"
-      ],
-      [
-        "Horde",
-        "horde",
-        "horde",
-        "horde",
-        "horde"
-      ],
-      [
-        "Atomic",
-        "atomic",
-        "atomic",
-        "atomic",
-        "atomic"
-      ],
-      [
-        "Chess960",
-        "chess960",
-        "chess960",
-        "960",
-        "960"
-      ],
-      [
-        "King of the Hill",
-        "koth",
-        "kingOfTheHill",
-        "koth",
-        "koth"
-      ],
-      [
-        "Racing Kings",
-        "racingkings",
-        "racingKings",
-        "racing-kings",
-        "racingkings"
-      ]
-    ],
-    "chesscom": [
-      [
-        "Bullet",
-        "bullet",
-        "bullet",
-        "bullet",
-        "thehouse"
-      ],
-      [
-        "Blitz",
-        "lightning",
-        "lightning",
-        "blitz",
-        "thehouse"
-      ],
-      [
-        "Daily",
-        "chess",
-        "chess",
-        "chess",
-        "thehouse"
-      ],
-      [
-        "Rapid",
-        "rapid",
-        "rapid",
-        "rapid"
-      ],
-      [
-        "King of the Hill",
-        "koth",
-        "kingofthehill",
-        "koth",
-        "koth"
-      ],
-      [
-        "Crazyhouse",
-        "crazyhouse",
-        "crazyhouse",
-        "zh",
-        "crazyhouse"
-      ],
-      [
-        "Bughouse",
-        "bughouse",
-        "bughouse",
-        "bug",
-        "bughouse"
-      ],
-      [
-        "Daily 960",
-        "chess960",
-        "chess960",
-        "960",
-        "960"
-      ],
-      [
-        "Live 960",
-        "livechess960",
-        "liveChess960",
-        "live960",
-        "960"
-      ],
-      [
-        "Tactics",
-        "tactics",
-        "tactics",
-        "tactics",
-        "chesscom"
-      ],
-      [
-        "Lessons",
-        "lessons",
-        "lessons",
-        "lessons",
-        "chesscom"
-      ]
-    ],
-    "bughousetest": [
-      [
-        "Bughouse",
-        "bughouse",
-        "bughouse",
-        "bug",
-        "bughouse"
-      ]
-    ]
-  },
-  "sources": [
-    [
-      "Lichess.org",
-      "lichess",
-      "https://lichess.org/"
-    ],
-    [
-      "Chess.com",
-      "chesscom",
-      "https://www.chess.com/"
-    ],
-    [
-      "BughouseTest.com",
-      "bughousetest",
-      "http://bughousetest.com/api/user/|"
-    ]
-  ],
-  "templates": {
-    "dbuser": {
-      "id": "",
-      "username": "",
-      "messages": 0
+        "board": "icy_sea",
+        "pieces": "alpha",
+        "coords": 0,
+        "size": 2,
+        "url": {
+          "board": "https://www.chess.com/dynboard|",
+          "analysis": "https://lichess.org/analysis?fen=|",
+          "crazyhouse": "https://lichess.org/analysis/crazyhouse/|",
+          "threeCheck": "https://lichess.org/analysis/threeCheck/|"
+        }
     },
-    "server": {
-      "id": "",
-      "testingmodeboolean": false,
-      "ratings": [],
-      "prefixes": {
-        "prefix": "!",
-        "nadeko": "."
-      },
-      "channels": {
-        "announcements": "",
-        "bot": "",
-        "bot2": "",
-        "mod": "",
-        "log": "",
-        "join": "",
-        "leave": "",
-        "live": ""
-      },
-      "colors": {
-        "generic": "",
-        "error": "",
-        "ratings": ""
-      },
-      "roles": {
-        "bot": "",
-        "muted": "",
-        "unranked": "",
-        "league": "",
-        "arena": "",
-        "beta": "",
-        "livenotifications": ""
-      },
-      "acceptedlinkdomains": [],
-      "regions": [],
-      "cr": [],
-      "er": [],
-      "oldcount": 0,
-      "shadowbanned": [],
-      "keys": []
+    "variants": {
+        "lichess": {
+            "960": {
+                "name": "Chess960",
+                "api": "chess960",
+                "key": "960"
+            },
+            "blitz": {
+                "name": "Blitz",
+                "api": "blitz",
+                "key": "blitz"
+            },
+            "bullet": {
+              "name": "Bullet",
+              "api": "bullet",
+              "key": "bullet"
+            },
+            "rapid": {
+                "name": "Rapid",
+                "api": "rapid",
+                "key": "rapid"
+            },
+            "classical": {
+                "name": "Classical",
+                "api": "classical",
+                "key": "classical"
+            },
+            "crazyhouse": {
+                "name": "Crazyhouse",
+                "api": "crazyhouse",
+                "key": "crazyhouse"
+            },
+            "3-check": {
+                "name": "3-check",
+                "api": "threeCheck",
+                "key": "3-check"
+            },
+            "anti": {
+                "name": "Antichess",
+                "api": "antichess",
+                "key": "anti"
+            },
+            "horde": {
+                "name": "Horde",
+                "api": "horde",
+                "key": "horde"
+            },
+            "atomic": {
+                "name": "Atomic",
+                "api": "atomic",
+                "key": "atomic"
+            },
+            "koth": {
+                "name": "King of the Hill",
+                "api": "kingOfTheHill",
+                "key": "koth"
+            },
+            "racing-kings": {
+                "name": "Racing Kings",
+                "api": "racingKings",
+                "key": "racing-kings"
+            }
+        },
+        "chesscom": {
+            "960": {
+                "name": "Daily 960",
+                "api": "chess960",
+                "key": "960"
+            },
+            "bullet": {
+                "name": "Bullet",
+                "api": "bullet",
+                "key": "bullet"
+            },
+            "lightning": {
+                "name": "Blitz",
+                "api": "lightning",
+                "key": "lightning"
+            },
+            "chess": {
+                "name": "Daily",
+                "api": "chess",
+                "key": "chess"
+            },
+            "rapid": {
+                "name": "Rapid",
+                "api": "rapid",
+                "key": "rapid"
+            },
+            "koth": {
+                "name": "King of the Hill",
+                "api": "kingofthehill",
+                "key": "koth"
+            },
+            "crazyhouse": {
+                "name": "Crazyhouse",
+                "api": "crazyhouse",
+                "key": "crazyhouse"
+            },
+            "bug": {
+                "name": "Bughouse",
+                "api": "bughouse",
+                "key": "bug"
+            },
+            "live960": {
+                "name": "Live 960",
+                "api": "liveChess960",
+                "key": "live960"
+            },
+            "tactics": {
+                "name": "Tactics",
+                "api": "tactics",
+                "key": "tactics"
+            },
+            "lessons": {
+                "name": "Lessons",
+                "api": "lessons",
+                "key": "lessons"
+            }
+        },
+        "bughousetest": {
+            "bug": {
+                "name": "Bughouse",
+                "api": "bughouse",
+                "key": "bug"
+            }
+        }
+    },
+    "sources": {
+        "lichess": {
+            "name": "Lichess.org",
+            "key": "lichess",
+            "url": {
+              "ping": "https://lichess.org/",
+              "profile": "https://lichess.org/@/|",
+              "user": "https://lichess.org/api/user/|",
+              "status": "https://lichess.org/api/users/status?ids=|",
+              "game": "https://lichess.org/api/game/|"
+            }
+        },
+        "chesscom": {
+            "name": "Chess.com",
+            "key": "chesscom",
+            "url": {
+              "ping": "https://www.chess.com/",
+              "profile": "https://www.chess.com/member/|",
+              "info": "https://api.chess.com/pub/player/|",
+              "user": "https://www.chess.com/callback/member/stats/|",
+              "status": "https://api.chess.com/pub/player/|/is-online"
+            }
+        },
+        "bughousetest": {
+            "name": "BughouseTest.com",
+            "key": "bughousetest",
+            "url": {
+              "ping": "http://bughousetest.com/",
+              "profile": "http://bughousetest.com/@/|",
+              "user": "http://bughousetest.com/api/user/|",
+              "status": "http://bughousetest.com/api/users/status?ids=|",
+              "game": "http://bughousetest.com/api/game/|"
+            }
+        }
+    },
+    "templates": {
+        "dbuser": {
+            "id": "",
+            "username": "",
+            "messages": {
+              "count": 0
+            }
+        },
+        "server": {
+            "id": "",
+            "testingmodeboolean": false,
+            "ratings": [],
+            "prefixes": {
+                "prefix": "!",
+                "nadeko": "."
+            },
+            "channels": {
+                "announcements": "",
+                "bot": "",
+                "bot2": "",
+                "mod": "",
+                "log": "",
+                "join": "",
+                "leave": "",
+                "live": ""
+            },
+            "colors": {
+                "generic": "",
+                "error": "",
+                "ratings": ""
+            },
+            "roles": {
+                "bot": "",
+                "muted": "",
+                "unranked": "",
+                "league": "",
+                "arena": "",
+                "beta": "",
+                "livenotifications": ""
+            },
+            "acceptedlinkdomains": [],
+            "regions": [],
+            "cr": [],
+            "er": [],
+            "oldcount": 0,
+            "shadowbanned": [],
+            "keys": []
+        }
     }
-  }
 }

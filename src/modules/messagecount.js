@@ -7,6 +7,18 @@ class MessageCount extends Parse {
     super(message);
   }
 
+  log (author, dbuser) { //section for message logging
+    if(author.bot) return;
+    dbuser.messages.count++;
+    for(let prefix in this.server.prefixes) {
+      if(this.prefix === this.server.prefixes[prefix]) return;
+    };
+    dbuser.messages.last = this.content.length > 500 ? this.content.slice(0, 500).replace("`", "") + "..." : this.content.replace(/\`/g,"");
+    dbuser.messages.lastSeen = this.message.createdTimestamp;
+    if(dbuser.username !== author.tag) dbuser.username = author.tag; 
+    DBuser.setData(dbuser);
+  }
+
   update (user) {
     let newcount;
     for(let i = 0; i < this.args.length; i++) {

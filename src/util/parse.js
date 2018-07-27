@@ -72,43 +72,7 @@ class Parse {
     let cmdInfo = new Parse(message);
     return cmdInfo;
   }
-
-  static RatingData(dbuser, source, rankingobject) {
-    let sourceratings = source + "ratings";
-    let sourcerankings = source + "rankings";
-    let sourceratingData = rankingobject ? `**${rankingobject ? "Overall" : "Highest"}: ${dbuser[sourceratings].maxRating}**\n` : ""; //${rankingobject[sourcerankings]}`;
-    for(let i = 0; i < config.variants[source].length; i++) {
-      if(dbuser[source]) {
-        let variant = config.variants[source][i];
-        if(dbuser[sourceratings]) {
-          let rating = dbuser[sourceratings][variant[1]];
-          let ranking = "";
-          if(rankingobject) ranking = rankingobject[sourcerankings][variant[1]]
-          if(rating && !rankingobject || rating && !rating.toString().endsWith("?") && rankingobject) sourceratingData += `${variant[0]}: ${rating.toString().endsWith("?") ? "" : "**" }${rating}${rating.toString().endsWith("?") ? "" : "**" } ${ranking ? `(#` + ranking + `)` : ""}${i < config.variants[source].length -1 ? "\n" : ""}`;
-        }
-      };
-    };
-    return sourceratingData;
-  }
   
-  static Profiles(dbuser, source) {
-    return `[${dbuser[source]}](${(config.url[source].profile.replace("|", dbuser[source]))})`;
-  }
-
-  static sourcefromTitle(sourceTitle) {
-    for(let i = 0; i < config.sources.length; i++) {
-      if(config.sources[i][0] === sourceTitle) return config.sources[i][1];
-    };
-    return;
-  }
-
-  static sourceTitle(source) {
-    for(let i = 0; i < config.sources.length; i++) {
-      if(config.sources[i][1] === source) return config.sources[i][0];
-    };
-    return;
-  };
-
 }
 
 module.exports = Parse;

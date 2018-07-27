@@ -29,25 +29,27 @@ class Embed {
     })
   }
 
-  static getFields(array, messageconstant, bold) { //see explanation at bottom
+  static getFields(array, data) { //see explanation at bottom
+    if(!data) data = {
+      "bold": false,
+      "constant": ""
+    };
     let string = "";
-    if(!messageconstant) {
-      for(let i = 0; i < array.length; i++) {
-        if(typeof array[i] === "array" || typeof array[i] === "object" ) {
-          if(array[i][1] || array[i][1] === 0) {
-            string += (array[i][2] === false ? array[i][0] + array[i][1] + (i < array.length -1 ? `\n` : `` ) : array[i][0] + "**" + array[i][1] + "**" + (i < array.length -1 ? `\n` : ``));
-          }
-        } else 
-        if(typeof array[i] === "string") {
-          string += array[i] + (i < array.length -1 ? `\n` : ``);
-        }
-      }
-    } else {
-      for(let i = 0; i < array.length; i++) {
-        if(array[i]) {
-          string += (bold ? messageconstant + "**" + array[i] + "**" + (i < array.length -1 ? `\n` : ``) : messageconstant + array[i] + (i < array.length -1 ? `\n` : ``));
-        }
-      }
+    for(let i = 0; i < array.length; i++) {
+      if(typeof array[i] === "array" || typeof array[i] === "object" ) {
+        if(array[i][1] || array[i][1] === 0) string += //if we have a double array format [["UID", "185412969130229760"]]
+          array[i][0] + ": " +
+          (data.bold ? "**" : "") + array[i][1] + (data.bold ? "**" : "") +
+          (i < array.length -1 ? `\n` : `` ); /*
+        else string += //if we have a double array format with single items [["Trophy 1"], ["Trophy 2"], ["Trophy 3"]
+          data.constant +
+          (data.bold ? "**" : "") + array[i] + (data.bold ? "**" : "") +
+          (i < array.length -1 ? `\n` : ``); */
+      } else 
+      if(typeof array[i] === "string") string += //if we have 
+        data.constant +
+        (data.bold ? "**" : "") + array[i] + (data.bold ? "**" : "") +
+        (i < array.length -1 ? `\n` : ``);
     }
     return string;
   }
@@ -291,7 +293,9 @@ class Embed {
     Double embeds can be annoying and complicated so make sure to include line breaks to add clarity and well-formatted for(let loops.
 
   VALID EMBED.GETFIELDS INPUT FORMATS {
-    double array, each item in outer array is an array of three parts: the title, the value, and whether it is inline or not.
+
+    TYPE 1:
+    a double array, each item in outer array is an array of three parts: the title, the value, and whether it is inline or not.
     skip a line between each for clarity.
     ex:
     [
@@ -303,6 +307,10 @@ class Embed {
         ["Last Message", this.lastMessage, false],
         ["House Trophies", this.award, true]
     ]
+
+    TYPE 2:
+    a single array! Each item in the array is a new line.
+    ex: 
   }
   */
 

@@ -727,6 +727,20 @@
   },
   {
     "aliases": [
+      "postVotes"
+    ],
+    "description": "Triggers the vote count for a recent election.",
+    "usage": [
+      "postVotes"
+    ],
+    "module": "Election",
+    "file": "election",
+    "method": "postResults",
+    "arguments": [],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
       "parseVotes"
     ],
     "module": "Election",
@@ -764,5 +778,80 @@
     "method": "end",
     "arguments": [],
     "prefix": "nadeko"
+  },
+  {
+    "aliases": [
+      "lichess"
+    ],
+    "description": "Links your Discord user profile to a lichess account.",
+    "usage": [
+      "lichess",
+      "lichess littleplotkin"
+    ],
+    "module": "Chess",
+    "file": "tracker",
+    "method": "run",
+    "arguments": ["command", "args"],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
+      "chesscom",
+      "chess.com"
+    ],
+    "description": "Links your Discord user profile to a Chess.com account.",
+    "usage": [
+      "chesscom",
+      "chesscom schoolmeester"
+    ],
+    "module": "Chess",
+    "file": "tracker",
+    "method": "run",
+    "arguments": ["command", "args"],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
+      "bughousetest"
+    ],
+    "description": "Links your Discord user profile to a bughousetest.com account.",
+    "usage": [
+      "bughousetest",
+      "bughousetest thepinky"
+    ],
+    "module": "Chess",
+    "file": "tracker",
+    "method": "run",
+    "arguments": ["command", "args"],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
+      "remove"
+    ],
+    "description": "Removes a linked account.",
+    "usage": [
+      "remove lichess",
+      "remove lichess theLAZYmd"
+    ],
+    "module": "Chess",
+    "file": "tracker",
+    "method": "run",
+    "arguments": ["command", "args"],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
+      "eval"
+    ],
+    "description": "Use to evaluated javascript code. Bot owner only, for obvious reasons.",
+    "usage": [
+      "eval ```js this.channel.send(Date.now())```"
+    ],
+    "module": "Administration",
+    "file": "eval",
+    "method": "run",
+    "arguments": ["args", "argument"],
+    "prefix": "generic"
   }
 ]
