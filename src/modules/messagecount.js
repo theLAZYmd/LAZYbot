@@ -9,7 +9,11 @@ class MessageCount extends Parse {
 
   log (author, dbuser) { //section for message logging
     if(author.bot) return;
-    dbuser.messages.count++;
+    if(!isNaN(dbuser.messages.count)) dbuser.messages.count++;
+    else {
+      dbuser.messages.count = 0;
+      this.Output.onError("Your message count data has been lost. Please search `from: " + author.tag + "` and use the command `!updatemessagecount [number-here]` to reset your counter.")
+    };
     for(let prefix in this.server.prefixes) {
       if(this.prefix === this.server.prefixes[prefix]) return;
     };
