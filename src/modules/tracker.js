@@ -301,7 +301,7 @@ class Tracker extends Parse {
     return profile;
   }
 
-  static parsechesscom(chesscomData, onError) {
+  static parsechesscom(chesscomData, onError, data) {
     let username = data.username;
     let stats = chesscomData.stats;
     if(!stats) return onError("Couldn't find **'" + username + "'** on Chess.com.");

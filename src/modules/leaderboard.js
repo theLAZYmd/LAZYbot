@@ -59,7 +59,8 @@ class Leaderboard extends Parse {
       if(!active || (dbuser.lastmessagedate && Date.now() - dbuser.lastmessagedate < 604800000)) { //if lastmessage within a week
         if(dbuser[source.key] && !dbuser[source.key].cheating) { //find dbuser tracked from that source, not marked
           let username = dbuser[source.key]._main;
-          if((dbuser[source.key][username][variant.key] && !dbuser[source.key][variant.key].endsWith("?")) || variant.key === "everyone") {
+          if(!dbuser[source.key][username]) this.Output.onError("We have an error for user " + dbuser.username + ".");
+          else if((dbuser[source.key][username][variant.key] && !dbuser[source.key][username][variant.key].endsWith("?")) || variant.key === "everyone") {
             let entry = {
               "tag": dbuser.username.slice(0, -5),
               "username": username,
@@ -84,12 +85,13 @@ class Leaderboard extends Parse {
     for(let i = 0; i < 10; i++) {
       if(this.vlb.rankings[i + 10 * page]) {
         let urltext = this.vlb.rankings[i + 10 * page].tag; //discord username
-        let urllink = config.url[this.vlb.source.key].profile.replace("|", this.vlb.rankings[i + 10 * page].username); //lichess.org/@/V2chess
+        let urllink = config.sources[this.vlb.source.key].url.profile.replace("|", this.vlb.rankings[i + 10 * page].username); //lichess.org/@/V2chess
         let rating = this.vlb.rankings[i + 10 * page].rating;
         array[i] = [];
-        array[i][0] = "[" + urltext +  + "](" + urllink + ") " + rating;
+        array[i][0] = "[" + urltext + "](" + urllink + ") " + rating;
       }
     };
+    console.log(array);
     let lbembed = Embed.leaderboard(array, page); //Case 2 Leaderboard: 
     lbembed.title = `${this.Search.emojis.get(this.vlb.variant.key)} House Rankings on ${this.vlb.source.name} for${this.vlb.active ? "active ": " "}${this.vlb.variant.name} players`;
     return lbembed;

@@ -2,7 +2,7 @@
     "314155682033041408": {
         "id": "314155682033041408",
         "states": {
-            "tm": false,
+            "tm": true,
             "bcp": false,
             "election": true,
             "trivia": true
