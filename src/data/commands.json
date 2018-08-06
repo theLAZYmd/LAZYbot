@@ -427,7 +427,7 @@
     "module": "Profile",
     "file": "finger",
     "method": "run",
-    "arguments": ["args", "argument", "user"],
+    "arguments": ["args", "argument", "author"],
     "prefix": "generic"
   },
   {
@@ -852,6 +852,22 @@
     "file": "eval",
     "method": "run",
     "arguments": ["args", "argument"],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
+      "myrank",
+      "rank"
+    ],
+    "description": "Gets the rank of a user across all leaderboards. Default is yourself.",
+    "usage": [
+      "myrank",
+      "myrank DragonMateZ"
+    ],
+    "module": "Chess",
+    "file": "leaderboard",
+    "method": "getVariantRank",
+    "arguments": ["member", "args"],
     "prefix": "generic"
   }
 ]

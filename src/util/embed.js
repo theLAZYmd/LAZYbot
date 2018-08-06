@@ -147,7 +147,6 @@ class Embed {
     let embed = {
       "description": ""
     };
-    if(!array[0]) return;
     let pagekey = _pagekey ? _pagekey : 9;
     let beginfields = false;
     for(let i = 0; i < array.length; i++) { //if i is less than point where second field starts appearing, add to description

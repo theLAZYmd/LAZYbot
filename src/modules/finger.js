@@ -8,7 +8,7 @@ class Finger extends Parse {
     super(message);
   }
 
-  run(args, argument, user) { //all from the same command, so the arguments parse starts here
+  run (args, argument, user) { //all from the same command, so the arguments parse starts here
     let modboolean = false;
     if(args[0] && this.Search.users.get(args[0])) { //if the first word summons a user then we do something different
       user = this.Search.users.get(args[0]); //the user we use becomes the args[0] (instead of message.author);
@@ -16,7 +16,7 @@ class Finger extends Parse {
       argument = args.join(" ").replace(/[^a-zA-Z0-9\.!\?',;:"£\$%~\+=()\s\u200B-\u200D\uFEFF-]+/g, "");
       modboolean = true; //user summoning is a mod action. It's find for just viewing profiles but for changing we need permissions.
     };
-    let dbuser = DBuser.getfromuser(user);
+    let dbuser = DBuser.getUser(user);
     if(!args[0] || !argument) return this.get(dbuser); //so if there's no arguments left, just view the profile.
     if(modboolean && !this.Check.role(this.member, this.server.roles.admin)) return; //to change or clear, need mod permissions.
     if(args[0] === "clear") return this.clear(dbuser);

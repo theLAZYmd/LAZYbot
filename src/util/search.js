@@ -152,7 +152,7 @@ class Emoji extends All {
   }
   
   byName(name) {
-    return this.client.emojis.find("name", name) || "";
+    return this.client.emojis.find(emoji => emoji.name.replace(/[^a-z0-9]+/gi, "") === name.replace(/[^a-z0-9]+/gi, "")) || "";
   }
 
   byUnicode(searchstring) {

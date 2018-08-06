@@ -19,7 +19,7 @@ class Voters extends Parse {
     if(!this.server.election[channel.name].voters) this.server.election[channel.name].voters = {};
     console.log(channel.name, role.name);
     for(let [key, member] of role.members) {
-      let dbuser = DBuser.get(member.user);
+      let dbuser = DBuser.getUser(member.user);
       if(dbuser && dbuser.messages && dbuser.messages > 50) {
         console.log(`Acknowledging voting rights for ${member.user.tag}.`)
         voters += member.user.tag + "\n";

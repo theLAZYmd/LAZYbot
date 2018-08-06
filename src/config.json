@@ -48,8 +48,8 @@
     "variants": {
         "lichess": {
             "960": {
-                "name": "Chess960",
-                "api": "chess960",
+                "name": "960",
+                "api": "960",
                 "key": "960"
             },
             "blitz": {
@@ -109,10 +109,10 @@
             }
         },
         "chesscom": {
-            "960": {
+            "daily960": {
                 "name": "Daily 960",
-                "api": "chess960",
-                "key": "960"
+                "api": "960",
+                "key": "daily960"
             },
             "bullet": {
                 "name": "Bullet",
@@ -149,10 +149,10 @@
                 "api": "bughouse",
                 "key": "bug"
             },
-            "live960": {
-                "name": "Live 960",
-                "api": "liveChess960",
-                "key": "live960"
+            "960": {
+                "name": "960",
+                "api": "livechess960",
+                "key": "960"
             },
             "tactics": {
                 "name": "Tactics",

@@ -73,6 +73,11 @@ class Leaderboard extends Parse {
       }
     };
     if(leaderboard.rankings.length === 0 || variant.key === "everyone") return leaderboard;
+    leaderboard.rankings.filter((entry) => {
+      if(!entry.rating) return false;
+      if(!entry.rating.endsWith("?")) return false;
+      return true;
+    })
     leaderboard.rankings.sort(function(a, b) {
       return (parseInt(b.rating) - parseInt(a.rating));
     })
@@ -82,6 +87,7 @@ class Leaderboard extends Parse {
   outputVariant(page) {
     this.page = page && !isNaN(page) ? page : 0;
     let array = [];
+    if(this.vlb.variant.key === "3-check") console.log(this.vlb.rankings.map(object => object.tag));
     for(let i = 0; i < 10; i++) {
       if(this.vlb.rankings[i + 10 * page]) {
         let urltext = this.vlb.rankings[i + 10 * page].tag; //discord username
@@ -91,8 +97,7 @@ class Leaderboard extends Parse {
         array[i][0] = "[" + urltext + "](" + urllink + ") " + rating;
       }
     };
-    console.log(array);
-    let lbembed = Embed.leaderboard(array, page); //Case 2 Leaderboard: 
+    let lbembed = Embed.leaderboard(array, page, false, 10); //Case 2 Leaderboard: 
     lbembed.title = `${this.Search.emojis.get(this.vlb.variant.key)} House Rankings on ${this.vlb.source.name} for${this.vlb.active ? "active ": " "}${this.vlb.variant.name} players`;
     return lbembed;
   }
@@ -100,28 +105,63 @@ class Leaderboard extends Parse {
   getVariantRank (member, args) {
     if(args.length === 1) member = this.Search.members.get(args[0]);
     let active = this.content.toLowerCase().includes("active");
-    let rankingobject = {};
-    let sources = Object.keys(config.sources).map(source => this.dbuser[source.key]); //applicable sources are those on the dbuser
+    let rankingObject = {};
+    let sources = Object.keys(config.sources).filter(source => !!this.dbuser[source]); //applicable sources are those on the dbuser
     if(sources.length === 0) return this.Output.onError(`No linked accounts found.\nPlease link an account to your profile through \`!lichess\` or \`!chess.com\``);
-    let leaderboard = Leaderboard.getforVariant({"key": "everyone"}, {"key": source}, active); //grab a leaderboard of all
     for(let i = 0; i < sources.length; i++) { //for each source which is applicable
-      let variants = Object.keys(config.variants).map(variant => this.dbuser[sources[i]][username][variant] && !this.dbuser[sources[i]][username][variant].endsWith("?")); //applicable sources are those on the main account
+      let leaderboard = this.parseVariant({"key": "everyone"}, {"key": sources[i]}, active); //grab a leaderboard of all
+      let variants = Object.keys(config.variants[sources[i]]).filter((variant) => {
+        if(!this.dbuser[sources[i]]) return false;
+        let username = this.dbuser[sources[i]]._main;
+        if(!this.dbuser[sources[i]][username][variant]) return false;
+        if(this.dbuser[sources[i]][username][variant].endsWith("?")) return false; //applicable sources are those on the main account
+        return true;
+      });
       rankingObject[sources[i]] = {};
       for(let j = 0; j < variants.length; j++) {
-        leaderboard.rankings.sort((a, b) => { //for each variant instance, sort the same leaderboard by variant rating
-          return parseInt(b.rating[variants[j]]) - parseInt(a.rating[variants[jk]]);       
+        let lb = Object.assign({}, leaderboard);
+        //if(variants[j] === "3-check") console.log(lb.rankings.map(object => object.tag));
+        lb.rankings.filter((entry) => {
+          //console.log(entry.rating);
+          if(!entry.rating) return false;
+          if(!entry.rating[variants[j]]) return false;
+          if(!entry.rating[variants[j]].endsWith("?")) return false;
+          return true;
         });
-        rankingObject[sources[i]][variants[j]] = 0;
-        for(let k = 0; k < leaderboard.rankings.length; k++) {
-          if(leaderboard.rankings[k].rating[variant[j]].endsWith("?")) continue; //skip over provisional ratings
-          if(leaderboard.rankings[k].rating[variant[1]] === 0) break; //get rid of 0 ratings
-          rankingObject[sources[i]][variants[j]]++;
-          if(leaderboard.rankings[k].id === member.id) break; //end the count once you reach the desired user
+        //if(variants[j] === "3-check") console.log(lb.rankings.map(object => object.tag));
+        lb.rankings.sort((a, b) => { //for each variant instance, sort same leaderboard by variant rating
+          return parseInt(b.rating[variants[j]]) - parseInt(a.rating[variants[j]]);       
+        });
+        for(let k = 0; k < lb.rankings.length; k++) {
+          if(lb.rankings[k].id === member.id) {
+            rankingObject[sources[i]][variants[j]] = {
+              "rating": lb.rankings[k].rating[variants[j]],
+              "rank": k + 1
+            };
+            break; //end the count once you reach the desired user
+          }
+        }
+      };
+      let lb = Object.assign({}, leaderboard);
+      lb.rankings.filter((entry) => {
+        if(!entry.rating) return false;
+        if(!entry.rating.maxRating) return false;
+        return true;
+      });
+      lb.rankings.sort((a, b) => {
+        return parseInt(b.rating.maxRating) - parseInt(a.rating.maxRating);       
+      });
+      for(let k = 0; k < lb.rankings.length; k++) {
+        if(lb.rankings[k].id === member.id) {
+          rankingObject[sources[i]].maxRating = {
+            "rating": lb.rankings[k].rating.maxRating,
+            "rank": k + 1
+          };
+          break;
         }
       }
     };
-    console.log(rankingObject);
-    //this.Output.onRank(this.member.user, rankingObject);
+    this.Output.onRank(this.dbuser, rankingObject);
   }
     
 }
