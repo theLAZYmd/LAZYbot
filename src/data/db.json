@@ -178,7 +178,7 @@
               "classical": "1500?",
               "crazyhouse": "2021",
               "3-check": "1717?",
-              "antichess": "1531?",
+              "anti": "1531?",
               "atomic": "1336?"
           }
       },
@@ -244,7 +244,7 @@
               "classical": "2648?",
               "crazyhouse": "2530",
               "3-check": "2324",
-              "antichess": "2214",
+              "anti": "2214",
               "horde": "2566",
               "atomic": "2440",
               "koth": "2319",
@@ -278,7 +278,7 @@
               "classical": "1788?",
               "crazyhouse": "1979",
               "3-check": "1611",
-              "antichess": "1615",
+              "anti": "1615",
               "horde": "1574?",
               "atomic": "1476",
               "koth": "1705?",
@@ -347,7 +347,7 @@
               "classical": "1500?",
               "crazyhouse": "2161",
               "3-check": "1861",
-              "antichess": "1641",
+              "anti": "1641",
               "horde": "1279?",
               "atomic": "1674",
               "koth": "1704",
@@ -381,7 +381,7 @@
               "classical": "1801",
               "crazyhouse": "1926",
               "3-check": "1734",
-              "antichess": "1757",
+              "anti": "1757",
               "horde": "1700",
               "atomic": "1731",
               "koth": "1899",
@@ -452,7 +452,7 @@
               "classical": "1912",
               "crazyhouse": "1915",
               "3-check": "1750",
-              "antichess": "1769",
+              "anti": "1769",
               "horde": "1525",
               "atomic": "1518"
           }
@@ -541,7 +541,7 @@
               "classical": "1486",
               "crazyhouse": "1421",
               "3-check": "1529",
-              "antichess": "2061",
+              "anti": "2061",
               "horde": "1459",
               "atomic": "1639",
               "koth": "1541",
@@ -568,7 +568,7 @@
               "rapid": "2112",
               "classical": "2112?",
               "crazyhouse": "2281",
-              "antichess": "1444?",
+              "anti": "1444?",
               "horde": "1395?",
               "koth": "1920?"
           }
@@ -611,7 +611,7 @@
               "classical": "1500?",
               "crazyhouse": "2445",
               "3-check": "1420?",
-              "antichess": "1751",
+              "anti": "1751",
               "koth": "1657"
           }
       },
@@ -672,7 +672,7 @@
               "classical": "1321",
               "crazyhouse": "1838",
               "3-check": "1598",
-              "antichess": "2230",
+              "anti": "2230",
               "horde": "1563",
               "atomic": "1814",
               "koth": "1550",
@@ -710,7 +710,7 @@
               "classical": "1500?",
               "crazyhouse": "2437",
               "3-check": "2176",
-              "antichess": "1901",
+              "anti": "1901",
               "horde": "2349",
               "atomic": "1953",
               "koth": "2167",
@@ -829,7 +829,7 @@
               "classical": "1638?",
               "crazyhouse": "1351",
               "3-check": "1535",
-              "antichess": "1904",
+              "anti": "1904",
               "horde": "1931",
               "atomic": "1640",
               "koth": "1581",
@@ -898,7 +898,7 @@
               "classical": "1500?",
               "crazyhouse": "2241",
               "3-check": "2153",
-              "antichess": "1840?",
+              "anti": "1840?",
               "horde": "1811?",
               "atomic": "1816",
               "koth": "1915",
@@ -947,7 +947,7 @@
               "classical": "1500?",
               "crazyhouse": "2149",
               "3-check": "1991",
-              "antichess": "1799",
+              "anti": "1799",
               "horde": "1780",
               "atomic": "1958",
               "koth": "2006",
@@ -1055,7 +1055,7 @@
               "classical": "2270",
               "crazyhouse": "1911",
               "3-check": "1852",
-              "antichess": "1883",
+              "anti": "1883",
               "horde": "2016",
               "atomic": "1829",
               "koth": "2044",
@@ -1099,7 +1099,7 @@
               "classical": "1952?",
               "crazyhouse": "1494",
               "3-check": "1646",
-              "antichess": "1644",
+              "anti": "1644",
               "horde": "2485",
               "atomic": "1595",
               "koth": "2040",
@@ -1193,7 +1193,7 @@
               "classical": "1500?",
               "crazyhouse": "1860?",
               "3-check": "1990?",
-              "antichess": "1939",
+              "anti": "1939",
               "horde": "1716?",
               "atomic": "2236",
               "koth": "1974?",
@@ -1285,7 +1285,7 @@
               "blitz": "1477?",
               "rapid": "1587?",
               "classical": "1647?",
-              "antichess": "1644"
+              "anti": "1644"
           }
       },
       "chesscom": {
@@ -1353,7 +1353,7 @@
               "classical": "2309",
               "crazyhouse": "2651",
               "3-check": "2333",
-              "antichess": "2078",
+              "anti": "2078",
               "horde": "2218",
               "atomic": "2049",
               "koth": "2435",
@@ -1391,7 +1391,7 @@
               "classical": "2473",
               "crazyhouse": "2191",
               "3-check": "2098",
-              "antichess": "1725",
+              "anti": "1725",
               "horde": "2112",
               "atomic": "1892",
               "koth": "2225",
@@ -1445,7 +1445,7 @@
               "classical": "1906?",
               "crazyhouse": "2182",
               "3-check": "1791",
-              "antichess": "1878",
+              "anti": "1878",
               "horde": "1642",
               "atomic": "1779",
               "koth": "1773",
@@ -1526,7 +1526,7 @@
               "classical": "2064",
               "crazyhouse": "2490",
               "3-check": "1780",
-              "antichess": "1321?",
+              "anti": "1321?",
               "horde": "1399",
               "atomic": "1707",
               "koth": "1813?",
@@ -1564,7 +1564,7 @@
               "classical": "1729?",
               "crazyhouse": "1900",
               "3-check": "1851",
-              "antichess": "2101",
+              "anti": "2101",
               "horde": "1833",
               "atomic": "2252",
               "koth": "1904",
@@ -1614,7 +1614,7 @@
               "classical": "1500?",
               "crazyhouse": "2094",
               "3-check": "1864",
-              "antichess": "1999",
+              "anti": "1999",
               "horde": "1526?",
               "atomic": "1927",
               "koth": "1582",
@@ -1774,7 +1774,7 @@
               "rapid": "1500?",
               "classical": "1500?",
               "crazyhouse": "1718?",
-              "antichess": "1718?",
+              "anti": "1718?",
               "atomic": "1848"
           }
       }
@@ -1909,7 +1909,7 @@
               "classical": "1224?",
               "crazyhouse": "1993",
               "3-check": "1372?",
-              "antichess": "1716?",
+              "anti": "1716?",
               "horde": "1908?",
               "atomic": "1646",
               "koth": "1417",
@@ -1952,7 +1952,7 @@
               "blitz": "1721",
               "rapid": "1883",
               "classical": "1896",
-              "antichess": "1505",
+              "anti": "1505",
               "horde": "1530?",
               "atomic": "1825",
               "koth": "1838?"
@@ -2024,7 +2024,7 @@
               "classical": "1500?",
               "crazyhouse": "1535",
               "3-check": "1498",
-              "antichess": "1826",
+              "anti": "1826",
               "horde": "1413?",
               "atomic": "1864",
               "koth": "1458",
@@ -2150,7 +2150,7 @@
               "blitz": "1500?",
               "rapid": "1500?",
               "classical": "1500?",
-              "antichess": "1704?"
+              "anti": "1704?"
           }
       }
   },
@@ -2174,7 +2174,7 @@
               "classical": "1224?",
               "crazyhouse": "2004",
               "3-check": "1372?",
-              "antichess": "1716?",
+              "anti": "1716?",
               "horde": "1908?",
               "atomic": "1624",
               "koth": "1417",
@@ -2230,7 +2230,7 @@
               "classical": "1500?",
               "crazyhouse": "1749",
               "3-check": "1621",
-              "antichess": "2006",
+              "anti": "2006",
               "horde": "1369?",
               "atomic": "1696",
               "koth": "1735?",
@@ -2397,7 +2397,7 @@
               "classical": "1500?",
               "crazyhouse": "1622?",
               "3-check": "1458?",
-              "antichess": "1568?"
+              "anti": "1568?"
           }
       },
       "finger": "I have  a chess YT channel btw!",
@@ -2467,7 +2467,7 @@
               "maxRating": "",
               "ultra": "",
               "3-check": "",
-              "antichess": "",
+              "anti": "",
               "horde": "",
               "atomic": "",
               "koth": "",
@@ -2503,7 +2503,7 @@
               "classical": "1710?",
               "crazyhouse": "2101",
               "3-check": "1716",
-              "antichess": "1351?",
+              "anti": "1351?",
               "horde": "1765",
               "atomic": "1590",
               "koth": "1763",
@@ -2543,7 +2543,7 @@
               "classical": "1912?",
               "crazyhouse": "1581",
               "3-check": "1670",
-              "antichess": "1973",
+              "anti": "1973",
               "horde": "1612",
               "atomic": "1269?",
               "koth": "1562",
@@ -2572,7 +2572,7 @@
               "classical": "1722?",
               "crazyhouse": "1348",
               "3-check": "1292?",
-              "antichess": "1352?",
+              "anti": "1352?",
               "horde": "1632?",
               "atomic": "1616",
               "koth": "1458?",
@@ -2661,7 +2661,7 @@
               "classical": "1691",
               "crazyhouse": "1440",
               "3-check": "1452?",
-              "antichess": "1238?",
+              "anti": "1238?",
               "horde": "1359?",
               "atomic": "1105?",
               "koth": "1603?",
@@ -2744,7 +2744,7 @@
               "classical": "2192",
               "crazyhouse": "2108",
               "3-check": "2304",
-              "antichess": "1811",
+              "anti": "1811",
               "horde": "1928",
               "atomic": "2126",
               "koth": "2006",
@@ -2836,7 +2836,7 @@
               "classical": "1500?",
               "crazyhouse": "2115?",
               "3-check": "1385?",
-              "antichess": "2130?",
+              "anti": "2130?",
               "atomic": "1619",
               "koth": "1484",
               "racingkings": "1412?"
@@ -2991,7 +2991,7 @@
               "classical": "1500?",
               "crazyhouse": "2069",
               "3-check": "1611?",
-              "antichess": "1448?",
+              "anti": "1448?",
               "horde": "2017",
               "atomic": "1412?",
               "koth": "1632?"
@@ -3053,7 +3053,7 @@
               "classical": "1681",
               "crazyhouse": "1522",
               "3-check": "1355?",
-              "antichess": "1153?",
+              "anti": "1153?",
               "horde": "1445?",
               "atomic": "1421",
               "koth": "1583?",
@@ -3162,7 +3162,7 @@
               "blitz": "1500?",
               "rapid": "1500?",
               "classical": "1500?",
-              "antichess": "2269"
+              "anti": "2269"
           }
       },
       "lastupdate": 1532164232461
@@ -3226,7 +3226,7 @@
               "rapid": "1500?",
               "classical": "1500?",
               "crazyhouse": "2253",
-              "antichess": "2053"
+              "anti": "2053"
           }
       },
       "chesscom": {
@@ -3317,7 +3317,7 @@
               "rapid": "1500?",
               "classical": "1500?",
               "crazyhouse": "2071",
-              "antichess": "1992",
+              "anti": "1992",
               "horde": "1696?",
               "atomic": "2222",
               "racingkings": "1461?"
@@ -3459,7 +3459,7 @@
               "rapid": "1895",
               "classical": "1500?",
               "crazyhouse": "1844",
-              "antichess": "1458?",
+              "anti": "1458?",
               "horde": "1709",
               "atomic": "1591",
               "koth": "1753",
@@ -3579,7 +3579,7 @@
               "classical": "1500?",
               "crazyhouse": "1426",
               "3-check": "1513",
-              "antichess": "2432",
+              "anti": "2432",
               "horde": "1662?",
               "atomic": "1804",
               "koth": "1370?",
@@ -3953,7 +3953,7 @@
               "rapid": "1124",
               "classical": "1500?",
               "3-check": "1173?",
-              "antichess": "1566",
+              "anti": "1566",
               "horde": "1154?",
               "racingkings": "1484?"
           }
@@ -4016,7 +4016,7 @@
               "classical": "1700",
               "crazyhouse": "1806",
               "3-check": "1737",
-              "antichess": "1819",
+              "anti": "1819",
               "horde": "1482",
               "atomic": "2247",
               "koth": "1744",
@@ -4115,7 +4115,7 @@
               "rapid": "1366?",
               "classical": "1500?",
               "crazyhouse": "1108?",
-              "antichess": "1913",
+              "anti": "1913",
               "horde": "1277",
               "atomic": "1804",
               "koth": "1353",
@@ -4162,7 +4162,7 @@
               "classical": "1500?",
               "crazyhouse": "2401",
               "3-check": "1915",
-              "antichess": "1826?"
+              "anti": "1826?"
           }
       }
   },
@@ -4200,7 +4200,7 @@
               "rapid": "1902?",
               "classical": "1500?",
               "crazyhouse": "1500",
-              "antichess": "2191"
+              "anti": "2191"
           }
       },
       "lastupdate": 1532060322277
@@ -4389,7 +4389,7 @@
               "rapid": "1325?",
               "classical": "1500?",
               "crazyhouse": "1482?",
-              "antichess": "2341",
+              "anti": "2341",
               "atomic": "1479?"
           }
       }
@@ -4421,7 +4421,7 @@
               "classical": "1759",
               "crazyhouse": "1696",
               "3-check": "1459",
-              "antichess": "1457",
+              "anti": "1457",
               "horde": "1631?",
               "atomic": "1193?",
               "koth": "1744",
@@ -4450,7 +4450,7 @@
               "classical": "1500?",
               "crazyhouse": "2267",
               "3-check": "2002?",
-              "antichess": "2364?",
+              "anti": "2364?",
               "horde": "2661",
               "atomic": "2262",
               "koth": "2019",
@@ -4479,7 +4479,7 @@
               "classical": "1817?",
               "crazyhouse": "1885?",
               "3-check": "1619",
-              "antichess": "1792",
+              "anti": "1792",
               "horde": "1566?",
               "atomic": "1573?",
               "koth": "1368?",
@@ -4587,7 +4587,7 @@
               "classical": "1550?",
               "crazyhouse": "1683",
               "3-check": "1746",
-              "antichess": "1578",
+              "anti": "1578",
               "horde": "1453",
               "atomic": "1948",
               "koth": "1767",
@@ -4618,7 +4618,7 @@
               "rapid": "2270",
               "classical": "2029",
               "crazyhouse": "1476",
-              "antichess": "1317",
+              "anti": "1317",
               "atomic": "1156?",
               "racingkings": "1687"
           }
@@ -4728,7 +4728,7 @@
               "classical": "2039?",
               "crazyhouse": "1655",
               "3-check": "1666",
-              "antichess": "1646?",
+              "anti": "1646?",
               "horde": "1629?",
               "atomic": "1730",
               "koth": "1369?"
@@ -4845,7 +4845,7 @@
               "classical": "1500?",
               "crazyhouse": "2202",
               "3-check": "1861",
-              "antichess": "1641",
+              "anti": "1641",
               "horde": "1279?",
               "atomic": "1674",
               "koth": "1704",
@@ -5077,7 +5077,7 @@
               "classical": "1629",
               "crazyhouse": "1366?",
               "3-check": "1513?",
-              "antichess": "1313",
+              "anti": "1313",
               "horde": "1590",
               "atomic": "1494",
               "koth": "1574",
@@ -5126,7 +5126,7 @@
               "classical": "1122?",
               "crazyhouse": "1430?",
               "3-check": "1378?",
-              "antichess": "1885",
+              "anti": "1885",
               "horde": "1361?",
               "atomic": "2255",
               "racingkings": "1530?"
@@ -5256,7 +5256,7 @@
               "classical": "1500?",
               "crazyhouse": "1795",
               "3-check": "1630",
-              "antichess": "1400?",
+              "anti": "1400?",
               "horde": "1333?",
               "atomic": "1677",
               "koth": "1453?",
@@ -5331,7 +5331,7 @@
               "blitz": "1500?",
               "rapid": "1500?",
               "classical": "1500?",
-              "antichess": "1888",
+              "anti": "1888",
               "atomic": "2007",
               "racingkings": "2185"
           }
@@ -5423,7 +5423,7 @@
               "classical": "1500?",
               "crazyhouse": "1655",
               "3-check": "1833?",
-              "antichess": "1873",
+              "anti": "1873",
               "horde": "1769",
               "atomic": "2214",
               "koth": "1666",
@@ -5529,7 +5529,7 @@
               "classical": "2107?",
               "crazyhouse": "2103",
               "3-check": "1594",
-              "antichess": "1767",
+              "anti": "1767",
               "horde": "1789",
               "atomic": "1352?",
               "koth": "1322?",
@@ -5645,7 +5645,7 @@
               "classical": "1747",
               "crazyhouse": "1769",
               "3-check": "1659?",
-              "antichess": "1507",
+              "anti": "1507",
               "horde": "1602?",
               "atomic": "1545",
               "racingkings": "1581?"
@@ -5722,7 +5722,7 @@
               "classical": "1829?",
               "crazyhouse": "1738",
               "3-check": "1252?",
-              "antichess": "1579",
+              "anti": "1579",
               "horde": "1574?",
               "atomic": "1697",
               "koth": "1619",
@@ -5761,7 +5761,7 @@
               "classical": "1583?",
               "crazyhouse": "1444?",
               "3-check": "1339?",
-              "antichess": "1334?",
+              "anti": "1334?",
               "horde": "1259?",
               "atomic": "1432?"
           }
@@ -5788,7 +5788,7 @@
               "classical": "1500?",
               "crazyhouse": "2048",
               "3-check": "1629?",
-              "antichess": "1572",
+              "anti": "1572",
               "horde": "1731",
               "atomic": "1714",
               "koth": "1684?",
@@ -5847,7 +5847,7 @@
               "classical": "1831",
               "crazyhouse": "1515",
               "3-check": "1491",
-              "antichess": "1462",
+              "anti": "1462",
               "horde": "1662",
               "atomic": "1583",
               "koth": "1663",
@@ -5942,7 +5942,7 @@
               "rapid": "1684",
               "classical": "1783",
               "crazyhouse": "1596",
-              "antichess": "1471",
+              "anti": "1471",
               "horde": "1436?",
               "atomic": "1760",
               "racingkings": "1697"
@@ -6060,7 +6060,7 @@
               "classical": "1764",
               "crazyhouse": "1660",
               "3-check": "1708",
-              "antichess": "1672",
+              "anti": "1672",
               "horde": "1616",
               "atomic": "1467",
               "koth": "1615",
@@ -6611,7 +6611,7 @@
               "classical": "1500?",
               "crazyhouse": "1325",
               "3-check": "1566?",
-              "antichess": "1453",
+              "anti": "1453",
               "horde": "1315?",
               "atomic": "1161?",
               "racingkings": "1572"
