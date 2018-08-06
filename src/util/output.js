@@ -62,8 +62,8 @@ class Output {
     for(let source in config.sources) {
       for(let account in dbuser[source]) {
         let sourceratings = source + "ratings";
-        let sourceratinglist = Parse.RatingData(dbuser, source, rankingobject);
-        let sourceuserprofile = Parse.Profiles(dbuser, source, account);
+        let sourceratinglist = Render.ratingData(dbuser, source, rankingobject);
+        let sourceuserprofile = Render.profile(dbuser, source, account);
         embed.fields = Embed.fielder(
           embed.fields,
           `${this.Search.emojis.get(source)} Updated ${dbuser[source]}`,
@@ -75,20 +75,34 @@ class Output {
     this.sender(embed);
   }
 
-  onRank(dbuser, rankingobject) {
+  onRank(dbuser, rankingObject) {
     let embed = {
       "color": this.server.colors.ratings
     };
     let whitespace = "                                \u200B"
     for(let source in config.sources) {
-      for(let account in dbuser[source]) {
-        let sourceratings = source + "ratings";
-        let sourceratinglist = require.RatingData(dbuser, source, rankingobject);
-        let sourceuserprofile = Parse.Profiles(dbuser, source, account);
+      if(rankingObject[source]) {
+        let sourceratinglist = "";
+        if(rankingObject[source]) {
+          sourceratinglist += "Overall: " + rankingObject[source].maxRating + "\n";
+          for(let key in config.variants[source]) {
+            let variant = config.variants[source][key];
+            if(rankingObject[source][key]) sourceratinglist +=
+              variant.name +
+              ": " + 
+              (rankingObject[source][key].rating.toString().endsWith("?") ? "" : "**") +
+              rankingObject[source][key].rating +
+              (rankingObject[source][key].rating.toString().endsWith("?") ? "" : "**") +
+              " (#" +
+              rankingObject[source][key].rank +
+              ")\n";
+          }
+        };
+        let sourceuserprofile = Render.profile(dbuser, source, account);
         embed.fields = Embed.fielder(
           embed.fields,
-          `${this.Search.emojis.get(source)} ${dbuser[source]} Rankings`,
-          sourceuserprofile + "\n" + sourceratinglist,
+          `${this.Search.emojis.get(source)} ${config.sources[source].name} Rankings`,
+          sourceuserprofile + whitespace + "\n" + sourceratinglist,
           true
         )
       }
@@ -124,7 +138,7 @@ class Output {
         "color": config.colors.error
       }, channel)
       .then(message => resolve(message))
-      .catch(e => console.log(JSON.stringify(e)));
+      .catch(e => console.log(e));
     })
   }
 

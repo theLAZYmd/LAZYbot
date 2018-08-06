@@ -4,6 +4,7 @@ const DBuser = require("../util/dbuser.js");
 class Parse {
 
   constructor(message) { //everything extends to here
+
     this.message = message;
     this.client = this.message.client;
     this.author = this.message.author;
@@ -24,7 +25,7 @@ class Parse {
   }
 
   get dbuser () {
-    return DBuser.get(this.user)
+    return DBuser.getUser(this.user)
   }
 
   get dbindex () {

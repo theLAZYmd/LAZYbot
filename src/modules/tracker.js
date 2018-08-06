@@ -69,18 +69,18 @@ class Tracker extends Parse {
       if(command.replace(".", "") === _source) source = config.sources[_source];
     };
     if(args.length === 0) {
-      dbuser = DBuser.get(this.author);
+      dbuser = DBuser.getUser(this.author);
       username = this.author.username;
     };
     if(args.length === 1) {
-      dbuser = DBuser.get(this.author);
+      dbuser = DBuser.getUser(this.author);
       username = args[0];
     };
     if(args.length === 2) {
       if(!this.Check.roles(this.member, this.server.roles.admin)) return this.Output.onError("Invalid user given.")
       let user = this.Search.users.get(args[0]);
       if(!user) return this.Output.onError("Invalid user given.")
-      dbuser = DBuser.get(user);
+      dbuser = DBuser.getUser(user);
       username = args[1];
     };
     if(!dbuser || !source || !username) return this.Output.onError("Incorrect number of parameters given.");
@@ -120,8 +120,10 @@ class Tracker extends Parse {
       this.Output.onTrackSuccess(outputData.dbuser, outputData.source, outputData.username);
     })
     .catch((e) => {
-      this.Output.onError(e);
-      console.log(e);
+      if(e) {
+        this.Output.onError(e);
+        console.log(e);
+      };
     })
   }
 
@@ -143,7 +145,7 @@ class Tracker extends Parse {
   }
 
   updateinput(dbuser, args) {
-    if(args[0]) dbuser = DBuser.get(this.Search.users.get(args[0]));
+    if(args[0]) dbuser = DBuser.getUser(this.Search.users.get(args[0]));
     let linkedAccount = false;
     for(let source in config.sources) {
       if(dbuser[source]) linkedAccount = true;
@@ -182,8 +184,10 @@ class Tracker extends Parse {
       if(post) this.Output.onRatingUpdate(outputData.dbuser);
     })
     .catch((e) => {
-      this.Output.onError(e);
-      console.log(e);
+      if(e) {
+        this.Output.onError(e);
+        console.log(e);
+      };
     })
   }
 

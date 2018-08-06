@@ -32,6 +32,7 @@ class Router {
         for(let i = 0; i < Commands.length; i++) {
           let cmdInfo = Object.assign({}, Commands[i]);
           cmdInfo.prefix = data.argsInfo.server.prefixes[cmdInfo.prefix];
+          cmdInfo.command = true;
           if(cmdInfo.aliases.inArray(data.argsInfo.command) && cmdInfo.prefix === data.argsInfo.prefix) { //if valid command has been received
             Router.logCommand(data.argsInfo, cmdInfo);
             Router.runCommand(data.message, data.argsInfo, cmdInfo);
@@ -78,7 +79,7 @@ class Router {
     let args = [];
     for(let i = 0; i < cmdInfo.arguments.length; i++) {
       args[i] = argsInfo[cmdInfo.arguments[i]]; //the arguments we take for new Instance input are what's listed
-      if(!args[i]) return Output.onError(`Command **${argsInfo.command}** requires the following piece of data which you have not provided: **${cmdInfo.arguments[i]}**.`)
+      //if(!args[i]) return Output.onError(`Command **${argsInfo.command}** requires the following piece of data which you have not provided: **${cmdInfo.arguments[i]}**.`)
     };
     let Constructor = require("../modules/" + cmdInfo.file + ".js"); //Profile
     let Instance = new Constructor(message); //profile = new Profile(message);
