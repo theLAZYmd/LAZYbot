@@ -16,16 +16,19 @@
     "colors": {
         "generic": 53380,
         "error": 15406156,
-        "ratings": 9359868
+        "ratings": 9359868,
+        "background": {
+          "icons": "212225",
+          "markdown": "2f3136",
+          "chat": "36393e"
+        },
+        "text": {
+            "channels": "727671"
+        }
     },
     "avatar": "https://i.imgur.com/Yl4Xoku.jpg",
-    "background": {
-        "icons": "212225",
-        "markdown": "2f3136",
-        "chat": "36393e"
-    },
-    "text": {
-        "channels": "727671"
+    "states": {
+        "debug": false
     },
     "backupdb": [
         "Wed Jul 11 2018 15:40:25 GMT+01",
@@ -144,10 +147,10 @@
                 "api": "crazyhouse",
                 "key": "crazyhouse"
             },
-            "bug": {
+            "bughouse": {
                 "name": "Bughouse",
                 "api": "bughouse",
-                "key": "bug"
+                "key": "bughouse"
             },
             "960": {
                 "name": "960",
@@ -166,10 +169,10 @@
             }
         },
         "bughousetest": {
-            "bug": {
+            "bughouse": {
                 "name": "Bughouse",
                 "api": "bughouse",
-                "key": "bug"
+                "key": "bughouse"
             }
         }
     },

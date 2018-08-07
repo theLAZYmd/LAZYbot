@@ -25,6 +25,7 @@
     "preinstall": "rm package-lock.json",
     "dependencies": {
         "axios": "^0.18.0",
+        "circular-json": "^0.5.5",
         "discord.js": "^11.2.1",
         "enmap": "^0.3.2",
         "es6": "0.0.7",
@@ -35,6 +36,7 @@
         "request": "^2.87.0",
         "simple-oauth2": "^1.5.2",
         "tesseract.js": "^1.0.10",
+        "util": "^0.11.0",
         "yarn": "^1.5.1"
     }
 }
