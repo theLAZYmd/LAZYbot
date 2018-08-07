@@ -120,7 +120,7 @@ class FEN extends Parse {
   }
 
   get imageURL () {
-    return config.url.fen.board.replace("|",
+    return config.fen.url.board.replace("|",
       "?fen=" + encodeURIComponent(this.positionfen) +
       "&board=" + config.fen.board +
       "&piece=" + config.fen.pieces +
@@ -132,8 +132,8 @@ class FEN extends Parse {
   }
 
   get analysisURL () { //encode for chess
-    if(this.variant === "chess") return config.url.fen.analysis.replace("|", encodeURIComponent(this.fen));
-    else return config.url.fen[this.variant].replace("|", this.fen.replace(/\s+/g, "_"))
+    if(this.variant === "chess") return config.fen.url.analysis.replace("|", encodeURIComponent(this.fen));
+    else return config.fen.url[this.variant].replace("|", this.fen.replace(/\s+/g, "_"))
   } //as is with modified spaces for variants
 
   get embed () {

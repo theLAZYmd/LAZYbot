@@ -17,9 +17,11 @@ class Output {
     this.httpboolean = this.client.httpboolean;
     this.Search = new (require("../util/search.js"))(this.message);
     this.Check = new (require("../util/check.js"))(this.message);
+    this.debug = config.states.debug || false;
   }
 
   sender(embed, NewChannel) {
+    if(this.debug) return () => {};
     return new Promise((resolve, reject) => {
       Embed.sender(embed, NewChannel ? NewChannel : this.channel)
       .then(message => resolve(message))
@@ -75,6 +77,21 @@ class Output {
     this.sender(embed);
   }
 
+  /* rankingObject:
+  { lichess:
+   { blitz: { rating: '1879', rank: 46 },
+     bullet: { rating: '2056', rank: 37 },
+     rapid: { rating: '1997', rank: 28 },
+     crazyhouse: { rating: '2158', rank: 31 },
+     '3-check': { rating: '1708', rank: 31 },
+     maxRating: { rating: '2158', rank: 59 } },
+  chesscom:
+   { crazyhouse: { rating: '2104', rank: 1 },
+     bug: { rating: '2155', rank: 1 },
+     maxRating: { rating: '2155', rank: 21 } },
+  bughousetest: { maxRating: { rating: '1351', rank: 7 } } }
+  */
+
   onRank(dbuser, rankingObject) {
     let embed = {
       "color": this.server.colors.ratings
@@ -84,7 +101,12 @@ class Output {
       if(rankingObject[source]) {
         let sourceratinglist = "";
         if(rankingObject[source]) {
-          sourceratinglist += "Overall: " + rankingObject[source].maxRating + "\n";
+          sourceratinglist +=
+            "Overall: **" +
+            rankingObject[source].maxRating.rating +
+            "** (#" +
+            rankingObject[source].maxRating.rank +
+            ")\n";
           for(let key in config.variants[source]) {
             let variant = config.variants[source][key];
             if(rankingObject[source][key]) sourceratinglist +=
@@ -98,7 +120,7 @@ class Output {
               ")\n";
           }
         };
-        let sourceuserprofile = Render.profile(dbuser, source, account);
+        let sourceuserprofile = Render.profile(dbuser, source, dbuser[source]._main); //dbuser, source, username
         embed.fields = Embed.fielder(
           embed.fields,
           `${this.Search.emojis.get(source)} ${config.sources[source].name} Rankings`,
@@ -153,6 +175,7 @@ class Output {
 
   toOwner(message) {
     if(!message) throw "Failed to define a message."
+    if(this.debug) return () => {};
     for(let i = 0; i < config.ids.owner.length; i++) {
       let owner = this.client.users.get(config.ids.owner[i])
       if(owner) owner.send(message);

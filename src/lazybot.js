@@ -7,6 +7,7 @@ const onStartup = require("./events/onStartup.js");
 const DebuggingConstructor = require("./util/debugging.js");
 const config = require("./config.json");
 const client = new Discord.Client();
+const commands = require("./data/commands.json");
 
 const http = require('http');
 const express = require('express')();
@@ -32,6 +33,7 @@ class Bot {
       };
       console.log("bleep bloop! It's showtime.");
       const Debugging = new DebuggingConstructor(client);
+      if(config.states.debug) Bot.debug(data);
       //Debugging.removeDuplicates();
       //Debugging.convertCounttoObject();
       //Debugging.updateDBUserFormat();
@@ -53,6 +55,26 @@ class Bot {
       http.get(`http://${process.env.lazybot || "houselazybot"}.glitch.me/`); //pinging glitch.com
     }, 280000);
 
+  }
+
+  static debug (data) {
+    for(let i = 0; i < commands.length; i++) {
+      for(let j = 0; j < commands[i].usage.length; j++) {
+        data.message = Object.assign({}, DataManager.getFile("./src/data/genericmessage.json"));
+        if(commands[i].prefix === "generic") data.message.content = "!";
+        if(commands[i].prefix === "nadeko") data.message.content = ".";
+        data.message.content += commands[i].usage[j];
+        console.log(data.message.content);
+        Router.command(data);
+      }
+    };
+    return;
+  }
+
+  static recordMessage (message) {
+    let _message = require('circular-json').stringify(message, null, 4);
+    console.log(_message);
+    require("fs").writeFileSync("./src/data/genericmessage.json", _message);
   }
 
 }

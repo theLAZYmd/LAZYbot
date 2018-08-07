@@ -743,6 +743,10 @@
     "aliases": [
       "parseVotes"
     ],
+    "description": "Triggers the vote parsing for a recent election.",
+    "usage": [
+      "postVotes"
+    ],
     "module": "Election",
     "file": "election",
     "method": "votes.parse",
