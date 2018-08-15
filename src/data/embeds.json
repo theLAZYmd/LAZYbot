@@ -413,17 +413,17 @@
   "utility": {
       "dbpositions": {
           "title": "House Database Positions",
-          "description": "Greetings! You may have noticed on your profile there's a little database number. That corresponds to your index in the bot's database. Being higher up in the db means:\n\n• **Commands are slightly more likely to work for you.**\n\nIn addition to the other advantages:\n\n**• Can be seen on the `.dblb`.\n• Cool medal on your profile `!profile`.\n• Better number.\n• 'Higher' than everyone else.**\n\nBasically, people with higher-up numbers are just *better*. How do you change your position?\n​",
+          "description": "Greetings! You may have noticed on your profile there's a little database number. That corresponds to your index in the bot's database. Being higher up in the db means:\n\n• **Commands are slightly more likely to work for you.**\n\nIn addition to the other advantages:\n\n**• Can be seen on the `.dblb`.\n• Cool medal on your profile `!profile`.\n• Better number.\n• 'Higher' than everyone else.**\n\nBasically, people with higher-up numbers are just *better*. How do you change your position?\n",
           "color": 16738560,
           "fields": [
               {
                   "name": "1. Bid an Amount and Win",
-                  "value": "You can bid for a position using:\n\n`.give [bid amount] theLAZYmd#2353 Database Position [desired position]`\n\nFor example:\n\n`.give 100 theLAZYmd#2353 Database Position 1`\n\nThe amount you give is saved as your 'bid amount.' Using the command challenges another member for their position in the database. If your total bid amount is greater than their bid amount in reserver (consolidated) your challenge will be successful and you will take their position.\n​",
+                  "value": "You can bid for a position using:\n\n`.give [bid amount] theLAZYmd#2353 Database Position [desired position]`\n\nFor example:\n\n`.give 100 theLAZYmd#2353 Database Position 1`\n\nThe amount you give is saved as your 'bid amount.' Using the command challenges another member for their position in the database. If your total bid amount is greater than their bid amount in reserver (consolidated) your challenge will be successful and you will take their position.\n",
                   "inline": true
               },
               {
                   "name": "2. Bid an Amount and Attack",
-                  "value": "You can also underbid. If your total bid is lower than their consolidated bidamount, your bid will be used to cancel out their sum and that's it.\n​"
+                  "value": "You can also underbid. If your total bid is lower than their consolidated bidamount, your bid will be used to cancel out their sum and that's it.\n"
               },
               {
                   "name": "3. Consolidate",
@@ -676,6 +676,10 @@
           "footer": {
               "text": "Role rewards must be bought in order."
           }
+      },
+      "guides": {
+          "title": "How to offer an edit to an Official™ House Discord Guide",
+          "description": "• Head to [this url](https://github.com/theLAZYmd/LAZYbot/edit/master/src/data/embeds.json) which is the bot's **GitHub Repo**.\n• Scroll down to the section of the data relevant to you. You can do that by viewing the 'title' of each embed and making the correlation to the title you're looking for, or `Ctrl+F`ing a suitable word or phrase that will help you identify it.\n• Edit the JSON for that embed. If it's a minor correction, this shouldn't be an issue, just add it in the change required. If you're doing something more complicated, or you don't understyand what's going on here, have a look at [this article](https://www.red-gate.com/simple-talk/sql/oracle/json-for-absolute-beginners-part-1-introduction/) or ask someone in #devs for help.\n• Scroll down to the bottom. Write a one-line description for what you've done to the file in the 'Update embeds.json' field, then write a more detailed description below if necessary.\n• Press `Propose file change`! We'll review what you've done and correct it if necessary before approving!"
       }
   }
 }
