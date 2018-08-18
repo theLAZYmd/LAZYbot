@@ -62,6 +62,21 @@
                 "trigger": "ban",
                 "reaction": "banhammer",
                 "anyword": true
+            },
+            {
+                "trigger": "fischy",
+                "reaction": "🐟",
+                "anyword": false
+            },
+            {
+                "trigger": "party",
+                "reaction": "🎉",
+                "anyword": true
+            },
+            {
+                "trigger": "ping",
+                "reaction": "ping",
+                "anyword": false
             }
         ]
     }
