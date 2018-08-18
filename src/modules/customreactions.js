@@ -43,23 +43,33 @@ class CustomReactions extends Parse {
       };
     };
     if(foundboolean) {
-      this.message.react(this.Search.emojis.get("true"));
       this.onUpdate()
+      .then(() => this.message.react(this.Search.emojis.get("true")))
+      .catch((e) => {
+        this.message.react(this.Search.emojis.get("false"));
+        console.log(e);
+      })
     }
     else this.message.react(this.Search.emojis.get("false"));
   }
   
   onUpdate() {
-    CRFile[this.message.guild.id] = this.CRData;
-    DataManager.setFile(CRFile, "./data/customreactions.json");
+    return new Promise ((resolve, reject) => {
+      CRFile[this.guild.id] = this.CRData;
+      DataManager.setFile(CRFile, "./src/data/customreactions.json");
+      resolve(true)
+    });
   }
 
-  text () { //aplies to all messages
-    this.react (this.CRData.text, (content) => this.Output.generic(content));
+  text () { //applies to all messages
+    this.react(this.CRData.text, (content) => this.Output.generic(content));
   }
   
   emoji () { // applies to all messages
-    this.react (this.CRData.emoji, (emojiname) => this.message.react(this.Search.emojis.get(emojiname)))
+    this.react(this.CRData.emoji, (emojiname) => {
+      let emoji = this.Search.emojis.get(emojiname) ? this.Search.emojis.get(emojiname) : emojiname;
+      this.message.react(emoji);
+    })
   }
 
   add (args, argument) { //acr or aer
