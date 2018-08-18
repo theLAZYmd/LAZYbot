@@ -4,8 +4,15 @@ const DBuser = require("../util/dbuser.js");
 class Parse {
 
   constructor(message) { //everything extends to here
-
     this.message = message;
+    this.message.content = this.message.content = this.message.content && typeof this.message.content === "string" ?
+      this.message.content
+        .replace("’", "'")
+        .replace("…", "...")
+        .replace("“", "\"")
+        .replace("”", "\"")
+        .replace(/[\u200B-\u200D\uFEFF]/g, '')
+      : this.message.content;
     this.client = this.message.client;
     this.author = this.message.author;
     this.bot = this.author.bot && message.embeds && message.embeds[0];
@@ -32,17 +39,11 @@ class Parse {
     return DBuser.byIndex(this.dbuser)
   }
 
-  get content () {
-    let content = this.message.content ? this.message.content : (this.message.embeds[0] ? this.message.embeds[0].description : "");
-    content = content && typeof content === "string" ? content.replace("’", "'").replace("…", "...").replace("“", "\"").replace("”", "\"").replace(/[\u200B-\u200D\uFEFF]/g, '') : content;
-    return content || "";
-  }
-
   get command () {
     if(this.bot) {
       if(this.message.embeds[0].author) return this.message.embeds[0].author.name;
     } else {
-      let args = this.content.slice(this.prefix.length).match(/[^\s]+/gi);
+      let args = this.message.content.slice(this.prefix.length).match(/[^\s]+/gi);
       if(args) return args.shift().toLowerCase();
     };
     return "";
@@ -50,13 +51,13 @@ class Parse {
 
   get prefix () {
     for(let prefix in this.server.prefixes) {
-      if(this.content.startsWith(this.server.prefixes[prefix])) return this.server.prefixes[prefix];
+      if(this.message.content.startsWith(this.server.prefixes[prefix])) return this.server.prefixes[prefix];
     };
     return "";
   }
 
   get args () {
-    let firstargs = this.content.slice(this.prefix.length).match(/[^\s]+/gi) || [];
+    let firstargs = this.message.content.slice(this.prefix.length).match(/[^\s]+/gi) || [];
     return !!this.prefix ? firstargs.slice(1) : firstargs;
   }
 

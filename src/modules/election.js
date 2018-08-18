@@ -352,11 +352,11 @@ class Vote extends Parse {
   }
 
   get args () {
-    return this.content.split("\n").slice(2)
+    return this.message.content.split("\n").slice(2)
   }
 
   get matches () {
-    let matches = this.content.match(/VoterID: ((?:[0-9]{18}))\n#Channel: ([a-z0-9\-]+)/);
+    let matches = this.message.content.match(/VoterID: ((?:[0-9]{18}))\n#Channel: ([a-z0-9\-]+)/);
     return matches;
   }
 

@@ -64,11 +64,11 @@
   },
   {
     "aliases": [
-        "setprefix"
+        "setnadekoprefix"
     ],
     "description": "Sets the prefix for commands emulating Nadeko comands for this server. Prefixes are followed by spaces.",
     "usage": [
-        "setprefix !"
+        "setnadekoprefix !"
     ],
     
     "module": "Administration",
@@ -126,8 +126,9 @@
   },
   {
     "aliases": [
-      "addcustomreaction",
-      "acr"
+      "addcustreact",
+      "acr",
+      "addcustomreaction"
     ],
     "description": "Addes add a new text custom reaction to react to keywords in new messages.",
     "usage": [
@@ -142,8 +143,9 @@
   },
   {
     "aliases": [
-      "editcustomreaction",
-      "ecr"
+      "editcustreact",
+      "ecr",
+      "editcustomreaction"
     ],
     "description": "Edits an existing text custom reaction.",
     "usage": [
@@ -157,8 +159,9 @@
   },
   {
     "aliases": [
-      "togglecustomreaction",
-      "tcr"
+      "togcustreact",
+      "tcr",
+      "togglecustomreaction"
     ],
     "description": "Toggles whether an existing text reaction is triggered from a keyword anywhere in the message.",
     "usage": [
@@ -172,8 +175,9 @@
   },
   {
     "aliases": [
-      "deletecustomreaction",
-      "dcr"
+      "delcustreact",
+      "dcr",
+      "deletecustomreaction"
     ],
     "description": "Deletes a emssage reaction.",
     "usage": [
@@ -187,8 +191,9 @@
   },
   {
     "aliases": [
-      "addemojireaction",
-      "aer"
+      "addemoreact",
+      "aer",
+      "addemojireaction"
     ],
     "description": "Addes add a new emoji to react to messages containing keywords.",
     "usage": [
@@ -202,8 +207,9 @@
   },
   {
     "aliases": [
-      "editemojireaction",
-      "eer"
+      "editemoreact",
+      "eer",
+      "editemojireaction"
     ],
     "description": "Edits an existing emoji custom reaction.",
     "usage": [
@@ -217,8 +223,9 @@
   },
   {
     "aliases": [
-      "toggleemojireaction",
-      "ter"
+      "togemoreact",
+      "ter",
+      "toggleemojireaction"
     ],
     "description": "Toggles whether an existing emoji reaction is triggered from a keyword anywhere in the message.",
     "usage": [
@@ -232,8 +239,9 @@
   },
   {
     "aliases": [
-      "deleteemojireaction",
-      "der"
+      "delemoreact",
+      "der",
+      "deleteemojireaction"
     ],
     "description": "Deletes an emoji reaction.",
     "usage": [
@@ -264,6 +272,7 @@
   {
     "aliases": [
       "updatemessages",
+      "umc",
       "updatemessagecount"
     ],
     "description": "Edits the number of messages for a given user. If none provided, defaults to self.",
@@ -369,7 +378,7 @@
       "lb",
       "leaderboard"
     ],
-    "description": "Posts the leaderboard for House Members of that variant on a given source. Based on linked accounts through the ${generic}lichess and ${generic}chesscom commands.",
+    "description": "Posts the leaderboard for House Members of that variant on a given source. Based on linked accounts through the `${generic}lichess` and `${generic}chesscom` commands.",
     "usage": [
       "lb",
       "lb zh chesscom",
@@ -700,7 +709,7 @@
     "aliases": [
       "votingClose"
     ],
-    "description": "Ends the voting stage of an election. To be used in conjunction with ${generic}",
+    "description": "Ends the voting stage of an election. To be used in conjunction with `${generic}beginCount`.",
     "usage": [
       "votingClose"
     ],
@@ -816,7 +825,8 @@
   },
   {
     "aliases": [
-      "bughousetest"
+      "bughousetest",
+      "bht"
     ],
     "description": "Links your Discord user profile to a bughousetest.com account.",
     "usage": [
@@ -872,6 +882,36 @@
     "file": "leaderboard",
     "method": "getVariantRank",
     "arguments": ["member", "args"],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
+      "commands"
+    ],
+    "description": "List the stable commands availabe on the bot.",
+    "usage": [
+      "commands"
+    ],
+    "module": "Help",
+    "file": "commands",
+    "method": "list",
+    "arguments": [],
+    "prefix": "generic"
+  },
+  {
+    "aliases": [
+      "help", 
+      "h"
+    ],
+    "description": "Displays help info for a given command.",
+    "usage": [
+      "help",
+      "help !lichess"
+    ],
+    "module": "Help",
+    "file": "help",
+    "method": "run",
+    "arguments": ["args"],
     "prefix": "generic"
   }
 ]
