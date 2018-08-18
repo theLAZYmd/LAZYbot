@@ -22,19 +22,19 @@ class Leaderboard extends Parse {
   }
 
   buildVariant () { //this function finds input parameters and returns an embed. Needs source, variant, and active.
-    let source = config.sources[(this.channel.name === "bug" || this.channel.topic.includes("bug") || this.content.includes("bug")) ? "chesscom" : "lichess"]; //bug channel exception, default source is chess.com
+    let source = config.sources[(this.channel.name === "bug" || this.channel.topic.includes("bug") || this.message.content.includes("bug")) ? "chesscom" : "lichess"]; //bug channel exception, default source is chess.com
     for(let _source in config.sources) {
-      if(this.content.toLowerCase().replace(".", "").includes(_source.toLowerCase())) {
+      if(this.message.content.toLowerCase().replace(".", "").includes(_source.toLowerCase())) {
         source = config.sources[_source];
         break;
       }
     }; //find source requested in the message, if none found, assume lichess
-    let active = this.content.includes("active") ? true : false; //active is just if the message contains the word
+    let active = this.message.content.includes("active") ? true : false; //active is just if the message contains the word
     let foundv = {}; //to find variant: new object with properties as the possibilites found from matching args, topic, and channel
     let usev; //to be the variant 'used'
     for(let variant in config.variants[source.key]) {
       let value = config.variants[source.key][variant];
-      if(this.content.includes(variant)) foundv.args = value, usev = value; //if in args, match it.
+      if(this.message.content.includes(variant)) foundv.args = value, usev = value; //if in args, match it.
       if(this.channel.topic && this.channel.topic.includes(variant)) foundv.channel = value, usev = value; //if in topic match it.
       if(this.channel.name.includes(variant)) foundv.channel = value, usev = value; //if in channel name, match it.
       if(foundv.channel) break;
@@ -104,7 +104,7 @@ class Leaderboard extends Parse {
 
   getVariantRank (member, args) {
     if(args.length === 1) member = this.Search.members.get(args[0]);
-    let active = this.content.toLowerCase().includes("active");
+    let active = this.message.content.toLowerCase().includes("active");
     let rankingObject = {};
     let sources = Object.keys(config.sources).filter(source => !!this.dbuser[source]); //applicable sources are those on the dbuser
     if(sources.length === 0) return this.Output.onError(`No linked accounts found.\nPlease link an account to your profile through \`!lichess\` or \`!chess.com\``);

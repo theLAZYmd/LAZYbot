@@ -92,7 +92,7 @@ class Embed {
 
   static receiver(embed) {
     let embedinput = {};
-    let property = ["title", "url", "description", "color", "video", "timestamp"];
+    let property = ["content", "title", "url", "description", "color", "video", "timestamp"];
     for(let i = 0; i < property.length; i++) {
       if(embed[property[i]]) embedinput[property[i]] = embed[property[i]];
     };
