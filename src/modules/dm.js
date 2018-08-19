@@ -24,11 +24,41 @@ class DM extends Parse {
 
   mail () {
     if (this.author.bot) return;
-    let guilds = [];
+    let guilds = [], guild;
     for(let [id, guild] of this.client.guilds) {
       if (guild.members.has(this.author.id)) guilds.push(guild.id);
     };
-    if (guilds.length === 1 || true) this.ModMail.receiver(guilds[0]); //need to know which guild I'm modmailing to
+    if (guilds.length === 1) return this.ModMail.receiver(guilds[0]);
+    let text = "Please pick which server you would like to send this modmail to:\n";
+    for(let i = 0; i < guilds.length; i++) {
+      text += (i + 1) + "⃣ **" + this.client.guilds.get(guilds[i]).name + "**\n";
+    };
+    this.Output.generic(text)
+    .then(msg => {
+      for(let i = 0; i < guilds.length; i++) {
+        setTimeout(() => {
+          msg.react((i + 1) + "⃣");
+        }, i * 1000);
+      };
+      let filter = (reaction, user) => {
+        if(user.bot) return false;
+        let number = reaction.emoji.name.match(/([1-9])⃣/);
+        console.log(number);
+        if (Number(number[1]) < guilds.length) return true;
+        return false;
+      };
+      msg.awaitReactions(filter, {
+        "max": 1,
+        "time": 30000,
+        "errors": ["time"]
+      })
+      .then(collected => {
+        let number = collected.first().emoji.name.match(/([1-9]⃣)/);
+        return this.ModMail.receiver(Number(guilds[number]) - 1)
+      })
+      .catch(e => console.log(e));
+    })
+    .catch(e => console.log(e));
   }
 
 }

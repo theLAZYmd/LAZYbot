@@ -17,6 +17,7 @@ class ModMail extends Parse {
     if (!this.server.modmail) this.server.modmail = {};
     for(let id in this.server.modmail) { //for each modmail id
       if (this.server.modmail[id].tag === this.author.tag && !this.server.modmail[id].full) {
+        if (Date.now() - this.server.modmail[id].timeout < 86400000) return;
         Router.logCommand({
           "author": this.author,
           "args": this.message.content,
@@ -32,10 +33,8 @@ class ModMail extends Parse {
               embed.fields[embed.fields.length - 1].value += "\n" + this.message.content;
               this.editor(embed, modmail);
               this.server.modmail[modmail.id].lastMail = Date.now();
-              console.log(this.author.tag + " says " + this.message.content);
             } else {
               this.sender(embed.fields);
-              console.log("Received new delayed message from " + this.author.tag + "\n" + this.message.content);
               modmail.delete();
               delete this.server.modmail[modmail.id];
             };
@@ -181,7 +180,7 @@ class ModMail extends Parse {
     this.editor(embed, message);
     this.Output.sender({
       "title": "Warning from server " + this.guild.name + ":",
-      "description": "You are abusing the modmail system. Please keep requests civil and do not spam the inbox."
+      "description": "You are abusing the modmail system. Keep requests civil and do not spam the inbox."
     }, this.Search.users.byTag(mailInfo.tag));
   }
 
@@ -189,6 +188,7 @@ class ModMail extends Parse {
     let timestamp = Date.getISOtime(Date.now());
     let embed = message.embeds[0];
     embed.fields = Embed.fielder(embed.fields, "On " + timestamp + ", " + mod.tag + " timed out user for 24h.", "", false)
+    this.server.modmail[message.id].timeout = Date.now();
     this.editor(embed, message);
     this.Output.sender({
       "title": "You have been timed out from sending messages to server " + this.guild.name + ":",
