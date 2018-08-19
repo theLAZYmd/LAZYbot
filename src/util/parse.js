@@ -20,23 +20,14 @@ class Parse {
     this.channel = this.message.channel;
     this.server = this.guild ? require("../util/datamanager.js").getServer(this.guild) : "";
     this.member = this.guild ? this.message.member : "";
+    this.user = this.member ? this.member.user : "";
+    this.dbuser = this.user ? DBuser.getUser(this.user) : "";
+    this.dbindex = this.dbuser ? DBuser.byIndex(this.dbuser) : "";
     this.reboot = this.client.reboot;
     this.httpboolean = this.client.httpboolean;
     this.Search = new (require("../util/search.js"))(this.message);
     this.Check = new (require("../util/check.js"))(this.message);
     this.Output = new (require("../util/output.js"))(message);
-  }
-
-  get user () {
-    return this._member ? this._member.user : this.member.user;
-  }
-
-  get dbuser () {
-    return DBuser.getUser(this.user)
-  }
-
-  get dbindex () {
-    return DBuser.byIndex(this.dbuser)
   }
 
   get command () {

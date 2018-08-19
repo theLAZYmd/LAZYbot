@@ -71,26 +71,22 @@ class Router {
       "onError": cmdInfo.command ? argsInfo.Output.onError : () => {}
     };
     if(cmdInfo.requires) {
-      for(let type in cmdInfo.requires) { //such as channel, guild
+      for (let type in cmdInfo.requires) { //such as channel, guild
         let value = cmdInfo.requires[type]; //such as mod, owner, bot, trivia
         let killboolean = false;
-        if(typeof value === "string") {
-          if(!Permissions[type](value, argsInfo)) killboolean = true; //if no permissions, kill it
-        } else {
+        if (Array.isArray(value)) {
           let array = Array.from(value); //if array (i.e. multiple possible satisfactory conditions)
           killboolean = true; //assume it is to be killed
-          for(let i = 0; i < array.length; i++) {
-            if(Permissions[type](array[i], argsInfo)) killboolean = false; //but it satisfy just one condition, stop the kill
+          for (let i = 0; i < array.length; i++) {
+            if (Permissions[type](array[i], argsInfo)) killboolean = false; //but it satisfy just one condition, stop the kill
           };
-        };
-        if(killboolean) {
-          if(cmdInfo.command) argsInfo.Output.onError(Permissions.output(type, argsInfo.server.prefixes.generic));
-          return;
-        };
+        } else
+        if (!Permissions[type](value, argsInfo)) killboolean = true; //if no permissions, kill it
+        if (killboolean) return Output.onError(Permissions.output(type, argsInfo) + "\nUse `" + cmdInfo.prefix + "help` followed by the command name to see command info.");
       };
     };
     let args = [];
-    for(let i = 0; i < cmdInfo.arguments.length; i++) {
+    for (let i = 0; i < cmdInfo.arguments.length; i++) {
       args[i] = argsInfo[cmdInfo.arguments[i]]; //the arguments we take for new Instance input are what's listed
       //if(!args[i]) return Output.onError(`Command **${argsInfo.command}** requires the following piece of data which you have not provided: **${cmdInfo.arguments[i]}**.`)
     };

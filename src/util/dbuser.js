@@ -22,7 +22,7 @@ class DBuser {
     let dbuser = tally.find(dbuser => dbuser.id === user.id);
     if(!dbuser) {
       console.log("No dbuser found, creating one...");
-      let newuser = config.templates.dbuser;
+      let newuser = Object.assign({}, config.templates.dbuser);
       newuser.id = user.id;
       newuser.username = user.tag;
       tally.push(newuser);

@@ -36,12 +36,27 @@ class Permissions {
     return data.server.states[state.toLowerCase()];
   }
 
-  static output (key, prefix) {
-    let data = [
+  static args (data, argsInfo) {
+    if (data.length) {
+      if (typeof data.length === "number") {
+        if (argsInfo.args.length === data.length) return true;
+      } else {
+        for(let i = 0; i < data.length.length; i++) {
+          if (argsInfo.args.length === data.length[i]) return true;
+        }
+      }
+    }
+    return false;
+  }
 
-    ];
-    for(let i = 0; i < data.length; i++) {
-      if(key === data[0]) return "Wrong permissions to use this command! " + data[1] + "\nPlease use the `" + prefix + "help` command to view information about a command.";
+  static output (key, argsInfo) {
+    switch (key) {
+      case "role":
+        return "Insufficient server permissions to use this command."
+      case "channel":
+        return "Wrong channel to use this command."
+      case "args":
+        return "Unapplicable number of parameters."
     }
   }
 

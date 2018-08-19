@@ -1,6 +1,6 @@
 const Parse = require("../util/parse.js");
 
-class Conversion extends Parse {
+class Calc extends Parse {
 
   constructor(message) {
     super(message);
@@ -18,7 +18,6 @@ class Conversion extends Parse {
   }
 
   tf (args) {
-    if(args.length !== 3) return this.Output.onError("Incorrect number of parameters!");
     let [games, time, increment] = args;
     this.Output.sender({
       "title": "House Tournament Reward",
@@ -51,4 +50,4 @@ class Conversion extends Parse {
 
 }
 
-module.exports = Conversion;
+module.exports = Calc;

@@ -43,7 +43,6 @@ class DM extends Parse {
       let filter = (reaction, user) => {
         if(user.bot) return false;
         let number = reaction.emoji.name.match(/([1-9])⃣/);
-        console.log(number);
         if (Number(number[1]) < guilds.length) return true;
         return false;
       };

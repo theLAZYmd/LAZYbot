@@ -96,12 +96,16 @@
     "usage": [
         "UStoDecimal -160"
     ],
-    
     "module": "Utility",
-    "file": "conversion",
+    "file": "calc",
     "method": "todecimal",
     "arguments": ["args"],
-    "prefix": "nadeko"
+    "prefix": "nadeko",
+    "requires": {
+      "args": {
+        "length": 1
+      }
+    }
   },
   {
     "aliases": [
@@ -113,10 +117,36 @@
         "DecimaltoUS 1.7"
     ],
     "module": "Utility",
-    "file": "conversion",
+    "file": "calc",
     "method": "tous",
     "arguments": ["args"],
-    "prefix": "nadeko"
+    "prefix": "nadeko",
+    "requires": {
+      "args": {
+        "length": 1
+      }
+    }
+  },
+  {
+    "aliases": [
+        "tournamentformula",
+        "tf"
+    ],
+    "description": "Gets the reward currency for hosting a tournament. Requires three arguments of [games played in that tournament], [time control], [increment].",
+    "usage": [
+        "tournamentformula 620 0.5 0",
+        "tf 84 3 1"
+    ],
+    "module": "Utility",
+    "file": "calc",
+    "method": "tf",
+    "arguments": ["args"],
+    "prefix": "nadeko",
+    "requires": {
+      "args": {
+        "length": 3
+      }
+    }
   },
   {
     "aliases": [
