@@ -73,8 +73,21 @@ class Router {
     if(cmdInfo.requires) {
       for(let type in cmdInfo.requires) { //such as channel, guild
         let value = cmdInfo.requires[type]; //such as mod, owner, bot, trivia
-        if(!Permissions[type](value, argsInfo)) return;
-      }
+        let killboolean = false;
+        if(typeof value === "string") {
+          if(!Permissions[type](value, argsInfo)) killboolean = true; //if no permissions, kill it
+        } else {
+          let array = Array.from(value); //if array (i.e. multiple possible satisfactory conditions)
+          killboolean = true; //assume it is to be killed
+          for(let i = 0; i < array.length; i++) {
+            if(Permissions[type](array[i], argsInfo)) killboolean = false; //but it satisfy just one condition, stop the kill
+          };
+        };
+        if(killboolean) {
+          if(cmdInfo.command) argsInfo.Output.onError(Permissions.output(type, argsInfo.server.prefixes.generic));
+          return;
+        };
+      };
     };
     let args = [];
     for(let i = 0; i < cmdInfo.arguments.length; i++) {

@@ -2,7 +2,7 @@
     "314155682033041408": {
         "id": "314155682033041408",
         "states": {
-            "tm": true,
+            "tm": false,
             "bcp": false,
             "election": true,
             "trivia": true
@@ -15,11 +15,12 @@
             "announcements": "announcements",
             "bot": "spam",
             "bot2": "devs",
-            "mod": "test-channel-in-use",
+            "modmail": "mod-mail",
             "log": "comment-log",
             "join": "join",
             "leave": "lounge",
-            "live": "live"
+            "live": "live",
+            "trivia": "trivia"
         },
         "colors": {
             "generic": 53380,
@@ -28,6 +29,7 @@
         },
         "roles": {
             "admin": "admin",
+            "mod": "mod",
             "bot": "Bot-In-Use",
             "muted": "muted",
             "unranked": "unranked",
@@ -36,14 +38,6 @@
             "beta": "verified",
             "livenotifications": "subs"
         },
-        "acceptedlinkdomains": [
-            "http://lichess.org",
-            "http://www.chess.com",
-            "http://bughousetest.com",
-            "https://lichess.org",
-            "https://www.chess.com",
-            "https://bughousetest.com"
-        ],
         "regions": [
             "Americas",
             "Europe",
@@ -113,7 +107,6 @@
                 "messageid": "470346202454687745"
             }
         ],
-        "ticketsv2": [],
         "getplaying": {
             "390259605529427969": [
                 "penguingim1",
@@ -129,6 +122,12 @@
         },
         "notify": {
             "185412969130229760": 1532129995175
+        },
+        "modmail": {
+            "480812839875903488": {
+                "tag": "andy is an edgi boi#0035",
+                "lastMail": 1534705111920
+            }
         }
     }
 }

@@ -45,7 +45,10 @@
     "file": "set",
     "method": "username",
     "arguments": ["args"],
-    "prefix": "generic"
+    "prefix": "generic",
+    "requires": {
+      "user": "owner"
+    }
   },
   {
     "aliases": [
@@ -60,7 +63,10 @@
     "file": "set",
     "method": "genericprefix",
     "arguments": ["argument"],
-    "prefix": "generic"
+    "prefix": "generic",
+    "requires": {
+      "user": "owner"
+    }
   },
   {
     "aliases": [
@@ -75,11 +81,15 @@
     "file": "set",
     "method": "nadekoprefix",
     "arguments": ["argument"],
-    "prefix": "nadeko"
+    "prefix": "nadeko",
+    "requires": {
+      "user": "owner"
+    }
   },
   {
     "aliases": [
         "UStoDecimal",
+        "toDec",
         "toDecimal"
     ],
     "description": "Takes betting odds in the form of US numbers and converts them to Decimal odds.",
@@ -139,7 +149,10 @@
     "file": "customreactions",
     "method": "add",
     "arguments": ["args", "argument"],
-    "prefix": "generic"
+    "prefix": "generic",
+    "requires": {
+      "user": ["admin", "mod"]
+    }
   },
   {
     "aliases": [
@@ -155,7 +168,10 @@
     "file": "customreactions",
     "method": "edit",
     "arguments": ["args", "argument"],
-    "prefix": "generic"
+    "prefix": "generic",
+    "requires": {
+      "user": ["admin", "mod"]
+    }
   },
   {
     "aliases": [
@@ -171,7 +187,10 @@
     "file": "customreactions",
     "method": "toggle",
     "arguments": [],
-    "prefix": "generic"
+    "prefix": "generic",
+    "requires": {
+      "user": ["admin", "mod"]
+    }
   },
   {
     "aliases": [
@@ -187,7 +206,10 @@
     "file": "customreactions",
     "method": "delete",
     "arguments": [],
-    "prefix": "generic"
+    "prefix": "generic",
+    "requires": {
+      "user": ["admin", "mod"]
+    }
   },
   {
     "aliases": [
@@ -203,7 +225,10 @@
     "file": "customreactions",
     "method": "add",
     "arguments": ["args", "argument"],
-    "prefix": "generic"
+    "prefix": "generic",
+    "requires": {
+      "user": ["admin", "mod"]
+    }
   },
   {
     "aliases": [
@@ -219,7 +244,10 @@
     "file": "customreactions",
     "method": "edit",
     "arguments": ["args", "argument"],
-    "prefix": "generic"
+    "prefix": "generic",
+    "requires": {
+      "user": ["admin", "mod"]
+    }
   },
   {
     "aliases": [
@@ -235,7 +263,10 @@
     "file": "customreactions",
     "method": "toggle",
     "arguments": [],
-    "prefix": "generic"
+    "prefix": "generic",
+    "requires": {
+      "user": ["admin", "mod"]
+    }
   },
   {
     "aliases": [
@@ -251,7 +282,10 @@
     "file": "customreactions",
     "method": "delete",
     "arguments": [],
-    "prefix": "generic"
+    "prefix": "generic",
+    "requires": {
+      "user": ["admin", "mod"]
+    }
   },
   {
     "aliases": [
@@ -375,8 +409,8 @@
   },
   {
     "aliases": [
-      "lb",
-      "leaderboard"
+      "leaderboard",
+      "lb"
     ],
     "description": "Posts the leaderboard for House Members of that variant on a given source. Based on linked accounts through the `${generic}lichess` and `${generic}chesscom` commands.",
     "usage": [
@@ -392,8 +426,8 @@
   },
   {
     "aliases": [
-      "tm",
-      "testingmode"
+      "testingmode",
+      "tm"
     ],
     "description": "Toggles testing mode, which disables LAZYbot and Bouncer's permissions in the #spam and #devs channels. Specify 'true false' to just apply to one or the other.",
     "usage": [
@@ -409,8 +443,8 @@
   },
   {
     "aliases": [
-      "bcp",
-      "botcontingencyplan"
+      "botcontingencyplan",
+      "bcp"
     ],
     "description": "Switches whether Nadeko or Bouncer has 'Bot-in-Use' role (full permission for server). To be used when Bouncer is offline, triggers automaticalyl.",
     "usage": [
@@ -886,11 +920,13 @@
   },
   {
     "aliases": [
-      "commands"
+      "commands",
+      "cmds"
     ],
     "description": "List the stable commands availabe on the bot.",
     "usage": [
-      "commands"
+      "commands",
+      "cmds"
     ],
     "module": "Help",
     "file": "commands",

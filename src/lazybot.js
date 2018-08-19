@@ -22,6 +22,7 @@ class Bot {
 
     client.on("ready", () => { //console startup section
       data = new onStartup(client);
+      if(data.modmail) () => {}; //used to cache the messages that might need to be reacted to
       for(let guildID in DataManager.getFile(config.guildFile)) {
         console.log(`Loaded client server ${client.guilds.get(guildID).name} in ${Date.now() - data.reboot}ms`);
       };
@@ -44,6 +45,13 @@ class Bot {
       data.message = message;
       Router.command(data);
     });
+
+    client.on("messageReactionAdd", (messageReaction, user) => {
+      if (user.bot || !messageReaction.message.author.bot) return;
+      const ModMailConstructor = require("./modules/modmail.js");
+      const ModMail = new ModMailConstructor(messageReaction.message);
+      ModMail.event(messageReaction, user);
+    })
 
     express.get("/", (request, response) => { //interacting with glitch.com
       response.sendStatus(200);

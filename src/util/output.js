@@ -24,7 +24,9 @@ class Output {
     if(this.debug) return () => {};
     return new Promise((resolve, reject) => {
       Embed.sender(embed, NewChannel ? NewChannel : this.channel)
-      .then(message => resolve(message))
+      .then(message => {
+        resolve(message)
+      })
       .catch(error => this.onError(error));
     })
   }

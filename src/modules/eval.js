@@ -1,6 +1,7 @@
 const Parse = require("../util/parse.js");
 const DBuser = require("../util/dbuser.js");
 const DataManager = require("../util/datamanager.js");
+const Embed = require("../util/embed.js");
 
 class Eval extends Parse {
 

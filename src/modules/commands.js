@@ -11,7 +11,8 @@ class Commands extends Parse {
   list () { //command to generate all listing
     let embed = { //define embed first
       "color": 11126483,
-      "fields": []
+      "fields": [],
+      "footer": Embed.footer(`Type "${this.server.prefixes.generic}h CommandName" to see help for a specified command. e.g. "${this.server.prefixes.generic}h !profile"`)
     };
     let object = Commands.genObject(this.server); //get parsed command list of {module: {command: [aliases]}}
     for(let module in object) {
@@ -41,7 +42,7 @@ class Commands extends Parse {
       if(command === "inArray" || command === "remove") continue; // some weird fucking bug
       description += command
         + " ".repeat(Math.max(1, 18 - command.length)) //spacer, 18 allows 2 across per embed
-        + "[" + (object[title][command][0] && object[title][command][0].length < 5 ? object[title][command][0] : "" )
+        + "[" + (object[title][command][0] && object[title][command][0].length <= 5 ? object[title][command][0] : "" )
         //display aliases if aliases are shortcuts
         + "]"; //spacer
       description += " ".repeat(Math.max(0, 24 - description.length)) //space out to prevent back and forth

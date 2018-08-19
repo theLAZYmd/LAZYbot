@@ -1,44 +1,34 @@
 const Embed = require("../util/embed.js");
 const Parse = require("../util/parse.js");
+const ModMailConstructor = require("./modmail.js");
 
 class DM extends Parse {
 
   constructor(message) {
     super(message);
+    this.ModMail = new ModMailConstructor(message);
   }
 
   route () {
-    let message = this.message;
     const ElectionConstructor = require("./election.js");
-    const Election = new ElectionConstructor(message);
-    if(message.content.startsWith("#VoterID")) {
+    const Election = new ElectionConstructor(this.message);
+    if(this.message.content.startsWith("#VoterID")) {
       Election.vote.setData();
     } else
-    if(message.content === "mobile") {
+    if(this.message.content === "mobile") {
       Election.ballot.runMobile(this.author)
     } else {
-      this.return();
+      this.mail();
     }
   }
 
-  return () {
-    let message = this.message;
-    if(message.author.bot) return;
-    let timestamp = Date.getISOtime(message.createdAt);
-    if(message.embeds.length !== 0) {
-      let embed = Embed.receiver(message.embeds[0])
-      embed.content = message.content ? message.content.startsWith("On ") && message.content.includes("\, user **") && message.content.includes("** said\:") ? message.content : `On ${timestamp}, user **${message.author.tag}** said:\n\`\`\`${message.content}\`\`\`` : `On ${timestamp}, user **${message.author.tag}** said:`;
-      this.Output.toOwner({embed: embed});
-    } else {
-      if(message.content) {
-        let fetchedmessage = (message.createdTimestamp ? `\nAt ${Date.getISOtime(message.createdTimestamp)}, **${message.author.tag}** said` : "") + ("\`\`\`" + message.content + "\`\`\`");
-        let embed = {
-          "title": `DM received from ${message.author.tag}`,
-          "description": fetchedmessage
-        };
-        this.Output.toOwner({embed: embed});
-      }
-    }
+  mail () {
+    if (this.author.bot) return;
+    let guilds = [];
+    for(let [id, guild] of this.client.guilds) {
+      if (guild.members.has(this.author.id)) guilds.push(guild.id);
+    };
+    if (guilds.length === 1 || true) this.ModMail.receiver(guilds[0]); //need to know which guild I'm modmailing to
   }
 
 }
@@ -57,5 +47,5 @@ Date.gettime = function (ms) {
 }
 
 Date.getISOtime = function(ms) {
-  return Date.gettime(ms).toString().slice(0, 31); 
+  return Date.gettime(ms).toString().slice(0, 24); 
 }
