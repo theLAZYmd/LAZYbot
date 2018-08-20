@@ -2,6 +2,7 @@ const Parse = require("../util/parse.js");
 const DataManager = require("../util/datamanager.js");
 const request = require("request");
 const config = require("../config.json");
+const Paginator = require("../util/paginator.js");
 
 class Embeds extends Parse {
   constructor(message) {
@@ -15,7 +16,7 @@ class Embeds extends Parse {
         for (let guide in embeds[type]) {
           if (args[0] === guide) {
             this.guide = Array.isArray(embeds[type][guide]) ? embeds[type][guide] : [embeds[type][guide]];
-            return this.Output.paginator(this, "gen", this.guide.length, 180000); 
+            return this.Paginator.sender(this, "gen", this.guide.length, 180000); 
           }
         }
       };

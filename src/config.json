@@ -1,6 +1,6 @@
 {
-    "dataFile": "src/data/db.json",
-    "guildFile": "src/data/server.json",
+    "dataFile": "./src/data/db.json",
+    "guildFile": "./src/data/server.json",
     "houseid": "314155682033041408",
     "ids": {
         "bot": "338772451565502474",

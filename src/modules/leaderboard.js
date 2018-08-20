@@ -18,7 +18,7 @@ class Leaderboard extends Parse {
   getVariant () {
     let maxpages = this.buildVariant()
     //Constructor, method, maxpages, timeout on pages
-    if(!isNaN(maxpages)) this.Output.paginator(this, "outputVariant", maxpages, 30000);
+    if(!isNaN(maxpages)) this.Paginator.sender(this, "outputVariant", maxpages, 30000);
   }
 
   buildVariant () { //this function finds input parameters and returns an embed. Needs source, variant, and active.

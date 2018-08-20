@@ -1,17 +1,10 @@
 const config = require("../config.json");
 const DBuser = require("./dbuser.js");
+const Parse = require("./parse.js");
 
-class All {
+class All extends Parse {
   constructor(message) {
-    this.message = message;
-  }
-
-  get client () {
-    return this.message.client;
-  }
-  
-  get guild () {
-    return this.message.guild || this.client.guilds.get(config.houseid);
+    super(message);
   }
 }
 

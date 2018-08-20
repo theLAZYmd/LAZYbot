@@ -2,6 +2,7 @@ const config = require("../config.json");
 const Parse = require("../util/parse.js");
 const Embed = require("../util/embed.js");
 const Render = require("../util/render.js");
+const Paginator = require("../util/paginator.js");
 
 class Profile extends Parse {
 
@@ -16,7 +17,7 @@ class Profile extends Parse {
       else return this.Output.onError(`Couldn't find user!`);
     };
     //Constructor, method, embed, maxpages, timeout on pages
-    this.Output.paginator(this, "build", 1 + Math.ceil(this.chessFields.length / 4), 30000);
+    this.Paginator.sender(this, "build", 1 + Math.ceil(this.chessFields.length / 4), 30000);
   }
 
   build (page) {

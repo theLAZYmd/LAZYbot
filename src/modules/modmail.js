@@ -5,13 +5,12 @@ const DataManager = require("../util/datamanager.js");
 class ModMail extends Parse {
   constructor(message) {
     super(message);
-    this.reactionmessages = DataManager.getFile("./src/data/reactionmessages.json");
-    this.modmail = this.reactionmessages[this.server.id].modmail;
+    this.modmail = this.reactionmessages.modmail || {};
   }
 
   setData (modmail) {
-    this.reactionmessages[this.server.id].modmail = modmail;
-    DataManager.setFile(this.reactionmessages, "./src/data/reactionmessages.json");
+    this.reactionmessages.modmail = modmail;
+    DataManager.setServer(this.reactionmessages, "./src/data/reactionmessages.json");
   }
 
   receiver (guild) { //receive a guild as an input, set it to this.guild
@@ -66,33 +65,18 @@ class ModMail extends Parse {
 
   sender (fields) { //make a new post. All posts look the same, but you can have more 'previous' fields to add a history
     let timestamp = Date.getISOtime(this.message.createdAt);
-    this.reactor({
+    this.Output.reactor({
       "title": "ModMail Conversation for " + this.author.tag,
       "fields": Embed.fielder(fields || [], "On " + timestamp + ", user wrote:", this.message.content, false)
-    }, (modmail) => { //fields are past fields, + new one for the last message
+    }, this.Search.channels.get(this.server.channels.modmail), ["❎", "✉", "👁", "❗", "⏲"])
+    .then((modmail) => { //fields are past fields, + new one for the last message
       this.modmail[modmail.id] = { //and create a new record with the new message created entry
         "tag": this.author.tag,
         "lastMail": Date.now()
       };
       this.setData(this.modmail);
     })
-  }
-
-  reactor (embed, callback) {
-    this.Output.sender(embed, this.Search.channels.get(this.server.channels.modmail)) //send it
-      .then((modmail) => {
-        let emojis = ["❎", "✉", "👁", "❗", "⏲"]; //then react to it
-        for (let i = 0; i < emojis.length; i++) {
-          setTimeout(() => {
-            modmail.react(emojis[i])
-          }, i * 1000); //prevent api spam and to get the order right
-        };
-        return modmail;
-      })
-      .then((modmail) => {
-        if (callback) return callback(modmail);
-      })
-      .catch((e) => console.log(e));
+    .catch((e) => console.log(e));
   }
 
   editor (embed, message) {
@@ -121,6 +105,9 @@ class ModMail extends Parse {
         break;
       case "⏲":
         this.timeout(reaction.message, user, this.modmail[messageid]);
+        reaction.remove(user);
+        break;
+      default:
         reaction.remove(user);
         break;
     }
