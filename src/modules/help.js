@@ -11,13 +11,13 @@ class Help extends Parse {
   run(args) {
     for(let i = 0; i < commands.length; i++) {
       for(let j = 0; j < commands[i].aliases.length; j++) {
-        if(commands[i].aliases[j].toLowerCase().startsWith(args[0].toLowerCase().replace(/[^a-z]+/g, ""))) {
+        if(commands[i].aliases[j].toLowerCase() === args[0].toLowerCase() || this.server.prefixes[commands[i].prefix] + commands[i].aliases[j].toLowerCase() === args[0].toLowerCase()) {
           this.cmdInfo = commands[i];
           break;
         }
       }
     };
-    if(!this.cmdInfo) return this.Output.onError("Couldn't find that command. Please verify that that command exists.\nNote: some commands get removed for stability issues.")
+    if(!this.cmdInfo) return this.Output.onError("Couldn't find that command. Please verify that that command exists.\nNote: some commands get removed for stability issues.");
     this.Output.sender(this);
   }
 
@@ -34,6 +34,10 @@ class Help extends Parse {
       .replace(/\${([a-z]+)}/gi, value => this.server.prefixes[value.match(/[a-z]+/i)])
       //.replace(/\${generic}/gi, this.server.prefixes.generic)
       //.replace(/\${nadeko}/gi, this.server.prefixes.nadeko);
+  }
+
+  get prefix () {
+    return this.server.prefixes[this.cmdInfo.prefix];
   }
 
   get fields () {

@@ -19,7 +19,15 @@ class Embeds extends Parse {
           }
         }
       };
-      return this.Output.onError("Couldn't find guide matching that name.");
+      let filter = m => m.author.bot;
+      this.channel.awaitMessages(filter, {
+        "max": 1,
+        "time": 1000,
+        "errors": ["time"]
+      })
+      .catch(() => {
+        return this.Output.onError("Couldn't find guide matching that name.");
+      })
     })
     .catch((e) => console.log(e))
   }
