@@ -979,5 +979,23 @@
     "method": "run",
     "arguments": ["args"],
     "prefix": "generic"
+  },
+  {
+    "aliases": [
+      "guide",
+      ".."
+    ],
+    "description": "Displays a guide - a multipage information about something. There are guides for each variant! Compiled by the members of our community. Use `${nadeko}.. guides` to see info on how to contribute to them.",
+    "usage": [
+      ".. zh",
+      ".. anti",
+      ".. guides",
+      ".. flowers"
+    ],
+    "module": "Utility",
+    "file": "embeds",
+    "method": "find",
+    "arguments": ["args"],
+    "prefix": "nadeko"
   }
 ]

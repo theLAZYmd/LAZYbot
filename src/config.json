@@ -36,6 +36,9 @@
         "Sun Jun 17 2018 00:14:44 GMT+01"
     ],
     "updateDelay": 15000,
+    "urls": {
+        "embeds": "https://raw.githubusercontent.com/theLAZYmd/LAZYbot/master/src/data/embeds.json"
+    },
     "fen": {
         "board": "icy_sea",
         "pieces": "alpha",

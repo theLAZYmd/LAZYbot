@@ -24,6 +24,7 @@ class Debugging {
       duplicates[tally[i].id] = true;
     };
     DataManager.setData(tally);
+    return "Done!";
   }
 
   convertCounttoObject () {
@@ -45,6 +46,7 @@ class Debugging {
       }
     };
     DataManager.setData(tally);
+    return "Done!";
   }
 
   updateDBUserFormat () {
@@ -75,6 +77,7 @@ class Debugging {
       }
     };
     DataManager.setData(tally);
+    return "Done!"
   }
 
   duplicateMains () {
@@ -88,6 +91,7 @@ class Debugging {
       }
     };
     DataManager.setData(tally);
+    return "Done!";
   }
 
 }

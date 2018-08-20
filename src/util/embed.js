@@ -118,7 +118,7 @@ class Embed {
       if(url) embedinput.image = Embed.image(url);
     };
     if(embed.thumbnail) {
-      let url = "";
+      let url = typeof embed.thumbnail === "string" ? embed.thumbnail : "";
       if(embed.thumbnail.url) url = embed.thumbnail.url;
       if(url) embedinput.thumbnail = Embed.thumbnail(url);
     };

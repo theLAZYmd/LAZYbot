@@ -518,17 +518,12 @@
           {
               "title": "What are flowers?",
               "description": "Flowers are the artificial currency we use on this Discord server. We use them for fun purposes, like betting on tournaments and challenging each other to achieve things.\n\nObviously it doesn't mean anything, but it's fun, and those who have lots are the best.",
-              "color": 53380,
               "thumbnail": {
                   "url": "https://i.imgur.com/Jnbg4fG.png"
               }
           },
           {
               "title": "How can I earn flowers?",
-              "color": 53380,
-              "footer": {
-                  "text": "Page 1 of 3. Type ... getflowers2 to see next page."
-              },
               "thumbnail": {
                   "url": "https://i.imgur.com/Jnbg4fG.png"
               },
@@ -544,8 +539,8 @@
                       "inline": false
                   },
                   {
-                      "name": "Play a match against another House member",
-                      "value": "Organise a match in any variant with another member of The House and we'll sponsor you 🌸. Invite people to watch and get one of our `@licenced bookie`s to create odds on the outcome! Type `... challenge` or `... match` for more details.",
+                      "name": "Do something impressive",
+                      "value": "Get a a FIDE title; win a big Lichess shield or tournament; beat out some folk in a Titled Tuesday arena... let us know and we might dish out 🌸 for anything that sounds vaguely impressive.",
                       "inline": false
                   },
                   {
@@ -554,18 +549,14 @@
                       "inline": false
                   },
                   {
-                      "name": "Come up with a great quote",
-                      "value": " Leave your favourite quotes in <#390949445845385226> and you'll be rewarded with 20 🌸 and they'll be added to the `.typecontest` game if theLAZYmd#2353 likes them. `.qc` to see the criteria for a quote to be chosen.",
+                      "name": "Leave us a great quote",
+                      "value": "We're looking for quotes to add to our typecontest game. Have a look at the criteria in `... typeadd` then leave us a quote. If we approve it you'll earn 🌸.",
                       "inline": false
                   }
               ]
           },
           {
               "title": "How can I get free flowers?",
-              "color": 53380,
-              "footer": {
-                  "text": "Page 2 of 3. Type ... getmoreflowers to see next page."
-              },
               "thumbnail": {
                   "url": "https://i.imgur.com/Jnbg4fG.png"
               },
@@ -587,7 +578,7 @@
                   },
                   {
                       "name": "Win Trivia games",
-                      "value": "The House's speciality game - trivia contests between its highly competetive members! Play at any time in <#390289422802747403> by typing `.tr`, the first to 10 wins. Bigger and better games win more 🌸! `... tr` to see the rewards.",
+                      "value": "The House's speciality game - trivia contests between its highly competetive members! Play at any time in <#390289422802747403> by typing `.t`, the first to 10 wins. Bigger and better games win more 🌸! `... tr` to see the rewards.",
                       "inline": false
                   }
               ]
@@ -595,10 +586,6 @@
           {
               "title": "How can I get even more flowers?",
               "description": "You need to risk 🌸 to get 🌸. Here's some of the ways you can do that:",
-              "color": 53380,
-              "footer": {
-                  "text": "Page 3 of 3. Type ... getflowers to return to the beginning."
-              },
               "thumbnail": {
                   "url": "https://i.imgur.com/Jnbg4fG.png"
               },
@@ -671,16 +658,178 @@
       },
       "shop": {
           "title": "Official House Shop Roles",
-          "description": "Congrats on accumulating a whole bunch of flowers. Here are the roles you can buy; they will give you a special color flair and make you superior to other members on the right sidebar! The colors look really nice.\n\nCheck savings by `.$`. Check level by `.xp`\n\nClaim back the discounts if eligible by messaging/pinging <@!185412969130229760> when he's online, or by using the `.ticket add` system.\n\n__Bronze__: 200 🌸; **if level 5**, 90 🌸\n__Silver__: 360 🌸; **if level 10**, 180 🌸 \n__Gold__: 680 🌸; **if level 20**, 370 🌸 \n__Diamond__: 1320 🌸; **if level 30**, 760 🌸 \n\nAre you just that special that you want your own color? Well then buy:\n\n__ChooseColor__: 500 🌸 \n\nThat makes your color whatever you want it to be. However, it does not affect your right sidebar standings; it's for the vain ones among us.",
-          "color": 53380,
+          "description": "Congrats on accumulating a whole bunch of flowers. Here are the roles you can buy; they will give you a special color flair and make you superior to other members on the right sidebar! The colors look really nice.\n\nCheck savings by `.$`. Check level by `.xp`\n\n__Bronze__: 200 🌸; **if level 5**, 90 🌸\n__Silver__: 360 🌸; **if level 10**, 180 🌸 \n__Gold__: 680 🌸; **if level 20**, 370 🌸 \n__Diamond__: 1320 🌸; **if level 30**, 760 🌸 \n\nAre you just that special that you want your own color? Well then buy:\n\n__ChooseColor__: 500 🌸 \n\nThat makes your color whatever you want it to be by using the `!color` command. However, it does not affect your right sidebar standings; it's for the vain ones among us.",
           "footer": {
               "text": "Role rewards must be bought in order."
           }
       },
+      "ticket": {
+          "title": "Claim your flowers",
+          "description": "Type `.ticket add [flowers] [reason]` to claim your 🌸.\n• If you claim 🌸 for a tournament please add the link to the tournament\n• If you claim for a match add timecontrol, number of games and the link of the first game\n• If you claim for inviting a user plug in his name as a reason",
+          "footer": {
+            "text": "Use `... tournament` if you need to calculate the amount first."
+          },
+          "fields": [
+            {
+              "name": "Example",
+              "value": "`.ticket add 31 for this tournament https://lichess.org/tournament/4ihC4TfT`",
+              "inline": true
+            }
+          ],
+        "thumbnail": {
+          "url": "https://i.imgur.com/Jnbg4fG.png"
+        }
+      },
+      "trivia": {
+        "title": "House Trivia",
+        "description": "Based on **number of participants** in the trivia game! Bigger rewards, more features for better games.",
+        "fields": [
+          {
+            "name": "Winnings",
+            "value": "**1** player: 0 🌸 for 1st\n**2** players: 3 🌸 for 1st, 1 🌸 for 2nd\n**3** players: 4 🌸 for 1st, 2 🌸 for 2nd\n**4** players: 5 🌸 for 1st, 3 🌸 for 2nd, 1 🌸 for 3rd\n**5** players 6 🌸 for 1st, 4 🌸 for 2nd, 2 🌸 for 3rd\n**6 players** 7 🌸 for 1st, 5 🌸 for 2nd, 3 🌸 for 3rd, 1 🌸 for 4th\n... and so on.\n\nPayouts are done automatically.\nPokemon trivia is not rewarded 🌸.",
+            "inline": false
+          },
+          {
+            "name": "Rating",
+            "value": "Trivia games are now rated using a formula and mechanism developed by @ObiWanBenoni and @TcubesAK respectively! More info to come...",
+            "inline": false
+          }
+        ]
+      },
+      "greet": [
+        {
+          "content": "**Welcome to The House %user.mention%!** Let's get the party started @welcome squad.\n",
+          "description": "**We're the home of chess variants across lichess.org, chess.com, FICS, and anywhere else.**\n\u200b",
+          "color": 9359868,
+          "footer": {
+            "text": "Have fun!"
+          },
+          "thumbnail": {
+            "url": "https://i.imgur.com/VId4nJT.png"
+          },
+          "fields": [
+            {
+              "name": "View our channels",
+              "value": "You won't be able to see most of our channels until you're a **Member.**\nFirstly, familiarise yourself with the rules in #welcome.\nThen, head to #role-assignment and assign yourself permissions to see the chat channels and your favourite variant channels.\n\u200b",
+              "inline": false
+            },
+            {
+              "name": "How the hell do I use Discord?",
+              "value": "First time? type `... discord` for our guide on navigating this place.\n\u200b",
+              "inline": false
+            },
+            {
+              "name": "Link your accounts",
+              "value": "Type `!lichess` followed by your account name.\nType `!chess.com` followed by your account name.\n\u200b",
+              "inline": false
+            },
+            {
+              "name": "Crazyhouse World Championships",
+              "value": "Type `.iam CWC` to see the CWC channels on the left.\n\u200b",
+              "inline": false
+            },
+            {
+              "name": "Developers",
+              "value": "If you're a dev, type `@mods I'm a dev` and you'll be added to #devs.",
+              "inline": false
+            }
+          ]
+        },
+        {
+          "content": "**Welcome to The House %user.mention%!** Let's get the party started @welcome squad.\n",
+          "description": "**We're the home of chess variants across lichess.org, chess.com, FICS, and anywhere else.**\n\nYou won't be able to see or use most of our channels until you're a **Member.** Having familiarised yourself with the rules in #welcome, please head to #role-assignment and assign yourself the permissions to see the chat channels and your favourite variant channels.\n\n**If you're here for the Crazyhouse World Championships, say no more, just type `.iam CWC` to see the CWC channels on the left.**\n\nType `... greet` to translate the above into your preferred language.\nEcrivez `... greetfr` pour traduire le message ci-dessus en Français.\nEscriba `... greetes` para traducir el mensaje anterior de Español.\nSchreibe `... greetde`, um diese Nachricht auf Deutsch anzuzeigen.\nDigita `... greetit` per tradurre in italiano quanto scritto sopra.",
+          "color": 12956504,
+          "footer": {
+            "text": "If you're a dev, type `@mods I'm a dev` and someone will add you to the devs channel."
+          },
+          "thumbnail": {
+            "url": "https://i.imgur.com/E8S8QXE.png"
+          }
+        }
+      ],
       "guides": {
           "title": "How to offer an edit to an Official™ House Discord Guide",
-          "description": "• Head to [this url](https://github.com/theLAZYmd/LAZYbot/edit/master/src/data/embeds.json) which is the bot's **GitHub Repo**.\n• Scroll down to the section of the data relevant to you. You can do that by viewing the `\"title`\" of each embed and making the correlation to the title you're looking for, or `Ctrl+F`ing a suitable word or phrase that will help you identify it.\n• Edit the JSON for that embed. If it's a minor correction, this shouldn't be an issue, just add it in the change required. If you're doing something more complicated, or you don't understyand what's going on here, have a look at [this article](https://www.red-gate.com/simple-talk/sql/oracle/json-for-absolute-beginners-part-1-introduction/) or ask someone in #devs for help.\n• Scroll down to the bottom. Write a one-line description for what you've done to the file in the 'Update embeds.json' field, then write a more detailed description below if necessary.\n• Switch to the `soft-wrap` mode in the top right of the editing box if that makes things easier.\n• Press `Propose file change`! When the next page loads up, click `Create Pull Request` whenever it appears. We'll review what you've done and correct it if necessary before approving!",
-          "color": 53380
-      }
-  }
+          "description": "Head to [this url](https://github.com/theLAZYmd/LAZYbot/edit/master/src/data/embeds.json) which is the bot's **GitHub Repo**.\nScroll down to the section of the data relevant to you. You can do that by viewing the `\"title`\" of each embed and making the correlation to the title you're looking for, or `Ctrl+F`-ing a suitable word or phrase that will help you identify it.",
+          "fields": [
+              {
+                  "name": "Edit the JSON for that embed.",
+                  "value": "If it's a minor correction, this shouldn't be an issue, just add it in the change required. If you're doing something more complicated, or you don't understyand what's going on here, have a look at [this article](https://www.red-gate.com/simple-talk/sql/oracle/json-for-absolute-beginners-part-1-introduction/) or ask someone in #devs for help.\nSwitch to the `soft-wrap` mode in the top right of the editing box if that makes things easier.",
+                  "inline": false
+              },
+              {
+                  "name": "Submit the Pull Request.",
+                  "value": "Scroll down to the bottom.\nWrite a one-line description for what you've done to the file in the 'Update embeds.json' field, then write a more detailed description below if necessary.\nPress `Propose file change`! When the next page loads up, click `Create Pull Request` whenever it appears. \nWe'll review what you've done and correct it if necessary before approving! As soon as your changes are approved their live on the bot!",
+                  "inline": false
+              }
+            ]
+      },
+      "events": [
+        {
+          "title": "HOUSE EVENT - TRIVIA CHAMPIONSHIP",
+          "description": "Yeah, you read that right. We're going to do a tournament of your favourite server game, and crown one of you the **TRIVIA CHAMPION** of the {year/month/week/season/depends on how I'm feeling}.\n\nHere's how it works:",
+          "color": 53380,
+          "footer": {
+            "text": "Best of luck!"
+          },
+          "fields": [
+            {
+              "name": "QUALIFIERS",
+              "value": "Monday to Thursday. 9pm UTC **EVERY DAY** qualifiers. Rules are simple: at 8.30pm UTC exactly, trivia will be disabled, then at 9pm, lazy will type `.trivia 20`. A 20-question game of trivia will be played. **Win one of those qualifiers**... to qualify.",
+              "inline": true
+            },
+            {
+              "name": "SEMIFINALS",
+              "value": "Friday. 9PM UTC. Semi-Finals. The 4 semifinalists are seeded, and #1 seed plays #4 and #2 plays #3. Winner goes through to Finals. 10-question trivia, best of 5.",
+              "inline": true
+            },
+            {
+              "name": "3RD AND 4TH PLAYOFF",
+              "value": "Saturday. 9PM UTC. The two losers from the semifinals play a series of 5. 10-question trivia. Winner gets 3rd place and is awarded 20 :cherry_blossom:, loser get's 4th and is awarded 10 :cherry_blossom:.",
+              "inline": true
+            },
+            {
+              "name": "FINALS",
+              "value": "Sunday. 7PM UTC. Series of 5, 10-question trivia. Loser wins 2nd place and 30 :cherry_blossom:. Winner gets title of **HOUSE TRIVIA CHAMPION** (new role) and 50 :cherry_blossom:.",
+              "inline": true
+            }
+          ]
+        },
+        {
+          "title": "HOUSE EVENT - SHIELDS",
+          "description": "\nAlright, same deal as last time, good luck in those Shield Arenas.\n​\n",
+          "color": 53380,
+          "footer": {
+            "text": "Best of luck!"
+          },
+          "fields": [
+            {
+              "name": "SHIELDS",
+              "value": "Win a lichess shield! Head [here](https://lichess.org/tournament/calendar) to see the dates of the shield. Win 1 to be awarded VIP role + 50 :cherry_blossom:. Payouts for high performers too.",
+              "inline": true
+            },
+            {
+              "name": "Rankings ",
+              "value": "Top 30 win 10 :cherry_blossom:\nTop 20 win 20 :cherry_blossom:\nTop 10 win 30 :cherry_blossom:\nTop 3 win 40 :cherry_blossom:",
+              "inline": true
+            }
+          ]
+        }
+      ],
+      "games": [
+        {
+          "title": "Welcome to grindroll. Here are the rules.",
+          "description": "• Start with `.give x @grindonmygrande`\n• Roll 2 dice using `.roll 2`  \n  \n• If you roll a **2,3,4,9,10,11,12** you win!\n• Payout **2x** for **3,4,9,10,11**\n• Payout **3x** for **2,12**\n  \nWait for @Grindonmygrande#6203 to be online.",
+          "thumbnail": {
+            "url": "https://i.imgur.com/R9sk7iZ.png"
+          }
+        },
+        {
+          "title": "Rules of Music Flip & Roll",
+          "description": "1. Start by typing`.give x @Musickn`\n2. Flip 30 using `.roll 30`.\n3. If your average is lower than **2.85 or higher** than an average of **4.05**, then you get to flip a coin. Call **heads** or **tails**. If you win the coin flip, then you get **3x** what you bet!\n4. If your average is lower than **3.45**, then you get to flip a coin. Call **heads** or **tails**. If you win the coin flip you, then get **2x** what you bet!\n5. If your average is lower than **3.55**, then you get to flip a coin. Call **heads** or **tails**. If you win the coin flip, then you get **1.5x** what you bet!\n\nFlip by using `.flip`.\nHave fun!",
+          "thumbnail": {
+            "url": "https://i.imgur.com/w1Ne9aK.jpg"
+          }
+        }
+      ]
+    }
 }
