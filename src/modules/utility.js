@@ -7,37 +7,50 @@ class Utility extends Parse { //fairly miscelanneous functions
     super(message);
   }
 
-  uptime() {
+  uptime () {
     let time = Date.gettime(Date.now() - this.reboot);
     return this.Output.generic(`**${time.days}** days, **${time.hours}** hours, **${time.minutes}** minutes, and **${time.seconds}** seconds since ${Math.random() > 0.5 ? "**bleep bloop! It's showtime**" : "last reboot"}.`);
   }
 
-  fetch(message, args) { //function needs a channel input
-    let channel = args.length === 2 && this.Search.channels.get(args[1]) ? this.Search.channels.get(args[1]) : message.channel; //if second argument provided, that's the channel to look in
-    let id = args[0];
-    channel.fetchMessage(id)
-      .then(msg => {
-        let timestamp = Date.getISOtime(msg.createdAt);
-        if(msg.embeds.length !== 0) {
-          let embedinput = Embed.receiver(msg.embeds[0]);
-          embedinput.content = msg.content ?
-            (msg.content.startsWith("On ") && msg.content.includes("\, user **") && msg.content.includes("** said\:") ? msg.content :
-            `On ${timestamp}, user **${msg.author.tag}** said:\n\`\`\`${msg.content}\`\`\``)
-            : `On ${timestamp}, user **${msg.author.tag}** said:`;
-          this.Output.sender(embedinput);
-        } else
-        if(msg.content) {
-          let fetchedmsg =
-            (msg.createdTimestamp ? `\nAt ${Date.getISOtime (msg.createdTimestamp)}, **${msg.author.tag}** said` : "") +
-            ("\`\`\`" + msg.content + "\`\`\`");
-          this.Output.sender({
-            "title": `Fetched Message for ${message.author.tag}`,
-            "description": fetchedmsg
-          });
-          message.delete();
+  jsonify () {
+    this.find ((msg, embedinput) => {
+      if (!embedinput) return this.Output.onError("No embeds found to JSONify!");
+      this.Output.generic("```json\n" + JSON.stringify(embedinput, null, 4) + "```");
+    }, (error) => {
+      this.Output.onError(error)
+    })
+  }
+
+  fetch (message) {
+    this.find ((msg, embedinput = {}) => {
+      embedinput.content = embedinput.title ? "Fetched Message for " + this.author.tag + "\n" : "";
+      if(!embedinput.title) embedinput.title = "Fetched Message for " + this.author.tag;
+      if (msg.content) {
+        if (msg.content.startsWith("On ") && msg.content.includes("\, user **") && msg.content.includes("** said\:")) {
+          embedinput.content += msg.content;
+        } else {
+          embedinput.content += msg.createdTimestamp ? "\nAt" + Date.getISOtime(msg.createdTimestamp) + ", **" + msg.author.tag + "** said" : "";
+          embedinput.content += "\`\`\`" + msg.content + "\`\`\`";
         }
-      })
-      .catch(e => this.Output.onError(e)); //if no message found, say so
+      };
+      this.Output.sender(embedinput);
+      message.delete();
+    }, (error) => {
+      this.Output.onError(error)
+    })
+  }
+
+  find (resolve, reject) { //function needs a channel input
+    let id = this.args[0], channel = this.channel;
+    if (this.args.length === 2) {
+      channel = this.Search.channels.get(args[1]);
+      if (!channel) return reject("No such channel!");
+    }; //if second argument provided, that's the channel to look in
+    channel.fetchMessage(id)
+    .then(msg => {
+      return resolve(msg.content, msg.embeds && msg.embeds[0] ? Embed.receiver(msg.embeds[0]) : "");
+    })
+    .catch(e => this.Output.onError(e)); //if no message found, say so
   }
 
 }

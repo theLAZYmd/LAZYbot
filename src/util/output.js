@@ -156,8 +156,9 @@ class Output {
     let channel = NewChannel ? NewChannel : this.channel;
     console.log(error);
     let description = typeof error === "object" ? "**" + error.name + ":** " + error.message : error;
+    let Output = this;
     return new Promise((resolve, reject) => {
-      this.sender({
+      Output.sender({
         "description": description,
         "color": config.colors.error
       }, channel)

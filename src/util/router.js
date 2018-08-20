@@ -1,10 +1,24 @@
 const Parse = require("./parse.js");
+const DataManager = require("./datamanager.js");
 const Permissions = require("./permissions.js");
 const Commands = require("../data/commands.json");
 const allMessageCommands = require("../data/allmessagecommands.json");
 const DMCommands = require("../data/dmcommands.json");
 
 class Router {
+
+  static reaction (messageReaction, user) {
+    const reactionmessages = DataManager.getFile("./src/data/reactionmessages.json")[messageReaction.message.guild.id];
+    for(let type in reactionmessages) {
+      for (let messageID in reactionmessages[type]) {
+        if (messageReaction.message.id === messageID) {
+          let Constructor = require("../modules/" + type + ".js")
+          let Instance = new Constructor(messgeReaction.message);
+          Instance.react(messageReaction, user);
+        }
+      }
+    }
+  }
 
   static command (_data) {
     Router.checkErrors(_data)

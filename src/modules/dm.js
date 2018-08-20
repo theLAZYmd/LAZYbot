@@ -1,6 +1,6 @@
-const Embed = require("../util/embed.js");
 const Parse = require("../util/parse.js");
 const ModMailConstructor = require("./modmail.js");
+const Router = require("../util/router.js");
 
 class DM extends Parse {
 
@@ -22,23 +22,32 @@ class DM extends Parse {
     }
   }
 
-  mail () {
-    if (this.author.bot) return;
-    let guilds = [], guild;
+  mail () { //handles the input for dms
+    if (this.author.bot) return; //if bot, return
+    let guilds = []; //define an array for all possible guilds
     for(let [id, guild] of this.client.guilds) {
-      if (guild.members.has(this.author.id)) guilds.push(guild.id);
-    };
-    if (guilds.length === 1) return this.ModMail.receiver(guilds[0]);
-    let text = "Please pick which server you would like to send this modmail to:\n";
+      if (guild.members.has(this.author.id)) guilds.push(guild);
+    }; //and fill it with all guilds the bot has access to that the user is a member of.
+    Router.logCommand({
+      "author": this.author,
+      "args": this.message.content,
+      "command": "DM"
+    }, {
+      "file": "Mod Mail",
+      "prefix": ""
+    }); //log valid DMs received as a command
+    if (guilds.length === 1) return ModMail.receiver(guilds[0]); //if there's only one guild, proceed to modmail
+    let title = "Sending new ModMail on LAZYbot";
+    let description = "Please select a server to send this modmail to:\n";
     for(let i = 0; i < guilds.length; i++) {
-      text += (i + 1) + "⃣ **" + this.client.guilds.get(guilds[i]).name + "**\n";
+      description += (i + 1) + "⃣ **" + guilds[i].name + "**\n";
     };
-    this.Output.generic(text)
+    this.Output.sender({title, description}) //if more than one guild, send an embed letting them know
     .then(msg => {
       for(let i = 0; i < guilds.length; i++) {
         setTimeout(() => {
           msg.react((i + 1) + "⃣");
-        }, i * 1000);
+        }, i * 1000); //react to it with options
       };
       let filter = (reaction, user) => {
         if(user.bot) return false;
@@ -46,16 +55,19 @@ class DM extends Parse {
         if (Number(number[1]) < guilds.length) return true;
         return false;
       };
-      msg.awaitReactions(filter, {
+      msg.awaitReactions(filter, { //wait for them to react back
         "max": 1,
         "time": 30000,
         "errors": ["time"]
       })
       .then(collected => {
-        let number = collected.first().emoji.name.match(/([1-9]⃣)/);
-        return this.ModMail.receiver(Number(guilds[number]) - 1)
+        let number = Number(collected.first().emoji.name.match(/([1-9]⃣)/));
+        msg.delete();
+        return this.ModMail.receiver(guilds[number - 1]); //and if valid input, send of modmail for that guild
       })
-      .catch(e => console.log(e));
+      .catch(() => {
+        msg.delete();
+      });
     })
     .catch(e => console.log(e));
   }

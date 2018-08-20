@@ -1,16 +1,19 @@
 let start = Date.now(), data;
 
+//the permanent requires that access data files or modules
 const Discord = require('discord.js');
 const DataManager = require("./util/datamanager.js");
 const Router = require("./util/router.js")
-const onStartup = require("./events/onStartup.js");
-const DebuggingConstructor = require("./util/debugging.js");
 const config = require("./config.json");
 const client = new Discord.Client();
 const commands = require("./data/commands.json");
-
 const http = require('http');
 const express = require('express')();
+
+//the additional modules for debugging or only used sometimes
+const onStartup = require("./events/onStartup.js");
+const DebuggingConstructor = require("./util/debugging.js");
+const ModMailConstructor = require("./modules/modmail.js");
 
 class Bot {
 
@@ -47,10 +50,8 @@ class Bot {
     });
 
     client.on("messageReactionAdd", (messageReaction, user) => {
-      if (user.bot || !messageReaction.message.author.bot) return;
-      const ModMailConstructor = require("./modules/modmail.js");
-      const ModMail = new ModMailConstructor(messageReaction.message);
-      ModMail.event(messageReaction, user);
+      if (user.bot || !messageReaction.message.author.bot || !messageReaction.message.guild) return; //For using emojis as 'buttons'. Only reactions done by users reacting to bot messages are of interest to us.
+      Router.reaction(messageReaction, user);
     })
 
     express.get("/", (request, response) => { //interacting with glitch.com
@@ -65,7 +66,9 @@ class Bot {
 
   }
 
-  static debug (data) {
+  static debug (data) { //run through every command and try and run the examples to see if it throws errors
+    config.states.debug = true;
+    DataManager.setFile(config, "./src/config.json");
     for(let i = 0; i < commands.length; i++) {
       for(let j = 0; j < commands[i].usage.length; j++) {
         data.message = Object.assign({}, DataManager.getFile("./src/data/genericmessage.json"));
@@ -75,8 +78,7 @@ class Bot {
         console.log(data.message.content);
         Router.command(data);
       }
-    };
-    return;
+    }
   }
 
   static recordMessage (message) {

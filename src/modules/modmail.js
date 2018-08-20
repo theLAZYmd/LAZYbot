@@ -1,147 +1,135 @@
 const Parse = require("../util/parse.js");
 const Embed = require("../util/embed.js");
 const DataManager = require("../util/datamanager.js");
-const Router = require("../util/router.js");
 
 class ModMail extends Parse {
   constructor(message) {
-    super(message)
+    super(message);
+    this.reactionmessages = DataManager.getFile("./src/data/reactionmessages.json");
+    this.modmail = this.reactionmessages[this.server.id].modmail;
   }
 
-  receiver (guild) {
+  setData (modmail) {
+    this.reactionmessages[this.server.id].modmail = modmail;
+    DataManager.setFile(this.reactionmessages, "./src/data/reactionmessages.json");
+  }
+
+  receiver (guild) { //receive a guild as an input, set it to this.guild
     this.guild = guild;
-    let channel = this.Search.channels.get(this.server.channels.modmail);
     for(let [id, attachment] of this.message.attachments) {
-      this.message.content += " [Image Attachment](" + attachment.url + ")";
+      this.message.content += " [Image Attachment](" + attachment.url + ")"; //if there's any images, append them as a link to the DM image
     };
-    if (!this.server.modmail) this.server.modmail = {};
-    for(let id in this.server.modmail) { //for each modmail id
-      if (this.server.modmail[id].tag === this.author.tag && !this.server.modmail[id].full) {
-        if (Date.now() - this.server.modmail[id].timeout < 86400000) return;
-        Router.logCommand({
-          "author": this.author,
-          "args": this.message.content,
-          "command": "Reply"
-        }, {
-          "file": "Mod Mail",
-          "prefix": ""
-        });
-        return channel.fetchMessage(id)
-          .then((modmail) => {
-            let embed = modmail.embeds[0];
-            if (Date.now() - this.server.modmail[modmail.id].lastMail < 1800000 && embed.fields[embed.fields.length - 1].name.includes("user wrote:")) {
-              embed.fields[embed.fields.length - 1].value += "\n" + this.message.content;
-              this.editor(embed, modmail);
-              this.server.modmail[modmail.id].lastMail = Date.now();
-            } else {
-              this.sender(embed.fields);
-              modmail.delete();
-              delete this.server.modmail[modmail.id];
-            };
-            DataManager.setServer(this.server);
-          })
-          .catch(() => {
-            this.Output.generic("Couldn't find message. Please confirm that message no longer exists.", channel)
-            .then((msg) => {
-              let filter = m => m.content && m.content.match(/true|yes|confirm/gi);
-              msg.channel.awaitMessages(filter, {
-                "max": 1,
-                "time": 180000,
-                "errors": ["time"]
-              })
-              .then((collected) => {
-                msg.delete();
-                collected.first().react("✅")
-                delete this.server.modmail[id];
-                DataManager.setServer(this.server) ;
-              })
-              .catch((e) => console.log(e))
+    if (this.modmail) { //if the server has had modmail in the past
+      for(let id in this.modmail) { //for each record
+        if (this.modmail[id].tag === this.author.tag && !this.modmail[id].full) { //if the user hasn't mailed in the past or the post is more than 2000 characters, make a new one
+          if (Date.now() - this.modmail[id].timeout < 86400000) return; //if the user is timed out return completely
+          let channel = this.Search.channels.get(this.server.channels.modmail);
+          return channel.fetchMessage(id) //so if they have a chat history, find it
+            .then((modmail) => {
+              let embed = modmail.embeds[0];
+              if (Date.now() - this.modmail[modmail.id].lastMail < 1800000 && embed.fields[embed.fields.length - 1].name.includes("user wrote:")) {
+                embed.fields[embed.fields.length - 1].value += "\n" + this.message.content;
+                this.editor(embed, modmail); //and if they had last message, less than half an hour ago, merely append it with new line
+                this.modmail[modmail.id].lastMail = Date.now();
+              } else {
+                this.sender(embed.fields); //otherwise we're making a new post, extending the fields of the old post
+                modmail.delete(); //so delete the message
+                delete this.modmail[modmail.id]; //and delete the record
+              };
+              this.setData(this.modmail);
             })
-            .catch((e) => console.log(e));
-          })
+            .catch(() => {
+              this.Output.generic("Couldn't find message. Please confirm that message no longer exists.", channel)
+              .then((msg) => { //if couldn't find the message, chances are it's been accidentally deleted
+                let filter = m => m.content && m.content.match(/true|yes|confirm/gi); //so output then wait for confirmation
+                msg.channel.awaitMessages(filter, {
+                  "max": 1,
+                  "time": 180000,
+                  "errors": ["time"]
+                })
+                .then((collected) => {
+                  msg.delete();
+                  collected.first().react("✅")
+                  delete this.modmail[id]; //and delete the record
+                  this.sender(embed.fields); //and make a new post
+                  this.setData(this.modmail);
+                })
+                .catch((e) => console.log(e))
+              })
+              .catch((e) => console.log(e));
+            })
+        }
       }
-    };
-    Router.logCommand({
-      "author": this.author,
-      "args": this.message.content,
-      "command": "New"
-    }, {
-      "file": "Mod Mail",
-      "prefix": ""
-    });
+    } else this.modmail = {}; //if there's no modmail stored for this channel 
     this.sender([]); //if it's a new message it gets sent straight
   }
 
-  sender (fields) {
+  sender (fields) { //make a new post. All posts look the same, but you can have more 'previous' fields to add a history
     let timestamp = Date.getISOtime(this.message.createdAt);
-    this.react({
+    this.reactor({
       "title": "ModMail Conversation for " + this.author.tag,
       "fields": Embed.fielder(fields || [], "On " + timestamp + ", user wrote:", this.message.content, false)
-    }, (modmail) => {
-      this.server.modmail[modmail.id] = {
+    }, (modmail) => { //fields are past fields, + new one for the last message
+      this.modmail[modmail.id] = { //and create a new record with the new message created entry
         "tag": this.author.tag,
         "lastMail": Date.now()
       };
-      DataManager.setServer(this.server);
+      this.setData(this.modmail);
     })
   }
 
-  react (embed, callback) {
-    this.Output.sender(embed, this.Search.channels.get(this.server.channels.modmail))
+  reactor (embed, callback) {
+    this.Output.sender(embed, this.Search.channels.get(this.server.channels.modmail)) //send it
       .then((modmail) => {
-        let emojis = ["❎", "✉", "👁", "❗", "⏲"];
+        let emojis = ["❎", "✉", "👁", "❗", "⏲"]; //then react to it
         for (let i = 0; i < emojis.length; i++) {
           setTimeout(() => {
             modmail.react(emojis[i])
-          }, i * 1000);
+          }, i * 1000); //prevent api spam and to get the order right
         };
         return modmail;
       })
       .then((modmail) => {
-        if (callback) callback(modmail);
+        if (callback) return callback(modmail);
       })
       .catch((e) => console.log(e));
   }
 
   editor (embed, message) {
-    if (JSON.stringify(Embed.receiver(embed)).length < 2000) return this.Output.editor(embed, message);
-    this.sender([]);
-    this.server.modmail[message.id].full = true;
-    DataManager.setServer(this.server);
+    if (JSON.stringify(Embed.receiver(embed)).length < 2000) return this.Output.editor(embed, message); //check if the message would be more than 2000 characters
+    this.sender([]); //if so, create a new post
+    this.modmail[message.id].full = true; //and set that post to 'read-only' mode
+    this.setData(this.modmail);
   }
 
-  event (reaction, user) {
-    for (let messageid in this.server.modmail) {
-      if (this.message.id === messageid) {
-        switch (reaction.emoji.name) {
-          case "❎":
-            this.close(reaction.message, user, this.server.modmail[messageid]);
-            reaction.remove(user);
-            break;
-          case "✉":
-            this.reply(reaction.message, user, this.server.modmail[messageid]);
-            reaction.remove(user);
-            break;
-          case "👁": //"seen" 
-            break;
-          case "❗":
-            this.warn(reaction.message, user, this.server.modmail[messageid]);
-            reaction.remove(user);
-            break;
-          case "⏲":
-            this.timeout(reaction.message, user, this.server.modmail[messageid]);
-            reaction.remove(user);
-            break;
-        };
+  react (reaction, user) {
+    console.log(reaction);
+    switch (reaction.emoji.name) {
+      case "❎":
+        this.close(reaction.message, user, this.modmail[messageid]);
+        reaction.remove(user);
         break;
-      }
+      case "✉":
+        this.reply(reaction.message, user, this.modmail[messageid]);
+        reaction.remove(user);
+        break;
+      case "👁": //"seen" 
+        break;
+      case "❗":
+        this.warn(reaction.message, user, this.modmail[messageid]);
+        reaction.remove(user);
+        break;
+      case "⏲":
+        this.timeout(reaction.message, user, this.modmail[messageid]);
+        reaction.remove(user);
+        break;
     }
   }
 
   close (message, mod, mailInfo) {
     message.delete();
-    delete this.server.modmail[message.id];
-    DataManager.setServer(this.server);
+    delete this.modmail[message.id];
+    this.setData(this.modmail);
     this.Output.generic("**" + mod.tag + "** closed the ModMail conversation for **" + mailInfo.tag + "**.")
   }
 
@@ -188,7 +176,7 @@ class ModMail extends Parse {
     let timestamp = Date.getISOtime(Date.now());
     let embed = message.embeds[0];
     embed.fields = Embed.fielder(embed.fields, "On " + timestamp + ", " + mod.tag + " timed out user for 24h.", "", false)
-    this.server.modmail[message.id].timeout = Date.now();
+    this.modmail[message.id].timeout = Date.now();
     this.editor(embed, message);
     this.Output.sender({
       "title": "You have been timed out from sending messages to server " + this.guild.name + ":",

@@ -19,8 +19,8 @@
             "log": "comment-log",
             "join": "join",
             "leave": "lounge",
-            "live": "live",
-            "trivia": "trivia"
+            "trivia": "trivia",
+            "welcome": "welcome"
         },
         "colors": {
             "generic": 53380,
@@ -122,12 +122,6 @@
         },
         "notify": {
             "185412969130229760": 1532129995175
-        },
-        "modmail": {
-            "480812839875903488": {
-                "tag": "andy is an edgi boi#0035",
-                "lastMail": 1534705111920
-            }
         }
     }
 }

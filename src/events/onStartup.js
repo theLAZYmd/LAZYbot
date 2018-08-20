@@ -70,6 +70,12 @@ class onStartup {
       })
       .then(messages => array.concat(Array.from(messages)))
       .catch(e => console.log(e));
+      Search.channels.get(this.server.channels.welcome)
+      .fetchMessages({
+        "limit": 20
+      })
+      .then(messages => array.concat(Array.from(messages)))
+      .catch(e => console.log(e));
     }
   }
 
