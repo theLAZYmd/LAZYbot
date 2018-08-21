@@ -1,9 +1,12 @@
-const Parse = require("./parse.js");
+const Parse = require("../util/parse.js");
+const Embed = require("../util/embed.js");
+const DataManager = require("../util/datamanager.js");
 
 class Paginator extends Parse {
   constructor(message) {
     super(message);
-    this.paginator = this.reactionmessages[this.server.id].paginator;
+    if (!this.reactionmessages[this.server.id]) this.reactionmessages[this.server.id] = {};
+    this.paginator = this.reactionmessages[this.server.id].paginator || {};
   }
 
   setData (paginator) {
@@ -33,12 +36,19 @@ class Paginator extends Parse {
   */
 
   sender (Constructor, method, maxpages, period) {
-    embed.footer = embed.footer && maxpages === 1 ? embed.footer : Embed.footer(`${page + 1} / ${maxpages}`);
-    this.Output[maxpages < 2 ? "sender" : "reactor"](Constructor[method](0), this.channel, ["⬅", "➡"])
+    let embed = Constructor[method](0);
+    embed.footer = embed.footer && maxpages === 1 ? embed.footer : Embed.footer(`1 / ${maxpages}`);
+    this.Output[maxpages < 2 ? "sender" : "reactor"](embed, this.channel, ["⬅", "➡"])
     .then(msg => {
-      this.paginator[msg.id] = {Constructor, method, maxpages,
+      let embed = [];
+      for (let i = 0; i < maxpages; i++) {
+        let embedpage = Embed.receiver(Constructor[method](i));
+        if (!embedpage) this.Output.onError("Couldn't generate embed for that page.");
+        embed.push(embedpage);
+      }
+      this.paginator[msg.id] = {maxpages, embed,
         "period": period || 30000,
-        "page": 0        
+        "page": 0
       };
       this.setData(this.paginator);
       return msg;
@@ -47,27 +57,24 @@ class Paginator extends Parse {
       setTimeout(() => {
         msg.clearReactions()
         .catch((e) => console.log(e));
+        delete this.paginator[msg.id];
+        this.setData(this.paginator);
       }, period)
     })
     .catch((e) => console.log(e))
   }
 
-  react (reaction, user) {
-    for (let messageID in this.paginator) {
-      if (messageID === reaction.message.id) {
-        let data = this.paginator[messageID];
-        if (reaction.emoji.name === "➡") data.page++;
-        if (reaction.emoji.name === "⬅") data.page--;
-        reaction.remove(user);
-        if(page < 0 || page > data.maxpages) return;
-        let embed = data.Constructor[data.method](data.page);
-        if (!embed) return this.Output.onError("Couldn't generate embed for page " + (data.page + 1) + ".");
-        embed.footer = Embed.footer((data.page + 1) + " / " + maxpages);
-        this.editor(embed, reaction.message);
-        this.paginator[messageID] = data;
-        return this.setData(this.paginator);
-      }
-    }
+  react (reaction, user, data) {
+    if (reaction.emoji.name === "➡") data.page++;
+    if (reaction.emoji.name === "⬅") data.page--;
+    reaction.remove(user);
+    if(data.page < 0 || data.page > data.maxpages) return;
+    let embed = data.embed[data.page];
+    if (!embed) return this.Output.onError("Couldn't generate embed for page " + (data.page + 1) + ".");
+    embed.footer = Embed.footer((data.page + 1) + " / " + data.maxpages);
+    this.Output.editor(embed, reaction.message);
+    this.paginator[reaction.message.id] = data;
+    return this.setData(this.paginator);
   }
 
 }

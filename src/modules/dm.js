@@ -36,7 +36,7 @@ class DM extends Parse {
       "file": "Mod Mail",
       "prefix": ""
     }); //log valid DMs received as a command
-    if (guilds.length === 1) return ModMail.receiver(guilds[0]); //if there's only one guild, proceed to modmail
+    if (guilds.length === 1) return this.ModMail.receiver(guilds[0]); //if there's only one guild, proceed to modmail
     let title = "Sending new ModMail on LAZYbot";
     let description = "Please select a server to send this modmail to:\n";
     for(let i = 0; i < guilds.length; i++) {

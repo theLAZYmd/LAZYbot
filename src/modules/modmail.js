@@ -50,7 +50,7 @@ class ModMail extends Parse {
                   msg.delete();
                   collected.first().react("✅")
                   delete this.modmail[id]; //and delete the record
-                  this.sender(embed.fields); //and make a new post
+                  this.sender([]); //and make a new post
                   this.setData(this.modmail);
                 })
                 .catch((e) => console.log(e))
@@ -87,24 +87,23 @@ class ModMail extends Parse {
   }
 
   react (reaction, user) {
-    console.log(reaction);
     switch (reaction.emoji.name) {
       case "❎":
-        this.close(reaction.message, user, this.modmail[messageid]);
+        this.close(reaction.message, user, this.modmail[reaction.message.id]);
         reaction.remove(user);
         break;
       case "✉":
-        this.reply(reaction.message, user, this.modmail[messageid]);
+        this.reply(reaction.message, user, this.modmail[reaction.message.id]);
         reaction.remove(user);
         break;
       case "👁": //"seen" 
         break;
       case "❗":
-        this.warn(reaction.message, user, this.modmail[messageid]);
+        this.warn(reaction.message, user, this.modmail[reaction.message.id]);
         reaction.remove(user);
         break;
       case "⏲":
-        this.timeout(reaction.message, user, this.modmail[messageid]);
+        this.timeout(reaction.message, user, this.modmail[reaction.message.id]);
         reaction.remove(user);
         break;
       default:
@@ -164,6 +163,7 @@ class ModMail extends Parse {
     let embed = message.embeds[0];
     embed.fields = Embed.fielder(embed.fields, "On " + timestamp + ", " + mod.tag + " timed out user for 24h.", "", false)
     this.modmail[message.id].timeout = Date.now();
+    this.setData(this.modmail);
     this.editor(embed, message);
     this.Output.sender({
       "title": "You have been timed out from sending messages to server " + this.guild.name + ":",

@@ -35,7 +35,7 @@ class DataManager {
     let filepath = newfilepath ? newfilepath : config.guildFile; //if a path is provided, use it
     let allServer = DataManager.getFile(filepath); //get the file (the meta object)
     allServer[newServer.id] = newServer; //metaobject.id === the object
-    DataManager.setFile(allServer); //and set it
+    DataManager.setFile(allServer, filepath); //and set it
   }
 
 }

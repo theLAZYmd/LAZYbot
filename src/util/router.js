@@ -14,7 +14,7 @@ class Router {
         if (messageReaction.message.id === messageID) {
           let Constructor = require("../modules/" + type + ".js")
           let Instance = new Constructor(messageReaction.message);
-          Instance.react(messageReaction, user);
+          Instance.react(messageReaction, user, reactionmessages[type][messageID]);
         }
       }
     }

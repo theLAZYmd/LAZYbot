@@ -2,7 +2,6 @@ const config = require("../config.json");
 const Parse = require("../util/parse.js");
 const Embed = require("../util/embed.js");
 const Render = require("../util/render.js");
-const Paginator = require("../util/paginator.js");
 
 class Profile extends Parse {
 

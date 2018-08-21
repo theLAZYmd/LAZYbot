@@ -5,7 +5,6 @@ const DataManager = require("./datamanager.js")
 class Parse {
 
   constructor(message) { //everything extends to here
-    console.log(message);
     this.message = message;
     this.message.content = this.message.content && typeof this.message.content === "string" ?
       this.message.content
@@ -17,7 +16,7 @@ class Parse {
       : "";
     this.client = this.message.client;
     this.author = this.message.author;
-    this.bot = this.author.bot && message.embeds && message.embeds[0];
+    this.bot = this.author ? this.author.bot && message.embeds && message.embeds[0] : false;
     this.guild = this.message.guild || this.client.guilds.get(config.houseid);
     this.channel = this.message.channel;
     this.server = this.guild ? DataManager.getServer(this.guild.id) : "";
@@ -38,7 +37,7 @@ class Parse {
 
   get Paginator () {
     if (!this._Paginator) {
-      let PaginatorConstructor = require("./paginator.js");
+      let PaginatorConstructor = require("../modules/paginator");
       this._Paginator = new PaginatorConstructor(this.message);
     };
     return this._Paginator;
@@ -67,7 +66,8 @@ class Parse {
   }
 
   get dbindex () {
-    this.dbindex = this.dbuser ? DBuser.byIndex(this.dbuser) : "";
+    if (!this._dbindex) this._dbindex = this.dbuser ? DBuser.byIndex(this.dbuser) : "";
+    return this._dbindex;
   }
 
   get command () {
