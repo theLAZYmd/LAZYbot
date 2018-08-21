@@ -161,20 +161,7 @@ class Output extends Parse {
     let ModChannel = User.getChannel(server.channels.mod);
     this.onError(error, ModChannel)
   }
-
-  doNothing(error) {
-    //do nothing
-  }
-
-  toOwner(message) {
-    if(!message) throw "Failed to define a message."
-    if(this.debug) return () => {};
-    for(let i = 0; i < config.ids.owner.length; i++) {
-      let owner = this.client.users.get(config.ids.owner[i])
-      if(owner) owner.send(message);
-    }
-  }
-
+  
   reactor (embed, channel, emojis) {
     return new Promise ((resolve, reject) => {
       this.sender(embed, channel) //send it
@@ -182,6 +169,7 @@ class Output extends Parse {
         for (let i = 0; i < emojis.length; i++) { //then react to it
           setTimeout(() => {
             msg.react(emojis[i])
+            .catch(() => {})
           }, i * 1000); //prevent api spam and to get the order right
         };
         return msg;
@@ -189,6 +177,54 @@ class Output extends Parse {
       .then((msg) => resolve(msg))
     })
     .catch((e) => console.log(e));
+  }
+
+  confirm (description, channel, author) {
+    return new Promise ((resolve, reject) => {
+      let emojis = ["✅", "❎"];
+      this.reactor({
+        "description": description ? description : "Please confirm this action."
+      }, channel, emojis)
+      .then((msg) => {
+        let filter = (reaction, user) => emojis.includes(reaction.emoji.name) && author.id === user.id;
+        msg.awaitReactions(filter, {
+          "max": 1,
+          "time": 30000,
+          "errors": ["time"]
+        })
+        .then((collected) => {
+          if (collected.first().emoji.name === "✅") resolve();
+          else if (collected.first().emoji.name === "❎") reject ();
+          return msg.delete();
+        })
+        .catch(() => {
+          reject ();
+          return msg.delete();
+        })
+      })
+    })
+  }
+
+  response (author, description, channel) {
+    return new Promise ((resolve, reject) => {
+      this.Output.generic("**" + author.tag + "** " + (description ? description : "Please type your response below."), channel)
+      .then((msg) => {
+        let filter = m => m.author.id === author.id && m.content;
+        msg.channel.awaitMessages(filter, {
+          "max": 1,
+          "time": 180000,
+          "errors": ["time"]
+        })
+        .then((collected) => {
+          resolve(collected.first());
+          return msg.delete();
+        })
+        .catch(() => {
+          reject ();
+          return msg.delete();
+        })
+      })
+    })
   }
 
 }

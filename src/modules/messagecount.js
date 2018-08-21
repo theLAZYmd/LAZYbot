@@ -35,9 +35,9 @@ class MessageCount extends Parse {
     }
     if(!newcount) return this.Output.onError(`No new MessageCount specified!`);
     let dbuser = DBuser.getUser(user);
-    dbuser.messages = newcount;
+    dbuser.messages.count = newcount;
     DBuser.setData(dbuser);
-    return this.Output.generic(`Message count for **${user.tag}** is now **${dbuser.messages.toLocaleString()}** messages.`);
+    return this.Output.generic(`Message count for **${user.tag}** is now **${dbuser.messages.count.toLocaleString()}** messages.`);
   }
 
   get (args, user) {
@@ -47,7 +47,7 @@ class MessageCount extends Parse {
       if(!user) return this.Output.onError(`Couldn't find user!`);
     };
     let dbuser = DBuser.getUser(user);
-    return this.Output.generic(`**${user.tag}** has sent **${dbuser.messages.toLocaleString()}** messages.`)
+    return this.Output.generic(`**${user.tag}** has sent **${dbuser.messages.count.toLocaleString()}** messages.`)
   }
 
 }

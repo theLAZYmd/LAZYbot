@@ -2,89 +2,17 @@
     "314155682033041408": {
         "id": "314155682033041408",
         "modmail": {
-            "480812839875903488": {
-                "tag": "andy is an edgi boi#0035",
-                "lastMail": 1534705111920
+            "timeout": {},
+            "481398933835481089": {
+                "tag": "acecace9801#4811",
+                "lastMail": 1534844868782,
+                "overflow": "481400757858336787"
             },
-            "481216269815644161": {
-                "tag": "theLAZYmd#2353",
-                "lastMail": 1534801298475,
-                "timeout": 1534801322183
+            "481400757858336787": {
+                "tag": "acecace9801#4811",
+                "lastMail": 1534845284720
             }
         },
-        "314155682033041408": {},
-        "paginator": {
-            "481275378745212929": {
-                "maxpages": 10,
-                "embed": [
-                    {
-                        "title": "<:crazyhouse:471114113599406110> House Rankings on Lichess.org for Crazyhouse players",
-                        "description": "**#1** [Mark Plotkin](https://lichess.org/@/littleplotkin) 2725\n**#2** [schaker](https://lichess.org/@/opperwezen) 2651\n**#3** [gsvc](https://lichess.org/@/gsvc) 2621\n**#4** [Fumitoks](https://lichess.org/@/Velysine) 2592\n**#5** [Mugwort](https://lichess.org/@/Mugwort) 2559\n**#6** [MMichael](https://lichess.org/@/TheFinnisher) 2556\n**#7** [Vempele](https://lichess.org/@/Vempele) 2545\n**#8** [Grindonmygrande](https://lichess.org/@/grindonmygrande) 2539\n**#9** [penguingm1](https://lichess.org/@/penguingim1) 2530\n**#10** [mastertan](https://lichess.org/@/mastertan) 2494\n"
-                    },
-                    {
-                        "title": "<:crazyhouse:471114113599406110> House Rankings on Lichess.org for Crazyhouse players",
-                        "description": "**#11** [retardedplatypus123](https://lichess.org/@/retardedplatypus123) 2490\n**#12** [schwinggggg](https://lichess.org/@/schwinggggg) 2452\n**#13** [TcubesAK](https://lichess.org/@/TcubesAK) 2445\n**#14** [MeneerMandje](https://lichess.org/@/VariantsOnly) 2437\n**#15** [HighContrast](https://lichess.org/@/HighContrast) 2421\n**#16** [the420boss](https://lichess.org/@/FreeBee) 2414\n**#17** [Atamek](https://lichess.org/@/atamek) 2401\n**#18** [Zaphikel](https://lichess.org/@/Metatronic) 2331\n**#19** [jazzii](https://lichess.org/@/jazzii) 2315\n**#20** [PawnInTraining](https://lichess.org/@/PawnInTraining) 2281\n",
-                        "footer": {
-                            "text": "2 / 10"
-                        }
-                    },
-                    {
-                        "title": "<:crazyhouse:471114113599406110> House Rankings on Lichess.org for Crazyhouse players",
-                        "description": "**#21** [LegionDestroyer](https://lichess.org/@/LegionDestroyer) 2274\n**#22** [Boss](https://lichess.org/@/Ingrid-Vengeance) 2267\n**#23** [aNOnyMOUSE](https://lichess.org/@/HopelessWanderer) 2253\n**#24** [crptone](https://lichess.org/@/crptone) 2241\n**#25** [moonenane](https://lichess.org/@/moonenaneBETA) 2233\n**#26** [Alduto](https://lichess.org/@/Alduto) 2233\n**#27** [Yeti](https://lichess.org/@/yatinagarwal) 2202\n**#28** [CrossOnline](https://lichess.org/@/cross_online) 2194\n**#29** [lovlas](https://lichess.org/@/lovlas) 2191\n**#30** [Kyle](https://lichess.org/@/KyleLegion) 2182\n",
-                        "footer": {
-                            "text": "3 / 10"
-                        }
-                    },
-                    {
-                        "title": "<:crazyhouse:471114113599406110> House Rankings on Lichess.org for Crazyhouse players",
-                        "description": "**#31** [Yeti](https://lichess.org/@/yatinagarwal) 2161\n**#32** [theLAZYmd](https://lichess.org/@/TheLAZYmd) 2158\n**#33** [Musickn](https://lichess.org/@/Musicknight123) 2149\n**#34** [SnowyHamster](https://lichess.org/@/SnowyHamster) 2142\n**#35** [thelastpolymath](https://lichess.org/@/notsotantheman) 2140\n**#36** [Cocaino74](https://lichess.org/@/Cocaino74) 2120\n**#37** [moonenaneBETA](https://lichess.org/@/moonenaneBETA) 2108\n**#38** [Truthdoc](https://lichess.org/@/FischyVishy) 2108\n**#39** [EF](https://lichess.org/@/eflc) 2103\n**#40** [nowayouwin](https://lichess.org/@/Nowayouwin) 2101\n",
-                        "footer": {
-                            "text": "4 / 10"
-                        }
-                    },
-                    {
-                        "title": "<:crazyhouse:471114113599406110> House Rankings on Lichess.org for Crazyhouse players",
-                        "description": "**#41** [TheLoneWolf](https://lichess.org/@/the-lone-wolf) 2094\n**#42** [SREGORG](https://lichess.org/@/grogers) 2072\n**#43** [Chronatog](https://lichess.org/@/Chronatog) 2071\n**#44** [lasz1](https://lichess.org/@/lasz1) 2069\n**#45** [chuckmoulton](https://lichess.org/@/chuckmoulton) 2052\n**#46** [blunderman1](https://lichess.org/@/blunderman1) 2048\n**#47** [samoyd](https://lichess.org/@/samoyd) 2021\n**#48** [Illion](https://lichess.org/@/Illion) 2018\n**#49** [Kebab](https://lichess.org/@/BurakYarol) 2004\n**#50** [2100 rated zh player](https://lichess.org/@/BurakYarol) 1993\n",
-                        "footer": {
-                            "text": "5 / 10"
-                        }
-                    },
-                    {
-                        "title": "<:crazyhouse:471114113599406110> House Rankings on Lichess.org for Crazyhouse players",
-                        "description": "**#51** [ObiWanBenoni](https://lichess.org/@/andreijl) 1979\n**#52** [Zach](https://lichess.org/@/zdwalsh) 1948\n**#53** [chessguy101](https://lichess.org/@/chesssky2) 1926\n**#54** [Morris](https://lichess.org/@/Natso) 1921\n**#55** [okei](https://lichess.org/@/okei) 1915\n**#56** [rrhyddhad](https://lichess.org/@/Rrhyddhad) 1913\n**#57** [ArdinB](https://lichess.org/@/Sonata2) 1911\n**#58** [ProgramFOX](https://lichess.org/@/ProgramFOX) 1900\n**#59** [Tomitau](https://lichess.org/@/tomitau) 1877\n**#60** [Mystiko](https://lichess.org/@/marczhouse) 1856\n",
-                        "footer": {
-                            "text": "6 / 10"
-                        }
-                    },
-                    {
-                        "title": "<:crazyhouse:471114113599406110> House Rankings on Lichess.org for Crazyhouse players",
-                        "description": "**#61** [liamchez](https://lichess.org/@/liamchez) 1850\n**#62** [poriluk](https://lichess.org/@/Brokula) 1844\n**#63** [Raven](https://lichess.org/@/PepsiNGaming) 1838\n**#64** [hiiiii](https://lichess.org/@/JaakkoT) 1806\n**#65** [beppos](https://lichess.org/@/repetitaiuvant) 1798\n**#66** [IceFire19](https://lichess.org/@/IceFire1921) 1795\n**#67** [jamarlo](https://lichess.org/@/jamesog) 1769\n**#68** [TheUnknownGuyReborn](https://lichess.org/@/TheUnknownGuyReborn) 1749\n**#69** [javi0111](https://lichess.org/@/Javi0111) 1738\n**#70** [Forhavu](https://lichess.org/@/Forhavu) 1696\n",
-                        "footer": {
-                            "text": "7 / 10"
-                        }
-                    },
-                    {
-                        "title": "<:crazyhouse:471114113599406110> House Rankings on Lichess.org for Crazyhouse players",
-                        "description": "**#71** [supunay](https://lichess.org/@/supunay) 1683\n**#72** [Gopnik](https://lichess.org/@/Gopnikk) 1675\n**#73** [AdamGaming](https://lichess.org/@/adelgat) 1660\n**#74** [hipno](https://lichess.org/@/hipno) 1655\n**#75** [ericw31415](https://lichess.org/@/ericw31415) 1655\n**#76** [Juanma206](https://lichess.org/@/SadLittleTurtle) 1596\n**#77** [FlyingFalcon](https://lichess.org/@/FalconPower) 1581\n**#78** [pethidine](https://lichess.org/@/fgalla) 1551\n**#79** [TheM492017](https://lichess.org/@/TheM492017) 1535\n**#80** [Viking88](https://lichess.org/@/FireWorks) 1522\n",
-                        "footer": {
-                            "text": "8 / 10"
-                        }
-                    },
-                    {
-                        "title": "<:crazyhouse:471114113599406110> House Rankings on Lichess.org for Crazyhouse players",
-                        "description": "**#81** [loukas435](https://lichess.org/@/loukas435) 1515\n**#82** [Raven](https://lichess.org/@/Antiprion) 1500\n**#83** [Stubenfisch](https://lichess.org/@/Stubenfisch) 1494\n**#84** [Aram](https://lichess.org/@/AramSevag) 1476\n**#85** [Kai](https://lichess.org/@/the_loving_boy) 1440\n**#86** [fuck u bitch](https://lichess.org/@/AcademicNinja99) 1435\n**#87** [townes-paycheck](https://lichess.org/@/townes-paycheck) 1426\n**#88** [Andrew](https://lichess.org/@/Link) 1421\n**#89** [Babosos](https://lichess.org/@/Babosos) 1351\n**#90** [pydlv](https://lichess.org/@/PMethod) 1348\n",
-                        "footer": {
-                            "text": "9 / 10"
-                        }
-                    },
-                    {
-                        "title": "<:crazyhouse:471114113599406110> House Rankings on Lichess.org for Crazyhouse players",
-                        "description": "**#91** [stevis5](https://lichess.org/@/stevis5) 1325\n"
-                    }
-                ],
-                "period": 30000,
-                "page": 8
-            }
-        }
+        "paginator": {}
     }
 }

@@ -2,7 +2,6 @@ const Parse = require("../util/parse.js");
 const DataManager = require("../util/datamanager.js");
 const request = require("request");
 const config = require("../config.json");
-const Paginator = require("../util/paginator.js");
 
 class Embeds extends Parse {
   constructor(message) {

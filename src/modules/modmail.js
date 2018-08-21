@@ -15,75 +15,77 @@ class ModMail extends Parse {
 
   receiver (guild) { //receive a guild as an input, set it to this.guild
     this.guild = guild;
-    for(let [id, attachment] of this.message.attachments) {
-      this.message.content += " [Image Attachment](" + attachment.url + ")"; //if there's any images, append them as a link to the DM image
-    };
     if (this.modmail) { //if the server has had modmail in the past
-      for(let id in this.modmail) { //for each record
-        if (this.modmail[id].tag === this.author.tag && !this.modmail[id].full) { //if the user hasn't mailed in the past or the post is more than 2000 characters, make a new one
-          if (Date.now() - this.modmail[id].timeout < 86400000) return; //if the user is timed out return completely
+      if (this.modmail.timeout && this.modmail.timeout[this.author.tag]) {
+        if (Date.now() - this.modmail.timeout[this.author.tag] < 86400000) return; //if the user is timed out return completely
+        delete this.modmail.timeout[this.author.tag];
+      };
+      for (let id in this.modmail) { //for each record
+        if (id === "timeout") continue;
+        if (this.modmail[id].tag === this.author.tag && !this.modmail[id].overflow) { //if the user hasn't mailed in the past or the post is more than 2000 characters, make a new one
           let channel = this.Search.channels.get(this.server.channels.modmail);
           return channel.fetchMessage(id) //so if they have a chat history, find it
-            .then((modmail) => {
-              let embed = modmail.embeds[0];
-              if (Date.now() - this.modmail[modmail.id].lastMail < 1800000 && embed.fields[embed.fields.length - 1].name.includes("user wrote:")) {
-                embed.fields[embed.fields.length - 1].value += "\n" + this.message.content;
-                this.editor(embed, modmail); //and if they had last message, less than half an hour ago, merely append it with new line
-                this.modmail[modmail.id].lastMail = Date.now();
-              } else {
-                this.sender(embed.fields); //otherwise we're making a new post, extending the fields of the old post
-                modmail.delete(); //so delete the message
-                delete this.modmail[modmail.id]; //and delete the record
-              };
+          .then((modmail) => {
+            let embed = modmail.embeds[0];
+            if (Date.now() - this.modmail[modmail.id].lastMail < 1800000 && embed.fields[embed.fields.length - 1].name.includes("user wrote:")) {
+              embed.fields[embed.fields.length - 1].value += "\n" + this.message.content;
+              this.editor(embed, modmail); //and if they had last message, less than half an hour ago, merely append it with new line
+              this.modmail[modmail.id].lastMail = Date.now();
+            } else {
+              this.sender(embed.fields); //otherwise we're making a new post, extending the fields of the old post
+              modmail.delete(); //so delete the message
+              delete this.modmail[modmail.id]; //and delete the record
+            };
+            this.setData(this.modmail);
+          })
+          .catch(() => {
+            this.Output.confirm("Couldn't find message. Please confirm that message no longer exists.", channel, mod)
+            .then(() => {
+              msg.delete();
+              delete this.modmail[id]; //and delete the record
+              this.sender([]); //and make a new post
               this.setData(this.modmail);
             })
-            .catch(() => {
-              this.Output.generic("Couldn't find message. Please confirm that message no longer exists.", channel)
-              .then((msg) => { //if couldn't find the message, chances are it's been accidentally deleted
-                let filter = m => m.content && m.content.match(/true|yes|confirm/gi); //so output then wait for confirmation
-                msg.channel.awaitMessages(filter, {
-                  "max": 1,
-                  "time": 180000,
-                  "errors": ["time"]
-                })
-                .then((collected) => {
-                  msg.delete();
-                  collected.first().react("✅")
-                  delete this.modmail[id]; //and delete the record
-                  this.sender([]); //and make a new post
-                  this.setData(this.modmail);
-                })
-                .catch((e) => console.log(e))
-              })
-              .catch((e) => console.log(e));
-            })
+            .catch(() => {})
+          })
         }
       }
-    } else this.modmail = {}; //if there's no modmail stored for this channel 
+    } else this.modmail = {
+      "timeout": {}
+    }; //if there's no modmail stored for this channel 
     this.sender([]); //if it's a new message it gets sent straight
   }
 
-  sender (fields) { //make a new post. All posts look the same, but you can have more 'previous' fields to add a history
-    let timestamp = Date.getISOtime(this.message.createdAt);
-    this.Output.reactor({
-      "title": "ModMail Conversation for " + this.author.tag,
-      "fields": Embed.fielder(fields || [], "On " + timestamp + ", user wrote:", this.message.content, false)
-    }, this.Search.channels.get(this.server.channels.modmail), ["❎", "✉", "👁", "❗", "⏲"])
-    .then((modmail) => { //fields are past fields, + new one for the last message
-      this.modmail[modmail.id] = { //and create a new record with the new message created entry
-        "tag": this.author.tag,
-        "lastMail": Date.now()
-      };
-      this.setData(this.modmail);
-    })
-    .catch((e) => console.log(e));
+  sender (fields, mailInfo) { //make a new post. All posts look the same, but you can have more 'previous' fields to add a history
+    return new Promise ((resolve, reject) => {  
+      let tag = mailInfo ? mailInfo.tag : this.author.tag;
+      let timestamp = Date.getISOtime(this.message.createdAt);
+      this.Output.reactor({
+        "title": "ModMail Conversation for " + tag,
+        "fields": Embed.fielder(fields || [], "On " + timestamp + ", " + (this.mod ? this.mod.tag : "user") + " wrote:", this.message.content, false)
+      }, this.Search.channels.get(this.server.channels.modmail), ["❎", "✉", "👁", "❗", "⏲"])
+      .then((modmail) => { //fields are past fields, + new one for the last message
+        this.modmail[modmail.id] = { //and create a new record with the new message created entry
+          "tag": tag,
+          "lastMail": Date.now()
+        };
+        this.setData(this.modmail);
+        return modmail;
+      })
+      .then(modmail => resolve(modmail))
+      .catch((e) => console.log(e));
+    });
   }
 
-  editor (embed, message) {
+  editor (embed, message, mailInfo) {
     if (JSON.stringify(Embed.receiver(embed)).length < 2000) return this.Output.editor(embed, message); //check if the message would be more than 2000 characters
-    this.sender([]); //if so, create a new post
-    this.modmail[message.id].full = true; //and set that post to 'read-only' mode
-    this.setData(this.modmail);
+    message.clearReactions();
+    this.sender([], mailInfo) //if so, create a new post
+    .then((msg) => {
+      this.modmail[message.id].overflow = msg.id;
+      this.setData(this.modmail);
+    })
+    .catch((e) => console.log(e)); //and set that post to 'read-only' mode
   }
 
   react (reaction, user) {
@@ -112,63 +114,79 @@ class ModMail extends Parse {
     }
   }
 
-  close (message, mod, mailInfo) {
-    message.delete();
-    delete this.modmail[message.id];
-    this.setData(this.modmail);
-    this.Output.generic("**" + mod.tag + "** closed the ModMail conversation for **" + mailInfo.tag + "**.")
-  }
-
   reply (message, mod, mailInfo) {
     let user = this.Search.users.byTag(mailInfo.tag);
     if (!user) return this.Output.onError("User **" + user.tag + "** no longer exists!");
-    this.Output.generic("**" + mod.tag + "** Please type your reply now.")
+    this.Output.response(mod)
     .then((msg) => {
-      let filter = m => m.author.id === mod.id && m.content;
-      msg.channel.awaitMessages(filter, {
-        "max": 1,
-        "time": 180000,
-        "errors": ["time"]
-      })
-      .then((collected) => {
-        let timestamp = Date.getISOtime(Date.now());
-        let embed = message.embeds[0];
-        embed.fields = Embed.fielder(embed.fields, "On " + timestamp + ", " + mod.tag + " wrote:", collected.first().content, false)
-        this.editor(embed, message);
-        this.Output.sender({
-          "title": "New mail from server " + this.guild.name + ":",
-          "description": collected.first().content
-        }, user);
-        msg.delete();
-        collected.first().delete();
-      })
-      .catch((e) => console.log(e))
+      for(let [id, attachment] of msg.attachments) {
+        msg.content += " [Image Attachment](" + attachment.url + ")"; //if there's any images, append them as a link to the DM image
+      };
+      if (msg.content.length > 1024) return this.Output.onError("Your message must be less than 1024 characters!\nPlease shorten it by **" + (msg.content.length - 1024) + "** characters.");
+      this.message = msg, this.mod = mod;
+      let timestamp = Date.getISOtime(Date.now()), embed = message.embeds[0];
+      embed.fields = Embed.fielder(embed.fields, "On " + timestamp + ", " + mod.tag + " wrote:", msg.content, false)
+      this.editor(embed, message, mailInfo);
+      this.Output.sender({
+        "title": "New mail from server " + this.guild.name + ":",
+        "description": msg.content
+      }, user);
+      msg.delete();
     })
     .catch((e) => console.log(e));
   }
 
+  close (message, mod, mailInfo) {
+    this.Output.confirm("Please confirm closing the conversation for user **" + mailInfo.tag + "**.", this.channel, mod)
+    .then(() => {
+      for (let id in this.modmail) {
+        if (this.modmail[id].tag === mailInfo.tag) {
+          message.channel.fetchMessage(id)
+          .then((msg) => {
+            msg.delete()
+            .catch(e => console.log(e));
+          })
+          .catch(() => {});
+          delete this.modmail[id];
+        }
+      };
+      this.setData(this.modmail);
+      return this.Output.generic("**" + mod.tag + "** closed the ModMail conversation for **" + mailInfo.tag + "**.");
+    })
+    .catch(() => {});
+  }
+
   warn (message, mod, mailInfo) {
-    let timestamp = Date.getISOtime(Date.now());
-    let embed = message.embeds[0];
-    embed.fields = Embed.fielder(embed.fields, "On " + timestamp + ", " + mod.tag + " warned user.", "", false)
-    this.editor(embed, message);
-    this.Output.sender({
-      "title": "Warning from server " + this.guild.name + ":",
-      "description": "You are abusing the modmail system. Keep requests civil and do not spam the inbox."
-    }, this.Search.users.byTag(mailInfo.tag));
+    this.Output.confirm("Please confirm warning for user **" + mailInfo.tag + "**.", this.channel, mod)
+    .then(() => {
+      let timestamp = Date.getISOtime(Date.now());
+      let embed = message.embeds[0];
+      embed.fields = Embed.fielder(embed.fields, "On " + timestamp + ", " + mod.tag + " warned user.", "", false)
+      this.editor(embed, message);
+      this.Output.sender({
+        "title": "Warning from server " + this.guild.name + ":",
+        "description": "You are abusing the modmail system. Keep requests civil and do not spam the inbox."
+      }, this.Search.users.byTag(mailInfo.tag));
+    })
+    .catch(() => {});
   }
 
   timeout (message, mod, mailInfo) {
-    let timestamp = Date.getISOtime(Date.now());
-    let embed = message.embeds[0];
-    embed.fields = Embed.fielder(embed.fields, "On " + timestamp + ", " + mod.tag + " timed out user for 24h.", "", false)
-    this.modmail[message.id].timeout = Date.now();
-    this.setData(this.modmail);
-    this.editor(embed, message);
-    this.Output.sender({
-      "title": "You have been timed out from sending messages to server " + this.guild.name + ":",
-      "description": "You will not be able to send messages to the mod team for 24 hours."
-    }, this.Search.users.byTag(mailInfo.tag));
+    this.Output.confirm("Please confirm timeout for user **" + mailInfo.tag + "**.", this.channel, mod)
+    .then(() => {
+      let timestamp = Date.getISOtime(Date.now());
+      let embed = message.embeds[0];
+      embed.fields = Embed.fielder(embed.fields, "On " + timestamp + ", " + mod.tag + " timed out user for 24h.", "", false)
+      if (!this.modmail.timeout) this.modmail.timeout = {};
+      this.modmail.timeout[mailInfo.tag] = Date.now();
+      this.setData(this.modmail);
+      this.editor(embed, message);
+      this.Output.sender({
+        "title": "You have been timed out from sending messages to server " + this.guild.name + ":",
+        "description": "The mod team will not receive your messages for 24 hours."
+      }, this.Search.users.byTag(mailInfo.tag));
+    })
+    .catch(() => {});
   }
 
   //Old code from here onwards

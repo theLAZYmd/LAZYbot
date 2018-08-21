@@ -36,6 +36,10 @@ class DM extends Parse {
       "file": "Mod Mail",
       "prefix": ""
     }); //log valid DMs received as a command
+    for(let [id, attachment] of this.message.attachments) {
+      this.message.content += " [Image Attachment](" + attachment.url + ")"; //if there's any images, append them as a link to the DM image
+    };
+    if (this.message.content.length > 1024) return this.Output.onError("Your message must be less than 1024 characters!\nPlease shorten it by **" + (this.message.content.length - 1024) + "** characters.");
     if (guilds.length === 1) return this.ModMail.receiver(guilds[0]); //if there's only one guild, proceed to modmail
     let title = "Sending new ModMail on LAZYbot";
     let description = "Please select a server to send this modmail to:\n";
