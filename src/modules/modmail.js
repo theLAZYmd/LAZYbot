@@ -62,8 +62,8 @@ class ModMail extends Parse {
       let timestamp = Date.getISOtime(this.message.createdAt);
       this.Output.reactor({
         "title": "ModMail Conversation for " + tag,
-        "fields": Embed.fielder(fields || [], "On " + timestamp + ", " + (this.mod ? this.mod.tag : "user") + " wrote:", this.message.content, false)
-      }, this.Search.channels.get(this.server.channels.modmail), ["❎", "✉", "👁", "❗", "⏲"])
+        "fields": Embed.fielder(fields || [], "On " + timestamp + ", " + (this.mod ? this.mod.tag : "user") + (this.mod && !this.mod.flair ? " 🗣" : "") +" wrote:", this.message.content, false)
+      }, this.Search.channels.get(this.server.channels.modmail), ["❎", "🗣", "👤", "👁", "❗", "⏲"])
       .then((modmail) => { //fields are past fields, + new one for the last message
         this.modmail[modmail.id] = { //and create a new record with the new message created entry
           "tag": tag,
@@ -94,8 +94,12 @@ class ModMail extends Parse {
         this.close(reaction.message, user, this.modmail[reaction.message.id]);
         reaction.remove(user);
         break;
-      case "✉":
-        this.reply(reaction.message, user, this.modmail[reaction.message.id]);
+      case "🗣":
+        this.reply(reaction.message, Object.assign(user, {"flair": false}), this.modmail[reaction.message.id]);
+        reaction.remove(user);
+        break;
+      case "👤":
+        this.reply(reaction.message, Object.assign(user, {"flair": true}), this.modmail[reaction.message.id]);
         reaction.remove(user);
         break;
       case "👁": //"seen" 
@@ -118,7 +122,8 @@ class ModMail extends Parse {
     let user = this.Search.users.byTag(mailInfo.tag);
     if (!user) return this.Output.onError("User **" + user.tag + "** no longer exists!");
     this.Output.response({
-      "author": mod
+      "author": mod,
+      "description": "Please type your response below (replying as " + (mod.flair ? "yourself" : "server") + ")"
     })
     .then((msg) => {
       for(let [id, attachment] of msg.attachments) {
@@ -127,10 +132,10 @@ class ModMail extends Parse {
       if (msg.content.length > 1024) return this.Output.onError("Your message must be less than 1024 characters!\nPlease shorten it by **" + (msg.content.length - 1024) + "** characters.");
       this.message = msg, this.mod = mod;
       let timestamp = Date.getISOtime(Date.now()), embed = message.embeds[0];
-      embed.fields = Embed.fielder(embed.fields, "On " + timestamp + ", " + mod.tag + " wrote:", msg.content, false)
+      embed.fields = Embed.fielder(embed.fields, "On " + timestamp + ", " + mod.tag + (!mod.flair ? " 🗣" : "") + " wrote:", msg.content, false)
       this.editor(embed, message, mailInfo);
       this.Output.sender({
-        "title": "New mail from server " + this.guild.name + ":",
+        "title": "New mail from " + (mod.flair ? mod.tag + " via " : "server ") + this.guild.name + ":",
         "description": msg.content
       }, user);
       msg.delete();

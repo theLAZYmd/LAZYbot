@@ -26,6 +26,16 @@ class Maths extends Parse {
     })
   }
 
+  static negativebinomial (r, p, x, cumulative) {
+    let result = Maths.choose(x - 1, r - 1) * Math.pow(p, r) * Math.pow(1 - p, x - r);
+    if (cumulative) {
+      for (let i = 0; i < x ; i++) {
+        result += Maths.choose(x - 1, r - 1) * Math.pow(p, r) * Math.pow(1 - p, x - r);
+      }
+    };
+    return result;
+  }
+
   static binomial (n, p, x, cumulative) {
     let result = Maths.choose(n, x) * Math.pow(p, x) * Math.pow(1 - p, n - x);
     if (cumulative) {

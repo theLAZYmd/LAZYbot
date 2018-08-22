@@ -77,7 +77,7 @@ class Tracker extends Parse {
       username = args[0];
     };
     if(args.length === 2) {
-      if(!this.Check.roles(this.member, this.server.roles.admin)) return this.Output.onError("Invalid user given.")
+      if(!this.Check.role(this.member, this.server.roles.admin)) return this.Output.onError("Invalid user given.")
       let user = this.Search.users.get(args[0]);
       if(!user) return this.Output.onError("Invalid user given.")
       dbuser = DBuser.getUser(user);

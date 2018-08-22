@@ -20,8 +20,8 @@ class Series extends All {
       "players": []
     };
     this.Output.response({ //get the number of games played. Game total must add up to this number.
-      "description": "Please input number of games to be played in upcoming series.",
-      "filter": m => !isNaN(parseInt(m.content) && Number(m.content) < 31
+      "description": "Please input the number of games played in the series.",
+      "filter": m => !isNaN(parseInt(m.content) && Number(m.content) < 21)
     })
     .then((msg1) => {
       data.length = parseInt(msg1.content); 
@@ -68,7 +68,7 @@ class Series extends All {
   gen (data) {
     data.total = data.players[0].score + data.players[1].score;
     if (!data.total) return this.Output.onError("Couldn't calculate odds for this data.");
-    data.reliability = (Math.pow(Math.E, (Math.min(data.total, 1000) / 1000)) //e^(total/1000) or if total is more than 1000, 1
+    data.reliability = (Math.pow(Math.E, (Math.min(data.total, 200) / 200)) //e^(total/1000) or if total is more than 1000, 1
       * (1 / (Math.E - 1)) //divided by (e-1), now a number between 0 and 1
       * 0.25); //now a number between 0 and 0.25
     data.accuracy = (Math.pow(Math.E, (Math.min(data.length, 50) / 50)) //e^(number of games/50) or if total is more than 50, 1
@@ -103,7 +103,7 @@ class Series extends All {
     let type = page === 0 ? "discrete" : "cumulative";
     let embed = {
       "title": this.Search.emojis.get("lazyslack") + " LAZY odds for match " + data.players[0].name + " vs " + data.players[1].name,
-      "description": "Showing " + type + " odds...",
+      "description": "Showing " + type + " odds...\n**Note:** these odds are not valid unless it is <@!185412969130229760> who has request them.",
       "fields": []
     };
     for (let i = 0; i < data.players.length; i++) {

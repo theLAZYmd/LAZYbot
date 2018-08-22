@@ -87,12 +87,9 @@ class Embed {
       if (embed[property[i]]) embedinput[property[i]] = embed[property[i]];
     };
     if (embed.author) {
-      let name = "";
-      let url = "";
-      let icon_url = "";
-      name = embed.author.name;
-      if (embed.author.url) url = embed.author.url;
-      if (embed.author.icon_url) icon_url = embed.author.icon_url;
+      let name = embed.author.name ? embed.author.name : "";
+      let url = embed.author.url ? embed.author.url : "";
+      let icon_url = embed.author.icon_url ? embed.author.icon_url : "";
       embedinput.author = Embed.author(name, url, icon_url);
     };
     if (embed.footer) {
