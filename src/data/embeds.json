@@ -1,39 +1,5 @@
 {
     "guides": {
-        "960": [{
-                "title": "House Guide to Chess960",
-                "description": "__**ABOUT**__\n\n**Chess960 (960)** is a chess variant, which uses the same board and pieces as orthodox chess, but the starting position of the pieces is randomized. However, the pieces on the both sides will be placed symmetrical. The random starting position is to hinder players from memorizing the opening lines and it forces them to rely more on their talent and creativity. \n\nOther names for this variant are Fischer Random Chess and **Fischerandom**, both named after Bobby Fischer, who invented the variant. It's also known as it’s also known as wild 22.\n\n__**RULES**__ \n\nThe rules are the same as in orthodox chess. However, the castling may seem different because the king and the rooks might have a different starting square than in standard chess.\n\n[Rules page on lichess](<https://lichess.org/variant/chess960>).\n         \n__**SITES**__\n\n● [lichess.org](https://lichess.org)\n● [chess.com](https://chess.com)\n● [Free Internet Chess Server](http://www.freechess.org/)\n● [Internet Chess Club](https://www.chessclub.com/)\n\nYou can simply type `... 960` followed by a number to navigate through our pages, alternatively: \n\n`... 960 improve` to see our strategy suggestions. \n`... 960 videos` to see some of the 960 videos.",
-                "color": 14841132,
-                "footer": {
-                    "text": "Page 1 of 3. \"... 960 improve\" to see next page."
-                },
-                "thumbnail": {
-                    "url": "https://i.imgur.com/YMgh4dH.png"
-                }
-            },
-            {
-                "title": "House Guide to Chess960",
-                "description": "__**IMPROVE**__\n\nNow that you know the rules, you may wonder how to get better at Fischerandom. Since there are no opening theory, I would recommend to focus on these four points:\n\n• Follow the normal opening **principles**: control center, develop your pieces and get your king in safety.\n• Know your middlegame plans: identify **the weaknesses** in your and your opponent's camp, ask yourself how you can get rid of them and how you can exploit them.\n• Be sharp with the **tactics**: It's been said that chess is 99% about tactics, you can work on your tactics in chesstempo or lichess. The tactical success requires an understanding of strategy.\n• Master **the endgame**: Most of your 960 games will reach the endgame stage, be prepared to grind the victory in rook or other kind of endgames.\n\n[How To Get Better At Chess article](<https://www.chess.com/article/view/how-to-get-better-at-chess>).",
-                "color": 14841132,
-                "footer": {
-                    "text": "Page 2 of 3. \"... 960 videos\" to see next page."
-                },
-                "thumbnail": {
-                    "url": "https://i.imgur.com/YMgh4dH.png"
-                }
-            },
-            {
-                "title": "House Guide to Chess960",
-                "description": "**__VIDEOS__**\n\n**IM John Batholomew:** [Chess960 introduction video](<https://www.youtube.com/watch?v=fUypgJQy7O8>)\n**NM Chess-Network:** [10 ways to improve your chess](<https://www.youtube.com/watch?v=m--LuusPfwA>)",
-                "color": 14841132,
-                "footer": {
-                    "text": "Page 3 of 3. \"... 960\" to return to the introductory page."
-                },
-                "thumbnail": {
-                    "url": "https://i.imgur.com/YMgh4dH.png"
-                }
-            }
-        ],
         "zh": [{
                 "title": "House Guide to Crazyhouse",
                 "description": "\n__**ABOUT**__\n\n#zh\n\n**Crazyhouse** (ZH) is a chess variant in which an opponent's captured pieces can be dropped back on the board instead of moving a piece. Crazyhouse is a variant similar to bughouse chess, but with only two players.\n\nOther names for this variant are drop chess, mad chess, reinforcement chess, turnabout chess and schizo-chess. It’s also known as wild 23. \n\n__**RULES**__\n\nAll the rules and conventions of standard chess apply, with the addition of drops, as explained below.\n\n • A captured piece reverses colour and goes to the capturing player's pocket. At any time, instead of making a move with a piece on the board, a player can drop a piece from their pocket onto an empty square on the board.\n• Drops resulting in immediate checkmate are permitted.\n• Pawns may not be dropped on the players' 1st or 8th ranks.\n• Promoted but captured pawns are dropped as pawns.\n\nRules-page on lichess with video: https://lichess.org/variant/crazyhouse\n\n__**WHERE?**__\n\n● [lichess.org](https://lichess.org)\n● [chess.com](https://chess.com)\n● [Free Internet Chess Server](http://www.freechess.org/)\n● [Internet Chess Club](https://www.chessclub.com/)",
@@ -75,7 +41,7 @@
                 }
             }
         ],
-        "bug": [{
+                "bug": [{
                 "title": "House Guide to Bughouse",
                 "description": "__**ABOUT**__\n\n**Bughouse** (Bug) chess is a chess variant played on two chessboards by four players in teams of two. The game is usually played at a fast time control; this, together with the passing and dropping of pieces, can make the game look chaotic and random to the casual onlooker; hence the name bughouse, which is slang for mental hospital.\n\nBughouse chess is often called as its abbreviation bug. Other names for this variant are exchange chess, siamese chess, tandem chess, transfer chess, double bughouse, cross chess, swap chess or simply bughouse. It’s also known as wild 24.\n\n__**RULES**__\n\nNormal chess rules apply on bughouse, except that captured pieces on one board are passed on to the teammate on the other board, who then has the option of putting these pieces on his or her board. On any given move, you can either make a normal move, or \"drop\" a piece. You can only drop pieces that you have in hand, from your partner's captures.\n\n__**WHERE?**__\n\nBughouse can be played on..\n\n● [Free Internet Chess Server](http://www.freechess.org/)\n● [bughousetest.com](http://bughousetest.com)\n● [chess.com](http://chess.com)\n\nCompiled by @MMichael#3973",
                 "color": 14841132,
@@ -108,7 +74,7 @@
                 }
             }
         ],
-        "threecheck": [{
+                "threecheck": [{
                 "title": "House Guide to Three-Check",
                 "description": "__**ABOUT**__\n\n**Three-check** (3+) chess is a chess variant in which the winner is the first player to check their opponent three times. It’s also known as wild 25. \n\n__**RULES**__\n\nAll the normal chess rules apply, but one extra rule applies in addition:\n\n• If you make a legal move that puts your opponent's king into third check for the third time in the game, you win.\n\nA few clarifications to that rule exist as follows:\n\n• The winning move has to be legal, i.e. you cannot give the third check while in check.\n• Checkmating your opponent is still a legal way to win.\n• A double check counts a single check towards the running total.\n\n[Rules page on lichess.org](https://lichess.org/variant/threeCheck)\n\n__**WHERE?**__\n\n• [lichess.org](https://lichess.org)\n• [chess.com](https://chess.com)\n• [Free Internet Chess Server](http://www.freechess.org/)\n• [Internet Chess Club](https://www.chessclub.com/)\n\nYou can simply type `... threecheck` followed by a number to navigate through our pages, alternatively:\n\n`... threecheck improve` to see our strategy suggestions.\n`... threecheck studies` to see a list of useful studies.\n`... threecheck videos` to see some of the best 3-check video guides.\n\nCompiled by MMichael#3973",
                 "color": 14841132,
@@ -153,7 +119,7 @@
                 }
             }
         ],
-        "anti": [{
+                "anti": [{
                 "title": "House Guide to Antichess",
                 "description": "__**ABOUT**__\n\n**Antichess** (anti) is a variant in which the aim  is to get rid of your own pieces. The game is also known as Losing chess, the Losing Game, Giveaway Chess, Suicide Chess, Killer Chess, Must-Kill, Take-All Chess, Capture Chess, Losums, or Take-Me. The game has recently been solved: there is a tree (called the Watkins tree) which proves a forced win for white from 1. e3. On the other other hand, many starting moves can lead to a forced loss for white which have been known throughout the history of the game, those include 1.e4, 1.d3 and 1.d4.\n\n__**RULES**__\n\nThe rules follow most standard chess rules but demand in addition that **a capture is forced if it can be played**, if more then one capture is possible, then a player is permitted to choose which one to make. In mainstream anti the king is considered a normal piece and promotion to king is allowed and often useful. Victory is achieved by losing all the pieces or getting stalemated in standard rules. When playing on FICS, victory is awarded to the player with the smaller number of pieces on the board in the case of stalemate, and an equal number of pieces is considered to be a draw.\n\n__**WHERE?**__\n\nAntichess can be played on:\n\n• [Free Internet Chess Server](http://www.freechess.org/)\n• [lichess.org](https://lichess.org/)\n\nYou can simply type `... anti` followed by a number to navigate through our pages, alternatively:\n\n`... anti pieces` to see the piece evaluations for antichess\n`... anti basic` to see a list of beginner mistakes.\n`... anti improve` to see tips on how to further.\n`... anti guides` to see anti player's helpful resources.\n\nCompiled by the-lone-wolf#4001",
                 "color": 14841132,
@@ -209,51 +175,6 @@
                 }
             }
         ],
-        "atomic": [{
-                "title": "House Guide to Atomic",
-                "description": "__**ABOUT**__ \n\n**Atomic chess** is a chess variant in which one has to nuke their opponent’s king in order to win the game.\n\nIt’s known as wild 27 or bomb chess.\n\n__**RULES**__\n\nThe normal chess rules are valid, with the following extensions.\n\nWhenever a piece is captured, an explosion occurs on the regarding field. The explosion destroys..\n• the capturing piece\n• the captured piece\n• all pieces on the immediate horizontal, vertical and diagonal neighbour fields, except pawns. There is no chain reaction.\n\nThere are few more extra conditions compared to orthodox chess, those are:\n• A game is won by checkmate or causing explosion of the opponent’s king by an indirect hit.\n• Moves causing own king's explosion are not allowed. Any move that results in blowing up the opposite King will claim an immediate victory, overriding all checks.\n• The kings can be connected by moving one into the adjacent squares of the other sided king. When the kings are connected, checks do not apply.\n\nRules-page on lichess: https://lichess.org/variant/atomic\n\n__**WHERE?**__ \n\n● [Lichess.org](https://lichess.org/)\n● [Free Internet Chess Server](http://www.freechess.org/)\n● [Internet Chess Club](https://www.chessclub.com/).\n\nYou can simply type `... atomic` followed by a number to navigate through our pages, alternatively:\n\n`... atomic improve` to see our material on how to improve.\n`... atomic material` to see guides published by atomic players.",
-                "color": 14841132,
-                "footer": {
-                    "text": "Page 1 of 4. \"... atomic improve\" to see next page."
-                },
-                "thumbnail": {
-                    "url": "https://i.imgur.com/mjbalyw.png"
-                }
-            },
-            {
-                "title": "House Guide to Atomic",
-                "description": "__**IMPROVE**__\n\nThe knights, rooks, queens, bishops and pawns also develop their respective tactics in Atomic chess. Material sacrifices are more common in atomic chess than in chess. In the opening and middle-game it is common to offer a piece in order to seize an initiative enabled by the newly opened spaces captures create.",
-                "color": 14841132,
-                "footer": {
-                    "text": "Page 2 of 4. \"... atomic studies\" to see next page."
-                },
-                "thumbnail": {
-                    "url": "https://i.imgur.com/mjbalyw.png"
-                }
-            },
-            {
-                "title": "House Guide to Atomic",
-                "description": "**__STUDIES__**\n\n**ProgramFOX:** [Opening and midgame tactics](<https://lichess.org/study/mxYOPgI3>)\n**ProgramFOX:** [Endgame positions](<https://lichess.org/study/JYSYPQrN>)\n\n**tipau:** [Endgames level 1 ](<https://lichess.org/study/ikJM4K3L>)\n**tipau:** [Endgames level 2](<https://lichess.org/study/tCqrXrbG>)\n**tipau:** [Endgames level 3](<https://lichess.org/study/WOWizkm4>)\n\n**Ngb & co:** [Detailed opening analysis](<https://lichess.org/study/nP8wnNGJ>)\n\n**Illion:** [Multiple blog posts](<https://lichess.org/team/illions-atomic-blog>)",
-                "color": 14841132,
-                "footer": {
-                    "text": "Page 3 of 4. \"... atomic videos\" to see next page."
-                },
-                "thumbnail": {
-                    "url": "https://i.imgur.com/mjbalyw.png"
-                }
-            },
-            {
-                "title": "House Guide to Atomic",
-                "description": "**__VIDEOS__**\n\n• **ProgramFOX:** [YouTube](<https://www.youtube.com/channel/UCmx82Kgy9ALzAcmti0LwkJw>), [Twitch](<https://www.twitch.tv/programFOX>).\n\n• **Tipau**: [YouTube](<https://www.youtube.com/user/tipau>), [Twitch](<https://www.twitch.tv/tipau_lichess>).\n\n• **Onubense:** [Twitch](<https://www.twitch.tv/gmonubense>).\n\n• **ijh:** [Twitch](<https://www.twitch.tv/ijhchess>).",
-                "color": 14841132,
-                "footer": {
-                    "text": "Page 4 of 4. \"... atomic\" to return to the introductory page."
-                },
-                "thumbnail": {
-                    "url": "https://i.imgur.com/mjbalyw.png"
-                }
-            }
-        ],
         "horde": [{
                 "title": "House Guide to Horde",
                 "description": "__**ABOUT**__\n\n**Horde chess** is a chess variant where the white side starts with 36 pawns (*The Pawns*) and the black side (*The Pieces*) needs to destroy the Horde to win. \n\n__**RULES**__\n\n[Starting position](<https://i.imgur.com/Hurb8aW.png>)\n\nThe normal chess rules are valid; for example\n\n• all pawns can be promoted on the final rank\n• stalemate occurs, if either side run out of moves\n\nThe only exception is…\n\n• that white's pawns on the first and second ranks may advance one or two steps, given that the path in the file is free. Unlike in regular chess, this does not have to be the pawn's first move.\n• if a pawn advances two squares from the first to the third rank, black can not capture it with the enpassant rule\n\n[Rules page on lichess](https://lichess.org/variant/horde).\n\n__**WHERE?**__ \n\n● [Lichess.org](https://lichess.org/)\n\nYou can simply type `... horde` followed by a number to navigate through our pages, alternatively: \n\n`... horde improve` to see our strategy suggestions. \n`... horde studies` to see a list of useful studies. \n`... horde videos` to see some of the best horde videos.",
@@ -299,6 +220,51 @@
                 }
             }
         ],
+        "atomic": [{
+                "title": "House Guide to Atomic",
+                "description": "__**ABOUT**__ \n\n**Atomic chess** is a chess variant in which one has to nuke their opponent’s king in order to win the game.\n\nIt’s known as wild 27 or bomb chess.\n\n__**RULES**__\n\nThe normal chess rules are valid, with the following extensions.\n\nWhenever a piece is captured, an explosion occurs on the regarding field. The explosion destroys..\n• the capturing piece\n• the captured piece\n• all pieces on the immediate horizontal, vertical and diagonal neighbour fields, except pawns. There is no chain reaction.\n\nThere are few more extra conditions compared to orthodox chess, those are:\n• A game is won by checkmate or causing explosion of the opponent’s king by an indirect hit.\n• Moves causing own king's explosion are not allowed. Any move that results in blowing up the opposite King will claim an immediate victory, overriding all checks.\n• The kings can be connected by moving one into the adjacent squares of the other sided king. When the kings are connected, checks do not apply.\n\nRules-page on lichess: https://lichess.org/variant/atomic\n\n__**WHERE?**__ \n\n● [Lichess.org](https://lichess.org/)\n● [Free Internet Chess Server](http://www.freechess.org/)\n● [Internet Chess Club](https://www.chessclub.com/).\n\nYou can simply type `... atomic` followed by a number to navigate through our pages, alternatively:\n\n`... atomic improve` to see our material on how to improve.\n`... atomic material` to see guides published by atomic players.",
+                "color": 14841132,
+                "footer": {
+                    "text": "Page 1 of 4. \"... atomic improve\" to see next page."
+                },
+                "thumbnail": {
+                    "url": "https://i.imgur.com/mjbalyw.png"
+                }
+            },
+            {
+                "title": "House Guide to Atomic",
+                "description": "__**IMPROVE**__\n\nThe knights, rooks, queens, bishops and pawns also develop their respective tactics in Atomic chess. Material sacrifices are more common in atomic chess than in chess. In the opening and middle-game it is common to offer a piece in order to seize an initiative enabled by the newly opened spaces captures create.",
+                "color": 14841132,
+                "footer": {
+                    "text": "Page 2 of 4. \"... atomic studies\" to see next page."
+                },
+                "thumbnail": {
+                    "url": "https://i.imgur.com/mjbalyw.png"
+                }
+            },
+            {
+                "title": "House Guide to Atomic",
+                "description": "**__STUDIES__**\n\n**ProgramFOX:** [Opening and midgame tactics](<https://lichess.org/study/mxYOPgI3>)\n**ProgramFOX:** [Endgame positions](<https://lichess.org/study/JYSYPQrN>)\n\n**tipau:** [Endgames level 1 ](<https://lichess.org/study/ikJM4K3L>)\n**tipau:** [Endgames level 2](<https://lichess.org/study/tCqrXrbG>)\n**tipau:** [Endgames level 3](<https://lichess.org/study/WOWizkm4>)\n\n**Ngb & co:** [Detailed opening analysis](<https://lichess.org/study/nP8wnNGJ>)\n\n**Illion:** [Multiple blog posts](<https://lichess.org/team/illions-atomic-blog>)",
+                "color": 14841132,
+                "footer": {
+                    "text": "Page 3 of 4. \"... atomic videos\" to see next page."
+                },
+                "thumbnail": {
+                    "url": "https://i.imgur.com/mjbalyw.png"
+                }
+            },
+            {
+                "title": "House Guide to Atomic",
+                "description": "**__VIDEOS__**\n\n• **ProgramFOX:** [YouTube](<https://www.youtube.com/channel/UCmx82Kgy9ALzAcmti0LwkJw>), [Twitch](<https://www.twitch.tv/programFOX>).\n\n• **Tipau**: [YouTube](<https://www.youtube.com/user/tipau>), [Twitch](<https://www.twitch.tv/tipau_lichess>).\n\n• **Onubense:** [Twitch](<https://www.twitch.tv/gmonubense>).\n\n• **ijh:** [Twitch](<https://www.twitch.tv/ijhchess>).",
+                "color": 14841132,
+                "footer": {
+                    "text": "Page 4 of 4. \"... atomic\" to return to the introductory page."
+                },
+                "thumbnail": {
+                    "url": "https://i.imgur.com/mjbalyw.png"
+                }
+            }
+        ],
         "schess": [{
                 "title": "House Guide to Seirawan Chess",
                 "description": "__**ABOUT**__\n\n**Seirawan Chess (s-chess)** is a chess variant, which was invented by GM Yasser Seirawan and Bruce Harper 2007. It is played on the standard 8x8 board and uses two new pieces, **the hawk** (which moves like knight and bishop) and **the elephant** (which moves like knight and rook).\n\nSeirawan chess is also known as Sharper chess (a combination of the names Seirawan and Harper). The idea of two extra pieces were adopted from the World Champons Jose Raoul Capablanca who in 1920s proposed **Capablanca chess**, adding two new pieces on a 10x10 board.\n\n__**RULES**__ \n\nThe rules are the same as in orthodox chess except that two pieces, the Elephant and the Hawk are placed in the reserve. Whenever a piece leaves its initial square, one of the extra pieces can be immediately be introduced to the vacant square. That means a player has eight opportunities to bring the Hawk and Elephant into play. If a player fails to do so, the unplaced piece remains out of play.\n\nWhen a player castles, the Hawk or the Elephant may be placed on either e1(8) or h1(8)/a1(8), but not on both.\n\n__**SITES**__\n\n• [Schess.org](https://schess.org/#/).\n\nYou can simply type `... schess` followed by a number to navigate through our pages, alternatively: \n\n`... schess improve` to see our strategy suggestions. \n`... schess videos` to see some of the best s-chess videos.",
@@ -328,6 +294,40 @@
                 },
                 "thumbnail": {
                     "url": "https://i.imgur.com/nVeKhtG.png"
+                }
+            }
+        ],
+        "960": [{
+                "title": "House Guide to Chess960",
+                "description": "__**ABOUT**__\n\n**Chess960 (960)** is a chess variant, which uses the same board and pieces as orthodox chess, but the starting position of the pieces is randomized. However, the pieces on the both sides will be placed symmetrical. The random starting position is to hinder players from memorizing the opening lines and it forces them to rely more on their talent and creativity. \n\nOther names for this variant are Fischer Random Chess and **Fischerandom**, both named after Bobby Fischer, who invented the variant. It's also known as it’s also known as wild 22.\n\n__**RULES**__ \n\nThe rules are the same as in orthodox chess. However, the castling may seem different because the king and the rooks might have a different starting square than in standard chess.\n\n[Rules page on lichess](<https://lichess.org/variant/chess960>).\n         \n__**SITES**__\n\n● [lichess.org](https://lichess.org)\n● [chess.com](https://chess.com)\n● [Free Internet Chess Server](http://www.freechess.org/)\n● [Internet Chess Club](https://www.chessclub.com/)\n\nYou can simply type `... 960` followed by a number to navigate through our pages, alternatively: \n\n`... 960 improve` to see our strategy suggestions. \n`... 960 videos` to see some of the 960 videos.",
+                "color": 14841132,
+                "footer": {
+                    "text": "Page 1 of 3. \"... 960 improve\" to see next page."
+                },
+                "thumbnail": {
+                    "url": "https://i.imgur.com/YMgh4dH.png"
+                }
+            },
+            {
+                "title": "House Guide to Chess960",
+                "description": "__**IMPROVE**__\n\nNow that you know the rules, you may wonder how to get better at Fischerandom. Since there are no opening theory, I would recommend to focus on these four points:\n\n• Follow the normal opening **principles**: control center, develop your pieces and get your king in safety.\n• Know your middlegame plans: identify **the weaknesses** in your and your opponent's camp, ask yourself how you can get rid of them and how you can exploit them.\n• Be sharp with the **tactics**: It's been said that chess is 99% about tactics, you can work on your tactics in chesstempo or lichess. The tactical success requires an understanding of strategy.\n• Master **the endgame**: Most of your 960 games will reach the endgame stage, be prepared to grind the victory in rook or other kind of endgames.\n\n[How To Get Better At Chess article](<https://www.chess.com/article/view/how-to-get-better-at-chess>).",
+                "color": 14841132,
+                "footer": {
+                    "text": "Page 2 of 3. \"... 960 videos\" to see next page."
+                },
+                "thumbnail": {
+                    "url": "https://i.imgur.com/YMgh4dH.png"
+                }
+            },
+            {
+                "title": "House Guide to Chess960",
+                "description": "**__VIDEOS__**\n\n**IM John Batholomew:** [Chess960 introduction video](<https://www.youtube.com/watch?v=fUypgJQy7O8>)\n**NM Chess-Network:** [10 ways to improve your chess](<https://www.youtube.com/watch?v=m--LuusPfwA>)",
+                "color": 14841132,
+                "footer": {
+                    "text": "Page 3 of 3. \"... 960\" to return to the introductory page."
+                },
+                "thumbnail": {
+                    "url": "https://i.imgur.com/YMgh4dH.png"
                 }
             }
         ],
