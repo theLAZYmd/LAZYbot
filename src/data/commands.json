@@ -180,7 +180,7 @@
         "arguments": ["args", "argument"],
         "prefix": "generic",
         "requires": {
-            "user": ["admin", "mod"]
+            "role": ["admin", "mod"]
         }
     },
     {
@@ -199,7 +199,7 @@
         "arguments": ["args", "argument"],
         "prefix": "generic",
         "requires": {
-            "user": ["admin", "mod"]
+            "role":  ["admin", "mod"]
         }
     },
     {
@@ -218,7 +218,7 @@
         "arguments": [],
         "prefix": "generic",
         "requires": {
-            "user": ["admin", "mod"]
+            "role":  ["admin", "mod"]
         }
     },
     {
@@ -237,7 +237,7 @@
         "arguments": [],
         "prefix": "generic",
         "requires": {
-            "user": ["admin", "mod"]
+            "role":  ["admin", "mod"]
         }
     },
     {
@@ -256,7 +256,7 @@
         "arguments": ["args", "argument"],
         "prefix": "generic",
         "requires": {
-            "user": ["admin", "mod"]
+            "role":  ["admin", "mod"]
         }
     },
     {
@@ -275,7 +275,7 @@
         "arguments": ["args", "argument"],
         "prefix": "generic",
         "requires": {
-            "user": ["admin", "mod"]
+            "role":  ["admin", "mod"]
         }
     },
     {
@@ -294,7 +294,7 @@
         "arguments": [],
         "prefix": "generic",
         "requires": {
-            "user": ["admin", "mod"]
+            "role":  ["admin", "mod"]
         }
     },
     {
@@ -313,7 +313,7 @@
         "arguments": [],
         "prefix": "generic",
         "requires": {
-            "user": ["admin", "mod"]
+            "role":  ["admin", "mod"]
         }
     },
     {
@@ -1053,5 +1053,61 @@
         "method": "run",
         "arguments": ["argument"],
         "prefix": "generic"
+    },
+    {
+        "aliases": [
+            "upversion"
+        ],
+        "description": "Increases the semantic version count of the bot in package.json and in the nickname. Give argument `big` to increase Y count, `huge` to increase X count.",
+        "usage": [
+            "upversion",
+            "upversion big",
+            "upversion huge"
+        ],
+        "module": "Adminisration",
+        "file": "set",
+        "method": "upversion",
+        "arguments": ["argument"],
+        "prefix": "generic",
+        "requires": {
+            "user": "owner"
+        }
+    },
+    {
+        "aliases": [
+            "downversion"
+        ],
+        "description": "Decreases the semantic version count of the bot in package.json and in the nickname. Give argument `big` to decrease Y count, `huge` to decrease X count.",
+        "usage": [
+            "downversion",
+            "downversion big",
+            "downversion huge"
+        ],
+        "module": "Adminisration",
+        "file": "set",
+        "method": "downversion",
+        "arguments": ["argument"],
+        "prefix": "generic",
+        "requires": {
+            "user": "owner"
+        }
+    },
+    {
+        "aliases": [
+            "version"
+        ],
+        "description": "Sets the semantic version of LAZYbot to a custom specified value. Leave empty to return current value.",
+        "usage": [
+            "version",
+            "version 1.5.2"
+        ],
+        "module": "Administration",
+        "file": "set",
+        "method": "version",
+        "arguments": ["argument"],
+        "prefix": "generic",
+        "requires": {
+            "user": "owner"
+        }
     }
 ]

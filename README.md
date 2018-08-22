@@ -22,7 +22,7 @@ It's main modules are:
   - Outputs winners;
 - Allows users to change their only username colour;
 
-#In active development
+**In active development**
 
 - More modules available on a (shoddy) previous version, the bot is currently in the transition to a rewrite to the class-based system.
 - The repo available on this remote origin is the rewritten class based version.

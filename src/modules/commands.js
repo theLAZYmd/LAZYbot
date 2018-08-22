@@ -25,7 +25,7 @@ class Commands extends Parse {
     let modules = {};
     for(let i = 0; i < commands.length; i++) {
       if(!modules[commands[i].module]) modules[commands[i].module] = [];
-      let aliases = commands[i].aliases;
+      let aliases = Array.from(commands[i].aliases);
       let key = server.prefixes[commands[i].prefix] + aliases.shift();
       modules[commands[i].module][key] = aliases;
     };
