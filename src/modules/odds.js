@@ -20,8 +20,8 @@ class Series extends All {
       "players": []
     };
     this.Output.response({ //get the number of games played. Game total must add up to this number.
-      "description": "Please input the number of games played in the series.",
-      "filter": m => !isNaN(parseInt(m.content))
+      "description": "Please input number of games to be played in upcoming series.",
+      "filter": m => !isNaN(parseInt(m.content) && Number(m.content) < 31
     })
     .then((msg1) => {
       data.length = parseInt(msg1.content); 
@@ -40,13 +40,13 @@ class Series extends All {
             "name": msg3.content
           };
           this.Output.response({ //these are important - not only do they provide the ratio but the degree of accuracy too
-            "description": "Please input number of **" + data.players[0].name + "** wins against " + data.players[1].name + ".",
+            "description": "Please input past number of **" + data.players[0].name + "** wins against " + data.players[1].name + ".",
             "filter": m => !isNaN(Number(m.content))
           })
           .then((msg4) => {
             data.players[0].score = Number(msg4.content);
             this.Output.response({
-              "description": "Please input number of **" + data.players[1].name + "** wins against " + data.players[0].name + ".",
+              "description": "Please input past number of **" + data.players[1].name + "** wins against " + data.players[0].name + ".",
               "filter": m => !isNaN(Number(m.content))
             })
             .then((msg5) => {
