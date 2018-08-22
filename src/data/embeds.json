@@ -265,7 +265,6 @@
                 }
             }
         ],
-                ],
         "schess": [{
                 "title": "House Guide to Seirawan Chess",
                 "description": "__**ABOUT**__\n\n**Seirawan Chess (s-chess)** is a chess variant, which was invented by GM Yasser Seirawan and Bruce Harper 2007. It is played on the standard 8x8 board and uses two new pieces, **the hawk** (which moves like knight and bishop) and **the elephant** (which moves like knight and rook).\n\nSeirawan chess is also known as Sharper chess (a combination of the names Seirawan and Harper). The idea of two extra pieces were adopted from the World Champons Jose Raoul Capablanca who in 1920s proposed **Capablanca chess**, adding two new pieces on a 10x10 board.\n\n__**RULES**__ \n\nThe rules are the same as in orthodox chess except that two pieces, the Elephant and the Hawk are placed in the reserve. Whenever a piece leaves its initial square, one of the extra pieces can be immediately be introduced to the vacant square. That means a player has eight opportunities to bring the Hawk and Elephant into play. If a player fails to do so, the unplaced piece remains out of play.\n\nWhen a player castles, the Hawk or the Elephant may be placed on either e1(8) or h1(8)/a1(8), but not on both.\n\n__**SITES**__\n\n• [Schess.org](https://schess.org/#/).\n\nYou can simply type `... schess` followed by a number to navigate through our pages, alternatively: \n\n`... schess improve` to see our strategy suggestions. \n`... schess videos` to see some of the best s-chess videos.",
