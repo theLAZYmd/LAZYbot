@@ -117,7 +117,9 @@ class ModMail extends Parse {
   reply (message, mod, mailInfo) {
     let user = this.Search.users.byTag(mailInfo.tag);
     if (!user) return this.Output.onError("User **" + user.tag + "** no longer exists!");
-    this.Output.response(mod)
+    this.Output.response({
+      "author": mod
+    })
     .then((msg) => {
       for(let [id, attachment] of msg.attachments) {
         msg.content += " [Image Attachment](" + attachment.url + ")"; //if there's any images, append them as a link to the DM image
@@ -165,7 +167,7 @@ class ModMail extends Parse {
       this.editor(embed, message);
       this.Output.sender({
         "title": "Warning from server " + this.guild.name + ":",
-        "description": "You are abusing the modmail system. Keep requests civil and do not spam the inbox."
+        "description": "You are abusing server modmail. Please be polite and do not spam the inbox."
       }, this.Search.users.byTag(mailInfo.tag));
     })
     .catch(() => {});

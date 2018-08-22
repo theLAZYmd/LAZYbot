@@ -31,22 +31,16 @@ class Paginator extends Parse {
 
   When paginator is triggered, it loads page 0 of the series.
   Upon MessageReaction, it changes the pagecount to either ++ or -- and calls the given Constructor.method() to return an embed.
-  If a null value is returned, this must be because the maxpages value for that series is exceeded (i.e. trying to call the 3rd page when there are only 2).
+  If a null value is returned, this must be because the embedgroup.length value for that series is exceeded (i.e. trying to call the 3rd page when there are only 2).
   If null value therefore, the pagecount is lowered again. Otherwise, the original message is edited with the new embed.
   */
 
-  sender (Constructor, method, maxpages, period) {
-    let embed = Constructor[method](0);
-    embed.footer = embed.footer && maxpages === 1 ? embed.footer : Embed.footer(`1 / ${maxpages}`);
-    this.Output[maxpages < 2 ? "sender" : "reactor"](embed, this.channel, ["⬅", "➡"])
+  sender (embedgroup, period) {
+    let embed = embedgroup[0];
+    embed.footer = embed.footer && embedgroup.length === 1 ? embed.footer : Embed.footer(`1 / ${embedgroup.length}`);
+    this.Output[embedgroup.length < 2 ? "sender" : "reactor"](embed, this.channel, ["⬅", "➡"])
     .then(msg => {
-      let embed = [];
-      for (let i = 0; i < maxpages; i++) {
-        let embedpage = Embed.receiver(Constructor[method](i));
-        if (!embedpage) this.Output.onError("Couldn't generate embed for that page.");
-        embed.push(embedpage);
-      }
-      this.paginator[msg.id] = {maxpages, embed,
+      this.paginator[msg.id] = {embedgroup,
         "period": period || 30000,
         "page": 0
       };
@@ -68,10 +62,10 @@ class Paginator extends Parse {
     if (reaction.emoji.name === "➡") data.page++;
     if (reaction.emoji.name === "⬅") data.page--;
     reaction.remove(user);
-    if(data.page < 0 || data.page > data.maxpages) return;
-    let embed = data.embed[data.page];
+    if(data.page < 0 || data.page > data.embedgroup.length) return;
+    let embed = data.embedgroup[data.page];
     if (!embed) return this.Output.onError("Couldn't generate embed for page " + (data.page + 1) + ".");
-    embed.footer = Embed.footer((data.page + 1) + " / " + data.maxpages);
+    embed.footer = Embed.footer(`${data.page + 1} / ${data.embedgroup.length}`);
     this.Output.editor(embed, reaction.message);
     this.paginator[reaction.message.id] = data;
     return this.setData(this.paginator);

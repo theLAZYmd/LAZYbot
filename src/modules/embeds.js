@@ -15,7 +15,7 @@ class Embeds extends Parse {
         for (let guide in embeds[type]) {
           if (args[0] === guide) {
             this.guide = Array.isArray(embeds[type][guide]) ? embeds[type][guide] : [embeds[type][guide]];
-            return this.Paginator.sender(this, "gen", this.guide.length, 180000); 
+            return this.Paginator.sender(this.guide, 180000); 
           }
         }
       };
@@ -30,10 +30,6 @@ class Embeds extends Parse {
       })
     })
     .catch((e) => console.log(e))
-  }
-
-  gen (page) {
-    return this.guide[page]
   }
 
   getEmbeds () {

@@ -205,14 +205,21 @@ class Output extends Parse {
     })
   }
 
-  response (author, description, channel) {
+  response (data = {}) {
+    data = Object.assign({
+      "author": this.author,
+      "description": "Please type your response below.",
+      "channel": this.channel,
+      "filter": () => {return true},
+      "time": 18000
+    }, data)
     return new Promise ((resolve, reject) => {
-      this.Output.generic("**" + author.tag + "** " + (description ? description : "Please type your response below."), channel)
+      this.Output.generic("**" + data.author.tag + "** " + data.description, data.channel)
       .then((msg) => {
-        let filter = m => m.author.id === author.id && m.content;
+        let filter = m => m.author.id === data.author.id && m.content && data.filter(m);
         msg.channel.awaitMessages(filter, {
           "max": 1,
-          "time": 180000,
+          "time": data.time,
           "errors": ["time"]
         })
         .then((collected) => {

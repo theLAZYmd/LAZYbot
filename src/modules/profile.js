@@ -15,12 +15,15 @@ class Profile extends Parse {
       if(user) this.member = this.Search.members.get(user);
       else return this.Output.onError(`Couldn't find user!`);
     };
-    //Constructor, method, embed, maxpages, timeout on pages
-    this.Paginator.sender(this, "build", 1 + Math.ceil(this.chessFields.length / 4), 30000);
+    let embedgroup = [];
+    for (let i = 0; i < (1 + Math.ceil(this.chessFields.length / 4)); i++) {
+      embedgroup.push(this.build(i));
+    };
+    this.Paginator.sender(embedgroup, 30000);
   }
 
   build (page) {
-    if(!isNaN(page)) this.page = page;
+    this.page = page;
     return Embed.receiver(this);
   }
 

@@ -26,28 +26,44 @@ class Calc extends Parse {
   }
 
   tous(args) {
-    if(args.length !== 1) return;
-    if(isNaN(Number(args[0]))) return;
+    if(isNaN(args[0])) return;
+    let description = Calc.tous(Number(args[0]));
+    if (!description) return this.Output.onError("Decimal odds must be above 1!");
+    description = (description > 0 ? "+" : "") + description.round().toFixed().toString();
     let embedoutput = {
       "title": "Decimal to US Odds",
       "color": 431075,
-      "description": args[0] < 1 ? "Error: Decimal odds must be greater than or equal to 1." :
-                    (args[0] < 2 ? (-100/(args[0]-1)).toFixed(0).toString() : "+" + (100*(args[0]-1)).toFixed(0).toString())
+      description
     }
     this.Output.sender(embedoutput);
   }
 
   todecimal(args) {
-    if(args.length !== 1) return;
     if(isNaN(args[0])) return;
+    let description = Calc.todecimal(Number(args[0])).round(2).toFixed(1).toString();
     let embedoutput = {
       "title": "US to Decimal Odds",
       "color": 431075,
-      "description": args[0] < 0 ? (1 - 100/args[0]).toFixed(1) : (1 + args[0]/100).toFixed(1)
+      description
     }
     this.Output.sender(embedoutput);
+  }
+
+  static tous (odds) {
+    if (odds < 1) return null;
+    if (odds < 2) return (-100 / (odds - 1));
+    return (100 * (odds - 1))
+  }
+
+  static todecimal (odds) {
+    if (odds < 0) return (1 - 100 / odds);
+    return (1 + odds / 100);
   }
 
 }
 
 module.exports = Calc;
+
+Number.prototype.round = function (places = 0) {
+  return (Math.round(this * Math.pow(10, places)) / Math.pow(10, places)); 
+}

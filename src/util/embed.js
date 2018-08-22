@@ -4,15 +4,16 @@ class Embed {
 
   static sender(inputobject, channel) {
     return new Promise((resolve, reject) => {
-      if(!inputobject) return reject("**Embed.sender():** Embed object is undefined.");
+      if (!inputobject) return reject("**Embed.sender():** Embed object is undefined.");
       let object = Embed.receiver(inputobject);
-      if(!object.color) object.color = config.colors.generic;
+      if (!object.color) object.color = config.colors.generic;
       try {
-        channel.send(object.content, {embed: object})
-        .then(msg => resolve(msg))
-        .catch(e => console.log(JSON.stringify(e)));
-      }
-      catch(error) {
+        channel.send(object.content, {
+            embed: object
+          })
+          .then(msg => resolve(msg))
+          .catch(e => console.log(JSON.stringify(e)));
+      } catch (error) {
         return reject("**Embed.sender():** Incorrect embed format.");
       }
     })
@@ -20,54 +21,39 @@ class Embed {
 
   static editor(inputobject, message) {
     return new Promise((resolve, reject) => {
-      if(!inputobject) return reject(`Incorrect embed object syntax.`);
+      if (!inputobject) return reject(`Incorrect embed object syntax.`);
       let object = Embed.receiver(inputobject);
-      if(!object.color) object.color = config.colors.generic;
-      message.edit(object.content, {embed: object})
-      .then(msg => resolve(msg))
-      .catch(e => console.log(JSON.stringify(e)));
+      if (!object.color) object.color = config.colors.generic;
+      message.edit(object.content, {
+          embed: object
+        })
+        .then(msg => resolve(msg))
+        .catch(e => console.log(JSON.stringify(e)));
     })
   }
 
-  static getFields(array, data) { //see explanation at bottom
-    if(!data) data = {
-      "bold": false,
-      "constant": ""
-    };
-    let string = "";
-    for(let i = 0; i < array.length; i++) {
-      if(typeof array[i] === "array" || typeof array[i] === "object" ) {
-        if(array[i][1] || array[i][1] === 0) string += //if we have a double array format [["UID", "185412969130229760"]]
-          array[i][0] + ": " +
-          (data.bold ? "**" : "") + array[i][1] + (data.bold ? "**" : "") +
-          (i < array.length -1 ? `\n` : `` ); /*
-        else string += //if we have a double array format with single items [["Trophy 1"], ["Trophy 2"], ["Trophy 3"]
-          data.constant +
-          (data.bold ? "**" : "") + array[i] + (data.bold ? "**" : "") +
-          (i < array.length -1 ? `\n` : ``); */
-      } else 
-      if(typeof array[i] === "string") string += //if we have 
-        data.constant +
-        (data.bold ? "**" : "") + array[i] + (data.bold ? "**" : "") +
-        (i < array.length -1 ? `\n` : ``);
-    }
-    return string;
-  }
-
-  static fielder(fields, name, value, inline) { 
+  static fielder(fields, name, value, inline) {
     inline = inline ? inline : false;
-    if(!fields) {
+    if (!fields) {
       fields = [];
-      fields[0] = {name, value, inline}
-    } else fields.push({name, value, inline});
+      fields[0] = {
+        name,
+        value,
+        inline
+      }
+    } else fields.push({
+      name,
+      value,
+      inline
+    });
     return fields;
   }
 
   static author(name, url, icon_url) {
     let author = {};
     author.name = name;
-    if(url) author.url = url;
-    if(icon_url) author.icon_url = icon_url;
+    if (url) author.url = url;
+    if (icon_url) author.icon_url = icon_url;
     return author;
   }
 
@@ -83,95 +69,127 @@ class Embed {
     }
   }
 
-  static footer (text, icon_url) {
+  static footer(text, icon_url) {
     let footer = {};
-    if(text) {footer.text = text};
-    if(icon_url) {footer.icon_url = icon_url};
+    if (text) {
+      footer.text = text
+    };
+    if (icon_url) {
+      footer.icon_url = icon_url
+    };
     return footer
   }
 
   static receiver(embed) {
     let embedinput = {};
     let property = ["content", "title", "url", "description", "color", "video", "timestamp"];
-    for(let i = 0; i < property.length; i++) {
-      if(embed[property[i]]) embedinput[property[i]] = embed[property[i]];
+    for (let i = 0; i < property.length; i++) {
+      if (embed[property[i]]) embedinput[property[i]] = embed[property[i]];
     };
-    if(embed.author) {
+    if (embed.author) {
       let name = "";
       let url = "";
       let icon_url = "";
       name = embed.author.name;
-      if(embed.author.url) url = embed.author.url;
-      if(embed.author.icon_url) icon_url = embed.author.icon_url;
+      if (embed.author.url) url = embed.author.url;
+      if (embed.author.icon_url) icon_url = embed.author.icon_url;
       embedinput.author = Embed.author(name, url, icon_url);
     };
-    if(embed.footer) {
+    if (embed.footer) {
       let text = "";
       let icon_url = "";
-      if(embed.footer.text) text = embed.footer.text;
-      if(embed.footer.icon_url) icon_url = embed.footer.icon_url;
-      if(text || icon_url) embedinput.footer = Embed.footer(text ? text : "", icon_url ? icon_url : "");
+      if (embed.footer.text) text = embed.footer.text;
+      if (embed.footer.icon_url) icon_url = embed.footer.icon_url;
+      if (text || icon_url) embedinput.footer = Embed.footer(text ? text : "", icon_url ? icon_url : "");
     };
-    if(embed.image) {
+    if (embed.image) {
       let url = "";
-      if(embed.image.url) url = embed.image.url;
-      if(url) embedinput.image = Embed.image(url);
+      if (embed.image.url) url = embed.image.url;
+      if (url) embedinput.image = Embed.image(url);
     };
-    if(embed.thumbnail) {
+    if (embed.thumbnail) {
       let url = typeof embed.thumbnail === "string" ? embed.thumbnail : "";
-      if(embed.thumbnail.url) url = embed.thumbnail.url;
-      if(url) embedinput.thumbnail = Embed.thumbnail(url);
+      if (embed.thumbnail.url) url = embed.thumbnail.url;
+      if (url) embedinput.thumbnail = Embed.thumbnail(url);
     };
-    if(embed.fields) {
+    if (embed.fields) {
       embedinput.fields = [];
-      for(let i = 0; i < embed.fields.length; i++) {
+      for (let i = 0; i < embed.fields.length; i++) {
         let name = "";
         let value = "";
         let inline = "";
-        if(embed.fields[i].name) name = embed.fields[i].name;
-        if(embed.fields[i].value) value = embed.fields[i].value;
-        if(embed.fields[i].inline) inline = embed.fields[i].inline;
-        if(name || value || inline) {
+        if (embed.fields[i].name) name = embed.fields[i].name;
+        if (embed.fields[i].value) value = embed.fields[i].value;
+        if (embed.fields[i].inline) inline = embed.fields[i].inline;
+        if (name || value || inline) {
           embedinput.fields[i] = {};
           name = name ? name : "\u200b";
           value = value ? value : "\u200b";
           inline = inline ? inline : false;
-          embedinput.fields[i] = {name, value, inline}
+          embedinput.fields[i] = {
+            name,
+            value,
+            inline
+          }
         };
       };
     };
     return embedinput;
   }
 
-  static leaderboard(array, page, inline, _pagekey) { //see explanation at bottom
-    let embed = {
-      "description": ""
-    };
-    let pagekey = _pagekey ? _pagekey : 9;
-    let beginfields = false;
-    for(let i = 0; i < array.length; i++) { //if i is less than point where second field starts appearing, add to description
-      if(!!array[i][1] || array[i][1] === 0 || !beginfields) {
-        embed.description += "**#" + (i + 1 + page * pagekey) + "** " +array[i][0] + (i < 10 ? "\n" : ""); //CLASS 2
-      } else {
-        if(array[i][0] && array[i][1]) { //CLASS 1 OR 3
-          if(array[i][0].length > 17 && inline !== false) array[i][0] = array[i][0].slice(0, 17); //if title is longer than 17, trim
-          embed.fields = Embed.fielder(embed.fields,
-            `#${i + 1 + page * pagekey} ${array[i][0]} `, //#1 theLAZYmd#2353 score value is multiplied by page * 9
-            array[i][1], //second item in embed
-            inline === false ? false : true //default position of inline is true, have it be true unless specifically stated
-          );
-          beginfields = true; //first time we begin making fields, it triggers so that we do it from now on
-        } else 
-        if(!array[i][1]) {
-          embed.fields = Embed.fielder(embed.fields,
-            `#${i + 1 + page * pagekey} `, //since no two fields specified, one field given is the value, leave the name as just increment
-            array[i][0],
-            inline === false ? false : true
-          );
-        }
-      }
-    };
-    return embed;
+  /*
+  VALID EMBED.GETFIELDS INPUT FORMATS {
+
+    returns a string
+
+    TYPE 1:
+    a double array, each item in outer array is an array of three parts: the title, the value, and whether it is inline or not.
+    skip a line between each for clarity.
+    ex:
+    [
+        ["a.k.a.", this.aliases, false],
+        [(this.dbuser.modverified ? " " + this.Search.emojis.get(this.dbuser.modverified[0]) : "") + "Info", this.info, true],
+        ["Joined Date", this.joined, this.info ? true: false],
+        ["Index", this.ids, this.dbuser.messages ? true : false],
+        ["Messages Sent", this.dbuser.messages.toLocaleString(), true],
+        ["Last Message", this.lastMessage, false],
+        ["House Trophies", this.award, true]
+    ]
+
+    and this returns basically a string
+
+    TYPE 2:
+    a single array! Each item in the array is a new line.
+    requires a "data.constant"!
+    each line is made up of:
+      ${data.constant}: value
+    with bolding around the value if specified.
+  }
+  */
+
+  static getFields(array, data) { //see explanation at bottom
+    data = Object.assign({
+      "bold": false,
+      "constant": ""
+    }, data); //default states
+    let string = "";
+    for (let i = 0; i < array.length; i++) {
+      if (Array.isArray(array[i])) {
+        if (array[i][1] || array[i][1] === 0) string += //if we have a double array format [["UID", "185412969130229760"]]
+          array[i][0] + ": " + //[item 1,]
+          (data.bold ? "**" : "") + //is it bold?
+          array[i][1] + //[,item 2]
+          (data.bold ? "**" : "") +
+          (i < array.length - 1 ? `\n` : ``); //newline if not last
+      } else
+      if (/string|number/.test(typeof array[i])) string += //if we have 
+        data.constant +
+        (data.bold ? "**" : "") +
+        array[i] +
+        (data.bold ? "**" : "") +
+        (i < array.length - 1 ? `\n` : ``);
+    }
+    return string;
   }
 
   /*
@@ -290,28 +308,38 @@ class Embed {
     
     So hope this makes it memorable now.
     Double embeds can be annoying and complicated so make sure to include line breaks to add clarity and well-formatted for(let loops.
-
-  VALID EMBED.GETFIELDS INPUT FORMATS {
-
-    TYPE 1:
-    a double array, each item in outer array is an array of three parts: the title, the value, and whether it is inline or not.
-    skip a line between each for clarity.
-    ex:
-    [
-        ["a.k.a.", this.aliases, false],
-        [(this.dbuser.modverified ? " " + this.Search.emojis.get(this.dbuser.modverified[0]) : "") + "Info", this.info, true],
-        ["Joined Date", this.joined, this.info ? true: false],
-        ["Index", this.ids, this.dbuser.messages ? true : false],
-        ["Messages Sent", this.dbuser.messages.toLocaleString(), true],
-        ["Last Message", this.lastMessage, false],
-        ["House Trophies", this.award, true]
-    ]
-
-    TYPE 2:
-    a single array! Each item in the array is a new line.
-    ex: 
-  }
   */
+
+  static leaderboard(array, page, inline, _pagekey) { //see explanation at bottom
+    let embed = {
+      "description": ""
+    };
+    let pagekey = _pagekey ? _pagekey : 9;
+    let beginfields = false;
+    for (let i = 0; i < array.length; i++) { //if i is less than point where second field starts appearing, add to description
+      if (!!array[i][1] || array[i][1] === 0 || !beginfields) {
+        embed.description += "**#" + (i + 1 + page * pagekey) + "** " + array[i][0] + (i < 10 ? "\n" : ""); //CLASS 2
+      } else {
+        if (array[i][0] && array[i][1]) { //CLASS 1 OR 3
+          if (array[i][0].length > 17 && inline !== false) array[i][0] = array[i][0].slice(0, 17); //if title is longer than 17, trim
+          embed.fields = Embed.fielder(embed.fields,
+            `#${i + 1 + page * pagekey} ${array[i][0]} `, //#1 theLAZYmd#2353 score value is multiplied by page * 9
+            array[i][1], //second item in embed
+            inline === false ? false : true //default position of inline is true, have it be true unless specifically stated
+          );
+          beginfields = true; //first time we begin making fields, it triggers so that we do it from now on
+        } else
+        if (!array[i][1]) {
+          embed.fields = Embed.fielder(embed.fields,
+            `#${i + 1 + page * pagekey} `, //since no two fields specified, one field given is the value, leave the name as just increment
+            array[i][0],
+            inline === false ? false : true
+          );
+        }
+      }
+    };
+    return embed;
+  }
 
 };
 

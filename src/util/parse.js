@@ -22,7 +22,6 @@ class Parse {
     this.server = this.guild ? DataManager.getServer(this.guild.id) : "";
     this.reactionmessages = this.guild ? DataManager.getServer(this.guild.id, "./src/data/reactionmessages.json") : "";
     this.member = this.guild ? this.message.member : "";
-    this.user = this.member ? this.member.user : "";
     this.reboot = this.client.reboot;
     this.httpboolean = this.client.httpboolean;
   }
@@ -59,15 +58,23 @@ class Parse {
     return this._Check;
   }
 
+  get user () {  
+    if (!this.member) return "";
+    return this.member.user;
+  }
+
   get dbuser () {
     if (!this.user) return "";
-    if (!this._dbuser) this._dbuser = DBuser.getUser(this.user);
-    return this._dbuser;
+    return DBuser.getUser(this.user);
+    //if (!this._dbuser) this._dbuser = DBuser.getUser(this.user);
+    //return this._dbuser;
   }
 
   get dbindex () {
-    if (!this._dbindex) this._dbindex = this.dbuser ? DBuser.byIndex(this.dbuser) : "";
-    return this._dbindex;
+    if (!this.dbuser) return "";
+    return DBuser.byIndex(this.dbuser);
+    //if (!this._dbindex) this._dbindex = this.dbuser ? DBuser.byIndex(this.dbuser) : "";
+    //return this._dbindex;
   }
 
   get command () {
