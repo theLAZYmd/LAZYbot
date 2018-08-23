@@ -9,13 +9,19 @@
     "module": "CustomReactions",
     "file": "customreactions",
     "method": "text",
-    "arguments": []
+    "arguments": [],
+    "requires": {
+      "bot": "false"
+    }
   },
   {
     "module": "CustomReactions",
     "file": "customreactions",
     "method": "emoji",
-    "arguments": []
+    "arguments": [],
+    "requires": {
+      "bot": "false"
+    }
   },
   {
     "module": "Reddit",
@@ -29,7 +35,7 @@
     "method": "onNewMessage",
     "arguments": [],
     "requires": {
-      "channel": "trivia",
+      "channels": "trivia",
       "state": "trivia"
     }
   }

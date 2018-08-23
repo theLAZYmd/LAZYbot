@@ -7,8 +7,15 @@ class Award extends Parse {
     super(message)
   }
 
-  on() {
-    if(this.author.id === config.ids.bot) this.message.delete();
+  on (channel) {
+    channel.awaitMessages((m) => m.author.id === config.ids.bot && m.embeds && m.embeds[0] && m.embeds[0].description.includes("has awarded"), {
+      "time": 2000,
+      "max": 1
+    })
+    .then(() => {
+      this.message.delete();
+    })
+    .catch((e) => console.log(e));
   }
 }
 

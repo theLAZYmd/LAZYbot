@@ -93,15 +93,12 @@ class Embed {
       embedinput.author = Embed.author(name, url, icon_url);
     };
     if (embed.footer) {
-      let text = "";
-      let icon_url = "";
-      if (embed.footer.text) text = embed.footer.text;
-      if (embed.footer.icon_url) icon_url = embed.footer.icon_url;
-      if (text || icon_url) embedinput.footer = Embed.footer(text ? text : "", icon_url ? icon_url : "");
+      let text = embed.footer.text ? embed.footer.text : "";
+      let icon_url = embed.footer.icon_url ? embed.footer.icon_url : "";
+      if (text || icon_url) embedinput.footer = Embed.footer(text, icon_url);
     };
     if (embed.image) {
-      let url = "";
-      if (embed.image.url) url = embed.image.url;
+      let url = embed.image.url ? embed.image.url : "";
       if (url) embedinput.image = Embed.image(url);
     };
     if (embed.thumbnail) {
@@ -112,24 +109,11 @@ class Embed {
     if (embed.fields) {
       embedinput.fields = [];
       for (let i = 0; i < embed.fields.length; i++) {
-        let name = "";
-        let value = "";
-        let inline = "";
-        if (embed.fields[i].name) name = embed.fields[i].name;
-        if (embed.fields[i].value) value = embed.fields[i].value;
-        if (embed.fields[i].inline) inline = embed.fields[i].inline;
-        if (name || value || inline) {
-          embedinput.fields[i] = {};
-          name = name ? name : "\u200b";
-          value = value ? value : "\u200b";
-          inline = inline ? inline : false;
-          embedinput.fields[i] = {
-            name,
-            value,
-            inline
-          }
-        };
-      };
+        let name = embed.fields[i].name ? embed.fields[i].name : "\u200b";
+        let value = embed.fields[i].value ? embed.fields[i].value : "\u200b";
+        let inline = embed.fields[i].inline ? embed.fields[i].inline : "false";
+        if ((name && name !== "\u200b") || (value && value !== "\u200b")) embedinput.fields[i] = {name, value, inline};
+      }
     };
     return embedinput;
   }

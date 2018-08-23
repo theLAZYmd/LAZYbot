@@ -16,7 +16,6 @@ class Parse {
       : "";
     this.client = this.message.client;
     this.author = this.message.author;
-    this.bot = this.author ? this.author.bot && message.embeds && message.embeds[0] : false;
     this.guild = this.message.guild || this.client.guilds.get(config.houseid);
     this.channel = this.message.channel;
     this.server = this.guild ? DataManager.getServer(this.guild.id) : "";
@@ -32,6 +31,14 @@ class Parse {
       this._Output = new OutputConstructor(this.message);
     };
     return this._Output;
+  }
+
+  get Permissions () {
+    if (!this._Permissions) {
+      let PermissionsConstructor = require("./permissions.js");
+      this._Permissions = new PermissionsConstructor(this.message);
+    };
+    return this._Permissions;
   }
 
   get Paginator () {
@@ -78,7 +85,7 @@ class Parse {
   }
 
   get command () {
-    if(this.bot) {
+    if (this.author ? this.author.bot && this.message.embeds && this.message.embeds[0] : false) {
       if(this.message.embeds[0].author) return this.message.embeds[0].author.name;
     } else {
       let args = this.message.content.slice(this.prefix.length).match(/[^\s]+/gi);

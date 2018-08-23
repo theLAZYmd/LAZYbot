@@ -50,8 +50,11 @@ class Bot {
     });
 
     client.on("messageReactionAdd", (messageReaction, user) => {
-      if (user.bot || !messageReaction.message.author.bot || !messageReaction.message.guild) return; //For using emojis as 'buttons'. Only reactions done by users reacting to bot messages are of interest to us.
-      Router.reaction(messageReaction, user);
+      if (!messageReaction.message.guild) return;
+      if (user.bot || !messageReaction.message.author.bot) {
+        if (messageReaction.emoji.id === "481996881606475798" && !user.bot) return messageReaction.remove(user);
+      } //For using emojis as 'buttons'. Only reactions done by users reacting to bot messages are of interest to us.
+      else Router.reaction(messageReaction, user);
     })
 
     express.get("/", (request, response) => { //interacting with glitch.com

@@ -1,6 +1,5 @@
 const Parse = require("./parse.js");
 const DataManager = require("./datamanager.js");
-const Permissions = require("./permissions.js");
 const Commands = require("../data/commands.json");
 const allMessageCommands = require("../data/allmessagecommands.json");
 const DMCommands = require("../data/dmcommands.json");
@@ -87,16 +86,16 @@ class Router {
     if(cmdInfo.requires) {
       for (let type in cmdInfo.requires) { //such as channel, guild
         let value = cmdInfo.requires[type]; //such as mod, owner, bot, trivia
-        let killboolean = false;
         if (Array.isArray(value)) {
           let array = Array.from(value); //if array (i.e. multiple possible satisfactory conditions)
           killboolean = true; //assume it is to be killed
           for (let i = 0; i < array.length; i++) {
-            if (Permissions[type](array[i], argsInfo)) killboolean = false; //but it satisfy just one condition, stop the kill
+            if (argsInfo.Permissions[type](array[i], argsInfo)) killboolean = false; //but it satisfy just one condition, stop the kill
           };
-        } else
-        if (!Permissions[type](value, argsInfo)) killboolean = true; //if no permissions, kill it
-        if (killboolean) return Output.onError(Permissions.output(type, argsInfo) + "\nUse `" + cmdInfo.prefix + "help` followed by the command name to see command info.");
+          if (killboolean) return Output.onError(argsInfo.Permissions.output(type, argsInfo) + "\nUse `" + cmdInfo.prefix + "help` followed by the command name to see command info.");
+        } else {
+          if (!argsInfo.Permissions[type](value, argsInfo)) return Output.onError(argsInfo.Permissions.output(type, argsInfo) + "\nUse `" + cmdInfo.prefix + "help` followed by the command name to see command info."); //if no argsInfo.Permissions, kill it
+        };
       };
     };
     let args = [];

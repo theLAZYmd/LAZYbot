@@ -375,7 +375,21 @@
         "module": "Currency",
         "file": "award",
         "method": "on",
-        "arguments": [],
+        "arguments": ["channel"],
+        "prefix": "nadeko"
+    },
+    {
+        "aliases": [
+            "take"
+        ],
+        "description": "Takes currency through the Nadeko bot. Bot owner only!",
+        "usage": [
+            "take 100 littleplotkin"
+        ],
+        "module": "Currency",
+        "file": "award",
+        "method": "on",
+        "arguments": ["channel"],
         "prefix": "nadeko"
     },
     {
@@ -1109,5 +1123,50 @@
         "requires": {
             "user": "owner"
         }
+    },
+    {
+        "aliases": [
+            "emoji"
+        ],
+        "description": "Reacts to your message with all emoji listed in the message as separate words.",
+        "usage": [
+            "emoji lichess",
+            "emoji ✅ ❎"
+        ],
+        "module": "Custom Reactions",
+        "file": "emoji",
+        "method": "emoji",
+        "arguments": ["args"],
+        "prefix": "generic"
+    },
+    {
+        "aliases": [
+            "emoji"
+        ],
+        "description": "Reacts to a given message, or if name provided, their last in the channel, with all emoji listed in the message as separate words.\nCan use animated emoji.\nFirst argument must be message ID or user.",
+        "usage": [
+            "react ijh hyperpoggers",
+            "react 482013403595014155 lichess chesscom bughousetest"
+        ],
+        "module": "Custom Reactions",
+        "file": "emoji",
+        "method": "emoji",
+        "arguments": ["args"],
+        "prefix": "generic"
+    },
+    {
+        "aliases": [
+            "gild"
+        ],
+        "description": "Gilds a given message, or if name provided, their last in the channel.\nCosts 1 🌸 to use.",
+        "usage": [
+            "gild fumitoks",
+            "gild 481994356106985493"
+        ],
+        "module": "Custom Reactions",
+        "file": "emoji",
+        "method": "gild",
+        "arguments": ["args"],
+        "prefix": "generic"
     }
 ]

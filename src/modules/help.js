@@ -55,11 +55,7 @@ class Help extends Parse {
   }
 
   get usage () {
-    let string = "";
-    for(let i = 0; i < this.cmdInfo.usage.length; i++) {
-      string += "`" + this.prefix + this.cmdInfo.usage[i] + (i < this.cmdInfo.usage.length -1 ? "` or\n" : "`");
-    };
-    return string;
+    return "`" + this.prefix + this.cmdInfo.usage.join("`\n`" + this.prefix) + "`";
   }
 }
 

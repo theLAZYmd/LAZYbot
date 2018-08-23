@@ -68,7 +68,8 @@ class CustomReactions extends Parse {
   emoji () { // applies to all messages
     this.react(this.CRData.emoji, (emojiname) => {
       let emoji = this.Search.emojis.get(emojiname) ? this.Search.emojis.get(emojiname) : emojiname;
-      this.message.react(emoji);
+      this.message.react(emoji)
+      .catch(() => {});
     })
   }
 

@@ -1,16 +1,22 @@
-const config = require("../config.json")
+const Parse = require("./parse.js");
+const DataManager = require("./datamanager.js");
+const config = DataManager.getFile("./src/config.json");
 
-class Permissions {
+class Permissions extends Parse {
+
+  constructor(message) {
+    super(message);
+  }
   
-  static user (requirement, argsInfo) {
-    for(let id in config.ids) {
-      if(requirement === id) {
+  user (requirement, argsInfo) {
+    for (let id in config.ids) {
+      if (requirement === id) {
         let value = config.ids[id];
-        if(typeof value === "string") {
+        if (typeof value === "string") {
           if(value === argsInfo.author.id) return true;
         } else {
           for(let i = 0; i < value.length; i++) {
-            if(value[i] === argsInfo.author.id) return true; //if Array. No support for object.
+            if (value[i] === argsInfo.author.id) return true; //if Array. No support for object.
           }
         }
       }
@@ -18,25 +24,31 @@ class Permissions {
     return false;
   }
 
-  static role (roleType, argsInfo) { //admin, {object}
+  role (roleType, argsInfo) { //admin, {object}
     for(let _roleType in argsInfo.server.roles) { //
-      if(roleType === _roleType) {
+      if (roleType === _roleType) {
         let roleName = argsInfo.server.roles[_roleType];
-        if(argsInfo.member.roles.some(role => role.name.toLowerCase().startsWith(roleName))) return true;
+        if (!this.guild.roles.some(role => role.name = roleName) || !roleName) return true;
+        return argsInfo.member.roles.some(role => role.name.toLowerCase().startsWith(roleName));
       }
     };
     return false;
   }
 
-  static channel (channelName, data) {
+  channels (channelName, data) {
+    if (!this.guild.channels.some(channel => channel.name = channelName)) channelName === "general";
     return data.channel.name.toLowerCase() === data.server.channels[channelName].toLowerCase();
   }
 
-  static state (state, data) {
+  state (state, data) {
     return data.server.states[state.toLowerCase()];
   }
 
-  static args (data, argsInfo) {
+  bot (bot, data) {
+    return data.author.bot === bot;
+  }
+
+  args (data, argsInfo) {
     if (data.length) {
       if (typeof data.length === "number") {
         if (argsInfo.args.length === data.length) return true;
@@ -49,7 +61,7 @@ class Permissions {
     return false;
   }
 
-  static output (key, argsInfo) {
+  output (key, argsInfo) {
     switch (key) {
       case "role":
         return "Insufficient server permissions to use this command."

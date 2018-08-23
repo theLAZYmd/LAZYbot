@@ -77,6 +77,31 @@
                 "trigger": "ping",
                 "reaction": "ping",
                 "anyword": false
+            },
+            {
+                "trigger": "hyperpoggers",
+                "reaction": "hyperpoggers",
+                "anyword": true
+            },
+            {
+                "trigger": "confuse??",
+                "reaction": "confuse",
+                "anyword": false
+            },
+            {
+                "trigger": "hellooo",
+                "reaction": "hello",
+                "anyword": true
+            },
+            {
+                "trigger": "lazycat",
+                "reaction": "lazycat",
+                "anyword": false
+            },
+            {
+                "trigger": "shegg",
+                "reaction": "shegg",
+                "anyword": true
             }
         ]
     }

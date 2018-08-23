@@ -64,18 +64,19 @@ class onStartup {
     let servers = DataManager.getFile("./src/data/server.json")
     for(let id in servers) {
       this.server = servers[id];
-      Search.channels.get(this.server.channels.modmail)
-      .fetchMessages({
+      let modmail = Search.channels.get(this.server.channels.modmail);
+      if (modmail) modmail.fetchMessages({
+
         "limit": 80
       })
       .then(messages => array.concat(Array.from(messages)))
-      .catch(e => console.log(e));
-      Search.channels.get(this.server.channels.welcome)
-      .fetchMessages({
+      .catch(() => {});
+      let welcome = Search.channels.get(this.server.channels.welcome);
+      if (welcome) welcome.fetchMessages({
         "limit": 20
       })
       .then(messages => array.concat(Array.from(messages)))
-      .catch(e => console.log(e));
+      .catch(() => {});
     }
   }
 

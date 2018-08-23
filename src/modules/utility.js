@@ -13,44 +13,52 @@ class Utility extends Parse { //fairly miscelanneous functions
   }
 
   jsonify () {
-    this.find ((msg, embedinput) => {
+    this.find()
+    .then((msg, embedinput) => {
       if (!embedinput) return this.Output.onError("No embeds found to JSONify!");
       this.Output.generic("```json\n" + JSON.stringify(embedinput, null, 4) + "```");
-    }, (error) => {
-      this.Output.onError(error)
+    })
+    .catch((e) => {
+      this.Output.onError(e)
     })
   }
 
   fetch (message) {
-    this.find ((msg, embedinput = {}) => {
-      embedinput.content = embedinput.title ? "Fetched Message for " + this.author.tag + "\n" : "";
-      if(!embedinput.title) embedinput.title = "Fetched Message for " + this.author.tag;
+    this.find()
+    .then((msg, embedinput = {}) => {
+      embedinput.content = "";
       if (msg.content) {
-        if (msg.content.startsWith("On ") && msg.content.includes("\, user **") && msg.content.includes("** said\:")) {
+        if (msg.content.startsWith("On ") && msg.content.includes("\, user **") && msg.content.includes("** said:")) {
           embedinput.content += msg.content;
         } else {
-          embedinput.content += msg.createdTimestamp ? "\nAt" + Date.getISOtime(msg.createdTimestamp) + ", **" + msg.author.tag + "** said" : "";
-          embedinput.content += "\`\`\`" + msg.content + "\`\`\`";
+          if(!embedinput.title) embedinput.title = "Fetched Message for " + this.author.tag + "\n";
+          else embedinput.title = "Fetched Message for " + this.author.tag + "\n";
+          embedinput.content += msg.createdTimestamp ? "\On " + Date.getISOtime(msg.createdTimestamp) + ", user **" + msg.author.tag + "** said:" : "";
+          if (!embedinput.description) embedinput.description = "```" + msg.content + "```";
+          else embedinput.content += "```" + msg.content + "```";
         }
       };
       this.Output.sender(embedinput);
       message.delete();
-    }, (error) => {
-      this.Output.onError(error)
+    })
+    .catch((e) => {
+      this.Output.onError(e)
     })
   }
 
-  find (resolve, reject) { //function needs a channel input
-    let id = this.args[0], channel = this.channel;
-    if (this.args.length === 2) {
-      channel = this.Search.channels.get(args[1]);
-      if (!channel) return reject("No such channel!");
-    }; //if second argument provided, that's the channel to look in
-    channel.fetchMessage(id)
-    .then(msg => {
-      return resolve(msg.content, msg.embeds && msg.embeds[0] ? Embed.receiver(msg.embeds[0]) : "");
+  find (args = this.args) { //function needs a channel input
+    return new Promise ((resolve, reject) => {
+      let id = args[0], channel = this.channel;
+      if (args.length === 2) {
+        channel = this.Search.channels.get(args[1]);
+        if (!channel) return reject("No such channel!");
+      }; //if second argument provided, that's the channel to look in
+      channel.fetchMessage(id)
+      .then(msg => {
+        return resolve(msg, msg.embeds && msg.embeds[0] ? Embed.receiver(msg.embeds[0]) : "");
+      })
+      .catch(e => reject(e)); //if no message found, say so
     })
-    .catch(e => this.Output.onError(e)); //if no message found, say so
   }
 
 }

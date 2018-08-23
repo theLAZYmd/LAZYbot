@@ -18,10 +18,10 @@ class User extends All {
     if(typeof searchstring !== "string") return "";
     if(searchstring.length >= 2) {
       if(!user) user = this.byID(searchstring);
-      if(!user) user = this.byUsername(searchstring, exactmode);
       if(!user) user = this.byTag(searchstring);
-      if(!user) user = this.byAliases(searchstring, exactmode);
       if(!user) user = this.byNickname(searchstring, exactmode);
+      if(!user) user = this.byUsername(searchstring, exactmode);
+      if(!user) user = this.byAliases(searchstring, exactmode);
     };
     return user;
   }
@@ -35,6 +35,14 @@ class User extends All {
     return this.client.users.find(user => string.toLowerCase() === user.tag.toLowerCase()) || "";
   }
 
+  byNickname(string, exactmode) {
+    return this.guild.members.find((member) => {
+      if (!member.nickname) return false;
+      if (!exactmode) return member.nickname.toLowerCase().startsWith(string.toLowerCase());
+      return member.nickname.toLowerCase() === string.toLowerCase();
+    })
+  }
+
   byUsername(string, exactmode) {
     return this.client.users.find(user => exactmode ? user.username.toLowerCase() === string.toLowerCase() : user.username.toLowerCase().startsWith(string.toLowerCase())) || "";
   }
@@ -42,10 +50,6 @@ class User extends All {
   byAliases(searchstring, exactmode) {
     let dbuser = DBuser.get(searchstring, exactmode);
     return dbuser ? this.byID(dbuser.id) : "";
-  }
-
-  byNickname(string, exactmode) {
-    return this.guild.members.find(member => member.nickname && (exactmode ? member.nickname.toLowerCase() === string.toLowerCase() : member.nickname.toLowerCase().startsWith(string.toLowerCase()))) || "";
   }
 
 }
@@ -145,7 +149,7 @@ class Emoji extends All {
   }
   
   byName(name) {
-    return this.client.emojis.find(emoji => emoji.name.replace(/[^a-z0-9]+/gi, "") === name.replace(/[^a-z0-9]+/gi, "")) || "";
+    return this.client.emojis.find(emoji => emoji.name.replace(/[^a-z0-9]+/gi, "").toLowerCase() === name.replace(/[^a-z0-9]+/gi, "").toLowerCase()) || "";
   }
 
   byUnicode(searchstring) {

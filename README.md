@@ -3,7 +3,7 @@
 Discord bot operating in [the House server](http://dscrd.me/housechessvariants) to further lazy's understanding of basic js.
 Written in JavaScript, hosted on glitch.com.
 
-It's main modules are:
+**It's main modules are:**
 - A profile generator which includes:
   - Integration with the lichess and chess.com API to support account linking;
   - Customisable finger notes;

@@ -214,21 +214,40 @@ class Output extends Parse {
       "time": 18000
     }, data)
     return new Promise ((resolve, reject) => {
-      this.Output.generic("**" + data.author.tag + "** " + data.description, data.channel)
+      this.Output.reactor({
+        "description": "**" + data.author.tag + "** " + data.description
+      }, data.channel, "❎")
       .then((msg) => {
-        let filter = m => m.author.id === data.author.id && m.content && data.filter(m);
-        msg.channel.awaitMessages(filter, {
+        let rfilter = (reaction, user) => reaction.emoji.name = "❎" && user.id === data.author.id;
+        let mfilter = m => m.author.id === data.author.id && m.content && data.filter(m);
+        msg.awaitReactions(rfilter, {
+          "max": 1,
+          "time": 30000,
+          "errors": ["time"]
+        })
+        .then(() => {
+          reject ();
+          return msg.delete()
+          .catch(() => {});;
+        })
+        .catch(() => {
+          return msg.delete()
+          .catch(() => {});;
+        })
+        msg.channel.awaitMessages(mfilter, {
           "max": 1,
           "time": data.time,
           "errors": ["time"]
         })
         .then((collected) => {
           resolve(collected.first());
-          return msg.delete();
+          return msg.delete()
+          .catch(() => {});;
         })
         .catch(() => {
           reject ();
-          return msg.delete();
+          return msg.delete()
+          .catch(() => {});
         })
       })
     })
