@@ -571,7 +571,7 @@
                 "fields": [
                     {
                         "name": "Buying roles in the shop",
-                        "value": "You can certain roles from the shop. They will give you a special color flair and make you superior to other members on the right sidebar. If your level is high enough, you’re eligible for discount. See `… shop` for more.",
+                        "value": "You can certain roles from the shop. They will give you a special color flair and make you superior to other members on the right sidebar. If your level is high enough, you’re eligible for discount. See `… shop`.",
                         "inline": false
                     },
                     {
@@ -581,12 +581,12 @@
                     },
                     {
                         "name": "Claiming waifus and gifts",
-                        "value": "You can claim waifu(s) and give them gifts. See `.gift` and `.waifus` for more",
+                        "value": "You can claim waifu(s) and give them gifts. See `.gift` and `.waifus`.",
                         "inline": false
                     },
                     {
                         "name": "Trying to get more flowers",
-                        "value": "You spend flowers by betting on odds offered by licensed bookies, or by gambling in <#390259390709497857>. See `… flowers` for more.",
+                        "value": "You spend flowers by betting on odds offered by licensed bookies, or by gambling in <#390259390709497857>. See `… flowers`.",
                         "inline": false
                     }
                 ]
