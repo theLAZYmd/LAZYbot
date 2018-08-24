@@ -882,7 +882,12 @@
         "file": "tracker",
         "method": "run",
         "arguments": ["command", "args"],
-        "prefix": "generic"
+        "prefix": "generic",
+        "requires": {
+            "args": {
+                "length": [0, 1, 2]
+            }
+        }
     },
     {
         "aliases": [
@@ -898,7 +903,12 @@
         "file": "tracker",
         "method": "run",
         "arguments": ["command", "args"],
-        "prefix": "generic"
+        "prefix": "generic",
+        "requires": {
+            "args": {
+                "length": [0, 1, 2]
+            }
+        }
     },
     {
         "aliases": [
@@ -914,7 +924,12 @@
         "file": "tracker",
         "method": "run",
         "arguments": ["command", "args"],
-        "prefix": "generic"
+        "prefix": "generic",
+        "requires": {
+            "args": {
+                "length": [0, 1, 2]
+            }
+        }
     },
     {
         "aliases": [
@@ -929,6 +944,26 @@
         "file": "tracker",
         "method": "run",
         "arguments": ["command", "args"],
+        "prefix": "generic",
+        "requires": {
+            "args": {
+                "length": [0, 1, 2, 3]
+            }
+        }
+    },
+    {
+        "aliases": [
+            "update"
+        ],
+        "description": "Updates a user on all their accounts.",
+        "usage": [
+            "update",
+            "update theLAZYmd"
+        ],
+        "module": "Chess",
+        "file": "tracker",
+        "method": "update",
+        "arguments": ["dbuser", "args"],
         "prefix": "generic"
     },
     {
@@ -1141,7 +1176,7 @@
     },
     {
         "aliases": [
-            "emoji"
+            "react"
         ],
         "description": "Reacts to a given message, or if name provided, their last in the channel, with all emoji listed in the message as separate words.\nCan use animated emoji.\nFirst argument must be message ID or user.",
         "usage": [
@@ -1150,7 +1185,7 @@
         ],
         "module": "Custom Reactions",
         "file": "emoji",
-        "method": "emoji",
+        "method": "react",
         "arguments": ["args"],
         "prefix": "generic"
     },

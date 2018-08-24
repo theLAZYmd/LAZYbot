@@ -85,13 +85,15 @@ class Parse {
   }
 
   get command () {
-    if (this.author ? this.author.bot && this.message.embeds && this.message.embeds[0] : false) {
-      if(this.message.embeds[0].author) return this.message.embeds[0].author.name;
-    } else {
-      let args = this.message.content.slice(this.prefix.length).match(/[^\s]+/gi);
-      if(args) return args.shift().toLowerCase();
+    if (!this._command) {
+      if (this.author ? this.author.bot && this.message.embeds && this.message.embeds[0] : false) {
+        if(this.message.embeds[0].author) this._command = this.message.embeds[0].author.name;
+      } else {
+        let args = this.message.content.slice(this.prefix.length).match(/[^\s]+/gi);
+        if(args) this._command = args.shift().toLowerCase();
+      };
     };
-    return "";
+    return this._command || "";
   }
 
   get prefix () {

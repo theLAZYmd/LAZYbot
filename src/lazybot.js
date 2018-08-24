@@ -46,7 +46,10 @@ class Bot {
     
     client.on("message", (message) => { //command handler
       data.message = message;
-      Router.command(data);
+      Router.command(data)
+      .catch((e) => {
+        if (e) console.log(e);
+      });
     });
 
     client.on("messageReactionAdd", (messageReaction, user) => {

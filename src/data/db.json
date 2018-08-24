@@ -3,28 +3,13 @@
         "id": "185412969130229760",
         "username": "theLAZYmd#2353",
         "messages": {
-            "count": 69316,
-            "last": "I should sleepppppp 😦",
-            "lastSeen": 1534986980669
+            "count": 69392,
+            "last": "10 <:pogchamp:450699459853156352>",
+            "lastSeen": 1535069076818
         },
         "bidamount": 100000000000000000,
         "location": "Toronto",
         "sex": "male",
-        "lichess": {
-            "_main": "TheLAZYmd",
-            "TheLAZYmd": {
-                "maxRating": "2158",
-                "ultra": "1829",
-                "bullet": "2056",
-                "blitz": "1879",
-                "rapid": "1997",
-                "classical": "1500?",
-                "crazyhouse": "2158",
-                "3-check": "1708",
-                "atomic": "1563?",
-                "koth": "1710?"
-            }
-        },
         "patron": false,
         "lastupdate": 1532184663178,
         "triviarating": 1475,
@@ -33,9 +18,10 @@
         "bughousetest": {
             "_main": "theLAZYmd",
             "theLAZYmd": {
-                "maxRating": "1351",
-                "bughouse": "1351"
-            }
+                "maxRating": "1378",
+                "bughouse": "1378"
+            },
+            "_name": "undefined undefined"
         },
         "trophy": [
             "champion du mondeeeeeeee"
@@ -43,14 +29,57 @@
         "chesscom": {
             "_main": "theLAZYbot",
             "theLAZYbot": {
-                "maxRating": "2155",
+                "maxRating": "2136",
+                "bullet": "1817?",
                 "crazyhouse": "2104",
-                "bughouse": "2155"
+                "bughouse": "2136"
             }
         },
-        "lastUpdate": 1534818965994,
+        "lastUpdate": 1535068768532,
         "age": "19",
-        "finger": "https://twitch.tv/zhbruhs follow that shit it's the future"
+        "finger": "https://twitch.tv/zhbruhs follow that shit it's the future",
+        "lichess": {
+            "_main": "TheLAZYmd",
+            "TheLAZYmd": {
+                "maxRating": "2295",
+                "blitz": "1890",
+                "bullet": "2038",
+                "rapid": "1997",
+                "classical": "1500?",
+                "crazyhouse": "2295",
+                "3-check": "1708",
+                "atomic": "1563?",
+                "koth": "1710?"
+            },
+            "_country": "FR",
+            "_language": "fr-FR",
+            "Fumitoks": {
+                "maxRating": "2414",
+                "blitz": "2328",
+                "bullet": "2246",
+                "rapid": "1500?",
+                "classical": "1500?",
+                "crazyhouse": "2414",
+                "3-check": "2086",
+                "koth": "1752?",
+                "racing-kings": "1997?"
+            },
+            "opperwezen": {
+                "maxRating": "2740",
+                "blitz": "2507",
+                "bullet": "2625",
+                "rapid": "2629",
+                "classical": "2309",
+                "crazyhouse": "2740",
+                "3-check": "2333",
+                "anti": "2078",
+                "horde": "2218",
+                "atomic": "2049",
+                "koth": "2435",
+                "racing-kings": "1956"
+            },
+            "_name": "undefined undefined"
+        }
     },
     {
         "id": "370357539931684865",
@@ -263,9 +292,9 @@
         "id": "373480715276517376",
         "username": "ObiWanBenoni#3488",
         "messages": {
-            "count": 60212,
-            "last": "<:noothi:472504654471888896>",
-            "lastSeen": 1534987317245
+            "count": 60215,
+            "last": "ez",
+            "lastSeen": 1535041136054
         },
         "finger": "Join team obi to get free flowers",
         "lichess": {
@@ -928,9 +957,9 @@
         "id": "409729432236982282",
         "username": "Musickn#8622",
         "messages": {
-            "count": 59441,
-            "last": "i gave mine to obi",
-            "lastSeen": 1534974016476
+            "count": 59445,
+            "last": "<:GWczeWhat:399970544830775300>",
+            "lastSeen": 1535038266962
         },
         "finger": "LAZY You can do IT!",
         "sex": "❤",
@@ -1244,20 +1273,20 @@
         "id": "333586342275710978",
         "username": "MMichael#3973",
         "messages": {
-            "count": 23511,
-            "last": "😮",
-            "lastSeen": 1534974048186
+            "count": 23525,
+            "last": "You can do it",
+            "lastSeen": 1535046237186
         },
         "chesscom": {
             "_main": "MMichael",
             "MMichael": {
-                "maxRating": 2501,
+                "maxRating": "2606",
                 "bullet": "2397",
                 "lightning": "2313",
                 "chess": "1494",
                 "rapid": "1762",
                 "crazyhouse": "2433",
-                "bughouse": "2501",
+                "bughouse": "2606",
                 "tactics": "2311",
                 "lessons": "1946"
             }
@@ -1265,24 +1294,33 @@
         "lichess": {
             "_main": "TheFinnisher",
             "TheFinnisher": {
-                "960": "2013",
-                "maxRating": "2556",
-                "ultra": "2205",
-                "bullet": "2287",
+                "maxRating": "2605",
                 "blitz": "2180",
+                "bullet": "2383",
                 "rapid": "1500?",
                 "classical": "2133?",
-                "crazyhouse": "2556",
+                "crazyhouse": "2605",
                 "3-check": "1975",
                 "horde": "1910",
                 "atomic": "2232",
                 "koth": "2180"
+            },
+            "_country": "FI",
+            "_language": "en-US",
+            "MMichael": {
+                "maxRating": "2663",
+                "blitz": "2355",
+                "bullet": "2503",
+                "rapid": "2369",
+                "classical": "2245?",
+                "crazyhouse": "2663"
             }
         },
         "lastupdate": 1532181781276,
         "triviarating": 1246,
         "triviagames": 6,
-        "triviaprovisional": false
+        "triviaprovisional": false,
+        "lastUpdate": 1535046032253
     },
     {
         "id": "179603851073028100",
@@ -1448,9 +1486,9 @@
         "id": "325736595980288010",
         "username": "Kyle#4287",
         "messages": {
-            "count": 14645,
-            "last": "nice raven",
-            "lastSeen": 1534959939309
+            "count": 14646,
+            "last": "I'll play",
+            "lastSeen": 1535069068726
         },
         "lichess": {
             "_main": "KyleLegion",
@@ -1680,9 +1718,9 @@
         "id": "317034686973214720",
         "username": "Gopnik#4031",
         "messages": {
-            "count": 12908,
-            "last": "gg",
-            "lastSeen": 1534464471880
+            "count": 12909,
+            "last": "I'm gonna play in like 15 min",
+            "lastSeen": 1535069140806
         },
         "finger": "cheeki breeki iv damke",
         "age": "87",
@@ -2484,7 +2522,7 @@
         "id": "392031018313580546",
         "username": "housebank#5970",
         "messages": {
-            "count": 331,
+            "count": 332,
             "last": "Powerful friends you have dear lady!",
             "lastSeen": 1534120123628
         },
@@ -4121,9 +4159,9 @@
         "id": "447723359317262336",
         "username": "Fumitoks#3763",
         "messages": {
-            "count": 4900,
-            "last": "Get better mark",
-            "lastSeen": 1534970476187
+            "count": 4902,
+            "last": "fuck yeah",
+            "lastSeen": 1535069128326
         },
         "lastUpdate": 1534673029455
     },
@@ -5143,9 +5181,9 @@
         "id": "334801525400666112",
         "username": "ijh#0966",
         "messages": {
-            "count": 884,
-            "last": "OK. Nice seeing you again!",
-            "lastSeen": 1534980534150
+            "count": 894,
+            "last": "ok, good night!",
+            "lastSeen": 1534992076559
         },
         "lichess": {
             "_main": "ijh",
@@ -7570,7 +7608,7 @@
         "id": "207436604934062080",
         "username": "Anti Erdogan#5862",
         "messages": {
-            "count": 7,
+            "count": 8,
             "last": "Ggs",
             "lastSeen": 1534982082338
         },

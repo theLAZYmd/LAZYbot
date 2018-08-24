@@ -2,7 +2,7 @@
     "name": "LAZYbot",
     "description": "Discord bot operating in the House server http://dscrd.me/housechessvariants just to further lazy's understanding of basic js. ",
     "main": "src/lazybot.js",
-    "version": "1.5.4",
+    "version": "1.5.5",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "node src/lazybot.js"

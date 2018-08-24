@@ -9,6 +9,7 @@ class Embeds extends Parse {
   }
 
   find (args) {
+    if (!args[0]) return;
     this.getEmbeds ()
     .then((embeds) => {
       for (let type in embeds) {

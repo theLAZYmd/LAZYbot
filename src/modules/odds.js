@@ -15,115 +15,107 @@ class Series extends All {
     this.embed = {};
   }
 
-  input () { //if there's a draw the bettor just gets all the money
-    let data = { //alright create the big data object to be passed around
-      "players": []
-    };
-    this.Output.response({ //get the number of games played. Game total must add up to this number.
-      "description": "Please input the number of games played in the series.",
-      "filter": m => !isNaN(parseInt(m.content) && Number(m.content) < 21)
-    })
-    .then((msg1) => {
-      data.length = parseInt(msg1.content); 
-      this.Output.response({ //first name. String literal for object. Purely aesthetic, we don't take into account ratings
+  async input() { //if there's a draw the bettor just gets all the money
+    try {
+      let data = { //alright create the big data object to be passed around
+        "players": []
+      };
+      let msg1 = await this.Output.response({ //get the number of games played. Game total must add up to this number.
+        "description": "Please input the number of games played in the series.",
+        "filter": m => !isNaN(parseInt(m.content) && Number(m.content) < 21)
+      });
+      data.length = parseInt(msg1.content);
+      let msg2 = await this.Output.response({ //first name. String literal for object. Purely aesthetic, we don't take into account ratings
         "description": "Please input the name of the first player."
       })
-      .then((msg2) => {
-        data.players[0] = {
-          "name": msg2.content
-        };
-        this.Output.response({ //second name. String literal for object. Purely aesthetic, we don't take into account ratings
-          "description": "Please input the name of the second player."
-        })
-        .then((msg3) => {
-          data.players[1] = {
-            "name": msg3.content
-          };
-          this.Output.response({ //these are important - not only do they provide the ratio but the degree of accuracy too
-            "description": "Please input past number of **" + data.players[0].name + "** wins against " + data.players[1].name + ".",
-            "filter": m => !isNaN(Number(m.content))
-          })
-          .then((msg4) => {
-            data.players[0].score = Number(msg4.content);
-            this.Output.response({
-              "description": "Please input past number of **" + data.players[1].name + "** wins against " + data.players[0].name + ".",
-              "filter": m => !isNaN(Number(m.content))
-            })
-            .then((msg5) => {
-              data.players[1].score = Number(msg5.content);
-              this.message.delete(), msg1.delete(), msg2.delete(), msg3.delete(), msg4.delete(), msg5.delete();
-              this.gen(data);
-            })
-            .catch(e => console.log(e));
-          })
-          .catch(e => console.log(e))
-        })
-        .catch(e => console.log(e))
+      data.players[0] = {
+        "name": msg2.content
+      };
+      let msg3 = await this.Output.response({ //second name. String literal for object. Purely aesthetic, we don't take into account ratings
+        "description": "Please input the name of the second player."
       })
-      .catch(e => console.log(e))
-    })
-    .catch(e => console.log(e))
+      data.players[1] = {
+        "name": msg3.content
+      };
+      let msg4 = await this.Output.response({ //these are important - not only do they provide the ratio but the degree of accuracy too
+        "description": "Please input past number of **" + data.players[0].name + "** wins against " + data.players[1].name + ".",
+        "filter": m => !isNaN(Number(m.content))
+      })
+
+      data.players[0].score = Number(msg4.content);
+      let msg5 = await this.Output.response({
+        "description": "Please input past number of **" + data.players[1].name + "** wins against " + data.players[0].name + ".",
+        "filter": m => !isNaN(Number(m.content))
+      })
+      data.players[1].score = Number(msg5.content);
+      this.message.delete(), msg1.delete(), msg2.delete(), msg3.delete(), msg4.delete(), msg5.delete();
+      this.gen(data);
+    } catch (e) {
+      console.log(e);
+    }
   }
 
-  gen (data) {
+  gen(data) {
     data.total = data.players[0].score + data.players[1].score;
     if (!data.total) return this.Output.onError("Couldn't calculate odds for this data.");
     data.reliability = (Math.pow(Math.E, (Math.min(data.total, 200) / 200)) //e^(total/1000) or if total is more than 1000, 1
-      * (1 / (Math.E - 1)) //divided by (e-1), now a number between 0 and 1
-      * 0.25); //now a number between 0 and 0.25
+      *
+      (1 / (Math.E - 1)) //divided by (e-1), now a number between 0 and 1
+      *
+      0.25); //now a number between 0 and 0.25
     data.accuracy = (Math.pow(Math.E, (Math.min(data.length, 50) / 50)) //e^(number of games/50) or if total is more than 50, 1
-      * (1 / (Math.E - 1)) //divided by (e-1), now a number between 0 and 1
-      * 0.25); //now a number between 0 and 0.25
-    data.confidence = 0.5 + data.reliability + data.accuracy//base value
-    for (let i = 0; i < data.players.length; i++) { //for each player
-      data.players[i].discrete = {
+      *
+      (1 / (Math.E - 1)) //divided by (e-1), now a number between 0 and 1
+      *
+      0.25); //now a number between 0 and 0.25
+    data.confidence = 0.5 + data.reliability + data.accuracy //base value
+    for (let player of data.players) { //for each player
+      player.discrete = {
         "probability": [],
         "decimal": []
       };
-      data.players[i].cumulative = {
+      player.cumulative = {
         "probability": [],
         "decimal": []
       };
-      data.players[i].winchance = (data.players[i].score / data.total);
+      player.winchance = (player.score / data.total);
       for (let j = 0; j < data.length + 1; j++) {
-        data.players[i].discrete.probability[j] = Maths.binomial(data.length, data.players[i].winchance, j, false);
-        data.players[i].discrete.decimal[j] = data.confidence / data.players[i].discrete.probability[j];
-        data.players[i].cumulative.probability[j] = 1 - Maths.binomial(data.length, data.players[i].winchance, j - 1, true);
-        data.players[i].cumulative.decimal[j] = data.confidence / data.players[i].cumulative.probability[j];
+        player.discrete.probability[j] = Maths.binomial(data.length, player.winchance, j, false);
+        player.discrete.decimal[j] = data.confidence / player.discrete.probability[j];
+        player.cumulative.probability[j] = 1 - Maths.binomial(data.length, player.winchance, j - 1, true);
+        player.cumulative.decimal[j] = data.confidence / player.cumulative.probability[j];
       };
     };
     let embedgroup = [];
-    for (let i = 0; i < 2; i++) { //maxpages is 2
-      embedgroup.push(this.build(data, i));
+    for (let j = 0; j < 2; j++) { //maxpages is 2
+      embedgroup.push(this.build(data, j));
     };
     this.Paginator.sender(embedgroup, 180000)
   }
 
-  build (data, page) {
+  build(data, page) {
     let type = page === 0 ? "discrete" : "cumulative";
     let embed = {
       "title": this.Search.emojis.get("lazyslack") + " LAZY odds for match " + data.players[0].name + " vs " + data.players[1].name,
       "description": "Showing " + type + " odds...\n**Note:** these odds are not valid unless it is <@!185412969130229760> who has request them.",
       "fields": []
     };
-    for (let i = 0; i < data.players.length; i++) {
+    for (let player of data.players) {
       let array = [];
       for (let j = 0; j < data.length + 1; j++) {
-        let decimal = data.players[i][type].decimal[j] && data.players[i][type].decimal[j] > 1 ? data.players[i][type].decimal[j].toFixed(2) : null;
+        let decimal = player[type].decimal[j] && player[type].decimal[j] > 1 ? player[type].decimal[j].toFixed(2) : null;
         let us = decimal ? (decimal > 2 ? "+" : "") + Calc.tous(decimal).toFixed() : null;
         array.push([
-          (type === "discrete" ? "Exactly ": "At least ") + j,
-          !decimal || decimal > 80 ? "-" : "**" + decimal + "** (" + us + ")"
+          (type === "discrete" ? "Exactly " : "At least ") + j, !decimal || decimal > 80 ? "-" : "**" + decimal + "** (" + us + ")"
         ]);
       };
       let w = Math.floor((data.length - 1) / 2);
-      let matchodds = data.players[i].cumulative.decimal[w] && data.players[i].cumulative.decimal[w] > 1 ? data.players[i].cumulative.decimal[w].toFixed(2) : "";
+      let matchodds = player.cumulative.decimal[w] && player.cumulative.decimal[w] > 1 ? player.cumulative.decimal[w].toFixed(2) : "";
       let usmatchodds = matchodds ? (matchodds > 2 ? "+" : "") + Calc.tous(matchodds).toFixed() : null;
       array.push([
-        "The match",
-        !matchodds || matchodds > 80 ? "-" : "**" + matchodds + "** (" + usmatchodds + ")"
+        "The match", !matchodds || matchodds > 80 ? "-" : "**" + matchodds + "** (" + usmatchodds + ")"
       ])
-      Embed.fielder(embed.fields, "How many games will " + data.players[i].name + " win?    \u200b", Embed.getFields(array), true);
+      Embed.fielder(embed.fields, "How many games will " + player.name + " win?    \u200b", Embed.getFields(array), true);
     };
     return embed;
   }
@@ -136,19 +128,19 @@ class Odds {
     this.message = message;
   }
 
-  get series () {
+  get series() {
     return new Series(this.message);
   }
 
-  get match () {
+  get match() {
     return new Match(this.message);
   }
 
-  get tournament () {
+  get tournament() {
     return new Tournament(this.message);
   }
 
-  run (args) {
+  run(args) {
     if (this[args[0]]) return this[args[0]].input();
     this.Output.onError("Invalid type of odds requested.");
   }
@@ -162,11 +154,11 @@ Number.prototype.round = function (places) {
   return this;
 }
 
-String.prototype.toProperCase = function() {
+String.prototype.toProperCase = function () {
   let words = this.split(/ +/g);
   let newArray = [];
-  for(let i = 0; i < words.length; i++) {
-    newArray[i] = words[i][0].toUpperCase() + words[i].slice(1, words[i].length).toLowerCase();
+  for (let j = 0; j < words.length; j++) {
+    newArray[j] = words[j][0].toUpperCase() + words[j].slice(1, words[j].length).toLowerCase();
   }
   let newString = newArray.join(" ");
   return newString;
