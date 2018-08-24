@@ -3,9 +3,9 @@
         "id": "185412969130229760",
         "username": "theLAZYmd#2353",
         "messages": {
-            "count": 69512,
-            "last": "I'm looking at one right now you fucking wanker",
-            "lastSeen": 1535114755149
+            "count": 69513,
+            "last": "dude",
+            "lastSeen": 1535116997226
         },
         "bidamount": 100000000000000000,
         "location": "Toronto",
@@ -423,40 +423,40 @@
         "chesscom": {
             "_main": "okeizh",
             "okeizh": {
-                "maxRating": 1851,
+                "maxRating": "1851",
                 "bullet": "1652",
                 "lightning": "1614",
                 "crazyhouse": "1851",
-                "bughouse": "1752",
-                "tactics": "1652"
+                "bughouse": "1800",
+                "tactics": "1722"
             }
         },
         "lichess": {
             "_main": "okei",
             "okei": {
-                "960": "1727",
-                "maxRating": "1915",
-                "ultra": "1469",
-                "bullet": "1709",
-                "blitz": "1758",
+                "maxRating": "2025",
+                "blitz": "1767",
+                "bullet": "1703",
                 "rapid": "1913",
                 "classical": "1912",
-                "crazyhouse": "1915",
+                "crazyhouse": "2025",
                 "3-check": "1750",
                 "anti": "1769",
                 "horde": "1525",
                 "atomic": "1518"
-            }
+            },
+            "_country": "GB",
+            "_language": "en-GB"
         },
         "bidamount": 6,
         "bughousetest": {
             "_main": "okeizh",
             "okeizh": {
-                "maxRating": "1237",
-                "bughouse": "1237"
+                "maxRating": "1217",
+                "bughouse": "1217"
             }
         },
-        "lastupdate": 1532181751917,
+        "lastupdate": 1535117254020,
         "triviarating": 1790,
         "triviagames": 21,
         "triviaprovisional": true
@@ -524,23 +524,23 @@
         "lichess": {
             "_main": "Link",
             "Link": {
-                "960": "1410",
-                "maxRating": "2061",
-                "ultra": "1347",
+                "maxRating": "1926",
+                "blitz": "1305",
                 "bullet": "1446",
-                "blitz": "1314",
-                "rapid": "1369",
+                "rapid": "1367",
                 "classical": "1486",
                 "crazyhouse": "1421",
-                "3-check": "1529",
-                "anti": "2061",
-                "horde": "1459",
-                "atomic": "1639",
+                "3-check": "1496",
+                "anti": "1926",
+                "horde": "1473",
+                "atomic": "1614",
                 "koth": "1541",
-                "racingkings": "1633"
-            }
+                "racing-kings": "1643"
+            },
+            "_country": "US",
+            "_language": "en"
         },
-        "lastupdate": 1532185473180
+        "lastupdate": 1535117372912
     },
     {
         "id": "317767348566097930",
@@ -640,14 +640,14 @@
         "chesscom": {
             "_main": "PepsiNGaming",
             "PepsiNGaming": {
-                "maxRating": 1540,
+                "maxRating": "1540",
                 "bullet": "1200",
                 "lightning": "924",
                 "chess": "1029?",
                 "rapid": "1175",
                 "koth": "1041",
                 "crazyhouse": "1417",
-                "bughouse": "1506",
+                "bughouse": "1499",
                 "tactics": "779",
                 "lessons": "1540"
             }
@@ -655,23 +655,23 @@
         "lichess": {
             "_main": "PepsiNGaming",
             "PepsiNGaming": {
-                "960": "1371?",
-                "maxRating": "2230",
-                "ultra": "1458",
-                "bullet": "1641",
-                "blitz": "1603",
-                "rapid": "1233?",
-                "classical": "1321",
-                "crazyhouse": "1838",
-                "3-check": "1598",
-                "anti": "2230",
-                "horde": "1563",
-                "atomic": "1814",
+                "maxRating": "2175",
+                "blitz": "1618",
+                "bullet": "1587",
+                "rapid": "1326?",
+                "classical": "1365",
+                "crazyhouse": "1953",
+                "3-check": "1652",
+                "anti": "2175",
+                "horde": "1636",
+                "atomic": "1786",
                 "koth": "1550",
-                "racingkings": "1828"
-            }
+                "racing-kings": "1832"
+            },
+            "_name": "Caleb",
+            "_country": "TT"
         },
-        "lastupdate": 1532185263216,
+        "lastupdate": 1535117313138,
         "triviarating": 1332,
         "triviagames": 1,
         "triviaprovisional": false,
@@ -926,18 +926,16 @@
         "finger": "LAZY You can do IT!",
         "sex": "❤",
         "location": "Lazy",
-        "lastupdate": 1532185503162,
+        "lastupdate": 1535117398945,
         "triviarating": null,
         "triviagames": 32,
         "triviaprovisional": true,
         "lichess": {
             "_main": "Musicknight123",
             "Musicknight123": {
-                "960": "2227",
-                "maxRating": "2227",
-                "ultra": "1924",
-                "bullet": "1500?",
+                "maxRating": "2149",
                 "blitz": "1500?",
+                "bullet": "1500?",
                 "rapid": "1500?",
                 "classical": "1500?",
                 "crazyhouse": "2149",
@@ -946,8 +944,9 @@
                 "horde": "1780",
                 "atomic": "1958",
                 "koth": "2006",
-                "racingkings": "2011"
-            }
+                "racing-kings": "2011"
+            },
+            "_language": "en-GB"
         }
     },
     {
@@ -1542,30 +1541,31 @@
         "lichess": {
             "_main": "retardedplatypus123",
             "retardedplatypus123": {
-                "960": "1744",
-                "maxRating": "2490",
-                "ultra": "2010",
-                "bullet": "2225",
-                "blitz": "2128",
+                "maxRating": "2503",
+                "blitz": "2203",
+                "bullet": "2170",
                 "rapid": "2099",
                 "classical": "2064",
-                "crazyhouse": "2490",
+                "crazyhouse": "2503",
                 "3-check": "1780",
                 "anti": "1321?",
-                "horde": "1399",
+                "horde": "1417",
                 "atomic": "1707",
                 "koth": "1813?",
-                "racingkings": "1387?"
-            }
+                "racing-kings": "1387?"
+            },
+            "_country": "CA",
+            "_language": "en-GB"
         },
         "finger": "zh noob",
-        "lastupdate": 1532033693233,
+        "lastupdate": 1535117073500,
         "chesscom": {
             "_main": "homeless_patzer",
             "homeless_patzer": {
-                "maxRating": 2226,
-                "bullet": "2226",
-                "bughouse": "2206"
+                "maxRating": "2236",
+                "bullet": "2236",
+                "lightning": "1741",
+                "bughouse": "2207"
             }
         }
     },
@@ -1905,17 +1905,17 @@
             "last": "Dude tell me already <:cmonBruh:478550236491677697>",
             "lastSeen": 1535108317216
         },
-        "lastupdate": 1532161963711,
+        "lastupdate": 1535117132785,
         "finger": "ProgramFOX for admin",
         "lichess": {
             "_main": "hauptschuleBOT",
             "hauptschuleBOT": {
-                "maxRating": "2387",
+                "maxRating": "2383",
                 "blitz": "1500?",
                 "bullet": "1500?",
                 "rapid": "1500?",
                 "classical": "1500?",
-                "anti": "2387"
+                "anti": "2383"
             },
             "_country": "DE",
             "_language": "en-GB",
@@ -2647,22 +2647,25 @@
             "last": "New phone who dis",
             "lastSeen": 1534892025022
         },
-        "lastupdate": 1532184287605,
+        "lastupdate": 1535117193265,
         "lichess": {
             "_main": "Whitedancingrockstar",
             "Whitedancingrockstar": {
-                "maxRating": "1867",
-                "bullet": "1802",
-                "blitz": "1854",
+                "maxRating": "1906",
+                "blitz": "1861",
+                "bullet": "1906",
                 "rapid": "1867",
-                "classical": "1810?"
-            }
+                "classical": "1845"
+            },
+            "_name": "Valentin Derdic",
+            "_country": "SE",
+            "_language": "en-GB"
         },
         "chesscom": {
             "_main": "blyatiful",
             "blyatiful": {
-                "maxRating": 1750,
-                "bullet": "1610",
+                "maxRating": "1750",
+                "bullet": "1706",
                 "lightning": "1750"
             }
         },
@@ -5348,14 +5351,15 @@
             "_main": "konstantinua00",
             "konstantinua00": {
                 "maxRating": "1746",
-                "bullet": "1500?",
                 "blitz": "1500?",
+                "bullet": "1500?",
                 "rapid": "1500?",
                 "classical": "1500?",
-                "racingkings": "1746"
-            }
+                "racing-kings": "1746"
+            },
+            "_language": "en-GB"
         },
-        "lastupdate": 1532185187970
+        "lastupdate": 1535117012758
     },
     {
         "id": "101143512812113920",
@@ -6921,11 +6925,10 @@
                 "racing-kings": "1865"
             },
             "_country": "NL",
-            "_language": "en-GB",
-            "_name": "undefined undefined"
+            "_language": "en-GB"
         },
         "lastUpdate": 1533055686786,
-        "lastupdate": 1535114075714
+        "lastupdate": 1535117458960
     },
     {
         "id": "365673273704579074",
@@ -7470,11 +7473,10 @@
                 "koth": "1431?"
             },
             "_country": "SG",
-            "_language": "en-GB",
-            "_name": "undefined undefined"
+            "_language": "en-GB"
         },
         "lastUpdate": 1534774235565,
-        "lastupdate": 1535114135757
+        "lastupdate": 1535117484237
     },
     {
         "id": "364227499728568320",
@@ -7522,11 +7524,10 @@
                 "koth": "1580?",
                 "racing-kings": "1517?"
             },
-            "_country": "US",
-            "_name": "undefined undefined"
+            "_country": "US"
         },
         "lastUpdate": 1534798558266,
-        "lastupdate": 1535114195780
+        "lastupdate": 1535117547776
     },
     {
         "id": "289177026156560385",

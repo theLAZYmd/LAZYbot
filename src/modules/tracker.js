@@ -4,6 +4,7 @@ const request = require("request");
 const DataManager = require("../util/datamanager.js");
 const DBuser = require("../util/dbuser.js");
 const Render = require("../util/render.js");
+const Router = require("../util/router.js");
 
 class Tracker extends Parse {
 
@@ -132,7 +133,16 @@ class Tracker extends Parse {
       };
       data.dbuser.lastupdate = Date.now(); //Mark the update time
       await DBuser.setData(data.dbuser); //set it
-      console.log(`Updated ${data.dbuser.username} on ${data.successfulupdates.join(", ") } with no errors.`);
+      Router.logCommand({
+        "author": {
+          "tag": data.dbuser.username
+        },
+        "args": data.successfulupdates,
+        "command": "auto-updated"
+      }, {
+        "file": "Tracker",
+        "prefix": ""
+      }); //log updates received as a command
       if (this.command) this.trackOutput(data);
     } catch(e) {
       e = "**" + data.dbuser.username + ":** " + e;
