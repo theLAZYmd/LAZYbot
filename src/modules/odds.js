@@ -65,7 +65,7 @@ class Series extends All {
       0.25); //now a number between 0 and 0.25
     data.accuracy = (Math.pow(Math.E, (Math.min(data.length, 20) / 20)) //e^(number of games/50) or if total is more than 50, 1
       *
-      (1 / Math.E - 1) //divided by (e), now a number between 0 and 1
+      (1 / Math.E) //divided by (e), now a number between 0 and 1
       *
       0.25); //now a number between 0 and 0.25
     data.confidence = 0.45 + data.reliability + data.accuracy //base value

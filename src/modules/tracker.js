@@ -12,29 +12,44 @@ class Tracker extends Parse {
   }
 
   get LUTDU() { //Least Up-to-Date User
-    const tally = DataManager.getData();
+    let tally = DataManager.getData();
     let foundUser = null, currentValue = Infinity
     for (let dbuser of tally) {
       if (dbuser.left) continue; //if they're not in the server, stop updating them
       let sources = Object.values(config.sources).filter(source => dbuser[source.key]);
       if (sources.length === 0) continue; //if no linked accounts, ignore them
       if (!dbuser.lastupdate) { //if they haven't been updated (historic people)...
+        let member = this.Search.members.byUser(dbuser);
+        if (!member) {
+          dbuser.left = true;
+          DBuser.setData(dbuser);
+          continue;
+        };
+        if (dbuser.left) {
+          delete dbuser.left;
+          DBuser.setData(dbuser);
+        };
+        if (!/online|idle|dnd/.test(member.presence.status)) continue;
         foundUser = dbuser; //don't both searching anymore
         break;
       };
-      if (dbuser.lastupdate < currentValue && tally[i].lastupdate < Date.now() - config.delays.repeat) {
+      if (dbuser.lastupdate < currentValue && dbuser.lastupdate < Date.now() - config.delays.repeat) {
+        let member = this.Search.members.byUser(dbuser);
+        if (!member) {
+          dbuser.left = true;
+          DBuser.setData(dbuser);
+          continue;
+        };
+        if (dbuser.left) {
+          delete dbuser.left;
+          DBuser.setData(dbuser);
+        };
+        if (!/online|idle|dnd/.test(member.presence.status)) continue;
         currentValue = dbuser.lastupdate;
         foundUser = dbuser;
+        console.log(currentValue);
       }
     };
-    let member = this.Search.members.byUser(foundUser);
-    if (!member) {
-      foundUser.left = true;
-      DataManager.setData(tally);
-      return null;
-    };
-    if (foundUser.left) delete foundUser.left;
-    if (/online|idle|dnd/.test(member.presence.status));
     return foundUser;
   }
 
@@ -105,6 +120,7 @@ class Tracker extends Parse {
       for (let source of data.sources) {
         data.source = source;
         if (this.command && data.username && this.command !== "update") {
+          if (!data.dbuser[data.source.key]) data.dbuser[data.source.key] = {};
           if (data.dbuser[data.source.key][data.username]) throw `Already linked ${data.source.name} account **${data.username}** to ${data.dbuser.username}!`;
           data = await Tracker.handle(data);
         } else {
@@ -115,7 +131,9 @@ class Tracker extends Parse {
           }
         }
       };
-      console.log(`Updated ${data.dbuser.username} on ${data.successfulupdates.join(", ") }with no errors.`);
+      data.dbuser.lastupdate = Date.now(); //Mark the update time
+      await DBuser.setData(data.dbuser); //set it
+      console.log(`Updated ${data.dbuser.username} on ${data.successfulupdates.join(", ") } with no errors.`);
       if (this.command) this.trackOutput(data);
     } catch(e) {
       if (e) this.Output.onError(e);
@@ -193,8 +211,6 @@ class Tracker extends Parse {
       "username": data.username
     });
     data = await Tracker.assign(data, parsedData);
-    data.dbuser.lastupdate = Date.now(); //Mark the update time
-    DBuser.setData(data.dbuser); //set it
     return data;
   }
 

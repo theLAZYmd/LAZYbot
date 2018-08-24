@@ -1,11 +1,11 @@
 const DataManager = require("./datamanager.js");
 const config = require("../config.json");
-const tally = DataManager.getData();
 
 class DBuser {
   
-  static setData (dbuser) {
-    tally[DBuser.byID(dbuser.id)] = dbuser;
+  static async setData (dbuser) {
+    let tally = DataManager.getData();
+    tally[DBuser.getIndex(dbuser)] = dbuser;
     DataManager.setData(tally);
   }
 
@@ -19,6 +19,7 @@ class DBuser {
   }
 
   static getUser(user) {
+    let tally = DataManager.getData();
     let dbuser = tally.find(dbuser => dbuser.id === user.id);
     if(!dbuser) {
       console.log("No dbuser found, creating one...");
@@ -32,16 +33,26 @@ class DBuser {
     };
     return dbuser;
   }
+
+  static getIndex(dbuser) {
+    let tally = DataManager.getData();
+    for (let i = 0; i < tally.length; i++) 
+      if (tally[i].id === dbuser.id) return i;
+    return -1;
+  }
   
   static byUsername(username) {
+    let tally = DataManager.getData();
     return tally.find(dbuser => username === dbuser.username) || "";
   }
   
   static byID(id) {
+    let tally = DataManager.getData();
     return tally.find(dbuser => id === dbuser.id) || "";
   }
 
   static byIndex(index) {
+    let tally = DataManager.getData();
     if(typeof index === "number" && !!tally[index]) return tally[index];
     return "";
   }
