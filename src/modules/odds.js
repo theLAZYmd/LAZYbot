@@ -58,14 +58,14 @@ class Series extends All {
   gen(data) {
     data.total = data.players[0].score + data.players[1].score;
     if (!data.total) return this.Output.onError("Couldn't calculate odds for this data.");
-    data.reliability = (Math.pow(Math.E, (Math.min(data.total, 200) / 200)) //e^(total/1000) or if total is more than 1000, 1
+    data.reliability = (Math.pow(Math.E, (Math.min(data.total, 200) / 200)) //e^(total/200) or if total is more than 1000, 1
       *
-      (1 / (Math.E - 1)) //divided by (e-1), now a number between 0 and 1
+      (1 / (Math.E)) //divided by (e), now a number between 0 and 1
       *
       0.25); //now a number between 0 and 0.25
-    data.accuracy = (1 / (Math.pow(Math.E, (Math.min(data.length, 20) / 20))) //e^(number of games/50) or if total is more than 50, 1
+    data.accuracy = (Math.pow(Math.E, (Math.min(data.length, 20) / 20)) //e^(number of games/50) or if total is more than 50, 1
       *
-      ((Math.E - 1)) //divided by (e-1), now a number between 0 and 1
+      (1 / Math.E - 1) //divided by (e), now a number between 0 and 1
       *
       0.25); //now a number between 0 and 0.25
     data.confidence = 0.45 + data.reliability + data.accuracy //base value

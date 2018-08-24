@@ -22,8 +22,8 @@ class Tracker extends Parse {
         foundUser = dbuser; //don't both searching anymore
         break;
       };
-      if (tally[i].lastupdate < currentValue && tally[i].lastupdate < Date.now() - config.delays.repeat) {
-        currentvalue = dbuser.lastupdate;
+      if (dbuser.lastupdate < currentValue && tally[i].lastupdate < Date.now() - config.delays.repeat) {
+        currentValue = dbuser.lastupdate;
         foundUser = dbuser;
       }
     };
@@ -104,9 +104,10 @@ class Tracker extends Parse {
       data.successfulupdates = [];
       for (let source of data.sources) {
         data.source = source;
-        if (data.username && data.dbuser[data.source.key][data.username]) throw `Already linked ${data.source.name} account **${data.username}** to ${data.dbuser.username}!`;
-        if (data.username && this.command && this.command !== "update") data = await Tracker.handle(data);
-        else {
+        if (this.command && data.username && this.command !== "update") {
+          if (data.dbuser[data.source.key][data.username]) throw `Already linked ${data.source.name} account **${data.username}** to ${data.dbuser.username}!`;
+          data = await Tracker.handle(data);
+        } else {
           for (let account in data.dbuser[data.source.key]) {
             if (account.startsWith("_")) continue;
             data.username = account;
