@@ -258,9 +258,9 @@
         "lichess": {
             "_main": "andreijl",
             "andreijl": {
-                "maxRating": "1866",
+                "maxRating": "1894",
                 "blitz": "1748",
-                "bullet": "1866",
+                "bullet": "1894",
                 "rapid": "1774",
                 "classical": "1788?",
                 "crazyhouse": "1798",
@@ -296,7 +296,7 @@
             "_name": "JM Obi Wan Benoni"
         },
         "patron": false,
-        "lastupdate": 1535114436861,
+        "lastupdate": 1535117728641,
         "triviarating": 1501,
         "triviagames": 59,
         "triviaprovisional": true
@@ -1276,10 +1276,9 @@
                 "rapid": "2369",
                 "classical": "2245?",
                 "crazyhouse": "2663"
-            },
-            "_name": "undefined undefined"
+            }
         },
-        "lastupdate": 1535114592738,
+        "lastupdate": 1535117561033,
         "triviarating": 1246,
         "triviagames": 6,
         "triviaprovisional": false,
@@ -3041,7 +3040,7 @@
             },
             "_language": "en-GB"
         },
-        "lastupdate": 1535114255931
+        "lastupdate": 1535117607729
     },
     {
         "id": "293457973039071232",
@@ -5922,7 +5921,7 @@
             "last": "The <#407612549022875668> channel.  Where are those ratings from?",
             "lastSeen": 1530206681899
         },
-        "lastupdate": 1535114315879,
+        "lastupdate": 1535117667752,
         "lichess": {
             "_main": "colwem",
             "colwem": {

@@ -90,11 +90,13 @@ class Embed {
       let name = embed.author.name ? embed.author.name : "";
       let url = embed.author.url ? embed.author.url : "";
       let icon_url = embed.author.icon_url ? embed.author.icon_url : "";
+      if (embed.author.iconURL) icon_url = embed.author.iconURL;
       embedinput.author = Embed.author(name, url, icon_url);
     };
     if (embed.footer) {
       let text = embed.footer.text ? embed.footer.text : "";
       let icon_url = embed.footer.icon_url ? embed.footer.icon_url : "";
+      if (embed.footer.iconURL) icon_url = embed.footer.iconURL;
       if (text || icon_url) embedinput.footer = Embed.footer(text, icon_url);
     };
     if (embed.image) {
