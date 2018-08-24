@@ -2,15 +2,13 @@ const commands = require("../data/commands.json");
 const config = require("../config.json");
 const request = require('request');
 const DataManager = require("../util/datamanager.js");
+const TrackerConstructor = require("../modules/tracker.js");
 
 class onStartup {
 
   constructor(client) {
     this.client = client;
-  }
-
-  get reboot() {
-    return this.client.readyTimestamp;
+    this.Tracker = new TrackerConstructor()
   }
 
   get commands() {
@@ -55,11 +53,9 @@ class onStartup {
   get owners() {
     return config.ids.owner.map(owner => this.client.users.get(owner)) || "";
   }
-
+  /*
   get modmail () {
-    let Search = new (require("../util/search.js"))({
-      "client": this.client
-    });
+    let Search = new (require("../util/search.js"))();
     let array = [];
     let servers = DataManager.getFile("./src/data/server.json")
     for(let id in servers) {
@@ -78,6 +74,11 @@ class onStartup {
       .then(messages => array.concat(Array.from(messages)))
       .catch(() => {});
     }
+  }*/
+
+  get autoupdates () {
+    this.Tracker.initUpdateCycle();
+    return true;
   }
 
 }

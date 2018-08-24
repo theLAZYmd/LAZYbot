@@ -21,7 +21,7 @@ class Router {
 
   static async command(data) {
     data = await Router.checkErrors(data);
-    data.argsInfo = new Parse(data.message); //sets object with all like guild, channel (arguments for functions)
+    data.argsInfo = new Parse(data.message, data.client); //sets object with all like guild, channel (arguments for functions)
     if (data.message.channel.type === "dm" || data.message.channel.type === "group" || !data.message.guild) {
       for (let command of DMCommands)
         Router.runCommand(data.message, data.argsInfo, command);
@@ -46,9 +46,7 @@ class Router {
     return new Promise((resolve, reject) => {
       if (data.message.author.id === data.client.user.id) return reject();
       if (data.message.content.length === 1) return reject();
-      if (!data.message.client) data.message.client = data.client; //data.message is the object that gets transferred :( so assign stuff to here
-      data.message.client.reboot = data.reboot;
-      data.message.client.httpboolean = data.httpboolean;
+      data.client.reboot = data.readyTimestamp;
       resolve(data);
     })
   }

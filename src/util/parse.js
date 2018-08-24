@@ -1,28 +1,34 @@
 const config = require("../config.json");
 const DBuser = require("./dbuser.js");
-const DataManager = require("./datamanager.js")
+const DataManager = require("./datamanager.js");
 
 class Parse {
 
   constructor(message) { //everything extends to here
     this.message = message;
-    this.message.content = this.message.content && typeof this.message.content === "string" ?
-      this.message.content
+    this.client = message ? message.client : this.Bot.client;
+    this.guild = message ? message.guild : this.client.guilds.get(config.houseid);
+    if (!message) return;
+    this.message.content = message && message.content && typeof message.content === "string" ?
+      message.content
         .replace("’", "'")
         .replace("…", "...")
         .replace("“", "\"")
         .replace("”", "\"")
         .replace(/[\u200B-\u200D\uFEFF]/g, '')
       : "";
-    this.client = this.message.client;
-    this.author = this.message.author;
-    this.guild = this.message.guild || this.client.guilds.get(config.houseid);
-    this.channel = this.message.channel;
+    this.author = message.author;
+    this.channel = message.channel;
     this.server = this.guild ? DataManager.getServer(this.guild.id) : "";
     this.reactionmessages = this.guild ? DataManager.getServer(this.guild.id, "./src/data/reactionmessages.json") : "";
-    this.member = this.guild ? this.message.member : "";
-    this.reboot = this.client.reboot;
-    this.httpboolean = this.client.httpboolean;
+    this.member = this.guild ? message.member : "";
+  }
+
+  get Bot () {
+    if (!this._Bot) {
+      this._Bot = require("../lazybot.js");
+    }
+    return this._Bot;
   }
 
   get Output () {
@@ -86,6 +92,7 @@ class Parse {
 
   get command () {
     if (!this._command) {
+      if (!this.message) return "";
       if (this.author ? this.author.bot && this.message.embeds && this.message.embeds[0] : false) {
         if(this.message.embeds[0].author) this._command = this.message.embeds[0].author.name;
       } else {
@@ -118,5 +125,7 @@ class Parse {
   }
   
 }
+
+Parse.client = "";
 
 module.exports = Parse;

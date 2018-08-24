@@ -9,60 +9,49 @@ class Tracker extends Parse {
 
   constructor(message) {
     super(message);
-    this.updateDelay = config.updateDelay;
-    this.updateQueue = this._updateQueue;
   }
 
-  get _updateQueue() {
-    this.Search.members.getOnline().forEach((member) => {
-      Tracker.updateQueue[member.id] = true;
-    });
-    return Tracker.updateQueue;
-  }
-
-  static getLeastUpToDateUser() {
-    const tally = DataManager.getData(),
-      foundUser = null,
-      currentValue = Infinity
-    for (let i = 0; i < tally.length; i++) {
-      if (Tracker.updateQueue[tally[i].id]) {
-        let verified = false;
-        for (let source in config.sources) {
-          if (tally[i][source]) verified = true;
-        };
-        if (!verified) {
-          currentValue = 0;
-          foundUser = tally[i];
-          break;
-        };
-      } else
-      if ((Tracker.updateQueue[tally[i].id] && tally[i].lastUpdate && tally[i].lastUpdate < currentValue && tally[i].lastUpdate < Date.now() - 1800000)) {
-        let killboolean = true;
-        for (let source in config.sources) {
-          if (tally[i][source]) killboolean = false;
-        };
-        if (!killboolean) {
-          currentvalue = tally[i].lastUpdate || 0;
-          foundUser = tally[i];
-        }
+  get LUTDU() { //Least Up-to-Date User
+    const tally = DataManager.getData();
+    let foundUser = null, currentValue = Infinity
+    for (let dbuser of tally) {
+      if (dbuser.left) continue; //if they're not in the server, stop updating them
+      let sources = Object.values(config.sources).filter(source => dbuser[source.key]);
+      if (sources.length === 0) continue; //if no linked accounts, ignore them
+      if (!dbuser.lastupdate) { //if they haven't been updated (historic people)...
+        foundUser = dbuser; //don't both searching anymore
+        break;
+      };
+      if (tally[i].lastupdate < currentValue && tally[i].lastupdate < Date.now() - config.delays.repeat) {
+        currentvalue = dbuser.lastupdate;
+        foundUser = dbuser;
       }
     };
+    let member = this.Search.members.byUser(foundUser);
+    if (!member) {
+      foundUser.left = true;
+      DataManager.setData(tally);
+      return null;
+    };
+    if (foundUser.left) delete foundUser.left;
+    if (/online|idle|dnd/.test(member.presence.status));
     return foundUser;
   }
 
   initUpdateCycle() {
-    let dbuser = Tracker.getLeastUpToDateUser();
-    this.post = false;
-    if (dbuser) this.update(dbuser);
-    setTimeout(() => this.initUpdateCycle(), 15000);
+    let dbuser = this.LUTDU;
+    if (dbuser) {
+      let sources = Object.values(config.sources).filter(source => dbuser[source.key]);
+      if (dbuser) this.track({dbuser, sources});
+    };
+    setTimeout(() => this.initUpdateCycle(), config.delays.update);
   }
 
   updatepresence(member, nowonline) {
     if (nowonline) Tracker.updateQueue[member.id] = true;
     else delete Tracker.updateQueue[member.id];
   }
- //if command is lichess, _command === command and command === track
- //if command is remove, _command === args.shift() and command === remove
+
   async run(command, args) { //both !remove and the linking commands start here
     try {
       let username, _command;
@@ -88,7 +77,7 @@ class Tracker extends Parse {
       for (let _username in dbuser[sources[0].key]) 
         if (_username.toLowerCase() === username.toLowerCase()) username = _username;
       if (!username.match(/[a-z0-9][\w-]*[a-z0-9]/i)) throw "Invalid username.";
-      this[command]({dbuser, sources, username, "successfulupdates": []})
+      this[command]({dbuser, sources, username})
       .catch((e) => {throw e})
       let newRole = this.Search.roles.get(this.server.roles.beta);
       if (!this.member.roles.has(newRole.id)) this.member.addRole(newRole).catch((e) => this.Output.onError(e));
@@ -103,19 +92,20 @@ class Tracker extends Parse {
       let dbuser = this.dbuser;
       let sources = Object.values(config.sources).filter(source => dbuser[source.key]);
       if (sources.length === 0) throw "No linked accounts found.\nPlease link an account to your profile through `!lichess\`, `!chess.com`, or `!bughousetest`.";
-      this.track({dbuser, sources, "successfulupdates": []})
+      this.track({dbuser, sources})
       .catch((e) => {throw e})
     } catch(e) {
-      if (e) this.Output.onError(e);
+      if (e && this.command === "update") this.Output.onError(e);
     }
   }
 
   async track(data) {
     try {
+      data.successfulupdates = [];
       for (let source of data.sources) {
         data.source = source;
         if (data.username && data.dbuser[data.source.key][data.username]) throw `Already linked ${data.source.name} account **${data.username}** to ${data.dbuser.username}!`;
-        if (this.command !== "update") data = await Tracker.handle(data);
+        if (data.username && this.command && this.command !== "update") data = await Tracker.handle(data);
         else {
           for (let account in data.dbuser[data.source.key]) {
             if (account.startsWith("_")) continue;
@@ -125,7 +115,7 @@ class Tracker extends Parse {
         }
       };
       console.log(`Updated ${data.dbuser.username} on ${data.successfulupdates.join(", ") }with no errors.`);
-      this.trackOutput(data);
+      if (this.command) this.trackOutput(data);
     } catch(e) {
       if (e) this.Output.onError(e);
     }
@@ -202,14 +192,14 @@ class Tracker extends Parse {
       "username": data.username
     });
     data = await Tracker.assign(data, parsedData);
-    data.dbuser.lastUpdate = Date.now(); //Mark the update time
+    data.dbuser.lastupdate = Date.now(); //Mark the update time
     DBuser.setData(data.dbuser); //set it
     return data;
   }
 
   static request(source, username) {
     return new Promise((resolve, reject) => {
-      if (!username) return reject("Invalid username.");
+      if (!username) return reject("Request: Invalid username.");
       request.get(config.sources[source.key].url.user.replace("|", username), (error, response, body) => {
         if (error) {
           return reject(error);

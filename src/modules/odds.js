@@ -63,12 +63,13 @@ class Series extends All {
       (1 / (Math.E - 1)) //divided by (e-1), now a number between 0 and 1
       *
       0.25); //now a number between 0 and 0.25
-    data.accuracy = (Math.pow(Math.E, (Math.min(data.length, 50) / 50)) //e^(number of games/50) or if total is more than 50, 1
+    data.accuracy = (1 / (Math.pow(Math.E, (Math.min(data.length, 20) / 20))) //e^(number of games/50) or if total is more than 50, 1
       *
-      (1 / (Math.E - 1)) //divided by (e-1), now a number between 0 and 1
+      ((Math.E - 1)) //divided by (e-1), now a number between 0 and 1
       *
       0.25); //now a number between 0 and 0.25
-    data.confidence = 0.5 + data.reliability + data.accuracy //base value
+    data.confidence = 0.45 + data.reliability + data.accuracy //base value
+    console.log("data.reliability: " + data.reliability + "\n", "data.accuracy:" + data.accuracy + "\n", "data.confidence: " + data.confidence)
     for (let player of data.players) { //for each player
       player.discrete = {
         "probability": [],

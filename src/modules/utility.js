@@ -3,18 +3,15 @@ const Embed = require("../util/embed.js");
 
 class Utility extends Parse { //fairly miscelanneous functions
 
-  constructor(message) {
-    super(message);
-  }
-
   uptime () {
     let time = Date.gettime(Date.now() - this.reboot);
     return this.Output.generic(`**${time.days}** days, **${time.hours}** hours, **${time.minutes}** minutes, and **${time.seconds}** seconds since ${Math.random() > 0.5 ? "**bleep bloop! It's showtime**" : "last reboot"}.`);
   }
 
-  jsonify () {
+  async jsonify () {
     this.find()
     .then((msg, embedinput) => {
+      console.log(msg, embedinput);
       if (!embedinput) return this.Output.onError("No embeds found to JSONify!");
       this.Output.generic("```json\n" + JSON.stringify(embedinput, null, 4) + "```");
     })

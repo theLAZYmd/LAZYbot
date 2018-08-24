@@ -4,7 +4,7 @@ class Embed {
 
   static sender(inputobject, channel) {
     return new Promise((resolve, reject) => {
-      if (!inputobject) return reject("**Embed.sender():** Embed object is undefined.");
+      if (!inputobject) return reject("Embed.sender(): Embed object is undefined.");
       let object = Embed.receiver(inputobject);
       if (!object.color) object.color = config.colors.generic;
       try {

@@ -35,7 +35,10 @@
         "Sun Jun 17 2018 00:14:44 GMT+01",
         "Sun Jun 17 2018 00:14:44 GMT+01"
     ],
-    "updateDelay": 15000,
+    "delays": {
+        "update": 30000,
+        "repeat": 1800000
+    },
     "urls": {
         "embeds": "https://raw.githubusercontent.com/theLAZYmd/LAZYbot/master/src/data/embeds.json"
     },

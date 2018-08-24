@@ -17,39 +17,39 @@ const ModMailConstructor = require("./modules/modmail.js");
 
 class Bot {
 
-  static ready () {
+  static ready() {
     return client.login(process.env.TOKEN ? process.env.TOKEN : require("./token.json").token)
   }
 
-  static run () {
+  static run() {
 
     client.on("ready", () => { //console startup section
       data = new onStartup(client);
-      if(data.modmail) () => {}; //used to cache the messages that might need to be reacted to
-      for(let guildID in DataManager.getFile(config.guildFile)) {
+      if (data.modmail) () => {}; //used to cache the messages that might need to be reacted to
+      for (let guildID in DataManager.getFile(config.guildFile)) {
         console.log(`Loaded client server ${client.guilds.get(guildID).name} in ${Date.now() - data.reboot}ms`);
       };
       console.log(data.bouncerbot ? `Noticed bot user ${data.bouncerbot.tag} in ${Date.now() - data.reboot}ms` : `Bouncer#8585 is not online!`);
       console.log(data.nadekobot ? `Noticed bot user ${data.nadekobot.tag} in ${Date.now() - data.reboot}ms` : `Nadeko#6685 is not online!`);
       console.log(data.harmonbot ? `Noticed bot user ${data.harmonbot.tag} in ${Date.now() - data.reboot}ms` : `Harmonbot#4049 is not online!`);
-      for(let i = 0; i < data.owners.length; i++) {
-        console.log(`Noticed bot owner ${data.owners[i].tag} in ${Date.now() - data.reboot}ms`);
-      };
+      for (let owner of data.owners)
+        console.log(`Noticed bot owner ${owner.tag} in ${Date.now() - data.reboot}ms`);
       console.log("bleep bloop! It's showtime.");
+      if (data.autoupdates) console.log("Beginning update cycle...");
       const Debugging = new DebuggingConstructor(client);
-      if(config.states.debug) Bot.debug(data);
+      if (config.states.debug) Bot.debug(data);
       //Debugging.removeDuplicates();
       //Debugging.convertCounttoObject();
       //Debugging.updateDBUserFormat();
       //Debugging.duplicateMains();
     });
-    
+
     client.on("message", (message) => { //command handler
       data.message = message;
       Router.command(data)
-      .catch((e) => {
-        if (e) console.log(e);
-      });
+        .catch((e) => {
+          if (e) console.log(e);
+        });
     });
 
     client.on("messageReactionAdd", (messageReaction, user) => {
@@ -72,14 +72,14 @@ class Bot {
 
   }
 
-  static debug (data) { //run through every command and try and run the examples to see if it throws errors
+  static debug(data) { //run through every command and try and run the examples to see if it throws errors
     config.states.debug = true;
     DataManager.setFile(config, "./src/config.json");
-    for(let i = 0; i < commands.length; i++) {
-      for(let j = 0; j < commands[i].usage.length; j++) {
+    for (let i = 0; i < commands.length; i++) {
+      for (let j = 0; j < commands[i].usage.length; j++) {
         data.message = Object.assign({}, DataManager.getFile("./src/data/genericmessage.json"));
-        if(commands[i].prefix === "generic") data.message.content = "!";
-        if(commands[i].prefix === "nadeko") data.message.content = ".";
+        if (commands[i].prefix === "generic") data.message.content = "!";
+        if (commands[i].prefix === "nadeko") data.message.content = ".";
         data.message.content += commands[i].usage[j];
         console.log(data.message.content);
         Router.command(data);
@@ -87,7 +87,7 @@ class Bot {
     }
   }
 
-  static recordMessage (message) {
+  static recordMessage(message) {
     let _message = require('circular-json').stringify(message, null, 4);
     console.log(_message);
     require("fs").writeFileSync("./src/data/genericmessage.json", _message);
@@ -97,3 +97,5 @@ class Bot {
 
 Bot.run();
 Bot.ready();
+
+module.exports = {client};

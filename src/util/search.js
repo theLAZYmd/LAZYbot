@@ -159,10 +159,9 @@ class Emoji extends All {
 
 }
 
-class Search {
+class Search extends Parse {
   constructor(message) {
-    this.client = message.client;
-    this.guild = message.guild || this.client.guilds.get(config.houseid);
+    super(message);
     this.users = new User(message);
     this.members = new Member(message);
     this.channels = new Channel(message);
