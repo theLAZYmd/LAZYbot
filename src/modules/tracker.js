@@ -47,7 +47,6 @@ class Tracker extends Parse {
         if (!/online|idle|dnd/.test(member.presence.status)) continue;
         currentValue = dbuser.lastupdate;
         foundUser = dbuser;
-        console.log(currentValue);
       }
     };
     return foundUser;
@@ -136,7 +135,9 @@ class Tracker extends Parse {
       console.log(`Updated ${data.dbuser.username} on ${data.successfulupdates.join(", ") } with no errors.`);
       if (this.command) this.trackOutput(data);
     } catch(e) {
-      if (e) this.Output.onError(e);
+      e = "**" + data.dbuser.username + ":** " + e;
+      if (this.command) this.Output.onError(e);
+      else console.log(e);
     }
   }
 
@@ -204,7 +205,7 @@ class Tracker extends Parse {
   }
 
   static async handle(data) {
-    let sourceData = await Tracker.request(data.source, data.username)
+    let sourceData = await Tracker.request(data)
     let method = "parse" + (data.source.key === "bughousetest" ? "lichess" : data.source.key);
     let parsedData = await Tracker[method](sourceData, {
       "source": data.source,
@@ -214,23 +215,18 @@ class Tracker extends Parse {
     return data;
   }
 
-  static request(source, username) {
+  static request(data) {
     return new Promise((resolve, reject) => {
-      if (!username) return reject("Request: Invalid username.");
-      request.get(config.sources[source.key].url.user.replace("|", username), (error, response, body) => {
-        if (error) {
-          return reject(error);
-        }
-        if (body.length === 0) {
-          return reject("Couldn't find **'" + username + "'** on " + source.name + ".");
-        }
-        let json = null;
+      if (!data.username) return reject("Request: Invalid username.");
+      request.get(config.sources[data.source.key].url.user.replace("|", data.username), (error, response, body) => {
+        if (error) return reject(error);
+        if (body.length === 0) return reject("Couldn't find **'" + data.username + "'** on " + data.source.name + ".");
         try {
-          json = JSON.parse(body);
+          let json = JSON.parse(body);
+          resolve(json);
         } catch (e) {
-          reject(response, e);
+          if (e) reject(response, e);
         }
-        resolve(json);
       })
     })
   }
@@ -238,7 +234,7 @@ class Tracker extends Parse {
   static parselichess(lichessData, data) { //Parsing API Data is different for each site
     return new Promise((resolve, reject) => {
       let source = data.source;
-      if (!lichessData) return reject("Couldn't find '" + username + "' on " + source.name + "."); //if invalid username (i.e. from this.track()), return;
+      if (!lichessData) return reject("No data found for '" + data.username + "' on " + source.name + "."); //if invalid username (i.e. from this.track()), return;
       if (lichessData.closed) return reject("Account " + lichessData.username + " is closed on " + source.name + "."); //if closed return
       let ratings = { //the sub-object
         "maxRating": 0
@@ -271,7 +267,7 @@ class Tracker extends Parse {
         "_language": lichessData.language ? lichessData.language : "",
         "_title": lichessData.title ? lichessData.title : "",
         "_country": lichessData.profile ? lichessData.profile.country : "",
-        "_name": lichessData.profile ? lichessData.profile.firstName + " " + lichessData.profile.lastName : "",
+        "_name": lichessData.profile ? (lichessData.profile.firstName ? lichessData.profile.firstName : "") + " " + (lichessData.profile.lastName ? lichessData.profile.lastName : "") : "",
       }; //return a data object
       if (account._name) account._name = account._name.trim();
       for (let property in account)
@@ -284,7 +280,7 @@ class Tracker extends Parse {
     return new Promise((resolve, reject) => {
       let username = data.username;
       let stats = chesscomData.stats;
-      if (!stats) return reject("Couldn't find **'" + username + "'** on Chess.com.");
+      if (!stats) return reject("No data found for **'" + username + "'** on Chess.com.");
       let ratings = {
         "maxRating": 0
       };

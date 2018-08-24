@@ -11,12 +11,15 @@ class onStartup {
     this.Tracker = new TrackerConstructor()
   }
 
+  get reboot() {
+    return this.client.readyTimestamp;
+  }
+
   get commands() {
     let commandlist = {};
-    for(let i = 0; i < commands.length; i++) {
-      for(let j = 0; j < commands[i].aliases.length; j++) {
-        commandlist[commands[i].aliases[j].toLowerCase()] = true;
-
+    for(let cmdInfo of commands) {
+      for(let alias of cmdInfo.aliases) {
+        commandlist[alias.toLowerCase()] = true;
       }
     };
     return commandlist;
