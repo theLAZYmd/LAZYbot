@@ -2,7 +2,7 @@
     "314155682033041408": {
         "id": "314155682033041408",
         "states": {
-            "tm": true,
+            "tm": false,
             "bcp": false,
             "election": false,
             "trivia": false
@@ -19,7 +19,7 @@
             "log": "comment-log",
             "join": "join",
             "leave": "lounge",
-            "trivia": "trivia",
+            "trivia": "arena",
             "welcome": "welcome"
         },
         "colors": {
@@ -34,7 +34,7 @@
             "muted": "muted",
             "unranked": "unranked",
             "league": "league",
-            "arena": "arena",
+            "trivia": "arena",
             "beta": "verified",
             "livenotifications": "subs"
         },
@@ -62,7 +62,9 @@
                 "326918898178064396": true,
                 "317034686973214720": true,
                 "363519664875372556": true,
-                "414816252733685760": true
+                "414816252733685760": true,
+                "471771674833059882": true,
+                "364227499728568320": true
             }
         },
         "tickets": [

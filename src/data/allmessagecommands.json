@@ -35,8 +35,8 @@
     "method": "onNewMessage",
     "arguments": [],
     "requires": {
-      "channels": "trivia",
-      "state": "trivia"
+      "state": "trivia",
+      "channels": "trivia"
     }
   }
 ]

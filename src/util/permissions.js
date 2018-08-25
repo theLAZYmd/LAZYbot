@@ -7,20 +7,20 @@ class Permissions extends Parse {
   constructor(message) {
     super(message);
   }
+
+  async house (requirement, argsInfo) {
+    if (requirement && argsInfo.guild.id !== config.houseid) return false;
+    return true;
+  }
   
   async user (requirement, argsInfo) {
-    for (let id in config.ids) {
-      if (requirement === id) {
-        let value = config.ids[id];
-        if (typeof value === "string") {
-          if(value === argsInfo.author.id) return true;
-        } else {
-          for(let i = 0; i < value.length; i++) {
-            if (value[i] === argsInfo.author.id) return true; //if Array. No support for object.
-          }
-        }
-      }
-    };
+    let value = config.ids[requirement];
+    if (!value) return true;
+    if (typeof value === "string" && value === argsInfo.author.id) return true;
+    else if (Array.isArray(value)) {
+      for(let passable of value)
+        if (passable === argsInfo.author.id) return true; //if Array. No support for object.
+    }
     return false;
   }
 

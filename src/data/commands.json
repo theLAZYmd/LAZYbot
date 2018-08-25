@@ -412,8 +412,8 @@
         "arguments": [],
         "prefix": "nadeko",
         "requires": {
-            "response": "bouncer",
-            "channels": ["bot"]
+            "channels": ["bot"],
+            "response": "bouncer"
         }
     },
     {

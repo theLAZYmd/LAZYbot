@@ -7,6 +7,7 @@ class DBuser {
     let tally = DataManager.getData();
     tally[DBuser.getIndex(dbuser)] = dbuser;
     DataManager.setData(tally);
+    return true;
   }
 
   static get(searchstring, exactmode) {

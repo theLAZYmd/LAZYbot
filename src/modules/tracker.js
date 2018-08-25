@@ -57,7 +57,7 @@ class Tracker extends Parse {
     let dbuser = this.LUTDU;
     if (dbuser) {
       let sources = Object.values(config.sources).filter(source => dbuser[source.key]);
-      if (dbuser) this.track({dbuser, sources});
+      this.track({dbuser, sources});
     };
     setTimeout(() => this.initUpdateCycle(), config.delays.update);
   }
@@ -127,11 +127,7 @@ class Tracker extends Parse {
           for (let account in data.dbuser[data.source.key]) {
             if (account.startsWith("_")) continue;
             data.username = account;
-            try {
-              data = await Tracker.handle(data);
-            } catch (e) {
-              if (e) console.log(e);
-            }
+            data = await Tracker.handle(data);
           }
         }
       };
@@ -139,7 +135,7 @@ class Tracker extends Parse {
       await DBuser.setData(data.dbuser); //set it
       Router.logCommand({
         "author": {
-          "tag": "auto"
+          "tag": this.command ? this.author.tag : "auto"
         },
         "args": [data.dbuser.username, ...data.successfulupdates],
         "command": "update"
@@ -147,12 +143,9 @@ class Tracker extends Parse {
         "file": "Tracker",
         "prefix": ""
       }); //log updates received as a command
-      console.log(this.command);
       if (this.command) this.trackOutput(data);
     } catch(e) {
-      e = "**" + (data ? data.dbuser.username : "Object undefined") + ":** " + e;
-      if (this.command) this.Output.onError(e);
-      else console.log(e);
+      if (this.command && e) this.Output.onError(e);
     }
   }
 
@@ -232,6 +225,7 @@ class Tracker extends Parse {
       return data;
     } catch (e) {
       if (e) console.log(e);
+      return data;
     }
   }
 
@@ -276,7 +270,7 @@ class Tracker extends Parse {
         if (allProvisional) return reject("All ratings for " + lichessData.username + " are provisional.");
       };
       if (lichessData.engine) ratings.cheating = "engine";
-      if (lichessData.boosting) ratings.boosting = "boosting";
+      if (lichessData.boosting) ratings.cheating = "boosting";
       if (ratings.cheating) reject( //if found to be cheating, log it in database and tell mods
         `Player ${lichessData.username} (${config.sources[source.key].url.profile.replace("|", lichessData.username)}) ` +
         (ratings.cheating === "engine" ? "uses chess computer assistance." : "") +
@@ -331,15 +325,14 @@ class Tracker extends Parse {
 
   static assign(data, parsedData) {
     let account = data.dbuser[data.source.key]; //get the "account" set of rating data for that source
-    if (!account) account = { //if that source has never been assigned to before (first account)
-      "_main": parsedData.username //it's the main one
-    };
-    Object.assign(account[parsedData.username] = {}, parsedData.ratings);
+    Object.assign(account[parsedData.username] = { //if that source has never been assigned to before (first account)
+      "_main": parsedData.username //set it as the main one
+    }, parsedData.ratings);
     if (account._main === parsedData.username) { //if it's the main one
       let properties = ["_name", "_country", "_language", "_title"];
-      for (let i = 0; i < properties.length; i++) {
-        if (parsedData[properties[i]]) account[properties[i]] = parsedData[properties[i]]; //grab info
-        else if (account[properties[i]]) delete account[properties[i]]; //keeps it in sync - if excess data, delete it
+      for (let property of properties) {
+        if (parsedData[property]) account[property] = parsedData[property]; //grab info
+        else if (account[property]) delete account[property]; //keeps it in sync - if excess data, delete it
       }
     };
     data.username = parsedData.username;
