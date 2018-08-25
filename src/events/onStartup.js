@@ -56,28 +56,6 @@ class onStartup {
   get owners() {
     return config.ids.owner.map(owner => this.client.users.get(owner)) || "";
   }
-  /*
-  get modmail () {
-    let Search = new (require("../util/search.js"))();
-    let array = [];
-    let servers = DataManager.getFile("./src/data/server.json")
-    for(let id in servers) {
-      this.server = servers[id];
-      let modmail = Search.channels.get(this.server.channels.modmail);
-      if (modmail) modmail.fetchMessages({
-
-        "limit": 80
-      })
-      .then(messages => array.concat(Array.from(messages)))
-      .catch(() => {});
-      let welcome = Search.channels.get(this.server.channels.welcome);
-      if (welcome) welcome.fetchMessages({
-        "limit": 20
-      })
-      .then(messages => array.concat(Array.from(messages)))
-      .catch(() => {});
-    }
-  }*/
 
   get autoupdates () {
     this.Tracker.initUpdateCycle();

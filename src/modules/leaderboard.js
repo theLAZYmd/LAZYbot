@@ -61,7 +61,7 @@ class Leaderboard extends Parse {
       if(!active || (dbuser.lastmessagedate && Date.now() - dbuser.lastmessagedate < 604800000)) { //if lastmessage within a week
         if(dbuser[source.key] && !dbuser[source.key].cheating) { //find dbuser tracked from that source, not marked
           let username = dbuser[source.key]._main;
-          if(!dbuser[source.key][username]) this.Output.onError("We have an error for user " + dbuser.username + ".");
+          if(this.command.includes("rank") && !dbuser[source.key][username]) this.Output.onError("We have an error for user " + dbuser.username + ".");
           else if((dbuser[source.key][username][variant.key] && !dbuser[source.key][username][variant.key].endsWith("?")) || variant.key === "everyone") {
             let entry = {
               "tag": dbuser.username.slice(0, -5),

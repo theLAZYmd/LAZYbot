@@ -127,7 +127,11 @@ class Tracker extends Parse {
           for (let account in data.dbuser[data.source.key]) {
             if (account.startsWith("_")) continue;
             data.username = account;
-            data = await Tracker.handle(data)
+            try {
+              data = await Tracker.handle(data);
+            } catch (e) {
+              if (e) console.log(e);
+            }
           }
         }
       };
@@ -135,17 +139,18 @@ class Tracker extends Parse {
       await DBuser.setData(data.dbuser); //set it
       Router.logCommand({
         "author": {
-          "tag": data.dbuser.username
+          "tag": "auto"
         },
-        "args": data.successfulupdates,
-        "command": "auto-updated"
+        "args": [data.dbuser.username, ...data.successfulupdates],
+        "command": "update"
       }, {
         "file": "Tracker",
         "prefix": ""
       }); //log updates received as a command
+      console.log(this.command);
       if (this.command) this.trackOutput(data);
     } catch(e) {
-      e = "**" + data.dbuser.username + ":** " + e;
+      e = "**" + (data ? data.dbuser.username : "Object undefined") + ":** " + e;
       if (this.command) this.Output.onError(e);
       else console.log(e);
     }
@@ -215,27 +220,32 @@ class Tracker extends Parse {
   }
 
   static async handle(data) {
-    let sourceData = await Tracker.request(data)
-    let method = "parse" + (data.source.key === "bughousetest" ? "lichess" : data.source.key);
-    let parsedData = await Tracker[method](sourceData, {
-      "source": data.source,
-      "username": data.username
-    });
-    data = await Tracker.assign(data, parsedData);
-    return data;
+    try {
+      let sourceData = await Tracker.request(data);
+      if (!sourceData) return data;
+      let method = "parse" + (data.source.key === "bughousetest" ? "lichess" : data.source.key);
+      let parsedData = await Tracker[method](sourceData, {
+        "source": data.source,
+        "username": data.username
+      });
+      data = await Tracker.assign(data, parsedData);
+      return data;
+    } catch (e) {
+      if (e) console.log(e);
+    }
   }
 
-  static request(data) {
-    return new Promise((resolve, reject) => {
-      if (!data.username) return reject("Request: Invalid username.");
+  static async request(data) {
+    return new Promise ((resolve, reject) => {
+      if (!data.username) throw "Request: Invalid username.";
       request.get(config.sources[data.source.key].url.user.replace("|", data.username), (error, response, body) => {
-        if (error) return reject(error);
-        if (body.length === 0) return reject("Couldn't find **'" + data.username + "'** on " + data.source.name + ".");
+        if (error) resolve("**" + data.source.name + " " + response + "**: " + error);
+        if (!body || body.length === 0) resolve("Couldn't find **'" + data.username + "'** on " + data.source.name + ".");
         try {
           let json = JSON.parse(body);
           resolve(json);
         } catch (e) {
-          if (e) reject(response, e);
+          if (e) reject(e);
         }
       })
     })
@@ -250,19 +260,21 @@ class Tracker extends Parse {
         "maxRating": 0
       };
       let allProvisional = true; //if no non-provisional ratings, return an error
-      for (let key in config.variants[source.key]) { //ex: "crazyhouse"
-        let variant = config.variants[source.key][key]; //ex: {"name": "Crazyhouse", "api": "crazyhouse", "key": "crazyhouse"}
-        let variantData = lichessData.perfs[variant.api]; //lichess data, ex: {"games":1,"rating":1813,"rd":269,"prog":0,"prov":true}
-        if (variantData) {
-          ratings[key] = variantData.rating.toString(); //if it exists, take the API's number and store it as a string
-          if (!variantData || variantData.prov) ratings[key] += "?"; //if provisional, stick a question mark on it
-          else {
-            allProvisional = false; //if not provisional, allow user to link this account
-            if (Number(ratings[key]) > ratings.maxRating) ratings.maxRating = ratings[key]; //and if it's the biggest so far, set it.
+      if (lichessData.perfs) {
+        for (let key in config.variants[source.key]) { //ex: "crazyhouse"
+          let variant = config.variants[source.key][key]; //ex: {"name": "Crazyhouse", "api": "crazyhouse", "key": "crazyhouse"}
+          let variantData = lichessData.perfs[variant.api]; //lichess data, ex: {"games":1,"rating":1813,"rd":269,"prog":0,"prov":true}
+          if (variantData) {
+            ratings[key] = variantData.rating.toString(); //if it exists, take the API's number and store it as a string
+            if (!variantData || variantData.prov) ratings[key] += "?"; //if provisional, stick a question mark on it
+            else {
+              allProvisional = false; //if not provisional, allow user to link this account
+              if (Number(ratings[key]) > ratings.maxRating) ratings.maxRating = ratings[key]; //and if it's the biggest so far, set it.
+            }
           }
-        }
+        };
+        if (allProvisional) return reject("All ratings for " + lichessData.username + " are provisional.");
       };
-      if (allProvisional) return reject("All ratings for " + lichessData.username + " are provisional.");
       if (lichessData.engine) ratings.cheating = "engine";
       if (lichessData.boosting) ratings.boosting = "boosting";
       if (ratings.cheating) reject( //if found to be cheating, log it in database and tell mods

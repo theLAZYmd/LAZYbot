@@ -373,10 +373,13 @@
             "award 100 Kyle"
         ],
         "module": "Currency",
-        "file": "award",
+        "file": "currency",
         "method": "on",
         "arguments": ["channel"],
-        "prefix": "nadeko"
+        "prefix": "nadeko",
+        "requires": {
+            "response": "bouncer"
+        }
     },
     {
         "aliases": [
@@ -387,10 +390,31 @@
             "take 100 littleplotkin"
         ],
         "module": "Currency",
-        "file": "award",
+        "file": "currency",
         "method": "on",
         "arguments": ["channel"],
-        "prefix": "nadeko"
+        "prefix": "nadeko",
+        "requires": {
+            "response": "bouncer"
+        }
+    },
+    {
+        "aliases": [
+            "timely"
+        ],
+        "description": "Use to claim your 'timely' currency. Bot owner has to specify the amount and the period on how often you can claim your currency.",
+        "usage": [
+            "timely"
+        ],
+        "module": "Currency",
+        "file": "currency",
+        "method": "timely",
+        "arguments": [],
+        "prefix": "nadeko",
+        "requires": {
+            "response": "bouncer",
+            "channels": ["bot"]
+        }
     },
     {
         "aliases": [
@@ -1201,6 +1225,48 @@
         "module": "Custom Reactions",
         "file": "emoji",
         "method": "gild",
+        "arguments": ["args"],
+        "prefix": "generic"
+    },
+    {
+        "aliases": [
+            "members"
+        ],
+        "description": "Returns the number of members in the database.",
+        "usage": [
+            "members"
+        ],
+        "module": "Utility",
+        "file": "utility",
+        "method": "members",
+        "arguments": [],
+        "prefix": "generic"
+    },
+    {
+        "aliases": [
+            "ping"
+        ],
+        "description": "Returns the bot's ping in milliseconds. **Note:** this is not your ping! This is the time taken for a client-emitted event to reach the bot, not how long it takes you to send a message.",
+        "usage": [
+            "ping"
+        ],
+        "module": "Utility",
+        "file": "utility",
+        "method": "ping",
+        "arguments": [],
+        "prefix": "generic"
+    },
+    {
+        "aliases": [
+            "trophy"
+        ],
+        "description": "Adds, edits, or removes a trophy for a user.",
+        "usage": [
+            "trophy add penguingim1 Reached 3000!"
+        ],
+        "module": "Profile",
+        "file": "trophy",
+        "method": "run",
         "arguments": ["args"],
         "prefix": "generic"
     }

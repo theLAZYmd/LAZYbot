@@ -80,7 +80,7 @@ class Debugging {
     return "Done!"
   }
 
-  duplicateMains () {
+  duplicateMains () { //there was an account._main._main issue going on for a while
     let tally = DataManager.getData();
     for(let i = 0; i < tally.length; i++) {
       for(let source in config.sources) {
@@ -92,6 +92,24 @@ class Debugging {
     };
     DataManager.setData(tally);
     return "Done!";
+  }
+
+  setField (arg, type) { //sets each dbuser[arg] to thing
+    let tally = DataManager.getData();
+    let newfield = arg.replace(/[^\w]/g,"");
+    for(let dbuser of tally)
+      dbuser[newfield] = type ? type : "";
+    DataManager.setData(tally);
+    return "New field **" + newfield + "** added to each user in db.";
+  }
+
+  deleteField (arg) { //deprecated
+    let tally = DataManager.getData();
+    let oldfield = arg.replace(/[^\w]/g,"");
+    for(let dbuser of tally)
+      delete dbuser[oldfield];
+    DataManager.setData(tally);
+    return "Field **" + newfield + "** deleted from each user in db.";
   }
 
 }

@@ -8,7 +8,7 @@ class Permissions extends Parse {
     super(message);
   }
   
-  user (requirement, argsInfo) {
+  async user (requirement, argsInfo) {
     for (let id in config.ids) {
       if (requirement === id) {
         let value = config.ids[id];
@@ -24,8 +24,8 @@ class Permissions extends Parse {
     return false;
   }
 
-  role (roleType, argsInfo) { //admin, {object}
-    for(let _roleType in argsInfo.server.roles) { //
+  async role (roleType, argsInfo) { //admin, {object}
+    for (let _roleType in argsInfo.server.roles) { //
       if (roleType === _roleType) {
         let roleName = argsInfo.server.roles[_roleType];
         if (!this.guild.roles.some(role => role.name = roleName) || !roleName) return true;
@@ -35,30 +35,41 @@ class Permissions extends Parse {
     return false;
   }
 
-  channels (channelName, data) {
+  async channels (channelName, data) {
     if (!this.guild.channels.some(channel => channel.name = channelName)) channelName === "general";
     return data.channel.name.toLowerCase() === data.server.channels[channelName].toLowerCase();
   }
 
-  state (state, data) {
+  async state (state, data) {
     return data.server.states[state.toLowerCase()];
   }
 
-  bot (bot, data) {
+  async bot (bot, data) {
     return data.author.bot === bot;
   }
 
-  args (data, argsInfo) {
+  async args (data, argsInfo) {
     if (data.length) {
       if (typeof data.length === "number") {
         if (argsInfo.args.length === data.length) return true;
       } else {
-        for(let i = 0; i < data.length.length; i++) {
-          if (argsInfo.args.length === data.length[i]) return true;
+        for (let value of data.length) {
+          if (argsInfo.args.length === value) return true;
         }
       }
     }
     return false;
+  }
+
+  async response (recipient, argsInfo) {
+    try {
+      return !(await argsInfo.channel.awaitMessages((m) => m.author.id === config.ids[recipient] && m.embeds && m.embeds[0], {
+        "time": 2000,
+        "max": 1
+      }))
+    } catch (e) {
+      if (e) console.log(e);
+    }
   }
 
   output (key, argsInfo) {

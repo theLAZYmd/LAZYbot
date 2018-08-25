@@ -58,6 +58,7 @@ class DBuser {
   }
 
   static byAliases(alias, exactmode) {
+    let tally = DataManager.getData();
     for(let i = 0; i < tally.length; i++) {
       let dbuser = tally[i];
       for(let source in config.sources) {

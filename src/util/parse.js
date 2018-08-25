@@ -6,8 +6,9 @@ class Parse {
 
   constructor(message) { //everything extends to here
     this.message = message;
+    this.member = message ? message.member : "";
     this.client = message ? message.client : this.Bot.client;
-    this.guild = message ? message.guild : this.client.guilds.get(config.houseid);
+    this.guild = this.member ? this.member.guild : this.client.guilds.get(config.houseid);
     if (!message) return;
     this.message.content = message && message.content && typeof message.content === "string" ?
       message.content
@@ -21,7 +22,6 @@ class Parse {
     this.channel = message.channel;
     this.server = this.guild ? DataManager.getServer(this.guild.id) : "";
     this.reactionmessages = this.guild ? DataManager.getServer(this.guild.id, "./src/data/reactionmessages.json") : "";
-    this.member = this.guild ? message.member : "";
   }
 
   get Bot () {

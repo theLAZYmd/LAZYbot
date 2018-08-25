@@ -2,34 +2,28 @@ const config = require("../config.json");
 
 class Embed {
 
-  static sender(inputobject, channel) {
-    return new Promise((resolve, reject) => {
-      if (!inputobject) return reject("Embed.sender(): Embed object is undefined.");
+  static async sender(inputobject, channel) {
+    try {
       let object = Embed.receiver(inputobject);
       if (!object.color) object.color = config.colors.generic;
-      try {
-        channel.send(object.content, {
-            embed: object
-          })
-          .then(msg => resolve(msg))
-          .catch(e => console.log(JSON.stringify(e)));
-      } catch (error) {
-        return reject("**Embed.sender():** Incorrect embed format.");
-      }
-    })
+      return channel.send(object.content, {
+        embed: object
+      })
+    } catch (e) {
+      if (e) console.log(e);
+    }
   }
 
-  static editor(inputobject, message) {
-    return new Promise((resolve, reject) => {
-      if (!inputobject) return reject(`Incorrect embed object syntax.`);
+  static async editor(inputobject, message) {
+    try {
       let object = Embed.receiver(inputobject);
       if (!object.color) object.color = config.colors.generic;
-      message.edit(object.content, {
-          embed: object
-        })
-        .then(msg => resolve(msg))
-        .catch(e => console.log(JSON.stringify(e)));
-    })
+      return message.edit(object.content, {
+        embed: object
+      });
+    } catch (e) {
+      if (e) console.log(e);
+    }
   }
 
   static fielder(fields, name, value, inline) {

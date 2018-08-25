@@ -100,7 +100,7 @@ class Channel extends All {
   }
   
   byName(name) {
-    return this.guild.channels.find(channel => name.toLowerCase() === channel.name.toLowerCase()) || "";
+    return this.guild.channels.find(channel => name.toLowerCase() === channel.name && channel.name.toLowerCase()) || "";
   }
 
 }

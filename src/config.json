@@ -36,7 +36,7 @@
         "Sun Jun 17 2018 00:14:44 GMT+01"
     ],
     "delays": {
-        "update": 60000,
+        "update": 300000,
         "repeat": 1800000
     },
     "urls": {

@@ -39,7 +39,7 @@ class Commands extends Parse {
   static genField (object, title) {
     let description = "```css\n"; //to get coloured text
     for(let command in object[title]) {
-      if(command === "inArray" || command === "remove") continue; // some weird fucking bug
+      if(command === "inArray" || command === "remove" || command === "clean") continue; // some weird fucking bug
       description += command
         + " ".repeat(Math.max(1, 18 - command.length)) //spacer, 18 allows 2 across per embed
         + "[" + (object[title][command][0] && object[title][command][0].length <= 5 ? object[title][command][0] : "" )

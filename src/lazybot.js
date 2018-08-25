@@ -47,18 +47,40 @@ class Bot {
     client.on("message", (message) => { //command handler
       data.message = message;
       Router.command(data)
-        .catch((e) => {
-          if (e) console.log(e);
-        });
-    });
+      .catch((e) => {
+        if (e) console.log(e);
+      });
+    })
 
     client.on("messageReactionAdd", (messageReaction, user) => {
       if (!messageReaction.message.guild) return;
       if (user.bot || !messageReaction.message.author.bot) {
         if (messageReaction.emoji.id === "481996881606475798" && !user.bot) return messageReaction.remove(user);
       } //For using emojis as 'buttons'. Only reactions done by users reacting to bot messages are of interest to us.
-      else Router.reaction(messageReaction, user);
+      else Router.reaction(messageReaction, user)
+      .catch((e) => {
+        if (e) console.log(e);
+      });
     })
+
+    client.on("presenceUpdate", (oldMember, newMember) => {
+      Router.presence(oldMember, newMember)
+      .catch((e) => {
+        if (e) console.log(e);
+      });
+    })
+
+    client.on('raw', async event => {
+      if (event.t !== "MESSAGE_REACTION_ADD") return;
+      let data = event.d;
+      let user = client.users.get(data.user_id);
+      let channel = client.channels.get(data.channel_id) || await user.createDM();
+      if (channel.messages.has(data.message_id)) return;
+      let message = await channel.fetchMessage(data.message_id);
+      let emojiKey = (data.emoji.id) ? `${data.emoji.name}:${data.emoji.id}` : data.emoji.name;
+      let reaction = message.reactions.get(emojiKey);
+      client.emit("messageReactionAdd", reaction, user);
+    });
 
     express.get("/", (request, response) => { //interacting with glitch.com
       response.sendStatus(200);

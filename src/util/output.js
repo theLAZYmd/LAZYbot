@@ -10,23 +10,23 @@ class Output extends Parse {
     super(message);
   }
 
-  sender(embed, NewChannel) {
-    if (config.states.debug) return () => {};
-    return new Promise((resolve, reject) => {
-      Embed.sender(embed, NewChannel ? NewChannel : this.channel)
-        .then(message => {
-          resolve(message)
-        })
-        .catch(e => console.log(e));
-    })
+  async sender(embed, NewChannel) {
+    try {
+      if (config.states.debug) throw "";
+      if (!embed) throw "**this.Output.sender():** Embed object is undefined.";
+      return await Embed.sender(embed, NewChannel ? NewChannel : this.channel);
+    } catch (e) {
+      if (e) this.onError(e);
+    }
   }
 
-  editor(embed, NewMessage) {
-    return new Promise((resolve, reject) => {
-      Embed.editor(embed, NewMessage ? NewMessage : this.message)
-        .then(message => resolve(message))
-        .catch(error => this.onError(error));
-    })
+  async editor(embed, NewMessage) {
+    try {
+      if (!embed) throw "**this.Output.editor():** Embed object is undefined.";
+      return await Embed.editor(embed, NewMessage ? NewMessage : this.message);
+    } catch (e) {
+      if (e) this.onError(e);
+    }
   }
 
   /* rankingObject:
@@ -84,28 +84,24 @@ class Output extends Parse {
     this.sender(embed);
   }
 
-  generic(description, NewChannel) {
-    return new Promise((resolve, reject) => {
-      this.sender({
-          "description": description
-        }, NewChannel)
-        .then(message => resolve(message))
-        .catch(e => console.log(JSON.stringify(e)));
-    })
+  async generic(description, NewChannel) {
+    try {
+      return this.sender({description}, NewChannel);
+    } catch (e) {
+      if (e) this.onError(e);
+    }
   }
 
-  onError(error, NewChannel) {
-    let channel = NewChannel ? NewChannel : this.channel;
-    console.log(error);
-    let description = typeof error === "object" ? "**" + error.name + ":** " + error.message : error;
-    return new Promise((resolve, reject) => {
-      this.sender({
-          "description": description,
-          "color": config.colors.error
-        }, channel)
-        .then(message => resolve(message))
-        .catch(e => console.log(e));
-    })
+  async onError(error, channel = this.channel) {
+    try {
+      console.log(error);
+      let description = typeof error === "object" ? "**" + error.name + ":** " + error.message : error;
+      this.sender({description,
+        "color": config.colors.error
+      }, channel)
+    } catch (e) {
+      if (e) this.onError(e);
+    }
   }
 
   onModError(error) {
@@ -113,97 +109,151 @@ class Output extends Parse {
     this.onError(error, ModChannel)
   }
 
-  reactor(embed, channel, emojis) {
-    return new Promise((resolve, reject) => {
-        this.sender(embed, channel) //send it
-          .then((msg) => {
-            for (let i = 0; i < emojis.length; i++) { //then react to it
-              setTimeout(() => {
-                msg.react(emojis[i])
-                  .catch(() => {})
-              }, i * 1000); //prevent api spam and to get the order right
-            };
-            return msg;
-          })
-          .then((msg) => resolve(msg))
+  async reactor(data = {}) { //sends a message with custom emojis
+    try {
+      data = Object.assign({
+        "channel": this.channel,
+        "emojis": []
+      }, data)
+      if (!data.embed) throw "";
+      let msg = await this.sender(data.embed, data.channel); //send it
+      for (let i = 0; i < data.emojis.length; i++) { //then react to it
+        setTimeout(() => {
+          msg.react(data.emojis[i]).catch((e) => console.log(e));
+        }, i * 1000); //prevent api spam and to get the order right
+      };
+      return msg;
+    } catch (e) {
+      if (e) this.Output.onError(e);
+    }
+  }
+
+  async confirm(data = {}) {
+    try {
+      data = Object.assign({
+        "description": "Please confirm this action.",
+        "channel": this.channel,
+        "author": this.author
+      }, data);
+      data.emojis = ["✅", "❎"];
+      let msg = await this.reactor(data);
+      let filter = (reaction, user) => data.emojis.includes(reaction.emoji.name) && author.id === user.id;
+      msg.awaitReactions(filter, {
+        "max": 1,
+        "time": 30000,
+        "errors": ["time"]
       })
-      .catch((e) => console.log(e));
+      .then((collected) => {
+        msg.delete();
+        if (collected.first().emoji.name === "✅") return;
+        else if (collected.first().emoji.name === "❎") throw "";
+      })
+      .catch((e) => {
+        console.log(e);
+      })
+    } catch (e) {
+      if (e) this.Output.onError(e);
+    }
   }
 
-  confirm(description, channel, author) {
-    return new Promise((resolve, reject) => {
-      let emojis = ["✅", "❎"];
-      this.reactor({
-          "description": description ? description : "Please confirm this action."
-        }, channel, emojis)
-        .then((msg) => {
-          let filter = (reaction, user) => emojis.includes(reaction.emoji.name) && author.id === user.id;
-          msg.awaitReactions(filter, {
-              "max": 1,
-              "time": 30000,
-              "errors": ["time"]
-            })
-            .then((collected) => {
-              if (collected.first().emoji.name === "✅") resolve();
-              else if (collected.first().emoji.name === "❎") reject();
-              return msg.delete();
-            })
-            .catch(() => {
-              reject();
-              return msg.delete();
-            })
-        })
-    })
+  async choose(data = {}) {
+    try {
+      data = Object.assign({
+        "author": this.author,
+        "channel": this.channel,
+        "filter": () => {
+          return true
+        },
+        "options": [],
+        "time": 18000,
+        "title": "",
+        "type": "option"
+      }, data)
+      let emojis = [], description = "";
+      let author = data.title ? {"name": data.title} : {};
+      let title = `Please choose a${/^(a|e|i|o|u)/.test(data.type) ? "n" : ""} ${data.type}:`;
+      for (let i = 0; i < data.options.length; i++) {
+        emojis.push((i + 1) + "⃣");
+        description += (i + 1) + "⃣ **" + data.options[i] + "**\n";
+      };
+      emojis.push("❎");
+      let msg = await this.reactor({emojis,
+        "embed": {author, title, description},
+        "channel": data.channel
+      });
+      let filter = (reaction, user) => {
+        if (user.id !== data.author.id) return false;
+        if (reaction.emoji.name === "❎") return true;
+        let number = reaction.emoji.name.match(/([1-9])⃣/);
+        if (Number(number[1]) >= data.options.length) return false;
+        return true;
+      };
+      let collected = await msg.awaitReactions(filter, { //wait for them to react back
+        "max": 1,
+        "time": 30000,
+        "errors": ["time"]
+      });
+      msg.delete();
+      if (collected.first().emoji.name === "❎") throw "";
+      let number = Number(collected.first().emoji.name.match(/([1-9]⃣)/));
+      return (number - 1); //and if valid input, send of modmail for that guild
+    } catch(e) {
+      if (e) this.onError(e);
+    }
   }
 
-  response(data = {}) {
-    data = Object.assign({
-      "author": this.author,
-      "description": "Please type your response below.",
-      "channel": this.channel,
-      "filter": () => {
-        return true
-      },
-      "time": 18000
-    }, data)
-    return new Promise((resolve, reject) => {
-      this.Output.reactor({
-          "description": "**" + data.author.tag + "** " + data.description
-        }, data.channel, "❎")
-        .then((msg) => {
-          let rfilter = (reaction, user) => reaction.emoji.name = "❎" && user.id === data.author.id;
-          let mfilter = m => m.author.id === data.author.id && m.content && data.filter(m);
-          msg.awaitReactions(rfilter, {
-              "max": 1,
-              "time": 30000,
-              "errors": ["time"]
-            })
-            .then(() => {
-              reject();
-              return msg.delete()
-                .catch(() => {});;
-            })
-            .catch(() => {
-              return msg.delete()
-                .catch(() => {});;
-            })
-          msg.channel.awaitMessages(mfilter, {
-              "max": 1,
-              "time": data.time,
-              "errors": ["time"]
-            })
-            .then((collected) => {
-              resolve(collected.first());
-              return msg.delete()
-                .catch(() => {});;
-            })
-            .catch(() => {
-              reject();
-              return msg.delete()
-                .catch(() => {});
-            })
-        })
-    })
+  async response(data = {}, message) {
+    try {
+      data = Object.assign({
+        "author": this.author,
+        "channel": this.channel,
+        "description": "Please type your response below.",
+        "filter": () => {
+          return true
+        },
+        "time": 30000,
+        "title": ""
+      }, data);
+      let author = data.title ? {"name": data.title} : {};
+      let title = "Please type your response below.";
+      let msg = await this.reactor({
+        "emojis": ["❎"],
+        "embed": {author, title, description},
+        "channel": data.channel
+      });
+      let rfilter = (reaction, user) => {
+        if (user.id !== data.author.id) return false;
+        if (reaction.emoji.name !== "❎") return false;
+        return true;
+      };
+      let mfilter = m => m.author.id === data.author.id && m.content && data.filter(m); //condition, plus user speicifed filter
+      msg.awaitReactions(rfilter, { //wait for them to react back
+        "max": 1,
+        "time": 30000,
+        "errors": ["time"]
+      })
+      .then(() => {
+        msg.delete().catch(() => {});
+        throw "";
+      })
+      .catch(() => {
+        return msg.delete().catch(() => {});
+      })
+      try {
+        let collected = await msg.channel.awaitMessages(mfilter, {
+          "max": 1,
+          "time": data.time,
+          "errors": ["time"]
+        });
+        msg.delete();
+        if (message) return collected.first();
+        else return collected.first().content;
+      } catch (e) {
+        msg.delete();
+      }
+    } catch (e) {
+      if (e) this.Output.onError(e);
+    }
   }
 
 }

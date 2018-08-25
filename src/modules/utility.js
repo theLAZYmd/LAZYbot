@@ -3,7 +3,16 @@ const Embed = require("../util/embed.js");
 
 class Utility extends Parse { //fairly miscelanneous functions
 
-  uptime () {
+  async members () {
+    let tally = DataManager.getData();
+    this.Output.generic(`There are ${tally.length} unique users registered to the database.`);
+  }
+
+  async ping () {
+    this.Output.generic(`** ${message.author.tag}** :ping_pong: ${parseInt(client.ping)}ms`);  
+  }
+  
+  async uptime () {
     let time = Date.gettime(Date.now() - this.client.readyTimestamp);
     return this.Output.generic(`**${time.days}** days, **${time.hours}** hours, **${time.minutes}** minutes, and **${time.seconds}** seconds since ${Math.random() > 0.5 ? "**bleep bloop! It's showtime**" : "last reboot"}.`);
   }
