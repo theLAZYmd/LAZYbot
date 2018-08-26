@@ -7,40 +7,39 @@ class Ban extends Parse {
     super(message)
   }
 
-  fake (args) { //fakebanning, some features are just for fun yes
-    this.generate(args)
-    .then(member => {
+  async fake (args) { //fakebanning, some features are just for fun yes
+    try {
+      let member = await this.generate(args);
       member.addRole(this.Search.roles.get(server.roles.muted))
-      .catch(e => console.log(e));
-    })
-    .catch(e => this.Output.onError(e));
+    } catch (e) {
+      if (e) this.Output.onError(e);
+    }
   }
 
-  real (args) {
-    this.generate(args)
-    .then(member => {
+  async real (args) {
+    try {
+      let member = await this.generate(args)
       member.ban({
         "days": !isNaN(args[1]) ? Number(args[1]) : 0, //if second argument is a number, delete that many messages
         "reason": args.slice(!isNaN(args[1]) ? 2 : 1).trim().join(" ") //anything else said is given as the reason
-      })
-      .catch(e => console.log(e));
-    })
-    .catch(e => this.Output.onError(e));
+      });
+    } catch (e) {
+      if (e) this.Output.onError(e);
+    }
   }
 
-  generate (args) {
-    return new Promise ((resolve, reject) => {
-      if(!args[0] || !this.Check.owner(this.member)) return reject("Insufficient permissions for this action!"); //temp permissions
-      let member = this.Search.members.get(args[0], true);
-      if(!member) return reject("No member found!");
-      let embed = {
-        "title": "⛔️ User Banned"
-      };
-      embed.fields = Embed.fielder(embed.fields, "Username", member.user.tag, true);
-      embed.fields = Embed.fielder(embed.fields, "ID", member.user.id, true);
-      this.Output.sender(embed);
-      resolve(member);
-    })
+  async generate (args) {
+    if(!args[0] || !this.Check.owner(this.member)) throw "Insufficient permissions for this action!"; //extra level of security since these are serious commands
+    let member = this.Search.members.get(args[0], true);
+    if(!member) throw "No member found!";
+    let embed = {
+      "title": "⛔️ User Banned",
+      "fields": []
+    };
+    embed.fields = Embed.fielder(embed.fields, "Username", member.user.tag, true);
+    embed.fields = Embed.fielder(embed.fields, "ID", member.user.id, true);
+    this.Output.sender(embed);
+    return member;
   }
 
 }

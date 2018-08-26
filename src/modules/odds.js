@@ -23,30 +23,29 @@ class Series extends All {
       let msg1 = await this.Output.response({ //get the number of games played. Game total must add up to this number.
         "description": "Please input the number of games played in the series.",
         "filter": m => !isNaN(parseInt(m.content) && Number(m.content) < 21)
-      });
+      }, true);
       data.length = parseInt(msg1.content);
       let msg2 = await this.Output.response({ //first name. String literal for object. Purely aesthetic, we don't take into account ratings
         "description": "Please input the name of the first player."
-      })
+      }, true);
       data.players[0] = {
         "name": msg2.content
       };
       let msg3 = await this.Output.response({ //second name. String literal for object. Purely aesthetic, we don't take into account ratings
         "description": "Please input the name of the second player."
-      })
+      }, true);
       data.players[1] = {
         "name": msg3.content
       };
       let msg4 = await this.Output.response({ //these are important - not only do they provide the ratio but the degree of accuracy too
         "description": "Please input past number of **" + data.players[0].name + "** wins against " + data.players[1].name + ".",
         "filter": m => !isNaN(Number(m.content))
-      })
-
+      }, true);
       data.players[0].score = Number(msg4.content);
       let msg5 = await this.Output.response({
         "description": "Please input past number of **" + data.players[1].name + "** wins against " + data.players[0].name + ".",
         "filter": m => !isNaN(Number(m.content))
-      })
+      }, true);
       data.players[1].score = Number(msg5.content);
       this.message.delete(), msg1.delete(), msg2.delete(), msg3.delete(), msg4.delete(), msg5.delete();
       this.gen(data);

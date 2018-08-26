@@ -1,5 +1,3 @@
-let start = Date.now(), data;
-
 //the permanent requires that access data files or modules
 const Discord = require('discord.js');
 const DataManager = require("./util/datamanager.js");
@@ -23,33 +21,40 @@ class Bot {
 
   static run() {
 
+    let data;
+
     client.on("ready", () => { //console startup section
-      data = new onStartup(client);
-      if (data.modmail) () => {}; //used to cache the messages that might need to be reacted to
-      for (let guildID in DataManager.getFile(config.guildFile)) {
-        console.log(`Loaded client server ${client.guilds.get(guildID).name} in ${Date.now() - data.reboot}ms`);
-      };
-      console.log(data.bouncerbot ? `Noticed bot user ${data.bouncerbot.tag} in ${Date.now() - data.reboot}ms` : `Bouncer#8585 is not online!`);
-      console.log(data.nadekobot ? `Noticed bot user ${data.nadekobot.tag} in ${Date.now() - data.reboot}ms` : `Nadeko#6685 is not online!`);
-      console.log(data.harmonbot ? `Noticed bot user ${data.harmonbot.tag} in ${Date.now() - data.reboot}ms` : `Harmonbot#4049 is not online!`);
-      for (let owner of data.owners)
-        console.log(`Noticed bot owner ${owner.tag} in ${Date.now() - data.reboot}ms`);
-      console.log("bleep bloop! It's showtime.");
-      if (data.autoupdates) console.log("Beginning update cycle...");
-      const Debugging = new DebuggingConstructor(client);
-      if (config.states.debug) Bot.debug(data);
-      //Debugging.removeDuplicates();
-      //Debugging.convertCounttoObject();
-      //Debugging.updateDBUserFormat();
-      //Debugging.duplicateMains();
+      try {
+        data = new onStartup(client);
+        if (data.modmail) () => {}; //used to cache the messages that might need to be reacted to
+        for (let guildID in DataManager.getFile(config.guildFile)) {
+          console.log(`Loaded client server ${client.guilds.get(guildID).name} in ${Date.now() - data.reboot}ms`);
+        };
+        console.log(data.bouncerbot ? `Noticed bot user ${data.bouncerbot.tag} in ${Date.now() - data.reboot}ms` : `Bouncer#8585 is not online!`);
+        console.log(data.nadekobot ? `Noticed bot user ${data.nadekobot.tag} in ${Date.now() - data.reboot}ms` : `Nadeko#6685 is not online!`);
+        console.log(data.harmonbot ? `Noticed bot user ${data.harmonbot.tag} in ${Date.now() - data.reboot}ms` : `Harmonbot#4049 is not online!`);
+        for (let owner of data.owners)
+          console.log(`Noticed bot owner ${owner.tag} in ${Date.now() - data.reboot}ms`);
+        console.log("bleep bloop! It's showtime.");
+        if (data.autoupdates) console.log("Beginning update cycle...");
+        const Debugging = new DebuggingConstructor(client);
+        if (config.states.debug) Bot.debug(data);
+        //Debugging.removeDuplicates();
+        //Debugging.convertCounttoObject();
+        //Debugging.updateDBUserFormat();
+        //Debugging.duplicateMains();
+      } catch (e) {
+        if (e) console.log(e);
+      }
     });
 
     client.on("message", (message) => { //command handler
-      data.message = message;
-      Router.command(data)
-      .catch((e) => {
-        if (e) console.log(e);
-      });
+      try {
+        data.message = message;
+        Router.command(data);
+      } catch (e) {
+        console.log(e);
+      }
     })
 
     client.on("messageReactionAdd", (messageReaction, user) => {

@@ -62,7 +62,9 @@ class Router {
       if (data.message.content.length === 1) throw "";
       data.client.reboot = data.readyTimestamp;
       return data;
-    } catch (e) {}
+    } catch (e) {
+      throw e;
+    }
   }
 
   static async logCommand(argsInfo, cmdInfo) {

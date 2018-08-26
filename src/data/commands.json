@@ -378,6 +378,7 @@
         "arguments": ["channel"],
         "prefix": "nadeko",
         "requires": {
+            "house": true,
             "response": "bouncer"
         }
     },
@@ -395,6 +396,7 @@
         "arguments": ["channel"],
         "prefix": "nadeko",
         "requires": {
+            "house": true,
             "response": "bouncer"
         }
     },
@@ -412,6 +414,7 @@
         "arguments": [],
         "prefix": "nadeko",
         "requires": {
+            "house": true,
             "channels": ["bot"],
             "response": "bouncer"
         }
@@ -506,7 +509,10 @@
         "file": "states",
         "method": "tm",
         "arguments": ["args"],
-        "prefix": "nadeko"
+        "prefix": "nadeko",
+        "requires": {
+            "house": true
+        }
     },
     {
         "aliases": [
@@ -521,7 +527,10 @@
         "file": "states",
         "method": "bcp",
         "arguments": [],
-        "prefix": "nadeko"
+        "prefix": "nadeko",
+        "requires": {
+            "house": true
+        }
     },
     {
         "aliases": [
@@ -568,7 +577,10 @@
         "file": "ban",
         "method": "fake",
         "arguments": ["args"],
-        "prefix": "generic"
+        "prefix": "generic",
+        "requires": {
+            "role": "admin"
+        }
     },
     {
         "aliases": [
@@ -583,7 +595,10 @@
         "file": "ban",
         "method": "real",
         "arguments": ["args"],
-        "prefix": "generic"
+        "prefix": "generic",
+        "requires": {
+            "role": "admin"
+        }
     },
     {
         "aliases": [
@@ -877,7 +892,10 @@
         "file": "trivia",
         "method": "init",
         "arguments": ["args"],
-        "prefix": "nadeko"
+        "prefix": "nadeko",
+        "requires": {
+            "response": "bot"
+        }
     },
     {
         "aliases": [
@@ -891,7 +909,10 @@
         "file": "trivia",
         "method": "end",
         "arguments": [],
-        "prefix": "nadeko"
+        "prefix": "nadeko",
+        "requires": {
+            "response": "bot"
+        }
     },
     {
         "aliases": [

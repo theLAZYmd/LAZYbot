@@ -1,6 +1,7 @@
 const Parse = require("../util/parse.js");
 const Embed = require("../util/embed.js");
 const DataManager = require("../util/datamanager.js");
+const Router = require("../util/router.js");
 
 class ModMail extends Parse {
   constructor(message) {
@@ -16,12 +17,12 @@ class ModMail extends Parse {
   async receiver (guild) { //receive a guild as an input, set it to this.guild
     this.guild = guild;
     if (this.modmail) { //if the server has had modmail in the past
-      if (this.modmail.timeout && this.modmail.timeout[this.author.tag]) {
-        if (Date.now() - this.modmail.timeout[this.author.tag] < 86400000) return; //if the user is timed out return completely
-        delete this.modmail.timeout[this.author.tag];
+      if (this.modmail._timeout && this.modmail._timeout[this.author.tag]) { //check if they're timed out
+        if (Date.now() - this.modmail._timeout[this.author.tag] < 86400000) return; //if so, return completely
+        delete this.modmail._timeout[this.author.tag]; //otherwise delete any old timeout
       };
       for (let id in this.modmail) { //for each record
-        if (id === "timeout") continue;
+        if (id.startsWith("_")) continue; //ignore _timeout and _id
         if (this.modmail[id].tag === this.author.tag && !this.modmail[id].overflow) { //if the user hasn't mailed in the past or the post is more than 2000 characters, make a new one
           let channel = this.Search.channels.get(this.server.channels.modmail);
           try {
@@ -41,16 +42,16 @@ class ModMail extends Parse {
             await this.Output.confirm({channel,
               "description": "Couldn't find message. Please confirm that message no longer exists.",
               "author": mod
-            })
-            msg.delete();
+            });
             delete this.modmail[id]; //and delete the record
             this.sender([]); //and make a new post
             this.setData(this.modmail);
+            return;
           }
         }
       }
     } else this.modmail = {
-      "timeout": {}
+      "_timeout": {}
     }; //if there's no modmail stored for this channel 
     this.sender([]); //if it's a new message it gets sent straight
   }
@@ -60,13 +61,9 @@ class ModMail extends Parse {
       let tag = mailInfo ? mailInfo.tag : this.author.tag;
       let timestamp = Date.getISOtime(this.message.createdAt);
       let modmail = await this.Output.reactor({
-        "emojis": ["❎", "🗣", "👤", "👁", "❗", "⏲"],
-        "embed": {
-          "title": "ModMail Conversation for " + tag,
-          "fields": Embed.fielder(fields || [], "On " + timestamp + ", " + (this.mod ? this.mod.tag : "user") + (this.mod && !this.mod.flair ? " 🗣" : "") +" wrote:", this.message.content, false),
-        },
-        "channel":  this.Search.channels.get(this.server.channels.modmail)
-      });
+        "title": "ModMail Conversation for " + tag,
+        "fields": Embed.fielder(fields || [], "On " + timestamp + ", " + (this.mod ? this.mod.tag : "user") + (this.mod && !this.mod.flair ? " 🗣" : "") +" wrote:", this.message.content, false),
+      }, this.Search.channels.get(this.server.channels.modmail), ["❎", "🗣", "👤", "👁", "❗", "⏲"]);
       this.modmail[modmail.id] = { //and create a new record with the new message created entry
         "tag": tag,
         "lastMail": Date.now()
@@ -80,7 +77,7 @@ class ModMail extends Parse {
 
   async editor (embed, message, mailInfo) {
     try {
-      if (JSON.stringify(Embed.receiver(embed)).length < 2000) return this.Output.editor(embed, message); //check if the message would be more than 2000 characters
+      if (JSON.stringify(Embed.receiver(embed)).length < 2000) return await this.Output.editor(embed, message); //check if the message would be more than 2000 characters
       message.clearReactions();
       let msg = await this.sender([], mailInfo) //if so, create a new post
       this.modmail[message.id].overflow = msg.id;
@@ -90,7 +87,7 @@ class ModMail extends Parse {
     }
   }
 
-  react (reaction, user) {
+  async react (reaction, user) {
     switch (reaction.emoji.name) {
       case "❎":
         this.close(reaction.message, user, this.modmail[reaction.message.id]);
@@ -123,15 +120,14 @@ class ModMail extends Parse {
   async reply (message, mod, mailInfo) {
     try {
       let user = this.Search.users.byTag(mailInfo.tag);
-      if (!user) return this.Output.onError("User **" + user.tag + "** no longer exists!");
+      if (!user) throw "User **" + user.tag + "** no longer exists!";
       let msg = await this.Output.response({
         "author": mod,
         "description": "Please type your response below (replying as " + (mod.flair ? "yourself" : "server") + ")"
-      });
-      for(let [id, attachment] of msg.attachments) {
+      }, true);
+      if (msg.attachments) for(let [id, attachment] of msg.attachments)
         msg.content += " [Image Attachment](" + attachment.url + ")"; //if there's any images, append them as a link to the DM image
-      };
-      if (msg.content.length > 1024) return this.Output.onError("Your message must be less than 1024 characters!\nPlease shorten it by **" + (msg.content.length - 1024) + "** characters.");
+      if (msg.content.length > 1024) throw "Your message must be less than 1024 characters!\nPlease shorten it by **" + (msg.content.length - 1024) + "** characters.";
       this.message = msg, this.mod = mod;
       let timestamp = Date.getISOtime(Date.now()), embed = message.embeds[0];
       embed.fields = Embed.fielder(embed.fields, "On " + timestamp + ", " + mod.tag + (!mod.flair ? " 🗣" : "") + " wrote:", msg.content, false)
@@ -141,6 +137,14 @@ class ModMail extends Parse {
         "description": msg.content
       }, user);
       msg.delete();
+      Router.logCommand({
+        "author": mod,
+        "args": [!mod.flair ? "server" : "self", user.tag, msg.content],
+        "command": "reply"
+      }, {
+        "file": "Mod Mail",
+        "prefix": ""
+      });
     } catch (e) {
       if (e) this.Output.onError(e);
     }
@@ -149,9 +153,9 @@ class ModMail extends Parse {
   async close (message, mod, mailInfo) {
     try {
       await this.Output.confirm({
-        "description": "Please confirm closing the conversation for user **" + mailInfo.tag + "**.",
+        "action": "closing the conversation for user **" + mailInfo.tag + "**",
         "author": mod
-      })
+      });
       for (let id in this.modmail) {
         if (this.modmail[id].tag === mailInfo.tag) {
           let msg = await message.channel.fetchMessage(id)
@@ -160,16 +164,24 @@ class ModMail extends Parse {
         }
       };
       this.setData(this.modmail);
-      return this.Output.generic("**" + mod.tag + "** closed the ModMail conversation for **" + mailInfo.tag + "**.");
+      this.Output.generic("**" + mod.tag + "** closed the ModMail conversation for **" + mailInfo.tag + "**.");
+      Router.logCommand({
+        "author": mod,
+        "args": mailInfo.tag,
+        "command": "close"
+      }, {
+        "file": "Mod Mail",
+        "prefix": ""
+      });
     } catch (e) {
-      () => {}
+      if (e) this.Output.onError(e);
     }
   }
 
   async warn (message, mod, mailInfo) {
     try {
       await this.Output.confirm({
-        "description": "Please confirm warning for user **" + mailInfo.tag + "**.",
+        "action": "warning for user **" + mailInfo.tag + "**",
         "author": mod
       });
       let timestamp = Date.getISOtime(Date.now());
@@ -180,6 +192,14 @@ class ModMail extends Parse {
         "title": "Warning from server " + this.guild.name + ":",
         "description": "You are abusing server modmail. Please be polite and do not spam the inbox."
       }, this.Search.users.byTag(mailInfo.tag));
+      Router.logCommand({
+        "author": mod,
+        "args": mailInfo.tag,
+        "command": "warn"
+      }, {
+        "file": "Mod Mail",
+        "prefix": ""
+      });
     } catch (e) {
       if (e) this.Output.onError(e);
     }
@@ -188,20 +208,28 @@ class ModMail extends Parse {
   async timeout (message, mod, mailInfo) {
     try {
       await this.Output.confirm({
-        "description": "Please confirm timeout for user **" + mailInfo.tag + "**.",
+        "action": "timeout for user **" + mailInfo.tag + "**",
         "author": mod
       });
       let timestamp = Date.getISOtime(Date.now());
       let embed = message.embeds[0];
       embed.fields = Embed.fielder(embed.fields, "On " + timestamp + ", " + mod.tag + " timed out user for 24h.", "", false)
-      if (!this.modmail.timeout) this.modmail.timeout = {};
-      this.modmail.timeout[mailInfo.tag] = Date.now();
+      if (!this.modmail._timeout) this.modmail._timeout = {};
+      this.modmail._timeout[mailInfo.tag] = Date.now();
       this.setData(this.modmail);
       this.editor(embed, message);
       this.Output.sender({
         "title": "You have been timed out from sending messages to server " + this.guild.name + ":",
         "description": "The mod team will not receive your messages for 24 hours."
       }, this.Search.users.byTag(mailInfo.tag));
+      Router.logCommand({
+        "author": mod,
+        "args": mailInfo.tag,
+        "command": "timeout"
+      }, {
+        "file": "Mod Mail",
+        "prefix": ""
+      });
     } catch (e) {
       if (e) this.Output.onError(e);
     }

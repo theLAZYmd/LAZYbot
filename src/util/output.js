@@ -86,7 +86,9 @@ class Output extends Parse {
 
   async generic(description, NewChannel) {
     try {
-      return this.sender({description}, NewChannel);
+      return this.sender({
+        description
+      }, NewChannel);
     } catch (e) {
       if (e) this.onError(e);
     }
@@ -96,7 +98,8 @@ class Output extends Parse {
     try {
       console.log(error);
       let description = typeof error === "object" ? "**" + error.name + ":** " + error.message : error;
-      this.sender({description,
+      this.sender({
+        description,
         "color": config.colors.error
       }, channel)
     } catch (e) {
@@ -109,50 +112,48 @@ class Output extends Parse {
     this.onError(error, ModChannel)
   }
 
-  async reactor(data = {}) { //sends a message with custom emojis
+  async reactor(embed, channel, emojis) { //sends a message with custom emojis
     try {
-      data = Object.assign({
-        "channel": this.channel,
-        "emojis": []
-      }, data)
-      if (!data.embed) throw "";
-      let msg = await this.sender(data.embed, data.channel); //send it
-      for (let i = 0; i < data.emojis.length; i++) { //then react to it
+      if (!embed) throw "";
+      let msg = await this.sender(embed, channel); //send it
+      for (let i = 0; i < emojis.length; i++) { //then react to it
         setTimeout(() => {
-          msg.react(data.emojis[i]).catch((e) => console.log(e));
+          msg.react(emojis[i]).catch((e) => console.log(e));
         }, i * 1000); //prevent api spam and to get the order right
       };
       return msg;
     } catch (e) {
       if (e) this.Output.onError(e);
+      throw e;
     }
   }
 
-  async confirm(data = {}) {
+  async confirm(data = {}, r) {
     try {
       data = Object.assign({
-        "description": "Please confirm this action.",
+        "action": "this action.",
         "channel": this.channel,
-        "author": this.author
+        "author": this.author,
+        "emojis": ["✅", "❎"]
       }, data);
-      data.emojis = ["✅", "❎"];
-      let msg = await this.reactor(data);
-      let filter = (reaction, user) => data.emojis.includes(reaction.emoji.name) && author.id === user.id;
-      msg.awaitReactions(filter, {
+      let msg = await this.reactor({
+        "description": data.description ? data.description : "Please confirm " + data.action + "."
+      }, data.channel, data.emojis);
+      let filter = (reaction, user) => data.emojis.includes(reaction.emoji.name) && data.author.id === user.id;
+      let collected = await msg.awaitReactions(filter, {
         "max": 1,
         "time": 30000,
         "errors": ["time"]
-      })
-      .then((collected) => {
-        msg.delete();
-        if (collected.first().emoji.name === "✅") return;
-        else if (collected.first().emoji.name === "❎") throw "";
-      })
-      .catch((e) => {
-        console.log(e);
-      })
+      });
+      msg.delete();
+      if (collected.first().emoji.name === "✅") return true;
+      else {
+        if (r) return false;
+        else throw "";
+      };
     } catch (e) {
       if (e) this.Output.onError(e);
+      throw "";
     }
   }
 
@@ -169,18 +170,22 @@ class Output extends Parse {
         "title": "",
         "type": "option"
       }, data)
-      let emojis = [], description = "";
-      let author = data.title ? {"name": data.title} : {};
+      let emojis = [],
+        description = "";
+      let author = data.title ? {
+        "name": data.title
+      } : {};
       let title = `Please choose a${/^(a|e|i|o|u)/.test(data.type) ? "n" : ""} ${data.type}:`;
       for (let i = 0; i < data.options.length; i++) {
         emojis.push((i + 1) + "⃣");
         description += (i + 1) + "⃣ **" + data.options[i] + "**\n";
       };
       emojis.push("❎");
-      let msg = await this.reactor({emojis,
-        "embed": {author, title, description},
-        "channel": data.channel
-      });
+      let msg = await this.reactor({
+        author,
+        title,
+        description
+      }, data.channel, emojis);
       let filter = (reaction, user) => {
         if (user.id !== data.author.id) return false;
         if (reaction.emoji.name === "❎") return true;
@@ -197,7 +202,7 @@ class Output extends Parse {
       if (collected.first().emoji.name === "❎") throw "";
       let number = Number(collected.first().emoji.name.match(/([1-9]⃣)/));
       return (number - 1); //and if valid input, send of modmail for that guild
-    } catch(e) {
+    } catch (e) {
       if (e) this.onError(e);
     }
   }
@@ -211,48 +216,46 @@ class Output extends Parse {
         "filter": () => {
           return true
         },
-        "time": 30000,
-        "title": ""
+        "time": 30000
       }, data);
-      let author = data.title ? {"name": data.title} : {};
-      let title = "Please type your response below.";
+      let author = data.title ? Embed.author(data.title) : {};
       let msg = await this.reactor({
-        "emojis": ["❎"],
-        "embed": {author, title, description},
-        "channel": data.channel
-      });
+        "description": data.description
+      }, data.channel, ["❎"]);
       let rfilter = (reaction, user) => {
         if (user.id !== data.author.id) return false;
         if (reaction.emoji.name !== "❎") return false;
         return true;
       };
       let mfilter = m => m.author.id === data.author.id && m.content && data.filter(m); //condition, plus user speicifed filter
-      msg.awaitReactions(rfilter, { //wait for them to react back
-        "max": 1,
-        "time": 30000,
-        "errors": ["time"]
-      })
-      .then(() => {
-        msg.delete().catch(() => {});
-        throw "";
-      })
-      .catch(() => {
-        return msg.delete().catch(() => {});
-      })
       try {
-        let collected = await msg.channel.awaitMessages(mfilter, {
-          "max": 1,
-          "time": data.time,
-          "errors": ["time"]
-        });
+        let collected = await Promise.race([
+          (async () => {
+            let reaction = await msg.awaitReactions(rfilter, { //wait for them to react back
+              "max": 1,
+              "time": data.time,
+              "errors": ["time"]
+            });
+            if (reaction) return false;
+            throw ""
+          })().catch(() => {}),
+          msg.channel.awaitMessages(mfilter, {
+            "max": 1,
+            "time": data.time,
+            "errors": ["time"]
+          })
+        ]);
+        if (!collected) throw "";
         msg.delete();
         if (message) return collected.first();
         else return collected.first().content;
       } catch (e) {
         msg.delete();
+        throw e;
       }
     } catch (e) {
       if (e) this.Output.onError(e);
+      throw e;
     }
   }
 
