@@ -46,8 +46,8 @@ class ModMail extends Parse {
             delete this.modmail[id]; //and delete the record
             this.sender([]); //and make a new post
             this.setData(this.modmail);
-            return;
-          }
+          };
+          return;
         }
       }
     } else this.modmail = {
@@ -123,7 +123,7 @@ class ModMail extends Parse {
       if (!user) throw "User **" + user.tag + "** no longer exists!";
       let msg = await this.Output.response({
         "author": mod,
-        "description": "Please type your response below (replying as " + (mod.flair ? "yourself" : "server") + ")"
+        "description": "**" + mod.tag + "** Please type your response below (replying as " + (mod.flair ? "yourself" : "server") + ")"
       }, true);
       if (msg.attachments) for(let [id, attachment] of msg.attachments)
         msg.content += " [Image Attachment](" + attachment.url + ")"; //if there's any images, append them as a link to the DM image
