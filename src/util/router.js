@@ -104,15 +104,15 @@ class Router {
     for (let [type, value] of Object.entries(cmdInfo.requires)) { //[channel: "spam"]
       try {
         if (!Array.isArray(value)) value = [value]; //if it's not array (i.e. multiple possible satisfactory conditions)
+        let kill = true;
         for (let passable of value) {
-          let kill = true;
           try {
             kill = !(await argsInfo.Permissions[type](passable, argsInfo));
           } catch (e) {
             console.log(e); //THERE SHOULD NOT BE ERRORS HERE, SO IF WE'RE RECEIVING ONE, DEAL WITH IT
           }
-          if (kill) throw cmdInfo.method;
         };
+        if (kill) throw cmdInfo.method;
       } catch (e) { //if it fails any of requirements, throw
         throw argsInfo.Permissions.output(type, argsInfo) ? argsInfo.Permissions.output(type, argsInfo) + "\nUse `" + cmdInfo.prefix + "help` followed by command name to see command info." : ""; //if no argsInfo.Permissions, kill it
       }
@@ -151,7 +151,7 @@ String.prototype.toProperCase = function () {
   let newArray = [];
   for (let i = 0; i < words.length; i++) {
     newArray[i] = words[i][0].toUpperCase() + words[i].slice(1, words[i].length).toLowerCase();
-  }
+  };
   let newString = newArray.join(" ");
   return newString;
 }

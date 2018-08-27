@@ -14,45 +14,59 @@ class Commands extends Parse {
       "fields": [],
       "footer": Embed.footer(`Type "${this.server.prefixes.generic}h CommandName" to see help for a specified command. e.g. "${this.server.prefixes.generic}h !profile"`)
     };
-    let object = Commands.genObject(this.server); //get parsed command list of {module: {command: [aliases]}}
-    for(let module in object) {
-      Embed.fielder(embed.fields, ...Commands.genField(object, module)); //generate fields for outputting
+    let modules = Object.entries(Commands.genObject(this.server)); //get parsed command list of {module: {command: firstalias}}
+    for (let i = 0; i < modules.length; i++) {
+      let name = modules[i][0];
+      let collection = Object.entries(modules[i][1]);
+      let value = "```css\n";
+      for (let j = 0; j < collection.length; j++) {
+        let [command, alias] = collection[j];
+        if (!modules[i][1].hasOwnProperty(command)) continue;
+        let line = command
+          + " ".repeat(Math.max(1, 18 - command.length)) //spacer, 18 allows 2 across per embed
+          + "[" + (alias && alias.length <= 5 ? alias : "" )
+          //display aliases if aliases are shortcuts
+          + "]"; //spacer
+        value += line;
+        if (i < modules.length - 1 || modules.length ^ 0) {
+          value += "\n";
+          continue;
+        };
+        console.log(j);
+        if (j !== collection.length - 1) continue;
+        value += j ^ 0 ? " ".repeat(Math.max(0, 28 - line.length)) + "\u200b" : "\n"; //spacer
+      };
+      value += "```";
+      Embed.fielder(embed.fields, name.toProperCase(), value, true); //return arguments for field, - a field
     };
     this.Output.sender(embed);
   }
 
   static genObject (server) {
-    let modules = {};
-    for(let i = 0; i < commands.length; i++) {
-      if(!modules[commands[i].module]) modules[commands[i].module] = [];
-      let aliases = Array.from(commands[i].aliases);
-      let key = server.prefixes[commands[i].prefix] + aliases.shift();
-      modules[commands[i].module][key] = aliases;
+    let modules = {}; //we're creating a big object
+    for(let cmdInfo of commands) { //for each cmdInfo
+      if (!modules[cmdInfo.module]) modules[cmdInfo.module] = {}; //if the object doesn't have that module as a key already, create it. {module: {}}
+      let aliases = Array.from(cmdInfo.aliases);
+      let key = server.prefixes[cmdInfo.prefix] + aliases.shift(); //{module: {key: firstalias}}
+      modules[cmdInfo.module][key] = aliases[0] ? aliases[0] : "";
     };
-    return Object.keys(modules)
-      .sort() //sort it alphabetically
+    return Object.keys(modules) //and return an object sorted alphabetically
+      .sort()
       .reduce((acc, key) => ({ //comment this out if we come up with logical order
         ...acc, [key]: modules[key]
     }), {});
   }
 
-  static genField (object, title) {
-    let description = "```css\n"; //to get coloured text
-    for(let command in object[title]) {
-      if(command === "inArray" || command === "remove" || command === "clean") continue; // some weird fucking bug
-      description += command
-        + " ".repeat(Math.max(1, 18 - command.length)) //spacer, 18 allows 2 across per embed
-        + "[" + (object[title][command][0] && object[title][command][0].length <= 5 ? object[title][command][0] : "" )
-        //display aliases if aliases are shortcuts
-        + "]"; //spacer
-      description += " ".repeat(Math.max(0, 24 - description.length)) //space out to prevent back and forth
-        + "\u200b" //use non-width space NOTE: THIS DOESN'T ACTUALLY SEEM TO WORK
-        + "\n"; //new line
-    };
-    description += "```";
-    return [title, description, true]; //return arguments for field, - a field
-  }
-
 }
 
 module.exports = Commands;
+
+String.prototype.toProperCase = function () {
+  let words = this.split(/ +/g);
+  let newArray = [];
+  for (let i = 0; i < words.length; i++) {
+    newArray[i] = words[i][0].toUpperCase() + words[i].slice(1, words[i].length).toLowerCase();
+  };
+  let newString = newArray.join(" ");
+  return newString;
+}

@@ -1,5 +1,4 @@
 const config = require("../config.json");
-const Render = require("./render.js");
 const Embed = require("./embed.js");
 const Parse = require("./parse.js");
 const DataManager = require("./datamanager.js");
@@ -23,7 +22,8 @@ class Output extends Parse {
   async editor(embed, NewMessage) {
     try {
       if (!embed) throw "**this.Output.editor():** Embed object is undefined.";
-      return await Embed.editor(embed, NewMessage ? NewMessage : this.message);
+      if (!NewMessage) throw "**this.Output.editor():** Couldn't find message to edit.";
+      return await Embed.editor(embed, NewMessage);
     } catch (e) {
       if (e) this.onError(e);
     }
@@ -86,9 +86,11 @@ class Output extends Parse {
 
   async generic(description, NewChannel) {
     try {
-      return this.sender({
+      let msg = await this.sender({
         description
       }, NewChannel);
+      console.log("GENERIC " + msg);
+      return msg;
     } catch (e) {
       if (e) this.onError(e);
     }
@@ -137,7 +139,7 @@ class Output extends Parse {
         "emojis": ["✅", "❎"]
       }, data);
       let msg = await this.reactor({
-        "description": data.description ? data.description : "Please confirm " + data.action + "."
+        "description": data.description ? data.description : "**" + data.author.tag + "** Please confirm " + data.action + "."
       }, data.channel, data.emojis);
       let filter = (reaction, user) => data.emojis.includes(reaction.emoji.name) && data.author.id === user.id;
       let collected = await msg.awaitReactions(filter, {

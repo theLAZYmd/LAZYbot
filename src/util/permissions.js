@@ -49,16 +49,17 @@ class Permissions extends Parse {
   }
 
   async args (data, argsInfo) {
-    if (data.length) {
+    if (data.length || data.length === 0) {
       if (typeof data.length === "number") {
         if (argsInfo.args.length === data.length) return true;
       } else {
         for (let value of data.length) {
           if (argsInfo.args.length === value) return true;
         }
-      }
+      };
+      return false;
     }
-    return false;
+    return true;
   }
 
   async response (recipient, argsInfo) {
@@ -74,12 +75,14 @@ class Permissions extends Parse {
 
   output (key, argsInfo) {
     switch (key) {
+      case "user":
+        return "That command is bot owner only.\nIf you are not an active developer on the bot, you cannot use this command."
       case "role":
         return "Insufficient server permissions to use this command."
       case "channel":
         return "Wrong channel to use this command."
       case "args":
-        return "Unapplicable number of parameters."
+        return this.command === ".." ? "" : "Inapplicable number of parameters."
     }
   }
 

@@ -1,26 +1,31 @@
 const config = require("../config.json");
 const Parse = require("../util/parse.js");
-const Embed = require("../util/embed.js");
-const Render = require("../util/render.js");
+const Embed = require("../util/embed.js"); 
+const DBuser = require("../util/dbuser.js");
 
 class Profile extends Parse {
 
   constructor(message) {
     super(message);
-    this._dbuser = Object.assign({}, this.dbuser);
   }
 
-  get() {
-    if (this.args.length === 1) { //!profile titsinablender
-      let user = this.Search.users.get(this.args[0]);
-      if (user) this.member = this.Search.members.get(user);
-      else return this.Output.onError(`Couldn't find user!`);
-    };
-    let embedgroup = [];
-    for (let i = 0; i < (1 + Math.ceil(this.chessFields.length / 4)); i++) {
-      embedgroup.push(this.build(i));
-    };
-    this.Paginator.sender(embedgroup, 30000);
+  async get() {
+    try {
+      if (this.args.length === 1) { //!profile titsinablender
+        let user = this.Search.users.get(this.args[0]);
+        if (user) this.member = this.Search.members.byUser(user);
+        else throw "Couldn't find user!";
+      };
+      this.user = this.member.user;
+      this._dbuser = Object.assign({}, this.dbuser);
+      this._dbindex = DBuser.getIndex(this._dbuser);
+      let embedgroup = [];
+      for (let i = 0; i < this.pages; i++)
+        embedgroup.push(this.build(i));
+      this.Paginator.sender(embedgroup, 30000);
+    } catch (e) {
+      if (e) this.Output.onError(e);
+    }
   }
 
   build(page) {
@@ -30,6 +35,14 @@ class Profile extends Parse {
     for (let property of properties)
       embed[property] = this[property];
     return Embed.receiver(embed);
+  }
+
+  get pages () {
+    if (!this._pages) {
+      let accounts = this.chessFields.length;
+      this._pages = 1 + Math.ceil(accounts / 4);
+    };
+    return this._pages;
   }
 
   get title() {
@@ -71,16 +84,18 @@ class Profile extends Parse {
   }
 
   get fields() {
-    let fields = [];
-    let potential = this.PotentialFields;
-    for (let field of potential)
-      if (field[1]) fields = Embed.fielder(fields, ...field);
-    return fields;
+    if (this.page === 0) return this.ProfileFields;
+    else {
+      let minField = 4 * (this.page - 1);
+      let maxField = Math.max(this.chessFields.length, 4); //solved issue of making array longer than it was
+      return this.chessFields.slice(minField, maxField); //if page === 1, 1, 2, 3, 4; if page = 2, 5, 6, 7, 8
+    };
   }
 
-  get PotentialFields() {
-    if (this.page === 0) {
-      return [
+  get ProfileFields() {
+    if (!this._ProfileFields) {
+      this._ProfileFields = [];
+      let fields = [
         ["a.k.a.", this.aliases, false],
         [(this._dbuser.modverified ? " " + this.Search.emojis.get(this._dbuser.modverified[0]) : "") + "Info", this.info, true],
         ["Joined Date", this.joined, this.info ? true : false],
@@ -89,24 +104,28 @@ class Profile extends Parse {
         ["Last Message", this.lastMessage, false],
         //["Roles", this.roles],
         ["House Trophies", this.award, true]
-      ]
-    } else return this.chessFields.splice(4 * (this.page - 1), 4); //if page === 1, 1, 2, 3, 4; if page = 2, 5, 6, 7, 8
+      ];
+      for (let field of fields)
+        if (field[1]) Embed.fielder(this._ProfileFields, ...field);
+    };
+    return this._ProfileFields;
   }
 
   get chessFields() {
-    let accounts = [];
-    for (let [key, source] of Object.entries(config.sources)) {
-      for (let account in source) {
-        if (!account.startsWith("_")) {
-          accounts.push([
-            this.Search.emojis.get(key) + " " + config.sources[key].name,
-            Render.profile(this._dbuser, key, account) + "\n" + Render.ratingData(this._dbuser, key, account),
+    if (!this._chessFields) {
+      this._chessFields = [];
+      for (let [key, source] of Object.entries(config.sources)) {
+        for (let account in this._dbuser[key]) {
+          if (account.startsWith("_")) continue;
+          Embed.fielder(this._chessFields,
+            this.Search.emojis.get(key) + " " + source.name,
+            Parse.profile(this._dbuser, source, account) + "\n" + Parse.ratingData(this._dbuser, source, account),
             true
-          ])
+          );
         }
-      }
+      };
     };
-    return accounts;
+    return this._chessFields;
   }
 
   get sourcecount() {
@@ -168,7 +187,7 @@ class Profile extends Parse {
   get ids() {
     return Embed.getFields([
       ["UID", "`" + this.user.id + "`", false],
-      ["Position in Database", this.dbindex]
+      ["Position in Database", this._dbindex]
     ], {
       "bold": true
     })
@@ -201,9 +220,9 @@ class Profile extends Parse {
 
   get medal() {
     let metal = "";
-    if (this.dbindex === 1) medal = ":first_place: **First in Database.**";
-    if (this.dbindex === 2) medal = ":second_place: **Second in Database.**";
-    if (this.dbindex === 3) medal = ":third_place: **Third in Database.**";
+    if (this._dbindex === 1) medal = ":first_place: **First in Database.**";
+    if (this._dbindex === 2) medal = ":second_place: **Second in Database.**";
+    if (this._dbindex === 3) medal = ":third_place: **Third in Database.**";
     return metal;
   }
 

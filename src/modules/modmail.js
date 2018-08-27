@@ -40,7 +40,7 @@ class ModMail extends Parse {
             this.setData(this.modmail);
           } catch (e) {
             await this.Output.confirm({channel,
-              "description": "Couldn't find message. Please confirm that message no longer exists.",
+              "description": "**" + mod.tag + "** Couldn't find message. Please confirm that message no longer exists.",
               "author": mod
             });
             delete this.modmail[id]; //and delete the record

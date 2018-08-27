@@ -9,7 +9,7 @@ class Utility extends Parse { //fairly miscelanneous functions
   }
 
   async ping () {
-    this.Output.generic(`** ${message.author.tag}** :ping_pong: ${parseInt(client.ping)}ms`);  
+    this.Output.generic(`** ${this.author.tag}** :ping_pong: ${parseInt(this.client.ping)}ms`);  
   }
   
   async uptime () {

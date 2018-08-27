@@ -6,7 +6,7 @@ class Embed {
     try {
       let object = Embed.receiver(inputobject);
       if (!object.color) object.color = config.colors.generic;
-      return channel.send(object.content, {
+      return await channel.send(object.content, {
         embed: object
       })
     } catch (e) {
@@ -18,7 +18,7 @@ class Embed {
     try {
       let object = Embed.receiver(inputobject);
       if (!object.color) object.color = config.colors.generic;
-      return message.edit(object.content, {
+      return await message.edit(object.content, {
         embed: object
       });
     } catch (e) {

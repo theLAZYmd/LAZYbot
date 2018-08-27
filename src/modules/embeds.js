@@ -2,22 +2,21 @@ const Parse = require("../util/parse.js");
 const DataManager = require("../util/datamanager.js");
 const request = require("request");
 const config = require("../config.json");
+const Embed = require("../util/embed.js");
 
 class Embeds extends Parse {
   constructor(message) {
     super(message)
   }
 
-  find (args) {
-    if (!args[0]) return;
-    this.getEmbeds ()
-    .then((embeds) => {
-      for (let type in embeds) {
-        for (let guide in embeds[type]) {
-          if (args[0] === guide) {
-            this.guide = Array.isArray(embeds[type][guide]) ? embeds[type][guide] : [embeds[type][guide]];
-            return this.Paginator.sender(this.guide, 180000); 
-          }
+  async find (args) {
+    try {
+      let file = await this.getEmbeds();
+      for (let collection in file) {
+        for (let [key, embed] of collection) {
+          if (args[0] !== key) continue;
+          let guide = Array.isArray(embed ? embed: [embed]);
+          return this.Paginator.sender(guide, 180000); 
         }
       };
       let filter = m => m.author.bot;
@@ -27,154 +26,66 @@ class Embeds extends Parse {
         "errors": ["time"]
       })
       .catch(() => {
-        return this.Output.onError("Couldn't find guide matching that name.");
-      })
-    })
-    .catch((e) => console.log(e))
+        throw "Couldn't find guide matching that name.";
+      });
+    } catch (e) {
+      if (e) this.Output.onError(e);
+    }
   }
 
-  getEmbeds () {
-    return new Promise ((resolve, reject) => {
-      if (!this._embeds) {
-        if (this.client.user.id === config.ids.betabot) {
-          this._embeds = DataManager.getFile("./src/data/embeds.json");
-          return resolve(this._embeds);
+  async list () {
+    try {
+      let prefix = this.server.prefixes.nadeko + "..";
+      let file = await this.getEmbeds();
+      let embed = { //define embed first
+        "title": "Guides for server " + this.guild.name + " on " + this.client.user.username,
+        "color": 11126483,
+        "fields": [],
+        "footer": Embed.footer(`Type "${prefix} GuideName" to view a guide. e.g. "${prefix} zh"`)
+      };
+      for (let [name, collection] of Object.entries(file)) { //for each subsection
+        let value = "```css\n"; //to get coloured text
+        let embeds = Object.keys(collection);
+        for (let i = 0; i < embeds.length; i++) { //for the name of each command
+          if (!collection.hasOwnProperty(embeds[i])) continue;
+          let line = prefix + " " + embeds[i];
+          value += line;
+          value += (i < embeds.length - 1 && !(i & 1) ? " ".repeat(Math.max(0, 28 - line.length)) + "\u200b" : ""); //spacer
+          value += (i ^ 1 ? "\n" : "");
         };
-        request(config.urls.embeds, function(error, response, body) {
-          if (response.statusCode === "404") {
-            reject(error);
-            this._embeds = DataManager.getFile("./data/embeds.json");
-            return resolve(this._embeds);
-          } else {
-            this._embeds = JSON.parse(body);
-            return resolve(this._embeds);
-          }
-        })
-      } else return resolve(this._embeds);
-    });
+        value += "```";
+        embed.fields = Embed.fielder(embed.fields, name.toProperCase(), value, true);
+      };
+      this.Output.sender(embed);
+    } catch (e) {
+      if (e) this.Output.onError(e);
+    }
   }
 
-  //old code: an absolute mess lmao
-
-  router () {
-    if(args.length < 1) return;
-    let guidename = args[0].toLowerCase();
-    if(guidename.match(/[^a-z]+/g)) return;
-    let deleteboolean = false;
-    let objectboolean = false;
-    for(let i = 0; i < args.length; i++) {
-      if(args[i].includes("{")) {
-        args.length = i;
-        objectboolean = true;
-        break;
-      };
-      if(args[i] === "delete") deleteboolean = true;
+  async getEmbeds () {
+    if (this._embeds) return this._embeds;
+    try {
+      if (this.client.user.id === config.ids.betabot) throw "";
+      else await request(config.urls.embeds, async (error, response, body) => {
+        if (response.statusCode === "404") throw "**" + response + "**: " + error;
+        this._embeds = JSON.parse(body);
+      });
+    } catch (e) {
+      if (e) this.Output.onError(e);
+      this._embeds = DataManager.getFile("./src/data/embeds.json");
     };
-    let [page, type] = ["", "utility"];
-    for(let i = 1; i < args.length; i++) {
-      if(!isNaN(parseInt(args[i]))) page = parseInt(args[i]) - 1;
-      if(args[i].match(/guide|utility/)) type = args[i];
-    };
-    argument = argument.slice(args.join(" ").length).trim();
-    let embeds = DataManager.getData("./embeds.json");
-    if(deleteboolean) {
-      if(page) {
-        if(embeds[type][guidename][page]) {
-          delete embeds[type][guidename][page];
-          message.react(getemojifromname("true"));
-        }
-      } else {
-        if(embeds[type][guidename]) {
-          delete embeds[type][guidename];
-          message.react(getemojifromname("true"));
-        };
-      }
-    } else {
-      if(!objectboolean) return;
-      let killboolean = false;
-      try {
-        JSON.parse(argument);
-      } catch(e) {
-        message.channel.send({embed: {
-          "description": `Invalid JSON!`,
-          "color": config.colors.error
-        }})
-        .then(msg => msg.delete(15000));
-        killboolean = true;
-      };
-      if(killboolean) {
-        let reactionsfilter = (reaction, user) => reaction.emoji.name === "false" && user.id === message.author.id;
-        message.react(getemojifromname("false"))
-        .then((reaction) => {
-          reaction.message.createReactionCollector(reactionsfilter, {
-            "max": 1,
-            "time": 15000
-          })
-          collector.on("collect", (collected) => {
-            if(collected.first()) message.delete()
-          })
-          collector.on("end", (collected)  => {
-            message.clearReactions();
-          })
-          .catch((e) => console.log(e))
-        })
-        .catch((e) => console.log(e))
-        return;
-      };
-      let object = JSON.parse(argument);
-      if(object.thumbnail && typeof object.thumbnail === "string") {
-        object.thumbnail = embedthumbnail(object.thumbnail);
-      };
-      if(object.image && typeof object.image === "string") {
-        object.image = embedimage(object.image);
-      };
-      if(!object.color) object.color = config.colors.generic;
-      if(page || page === 0) {
-        if(!embeds[type][guidename]) embeds[type][guidename] = [];
-        embeds[type][guidename][page] = object;
-      } else {
-        embeds[type][guidename] = object;
-      }
-      message.channel.send({embed: object});
-    };
-    let reactionsfilter = (reaction, user) => reaction.emoji.name === "true" && user.id === message.author.id;
-    message.react(getemojifromname("true"))
-    .then((reaction) => {
-      reaction.message.createReactionCollector(reactionsfilter, {
-        "max": 1,
-        "time": 15000
-      })
-      collector.on("collect", (collected) => {
-        if(collected.first()) message.delete()
-      })
-      collector.on("end", (collected)  => {
-        message.clearReactions();
-      })
-    })
-    .catch((e) => console.log(e))
-    if(command !== "say") DataManager.setData(embeds, "./embeds.json");
-  }
-
-  add () {
-    let topic = args[0]
-    let guidename = args[1];
-    if(guidename.startsWith("{")) return;
-    let object = JSON.parse(argument.slice(args[0].length).trim());
-    if(object !== Object(object)) return;
-    let embeds = DataManager.getData("./embeds.json");
-    embeds[topic][guidename] = object;
-    DataManager.setData(embeds, "./embeds.json");
-    message.react(getemojifromname("tick"))
-  }
-
-  get () {
-    let guidename = args[0];
-    embeds = DataManager.getData("./embeds.json");
-    object = embeds.guides[guidename];
-    if(!object) return;
-    message.channel.send({embed: object})
+    return this._embeds;
   }
 
 }
 
 module.exports = Embeds;
+
+String.prototype.toProperCase = function () {
+  let words = this.split(/ +/g);
+  let newArray = [];
+  for (let i = 0; i < words.length; i++) {
+    newArray[i] = words[i][0].toUpperCase() + words[i].slice(1, words[i].length).toLowerCase();
+  };
+  return newArray.join(" ");
+}

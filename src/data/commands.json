@@ -12,7 +12,7 @@
         "module": "Profile",
         "file": "profile",
         "method": "get",
-        "arguments": [],
+        "arguments": ["args"],
         "prefix": "generic"
     },
     {
@@ -29,8 +29,13 @@
         "module": "Profile",
         "file": "asl",
         "method": "run",
-        "arguments": [],
-        "prefix": "generic"
+        "arguments": ["args", "dbuser"],
+        "prefix": "generic",
+        "requires": {
+            "args": {
+                "length": [0, 1, 3]
+            }
+        }
     },
     {
         "aliases": [
@@ -1055,7 +1060,12 @@
         "file": "commands",
         "method": "list",
         "arguments": [],
-        "prefix": "generic"
+        "prefix": "generic",
+        "requires": {
+            "args": {
+                "length": 0
+            }
+        }
     },
     {
         "aliases": [
@@ -1089,7 +1099,31 @@
         "file": "embeds",
         "method": "find",
         "arguments": ["args"],
-        "prefix": "nadeko"
+        "prefix": "nadeko",
+        "requires": {
+            "args": {
+                "length": 1
+            }
+        }
+    },
+    {
+        "aliases": [
+            "guides"
+        ],
+        "description": "Lists all guides. There are guides for each variant! Compiled by the members of our community. Use `${nadeko}.. GuideName` to view each one individually. Use `${nadeko}.. guides` to see info on how to contribute to them.",
+        "usage": [
+            "guides"
+        ],
+        "module": "Utility",
+        "file": "embeds",
+        "method": "list",
+        "arguments": [],
+        "prefix": "generic",
+        "requires": {
+            "args": {
+                "length": [0]
+            }
+        }
     },
     {
         "aliases": [
@@ -1267,7 +1301,7 @@
         "aliases": [
             "ping"
         ],
-        "description": "Returns the bot's ping in milliseconds. **Note:** this is not your ping! This is the time taken for a client-emitted event to reach the bot, not how long it takes you to send a message.",
+        "description": "Returns the bot's ping in milliseconds.\n**Note:** this is not your ping! This is the time taken for a client-emitted event to reach the bot, not how long it takes you to send a message.",
         "usage": [
             "ping"
         ],

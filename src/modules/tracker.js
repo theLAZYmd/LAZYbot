@@ -3,7 +3,6 @@ const Parse = require("../util/parse.js");
 const request = require("request");
 const DataManager = require("../util/datamanager.js");
 const DBuser = require("../util/dbuser.js");
-const Render = require("../util/render.js");
 const Router = require("../util/router.js");
 
 class Tracker extends Parse {
@@ -107,10 +106,11 @@ class Tracker extends Parse {
       let dbuser = this.dbuser;
       let sources = Object.values(config.sources).filter(source => dbuser[source.key]);
       if (sources.length === 0) throw "No linked accounts found.\nPlease link an account to your profile through `!lichess\`, `!chess.com`, or `!bughousetest`.";
+      if (this.command) this.msg = await this.Output.generic("Updating user...");
       this.track({dbuser, sources})
       .catch((e) => {throw e})
     } catch(e) {
-      if (e && this.command === "update") this.Output.onError(e);
+      if (e && this.command) this.Output.onError(e);
     }
   }
 
@@ -122,12 +122,15 @@ class Tracker extends Parse {
         if (this.command && data.username && this.command !== "update") {
           if (!data.dbuser[data.source.key]) data.dbuser[data.source.key] = {};
           if (data.dbuser[data.source.key][data.username]) throw `Already linked ${data.source.name} account **${data.username}** to ${data.dbuser.username}!`;
-          data = await Tracker.handle(data);
+          data = await Tracker.handle(data, this.msg);
         } else {
           for (let account in data.dbuser[data.source.key]) {
             if (account.startsWith("_")) continue;
             data.username = account;
-            data = await Tracker.handle(data);
+            if (this.command) this.Output.editor({
+              "description": "Updating user... on **" + data.source.name + "**"
+            }, this.msg);
+            data = await Tracker.handle(data, this.msg);
           }
         }
       };
@@ -188,20 +191,19 @@ class Tracker extends Parse {
       "fields": []
     };
     let whitespace = "      \u200B"
-    for (let sourceObject of data.sources) {
-      let source = sourceObject.key;
-      for (let account in data.dbuser[source]) {
+    for (let source of data.sources) {
+      for (let account in data.dbuser[source.key]) {
         if (this.command !== "update") account = data.username;
         if (account.startsWith("_")) continue;
         embed.fields.push({
-          "name": this.Search.emojis.get(source) + " " + (this.command === "update" ? "Updated '" : `Linked ${this.user.username} to '`) + account + "'",
-          "value": Render.profile(data.dbuser, source, account) + "\nCurrent highest rating is **" + data.dbuser[source][account].maxRating + "**" + whitespace + "\n" + Render.ratingData(data.dbuser, source, account),
+          "name": this.Search.emojis.get(source.key) + " " + (this.command === "update" ? "Updated '" : `Linked ${this.user.username} to '`) + account + "'",
+          "value": Parse.profile(data.dbuser, source, account) + "\nCurrent highest rating is **" + data.dbuser[source.key][account].maxRating + "**" + whitespace + "\n" + Parse.ratingData(data.dbuser, source, account),
           "inline": true
         });
         if (this.command !== "update") break;
       }
     };
-    this.Output.sender(embed);
+    this.Output[this.command === "update" ? "editor" : "sender"](embed, this.msg);
   }
 
   removeOutput(data) {
@@ -230,48 +232,52 @@ class Tracker extends Parse {
   }
 
   static async request(data) {
-    return new Promise ((resolve, reject) => {
+    try {
       if (!data.username) throw "Request: Invalid username.";
-      request.get(config.sources[data.source.key].url.user.replace("|", data.username), (error, response, body) => {
-        if (error) resolve("**" + data.source.name + " " + response + "**: " + error);
-        if (!body || body.length === 0) resolve("Couldn't find **'" + data.username + "'** on " + data.source.name + ".");
+      request.get(config.sources[data.source.key].url.user.replace("|", data.username), async (error, response, body) => {
         try {
-          let json = JSON.parse(body);
-          resolve(json);
+          if (error) throw "**" + data.source.name + " " + response + "**: " + error;
+          if (!body || body.length === 0) throw "Couldn't find **'" + data.username + "'** on " + data.source.name + ".";
+          try {
+            let json = JSON.parse(body);
+            return json;
+          } catch (e) {
+            if (e) throw(e);
+          }
         } catch (e) {
-          if (e) reject(e);
+          console.log(e);
         }
       })
-    })
+    } catch (e) {
+      throw (e);
+    }
   }
 
-  static parselichess(lichessData, data) { //Parsing API Data is different for each site
-    return new Promise((resolve, reject) => {
+  static async parselichess(lichessData, data) { //Parsing API Data is different for each site
+    try {
       let source = data.source;
-      if (!lichessData) return reject("No data found for '" + data.username + "' on " + source.name + "."); //if invalid username (i.e. from this.track()), return;
-      if (lichessData.closed) return reject("Account " + lichessData.username + " is closed on " + source.name + "."); //if closed return
+      if (!lichessData) throw "No data found for '" + data.username + "' on " + source.name + "."; //if invalid username (i.e. from this.track()), return;
+      if (lichessData.closed) throw "Account " + lichessData.username + " is closed on " + source.name + "."; //if closed return
       let ratings = { //the sub-object
         "maxRating": 0
       };
+      if (!lichessData.perfs) throw "No game data found for '" + data.username + "' on " + source.name + ".";
       let allProvisional = true; //if no non-provisional ratings, return an error
-      if (lichessData.perfs) {
-        for (let key in config.variants[source.key]) { //ex: "crazyhouse"
-          let variant = config.variants[source.key][key]; //ex: {"name": "Crazyhouse", "api": "crazyhouse", "key": "crazyhouse"}
-          let variantData = lichessData.perfs[variant.api]; //lichess data, ex: {"games":1,"rating":1813,"rd":269,"prog":0,"prov":true}
-          if (variantData) {
-            ratings[key] = variantData.rating.toString(); //if it exists, take the API's number and store it as a string
-            if (!variantData || variantData.prov) ratings[key] += "?"; //if provisional, stick a question mark on it
-            else {
-              allProvisional = false; //if not provisional, allow user to link this account
-              if (Number(ratings[key]) > ratings.maxRating) ratings.maxRating = ratings[key]; //and if it's the biggest so far, set it.
-            }
+      for (let [key, variant] of Object.entries(config.variants[source.key])) { //ex: "crazyhouse"
+        let variantData = lichessData.perfs[variant.api]; //lichess data, ex: {"games":1,"rating":1813,"rd":269,"prog":0,"prov":true}
+        if (variantData) {
+          ratings[key] = variantData.rating.toString(); //if it exists, take the API's number and store it as a string
+          if (!variantData || variantData.prov) ratings[key] += "?"; //if provisional, stick a question mark on it
+          else {
+            allProvisional = false; //if not provisional, allow user to link this account
+            if (Number(ratings[key]) > ratings.maxRating) ratings.maxRating = ratings[key]; //and if it's the biggest so far, set it.
           }
-        };
-        if (allProvisional) return reject("All ratings for " + lichessData.username + " are provisional.");
+        }
       };
+      if (allProvisional) throw "All ratings for " + lichessData.username + " are provisional.";
       if (lichessData.engine) ratings.cheating = "engine";
       if (lichessData.boosting) ratings.cheating = "boosting";
-      if (ratings.cheating) reject( //if found to be cheating, log it in database and tell mods
+      if (ratings.cheating) console.log( //if found to be cheating, log it in database and tell mods
         `Player ${lichessData.username} (${config.sources[source.key].url.profile.replace("|", lichessData.username)}) ` +
         (ratings.cheating === "engine" ? "uses chess computer assistance." : "") +
         (ratings.cheating === "engine" ? "artificially increases/decreases their rating." : "") + "."
@@ -288,15 +294,17 @@ class Tracker extends Parse {
       if (account._name) account._name = account._name.trim();
       for (let property in account)
         if (!account[property]) delete account[property];
-      resolve(account);
-    })
+      return account;
+    } catch (e) {
+      if (e) throw e;
+    }
   }
 
   static parsechesscom(chesscomData, data) {
-    return new Promise((resolve, reject) => {
+    try {
       let username = data.username;
       let stats = chesscomData.stats;
-      if (!stats) return reject("No data found for **'" + username + "'** on Chess.com.");
+      if (!stats) throw "No data found for **'" + username + "'** on Chess.com.";
       let ratings = {
         "maxRating": 0
       };
@@ -315,12 +323,14 @@ class Tracker extends Parse {
           }
         }
       };
-      if (allProvisional) return reject("All chess.com ratings for " + username + " are provisional.");
-      resolve({
+      if (allProvisional) throw "All chess.com ratings for " + username + " are provisional.";
+      return {
         "ratings": ratings,
         "username": username
-      })
-    })
+      };
+    } catch (e) {
+      if (e) throw e;
+    }
   }
 
   static assign(data, parsedData) {
