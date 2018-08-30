@@ -29,67 +29,27 @@ class Output extends Parse {
     }
   }
 
-  /* rankingObject:
-  { lichess:
-   { blitz: { rating: '1879', rank: 46 },
-     bullet: { rating: '2056', rank: 37 },
-     rapid: { rating: '1997', rank: 28 },
-     crazyhouse: { rating: '2158', rank: 31 },
-     '3-check': { rating: '1708', rank: 31 },
-     maxRating: { rating: '2158', rank: 59 } },
-  chesscom:
-   { crazyhouse: { rating: '2104', rank: 1 },
-     bug: { rating: '2155', rank: 1 },
-     maxRating: { rating: '2155', rank: 21 } },
-  bughousetest: { maxRating: { rating: '1351', rank: 7 } } }
-  */
-
-  onRank(dbuser, rankingObject) {
-    let embed = {
-      "color": this.server.colors.ratings
-    };
-    let whitespace = "                                \u200B"
-    for (let source in config.sources) {
-      if (rankingObject[source]) {
-        let sourceratinglist = "";
-        if (rankingObject[source]) {
-          sourceratinglist +=
-            "Overall: **" +
-            rankingObject[source].maxRating.rating +
-            "** (#" +
-            rankingObject[source].maxRating.rank +
-            ")\n";
-          for (let key in config.variants[source]) {
-            let variant = config.variants[source][key];
-            if (rankingObject[source][key]) sourceratinglist +=
-              variant.name +
-              ": " +
-              (rankingObject[source][key].rating.toString().endsWith("?") ? "" : "**") +
-              rankingObject[source][key].rating +
-              (rankingObject[source][key].rating.toString().endsWith("?") ? "" : "**") +
-              " (#" +
-              rankingObject[source][key].rank +
-              ")\n";
-          }
-        };
-        let sourceuserprofile = Render.profile(dbuser, source, dbuser[source]._main); //dbuser, source, username
-        embed.fields = Embed.fielder(
-          embed.fields,
-          `${this.Search.emojis.get(source)} ${config.sources[source].name} Rankings`,
-          sourceuserprofile + whitespace + "\n" + sourceratinglist,
-          true
-        )
-      }
-    };
-    this.sender(embed);
-  }
-
   async generic(description, NewChannel) {
     try {
-      let msg = await this.sender({
+      return await this.sender({
         description
       }, NewChannel);
-      return msg;
+    } catch (e) {
+      if (e) this.onError(e);
+    }
+  }
+
+  async data(json, NewChannel) {
+    try {
+      let string = JSON.stringify(json, null, 2).replace(/`/g, "\\`");
+      let index = Math.ceil(string.length / 2048);
+      let keylength = Math.floor(string.length / index);
+      for (let i = 0; i < index; i++)
+        this.sender({
+          "color": 9359868,
+          "description": "```json\n" + string.slice(i * keylength, (i === index.length - 1 ? index.length : i * keylength + keylength)) + "```",
+          "footer": Embed.footer((i + 1) + " / " + index)
+        }, NewChannel);
     } catch (e) {
       if (e) this.onError(e);
     }

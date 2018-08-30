@@ -102,13 +102,19 @@ class Tracker extends Parse {
     }
   }
 
-  async update(args) {
+  async update(argument) {
     try {
-      if (args[0]) this.user = this.Search.users.get(args[0]);
-      let dbuser = this.dbuser;
+      let user = this.user;
+      if (argument) {
+        let _user = this.Search.users.get(argument);
+        if (!_user) throw "Couldn't find user **" + argument + "**!";
+        else user = _user;
+      };
+      let dbuser = DBuser.getUser(user);
+      if (dbuser.username !== this.user.tag) dbuser.username = user.tag;
       let sources = Object.values(config.sources).filter(source => dbuser[source.key]);
       if (sources.length === 0) throw "No linked accounts found.\nPlease link an account to your profile through `!lichess\`, `!chess.com`, or `!bughousetest`.";
-      if (this.command) this.msg = await this.Output.generic("Updating user...");
+      if (this.command) this.msg = await this.Output.generic("Updating user " + dbuser.username + "...");
       this.track({dbuser, sources})
       .catch((e) => {throw e})
     } catch(e) {
@@ -129,16 +135,16 @@ class Tracker extends Parse {
             if (account.startsWith("_")) continue;
             data.username = account;
             if (this.command) this.Output.editor({
-              "description": "Updating user... on **" + data.source.name + "**"
+              "description": "Updating user " + data.dbuser.username + "... on **" + data.source.name + "**"
             }, this.msg);
             data = await Tracker.handle(data, this.msg);
             data.username = "";
           }
         }
       };
+      data.dbuser.lastupdate = Date.now(); //Mark the update time
+      await DBuser.setData(data.dbuser); //set it
       if (data.successfulupdates.length > 0) {
-        data.dbuser.lastupdate = Date.now(); //Mark the update time
-        await DBuser.setData(data.dbuser); //set it
         Router.logCommand({
           "author": {
             "tag": this.command ? this.author.tag : "auto"
@@ -200,7 +206,6 @@ class Tracker extends Parse {
           if (account.startsWith("_")) continue;
           if (!data.successfulupdates.includes(source.key)) errors += this.Search.emojis.get(source.key) + " Couldn't " + (this.command === "update" ? "update '" : `link ${this.user.username} to '`) + account + "' on " + source.name;
           else {
-            console.log(source.key, account, data.dbuser);
             Embed.fielder(
               embed.fields,
               this.Search.emojis.get(source.key) + " " + (this.command === "update" ? "Updated '" : `Linked ${this.user.username} to '`) + account + "'",

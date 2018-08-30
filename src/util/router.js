@@ -44,8 +44,8 @@ class Router {
       for (let command of Commands) {
         let cmdInfo = Object.assign({}, command);
         cmdInfo.prefix = data.argsInfo.server.prefixes[cmdInfo.prefix];
-        cmdInfo.command = true;
-        if (cmdInfo.prefix === data.argsInfo.prefix && cmdInfo.aliases.inArray(data.argsInfo.command)) { //if valid command has been received
+        if (cmdInfo.active !== false && cmdInfo.prefix === data.argsInfo.prefix && cmdInfo.aliases.inArray(data.argsInfo.command)) { //if valid command has been received
+          cmdInfo.command = true;
           let run = await Router.runCommand(data.message, data.argsInfo, cmdInfo);
           if (run) Router.logCommand(data.argsInfo, cmdInfo);
           return;

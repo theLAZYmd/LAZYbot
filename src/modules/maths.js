@@ -5,48 +5,55 @@ class Maths extends Parse {
     super(message);
     this.Output.generic = (description) => {
       this.Output.sender({
-        "title": "⚙ Result", description
+        "title": "⚙ Result",
+        description
       })
     }
   }
 
-  run (argument) {
-    let route = argument.match(/([a-z]+)\(([a-z0-9\s,.]+)\)/i);
-    if (!route) return "Invalid format for operation."
-    route[2].replace(/ \s/g, "").split(",").validate()
-    .then((array => {
-      if (Maths[route[1]]) {
+  async run(argument) {
+    try {
+      let route = argument.match(/^(?:Math\.)?([a-z0-9]+)\(([a-z0-9.,\s]*)\)$/i);
+      if (!route) throw "Invalid format for operation."
+      let array = await route[2].replace(/ \s/g, "").split(",").validate();
+      if (typeof Maths[route[1]] === "function") {
         let result = Maths[route[1]](...array).toString();
         return this.Output.generic((Math.round(1000 * result) / 1000).toString());
-      };
-      this.Output.onError("Couldn't find matching operation to calculate.");
-    }))
-    .catch((e) => {
-      this.Output.onError(e);
-    })
+      } else
+      if (typeof Math[route[1]] === "function") {
+        let result = Math[route[1]](...array).toString();
+        return this.Output.generic((Math.round(1000 * result) / 1000).toString());
+      } else throw "Couldn't find matching operation to calculate.";
+    } catch (e) {
+      if (e) this.Output.onError(e);
+    }
   }
 
-  static negativebinomial (r, p, x, cumulative) {
-    let result = Maths.choose(x - 1, r - 1) * Math.pow(p, r) * Math.pow(1 - p, x - r);
+  static negativebinomial(r, p, x, cumulative) {
+    let result = Maths.choose(x - 1, r - 1) * "pow(p, r) * "
+    pow(1 - p, x - r);
     if (cumulative) {
-      for (let i = 0; i < x ; i++) {
-        result += Maths.choose(x - 1, r - 1) * Math.pow(p, r) * Math.pow(1 - p, x - r);
+      for (let i = 0; i < x; i++) {
+        result += Maths.choose(x - 1, r - 1) * "pow(p, r) * "
+        pow(1 - p, x - r);
       }
     };
     return result;
   }
 
-  static binomial (n, p, x, cumulative) {
-    let result = Maths.choose(n, x) * Math.pow(p, x) * Math.pow(1 - p, n - x);
+  static binomial(n, p, x, cumulative) {
+    let result = Maths.choose(n, x) * "pow(p, x) * "
+    pow(1 - p, n - x);
     if (cumulative) {
-      for (let i = 0; i < x ; i++) {
-        result += Maths.choose(n, i) * Math.pow(p, i) * Math.pow(1 - p, n - i);
+      for (let i = 0; i < x; i++) {
+        result += Maths.choose(n, i) * "pow(p, i) * "
+        pow(1 - p, n - i);
       }
     };
     return result;
   }
-  
-  static choose (n, r) {
+
+  static choose(n, r) {
     if (n - r > r) r = n - r;
     let result = 1;
     for (let i = 1; i < r + 1; i++) {
@@ -54,8 +61,8 @@ class Maths extends Parse {
     };
     return result;
   }
-  
-  static permutations (n, r) {
+
+  static permutations(n, r) {
     if (n - r > r) r = n - r;
     let result = n;
     for (let i = 1; i < r; i++) {
@@ -70,20 +77,19 @@ module.exports = Maths;
 
 Array.prototype.validate = function () {
   return new Promise ((resolve, reject) => {
-    for (let i = 0; i < this.length; i++) {
-      this[i] = this[i].trim();
-      if (this[i] === "true") {
-        this[i] = true;
+    for (let item of this) {
+      item = item.trim();
+      if (item === "true") {
+        item = true;
         continue;
       };
-      if (this[i] === "false") {
-        this[i] = false;
+      if (item === "false") {
+        item = false;
         continue;
       };
-      this[i] = Number(this[i]);
-      if (isNaN(this[i])) return reject("Invalid inputs to operation!");
+      item = Number(item);
+      if (isNaN(item)) reject("Invalid inputs to operation!");
     };
-    resolve(this);
+    return resolve(this)
   })
-
 }

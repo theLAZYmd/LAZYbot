@@ -495,8 +495,8 @@
         ],
         "module": "Chess",
         "file": "leaderboard",
-        "method": "getVariant",
-        "arguments": [],
+        "method": "variant",
+        "arguments": ["channel", "args"],
         "prefix": "generic"
     },
     {
@@ -1013,7 +1013,7 @@
         "module": "Chess",
         "file": "tracker",
         "method": "update",
-        "arguments": ["dbuser", "args"],
+        "arguments": ["argument"],
         "prefix": "generic"
     },
     {
@@ -1044,9 +1044,9 @@
             "myrank DragonMateZ"
         ],
         "module": "Chess",
-        "file": "leaderboard",
-        "method": "getVariantRank",
-        "arguments": ["member", "args"],
+        "file": "rank",
+        "method": "variant",
+        "arguments": ["argument"],
         "prefix": "generic"
     },
     {
@@ -1174,10 +1174,12 @@
             "calculate",
             "calc"
         ],
-        "description": "Performs a custom operation designed which isn't included in the [Math object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math). Enter operation arguments afterwards.",
+        "description": "Performs operation listed in the [Math object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math).\nPlease use format `operation(arguments)`, or it will not register.\nCustom operations listed below.",
         "usage": [
             "calc choose(10, 3)",
-            "calc binomial(10, 0.75, 6)"
+            "calc binomial(10, 0.75, 6)",
+            "calc negativebinomial(21, 0.6, 40, false)",
+            "calc permutations(6, 4)"
         ],
         "module": "Calculation",
         "file": "maths",
