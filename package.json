@@ -1,5 +1,5 @@
 {
-    "name": "LAZYbot",
+    "name": "lazybot",
     "description": "Discord bot operating in the House server http://dscrd.me/housechessvariants just to further lazy's understanding of basic js. ",
     "main": "src/lazybot.js",
     "version": "1.5.6",
@@ -30,6 +30,7 @@
         "es6": "0.0.7",
         "express": "^4.16.0",
         "request": "^2.87.0",
+        "request-promise": "^4.2.2",
         "yarn": "^1.5.1"
     }
 }

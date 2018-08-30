@@ -985,7 +985,7 @@
         "aliases": [
             "remove"
         ],
-        "description": "Removes a linked account.",
+        "description": "Removes a linked account. Please specify source afterwards.",
         "usage": [
             "remove lichess",
             "remove lichess theLAZYmd"
@@ -997,7 +997,7 @@
         "prefix": "generic",
         "requires": {
             "args": {
-                "length": [0, 1, 2, 3]
+                "length": [1, 2, 3]
             }
         }
     },
@@ -1028,7 +1028,10 @@
         "file": "eval",
         "method": "run",
         "arguments": ["args", "argument"],
-        "prefix": "generic"
+        "prefix": "generic",
+        "requires": {
+            "user": "owner"
+        }
     },
     {
         "aliases": [
@@ -1322,6 +1325,24 @@
         "module": "Profile",
         "file": "trophy",
         "method": "run",
+        "arguments": ["args"],
+        "prefix": "generic",
+        "requires": {
+            "user": "owner"
+        }
+    },
+    {
+        "aliases": [
+            "send"
+        ],
+        "description": "Sends a ModMail to a specified user. Use `-s` or `--server` flag to send as anonymous.",
+        "usage": [
+            "send bakkouz -s",
+            "send penguingim1"
+        ],
+        "module": "Administration",
+        "file": "dm",
+        "method": "outgoing",
         "arguments": ["args"],
         "prefix": "generic"
     }

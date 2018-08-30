@@ -21,7 +21,11 @@ class Utility extends Parse { //fairly miscelanneous functions
     try {
       let msg = await this.find()
       if (!msg.embed) return this.Output.onError("No embeds found to JSONify!");
-      this.Output.generic("```json\n" + JSON.stringify(msg.embed, null, 4) + "```");
+      let string = JSON.stringify(msg.embed, null, 2).replace(/`/g, "\\`");
+      let index = Math.ceil(string.length / 2048);
+      let keylength = Math.floor(string.length / index);
+      for (let i = 0; i < index; i++)
+        this.Output.generic("```json\n" + string.slice(i * keylength, (i === index.length - 1 ? index.length : i * keylength + keylength)) + "```");
     } catch(e) {
       if (e) this.Output.onError(e);
     }

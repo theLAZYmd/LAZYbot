@@ -12,22 +12,23 @@ class Embeds extends Parse {
   async find (args) {
     try {
       let file = await this.getEmbeds();
-      for (let collection in file) {
-        for (let [key, embed] of collection) {
+      for (let collection of Object.values(file)) {
+        for (let [key, embed] of Object.entries(collection)) {
           if (args[0] !== key) continue;
-          let guide = Array.isArray(embed ? embed: [embed]);
+          let guide = Array.isArray(embed) ? embed : [embed];
           return this.Paginator.sender(guide, 180000); 
         }
       };
       let filter = m => m.author.bot;
-      this.channel.awaitMessages(filter, {
-        "max": 1,
-        "time": 1000,
-        "errors": ["time"]
-      })
-      .catch(() => {
+      try {
+        await this.channel.awaitMessages(filter, {
+          "max": 1,
+          "time": 1000,
+          "errors": ["time"]
+        })
+      } catch (e) {
         throw "Couldn't find guide matching that name.";
-      });
+      };
     } catch (e) {
       if (e) this.Output.onError(e);
     }
@@ -49,9 +50,9 @@ class Embeds extends Parse {
         for (let i = 0; i < embeds.length; i++) { //for the name of each command
           if (!collection.hasOwnProperty(embeds[i])) continue;
           let line = prefix + " " + embeds[i];
-          value += line;
+          value += line; //necessary so that we can count line length
           value += (i < embeds.length - 1 && !(i & 1) ? " ".repeat(Math.max(0, 28 - line.length)) + "\u200b" : ""); //spacer
-          value += (i ^ 1 ? "\n" : "");
+          value += (i & 1 ? "\n" : "");
         };
         value += "```";
         embed.fields = Embed.fielder(embed.fields, name.toProperCase(), value, true);

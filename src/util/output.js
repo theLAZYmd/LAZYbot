@@ -89,7 +89,6 @@ class Output extends Parse {
       let msg = await this.sender({
         description
       }, NewChannel);
-      console.log("GENERIC " + msg);
       return msg;
     } catch (e) {
       if (e) this.onError(e);
@@ -136,15 +135,16 @@ class Output extends Parse {
         "action": "this action.",
         "channel": this.channel,
         "author": this.author,
-        "emojis": ["✅", "❎"]
+        "time": 30000
       }, data);
-      let msg = await this.reactor({
+      data.emojis = ["✅", "❎"];
+      let msg = await this.reactor(data.embed ? data.embed : {
         "description": data.description ? data.description : "**" + data.author.tag + "** Please confirm " + data.action + "."
       }, data.channel, data.emojis);
-      let filter = (reaction, user) => data.emojis.includes(reaction.emoji.name) && data.author.id === user.id;
+      let filter = (reaction, user) => data.emojis.includes(reaction.emoji.name) && (data.author.id === user.id || (data.role && this.Search.members.byUser(user).roles.has(data.role.id)));
       let collected = await msg.awaitReactions(filter, {
         "max": 1,
-        "time": 30000,
+        "time": data.time,
         "errors": ["time"]
       });
       msg.delete();
@@ -168,6 +168,7 @@ class Output extends Parse {
           return true
         },
         "options": [],
+        "role": "",
         "time": 18000,
         "title": "",
         "type": "option"
@@ -221,7 +222,7 @@ class Output extends Parse {
         "time": 30000
       }, data);
       let author = data.title ? Embed.author(data.title) : {};
-      let msg = await this.reactor({
+      let msg = await this.reactor({author,
         "description": data.description
       }, data.channel, ["❎"]);
       let rfilter = (reaction, user) => {

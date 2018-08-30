@@ -1,9 +1,11 @@
 const config = require("../config.json");
 const Parse = require("../util/parse.js");
 const request = require("request");
+const rp = require("request-promise");
 const DataManager = require("../util/datamanager.js");
 const DBuser = require("../util/dbuser.js");
 const Router = require("../util/router.js");
+const Embed = require("../util/embed.js");
 
 class Tracker extends Parse {
 
@@ -120,8 +122,7 @@ class Tracker extends Parse {
       for (let source of data.sources) {
         data.source = source;
         if (this.command && data.username && this.command !== "update") {
-          if (!data.dbuser[data.source.key]) data.dbuser[data.source.key] = {};
-          if (data.dbuser[data.source.key][data.username]) throw `Already linked ${data.source.name} account **${data.username}** to ${data.dbuser.username}!`;
+          if (data.dbuser[data.source.key] && data.dbuser[data.source.key][data.username]) throw `Already linked ${data.source.name} account **${data.username}** to ${data.dbuser.username}!`;
           data = await Tracker.handle(data, this.msg);
         } else {
           for (let account in data.dbuser[data.source.key]) {
@@ -131,21 +132,24 @@ class Tracker extends Parse {
               "description": "Updating user... on **" + data.source.name + "**"
             }, this.msg);
             data = await Tracker.handle(data, this.msg);
+            data.username = "";
           }
         }
       };
-      data.dbuser.lastupdate = Date.now(); //Mark the update time
-      await DBuser.setData(data.dbuser); //set it
-      Router.logCommand({
-        "author": {
-          "tag": this.command ? this.author.tag : "auto"
-        },
-        "args": [data.dbuser.username, ...data.successfulupdates],
-        "command": "update"
-      }, {
-        "file": "Tracker",
-        "prefix": ""
-      }); //log updates received as a command
+      if (data.successfulupdates.length > 0) {
+        data.dbuser.lastupdate = Date.now(); //Mark the update time
+        await DBuser.setData(data.dbuser); //set it
+        Router.logCommand({
+          "author": {
+            "tag": this.command ? this.author.tag : "auto"
+          },
+          "args": [data.dbuser.username, ...data.successfulupdates],
+          "command": "update"
+        }, {
+          "file": "Tracker",
+          "prefix": ""
+        }); //log updates received as a command
+      };
       if (this.command) this.trackOutput(data);
     } catch(e) {
       if (this.command && e) this.Output.onError(e);
@@ -155,7 +159,6 @@ class Tracker extends Parse {
   async remove(data) {
     try {
       data.source = data.sources[0];
-      if (!data.dbuser[data.source.key]) throw "There are no linked " + data.source.name + " accounts to **" + data.dbuser.username + "**.";
       let found = false, isMain = false, NoAccountsLeft = false;
       for (let account in data.dbuser[data.source.key]) {
         if (data.username && data.username.toLowerCase() === account.toLowerCase()) {
@@ -185,25 +188,33 @@ class Tracker extends Parse {
     }
   }
   
-  trackOutput(data) {
-    let embed = {
-      "color": this.server.colors.ratings,
-      "fields": []
-    };
-    let whitespace = "      \u200B"
-    for (let source of data.sources) {
-      for (let account in data.dbuser[source.key]) {
-        if (this.command !== "update") account = data.username;
-        if (account.startsWith("_")) continue;
-        embed.fields.push({
-          "name": this.Search.emojis.get(source.key) + " " + (this.command === "update" ? "Updated '" : `Linked ${this.user.username} to '`) + account + "'",
-          "value": Parse.profile(data.dbuser, source, account) + "\nCurrent highest rating is **" + data.dbuser[source.key][account].maxRating + "**" + whitespace + "\n" + Parse.ratingData(data.dbuser, source, account),
-          "inline": true
-        });
-        if (this.command !== "update") break;
-      }
-    };
-    this.Output[this.command === "update" ? "editor" : "sender"](embed, this.msg);
+  async trackOutput(data) {
+    try {
+      let embed = {
+        "color": this.server.colors.ratings,
+        "fields": []
+      };
+      let errors = "", whitespace = "      \u200B";
+      for (let source of data.sources) {
+        for (let account of (this.command === "update" ? Object.keys(data.dbuser[source.key]) : [data.username])) {
+          if (account.startsWith("_")) continue;
+          if (!data.successfulupdates.includes(source.key)) errors += this.Search.emojis.get(source.key) + " Couldn't " + (this.command === "update" ? "update '" : `link ${this.user.username} to '`) + account + "' on " + source.name;
+          else {
+            console.log(source.key, account, data.dbuser);
+            Embed.fielder(
+              embed.fields,
+              this.Search.emojis.get(source.key) + " " + (this.command === "update" ? "Updated '" : `Linked ${this.user.username} to '`) + account + "'",
+              Parse.profile(data.dbuser, source, account) + "\nCurrent highest rating is **" + data.dbuser[source.key][account].maxRating + "**" + whitespace + "\n" + Parse.ratingData(data.dbuser, source, account),
+              true
+            )
+          }
+        }
+      };
+      if (embed.fields.length > 0) this.Output[this.command === "update" ? "editor" : "sender"](embed, this.msg);
+      if (errors) throw errors;
+    } catch (e) {
+      if (e) this.Output.onError(e);
+    }
   }
 
   removeOutput(data) {
@@ -234,22 +245,13 @@ class Tracker extends Parse {
   static async request(data) {
     try {
       if (!data.username) throw "Request: Invalid username.";
-      request.get(config.sources[data.source.key].url.user.replace("|", data.username), async (error, response, body) => {
-        try {
-          if (error) throw "**" + data.source.name + " " + response + "**: " + error;
-          if (!body || body.length === 0) throw "Couldn't find **'" + data.username + "'** on " + data.source.name + ".";
-          try {
-            let json = JSON.parse(body);
-            return json;
-          } catch (e) {
-            if (e) throw(e);
-          }
-        } catch (e) {
-          console.log(e);
-        }
-      })
+      return await rp({
+        "uri": config.sources[data.source.key].url.user.replace("|", data.username),
+        "json": true,
+        "timeout": 2000
+      });
     } catch (e) {
-      throw (e);
+      throw "Couldn't find **'" + data.username + "'** on " + data.source.name + ": " + e;
     }
   }
 
@@ -333,11 +335,12 @@ class Tracker extends Parse {
     }
   }
 
-  static assign(data, parsedData) {
+  static async assign(data, parsedData) {
     let account = data.dbuser[data.source.key]; //get the "account" set of rating data for that source
-    Object.assign(account[parsedData.username] = { //if that source has never been assigned to before (first account)
-      "_main": parsedData.username //set it as the main one
-    }, parsedData.ratings);
+    if (!account) account = {
+      "_main": parsedData.username
+    };
+    account[parsedData.username] = parsedData.ratings;
     if (account._main === parsedData.username) { //if it's the main one
       let properties = ["_name", "_country", "_language", "_title"];
       for (let property of properties) {

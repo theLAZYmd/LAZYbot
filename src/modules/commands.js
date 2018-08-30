@@ -28,13 +28,12 @@ class Commands extends Parse {
           //display aliases if aliases are shortcuts
           + "]"; //spacer
         value += line;
-        if (i < modules.length - 1 || modules.length ^ 0) {
+        if (i < modules.length - 1 || !(modules.length & 1)) { //if we're not on the last module or we have an even number of modules
           value += "\n";
           continue;
         };
-        console.log(j);
-        if (j !== collection.length - 1) continue;
-        value += j ^ 0 ? " ".repeat(Math.max(0, 28 - line.length)) + "\u200b" : "\n"; //spacer
+        if (j === collection.length - 1) continue; //if we're not at the last one of the group continue
+        value += !(j & 1) ? " ".repeat(Math.max(0, 28 - line.length)) + "\u200b" : "\n"; //spacer
       };
       value += "```";
       Embed.fielder(embed.fields, name.toProperCase(), value, true); //return arguments for field, - a field

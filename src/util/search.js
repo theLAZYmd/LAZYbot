@@ -36,12 +36,14 @@ class User extends All {
   }
 
   byNickname(string, exactmode) {
-    return this.guild.members.find((member) => {
+    let member = this.guild.members.find((member) => {
       if (!member.nickname) return false;
       if (!exactmode) return member.nickname.toLowerCase().startsWith(string.toLowerCase());
       return member.nickname.toLowerCase() === string.toLowerCase();
-    })
-  }
+    });
+    if (member) return member.user;
+    else return "";
+  } 
 
   byUsername(string, exactmode) {
     return this.client.users.find(user => exactmode ? user.username.toLowerCase() === string.toLowerCase() : user.username.toLowerCase().startsWith(string.toLowerCase())) || "";
