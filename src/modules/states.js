@@ -41,7 +41,7 @@ class States extends Parse {
       this.Search.members.byUser(this.Search.members.get(config.ids.nadeko)) //nadeko member
     ];
     let role = this.Search.roles.get(this.server.roles.bot);
-    let activeboolean = forced || this.Check.role(membegrs[1], this.server.roles.bot); //does nadeko already have the role?
+    let activeboolean = forced || this.Check.role(members[1], this.server.roles.bot); //does nadeko already have the role?
     members[activeboolean ? 0 : 1].addRole(role) //if 0, added to bouncer
     .catch(e => console.log(e));
     members[activeboolean ? 1 : 0].removeRole(role) //and remove from nadeko

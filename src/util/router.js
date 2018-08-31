@@ -32,14 +32,14 @@ class Router {
   static async command(data) {
     try {
       data = await Router.checkErrors(data);
-      data.argsInfo = new Parse(data.message, data.client); //sets object with all like guild, channel (arguments for functions)
+      data.argsInfo = new Parse(data.message); //sets object with all like guild, channel (arguments for functions)
       if (data.message.channel.type === "dm" || data.message.channel.type === "group" || !data.message.guild) {
         for (let command of DMCommands)
           await Router.runCommand(data.message, data.argsInfo, command);
         throw "";
       }
       for (let command of allMessageCommands)
-        await Router.runCommand(data.message, data.argsInfo, command);
+        Router.runCommand(data.message, data.argsInfo, command);
       if (!data.commands[data.argsInfo.command]) throw ""; //checks if command appears on init-generated command listing
       for (let command of Commands) {
         let cmdInfo = Object.assign({}, command);

@@ -55,6 +55,7 @@ class Permissions extends Parse {
       } else {
         for (let value of data.length) {
           if (argsInfo.args.length === value) return true;
+          if (value === "++" && argsInfo.args.length > data.length[data.length.length - 2]) return true;
         }
       };
       return false;

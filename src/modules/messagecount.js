@@ -8,15 +8,12 @@ class MessageCount extends Parse {
   }
 
   log (author, dbuser) { //section for message logging
-    if(author.bot) return;
     if(!isNaN(dbuser.messages.count)) dbuser.messages.count++;
     else {
       dbuser.messages.count = 0;
-      this.Output.onError("Your message count data has been lost. Please search `from: " + author.tag + "` and use the command `!updatemessagecount [number-here]` to reset your counter.")
+      this.Output.onError("Your message count data has been lost. Please alert a bot owner immediately.")
     };
-    for(let prefix in this.server.prefixes) {
-      if(this.prefix === this.server.prefixes[prefix]) return;
-    };
+    if (Object.values(this.server.prefixes).includes(this.prefix)) return;
     dbuser.messages.last = this.message.content.length > 500 ? this.message.content.slice(0, 500).replace("`", "") + "..." : this.message.content.replace(/\`/g,"");
     dbuser.messages.lastSeen = this.message.createdTimestamp;
     if(dbuser.username !== author.tag) dbuser.username = author.tag; 
@@ -41,7 +38,6 @@ class MessageCount extends Parse {
   }
 
   get (args, user) {
-    if(args.length > 1) return;
     if(args.length === 1) { //!messages titsinablender
       user = this.Search.users.get(args[0]);
       if(!user) return this.Output.onError(`Couldn't find user!`);

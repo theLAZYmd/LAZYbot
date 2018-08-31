@@ -204,7 +204,7 @@
         "arguments": ["args", "argument"],
         "prefix": "generic",
         "requires": {
-            "role":  ["admin", "mod"]
+            "role": ["admin", "mod"]
         }
     },
     {
@@ -223,7 +223,7 @@
         "arguments": [],
         "prefix": "generic",
         "requires": {
-            "role":  ["admin", "mod"]
+            "role": ["admin", "mod"]
         }
     },
     {
@@ -242,7 +242,7 @@
         "arguments": [],
         "prefix": "generic",
         "requires": {
-            "role":  ["admin", "mod"]
+            "role": ["admin", "mod"]
         }
     },
     {
@@ -261,7 +261,7 @@
         "arguments": ["args", "argument"],
         "prefix": "generic",
         "requires": {
-            "role":  ["admin", "mod"]
+            "role": ["admin", "mod"]
         }
     },
     {
@@ -280,7 +280,7 @@
         "arguments": ["args", "argument"],
         "prefix": "generic",
         "requires": {
-            "role":  ["admin", "mod"]
+            "role": ["admin", "mod"]
         }
     },
     {
@@ -299,7 +299,7 @@
         "arguments": [],
         "prefix": "generic",
         "requires": {
-            "role":  ["admin", "mod"]
+            "role": ["admin", "mod"]
         }
     },
     {
@@ -318,7 +318,7 @@
         "arguments": [],
         "prefix": "generic",
         "requires": {
-            "role":  ["admin", "mod"]
+            "role": ["admin", "mod"]
         }
     },
     {
@@ -335,7 +335,12 @@
         "file": "messagecount",
         "method": "get",
         "arguments": ["args", "user"],
-        "prefix": "generic"
+        "prefix": "generic",
+        "requires": {
+            "args": {
+                "length": [0, 1]
+            }
+        }
     },
     {
         "aliases": [
@@ -352,7 +357,13 @@
         "file": "messagecount",
         "method": "update",
         "arguments": ["user"],
-        "prefix": "generic"
+        "prefix": "generic",
+        "requires": {
+            "user": "owner",
+            "args": {
+                "length": [1, 2]
+            }
+        }
     },
     {
         "aliases": [
@@ -367,7 +378,12 @@
         "file": "utility",
         "method": "uptime",
         "arguments": [],
-        "prefix": "generic"
+        "prefix": "generic",
+        "requires": {
+            "args": {
+                "length": 0
+            }
+        }
     },
     {
         "aliases": [
@@ -384,7 +400,10 @@
         "prefix": "nadeko",
         "requires": {
             "house": true,
-            "response": "bouncer"
+            "response": "bouncer",
+            "args": {
+                "length": [3, "++"]
+            }
         }
     },
     {
@@ -402,7 +421,10 @@
         "prefix": "nadeko",
         "requires": {
             "house": true,
-            "response": "bouncer"
+            "response": "bouncer",
+            "args": {
+                "length": [3, "++"]
+            }
         }
     },
     {
@@ -421,7 +443,10 @@
         "requires": {
             "house": true,
             "channels": ["bot"],
-            "response": "bouncer"
+            "response": "bouncer",
+            "args": {
+                "length": 0
+            }
         }
     },
     {

@@ -3,7 +3,10 @@
     "module": "Profile",
     "file": "messagecount",
     "method": "log",
-    "arguments": ["author", "dbuser"]
+    "arguments": ["author", "dbuser"],
+    "requires": {
+      "bot": false
+    }
   },
   {
     "module": "CustomReactions",
@@ -11,7 +14,7 @@
     "method": "text",
     "arguments": [],
     "requires": {
-      "bot": "false"
+      "bot": false
     }
   },
   {
@@ -20,14 +23,17 @@
     "method": "emoji",
     "arguments": [],
     "requires": {
-      "bot": "false"
+      "bot": false
     }
   },
   {
     "module": "Reddit",
     "file": "reddit",
     "method": "link",
-    "arguments": ["content"]
+    "arguments": ["content"],
+    "requires": {
+      "bot": false
+    }
   },
   {
     "module": "Trivia",
