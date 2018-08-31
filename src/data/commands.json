@@ -170,6 +170,22 @@
     },
     {
         "aliases": [
+            "lastmessage",
+            "last"
+        ],
+        "description": "Fetches the last message of a user. Defaults to self.",
+        "usage": [
+            "lastmessage",
+            "last"
+        ],
+        "module": "Utility",
+        "file": "messagecount",
+        "method": "last",
+        "arguments": ["argument"],
+        "prefix": "generic"
+    },
+    {
+        "aliases": [
             "addcustreact",
             "acr",
             "addcustomreaction"
@@ -402,7 +418,7 @@
             "house": true,
             "response": "bouncer",
             "args": {
-                "length": [3, "++"]
+                "length": [2, "++"]
             }
         }
     },
@@ -423,7 +439,7 @@
             "house": true,
             "response": "bouncer",
             "args": {
-                "length": [3, "++"]
+                "length": [2, "++"]
             }
         }
     },
@@ -641,7 +657,7 @@
             "color 255, 26, 26",
             "color NAVY_BLUE"
         ],
-        "module": "Administration",
+        "module": "Profile",
         "file": "color",
         "method": "run",
         "arguments": ["member"],
@@ -1222,7 +1238,7 @@
             "upversion big",
             "upversion huge"
         ],
-        "module": "Adminisration",
+        "module": "Administration",
         "file": "set",
         "method": "upversion",
         "arguments": ["argument"],
@@ -1241,7 +1257,7 @@
             "downversion big",
             "downversion huge"
         ],
-        "module": "Adminisration",
+        "module": "Administration",
         "file": "set",
         "method": "downversion",
         "arguments": ["argument"],
@@ -1372,5 +1388,42 @@
         "method": "outgoing",
         "arguments": ["args"],
         "prefix": "generic"
+    },
+    {
+        "aliases": [
+            "backup"
+        ],
+        "description": "Backs up the database to a given file.",
+        "usage": [
+            "backup",
+            "backup 1",
+            "backup 2",
+            "backup 3"
+        ],
+        "module": "Administration",
+        "file": "backup",
+        "method": "force",
+        "arguments": ["args"],
+        "prefix": "generic",
+        "requires": {
+            "user": "owner"
+        }
+    },
+    {
+        "aliases": [
+            "restore"
+        ],
+        "description": "Restores the database from a given file.",
+        "usage": [
+            "restore"
+        ],
+        "module": "Administration",
+        "file": "backup",
+        "method": "force",
+        "arguments": ["args"],
+        "prefix": "generic",
+        "requires": {
+            "user": "owner"
+        }
     }
 ]

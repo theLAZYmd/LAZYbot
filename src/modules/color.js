@@ -1,4 +1,6 @@
 const Parse = require("../util/parse.js");
+const Maths = require("../util/maths.js");
+const Router = require("../util/router.js");
 
 class Color extends Parse {
 
@@ -45,6 +47,41 @@ class Color extends Parse {
         .catch(e => console.log(e));
       }
     }
+  }
+
+  async add (member) {
+    try {
+      member.addRole(this.Search.roles.get("ChooseColor"));
+      let role = await this.guild.createRole({
+        "name": username + "CustomColor",
+        "position": 70
+      });
+      member.addRole(role);
+      Router.logCommand({
+        "author": {
+          "tag": "process"
+        },
+        "args": [role.name, member.user.tag],
+        "command": "createRole"
+      }, {
+        "file": "Color",
+        "prefix": ""
+      })
+    } catch (e) {
+      if (e) this.Output.onError(e);
+    }
+  }
+
+  static randDecimal () {
+    return Maths.randbetween(1, 16777215);
+  }
+
+  static randHex () {
+    let letters = '0123456789ABCDEF';
+    let color = '#';
+    for(let i = 0; i < 6; i++)
+      color += letters[Maths.randBetween(0, 17)];
+    return color;
   }
 
 }

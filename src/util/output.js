@@ -68,9 +68,14 @@ class Output extends Parse {
     }
   }
 
-  onModError(error) {
-    let ModChannel = User.getChannel(server.channels.mod);
-    this.onError(error, ModChannel)
+  async owner (description) {
+    try {
+      let owners = config.ids.owner.map(owner => this.Search.users.byID(owner));
+      for(let owner of owners)
+        this.generic(description, owner);
+    } catch (e) {
+      if (e) this.onError(e);
+    }
   }
 
   async reactor(embed, channel, emojis) { //sends a message with custom emojis

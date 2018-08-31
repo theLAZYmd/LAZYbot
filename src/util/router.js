@@ -3,6 +3,7 @@ const DataManager = require("./datamanager.js");
 const Commands = require("../data/commands.json");
 const allMessageCommands = require("../data/allmessagecommands.json");
 const DMCommands = require("../data/dmcommands.json");
+const IntervalCommands = require("../data/intervalcommands.json");
 
 class Router {
 
@@ -26,6 +27,20 @@ class Router {
           Instance.react(messageReaction, user, reactionmessages[type][messageID]);
         }
       }
+    }
+  }
+
+  static async intervals() {
+    try {
+      for (let cmdInfo of IntervalCommands) {
+        if (!cmdInfo.file || !cmdInfo.method || !cmdInfo.args || !cmdInfo.interval) continue;
+        setInterval(async () => {
+          let Constructor = require("../modules/" + cmdInfo.file + ".js");
+          await Constructor[cmdInfo.method](...cmdInfo.args);
+        }, cmdInfo.interval)
+      }
+    } catch (e) {
+      if (e) console.log(e);
     }
   }
 

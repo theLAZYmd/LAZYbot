@@ -46,6 +46,22 @@ class MessageCount extends Parse {
     return this.Output.generic(`**${user.tag}** has sent **${dbuser.messages.count.toLocaleString()}** messages.`)
   }
 
+  last (argument) {
+    try {
+      let user = this.author;
+      if (argument) user = this.Search.users.get(argument);
+      if (!user) throw "Couldn't find user **" + argument + "**!";
+      let dbuser = DBuser.getUser(user);
+      if (!dbuser.messages.last) throw "Last message was not logged for user **" + user.tag + "**.";
+      this.Output.sender({
+        "title": "Last Message of " + user.tag + "\n",
+        "description": "```" + dbuser.messages.last + "```"
+      });
+    } catch(e) {
+      if (e) this.Output.onError(e)
+    }
+  }
+
 }
 
 module.exports = MessageCount;

@@ -1,17 +1,64 @@
 //the permanent requires that access data files or modules
-const Discord = require('discord.js');
+const Discord = require("discord.js");
 const DataManager = require("./util/datamanager.js");
 const Router = require("./util/router.js")
 const config = require("./config.json");
 const client = new Discord.Client();
 const commands = require("./data/commands.json");
-const http = require('http');
-const express = require('express')();
+const http = require("http");
+const express = require("express")();
 
 //the additional modules for debugging or only used sometimes
 const onStartup = require("./events/onStartup.js");
 const DebuggingConstructor = require("./util/debugging.js");
 const ModMailConstructor = require("./modules/modmail.js");
+
+const events = [
+  ["channelCreate", ["channel"]],
+  ["channelDelete", ["channel"]],
+  ["channelPinsUpdate", ["channel", "time"]],
+  ["channelUpdate", ["oldChannel", "newChannel"]],
+  ["clientUserGuildSettingsUpdate", ["clientUserGuildSettings"]],
+  ["clientUserSettingsUpdate", ["clientUserSettings"]],
+  ["debug", ["info"]],
+  ["disconnect", ["event"]],
+  ["emojiCreate", ["emoji"]],
+  ["emojiDelete", ["emoji"]],
+  ["emojiUpdate", ["oldEmoji", "newEmoji"]],
+  ["error", ["error"]],
+  ["guildBanAdd", ["guild", "user"]],
+  ["guildBanRemove", ["guild", "user"]],
+  ["guildCreate", ["guild"]],
+  ["guildDelete", ["guild"]],
+  ["guildMemberAdd", ["member"]],
+  ["guildMemberAvailable", ["member"]],
+  ["guildMemberRemove", ["member"]],
+  ["guildMembersChunk", ["member", "guild"]],
+  ["guildMemberSpeaking", ["member", "speaking"]],
+  ["guildMemberUpdate", ["oldMember", "newMember"]],
+  ["guildUnavailable", ["guild"]],
+  ["guildUpdate", ["oldGuild", "newGuild"]],
+  ["message", ["message"], "command"],
+  ["messageDelete", ["message"]],
+  ["messageDeleteBulk", ["messages"]],
+  ["messageReactionAdd", ["messageReaction", "user"]],
+  ["messageReactionRemove", ["messageReaction", "user"]],
+  ["messageReactionRemoveAll", ["message"]],
+  ["messageUpdate", ["oldMessage", "newMessage"]],
+  ["presenceUpdate", ["oldMember", "newMember"]],
+  ["ready", []],
+  ["reconnecting", []],
+  ["resume", ["replayed"]],
+  ["roleCreate", ["role"]],
+  ["roleDelete", ["role"]],
+  ["roleUpdate", ["oldRole", "newRole"]],
+  ["typingStart", ["channel", "user"]],
+  ["typingStop", ["channel", "user"]],
+  ["userNoteUpdate", ["user", "oldNote", "newNote"]],
+  ["userUpdate", ["oldUser", "newUser"]],
+  ["voiceStateUpdate", ["oldMember", "newMember"]],
+  ["warn", ["info"]]
+];
 
 class Bot {
 
@@ -37,6 +84,7 @@ class Bot {
           console.log(`Noticed bot owner ${owner.tag} in ${Date.now() - data.reboot}ms`);
         console.log("bleep bloop! It's showtime.");
         if (data.autoupdates) console.log("Beginning update cycle...");
+        Router.intervals();
         const Debugging = new DebuggingConstructor(client);
         if (config.states.debug) Bot.debug(data);
         //Debugging.removeDuplicates();
@@ -48,6 +96,16 @@ class Bot {
       }
     });
 
+    for (let event of events) {
+      if (!event[2]) continue;
+      client.on(event[0], function () {
+        for (let i = 0; i < event[1].length; i++) {
+          data[event[1][i]] = arguments[i];
+        };
+        Router[event[2]](data);
+      });
+    } /*
+
     client.on("message", (message) => { //command handler
       try {
         data.message = message;
@@ -55,13 +113,13 @@ class Bot {
       } catch (e) {
         console.log(e);
       }
-    })
+    }) */
 
     client.on("messageReactionAdd", (messageReaction, user) => {
       if (!messageReaction.message.guild) return;
       if (user.bot || !messageReaction.message.author.bot) {
         if (messageReaction.emoji.id === "481996881606475798" && !user.bot) return messageReaction.remove(user);
-      } //For using emojis as 'buttons'. Only reactions done by users reacting to bot messages are of interest to us.
+      } //For using emojis as "buttons". Only reactions done by users reacting to bot messages are of interest to us.
       else Router.reaction(messageReaction, user)
       .catch((e) => {
         if (e) console.log(e);
@@ -75,7 +133,7 @@ class Bot {
       });
     })
 
-    client.on('raw', async event => {
+    client.on("raw", async event => {
       if (event.t !== "MESSAGE_REACTION_ADD") return;
       let data = event.d;
       let user = client.users.get(data.user_id);
@@ -115,7 +173,7 @@ class Bot {
   }
 
   static recordMessage(message) {
-    let _message = require('circular-json').stringify(message, null, 4);
+    let _message = require("circular-json").stringify(message, null, 4);
     console.log(_message);
     require("fs").writeFileSync("./src/data/genericmessage.json", _message);
   }

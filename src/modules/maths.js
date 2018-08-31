@@ -16,7 +16,7 @@ class Maths extends Parse {
       let route = argument.match(/^(?:Math\.)?([a-z0-9]+)\(([a-z0-9.,\s]*)\)$/i);
       if (!route) throw "Invalid format for operation."
       let array = await route[2].replace(/ \s/g, "").split(",").validate();
-      if (typeof Maths[route[1]] === "function") {
+      if (typeof Maths[route[1].toLowerCase()] === "function") {
         let result = Maths[route[1]](...array).toString();
         return this.Output.generic((Math.round(1000 * result) / 1000).toString());
       } else
@@ -27,6 +27,10 @@ class Maths extends Parse {
     } catch (e) {
       if (e) this.Output.onError(e);
     }
+  }
+
+  static randbetween (min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min );
   }
 
   static negativebinomial(r, p, x, cumulative) {
