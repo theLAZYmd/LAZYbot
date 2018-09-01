@@ -14,18 +14,23 @@ class DataManager {
   static getData() { //get tally
     return DataManager.getFile(config.dataFile);
   }
-  
+
   static setData(data) { //get tally
     return DataManager.setFile(data, config.dataFile);
   }
 
-  static getServer(id, newfilepath) { //get server by:
+  static getServer(_id, newfilepath) { //get server by:
     let filepath = newfilepath ? newfilepath : config.guildFile; //if a path is specified, it's not server.json
-    let server = DataManager.getFile(filepath)[id]; //get the specific info for that server
-    if(!server) { //if there's no data for that server
-      let object = newfilepath ? {id} : Object.assign(config.templates.server, {id}); //create a new object with object.id === the id in question
+    let file = DataManager.getFile(filepath);
+    let server = file[_id]; //get the specific info for that server
+    if (!server) { //if there's no data for that server
+      let object = newfilepath ? {
+        _id
+      } : Object.assign(config.templates.server, {
+        _id
+      }); //create a new object with object.id === the id in question
       DataManager.setServer(object, filepath); //set it
-      console.log("Server " + object.id + " has been logged in the database!");
+      console.log("Server " + object._id + " has been logged in the database!");
       return object; //and return the object
     };
     return server; //and return the object
@@ -34,7 +39,8 @@ class DataManager {
   static setServer(newServer, newfilepath) {
     let filepath = newfilepath ? newfilepath : config.guildFile; //if a path is provided, use it
     let allServer = DataManager.getFile(filepath); //get the file (the meta object)
-    allServer[newServer.id] = newServer; //metaobject.id === the object
+    let id = newServer._id || newServer.id;
+    allServer[id] = newServer; //metaobject.id === the object
     DataManager.setFile(allServer, filepath); //and set it
   }
 

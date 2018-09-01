@@ -1,6 +1,7 @@
 const Parse = require("../util/parse.js");
 const DataManager = require("../util/datamanager.js");
 const request = require("request");
+const rp = require("request-promise");
 const config = require("../config.json");
 const Embed = require("../util/embed.js");
 
@@ -67,10 +68,8 @@ class Embeds extends Parse {
     if (this._embeds) return this._embeds;
     try {
       if (this.client.user.id === config.ids.betabot) throw "";
-      else await request(config.urls.embeds, async (error, response, body) => {
-        if (response.statusCode === "404") throw "**" + response + "**: " + error;
-        this._embeds = JSON.parse(body);
-      });
+      let body = await rp(config.urls.embeds);
+      this._embeds = JSON.parse(body);
     } catch (e) {
       if (e) this.Output.onError(e);
       this._embeds = DataManager.getFile("./src/data/embeds.json");

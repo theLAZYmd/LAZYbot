@@ -1,10 +1,14 @@
 {
     "314155682033041408": {
-        "id": "314155682033041408",
+        "_id": "314155682033041408",
         "states": {
-            "tm": false,
+            "tm": true,
             "bcp": false,
-            "election": false,
+            "au": true,
+            "election": {
+                "registering": false,
+                "voting": false
+            },
             "trivia": false
         },
         "prefixes": {
@@ -13,6 +17,7 @@
         },
         "channels": {
             "announcements": "announcements",
+            "bank": "bank",
             "bot": "spam",
             "bot2": "devs",
             "modmail": "mod-mail",

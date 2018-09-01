@@ -8,6 +8,11 @@ class States extends Parse {
     super(message);
   }
 
+  au () {
+    this.server.states.automaticupdates = !this.server.states.automaticupdates;
+    DataManager.setServer(this.server);
+  }
+
   tm (args) {
     if(this.client.user.id === config.ids.bot) return;
     if(!args || args.length !== 2) args = [true, true]; //default for selectivity not specified

@@ -55,6 +55,7 @@ class Tracker extends Parse {
   }
 
   initUpdateCycle() {
+    //if (!this.server.states.automaticupdates) return;
     let dbuser = this.LUTDU;
     if (dbuser) {
       let sources = Object.values(config.sources).filter(source => dbuser[source.key]);

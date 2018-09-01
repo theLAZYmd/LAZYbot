@@ -25,14 +25,10 @@ class Permissions extends Parse {
   }
 
   async role (roleType, argsInfo) { //admin, {object}
-    for (let _roleType in argsInfo.server.roles) { //
-      if (roleType === _roleType) {
-        let roleName = argsInfo.server.roles[_roleType];
-        if (!this.guild.roles.some(role => role.name = roleName) || !roleName) return true;
-        return argsInfo.member.roles.some(role => role.name.toLowerCase().startsWith(roleName));
-      }
-    };
-    return false;
+    if (roleType === "owner") return argsInfo.guild.ownerID === argsInfo.member.id;
+    let roleName = argsInfo.server.roles[_roleType];
+    if (!this.guild.roles.some(role => role.name = roleName) || !roleName) return true;
+    return (argsInfo.member.roles.some(role => role.name.toLowerCase().startsWith(roleName)) || argsInfo.guild.ownerID === argsInfo.member.id);
   }
 
   async channels (channelName, data) {

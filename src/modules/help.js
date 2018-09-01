@@ -41,7 +41,9 @@ class Help extends Parse {
   }
 
   get prefix() {
-    return this.server.prefixes[this.cmdInfo.prefix];
+    if (this._prefix) return this._prefix;
+    this._prefix = this.server.prefixes[this.cmdInfo.prefix];
+    return this._prefix;
   }
 
   get fields() {
@@ -49,6 +51,11 @@ class Help extends Parse {
     fields = Embed.fielder(fields,
       "Usage",
       this.usage,
+      false
+    );
+    if (this.cmdInfo.subcommands) fields = Embed.fielder(fields,
+      "Subcommands",
+      this.subcommands,
       false
     );
     if (this.cmdInfo.requires && this.requires.trim()) fields = Embed.fielder(fields,
@@ -80,12 +87,33 @@ class Help extends Parse {
     return this._requires;
   }
 
+  get subcommands() {
+    if (this._subcommands) return this._subcommands;
+    this._subcommands = "";
+    for (let subcommand of this.cmdInfo.subcommands) { //[channel: "spam"]
+      this._subcommands += "***" + subcommand[0] + "***\n";
+      let array = [];
+      for (let [ex, description] of Object.entries(subcommand[1])) array.push([
+          "- `" + ex + "`",
+          description
+        ]);
+      this._subcommands += Embed.getFields(array) + "\n";
+    };
+    return this._subcommands;
+  }
+
   get footer() {
     return Embed.footer("Module: " + this.cmdInfo.module);
   }
 
   get usage() {
-    return "`" + this.prefix + this.cmdInfo.usage.join("`\n`" + this.prefix) + "`";
+    let string = "";
+    if (this.cmdInfo.subcommands) {
+      let subcommands = this.cmdInfo.subcommands.map(subcommand => subcommand[0]);
+      string += "`" + this.prefix + this.cmdInfo.aliases[0] + "` ***" + subcommands.join(" ") + "***\n";
+    };
+    string += "`" + this.prefix + this.cmdInfo.usage.join("`\n`" + this.prefix) + "`";
+    return string;
   }
 
   map(type, item) { //basically a custom map function customisable to the type
@@ -102,6 +130,7 @@ class Help extends Parse {
       case "channels":
         return this.Search.channels.get(this.server.channels[item]);
       case "role":
+        if (item === "owner") return "**Server owner only**.";
         return this.Search.roles.get(this.server.roles[item]);
       case "bot":
         return undefined;
@@ -111,6 +140,9 @@ class Help extends Parse {
         let string = "";
         if (item.hasOwnProperty("length")) {
           if (!Array.isArray(item.length)) item.length = [item.length];
+          for (let i in item)
+            if (item[i] === "++")
+              item[i] = "more";
           string += "`" + item.length.join("` or `") + "` arguments"
         };
         return string;

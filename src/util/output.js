@@ -112,9 +112,11 @@ class Output extends Parse {
         "time": data.time,
         "errors": ["time"]
       });
+      let emoji = collected.first();
       msg.delete();
-      if (collected.first().emoji.name === "✅") return true;
-      else {
+      if (collected.first().emoji.name === "✅") {
+        return true;
+      } else {
         if (r) return false;
         else throw "";
       };
@@ -143,7 +145,7 @@ class Output extends Parse {
       let author = data.title ? {
         "name": data.title
       } : {};
-      let title = `Please choose a${/^(a|e|i|o|u)/.test(data.type) ? "n" : ""} ${data.type}:`;
+      let title = data.description ? data.description : `Please choose a${/^(a|e|i|o|u)/.test(data.type) ? "n" : ""} ${data.type}:`;
       for (let i = 0; i < data.options.length; i++) {
         emojis.push((i + 1) + "⃣");
         description += (i + 1) + "⃣ **" + data.options[i] + "**\n";
@@ -168,14 +170,14 @@ class Output extends Parse {
       });
       msg.delete();
       if (collected.first().emoji.name === "❎") throw "";
-      let number = Number(collected.first().emoji.name.match(/([1-9]⃣)/));
+      let number = Number(collected.first().emoji.name.match(/([1-9])⃣/)[1]);
       return (number - 1); //and if valid input, send of modmail for that guild
     } catch (e) {
       if (e) this.onError(e);
     }
   }
 
-  async response(data = {}, message) {
+  async response(data = {}, r) {
     try {
       data = Object.assign({
         "author": this.author,
@@ -184,7 +186,8 @@ class Output extends Parse {
         "filter": () => {
           return true
         },
-        "time": 30000
+        "number": false,
+        "time": 60000
       }, data);
       let author = data.title ? Embed.author(data.title) : {};
       let msg = await this.reactor({author,
@@ -195,7 +198,7 @@ class Output extends Parse {
         if (reaction.emoji.name !== "❎") return false;
         return true;
       };
-      let mfilter = m => m.author.id === data.author.id && m.content && data.filter(m); //condition, plus user speicifed filter
+      let mfilter = m => m.author.id === data.author.id && m.content !== undefined && (!isNaN(m.content) || !data.number) && (m.content.trim().split(/\s+/g).length === 1 || !data.oneword) && data.filter(m); //condition, plus user speicifed filter
       try {
         let collected = await Promise.race([
           (async () => {
@@ -215,8 +218,12 @@ class Output extends Parse {
         ]);
         if (!collected) throw "";
         msg.delete();
-        if (message) return collected.first();
-        else return collected.first().content;
+        if (r) return collected.first();
+        else {
+          let value = collected.first().content;
+          collected.first().delete();
+          return value;
+        };
       } catch (e) {
         msg.delete();
         throw e;

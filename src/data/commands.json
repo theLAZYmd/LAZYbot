@@ -545,6 +545,16 @@
             "testingmode",
             "tm"
         ],
+        "subcommands": [
+            ["Bouncer", {
+                "true": "Allows Bouncer individually to view the testing channels.",
+                "false": "Blocks Bouncer individually from viewing the testing channels."
+            }],
+            ["LAZYbot", {
+                "true": "Allows LAZYbot individually to view the testing channels.",
+                "false": "Blocks LAZYbot individually from viewing the testing channels."
+            }]
+        ],
         "description": "Toggles testing mode, which disables LAZYbot and Bouncer's permissions in the #spam and #devs channels. Specify 'true false' to just apply to one or the other.",
         "usage": [
             "tm",
@@ -695,61 +705,45 @@
     },
     {
         "aliases": [
-            "generatevoters",
-            "genvoters"
-        ],
-        "description": "Registers the eligible voters to the database.",
-        "usage": [
-            "genvoters zh"
-        ],
-        "module": "Election",
-        "file": "election",
-        "method": "voters.add",
-        "arguments": ["args"],
-        "prefix": "generic"
-    },
-    {
-        "aliases": [
-            "disqualify",
-            "disqualifyvoters"
-        ],
-        "description": "Disqualifies user from voting in a channel.",
-        "usage": [
-            "disqualify zh moonenaneBETA eekarf"
-        ],
-        "module": "Election",
-        "file": "election",
-        "method": "voters.disqualify",
-        "arguments": ["args"],
-        "prefix": "generic"
-    },
-    {
-        "aliases": [
-            "getvoters",
             "voters"
         ],
-        "description": "Gets the list of eligble voters for a channel. To be used in #spam only.",
+        "description": "Performs an action on the voters register for an upcoming election on the server.",
+        "subcommands": [
+            ["action", {
+                "register": "Registers voters ready for a new election. Resets previous voting data.",
+                "disqualify": "Removes a voter from all election records.",
+                "get": "Gets the list of eligble voters for a channel. To be used in #spam only."
+            }]
+        ],
         "usage": [
-            "voters zh"
+            "voters register",
+            "voters disqualify",
+            "voters get"
         ],
         "module": "Election",
-        "file": "election",
-        "method": "voters.get",
-        "arguments": ["argument"],
-        "prefix": "generic"
+        "file": "election/voters",
+        "method": "run",
+        "arguments": ["args"],
+        "prefix": "generic",
+        "requires": {
+            "role": "owner",
+            "args": {
+                "length": [1, "++"]
+            }
+        }
     },
     {
         "aliases": [
-            "eligible",
-            "eligibletovote"
+            "eligible"
         ],
-        "description": "Returns if you are eligible to vote in a given channel.",
+        "description": "Lists the ballots for which a user is eligible to vote. Defaults to self.",
         "usage": [
-            "eligible anti"
+            "eligible",
+            "eligible hauptschule"
         ],
         "module": "Election",
-        "file": "election",
-        "method": "voters.eligible",
+        "file": "election/voters",
+        "method": "eligible",
         "arguments": ["argument"],
         "prefix": "generic"
     },
@@ -1194,10 +1188,17 @@
             "odds"
         ],
         "description": "Begins process to generate a given type of odds. Please specify type requested.",
+        "subcommands": [
+            ["type", {
+                "series": "A fixed number of games between two players.",
+                "match": "A set that ends when one player reaches a certain score (ex: first to 10).",
+                "arena": "A tournament for which there are no fixed 'rounds'."
+            }]
+        ],
         "usage": [
             "odds series",
             "odds match",
-            "odds tournament"
+            "odds arena"
         ],
         "module": "Calculation",
         "file": "odds",

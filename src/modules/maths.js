@@ -1,4 +1,5 @@
 const Parse = require("../util/parse.js");
+const uuid = require("uuid/v4");
 
 class Maths extends Parse {
   constructor(message) {
@@ -29,8 +30,22 @@ class Maths extends Parse {
     }
   }
 
-  static randbetween (min, max) {
-    return Math.floor(Math.random() * (max - min + 1) + min );
+  static randstrings(n, l) {
+    let r = '';
+    let length = n*l;
+    while (r.length < length) {
+      r += uuid().match(/[\d]*/g).join('');
+    };
+    r = r.substring(0,length);
+    let rs = [];
+    for (let i = 0; i < n; i++) {
+      rs.push(r.substring(i*l,(i+1)*l));
+    };
+    return rs;
+  }
+
+  static randbetween(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
   static negativebinomial(r, p, x, cumulative) {
@@ -80,7 +95,7 @@ class Maths extends Parse {
 module.exports = Maths;
 
 Array.prototype.validate = function () {
-  return new Promise ((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     for (let item of this) {
       item = item.trim();
       if (item === "true") {

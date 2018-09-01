@@ -97,12 +97,13 @@ class Channel extends All {
     return channel;
   }
 
-  byID(id) {
-    return this.guild.channels.find(channel => id === channel.id) || "";
+  byID(snowflake) {
+    let id = snowflake.match(/[0-9]{18}/);
+    return id ? this.guild.channels.find(channel => id[0] === channel.id) : "";
   }
   
   byName(name) {
-    return this.guild.channels.find(channel => name.toLowerCase() === channel.name && channel.name.toLowerCase()) || "";
+    return this.guild.channels.find(channel => channel.name && name.toLowerCase() === channel.name.toLowerCase()) || "";
   }
 
 }
