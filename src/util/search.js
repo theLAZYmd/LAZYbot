@@ -108,6 +108,31 @@ class Channel extends All {
 
 }
 
+class Guild extends All {
+  constructor(message) {
+    super(message);
+  }
+
+  get(searchstring) {
+    let guild = "";
+    if(searchstring.length >= 2) {
+      if(!guild) guild = this.byID(searchstring);
+      if(!guild) guild = this.byName(searchstring);
+    }
+    return guild;
+  }
+
+  byID(snowflake) {
+    let id = snowflake.match(/[0-9]{18}/);
+    return id ? this.guild.channels.find(guild => id[0] === guild.id) : "";
+  }
+  
+  byName(name) {
+    return this.guild.channels.find(guild => guild.name && name.toLowerCase() === guild.name.toLowerCase()) || "";
+  }
+
+}
+
 class Role extends All {
   constructor(message) {
     super(message);
@@ -168,6 +193,7 @@ class Search extends Parse {
     this.users = new User(message);
     this.members = new Member(message);
     this.channels = new Channel(message);
+    this.guilds = new Guild(message);
     this.roles = new Role(message);
     this.emojis = new Emoji(message);
   }

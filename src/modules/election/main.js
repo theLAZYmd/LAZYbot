@@ -1,25 +1,3 @@
-class Candidates extends Parse {
-  constructor(message) {
-    super(message)
-  }
-
-  add(args) {
-    if (!this.Check.role(this.member, this.server.roles.admin)) return this.Output.onError("Insufficient permissions to do this!");
-    if (args.length !== 2) return this.Output.onError("Incorrect format.");
-    let user = this.Search.users.get(args[0]);
-    let channel = this.Search.channels.get(args[1]);
-    if (!user || !channel) return this.Output.onError("Couldn't find matching user or channel!")
-    let election = this.server.election || {};
-    let candidates = election[channel.name] || {};
-    candidates[user.tag] = 0;
-    election[channel.name] = candidates;
-    this.server.election = election;
-    DataManager.setServer(this.server);
-    this.message.delete();
-    this.Output.generic(`Added **${user.tag}** to list of eligble candidates for channel **${channel.name}**.`)
-  }
-}
-
 class Ballot extends Parse {
 
   constructor(message) {

@@ -2,6 +2,7 @@ const Parse = require("../../util/parse.js");
 const DataManager = require("../../util/datamanager.js");
 const DBuser = require("../../util/dbuser.js");
 const Embed = require("../../util/embed.js");
+const config = require("../../config.json");
 
 class Voters extends Parse {
 
@@ -16,12 +17,30 @@ class Voters extends Parse {
 
   async run(args) {
     try {
-      let command = args.shift().toLowerCase();
+      let command = (args.shift() || "generate").toLowerCase();
+      if (/register|disqualify|clear/.test(command.toLowerCase()) && (this.guild.ownerID !== this.author.id && !config.ids.owner.includes(this.author.id))) throw "Insufficient server permissions to use this command.";
       if (typeof this[command] === "function") this[command](); //looks for, this.register(), this.get(), this.disqualify()
       else throw "Invalid second parameter given **" + command + "**.";
     } catch (e) {
       if (e) this.Output.onError(e);
     }
+  }
+
+  async generate(msg) {
+    let embed = {
+      "fields": [],
+      "footer": Embed.footer("Use '!voters get' to view individual voters for an election. '!h !voters' for more info.")
+    };
+    let votingBegun = await this.Permissions.state("election.voting", this);
+    for (let [name, data] of Object.entries(this.election)) {
+      if (name.startsWith("_")) continue;
+      let voters = Object.keys(data.voters);
+      let voted = Object.values(data.voters).filter(array => array[0]);
+      Embed.fielder(embed.fields, (this.election._type === "channel" ? "#" : "") + name, voters.length + " voters " + (votingBegun ? "(" + voted.length + " voted)" : ""), true);
+    };
+    embed.title = `Voters for upcoming ${this.election._type ? this.election._type + " " : ""}election${embed.fields.length > 1 ? "s" : ""} on ${this.guild.name}`
+    if (embed.fields.length === 0) embed.description = "No upcoming elections found.";
+    msg ? this.Output.editor(embed, msg) : this.Output.sender(embed);
   }
 
   async register() {
@@ -42,13 +61,9 @@ class Voters extends Parse {
       this.election._id = this.guild.id;
       this.election._type = type;
       this.setData(this.election);
-      let embed = {"fields": []};
-      for (let [name, voters] of Object.entries(data)) {
-        if (name.startsWith("_")) continue;
-        Embed.fielder(embed.fields, (type === "channel" ? "#" : "") + name, voters.length + " voters", true);
-      };
-      embed.title = `Voters for upcoming ${type} election${embed.fields.length > 1 ? "s" : ""} on ${this.guild.name}`
-      this.Output.editor(embed, msg);
+      this.server.states.election.registering = true;
+      DataManager.setServer(this.server);
+      this.generate(msg);
       this.message.delete();
     } catch (e) {
       if (e) this.Output.onError(e);
@@ -126,7 +141,8 @@ class Voters extends Parse {
           let collection;
           if (index === 0) collection = this.guild.members;
           else if (index === 1) {
-            let roleName = !one ? channel.name : await this.Output.response({
+            let roleName = channel.name;
+            if (one) roleName = await this.Output.response({
               "description": "Please write the name of the role for channel " + channel + "."
             });
             let role = this.Search.roles.get(roleName);
@@ -201,8 +217,30 @@ class Voters extends Parse {
     }
   }
 
+  async clear() {
+    try {
+      if (this.args[1]) {
+        let guild = this.Search.guilds.get(this.args[1]) || "";
+        if (!guild) throw "Couldn't find guild";
+        if (this.guild.id !== guild.id && !config.ids.owner.includes(this.author.id)) throw "Insufficient server permissions to use this command.";
+        this.guild = guild;
+      };
+      let election = {
+        "_id": this.guild.id
+      };
+      this.setData(election);
+      this.server.states.election.registering = false;
+      DataManager.setServer(this.server);
+      this.Output.generic("Cleared voting data for server **" + (this.guild.name) + "**.");
+    } catch (e) {
+      console.log(e);
+      if (e) this.Output.onError("**Couldn't clear voting data on server " + (this.guild.name) + "**: " + e);
+    }
+  }
+
   async get() {
     try {
+      if (!(await this.Permissions.state("election.registering", this) || await this.Permissions.state("election.voting", this))) throw "Registering for voters has not yet begun on server " + this.guild.name + ".";
       if (this.channel.name !== this.server.channels.bot) throw "Wrong channel to use this command. Requires: #spam channel.";
       let instance;
       if (this.election._type === "channel") {

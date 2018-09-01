@@ -140,9 +140,9 @@ class Help extends Parse {
         let string = "";
         if (item.hasOwnProperty("length")) {
           if (!Array.isArray(item.length)) item.length = [item.length];
-          for (let i in item)
-            if (item[i] === "++")
-              item[i] = "more";
+          for (let i in item.length)
+            if (item.length[i] === "++")
+              item.length[i] = "more";
           string += "`" + item.length.join("` or `") + "` arguments"
         };
         return string;

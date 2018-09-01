@@ -74,9 +74,8 @@ class Bot {
       try {
         data = new onStartup(client);
         if (data.modmail) () => {}; //used to cache the messages that might need to be reacted to
-        for (let guildID in DataManager.getFile(config.guildFile)) {
-          console.log(`Loaded client server ${client.guilds.get(guildID).name} in ${Date.now() - data.reboot}ms`);
-        };
+        for (let guild of Array.from(client.guilds.values()))
+          console.log(`Loaded client server ${guild.name} in ${Date.now() - data.reboot}ms`);
         console.log(data.bouncerbot ? `Noticed bot user ${data.bouncerbot.tag} in ${Date.now() - data.reboot}ms` : `Bouncer#8585 is not online!`);
         console.log(data.nadekobot ? `Noticed bot user ${data.nadekobot.tag} in ${Date.now() - data.reboot}ms` : `Nadeko#6685 is not online!`);
         console.log(data.harmonbot ? `Noticed bot user ${data.harmonbot.tag} in ${Date.now() - data.reboot}ms` : `Harmonbot#4049 is not online!`);

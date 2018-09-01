@@ -4,6 +4,7 @@ const Commands = require("../data/commands.json");
 const allMessageCommands = require("../data/allmessagecommands.json");
 const DMCommands = require("../data/dmcommands.json");
 const IntervalCommands = require("../data/intervalcommands.json");
+const Permissions = require("./permissions.js");
 
 class Router {
 
@@ -52,14 +53,14 @@ class Router {
         for (let command of DMCommands)
           await Router.runCommand(data.message, data.argsInfo, command);
         throw "";
-      }
+      };
       for (let command of allMessageCommands)
         Router.runCommand(data.message, data.argsInfo, command);
       if (!data.commands[data.argsInfo.command]) throw ""; //checks if command appears on init-generated command listing
       for (let command of Commands) {
         let cmdInfo = Object.assign({}, command);
         cmdInfo.prefix = data.argsInfo.server.prefixes[cmdInfo.prefix];
-        if (cmdInfo.active !== false && cmdInfo.prefix === data.argsInfo.prefix && cmdInfo.aliases.inArray(data.argsInfo.command)) { //if valid command has been received
+        if (cmdInfo.active !== false && cmdInfo.prefix === data.argsInfo.prefix && (cmdInfo.aliases.inArray(data.argsInfo.command) || cmdInfo.aliases.inArray(data.argsInfo.message.content))) { //if valid command has been received
           cmdInfo.command = true;
           let run = await Router.runCommand(data.message, data.argsInfo, cmdInfo);
           if (run) Router.logCommand(data.argsInfo, cmdInfo);
@@ -122,14 +123,14 @@ class Router {
         let kill = true;
         for (let passable of value) {
           try {
-            kill = !(await argsInfo.Permissions[type](passable, argsInfo));
+            kill = !(await Permissions[type](passable, argsInfo));
           } catch (e) {
             console.log(e); //THERE SHOULD NOT BE ERRORS HERE, SO IF WE'RE RECEIVING ONE, DEAL WITH IT
           }
         };
         if (kill) throw cmdInfo.method;
       } catch (e) { //if it fails any of requirements, throw
-        throw argsInfo.Permissions.output(type, argsInfo) ? argsInfo.Permissions.output(type, argsInfo) + "\nUse `" + cmdInfo.prefix + "help` followed by command name to see command info." : ""; //if no argsInfo.Permissions, kill it
+        throw Permissions.output(type, argsInfo) ? Permissions.output(type, argsInfo) + "\nUse `" + cmdInfo.prefix + "help` followed by command name to see command info." : ""; //if no Permissions, kill it
       }
     };
     return true;

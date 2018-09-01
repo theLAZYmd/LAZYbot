@@ -2,6 +2,8 @@ const config = require("../config.json");
 const DBuser = require("./dbuser.js");
 const DataManager = require("./datamanager.js");
 const Embed = require("./embed.js");
+const Aliases = DataManager.getFile("./src/data/aliases.json");
+const Permissions = require("./permissions.js");
 
 class Parse {
 
@@ -10,6 +12,7 @@ class Parse {
     this.member = message ? message.member : "";
     this.client = message ? message.client : this.Bot.client;
     this.guild = this.member ? this.member.guild : this.client.guilds.get(config.houseid);
+    this.aliases = this.guild ? Aliases._all.concat(Aliases[this.guild.id] || []) : Aliases.all;
     if (!message) return;
     this.message.content = message && message.content && typeof message.content === "string" ?
       message.content
@@ -22,6 +25,11 @@ class Parse {
     this.author = message.author;
     this.channel = message.channel;
     this.server = this.guild ? DataManager.getServer(this.guild.id) : "";
+    if (this.message.content && this.server) {
+      for (let [key, alias] of this.aliases)
+        if (this.message.content.toLowerCase().includes(key.toLowerCase()))
+          this.message.content = this.message.content.replace(key, alias.replace(/\${([a-z]+)}/gi, value => this.server.prefixes[value.match(/[a-z]+/i)]))
+    };
     this.reactionmessages = this.guild ? DataManager.getServer(this.guild.id, "./src/data/reactionmessages.json") : "";
   }
 
@@ -41,10 +49,7 @@ class Parse {
   }
 
   get Permissions() {
-    if (!this._Permissions) {
-      let PermissionsConstructor = require("./permissions.js");
-      this._Permissions = new PermissionsConstructor(this.message);
-    };
+    if (!this._Permissions) this._Permissions = Permissions;
     return this._Permissions;
   }
 
@@ -107,15 +112,19 @@ class Parse {
   }
 
   get prefix() {
-    for (let prefix in this.server.prefixes) {
-      if (this.message.content.startsWith(this.server.prefixes[prefix])) return this.server.prefixes[prefix];
-    };
-    return "";
+    if (!this._prefix) {
+      for (let prefix of Object.values(this.server.prefixes))
+        if (this.message.content.startsWith(prefix)) {
+          this._prefix = prefix;
+          continue;
+        }
+    }
+    return this._prefix || "";
   }
 
   get args() {
     let firstargs = this.message.content.slice(this.prefix.length).match(/[^\s]+/gi) || [];
-    return !!this.prefix ? firstargs.slice(1) : firstargs;
+    return this.prefix ? firstargs.slice(1) : firstargs;
   }
 
   get argument() {

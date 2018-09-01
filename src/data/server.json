@@ -2,7 +2,7 @@
     "314155682033041408": {
         "_id": "314155682033041408",
         "states": {
-            "tm": true,
+            "tm": false,
             "bcp": false,
             "au": true,
             "election": {

@@ -60,11 +60,11 @@ class Output extends Parse {
       console.log(error);
       let description = typeof error === "object" ? "**" + error.name + ":** " + error.message : error;
       this.sender({
-        description,
+        "description": description.replace(/\${([a-z]+)}/gi, value => this.server.prefixes[value.match(/[a-z]+/i)]),
         "color": config.colors.error
       }, channel)
     } catch (e) {
-      if (e) this.onError(e);
+      if (e) console.log(e);
     }
   }
 
@@ -160,7 +160,7 @@ class Output extends Parse {
         if (user.id !== data.author.id) return false;
         if (reaction.emoji.name === "❎") return true;
         let number = reaction.emoji.name.match(/([1-9])⃣/);
-        if (Number(number[1]) >= data.options.length) return false;
+        if (Number(number[1]) > data.options.length) return false;
         return true;
       };
       let collected = await msg.awaitReactions(filter, { //wait for them to react back
@@ -221,7 +221,7 @@ class Output extends Parse {
         if (r) return collected.first();
         else {
           let value = collected.first().content;
-          collected.first().delete();
+          collected.first().delete().catch((e) => {});
           return value;
         };
       } catch (e) {
