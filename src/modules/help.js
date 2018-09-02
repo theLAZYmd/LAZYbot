@@ -93,7 +93,8 @@ class Help extends Parse {
     for (let subcommand of this.cmdInfo.subcommands) { //[channel: "spam"]
       this._subcommands += "***" + subcommand[0] + "***\n";
       let array = [];
-      for (let [ex, description] of Object.entries(subcommand[1])) array.push([
+      if (subcommand[1])
+        for (let [ex, description] of Object.entries(subcommand[1])) array.push([
           "- `" + ex + "`",
           description
         ]);

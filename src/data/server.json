@@ -17,10 +17,10 @@
         },
         "channels": {
             "announcements": "announcements",
-            "bank": "bank",
             "bot": "spam",
             "bot2": "devs",
             "modmail": "mod-mail",
+            "mod": "test-channel-in-waiting",
             "log": "comment-log",
             "join": "join",
             "leave": "lounge",
@@ -34,6 +34,7 @@
         },
         "roles": {
             "admin": "admin",
+            "bank": "bank",
             "mod": "mod",
             "bot": "Bot-In-Use",
             "muted": "muted",

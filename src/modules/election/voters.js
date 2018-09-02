@@ -51,15 +51,17 @@ class Voters extends Parse {
         "filter": msg => typeof this["by" + msg.content.toProperCase()] === "function"
       });
       let data = await this["by" + type.toProperCase()](); //data: {type: 'collection of members'}
-      data._type = type;
+      if (!data) throw "Time out.";
+      data._type = type, data._id = this.guild.id;
       msg = await this.Output.generic("Finding eligible voters... ");
+      data._url = msg.url;
+      if (!data) throw "Time out.";
       data = await this.filter(data, msg);
+      if (!data) throw "Time out.";
       await this.Output.editor({
         "description": "Compiling voters to database... "
       }, msg);
       this.election = await this.compile(data);
-      this.election._id = this.guild.id;
-      this.election._type = type;
       this.setData(this.election);
       this.server.states.election.registering = true;
       DataManager.setServer(this.server);
@@ -121,6 +123,7 @@ class Voters extends Parse {
         this.Output.onError("Couldn't find channel **" + name + "**.");
       };
       if (channels.length === 0) throw "No applicable channels given.";
+      if (channels.length > 25) throw "Maximum number of elections that can be held at once is 25.";
       let index = await this.Output.choose({
         "options": [
           "All server members can vote in every election.",
@@ -164,16 +167,23 @@ class Voters extends Parse {
 
   async filter(data, msg) {
     try {
-      let active = !(await this.Output.confirm({
+      data._active = !(await this.Output.confirm({
         "description": "Allow inactive server members to vote?"
       }, true));
-      let banks = !(await this.Output.confirm({
+      data._banks = !(await this.Output.confirm({
         "description": "Allow dupe accounts to vote?"
       }, true));
-      let count = await this.Output.response({
+      data._count = await this.Output.response({
         "description": "Minimum threshold of messages sent in server to vote (return `0` for any):",
         "number": true
       });
+      let elections = Object.keys(data).filter(type => !type.startsWith("_")).length;
+      data._limit = elections === 1 ? 1 : await this.Output.response({
+        "description": "Maximum number of elections permitted to run for\n(out of " + elections + ", return '0' for any):",
+        "number": true,
+        "filter": m => Number(m.content) <= elections && 0 <= Number(m.content)
+      });
+      if (data.limit === 0) data._limit = elections;
       await this.Output.editor({
         "description": "Finding eligible voters for... "
       }, msg);
@@ -183,10 +193,10 @@ class Voters extends Parse {
           "description": "Finding eligible voters for... **" + (data._type === "channel" ? this.Search.channels.get(type) : type) + "**"
         }, msg);
         data[type] = Array.from(data[type].filter((member) => {
-          if (banks && member.roles.some(role => role.name === this.server.roles.bank)) return false;
+          if (data._banks && member.roles.some(role => role.name === this.server.roles.bank)) return false;
           let dbuser = DBuser.getUser(member.user);
-          if (active && (Date.now() - (dbuser.messages.lastSeen || 0) > 1210000000)) return false;
-          if (dbuser.messages.count < count) return false;
+          if (data._active && (Date.now() - (dbuser.messages.lastSeen || 0) > 1210000000)) return false;
+          if (dbuser.messages.count < data._count) return false;
           console.log(`[Register, ${type}, ${member.user.tag}]`);
           return true;
         }).keys());
@@ -202,8 +212,7 @@ class Voters extends Parse {
     try {
       let election = {};
       for (let type in data) {
-        if (type.startsWith("_")) continue;
-        election[type] = {
+        election[type] = (type.startsWith("_")) ? data[type] : { //if it's a non-native property, just add it
           "voters": data[type].reduce((acc, cur) => { //converts the array to an object with keys as items and values []
             acc[cur] = [];
             return acc
@@ -327,19 +336,3 @@ class Voters extends Parse {
 }
 
 module.exports = Voters;
-
-String.prototype.toProperCase = function () {
-  let words = this.split(/ +/g);
-  let newArray = [];
-  for (let i = 0; i < words.length; i++) {
-    newArray[i] = words[i][0].toUpperCase() + words[i].slice(1, words[i].length).toLowerCase();
-  };
-  let newString = newArray.join(" ");
-  return newString;
-}
-
-Array.prototype.toProperCase = function () {
-  for (let i = 0; i < this.length; i++)
-    this[i] = this[i].toProperCase();
-  return this;
-}

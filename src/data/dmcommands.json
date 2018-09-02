@@ -1,8 +1,29 @@
 [
   {
     "module": "DMs",
+    "file": "ModMail",
+    "method": "dm",
+    "guild": "Sending new ModMail on LAZYbot",
+    "arguments": [],
+    "prefix": ""
+  },
+  {
+    "aliases": [
+      "mobile"
+    ],
+    "module": "Election",
+    "file": "election/ballots",
+    "method": "one",
+    "guild": "Requesting mobile ballots for election",
+    "arguments": ["args"],
+    "prefix": "!"
+  },
+  {
+    "regex": "/VoterID: ((?:[0-9]{18}))\\n#Channel: ([a-z0-9\\-]+)/",
+    "module": "Election",
     "file": "dm",
-    "method": "route",
-    "arguments": []
+    "method": "incoming",
+    "arguments": [],
+    "prefix": ""
   }
 ]

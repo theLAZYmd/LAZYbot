@@ -9,13 +9,15 @@ const Embed = require("../util/embed.js");
 
 class Tracker extends Parse {
 
-  constructor(message) {
+  constructor(message, guildID) {
     super(message);
+    if (guildID) this.message.guild = this.Search.guilds.byID(guildID);
   }
 
-  get LUTDU() { //Least Up-to-Date User
+  getLUTDU(guildID) { //Least Up-to-Date User
     let tally = DataManager.getData();
-    let foundUser = null, currentValue = Infinity
+    this._guild = this.Search.guilds.byID(guildID);
+    let foundUser = null, currentValue = Infinity;
     for (let dbuser of tally) {
       if (dbuser.left) continue; //if they're not in the server, stop updating them
       let sources = Object.values(config.sources).filter(source => dbuser[source.key]);
@@ -54,14 +56,14 @@ class Tracker extends Parse {
     return foundUser;
   }
 
-  initUpdateCycle() {
+  initUpdateCycle(guildID) {
     //if (!this.server.states.automaticupdates) return;
-    let dbuser = this.LUTDU;
+    let dbuser = this.getLUTDU(guildID);
     if (dbuser) {
       let sources = Object.values(config.sources).filter(source => dbuser[source.key]);
       this.track({dbuser, sources});
     };
-    setTimeout(() => this.initUpdateCycle(), config.delays.update);
+    setTimeout(() => this.initUpdateCycle(guildID), config.delays.update);
   }
 
   updatepresence(member, nowonline) {

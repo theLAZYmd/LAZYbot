@@ -21,14 +21,14 @@ class Permissions {
 
   static async role (roleType, argsInfo) { //admin, {object}
     if (roleType === "owner") return (argsInfo.guild.ownerID === argsInfo.member.id || config.ids.owner.includes(argsInfo.member.id));
-    let roleName = argsInfo.server.roles[_roleType];
+    let roleName = argsInfo.server.roles[roleType];
     if (!argsInfo.guild.roles.some(role => role.name = roleName) || !roleName) return true;
     return (argsInfo.member.roles.some(role => role.name.toLowerCase().startsWith(roleName)) || argsInfo.guild.ownerID === argsInfo.member.id);
   }
 
-  static async channels (channelName, data) {
+  static async channels (channelName, argsInfo) {
     if (!argsInfo.guild.channels.some(channel => channel.name = channelName)) channelName === "general";
-    return data.channel.name.toLowerCase() === data.server.channels[channelName].toLowerCase();
+    return argsInfo.channel.name.toLowerCase() === argsInfo.server.channels[channelName].toLowerCase();
   }
 
   static async state (state, data) {

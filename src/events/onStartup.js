@@ -2,13 +2,11 @@ const commands = require("../data/commands.json");
 const config = require("../config.json");
 const request = require('request');
 const DataManager = require("../util/datamanager.js");
-const TrackerConstructor = require("../modules/tracker.js");
 
 class onStartup {
 
   constructor(client) {
     this.client = client;
-    this.Tracker = new TrackerConstructor()
   }
 
   get reboot() {
@@ -58,7 +56,14 @@ class onStartup {
   }
 
   get autoupdates () {
-    this.Tracker.initUpdateCycle();
+    let TrackerConstructor = require("../modules/tracker.js");
+    for (let [id, server] of Object.entries(DataManager.getFile("./src/data/server.json")))
+      if (server.states.au) {
+        this.Tracker = new TrackerConstructor({
+          "client": this.client
+        }, id);
+        this.Tracker.initUpdateCycle(id);
+      }
     return true;
   }
 

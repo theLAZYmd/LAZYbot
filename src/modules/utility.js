@@ -13,7 +13,7 @@ class Utility extends Parse { //fairly miscelanneous functions
   }
   
   async uptime () {
-    let time = Date.gettime(Date.now() - this.client.readyTimestamp);
+    let time = Date.getTime(Date.now() - this.client.readyTimestamp);
     return this.Output.generic(`**${time.days}** days, **${time.hours}** hours, **${time.minutes}** minutes, and **${time.seconds}** seconds since ${Math.random() > 0.5 ? "**bleep bloop! It's showtime**" : "last reboot"}.`);
   }
 
@@ -69,67 +69,3 @@ class Utility extends Parse { //fairly miscelanneous functions
 }
 
 module.exports = Utility;
-
-Date.gettime = function(ms) {
-  let time = new Date(ms);
-  time.hours = time.getUTCHours();
-  time.minutes = time.getUTCMinutes();
-  time.seconds = time.getUTCSeconds();
-  time.milliseconds = time.getUTCMilliseconds();
-  time.days = Math.floor(time.hours/24);
-  time.hours = time.hours - (24 * time.days);
-  return time;
-}
-
-Date.getISOtime = function(ms) {
-  return Date.gettime(ms).toString().slice(0, 31); 
-}
-
-Array.prototype.findAllIndexes = function(conditions) {
-  let indexes = [];
-  for(let i = 0; i < this.length; i++) {
-    if(conditions(this[i])) {
-      indexes.push(i)
-    }
-  };
-  return indexes;
-}
-
-Array.prototype.swap = function(dbindex1, dbindex2) {
-  let user = this[dbindex1];
-  this[dbindex1] = this[dbindex2];
-  this[dbindex2] = user;
-  return this;
-}
-
-String.prototype.occurrences = function(subString, allowOverlapping) {
-  subString += "";
-  if(subString.length <= 0) return (this.length + 1);
-  let n = 0;
-  let position = 0;
-  let step = allowOverlapping ? 1 : subString.length;
-  while(true) {
-      position = this.indexOf(subString, position);
-      if (position >= 0) {
-          ++n;
-          position += step;
-      } else break;
-  }
-  return n;
-}
-
-String.prototype.toProperCase = function () {
-  let words = this.split(/ +/g);
-  let newArray = [];
-  for (let i = 0; i < words.length; i++) {
-    newArray[i] = words[i][0].toUpperCase() + words[i].slice(1, words[i].length).toLowerCase();
-  };
-  let newString = newArray.join(" ");
-  return newString;
-}
-
-Array.prototype.toProperCase = function() {
-  for(let i = 0; i < this.length; i++)
-    this[i] = this[i].toProperCase();
-  return this;
-}

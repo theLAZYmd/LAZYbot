@@ -138,9 +138,11 @@ class ModMail extends Parse {
     }
   }
 
-  async dm(guild) { //new DM received to create new modmail conversation
+  async dm() { //new DM received to create new modmail conversation
     try {
-      this.guild = guild;
+      for (let [id, attachment] of this.message.attachments)
+        this.message.content += " [Image Attachment](" + attachment.url + ")"; //if there's any images, append them as a link to the DM image
+          if (this.message.content.length > 1024) return this.Output.onError("Your message must be less than 1024 characters!\nPlease shorten it by **" + (this.message.content.length - 1024) + "** characters.");
       let data = {
         "mod": false,
         "user": this.author,
@@ -162,6 +164,49 @@ class ModMail extends Parse {
       this.sort(data);
     } catch (e) {
       if (e) this.Output.onError("dm " + e)
+    }
+  }
+
+  async outgoing(args) {
+    try {
+      let data = {
+        "command": "send",
+        "users": []
+      };
+      data.mod = this.author;
+      data.mod.flair = false;
+      for (let arg of args) {
+        if (arg.startsWith("-")) {
+          if (args === "-s" || args === "--server") {
+            data.mod.flair = true;
+            continue;
+          } else throw "Invalid flag given \"" + arg + "\"!";
+        };
+        let user = this.Search.users.get(arg);
+        if (!user) {
+          this.Output.onError("Couldn't find user" + arg + "!");
+          continue;
+        };  
+        data.users.push(user);
+      };
+      this.message.delete();
+      let msg = await this.Output.response({
+        "title": "Sending new ModMail to " + data.users.map(user => user.tag).join(", "),
+        "description": "**" + data.mod.tag + "** Please type your message below (sending as " + (data.mod.flair ? "server" : "yourself") + ")"
+      }, true);
+      if (msg.attachments)
+        for (let [id, attachment] of msg.attachments)
+          msg.content += " [Image Attachment](" + attachment.url + ")"; //if there's any images, append them as a link to the DM image
+      data.content = msg.content;
+      if (data.content.length > 1024) throw "Your message must be less than 1024 characters!\nPlease shorten it by **" + (data.content.length - 1024) + "** characters.";
+      this.log(data);
+      for (let user of data.users) {
+        data.user = user;
+        await this.sort(Object.assign({}, data)); //{mod, content, user}
+      };
+      msg.delete();
+    } catch (e) {
+      if (e) this.Output.onError("outgoing" + e);
     }
   }
 
@@ -323,18 +368,3 @@ class ModMail extends Parse {
 }
 
 module.exports = ModMail;
-
-Date.gettime = function (ms) {
-  let time = new Date(ms);
-  time.hours = time.getUTCHours();
-  time.minutes = time.getUTCMinutes();
-  time.seconds = time.getUTCSeconds();
-  time.milliseconds = time.getUTCMilliseconds();
-  time.days = Math.floor(time.hours / 24);
-  time.hours = time.hours - (24 * time.days);
-  return time;
-}
-
-Date.getISOtime = function (ms) {
-  return Date.gettime(ms).toString().slice(0, 24);
-}

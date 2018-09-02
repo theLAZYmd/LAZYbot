@@ -1,17 +1,13 @@
 //the permanent requires that access data files or modules
 const Discord = require("discord.js");
-const DataManager = require("./util/datamanager.js");
-const Router = require("./util/router.js")
 const config = require("./config.json");
 const client = new Discord.Client();
-const commands = require("./data/commands.json");
 const http = require("http");
 const express = require("express")();
 
 //the additional modules for debugging or only used sometimes
-const onStartup = require("./events/onStartup.js");
-const DebuggingConstructor = require("./util/debugging.js");
-const ModMailConstructor = require("./modules/modmail.js");
+const onStartup = require("./events/onStartup.js"); //doesn't require Parse
+const DebuggingConstructor = require("./util/debugging.js"); //doesn't require Parse
 
 const events = [
   ["channelCreate", ["channel"]],
@@ -38,7 +34,7 @@ const events = [
   ["guildMemberUpdate", ["oldMember", "newMember"]],
   ["guildUnavailable", ["guild"]],
   ["guildUpdate", ["oldGuild", "newGuild"]],
-  ["message", ["message"], "command"],
+  ["message", ["message"], "message"],
   ["messageDelete", ["message"]],
   ["messageDeleteBulk", ["messages"]],
   ["messageReactionAdd", ["messageReaction", "user"]],
@@ -60,6 +56,15 @@ const events = [
   ["warn", ["info"]]
 ];
 
+class Dummy {
+  constructor() {
+
+  }
+
+  get Router () {
+    return require("./util/router.js");
+  }
+}
 class Bot {
 
   static ready() {
@@ -69,6 +74,7 @@ class Bot {
   static run() {
 
     let data;
+    let Router = (new Dummy()).Router;
 
     client.on("ready", () => { //console startup section
       try {
@@ -100,6 +106,7 @@ class Bot {
       client.on(event[0], function () {
         for (let i = 0; i < event[1].length; i++) {
           data[event[1][i]] = arguments[i];
+          data.client = client;
         };
         Router[event[2]](data);
       });
@@ -155,7 +162,7 @@ class Bot {
     }, 280000);
 
   }
-
+/*
   static debug(data) { //run through every command and try and run the examples to see if it throws errors
     config.states.debug = true;
     DataManager.setFile(config, "./src/config.json");
@@ -175,11 +182,143 @@ class Bot {
     let _message = require("circular-json").stringify(message, null, 4);
     console.log(_message);
     require("fs").writeFileSync("./src/data/genericmessage.json", _message);
-  }
+  }*/
 
 }
 
 Bot.run();
 Bot.ready();
 
-module.exports = {client};
+//UNIVERSAL FUNCTIONS
+
+Date.getTime = function (ms) {
+  let time = new Date(ms);
+  time.hours = time.getUTCHours();
+  time.minutes = time.getUTCMinutes();
+  time.seconds = time.getUTCSeconds();
+  time.milliseconds = time.getUTCMilliseconds();
+  time.days = Math.floor(time.hours / 24);
+  time.hours = time.hours - (24 * time.days);
+  return time;
+}
+
+Date.getISOtime = function (ms) {
+  return Date.getTime(ms).toString().slice(0, 31);
+}
+
+Array.prototype.inArray = function (string) {
+  for (let i = 0; i < this.length; i++) {
+    if (string.toLowerCase().replace(/[.,#!$%\^&;:{}<>=-_`\"~()]/g, "").trim() === this[i].toLowerCase().replace(/[.,#!$%\^&;:{}<>=-_`\"~()]/g, "").trim()) return true;
+  }
+  return false;
+}
+
+Array.prototype.findAllIndexes = function(conditions) {
+  let indexes = [];
+  for(let i = 0; i < this.length; i++) {
+    if(conditions(this[i])) {
+      indexes.push(i)
+    }
+  };
+  return indexes;
+}
+
+Array.prototype.swap = function(dbindex1, dbindex2) {
+  let user = this[dbindex1];
+  this[dbindex1] = this[dbindex2];
+  this[dbindex2] = user;
+  return this;
+}
+
+String.prototype.occurrences = function(subString, allowOverlapping) {
+  subString += "";
+  if(subString.length <= 0) return (this.length + 1);
+  let n = 0;
+  let position = 0;
+  let step = allowOverlapping ? 1 : subString.length;
+  while(true) {
+      position = this.indexOf(subString, position);
+      if (position >= 0) {
+          ++n;
+          position += step;
+      } else break;
+  }
+  return n;
+}
+
+String.prototype.toProperCase = function () {
+  let words = this.split(/ +/g);
+  let newArray = [];
+  for (let i = 0; i < words.length; i++) {
+    newArray[i] = words[i][0].toUpperCase() + words[i].slice(1, words[i].length).toLowerCase();
+  };
+  let newString = newArray.join(" ");
+  return newString;
+}
+
+Array.prototype.toProperCase = function() {
+  for(let i = 0; i < this.length; i++)
+    this[i] = this[i].toProperCase();
+  return this;
+}
+
+Array.prototype.clean = function () {
+  for (let i = 0; i < this.length; i++) {
+    if (!this[i]) {
+      this.splice(i, 1);
+      i--;
+    }
+  }
+  return this;
+}
+
+Array.prototype.shuffle = function () {
+  let currentIndex = this.length,
+    temporaryValue, randomIndex;
+  while (0 !== currentIndex) { // while there remain elements to shuffle...
+    randomIndex = Math.randBetween(0, currentIndex); // pick a remaining element...
+    currentIndex--;
+    temporaryValue = this[currentIndex]; // and swap it with the current element.
+    this[currentIndex] = this[randomIndex];
+    this[randomIndex] = temporaryValue;
+  }
+  return this.clean();
+}
+
+Array.prototype.remove = function (index) {
+  if (index === 0) return;
+  if (Array.isArray(index)) {
+    index.sort(function (a, b) {
+      return b - a;
+    })
+    for (let i = 0; i < index.length; i++) {;
+      this.splice(index[i], 1);
+    }
+  } else {
+    this.splice(index, 1);
+  }
+  return this;
+}
+
+Math.randBetween = function (min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+Math.genRange = function (number) {
+  let range = [];
+  for (let i = 0; i < number; i++) {
+    range.push(i + 1);
+  }
+  return range;
+}
+
+Math.genRandomList = function (number, independentvariables) {
+  let range = Math.genRange(number); //[1, 2, 3, 4, 5] up to number
+  let randomrange = [];
+  let limit = independentvariables ? Math.randBetween(0, number) : number; //length of randomrange is independent from number of voters
+  for (let i = 0; i < limit; i++) {
+    let randIndex = Math.randBetween(0, range.length - 1); //extract a random number from the array
+    randomrange.push(range.splice(randIndex, 1)[0]); //and push it, reducing the number of the original arrray
+  };
+  return randomrange; //[4, 2, 3]
+}

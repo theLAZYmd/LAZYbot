@@ -10,9 +10,8 @@ class Parse {
   constructor(message) { //everything extends to here
     this.message = message;
     this.member = message ? message.member : "";
-    this.client = message ? message.client : this.Bot.client;
-    this.guild = this.member ? this.member.guild : this.client.guilds.get(config.houseid);
-    this.aliases = this.guild ? Aliases._all.concat(Aliases[this.guild.id] || []) : Aliases.all;
+    this.client = message ? message.client : LAZYbot.client;
+    this.cmdAliases = this.guild ? Aliases._all.concat(Aliases[this.guild.id] || []) : Aliases.all;
     if (!message) return;
     this.message.content = message && message.content && typeof message.content === "string" ?
       message.content
@@ -24,20 +23,25 @@ class Parse {
       "";
     this.author = message.author;
     this.channel = message.channel;
-    this.server = this.guild ? DataManager.getServer(this.guild.id) : "";
     if (this.message.content && this.server) {
-      for (let [key, alias] of this.aliases)
+      for (let [key, alias] of this.cmdAliases)
         if (this.message.content.toLowerCase().includes(key.toLowerCase()))
           this.message.content = this.message.content.replace(key, alias.replace(/\${([a-z]+)}/gi, value => this.server.prefixes[value.match(/[a-z]+/i)]))
     };
-    this.reactionmessages = this.guild ? DataManager.getServer(this.guild.id, "./src/data/reactionmessages.json") : "";
   }
 
-  get Bot() {
-    if (!this._Bot) {
-      this._Bot = require("../lazybot.js");
-    }
-    return this._Bot;
+  get server () {
+    if (!this._server) {
+      if (this.guild) this._server = DataManager.getServer(this.guild.id);
+    };
+    return this._server || "";
+  }
+
+  get reactionmessages() {
+    if (!this._reactionmessages) {
+      if (this.guild) this._reactionmessages = DataManager.getServer(this.guild.id, "./src/data/reactionmessages.json");
+    };
+    return this._reactionmessages || "";
   }
 
   get Output() {
@@ -62,11 +66,8 @@ class Parse {
   }
 
   get Search() {
-    if (!this._Search) {
-      let SearchConstructor = require("./search.js");
-      this._Search = new SearchConstructor(this.message);
-    };
-    return this._Search;
+    let SearchConstructor = require("./search.js");
+    return new SearchConstructor(this.message);
   }
 
   get Check() {
@@ -75,6 +76,12 @@ class Parse {
       return new CheckConstructor(this.message);
     };
     return this._Check;
+  }
+
+  get guild() {
+    if (!this._guild && this.member) this._guild = this.member.guild;
+    if (!this._guild && this.message) this._guild = this.message.guild || this.message._guild;
+    return this._guild || "";
   }
 
   get user() {
@@ -113,7 +120,11 @@ class Parse {
 
   get prefix() {
     if (!this._prefix) {
-      for (let prefix of Object.values(this.server.prefixes))
+      let prefixes = this.server ? this.server.prefixes : {
+        "generic": "!",
+        "nadeko": "."
+      };
+      for (let prefix of Object.values(prefixes))
         if (this.message.content.startsWith(prefix)) {
           this._prefix = prefix;
           continue;

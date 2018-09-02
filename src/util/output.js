@@ -39,17 +39,19 @@ class Output extends Parse {
     }
   }
 
-  async data(json, NewChannel) {
+  async data(json, NewChannel, type) {
     try {
-      let string = JSON.stringify(json, null, 2).replace(/`/g, "\\`");
-      let index = Math.ceil(string.length / 2048);
+      let string = (typeof json === "object" ? JSON.stringify(json, null, 2) : json).replace(/`/g, "\\`");
+      let index = Math.ceil(string.length / 2000);
       let keylength = Math.floor(string.length / index);
-      for (let i = 0; i < index; i++)
+      for (let i = 0; i < index; i++) {
+        console.log(i === index.length - 1);
         this.sender({
           "color": 9359868,
-          "description": "```json\n" + string.slice(i * keylength, (i === index.length - 1 ? index.length : i * keylength + keylength)) + "```",
+          "description": "```" + (type ? type : "json") + "\n" + string.slice(i * keylength, (i === index.length - 1 ? string.length + 2 : i * keylength + keylength)) + " ".repeat(48) + "\u200b" + "```",
           "footer": Embed.footer((i + 1) + " / " + index)
         }, NewChannel);
+      }
     } catch (e) {
       if (e) this.onError(e);
     }

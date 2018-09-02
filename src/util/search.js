@@ -124,11 +124,11 @@ class Guild extends All {
 
   byID(snowflake) {
     let id = snowflake.match(/[0-9]{18}/);
-    return id ? this.guild.channels.find(guild => id[0] === guild.id) : "";
+    return id ? this.client.guilds.find(guild => id[0] === guild.id) : "";
   }
   
   byName(name) {
-    return this.guild.channels.find(guild => guild.name && name.toLowerCase() === guild.name.toLowerCase()) || "";
+    return this.client.guilds.find(guild => guild.name && name.toLowerCase() === guild.name.toLowerCase()) || "";
   }
 
 }

@@ -1,8 +1,6 @@
 const Parse = require("../../util/parse.js");
 const DataManager = require("../../util/datamanager.js");
-const DBuser = require("../../util/dbuser.js");
-const Embed = require("../../util/embed.js");
-const config = require("../../config.json");
+const Ballot = require("./ballot.js");
 
 class Candidates extends Parse {
 
@@ -42,6 +40,8 @@ class Candidates extends Parse {
       if (!this.election[election]) throw "Couldn't find election **" + election + "**! Please use command `${generic}voters` to view list of elections.";
       if (!this.election[channel.name].candidates) this.election[channel.name].candidates = [];
       if (this.election[channel.name].candidates.includes(user.tag)) throw `Already registered candidate **${user.tag}** for channel **${channel.name}**.`;
+      let channels = Ballot.validate(this.election, user, "candidates");
+      if (channels.length >= (this.election._limit || 2)) throw `Already registered candidate **${user.tag}** for channels **${channels.join(", ")}**!\nCannot run for more than ${this.election._limit} channels.`;
       this.election[channel.name].candidates.push(user.tag);
       this.setData(this.election);
       this.Output.generic(`Registered candidate **${user.tag}** for channel **${channel.name}**.`)
@@ -63,19 +63,3 @@ class Candidates extends Parse {
 }
 
 module.exports = Candidates;
-
-String.prototype.toProperCase = function () {
-  let words = this.split(/ +/g);
-  let newArray = [];
-  for (let i = 0; i < words.length; i++) {
-    newArray[i] = words[i][0].toUpperCase() + words[i].slice(1, words[i].length).toLowerCase();
-  };
-  let newString = newArray.join(" ");
-  return newString;
-}
-
-Array.prototype.toProperCase = function () {
-  for (let i = 0; i < this.length; i++)
-    this[i] = this[i].toProperCase();
-  return this;
-}

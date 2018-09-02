@@ -240,25 +240,3 @@ class Profile extends Parse {
 }
 
 module.exports = Profile;
-
-Date.gettime = function (ms) {
-  let time = new Date(ms);
-  time.hours = time.getUTCHours();
-  time.minutes = time.getUTCMinutes();
-  time.seconds = time.getUTCSeconds();
-  time.milliseconds = time.getUTCMilliseconds();
-  time.days = Math.floor(time.hours / 24);
-  time.hours = time.hours - (24 * time.days);
-  return time;
-};
-
-Date.getISOtime = function (ms) {
-  return Date.gettime(ms).toString().slice(0, 31);
-};
-
-Array.prototype.inArray = function (string) {
-  for (let i = 0; i < this.length; i++) {
-    if (string.toLowerCase().replace(/[.,#!$%\^&;:{}<>=-_`\"~()]/g, "").trim() === this[i].toLowerCase().replace(/[.,#!$%\^&;:{}<>=-_`\"~()]/g, "").trim()) return true;
-  }
-  return false;
-}

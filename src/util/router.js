@@ -5,6 +5,7 @@ const allMessageCommands = require("../data/allmessagecommands.json");
 const DMCommands = require("../data/dmcommands.json");
 const IntervalCommands = require("../data/intervalcommands.json");
 const Permissions = require("./permissions.js");
+const DM = require("../modules/dm.js");
 
 class Router {
 
@@ -45,30 +46,17 @@ class Router {
     }
   }
 
-  static async command(data) {
+  static async message(data) {
     try {
       data = await Router.checkErrors(data);
-      data.argsInfo = new Parse(data.message); //sets object with all like guild, channel (arguments for functions)
-      if (data.message.channel.type === "dm" || data.message.channel.type === "group" || !data.message.guild) {
-        for (let command of DMCommands)
-          await Router.runCommand(data.message, data.argsInfo, command);
+      if (!data.argsInfo.author.bot && (data.message.channel.type === "dm" || data.message.channel.type === "group" || !data.message.guild)) {
+        await Router.DM(data);
         throw "";
       };
-      for (let command of allMessageCommands)
-        Router.runCommand(data.message, data.argsInfo, command);
-      if (!data.commands[data.argsInfo.command]) throw ""; //checks if command appears on init-generated command listing
-      for (let command of Commands) {
-        let cmdInfo = Object.assign({}, command);
-        cmdInfo.prefix = data.argsInfo.server.prefixes[cmdInfo.prefix];
-        if (cmdInfo.active !== false && cmdInfo.prefix === data.argsInfo.prefix && (cmdInfo.aliases.inArray(data.argsInfo.command) || cmdInfo.aliases.inArray(data.argsInfo.message.content))) { //if valid command has been received
-          cmdInfo.command = true;
-          let run = await Router.runCommand(data.message, data.argsInfo, cmdInfo);
-          if (run) Router.logCommand(data.argsInfo, cmdInfo);
-          return;
-        }
-      }
+      Router.all(data);
+      Router.command(data);
     } catch (e) {
-      if (e) console.log(e);
+      if (e && typeof e !== "boolean") console.log(e);
     }
   }
 
@@ -77,9 +65,72 @@ class Router {
       if (data.message.author.id === data.client.user.id) throw "";
       if (data.message.content.length === 1) throw "";
       data.client.reboot = data.readyTimestamp;
+      data.argsInfo = new Parse(data.message);
       return data;
     } catch (e) {
       throw e;
+    }
+  }
+
+  static async DM(_data) {
+    try {
+      for (let i = 1; i < DMCommands.length; i++) {
+        let data = Object.assign({}, _data);
+        let cmdInfo = Object.assign({
+          "prefix": ""
+        }, DMCommands[i]);
+        if (cmdInfo.active === false) continue;
+        if (!cmdInfo.regex && !cmdInfo.aliases) continue;
+        if (cmdInfo.regex && !(new RegExp(cmdInfo.regex)).test(data.argsInfo.message.content)) continue;
+        if (cmdInfo.aliases && (!cmdInfo.aliases.inArray(data.argsInfo.command) || data.argsInfo.prefix !== cmdInfo.prefix)) continue;
+        if (cmdInfo.guild) {
+          let guild = await DM.setGuild(data.argsInfo, cmdInfo.guild); //now passed, just check if it needs a guild
+          if (!guild) throw "";
+          data.message._guild = guild;
+        };
+        let run = await Router.runCommand(data.message, data.argsInfo, cmdInfo);
+        if (run) await Router.logCommand(data.argsInfo, cmdInfo);
+        throw "";
+      };
+      let data = Object.assign({}, _data), guild;
+      if (DMCommands[0].guild) {
+        let guild = await DM.setGuild(_data.argsInfo, DMCommands[0].guild); //now passed, just check if it needs a guild
+        if (!guild) throw "";
+        data.message._guild = guild;
+      };
+      let run = await Router.runCommand(data.message, data.argsInfo, DMCommands[0]);
+      if (run) await Router.logCommand(data.argsInfo, DMCommands[0]);
+    } catch (e) {
+      if (e) _data.argsInfo.Output.onError(e);
+    }
+  }
+
+  static async all(data) {
+    try {
+      for (let cmdInfo of allMessageCommands) {
+        cmdInfo.prefix = "";
+        let run = await Router.runCommand(data.message, data.argsInfo, cmdInfo);
+        throw "";
+      }
+    } catch (e) {
+      if (e) data.argsInfo.Output.onError(e);
+    }
+  }
+
+  static async command(data) {
+    try {
+      for (let command of Commands) {
+        let cmdInfo = Object.assign({}, command);
+        cmdInfo.prefix = data.argsInfo.server.prefixes[cmdInfo.prefix];
+        if (cmdInfo.active !== false && cmdInfo.prefix === data.argsInfo.prefix && (cmdInfo.aliases.inArray(data.argsInfo.command) || cmdInfo.aliases.inArray(data.argsInfo.message.content))) { //if valid command has been received
+          cmdInfo.command = true;
+          let run = await Router.runCommand(data.message, data.argsInfo, cmdInfo);
+          if (run) throw await Router.logCommand(data.argsInfo, cmdInfo);
+          throw "";
+        }
+      }
+    } catch (e) {
+      if (e) data.argsInfo.Output.onError(e);
     }
   }
 
@@ -91,6 +142,7 @@ class Router {
       let command = cmdInfo.prefix + argsInfo.command;
       let args = argsInfo.args;
       console.log(time + " | " + author + " | " + Constructor + " | " + command + " | [" + args + "]");
+      return "";
     } catch (e) {
       if (e) console.log(e);
     }
