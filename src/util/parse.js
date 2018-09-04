@@ -12,8 +12,7 @@ class Parse {
     this.member = message ? message.member : "";
     this.client = message ? message.client : LAZYbot.client;
     this.cmdAliases = this.guild ? Aliases._all.concat(Aliases[this.guild.id] || []) : Aliases.all;
-    if (!message) return;
-    this.message.content = message && message.content && typeof message.content === "string" ?
+    if (typeof this.message === "object") this.message.content = message && message.content && typeof message.content === "string" ?
       message.content
       .replace("’", "'")
       .replace("…", "...")
@@ -21,9 +20,9 @@ class Parse {
       .replace("”", "\"")
       .replace(/[\u200B-\u200D\uFEFF]/g, '') :
       "";
-    this.author = message.author;
-    this.channel = message.channel;
-    if (this.message.content && this.server) {
+    if (this.message) this.author = message.author;
+    if (this.message) this.channel = message.channel;
+    if (this.message && this.message.content && this.server) {
       for (let [key, alias] of this.cmdAliases)
         if (this.message.content.toLowerCase().includes(key.toLowerCase()))
           this.message.content = this.message.content.replace(key, alias.replace(/\${([a-z]+)}/gi, value => this.server.prefixes[value.match(/[a-z]+/i)]))
@@ -79,6 +78,7 @@ class Parse {
   }
 
   get guild() {
+    if (this._guild) return this._guild;
     if (!this._guild && this.member) this._guild = this.member.guild;
     if (!this._guild && this.message) this._guild = this.message.guild || this.message._guild;
     return this._guild || "";
@@ -165,7 +165,5 @@ class Parse {
   }
 
 }
-
-Parse.client = "";
 
 module.exports = Parse;

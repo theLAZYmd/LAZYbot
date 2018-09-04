@@ -190,6 +190,7 @@ class ModMail extends Parse {
         data.users.push(user);
       };
       this.message.delete();
+      if (data.users.length === 0) throw "No valid users to whom a message can be sent."
       let msg = await this.Output.response({
         "title": "Sending new ModMail to " + data.users.map(user => user.tag).join(", "),
         "description": "**" + data.mod.tag + "** Please type your message below (sending as " + (data.mod.flair ? "server" : "yourself") + ")"
@@ -202,15 +203,16 @@ class ModMail extends Parse {
       this.log(data);
       for (let user of data.users) {
         data.user = user;
+        this.send(data);
         await this.sort(Object.assign({}, data)); //{mod, content, user}
       };
       msg.delete();
     } catch (e) {
-      if (e) this.Output.onError("outgoing" + e);
+      if (e) this.Output.onError(e);
     }
   }
 
-  async sort(data) {
+  async sort(data) {  //find the relevant modmil
     try {
       for (let [id, mailInfo] of Object.entries(this.modmail)) { //for each record
         if (id.startsWith("_") || mailInfo.tag !== data.user.tag || mailInfo.overflow) continue;

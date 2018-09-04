@@ -18,9 +18,9 @@
         "error": 15406156,
         "ratings": 9359868,
         "background": {
-          "icons": "212225",
-          "markdown": "2f3136",
-          "chat": "36393e"
+            "icons": "212225",
+            "markdown": "2f3136",
+            "chat": "36393e"
         },
         "text": {
             "channels": "727671"
@@ -31,7 +31,7 @@
         "debug": false
     },
     "backupdb": [
-        "Wed Jul 11 2018 15:40:25 GMT+01",
+        "Tue Sep 04 2018 05:20:01",
         "Sun Jun 17 2018 00:14:44 GMT+01",
         "Sun Jun 17 2018 00:14:44 GMT+01"
     ],
@@ -47,16 +47,22 @@
             "api": "https://api.reddit.com/r/|.json"
         }
     },
+    "electorals": {
+        "irv": {
+            "name": "Instant Run-Off",
+            "file": "irv"
+        }
+    },
     "fen": {
         "board": "icy_sea",
         "pieces": "alpha",
         "coords": 0,
         "size": 2,
         "url": {
-          "board": "https://www.chess.com/dynboard|",
-          "analysis": "https://lichess.org/analysis?fen=|",
-          "crazyhouse": "https://lichess.org/analysis/crazyhouse/|",
-          "threeCheck": "https://lichess.org/analysis/threeCheck/|"
+            "board": "https://www.chess.com/dynboard|",
+            "analysis": "https://lichess.org/analysis?fen=|",
+            "crazyhouse": "https://lichess.org/analysis/crazyhouse/|",
+            "threeCheck": "https://lichess.org/analysis/threeCheck/|"
         }
     },
     "variants": {
@@ -72,9 +78,9 @@
                 "key": "blitz"
             },
             "bullet": {
-              "name": "Bullet",
-              "api": "bullet",
-              "key": "bullet"
+                "name": "Bullet",
+                "api": "bullet",
+                "key": "bullet"
             },
             "rapid": {
                 "name": "Rapid",
@@ -123,6 +129,11 @@
             }
         },
         "chesscom": {
+            "960": {
+                "name": "960",
+                "api": "livechess960",
+                "key": "960"
+            },
             "daily960": {
                 "name": "Daily 960",
                 "api": "960",
@@ -163,11 +174,6 @@
                 "api": "bughouse",
                 "key": "bughouse"
             },
-            "960": {
-                "name": "960",
-                "api": "livechess960",
-                "key": "960"
-            },
             "tactics": {
                 "name": "Tactics",
                 "api": "tactics",
@@ -192,33 +198,33 @@
             "name": "Lichess.org",
             "key": "lichess",
             "url": {
-              "ping": "https://lichess.org/",
-              "profile": "https://lichess.org/@/|",
-              "user": "https://lichess.org/api/user/|",
-              "status": "https://lichess.org/api/users/status?ids=|",
-              "game": "https://lichess.org/api/game/|"
+                "ping": "https://lichess.org/",
+                "profile": "https://lichess.org/@/|",
+                "user": "https://lichess.org/api/user/|",
+                "status": "https://lichess.org/api/users/status?ids=|",
+                "game": "https://lichess.org/api/game/|"
             }
         },
         "chesscom": {
             "name": "Chess.com",
             "key": "chesscom",
             "url": {
-              "ping": "https://www.chess.com/",
-              "profile": "https://www.chess.com/member/|",
-              "info": "https://api.chess.com/pub/player/|",
-              "user": "https://www.chess.com/callback/member/stats/|",
-              "status": "https://api.chess.com/pub/player/|/is-online"
+                "ping": "https://www.chess.com/",
+                "profile": "https://www.chess.com/member/|",
+                "info": "https://api.chess.com/pub/player/|",
+                "user": "https://www.chess.com/callback/member/stats/|",
+                "status": "https://api.chess.com/pub/player/|/is-online"
             }
         },
         "bughousetest": {
             "name": "BughouseTest.com",
             "key": "bughousetest",
             "url": {
-              "ping": "http://bughousetest.com/",
-              "profile": "http://bughousetest.com/@/|",
-              "user": "http://bughousetest.com/api/user/|",
-              "status": "http://bughousetest.com/api/users/status?ids=|",
-              "game": "http://bughousetest.com/api/game/|"
+                "ping": "http://bughousetest.com/",
+                "profile": "http://bughousetest.com/@/|",
+                "user": "http://bughousetest.com/api/user/|",
+                "status": "http://bughousetest.com/api/users/status?ids=|",
+                "game": "http://bughousetest.com/api/game/|"
             }
         }
     },
@@ -227,7 +233,7 @@
             "id": "",
             "username": "",
             "messages": {
-              "count": 0
+                "count": 0
             }
         },
         "server": {

@@ -19,10 +19,27 @@
     "prefix": "!"
   },
   {
-    "regex": "/VoterID: ((?:[0-9]{18}))\\n#Channel: ([a-z0-9\\-]+)/",
+    "aliases": [
+      "eval"
+    ],
+    "description": "Use to evaluated javascript code. Bot owner only, for obvious reasons.",
+    "usage": [
+      "eval ```js this.channel.send(Date.now())```"
+    ],
+    "module": "Administration",
+    "file": "eval",
+    "method": "run",
+    "arguments": ["args", "argument"],
+    "prefix": "!",
+    "requires": {
+      "user": "owner"
+    }
+  },
+  {
+    "regex": "^#VoterID: (?:[0-9]{18})$\\n^#ServerID: (?:[0-9]{18})$\\n^#Channel: (?:[\\w-]+)$\\n(?:^(?:\\[(?:[1-9]*)\\]\\s(?:[\\w\\s]{2,32}#(?:[0-9]{4})|Write-In|Blank Vote)$\\n?)+)",
     "module": "Election",
-    "file": "dm",
-    "method": "incoming",
+    "file": "election/vote",
+    "method": "receive",
     "arguments": [],
     "prefix": ""
   }

@@ -9,6 +9,8 @@ const express = require("express")();
 const onStartup = require("./events/onStartup.js"); //doesn't require Parse
 const DebuggingConstructor = require("./util/debugging.js"); //doesn't require Parse
 
+require('events').EventEmitter.prototype._maxListeners = 100;
+
 const events = [
   ["channelCreate", ["channel"]],
   ["channelDelete", ["channel"]],
@@ -206,9 +208,14 @@ Date.getISOtime = function (ms) {
   return Date.getTime(ms).toString().slice(0, 31);
 }
 
+Date.getMonth = function (ms) {
+  let string = Date.getTime(ms).toString();
+  return string.slice(4, 7) + " " + string.slice(11, 15);
+}
+
 Array.prototype.inArray = function (string) {
   for (let i = 0; i < this.length; i++) {
-    if (string.toLowerCase().replace(/[.,#!$%\^&;:{}<>=-_`\"~()]/g, "").trim() === this[i].toLowerCase().replace(/[.,#!$%\^&;:{}<>=-_`\"~()]/g, "").trim()) return true;
+    if (string.toLowerCase().replace(/[^\s\w$£@!]/g, "").trim() === this[i].toLowerCase().replace(/[^\s\w$£@!]/g, "").trim()) return true;
   }
   return false;
 }
@@ -321,4 +328,20 @@ Math.genRandomList = function (number, independentvariables) {
     randomrange.push(range.splice(randIndex, 1)[0]); //and push it, reducing the number of the original arrray
   };
   return randomrange; //[4, 2, 3]
+}
+
+Object.prototype._getDescendantProp = function (desc) {
+  let arr = desc.split('.'), obj = this;
+  while (arr.length) {
+    obj = obj[arr.shift()];
+  }
+  return obj;
+}
+
+Object.prototype._setDescendantProp = function (desc, value) {
+  let arr = desc.split('.'), obj = this;
+  while (arr.length > 1) {
+    obj = obj[arr.shift()];
+  }
+  return obj[arr[0]] = value;
 }

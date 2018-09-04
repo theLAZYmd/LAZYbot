@@ -41,7 +41,7 @@ class Backup extends Parse {
       let tally = DataManager.getData();
       DataManager.setFile(tally, `./src/data/dbbackup${degree}.json`);
       config.backupdb[parseInt(degree) - 1] = Date.getISOtime(Date.now());
-      DataManager.setFile(config, "./config.json");
+      DataManager.setFile(config, "./src/config.json");
       if (!this.command) Backup.log("backup", degree);
     } catch (e) {
       if (e) throw e;

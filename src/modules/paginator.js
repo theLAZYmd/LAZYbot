@@ -9,10 +9,9 @@ class Paginator extends Parse {
     this.paginator = this.reactionmessages[this.server.id].paginator || {};
   }
 
-  setData (paginator) {
+  async setData(paginator) {
     this.reactionmessages.paginator = paginator;
     DataManager.setServer(this.reactionmessages, "./src/data/reactionmessages.json");
-    return paginator;
   }
 
   /*VALID INPUTS FOR PAGINATOR
@@ -20,55 +19,47 @@ class Paginator extends Parse {
   Paginator takes an embed an adds ⬅ ➡ reactions to it. When these are clicked, a message is edited with another (similar looking embed)
   i.e. the 'second page' of that embed.
 
-  Paginator takes input arguments of the constructor and method to purely produce a page embed.
-  That method must take no input values except page.
-  Both constructor and method are used because method might draw on inputs from constructor to function.
-
-  Third inpute is the maximum number of pages on the function. Needed to create the footer.
-  
-  Fourth input is the time period to await ⬅ ➡ reactions.
-  Can be modified in the future to use client.on('MessageReaction', () => {}) instead of .awaitReactions
-
-  When paginator is triggered, it loads page 0 of the series.
-  Upon MessageReaction, it changes the pagecount to either ++ or -- and calls the given Constructor.method() to return an embed.
-  If a null value is returned, this must be because the embedgroup.length value for that series is exceeded (i.e. trying to call the 3rd page when there are only 2).
-  If null value therefore, the pagecount is lowered again. Otherwise, the original message is edited with the new embed.
+  Paginator takes input arguments of an array of embeds and a period over which to accept valid reactions. It stores these (temporarily) in reactionmessages.json
+  When reaction is triggered, it changes the pagecount to either ++ or -- and loads the next embed in that array
   */
 
-  sender (embedgroup, period) {
-    let embed = embedgroup[0];
-    embed.footer = embed.footer && embedgroup.length === 1 ? embed.footer : Embed.footer(`1 / ${embedgroup.length}`);
-    this.Output[embedgroup.length < 2 ? "sender" : "reactor"](embed, this.channel, ["⬅", "➡"])
-    .then(msg => {
-      this.paginator[msg.id] = {embedgroup,
+  async sender(embedgroup, period) {
+    try {
+      let embed = embedgroup[0];
+      embed.footer = embed.footer && embedgroup.length === 1 ? embed.footer : Embed.footer(`1 / ${embedgroup.length}`);
+      let msg = await this.Output[embedgroup.length < 2 ? "sender" : "reactor"](embed, this.channel, ["⬅", "➡"]);
+      this.paginator[msg.id] = {
+        embedgroup,
         "period": period || 30000,
         "page": 0
       };
       this.setData(this.paginator);
-      return msg;
-    })
-    .then((msg) => {
       setTimeout(() => {
         msg.clearReactions()
-        .catch((e) => console.log(e));
+          .catch((e) => console.log(e));
         delete this.paginator[msg.id];
         this.setData(this.paginator);
-      }, period)
-    })
-    .catch((e) => console.log(e))
+      }, period);
+    } catch (e) {
+      if (e) this.Output.onError(e);
+    }
   }
 
-  react (reaction, user, data) {
-    if (reaction.emoji.name === "➡") data.page++;
-    if (reaction.emoji.name === "⬅") data.page--;
-    reaction.remove(user);
-    if(data.page < 0 || data.page > data.embedgroup.length) return;
-    let embed = data.embedgroup[data.page];
-    if (!embed) return this.Output.onError("Couldn't generate embed for page " + (data.page + 1) + ".");
-    embed.footer = Embed.footer(`${data.page + 1} / ${data.embedgroup.length}`);
-    this.Output.editor(embed, reaction.message);
-    this.paginator[reaction.message.id] = data;
-    return this.setData(this.paginator);
+  async react(reaction, user, data) {
+    try {
+      if (reaction.emoji.name === "➡") data.page++;
+      if (reaction.emoji.name === "⬅") data.page--;
+      reaction.remove(user);
+      if (data.page < 0 || data.page >= data.embedgroup.length) throw "";
+      let embed = data.embedgroup[data.page];
+      if (!embed) throw "Couldn't generate embed for page " + (data.page + 1) + ".";
+      embed.footer = Embed.footer(`${data.page + 1} / ${data.embedgroup.length}`);
+      this.Output.editor(embed, reaction.message);
+      this.paginator[reaction.message.id] = data;
+      this.setData(this.paginator);
+    } catch (e) {
+      if (e) this.Output.onError(e);
+    }
   }
 
 }

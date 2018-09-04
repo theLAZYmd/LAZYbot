@@ -1,4 +1,3 @@
-const config = require("../config.json");
 const DBuser = require("./dbuser.js");
 const Parse = require("./parse.js");
 
@@ -19,9 +18,9 @@ class User extends All {
     if(searchstring.length >= 2) {
       if(!user) user = this.byID(searchstring);
       if(!user) user = this.byTag(searchstring);
-      if(!user) user = this.byNickname(searchstring, exactmode);
       if(!user) user = this.byUsername(searchstring, exactmode);
       if(!user) user = this.byAliases(searchstring, exactmode);
+      if(!user) user = this.byDisplayName(searchstring, exactmode);
     };
     return user;
   }
@@ -35,24 +34,24 @@ class User extends All {
     return this.client.users.find(user => string.toLowerCase() === user.tag.toLowerCase()) || "";
   }
 
-  byNickname(string, exactmode) {
-    let member = this.guild.members.find((member) => {
-      if (!member.nickname) return false;
-      if (!exactmode) return member.nickname.toLowerCase().startsWith(string.toLowerCase());
-      return member.nickname.toLowerCase() === string.toLowerCase();
-    });
-    if (member) return member.user;
-    else return "";
-  } 
-
   byUsername(string, exactmode) {
-    return this.client.users.find(user => exactmode ? user.username.toLowerCase() === string.toLowerCase() : user.username.toLowerCase().startsWith(string.toLowerCase())) || "";
+    let user = null;
+    user = this.client.users.find(user => user.username.toLowerCase() === string.toLowerCase());
+    if (!user && !exactmode) user = this.client.users.find(user => user.username.toLowerCase().startsWith(string.toLowerCase()));
+    return user;
   }
 
   byAliases(searchstring, exactmode) {
     let dbuser = DBuser.get(searchstring, exactmode);
     return dbuser ? this.byID(dbuser.id) : "";
   }
+
+  byDisplayName(string, exactmode) {
+    let member = null;
+    member = this.guild.members.find(member => member.displayName.toLowerCase() === string.toLowerCase());
+    if (!member && !exactmode) member = this.guild.members.find(member => member.displayName.toLowerCase().startsWith(string.toLowerCase()));
+    return member ? member.user : null;
+  } 
 
 }
 
@@ -99,11 +98,11 @@ class Channel extends All {
 
   byID(snowflake) {
     let id = snowflake.match(/[0-9]{18}/);
-    return id ? this.guild.channels.find(channel => id[0] === channel.id) : "";
+    return id ? this.client.channels.find(channel => id[0] === channel.id) : "";
   }
   
   byName(name) {
-    return this.guild.channels.find(channel => channel.name && name.toLowerCase() === channel.name.toLowerCase()) || "";
+    return (this.guild || this._guild).channels.find(channel => channel.name && name.toLowerCase() === channel.name.toLowerCase()) || "";
   }
 
 }
@@ -187,15 +186,32 @@ class Emoji extends All {
 
 }
 
-class Search extends Parse {
+class Search {
   constructor(message) {
-    super(message);
-    this.users = new User(message);
-    this.members = new Member(message);
-    this.channels = new Channel(message);
-    this.guilds = new Guild(message);
-    this.roles = new Role(message);
-    this.emojis = new Emoji(message);
+    this.message = message;
+  }
+
+  get users () {
+    return new User(this.message);
+  }
+
+  get members () {
+    return new Member(this.message);
+  }
+
+  get channels () {
+    return new Channel(this.message);
+  }
+  get guilds () {
+    return new Guild(this.message);
+  }
+
+  get roles () {
+    return new Role(this.message);
+  }
+
+  get emojis () {
+    return new Emoji(this.message);
   }
 }
 

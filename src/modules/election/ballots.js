@@ -16,7 +16,7 @@ class Ballots extends Parse {
   async run(args) {
     try {
       let command = args.shift().toLowerCase();
-      if (typeof this[command] === "function") this[command](args); //looks for, this.one(), this.all(), and mobile which is a subset of this.one()
+      if (command !== "send" && typeof this[command] === "function") this[command](args); //looks for, this.one(), this.all(), and mobile which is a subset of this.one()
       else throw "Invalid second parameter given **" + command + "**.";
     } catch (e) {
       if (e) this.Output.onError(e);
@@ -44,8 +44,10 @@ class Ballots extends Parse {
       let object = {};
       for (let [type, data] of Object.entries(this.election)) { //for each election
         if (type.startsWith("_")) continue;
-        for (let id in data.voters)
+        for (let id in data.voters) {
+          if (!data.voters.hasOwnProperty(id)) continue;
           if (!object[id]) object[id] = true; //if the id isn't a property of the object, make it so
+        };
       };
       let array = Object.keys(object).map(id => this.Search.users.byID(id)); //then take the keys, and turn each id into a user object
       this.server.states.election.voting = true; //so this command cannot be used more than once
@@ -77,15 +79,15 @@ class Ballots extends Parse {
           try {
             if (!mobile) {
               let ballot = Ballots.gen(this.election, user, channels);  //generate the full ballot for desktop users
-              if (user.id === this.author.id && ballot) this.Output.sender(ballot, user);
+              this.Output.sender(ballot, user);
             } else {
               let ballots = Ballots.fields(this.election, user, channels);  //otherwise just generate the fields
               for (let j = 0; j < ballots.length; j++) {
                 setTimeout(() => {
                   let ballot = ballots[j].value.slice(6, -3).trim();  //and send them individually
-                  //user.send(ballot);
+                  user.send(ballot);
                   setTimeout(() => {
-                  //this.Output.generic("", user);  //with an empty embed to separate them
+                  this.Output.generic("", user);  //with an empty embed to separate them
                   }, 1000);
                 }, 2000 * j);
               };
@@ -94,7 +96,7 @@ class Ballots extends Parse {
               "description": `Sending ${channels.length} ${mobile ? "mobile " : ""}ballots to **${user.tag}**`,
               "footer": Embed.footer(`Sent ${ballotRunning} / ${ballotCount} ballots to ${voterRunning} / ${voterCount} voters.`)
             }, msg);
-            console.log(`${user.tag}: [${channels.join(", ")}]`);  //log it. Add to text string
+            console.log(Date.getISOtime(Date.now()) + " | " + user.tag + " | " + "Election/ballots" + " | " + "command-request" + " | [" + channels.join(", ") + "]");  //log it. Add to text string
             string += `#${user.tag}: [${channels.join(", ")}]\n`;
             ballotRunning += channels.length; //up the running totals to edit our aesthetic footer message
             voterRunning++;
@@ -122,8 +124,8 @@ class Ballots extends Parse {
     try {
       let ballot = {
         "author": {
-          "name": "House Discord Server Mod Elections: " + Date.getISOtime(Date.now()).slice(4, 15),
-          "icon_url": "https://i.imgur.com/YWF70U4.png",
+          "name": "House Discord Server Mod Elections: " + election._date,
+          "icon_url": election._icon,
           "url": election._url || "",
         },
         "title": "This constitutes your voting ballot for this election.",
@@ -143,7 +145,7 @@ class Ballots extends Parse {
   static fields(election, user, channels) {
     let fields = [];
     for (let channel of channels) {
-      let candidates = election[channel].candidates || [];
+      let candidates = Object.keys(election[channel].candidates || {}).filter(candidate => election[channel].candidates[candidate].length >= 2) || [];
       let votingString = Ballots.candidates(candidates);
       fields.push({
         "name": `#${channel} Ballot:`,
@@ -162,15 +164,16 @@ class Ballots extends Parse {
 
   static candidates (candidates) {
     let string = "";
-    for (let candidate of candidates.shuffle())
+    candidates.shuffle();
+    for (let candidate of candidates)
       string += "[] " + candidate + "\n"
     return string;
   }
 
   static validate(election, user, type = "voters") { //returns an array of channels
     return Object.entries(election) //get rid of the extra properties. if a user object is provided, check if the user is in the voters data
-      .filter(([channel, data]) => !channel.startsWith("_") && (!user || Object.keys(data["voters"]).includes(user.id)))
-      .map(([channel, data]) => channel);
+      .filter(([channel, data]) => !channel.startsWith("_") && data[type] && (!user || Object.keys(data[type]).includes(user.id)))
+      .map(([channel]) => channel);
   }
 
 }

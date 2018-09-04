@@ -15,6 +15,7 @@
             "generic": "!",
             "nadeko": "."
         },
+        "emoji": "housediscord",
         "channels": {
             "announcements": "announcements",
             "bot": "spam",
@@ -34,7 +35,7 @@
         },
         "roles": {
             "admin": "admin",
-            "bank": "bank",
+            "dupe": "bank",
             "mod": "mod",
             "bot": "Bot-In-Use",
             "muted": "muted",

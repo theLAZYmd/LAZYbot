@@ -81,18 +81,20 @@ class Router {
         }, DMCommands[i]);
         if (cmdInfo.active === false) continue;
         if (!cmdInfo.regex && !cmdInfo.aliases) continue;
-        if (cmdInfo.regex && !(new RegExp(cmdInfo.regex)).test(data.argsInfo.message.content)) continue;
+        if (cmdInfo.regex) {
+          let regex = new RegExp(cmdInfo.regex, "mg");
+          if (regex.test(data.argsInfo.message.content) === false) continue;
+        };
         if (cmdInfo.aliases && (!cmdInfo.aliases.inArray(data.argsInfo.command) || data.argsInfo.prefix !== cmdInfo.prefix)) continue;
         if (cmdInfo.guild) {
           let guild = await DM.setGuild(data.argsInfo, cmdInfo.guild); //now passed, just check if it needs a guild
           if (!guild) throw "";
           data.message._guild = guild;
         };
-        let run = await Router.runCommand(data.message, data.argsInfo, cmdInfo);
-        if (run) await Router.logCommand(data.argsInfo, cmdInfo);
+        Router.runCommand(data.message, data.argsInfo, cmdInfo);
         throw "";
       };
-      let data = Object.assign({}, _data), guild;
+      let data = Object.assign({}, _data);
       if (DMCommands[0].guild) {
         let guild = await DM.setGuild(_data.argsInfo, DMCommands[0].guild); //now passed, just check if it needs a guild
         if (!guild) throw "";
@@ -153,13 +155,12 @@ class Router {
     try {
       if (cmdInfo.requires) await Router.requires(argsInfo, cmdInfo); //halts it if fails permissions test
       let args = [];
-      for (let i = 0; i < cmdInfo.arguments.length; i++) {
+      for (let i = 0; i < cmdInfo.arguments.length; i++)
         args[i] = argsInfo[cmdInfo.arguments[i]]; //the arguments we take for new Instance input are what's listed
-        //if(!args[i]) return argsInfo.Output.onError(`Command **${argsInfo.command}** requires the following piece of data which you have not provided: **${cmdInfo.arguments[i]}**.`)
-      };
       let Constructor = require("../modules/" + cmdInfo.file + ".js"); //Profile
       let Instance = new Constructor(message); //profile = new Profile(message);
-      if (Instance[cmdInfo.method]) Instance[cmdInfo.method](...args);
+      if (typeof Instance[cmdInfo.method] === "function") Instance[cmdInfo.method](...args);
+      //else if (typeof Instance._getDescendantProp(cmdInfo.method) === "function") Instance._getDescendantProp(cmdInfo.method)(...args);
       else return !!eval("Instance." + cmdInfo.method + "(...args)");
       return true;
     } catch (e) {
@@ -191,35 +192,3 @@ class Router {
 }
 
 module.exports = Router;
-
-Array.prototype.inArray = function (string) {
-  for (let i = 0; i < this.length; i++) {
-    if (string.toLowerCase().replace(/[.,#!$%\^&;:{}<>=-_`\"~()]/g, "").trim() === this[i].toLowerCase().replace(/[.,#!$%\^&;:{}<>=-_`\"~()]/g, "").trim()) return true;
-  };
-  return false;
-}
-
-Date.gettime = function (ms) {
-  let time = new Date(ms);
-  time.hours = time.getUTCHours();
-  time.minutes = time.getUTCMinutes();
-  time.seconds = time.getUTCSeconds();
-  time.milliseconds = time.getUTCMilliseconds();
-  time.days = Math.floor(time.hours / 24);
-  time.hours = time.hours - (24 * time.days);
-  return time;
-}
-
-Date.getISOtime = function (ms) {
-  return Date.gettime(ms).toString().slice(0, 31);
-}
-
-String.prototype.toProperCase = function () {
-  let words = this.split(/ +/g);
-  let newArray = [];
-  for (let i = 0; i < words.length; i++) {
-    newArray[i] = words[i][0].toUpperCase() + words[i].slice(1, words[i].length).toLowerCase();
-  };
-  let newString = newArray.join(" ");
-  return newString;
-}

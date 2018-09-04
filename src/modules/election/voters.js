@@ -18,7 +18,7 @@ class Voters extends Parse {
   async run(args) {
     try {
       let command = (args.shift() || "generate").toLowerCase();
-      if (/register|disqualify|clear/.test(command.toLowerCase()) && (this.guild.ownerID !== this.author.id && !config.ids.owner.includes(this.author.id))) throw "Insufficient server permissions to use this command.";
+      if (/register|disqualify|clear/.test(command.toLowerCase()) && !this.Permissions.role("owner", this)) throw this.Permissions.output("role");
       if (typeof this[command] === "function") this[command](); //looks for, this.register(), this.get(), this.disqualify()
       else throw "Invalid second parameter given **" + command + "**.";
     } catch (e) {
@@ -44,17 +44,10 @@ class Voters extends Parse {
   }
 
   async register() {
-    let msg;
+    let msg = await this.Output.generic("Finding eligible voters... ");
     try {
-      let type = await this.Output.response({
-        "description": "Please define the scope of the election (`server`|`channel`)",
-        "filter": msg => typeof this["by" + msg.content.toProperCase()] === "function"
-      });
-      let data = await this["by" + type.toProperCase()](); //data: {type: 'collection of members'}
-      if (!data) throw "Time out.";
-      data._type = type, data._id = this.guild.id;
-      msg = await this.Output.generic("Finding eligible voters... ");
-      data._url = msg.url;
+      let data = Object.assign({"_url": msg.url}, this.election);
+      data = await this["by" + data._type.toProperCase()](data)
       if (!data) throw "Time out.";
       data = await this.filter(data, msg);
       if (!data) throw "Time out.";
@@ -63,37 +56,31 @@ class Voters extends Parse {
       }, msg);
       this.election = await this.compile(data);
       this.setData(this.election);
-      this.server.states.election.registering = true;
-      DataManager.setServer(this.server);
       this.generate(msg);
-      this.message.delete();
     } catch (e) {
       if (e) this.Output.onError(e);
       if (msg) msg.delete();
     }
   }
 
-  async byServer() {
+  async byServer(data) {
     try {
-      let data = {}; //data is what will replace this.election. It's {channelName: {"voters": {"memberID": []}}}
-      let index = await this.Output.choose({
-        "options": [
-          "All server members can vote in this election.",
-          "There is a role corresponding to the list of eligible voters.",
-          "Everyone who can see the current channel can vote in it."
-        ],
-        "type": "method of obtaining list of eligible voters."
-      });
       let collection;
-      if (index === 0) collection = this.guild.members;
-      else if (index === 1) {
+      if (data._criteria.includes("server")) collection = this.guild.members;
+      else if (data._criteria.includes("role")) {
         let name = await this.Output.response({
           "description": "Please write the name of the role for the list of eligible voters."
         })
         let role = this.Search.roles.get(name);
         if (!role) throw "Couldn't find role " + name + ".";
         collection = role.members;
-      } else if (index === 2) collection = this.channel.members;
+      } else
+      if (data._criteria.includes("channel")) {
+        let channel = this.Search.channels.byID(data._criteria);
+        if (!channel) throw "Invalid criteria given!";
+        collection = channel.members;
+      }
+      else throw "Invalid criteria given!";
       data[this.guild.name] = Array.from(collection.keys());
       return data;
     } catch (e) {
@@ -101,57 +88,31 @@ class Voters extends Parse {
     }
   }
 
-  async byChannel() {
+  async byChannel(data) {
     try {
-      let data = {}; //data: simple object with properties for each channel, and array of voters as value
-      let channels = (await this.Output.response({
-        "description": "Please list the channels or categories containing the channels to hold elections, separated by spaces."
-      })).split(/\s+/g);
-      for (let i = 0; i < channels.length; i++) { //error handling
-        let name = channels[i];
-        channels[i] = this.Search.channels.get(name);
-        if (channels[i] && channels[i].children) {
-          let collection = Array.from(channels[i].children.values());
-          for (let j = 0; j < collection.length; j++)
-            channels[i + j] = collection[j];
-          i += collection.length - 1;
-          let test = channels.map(channel => channel.name || "");
-        };
-        if (channels[i]) continue;
-        channels.splice(i, 1);
-        i--;
-        this.Output.onError("Couldn't find channel **" + name + "**.");
-      };
-      if (channels.length === 0) throw "No applicable channels given.";
-      if (channels.length > 25) throw "Maximum number of elections that can be held at once is 25.";
-      let index = await this.Output.choose({
-        "options": [
-          "All server members can vote in every election.",
-          "There are roles corresponding to each channel.",
-          "Everyone who can see the channel can vote in it."
-        ],
-        "type": "method of obtaining list of eligible voters."
-      }), one;
-      if (index === 1) one = await this.Output.choose({
-        "options": [
-          "The role names are identical to the channel names.",
-          "Let me choose them each time."
-        ],
-        "description": "How do these roles correspond to the channels?"
-      });
-      for (let channel of channels) {
+      for (let channelName in data) {
+        if (channelName.startsWith("_")) continue;
+        let channel = this.Search.channels.get(channelName);
         try {
           let collection;
-          if (index === 0) collection = this.guild.members;
-          else if (index === 1) {
-            let roleName = channel.name;
-            if (one) roleName = await this.Output.response({
+          if (data._criteria.includes("server")) collection = this.guild.members;
+          else
+          if (data._criteria.includes("role")) {
+            let roleName;
+            if (data._criteria === "role-identical") roleName = channel.name;
+            else if (data._criteria === "role-choose") roleName = await this.Output.response({
               "description": "Please write the name of the role for channel " + channel + "."
             });
+            else throw "Invalid criteria given!";
             let role = this.Search.roles.get(roleName);
             if (!role) throw "Couldn't find role for channel " + channel.name + ".";
             collection = role.members;
-          } else if (index === 2) collection = channel.members;
+          } else
+          if (data._criteria.includes("channel")) {
+            let channel = this.Search.channels.byID(data._criteria);
+            if (!channel) throw "Invalid criteria given!";
+            collection = channel.members;
+          } else throw "Invalid criteria given!";
           data[channel.name.toLowerCase()] = collection;
         } catch (e) {
           if (e) this.Output.onError(e);
@@ -167,36 +128,16 @@ class Voters extends Parse {
 
   async filter(data, msg) {
     try {
-      data._active = !(await this.Output.confirm({
-        "description": "Allow inactive server members to vote?"
-      }, true));
-      data._banks = !(await this.Output.confirm({
-        "description": "Allow dupe accounts to vote?"
-      }, true));
-      data._count = await this.Output.response({
-        "description": "Minimum threshold of messages sent in server to vote (return `0` for any):",
-        "number": true
-      });
-      let elections = Object.keys(data).filter(type => !type.startsWith("_")).length;
-      data._limit = elections === 1 ? 1 : await this.Output.response({
-        "description": "Maximum number of elections permitted to run for\n(out of " + elections + ", return '0' for any):",
-        "number": true,
-        "filter": m => Number(m.content) <= elections && 0 <= Number(m.content)
-      });
-      if (data.limit === 0) data._limit = elections;
-      await this.Output.editor({
-        "description": "Finding eligible voters for... "
-      }, msg);
       for (let type in data) {
-        if (type.startsWith("_")) continue;
+        if (type.startsWith("_") || !data.hasOwnProperty(type)) continue;
         await this.Output.editor({
           "description": "Finding eligible voters for... **" + (data._type === "channel" ? this.Search.channels.get(type) : type) + "**"
         }, msg);
         data[type] = Array.from(data[type].filter((member) => {
-          if (data._banks && member.roles.some(role => role.name === this.server.roles.bank)) return false;
+          if (!data._dupes && member.roles.some(role => role.name === this.server.roles.bank)) return false;
           let dbuser = DBuser.getUser(member.user);
-          if (data._active && (Date.now() - (dbuser.messages.lastSeen || 0) > 1210000000)) return false;
-          if (dbuser.messages.count < data._count) return false;
+          if (!data._inactives && (Date.now() - (dbuser.messages.lastSeen || 0) > 1210000000)) return false;
+          if (dbuser.messages.count < data._messages) return false;
           console.log(`[Register, ${type}, ${member.user.tag}]`);
           return true;
         }).keys());
@@ -212,11 +153,13 @@ class Voters extends Parse {
     try {
       let election = {};
       for (let type in data) {
+        if (!data.hasOwnProperty(type)) continue;
         election[type] = (type.startsWith("_")) ? data[type] : { //if it's a non-native property, just add it
           "voters": data[type].reduce((acc, cur) => { //converts the array to an object with keys as items and values []
             acc[cur] = [];
             return acc
-          }, {})
+          }, {}),
+          "candidates": []
         }
       };
       return election;
@@ -297,7 +240,7 @@ class Voters extends Parse {
           else throw "Couldn't find user **" + arg + ".";
         } else user = this.author;
         for (let type in this.election) {
-          if (type.startsWith("_")) continue;
+          if (type.startsWith("_") || !this.election.hasOwnProperty(type)) continue;
           if (this.election[type].voters[user.id]) delete this.election[type].voters[user.id];
         };
         embed.description += user + "\n";
@@ -322,7 +265,7 @@ class Voters extends Parse {
         else throw "Couldn't find user **" + argument + ".";
       } else user = this.author;
       for (let type in this.election) {
-        if (type.startsWith("_")) continue;
+        if (type.startsWith("_") || !this.election.hasOwnProperty(type)) continue;
         if (this.election[type].voters[user.id]) embed.description += this.election._type === "channel" ? this.Search.channels.get(type) + "\n" : type + "\n";
       };
       embed.title = user.tag + " is eligible to vote in election" + (count > 1 ? "s" : "") + ":";

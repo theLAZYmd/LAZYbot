@@ -82,19 +82,3 @@ class Permissions {
 }
 
 module.exports = Permissions;
-
-Object.prototype._getDescendantProp = function (desc) {
-  let arr = desc.split('.'), obj = this;
-  while (arr.length) {
-    obj = obj[arr.shift()];
-  }
-  return obj;
-}
-
-Object.prototype._setDescendantProp = function (desc, value) {
-  let arr = desc.split('.'), obj = this;
-  while (arr.length > 1) {
-    obj = obj[arr.shift()];
-  }
-  return obj[arr[0]] = value;
-}

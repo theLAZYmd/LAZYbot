@@ -691,15 +691,25 @@
   },
   {
     "aliases": [
-      "addcandidate"
+      "election"
     ],
-    "description": "Adds a new eligble candidate to the ballot for upcoming elections.",
+    "description": "Readies a server to hold a new election. Leave blank to show current set config data.",
+    "subcommands": [
+      ["action", {
+        "config": "Registers voters ready for a new election. Resets previous voting data.",
+        "initiate": "Opens the server to allow registering voters and candidates",
+        "reset": "Sets election config data to the default."
+      }]
+    ],
     "usage": [
-      "addcandidate titsinablender zh"
+      "election",
+      "election config",
+      "election initiate",
+      "election reset"
     ],
     "module": "Election",
-    "file": "election",
-    "method": "candidates.add",
+    "file": "election/main",
+    "method": "run",
     "arguments": ["args"],
     "prefix": "generic"
   },
@@ -747,7 +757,7 @@
   {
     "aliases": [
       "candidates",
-      "I declare my intention to run as candidate for "
+      "I declare my intention to run as candidate for"
     ],
     "description": "Registers a candiate.",
     "subcommands": [
@@ -772,12 +782,7 @@
     "file": "election/candidates",
     "method": "run",
     "arguments": ["args"],
-    "prefix": "generic",
-    "requires": {
-      "args": {
-        "length": [1, "++"]
-      }
-    }
+    "prefix": "generic"
   },
   {
     "aliases": [
@@ -813,139 +818,43 @@
   },
   {
     "aliases": [
-      "InitiateElection",
-      "electioninit"
+      "votes"
     ],
-    "description": "Use once. Sends everybody their ballots, triggers the election boolean to begin accepting votes.",
+    "description": "Collates valid votes received for an election.",
+    "subcommands": [
+      [
+        "action",
+        {
+          "close": "Closes voting on this server for all elections.",
+          "open": "Reopens voting on a server for all elections.",
+          "count": "Counts up the votes and saves the results, ready to be outputted."
+        }
+      ]
+    ],
     "usage": [
-      "initiateElection"
+      "votes close",
+      "votes open",
+      "votes count"
     ],
     "module": "Election",
-    "file": "election",
-    "method": "init",
-    "arguments": [],
-    "prefix": "generic"
-  },
-  {
-    "aliases": [
-      "ConfigElection"
-    ],
-    "description": "Transfers across data for the election. Use once.",
-    "usage": [
-      "configElection"
-    ],
-    "module": "Election",
-    "file": "election",
-    "method": "config",
-    "arguments": [],
-    "prefix": "generic"
-  },
-  {
-    "aliases": [
-      "initOne"
-    ],
-    "description": "Restarts the election cycle for a single user.",
-    "usage": [
-      "initOne hauptschule"
-    ],
-    "module": "Election",
-    "file": "election",
-    "method": "res",
-    "arguments": [],
-    "prefix": "generic"
-  },
-  {
-    "aliases": [
-      "voteCount"
-    ],
-    "description": "Returns the total vote count for an ongoing election.",
-    "usage": [
-      "voteCount"
-    ],
-    "module": "Election",
-    "file": "election",
-    "method": "countnow",
-    "arguments": [],
-    "prefix": "generic"
-  },
-  {
-    "aliases": [
-      "genMockAV"
-    ],
-    "description": "Generates a mock AV array. First argument is number of candidates, second is number of voters.",
-    "usage": [
-      "genMockAV 2 15"
-    ],
-    "module": "Election",
-    "file": "election",
-    "method": "votes.gen",
+    "file": "election/votes",
+    "method": "run",
     "arguments": ["args"],
-    "prefix": "generic"
+    "prefix": "generic",
+    "requires": {
+      "role": "admin",
+      "args":{
+        "length": 1
+      }
+    }
   },
   {
     "aliases": [
-      "cleanVotes"
+      "results"
     ],
-    "description": "Error fixing. Removes null values from election database.",
+    "description": "Outputs the results of a recent election.",
     "usage": [
-      "cleanVotes"
-    ],
-    "module": "Election",
-    "file": "election",
-    "method": "clean",
-    "arguments": [],
-    "prefix": "generic"
-  },
-  {
-    "aliases": [
-      "consolidateVotes"
-    ],
-    "description": "Data handling. Transfers all voted for candidates to 'candidates' section and assigns them an index.",
-    "usage": [
-      "consolidateVotes"
-    ],
-    "module": "Election",
-    "file": "election",
-    "method": "consol",
-    "arguments": [],
-    "prefix": "generic"
-  },
-  {
-    "aliases": [
-      "votingClose"
-    ],
-    "description": "Ends the voting stage of an election. To be used in conjunction with `${generic}beginCount`.",
-    "usage": [
-      "votingClose"
-    ],
-    "module": "Election",
-    "file": "election",
-    "method": "end",
-    "arguments": [],
-    "prefix": "generic"
-  },
-  {
-    "aliases": [
-      "countVotes",
-      "beginCount"
-    ],
-    "description": "Triggers the vote count for a recent election.",
-    "usage": [
-      "consolidateVotes"
-    ],
-    "module": "Election",
-    "file": "election",
-    "method": "count",
-    "arguments": [],
-    "prefix": "generic"
-  },
-  {
-    "aliases": [
-      "postVotes"
-    ],
-    "description": "Triggers the vote count for a recent election.",
-    "usage": [
-      "postVotes"
+      "results"
     ],
     "module": "Election",
     "file": "election",
@@ -955,17 +864,32 @@
   },
   {
     "aliases": [
-      "parseVotes"
+      "instantrunoff",
+      "IRV"
     ],
-    "description": "Triggers the vote parsing for a recent election.",
+    "description": "Display information about an Instant Run Off Election.",
+    "subcommands": [
+      [
+        "action",
+        {
+          "mock": "Generates mock data for an IRV election."
+        }
+      ]
+    ],
     "usage": [
-      "postVotes"
+      "IRV",
+      "IRV mock"
     ],
     "module": "Election",
-    "file": "election",
-    "method": "votes.parse",
+    "file": "election/electorals/irv",
+    "method": "run",
     "arguments": [],
-    "prefix": "generic"
+    "prefix": "generic",
+    "requires": {
+      "args":{
+        "length": [0, 1]
+      }
+    }
   },
   {
     "aliases": [
@@ -1373,7 +1297,7 @@
       "gild fumitoks",
       "gild 481994356106985493"
     ],
-    "module": "Custom Reactions",
+    "module": "Currency",
     "file": "emoji",
     "method": "gild",
     "arguments": ["args"],
@@ -1434,7 +1358,7 @@
       "send penguingim1"
     ],
     "module": "Administration",
-    "file": "dm",
+    "file": "modmail",
     "method": "outgoing",
     "arguments": ["args"],
     "prefix": "generic"

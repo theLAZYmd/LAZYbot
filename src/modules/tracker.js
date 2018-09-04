@@ -135,7 +135,7 @@ class Tracker extends Parse {
           data = await Tracker.handle(data, this.msg);
         } else {
           for (let account in data.dbuser[data.source.key]) {
-            if (account.startsWith("_")) continue;
+            if (account.startsWith("_") || !data.dbuser[data.source.key].hasOwnProperty(account)) continue;
             data.username = account;
             if (this.command) this.Output.editor({
               "description": "Updating user " + data.dbuser.username + "... on **" + data.source.name + "**"
@@ -170,6 +170,7 @@ class Tracker extends Parse {
       data.source = data.sources[0];
       let found = false, isMain = false, NoAccountsLeft = false;
       for (let account in data.dbuser[data.source.key]) {
+        if (!data.dbuser[data.source.key].hasOwnProperty(account)) continue;
         if (data.username && data.username.toLowerCase() === account.toLowerCase()) {
           found = true;
           delete data.dbuser[data.source.key][account];
@@ -182,6 +183,7 @@ class Tracker extends Parse {
       };
       if (!found) throw "Could not find username **" + data.username + "** linked to account **" + data.dbuser.username + "**.";
       for (let account in data.dbuser[data.source.key]) {
+        if (!data.dbuser[data.source.key].hasOwnProperty(account)) continue;
         if (account.startsWith("_")) {
           if (isMain) delete data.dbuser[data.source.key][account];
         } else {
