@@ -25,12 +25,12 @@
     "preinstall": "rm package-lock.json",
     "dependencies": {
         "axios": "^0.18.0",
-        "discord.js": "^11.2.1",
+        "discord.js": "^11.4.2",
         "enmap": "^0.3.2",
         "es6": "0.0.7",
         "express": "^4.16.0",
-        "request": "^2.87.0",
+        "request": "^2.88.0",
         "request-promise": "^4.2.2",
-        "yarn": "^1.5.1"
+        "yarn": "^1.9.4"
     }
 }

@@ -1,0 +1,128 @@
+const Main = require("./main.js");
+const Config = require("./config.js");
+const DataManager = require("../../util/datamanager.js");
+const Embed = require("../../util/embed.js");
+const config = require("../../config.json");
+
+class Election extends Main {
+
+  constructor(message) {
+    super(message);
+    this.properties = [   //default settings
+      ["date", Date.getMonth(Date.now()), "Date"],
+      ["type", "server", "Type of election"],
+      ["criteria", "Everyone in the server", "Electorate list"],
+      ["inactives", true, "Inactive members voting"],
+      ["dupes", true, "Dupe members voting"],
+      ["messages", 100, "Required messages"],
+      ["sponsors", 3, "Required sponsors"],
+      ["limit", 1, "Running limit"],
+      ["elections", {
+        "server": {
+          "voters": [],
+          "candidates": []
+        }
+      }, "Elections"],
+      ["role", undefined, "Corresponding role for voters"]
+    ];
+  }
+
+  async generate(init) {
+    try {
+      let election = this.election;
+      let emoji = this.Search.emojis.get(this.server.emoji);
+      let embed = new Embed().setTitle((emoji ? emoji + " " : "") + "Information for upcoming " + (election._type ? election._type + " " : "") + "election" + (election._type !== "server" ? "s" : "") +" on " + this.guild.name);
+      let value = ((states) => {
+        if (typeof states !== "object") return "\u200b";
+        if (!states.register) return "Voters have not yet been registered.";
+        let string = "Voters have been registered.\n";
+        if (states.candidates) return string += "Candidates are being registered.";
+        if (states.voting) return string = "Voting is currently taking place! Check your DMs.\nUse `" + this.server.prefixes.generic + "eligible` to check for which channels you are eligible to vote.";
+        if (states.results) return string = "Results have been announced! Use `" + this.server.prefixes.generic + "results` to view the results."
+        if (states.count) return string = "Votes have been counted. Awaiting results announcement...";
+        return string += "Awaiting initialisation of candidate registration...";
+      })(this.server.states.election)
+      embed.addField("Status", value, false);
+      for (let [property, def, name] of this.properties) {
+        if (election[property] === undefined) continue;
+        if (typeof election[property] === "object") {
+          if (Object.keys(election[property]).length > 2) while ((embed.fields.length - 1) % 3 !== 0 && embed.fields[embed.fields.length - 1].inline === true) embed.addBlankField(true);
+          embed.addField(name, "**" + Object.keys(election[property]).join("**\t|\t**") + "**", Object.keys(election[property]).length < 2);
+        } else embed.addField(name, election[property].toString(), true);
+      };
+      if (init) { //if this method was called from this.initiate() or this.config()
+        embed.setFooter("Verify and set these values?");
+        return !(await this.Output.confirm({embed,
+          "editor": typeof init === "object" ? init : "",
+          "autodelete": false
+        }, true))
+      } else {
+        if (embed.fields.length === 0) embed.setDescription("No upcoming election data found!");
+        this.Output.sender(embed);
+        return false;
+      }
+    } catch (e) {
+      if (e) this.Output.onError(e);
+    }
+  }
+
+  async initiate() {
+    try {
+      let election = this.election;
+      for (let [property, value] of this.properties)
+        election[property] = value;
+      this.election = election;
+      let msg = await this.generate(true);
+      if (msg) this.config(msg);
+    } catch (e) {
+      if (e) this.Output.onError(e);
+    }
+  }
+
+  async clear() {
+    try {
+      if (this.args[1]) {
+        let guild = this.Search.guilds.get(this.args[1]) || "";
+        if (!guild) throw "Couldn't find guild";
+        if (this.guild.id !== guild.id && !config.ids.owner.includes(this.author.id)) throw "Insufficient server permissions to use this command.";
+        this.guild = guild;
+      };
+      this.election = { "_id": this.guild.id };
+      this.server.states.election.register = false;
+      DataManager.setServer(this.server);
+      this.Output.generic("Cleared voting data for server **" + (this.guild.name) + "**.");
+    } catch (e) {
+      if (e) this.Output.onError("**Couldn't clear voting data on server " + (this.guild.name) + "**: " + e);
+    }
+  }
+
+  async config(msg = true) {
+    try {      
+      let election = this.election, args = this.args.slice(1), data = {};
+      if (args.length !== 0) for (let type in election) {
+        if (!election.hasOwnProperty(type) || args.inArray(type)) continue;
+        data[type] = election.type;
+      };
+      do {
+        let econfig = new Config(data, this);
+        for (let [property, def] of this.properties) {
+          if (args.length > 0 && !args.inArray(property)) continue;
+          let value = await econfig[property];
+          if (value === undefined) value = def;
+          election[property] = value;
+        };
+        args = [];
+        data = {};
+        this.election = election;
+        msg = await this.generate(msg);
+      } while (msg);
+      this.server.states.election.register = false;
+      DataManager.setServer(this.server);
+    } catch (e) {
+      if (e) this.Output.onError(e);
+    }
+  }
+
+}
+
+module.exports = Election;

@@ -693,22 +693,24 @@
     "aliases": [
       "election"
     ],
-    "description": "Readies a server to hold a new election. Leave blank to show current set config data.",
+    "description": "Displays current election data. Use action to configure the election.",
     "subcommands": [
       ["action", {
-        "config": "Registers voters ready for a new election. Resets previous voting data.",
-        "initiate": "Opens the server to allow registering voters and candidates",
-        "reset": "Sets election config data to the default."
+        "initiate": "Readies a server for a new election, using default settings.",
+        "config": "Changes the settings for an upcoming election, resetting any previous voting data and registered voters.",
+        "reset": "Sets election config data to the default.",
+        "clear": "Resets previous voting data."
       }]
     ],
     "usage": [
       "election",
-      "election config",
       "election initiate",
-      "election reset"
+      "election config",
+      "election reset",
+      "election clear"
     ],
     "module": "Election",
-    "file": "election/main",
+    "file": "election/election",
     "method": "run",
     "arguments": ["args"],
     "prefix": "generic"
@@ -722,16 +724,14 @@
       ["action", {
         "register": "Registers voters ready for a new election. Resets previous voting data.",
         "disqualify": "Removes a voter from all election records.",
-        "get": "Gets the list of eligble voters for a channel. To be used in #spam only.",
-        "clear": "Resets previous voting data."
+        "get": "Gets the list of eligble voters for a channel. To be used in #spam only."
       }]
     ],
     "usage": [
       "voters",
       "voters register",
       "voters disqualify",
-      "voters get",
-      "voters clear"
+      "voters get"
     ],
     "module": "Election",
     "file": "election/voters",

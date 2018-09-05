@@ -128,13 +128,13 @@ class ModMail extends Parse {
 
   async editor(data) { //check if the edited message is too long
     try {
-      if (JSON.stringify(Embed.receiver(data.embed)).length < 2000) return await this.Output.editor(data.embed, data.message); //check if the message would be more than 2000 characters 
+      if (data.embed.fields.length < 26) return await this.Output.editor(data.embed, data.message); //check if the message would be more than 2000 characters 
       data.message.clearReactions(); //clear reactions from the old message
       this.modmail[message.id].overflow = msg.id; //set the overflow to true
       this.setData(this.modmail);
       let msg = await this.anew(data);
     } catch (e) {
-      if (e) this.Output.onError("editor " + e);
+      if (e) this.Output.onError(e);
     }
   }
 

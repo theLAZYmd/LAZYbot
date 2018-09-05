@@ -1,36 +1,16 @@
-const Parse = require("../../util/parse.js");
+const Main = require("./main.js");
 const DataManager = require("../../util/datamanager.js");
 const IRV = require("./electorals/irv.js");
-const Embed = require("../../util/embed.js");
 
-class Votes extends Parse {
+class Votes extends Main {
 
   constructor(message) {
     super(message);
   }
 
-  get election() {
-    if (this._election) return this._election;
-    return this.guild ? DataManager.getServer(this.guild.id, "./src/data/votes.json") : null;
-  }
-
-  set election(election) {
-    this._election = election;
-    DataManager.setServer(election, "./src/data/votes.json");
-  }
-
-  async run(args) {
-    try {
-      let command = args.shift();
-      if (command) command = command.toLowerCase();
-      if (typeof this[command] === "function") this[command](args); //looks for, this.one(), this.all(), and mobile which is a subset of this.one()
-      else throw "Invalid second parameter given **" + command + "**.";
-    } catch (e) {
-      if (e) this.Output.onError(e);
-    }
-  }
-
   async open() {
+    if (!this.server.states.register) return this.Output.onError("Cannot initiate voting without voter registration.");
+    if (this.server.states.candidates) return this.Output.onError("Cannot initiate voting while candidate registration is still open.");
     this.server.states.election.voting = true;
     DataManager.setServer(this.server);
     this.Output.generic("Opened voting on server **" + this.guild.name + "**.");
@@ -44,22 +24,24 @@ class Votes extends Parse {
 
   async count() {
     try {
+      if (!this.server.states.register || this.server.states.candidates) throw "Cannot begin voter count before voting has begun.";
+      if (this.server.states.voting) throw "Cannot initiate voting while voting is still open.";
       let election = this.election;
       let msg = await this.Output.generic("Initialised final vote count for " + Object.keys(election).filter(property => !property.startsWith("_")).length + " elections...");
-      let system = config.electorals[this.election._system];
+      let system = config.electorals[this.election.system];
       if (!system) throw "Couldn't find valid electoral system by which to count up votes.";
       let Count = require("./electorals/" + system.file + ".js");
       if (!Count || typeof Count.rank !== "function") throw "Couldn't find valid process by which to count up votes.";
       await this.Output.editor("Counting up the votes...", msg)
-      for (let channel in this.election) {  //I say it's 'channel' but really it's any validated election
-        if (!this.election.hasOwnProperty(channel) || channel.startsWith("_")) continue;
+      for (let [channel, data] of Object.entries(this.election.elections)) {  //I say it's 'channel' but really it's any validated election
+        if (!this.election.hasOwnProperty(channel)) continue;
         await this.Output.editor("Counting up the votes for election... **" + channel + "**", msg);
-        let candidates = await this.parseCandidates(election[channel].candidates);
+        let candidates = await this.parseCandidates(data.candidates);
         //create a map for the candidates
         //exclude candidates that couldn't be found
-        let votes = await this.parseVotes(election[channel].voters);
+        let votes = await this.parseVotes(data.voters);
         let raw = await IRV.rank(candidates, votes);  
-        election[channel].results = await this.parseResults(raw);
+        this.election.elections[channel].results = await this.parseResults(raw); //need to use 'in' iterator for setters
       };
       await this.Output.editor("Setting the result...");
       this.election = election;

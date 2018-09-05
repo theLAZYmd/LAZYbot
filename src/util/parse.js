@@ -29,6 +29,8 @@ class Parse {
     };
   }
 
+  //DATA
+
   get server () {
     if (!this._server) {
       if (this.guild) this._server = DataManager.getServer(this.guild.id);
@@ -42,6 +44,8 @@ class Parse {
     };
     return this._reactionmessages || "";
   }
+
+  //Methods
 
   get Output() {
     if (!this._Output) {

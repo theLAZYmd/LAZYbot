@@ -6,8 +6,11 @@
             "bcp": false,
             "au": true,
             "election": {
-                "registering": false,
-                "voting": false
+                "register": false,
+                "candidates": false,
+                "voting": false,
+                "count": false,
+                "results": false
             },
             "trivia": false
         },

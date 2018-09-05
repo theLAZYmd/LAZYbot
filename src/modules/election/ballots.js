@@ -1,31 +1,17 @@
-const Parse = require("../../util/parse.js");
+const Main = require("./main.js");
 const DataManager = require("../../util/datamanager.js");
 const Embed = require("../../util/embed.js");
 
-class Ballots extends Parse {
+class Ballots extends Main {
 
   constructor(message) {
     super(message);
-    this.election = this.guild ? DataManager.getServer(this.guild.id, "./src/data/votes.json") : "";
   }
 
-  async setData(election) {
-    DataManager.setServer(election, "./src/data/votes.json");
-  }
-
-  async run(args) {
+  async one() { //sends one ballot. Purpose is to test the all function
     try {
-      let command = args.shift().toLowerCase();
-      if (command !== "send" && typeof this[command] === "function") this[command](args); //looks for, this.one(), this.all(), and mobile which is a subset of this.one()
-      else throw "Invalid second parameter given **" + command + "**.";
-    } catch (e) {
-      if (e) this.Output.onError(e);
-    }
-  }
-
-  async one(args) { //sends one ballot. Purpose is to test the all function
-    try {
-      let user = this.author, argument = args.join(" ");
+      if (this.server.states.voting && this.command === "mobile") throw "Cannot send ballots before voting has opened.";
+      let user = this.author, argument = this.args.slice(1).join(" ");
       if (argument) {
         if (!await this.Permissions.role("owner", this)) throw await this.Permissions.output("owner", this);
         let _user = this.Search.users.get(argument);
@@ -42,7 +28,7 @@ class Ballots extends Parse {
     try {
       if (this.server.states.election.voting) throw "This command cannot be used once voting has begun!"; //set to true at the end
       let object = {};
-      for (let [type, data] of Object.entries(this.election)) { //for each election
+      if (this.election.elections) for (let [type, data] of Object.entries(this.election.elections)) { //for each election
         if (type.startsWith("_")) continue;
         for (let id in data.voters) {
           if (!data.voters.hasOwnProperty(id)) continue;
@@ -61,17 +47,17 @@ class Ballots extends Parse {
   async send(users, mobile) {
     try {
       let voterCount = users.length, ballotCount = 0;
-      let msg = await this.Output.sender({
-        "description": `Initiating sending ${mobile ? "mobile " : ""}ballots...`,
-        "footer": Embed.footer(`Sending 0 / 0 ballots to 0 / ${voterCount} voters.`)
-      });
-      let voterChannels = users.map(user => [user, Ballots.validate(this.election, user)]); //Actually generate all the channels that need to be sent first!
+      let msg = await this.Output.sender(new Embed()
+        .setDescription(`Initiating sending ${mobile ? "mobile " : ""}ballots...`)
+        .setFooter(`Sending 0 / 0 ballots to 0 / ${voterCount} voters.`)
+      );
+      let voterChannels = users.map(user => [user, Main.validate(this.election, user)]); //Actually generate all the channels that need to be sent first!
       for (let [user, channels] of voterChannels) //validate returns an array of channels (as ids) that the user is eligible to vote for
         ballotCount += channels.length; //count them (for the beginning message)
-      await this.Output.editor({
-        "description": `Initiating sending ${mobile ? "mobile " : ""}ballots...`,
-        "footer": Embed.footer(`Sending 0 / ${ballotCount} ballots to 0 / ${voterCount} voters.`)
-      }, msg);
+      await this.Output.editor(new Embed()
+        .setDescription(`Initiating sending ${mobile ? "mobile " : ""}ballots...`)
+        .setFooter(`Sending 0 / ${ballotCount} ballots to 0 / ${voterCount} voters.`)
+      , msg);
       let voterRunning = 0, ballotRunning = 0, string = "";
       for (let i = 0; i < voterChannels.length; i++) {
         let [user, channels] = voterChannels[i]; //for each user
@@ -79,7 +65,8 @@ class Ballots extends Parse {
           try {
             if (!mobile) {
               let ballot = Ballots.gen(this.election, user, channels);  //generate the full ballot for desktop users
-              this.Output.sender(ballot, user);
+              this.Output.generic("This ballot was sent on error. Please do not try to vote with it or otherwise do anything.", user);
+              //this.Output.sender(ballot, user);
             } else {
               let ballots = Ballots.fields(this.election, user, channels);  //otherwise just generate the fields
               for (let j = 0; j < ballots.length; j++) {
@@ -92,10 +79,10 @@ class Ballots extends Parse {
                 }, 2000 * j);
               };
             };
-            this.Output.editor({  //on the aesthetic log message, edit it to 'sending' plus the user plus basic details
-              "description": `Sending ${channels.length} ${mobile ? "mobile " : ""}ballots to **${user.tag}**`,
-              "footer": Embed.footer(`Sent ${ballotRunning} / ${ballotCount} ballots to ${voterRunning} / ${voterCount} voters.`)
-            }, msg);
+            this.Output.editor(new Embed()  //on the aesthetic log message, edit it to 'sending' plus the user plus basic details
+              .setDescription(`Sending ${channels.length} ${mobile ? "mobile " : ""}ballots to **${user.tag}**`)
+              .setFooter(`Sent ${ballotRunning} / ${ballotCount} ballots to ${voterRunning} / ${voterCount} voters.`)
+            , msg);
             console.log(Date.getISOtime(Date.now()) + " | " + user.tag + " | " + "Election/ballots" + " | " + "command-request" + " | [" + channels.join(", ") + "]");  //log it. Add to text string
             string += `#${user.tag}: [${channels.join(", ")}]\n`;
             ballotRunning += channels.length; //up the running totals to edit our aesthetic footer message
@@ -103,11 +90,10 @@ class Ballots extends Parse {
           } catch (e) {
             if (e) this.Output.onError("**" + user.tag + "**: " + e);
           };
-          if (i === voterChannels.length - 1) setTimeout(() => {
-            let embed = {
-              "description": `Finished sending ${ballotRunning} ballots.`,
-              "footer": Embed.footer(`Sent ${ballotRunning} / ${ballotCount} ballots to ${voterRunning} / ${voterCount} voters.`)
-            };
+          if (i === voterChannels.length - 1) setTimeout(() => {  //required twice, so define it this way
+            let embed = new Embed()
+            .setDescription(`Finished sending ${ballotRunning} ballots.`)
+            .setFooter(`Sent ${ballotRunning} / ${ballotCount} ballots to ${voterRunning} / ${voterCount} voters.`);
             this.Output.editor(embed, msg);
             if (mobile) this.Output.sender(embed, user);
             else this.Output.data(string, this.Search.channels.get(this.server.channels.mod), "css");
@@ -124,8 +110,8 @@ class Ballots extends Parse {
     try {
       let ballot = {
         "author": {
-          "name": "House Discord Server Mod Elections: " + election._date,
-          "icon_url": election._icon,
+          "name": "House Discord Server Mod Elections: " + election.date,
+          "icon_url": election.icon,
           "url": election._url || "",
         },
         "title": "This constitutes your voting ballot for this election.",
@@ -145,7 +131,7 @@ class Ballots extends Parse {
   static fields(election, user, channels) {
     let fields = [];
     for (let channel of channels) {
-      let candidates = Object.keys(election[channel].candidates || {}).filter(candidate => election[channel].candidates[candidate].length >= 2) || [];
+      let candidates = Object.keys(election.elections[channel].candidates || {}).filter(candidate => election[channel].candidates[candidate].length >= 2) || [];
       let votingString = Ballots.candidates(candidates);
       fields.push({
         "name": `#${channel} Ballot:`,
@@ -168,12 +154,6 @@ class Ballots extends Parse {
     for (let candidate of candidates)
       string += "[] " + candidate + "\n"
     return string;
-  }
-
-  static validate(election, user, type = "voters") { //returns an array of channels
-    return Object.entries(election) //get rid of the extra properties. if a user object is provided, check if the user is in the voters data
-      .filter(([channel, data]) => !channel.startsWith("_") && data[type] && (!user || Object.keys(data[type]).includes(user.id)))
-      .map(([channel]) => channel);
   }
 
 }

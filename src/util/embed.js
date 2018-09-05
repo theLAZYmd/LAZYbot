@@ -1,6 +1,7 @@
 const config = require("../config.json");
+const { RichEmbed } = require("discord.js");
 
-class Embed {
+class Embed extends RichEmbed {
 
   static async sender(inputobject, channel) {
     try {
@@ -26,16 +27,8 @@ class Embed {
     }
   }
 
-  static fielder(fields, name, value, inline) {
-    inline = inline ? inline : false;
-    if (!fields) {
-      fields = [];
-      fields[0] = {
-        name,
-        value,
-        inline
-      }
-    } else fields.push({
+  static fielder(fields = [], name = " \u200b", value = " \u200b", inline = false) {
+    fields.push({
       name,
       value,
       inline
@@ -65,16 +58,13 @@ class Embed {
 
   static footer(text, icon_url) {
     let footer = {};
-    if (text) {
-      footer.text = text
-    };
-    if (icon_url) {
-      footer.icon_url = icon_url
-    };
+    if (text) footer.text = text;
+    if (icon_url) footer.icon_url = icon_url;
     return footer
   }
 
   static receiver(embed) {
+    return new Embed(embed); /*
     let embedinput = {};
     let property = ["content", "title", "url", "description", "color", "video", "timestamp"];
     for (let i = 0; i < property.length; i++) {
@@ -108,10 +98,10 @@ class Embed {
         let name = embed.fields[i].name ? embed.fields[i].name : "\u200b";
         let value = embed.fields[i].value ? embed.fields[i].value : "\u200b";
         let inline = embed.fields[i].inline ? embed.fields[i].inline : "false";
-        if ((name && name !== "\u200b") || (value && value !== "\u200b")) embedinput.fields[i] = {name, value, inline};
+        embedinput.fields[i] = {name, value, inline};
       }
     };
-    return embedinput;
+    return embedinput;*/
   }
 
   /*
