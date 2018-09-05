@@ -816,6 +816,8 @@
             }
         ],
         "cwc": [{
+                "image": "https://i.imgur.com/v5fg6wH.png"
+            },{
                 "title": "Entrant Eligibility",
                 "description": "Entrants who meet the following criteria will be accepted automatically:\n\n**1.** Have an established crazyhouse rating on lichess.\n\n**2.** Have played at least 50 rated crazyhouse games on lichess.\n\n**3.** Have had an account on lichess for over 1 month at the time of entry.\n\n**4.** Be participating only using their main account (no dupe accounts).\n\n**5.** Have messaged the TD (FischyVishy) with intent to join **within** the entry period.\n\n**6.** Have joined the Crazyhouse World Championship group.\n\nPoints 1, 2 and 3 above are aimed primarily at preventing duplicate accounts from entering. Entries not meeting these criteria may still be accepted and seeded at the TD's discretion.\n\nExceptions are most likely to be made for players known within the crazyhouse community who clearly are not using duplicate accounts.\n\nAny player attempting to use multiple accounts or computer assistance will be kicked out and if necessary reported to lichess moderators.",
                 "thumbnail": "https://i.imgur.com/AaQkW8G.png"
