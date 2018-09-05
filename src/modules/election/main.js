@@ -20,10 +20,11 @@ class Main extends Parse {
 
   async run() { //router
     try {
-      let command = this.args.shift();
+      let command = this.args.shift() || "";
+      command = command.toLowerCase();
       if (command && command !== "get" && !this.Permissions.role("owner", this)) throw this.Permissions.output("role");
-      command = (command || "generate").toLowerCase();
-      if (/reset|init/.test(command)) command = "initiate";
+      if (/^(?:status)?$/.test(command)) command = "generate";
+      if (/^reset|init$/.test(command)) command = "initiate";
       if (typeof this[command] === "function") this[command](); //looks for, this.register(), this.get(), this.disqualify()
       else throw "Invalid second parameter given **" + command + "**.";
     } catch (e) {

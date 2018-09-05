@@ -135,76 +135,73 @@ class Vote extends Parse { //this module parses voting data
   async receive() {
     try {
       let successfulchannels = [];
-      for (let match of this.matches) {
-        try {
-          let ballot = new Ballot(match);
-          if (ballot.voter !== this.author.id) throw "stolen";          //changed voterID (perhaps to another user)
-          this.message._guild = this.client.guilds.get(ballot.server);          
-          if (!this.guild) throw "noGuild";                              //changed serverID to other 18 digit code (for whatever reason)
-          let election = this.election;
-          if (!this.server.states.election.voting) throw "state";            //voting period has closed
-          if (!election[ballot.channel]) throw "noElection";       //changed channel (election) name to something invalid
-          if (!election[ballot.channel].voters[ballot.voter]) throw "ineligible";  //changed channel name to other election not eligible for
-          if (ballot.zeroes) throw "zeroes";                            //added a zero [0] option
-          if (ballot.writeIn) throw "badWriteIn";                       //added a number [1] to 'Wrote-In'
-          if (ballot.duplicates) throw "duplicates";                    //wrote the same number next to more than one
-          if (!ballot.ascending) throw "badOrder";                      //added a zero [0] option
-          let votes = ballot.votes
-            .filter(vote => !vote || vote === "blank" || this.Search.users.byTag(vote))          //so the ballot.votes[0] = false gets filtered to stay in
-            .map(vote => typeof vote === "string" ? (vote === "blank" ? "blank" : this.Search.users.byTag(vote).id) : Date.now()); //here's where the date is added
-          if (votes.length !== ballot.votes.length) throw "missingUsers";
-          if (election[ballot.channel].voters[ballot.voter][0]) {  //revote
-            if (Date.now() - election[ballot.channel].voters[ballot.voter][0] > 1800000) throw "timeout";    //trying to revote out of time (more than half a hour later)
-            else {
-              for (let candidate of vote) {
-                if (!election[ballot.channel].candidates[candidate]) {
-                  election[ballot.channel].candidates[candidate] = [];
-                  console.log(Date.getISOtime(Date.now()) + " | " + user.tag + " | " + "Election/vote" + " | " + "candidate register" + " | " + candidate);
-                }
-              };
-              if (ballot.spoiled) this.resolve("spoiled revote", this.author, ballot.channel);
-              else this.resolve("revote", this.author, ballot.channel);
-            }
-          } else {
+      for (let match of this.matches) try {
+        let ballot = new Ballot(match);
+        if (ballot.voter !== this.author.id) throw "stolen";          //changed voterID (perhaps to another user)
+        this.message._guild = this.client.guilds.get(ballot.server);          
+        if (!this.guild) throw "noGuild";                              //changed serverID to other 18 digit code (for whatever reason)
+        let election = this.election;
+        if (!this.server.states.election.voting) throw "state";            //voting period has closed
+        if (!election.type) throw "state";
+        if (!election.elections[ballot.channel]) throw "noElection";       //changed channel (election) name to something invalid
+        if (!election.elections[ballot.channel].voters[ballot.voter]) throw "ineligible";  //changed channel name to other election not eligible for
+        if (ballot.zeroes) throw "zeroes";                            //added a zero [0] option
+        if (ballot.writeIn) throw "badWriteIn";                       //added a number [1] to 'Wrote-In'
+        if (ballot.duplicates) throw "duplicates";                    //wrote the same number next to more than one
+        if (!ballot.ascending) throw "badOrder";                      //added a zero [0] option
+        let votes = ballot.votes
+          .filter(vote => !vote || vote === "blank" || this.Search.users.byTag(vote))          //so the ballot.votes[0] = false gets filtered to stay in
+          .map(vote => typeof vote === "string" ? (vote === "blank" ? "blank" : this.Search.users.byTag(vote).id) : Date.now()); //here's where the date is added
+        if (votes.length !== ballot.votes.length) throw "missingUsers";
+        if (election.elections[ballot.channel].voters[ballot.voter][0]) {  //revote
+          if (Date.now() - election.elections[ballot.channel].voters[ballot.voter][0] > 1800000) throw "timeout";    //trying to revote out of time (more than half a hour later)
+          else {
             for (let candidate of vote) {
-              if (!election[ballot.channel].candidates[candidate]) {
-                election[ballot.channel].candidates[candidate] = [];
+              if (!election.elections[ballot.channel].candidates[candidate]) {
+                election.elections[ballot.channel].candidates[candidate] = [];
                 console.log(Date.getISOtime(Date.now()) + " | " + user.tag + " | " + "Election/vote" + " | " + "candidate register" + " | " + candidate);
               }
             };
-            if (ballot.spoiled) this.resolve("spoiled", this.author, ballot.channel);
-            else this.resolve("vote", this.author, ballot.channel);
+            if (ballot.spoiled) this.resolve("spoiled revote", this.author, ballot.channel);
+            else this.resolve("revote", this.author, ballot.channel);
+          }
+        } else {
+          for (let candidate of vote) {
+            if (!election.elections[ballot.channel].candidates[candidate]) {
+              election.elections[ballot.channel].candidates[candidate] = [];
+              console.log(Date.getISOtime(Date.now()) + " | " + user.tag + " | " + "Election/vote" + " | " + "candidate register" + " | " + candidate);
+            }
           };
-          election[ballot.channel].voters[ballot.voter] = votes;
-          successfulchannels.push(ballot.channel);
-          this.election = election;
-        } catch (e) {
-          if (Errors[e]) {
-            let embed = {
-              "color": config.colors.error,
-              "description": Errors[e],
-              "fields": []
-            };
-            if (this.matches.length >= 2) embed.fields.push({
-              "name": "Invalid Ballot:",
-              "value": "```css\n" + match + " ".repeat(20) + "\n\u200b" + "```",
-              "inline": false
-            });
-            `[Vote, ${this.author.tag}, ${Errors[e]}]`
-            this.Output.sender(embed);
-          } else
-          if (typeof e === "string") {
-            console.log(e);
-            this.Output.sender({
-              "color": config.colors.error,
-              "description": e
-            });
-          } else {
-            this.Output.onError(e);
+          if (ballot.spoiled) this.resolve("spoiled", this.author, ballot.channel);
+          else this.resolve("vote", this.author, ballot.channel);
+        };
+        election.elections[ballot.channel].voters[ballot.voter] = votes;
+        successfulchannels.push(ballot.channel);
+        this.election = election;
+      } catch (e) {
+        if (Errors[e]) {
+          let embed = {
+            "color": config.colors.error,
+            "description": Errors[e],
+            "fields": []
           };
-          continue;
-        }
-      };
+          if (this.matches.length >= 2) embed.fields.push({
+            "name": "Invalid Ballot:",
+            "value": "```css\n" + match + " ".repeat(20) + "\n\u200b" + "```",
+            "inline": false
+          });
+          `[Vote, ${this.author.tag}, ${Errors[e]}]`
+          this.Output.sender(embed);
+        } else
+        if (typeof e === "string") {
+          console.log(e);
+          this.Output.sender({
+            "color": config.colors.error,
+            "description": e
+          });
+        } else throw e;
+        continue;
+      }
       console.log(Date.getISOtime(Date.now()) + " | " + user.tag + " | " + "Election/vote" + " | " + "vote" + " | [" + successfulchannelchannels.join(", ") + "]")
       if (this.guild) this.Output.sender({
         "title": "New vote from " + this.author.tag,

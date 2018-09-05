@@ -23,17 +23,22 @@ class Paginator extends Parse {
   When reaction is triggered, it changes the pagecount to either ++ or -- and loads the next embed in that array
   */
 
-  async sender(embedgroup, period) {
+  async sender(embedgroup, period, path) {
     try {
       let embed = embedgroup[0];
+      let emojis = ["⬅", "➡"];
+      emojis.push(period === Infinity ? "🔄" : "❎");
       embed.footer = embed.footer && embedgroup.length === 1 ? embed.footer : Embed.footer(`1 / ${embedgroup.length}`);
-      let msg = await this.Output[embedgroup.length < 2 ? "sender" : "reactor"](embed, this.channel, ["⬅", "➡"]);
+      let msg = await this.Output[embedgroup.length < 2 ? "sender" : "reactor"](embed, this.channel, emojis);
       this.paginator[msg.id] = {
         embedgroup,
-        "period": period || 30000,
-        "page": 0
+        "period": period === Infinity ? "Infinity" : (period || 30000),
+        "page": 0,
+        "author": this.author.id
       };
+      if (this.command === "...") this.paginator[msg.id].path = path;
       this.setData(this.paginator);
+      if (period === Infinity || period > 2147483647) return;
       setTimeout(() => {
         msg.clearReactions()
           .catch((e) => console.log(e));
@@ -49,7 +54,10 @@ class Paginator extends Parse {
     try {
       if (reaction.emoji.name === "➡") data.page++;
       if (reaction.emoji.name === "⬅") data.page--;
+      if (reaction.emoji.name === "🔄") data.page = 0;
       reaction.remove(user);
+      if (reaction.emoji.name === "❎" && user.id === data.author) reaction.message.delete();
+      if (!/➡|⬅|🔄/.test(reaction.emoji.name)) throw "";
       if (data.page < 0 || data.page >= data.embedgroup.length) throw "";
       let embed = data.embedgroup[data.page];
       if (!embed) throw "Couldn't generate embed for page " + (data.page + 1) + ".";

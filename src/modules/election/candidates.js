@@ -9,24 +9,13 @@ class Candidates extends Main {
     super(message);
   }
 
-  async sponsor(args) {
-    try {
-      if (!await this.Permissions.state("election.registering", this)) {
-        if (!await this.Permissions.state("election.voting", this)) throw "Registering for candidates has not yet begun on server " + this.guild.name + ".";
-        else throw "Registering for candidates has closed on server " + this.guild.name + ".";
-      };
-    } catch (e) {
-      if (e) this.Output.onError(e);
-    }
-  }
-
   async generate() {
     try {
       let election = this.election;
       let embed = new Embed()
         .setDescription(`Use \`${this.server.prefixes.generic}candidates sponsor\` to sponsor a candidate for an election, mentioning both channel and candidate.`)
         .setFooter("A candidate requires " + election.sponsors + " sponsors to be included on the ballot.");
-      let registeringBegun = await this.Permissions.state("election.registering", this);
+      let registeringBegun = await this.Permissions.state("election.candidates", this);
       for (let [name, data] of Object.entries(election.elections)) {
         let string = "";
         for (let [candidate, sponsors] of Object.entries(data.candidates || {})) { //["candidate#1024", [Array: List of Sponsors]]
@@ -42,52 +31,76 @@ class Candidates extends Main {
     }
   }
 
-  async register(args) {
+  async handler() {
     try {
-      let election = this.election;
-      if (!await this.Permissions.state("election.registering", this)) {
-        if (!await this.Permissions.state("election.voting", this)) throw "Registering for candidates has not yet begun on server " + this.guild.name + ".";
-        else throw "Registering for candidates has closed on server " + this.guild.name + ".";
+      if (!await this.Permissions.state("election.candidates", this)) {
+        if (await this.Permissions.state("election.voting", this)) throw "Registering for candidates has closed on server " + this.guild.name + ".";
+        else throw "Registering for candidates has not yet begun on server " + this.guild.name + ".";
       };
-      let type = args[0];
-      let channel = this.Search.channels.get(args[0]), user = this.author;
+      let args = this.args.slice(1), type = args[0], channel = type ? this.Search.channels.get(type) : "", user = this.author, election = this.election;
       if (channel) type = channel.name; 
       if (args[1]) {
         if (!this.Permissions.role("owner", this)) throw "Insufficient server permissions to use this command.";
         user = this.Search.users.get(args[1]);
         if (!user) throw "Couldn't find user **" + args[1] + "**!";
       };
-      if (!election.elections[type]) throw "Couldn't find election **" + election + "**! Please use command `${generic}voters` to view list of elections.";
+      if (!election.elections[type]) throw `Couldn't find election${type ? " **" + type + "**" : "" }! Please use command \`${this.server.prefixes.generic}candidates\` to view list of elections.`;
       if (!election.elections[type].candidates) election.elections[type].candidates = {};
-      if (election.elections[type].candidates[user.tag]) throw `Already registered candidate **${user.tag}** for channel **${channel.name}**.`;
+      if (!election.elections[type].voters[user.id] && !this.Permissions.role("owner", this)) throw "User **" + user.tag + "** is not a member of the electorate for election **" + type + "**.";
+      return [type, user];
+    } catch (e) {
+      if (e) throw e;
+    }
+  }
+
+  async register() {
+    try {
+      let election = this.election;
+      let [type, user] = await this.handler();
+      if (type === undefined) throw "";
+      if (election.elections[type].candidates[user.tag]) throw `Already registered candidate **${user.tag}** for channel **${type}**.`;
       let channels = Main.validate(election, user, "candidates");
-      if (channels.length >= (election.limit || 2)) throw `Already registered candidate **${user.tag}** for channels **${channels.join(", ")}**!\nCannot run for more than ${election.limit} channels.`;
+      if (election.limit && channels.length >= election.limit) throw `Already registered candidate **${user.tag}** for channels **${channels.join(", ")}**!\nCannot run for more than ${election.limit} channels.`;
       election.elections[type].candidates[user.tag] = []; //register it as an empty array ready to add sponsors
       this.election = election;
-      this.Output.generic(`Registered candidate **${user.tag}** for channel **${channel.name}**.`)
+      this.Output.generic(`Registered candidate **${user.tag}** for election **${type}**.`)
     } catch (e) {
       if (e) this.Output.onError(e);
     }
   }
 
-  async withdraw(args) {
+  async sponsor() { //[channel, user]
     try {
-      let election = this.elections;
-      let type = args[0];
-      let channel = this.Search.channels.get(args[0]), user = this.author;
-      if (channel) election = channel.name; 
-      if (args[1]) {
-        if (!this.Permissions.role("owner", this)) throw "Insufficient server permissions to use this command.";
-        user = this.Search.users.get(args[1]);
-        if (!user) throw "Couldn't find user **" + args[1] + "**!";
+      let election = this.election;
+      let [type, user] = await this.handler();
+      if (type === undefined) throw "";
+      let candidate = this.Search.users.get(await this.Output.response({
+        "description": "Please write the name of your chosen candidate to sponsor below.",
+        "filter": m => this.Search.users.get(m.content)
+      }));
+      if (candidate.id === user.id) throw `**${user.tag}** You may not sponsor yourself.`;
+      if (!election.elections[type].candidates[candidate.tag]) throw `**${user.tag}** has not registered as candidate for channel **${type}**.`;
+      if (!election.elections[type].voters[user.id] && !this.Permissions.role("owner", this)) throw "**" + user.tag + "** You are not a member of the electorate.\nYou may not declare sponsorship for a candidate for election **" + type + "**.";
+      if (election.elections[type].candidates[candidate.tag].includes(user.id)) throw `Already registered sponsor **${user.tag}** for candidate **${user.tag}** in election **${type}**!`;
+      for (let [c, sponsors] of Object.entries(election.elections[type].candidates)) {
+        if (sponsors.includes(user.id)) throw `Already registered **${user.tag}** as sponsor for candidate **${c}** for election **${type}**.`;
       };
-      if (!election.elections[type]) throw "Couldn't find election **" + election + "**! Please use command `${generic}voters` to view list of elections.";
-      if (!election.elections[type].candidates) election.elections[type].candidates = [];
-      let index = election.elections[type].candidates.indexOf(user.tag);
-      if (index === -1) throw `Couldn't find **${user.tag}** as a candidate for channel **${channel.name}**.`; //if can't find it, throw
-      election.elections[type].candidates.splice(index); //if can, then find it
+      election.elections[type].candidates[candidate.tag].push(user.id); //register it as an empty array ready to add sponsors
       this.election = election;
-      this.Output.generic(`Withdrew candidate **${user.tag}** from ballot for channel **${channel.name}**.`)
+      this.Output.generic(`**${user.tag}** Registered as sponsor for **${candidate.tag}** for channel **${type}**.`)
+    } catch (e) {
+      if (e) this.Output.onError(e);
+    }
+  }
+
+  async withdraw() {
+    try {
+      let election = this.election; 
+      let [type, user] = await this.handler();
+      if (!election.elections[type].candidates[user.tag]) throw `**${user.tag}** has not registered as candidate for channel **${type}**.`;
+      delete election.elections[type].candidates[user.tag]; //if can, then find it
+      this.election = election;
+      this.Output.generic(`Withdrew candidate **${user.tag}** from ballot for channel **${type}**.`)
     } catch (e) {
       if (e) this.Output.onError(e);
     }

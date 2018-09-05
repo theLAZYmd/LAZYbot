@@ -34,6 +34,7 @@ class Election extends Main {
       let embed = new Embed().setTitle((emoji ? emoji + " " : "") + "Information for upcoming " + (election._type ? election._type + " " : "") + "election" + (election._type !== "server" ? "s" : "") +" on " + this.guild.name);
       let value = ((states) => {
         if (typeof states !== "object") return "\u200b";
+        if (!election.type) return "Election has not yet been initiated.";
         if (!states.register) return "Voters have not yet been registered.";
         let string = "Voters have been registered.\n";
         if (states.candidates) return string += "Candidates are being registered.";
@@ -68,6 +69,8 @@ class Election extends Main {
 
   async initiate() {
     try {
+      if (this.args[0] !== "reset" && this.election.type) throw "Election has already been initiated on server **" + this.guild.name + "**.";
+      await this.Output.confirm();
       let election = this.election;
       for (let [property, value] of this.properties)
         election[property] = value;
@@ -81,14 +84,18 @@ class Election extends Main {
 
   async clear() {
     try {
+      await this.Output.confirm();
       if (this.args[1]) {
         let guild = this.Search.guilds.get(this.args[1]) || "";
         if (!guild) throw "Couldn't find guild";
         if (this.guild.id !== guild.id && !config.ids.owner.includes(this.author.id)) throw "Insufficient server permissions to use this command.";
         this.guild = guild;
       };
+      if (!this.election.type) throw "No voting data found.";
       this.election = { "_id": this.guild.id };
-      this.server.states.election.register = false;
+      for (let state of Object.keys(this.server.states.election)) {
+        this.server.states.election[state] = false;
+      };
       DataManager.setServer(this.server);
       this.Output.generic("Cleared voting data for server **" + (this.guild.name) + "**.");
     } catch (e) {

@@ -102,7 +102,7 @@ class Output extends Parse {
   async confirm(data = {}, r) {
     try {
       data = Object.assign({
-        "action": "this action.",
+        "action": "this action",
         "channel": this.channel,
         "author": this.author,
         "time": 30000

@@ -8,6 +8,30 @@ class Ballots extends Main {
     super(message);
   }
 
+  async gen() {
+    try {
+      if (this.server.states.voting && this.command === "mobile") throw "Cannot send ballots before voting has opened.";
+      let user = this.author, argument = this.args.slice(1).join(" ");
+      if (argument) {
+        if (!await this.Permissions.role("owner", this)) throw await this.Permissions.output("owner", this);
+        let _user = this.Search.users.get(argument);
+        if (_user) user = _user;
+        else throw "Couldn't find user **" + argument + "**."; //identify a user if argument given
+      };
+      let all = Main.validate(this.election, user);
+      let channels = (await this.Output.response({
+        "description": "Please list the channels you wish to be shown on the ballot from the list of valid ones below. Write `all` for all.\n" + "**" + all.join("**\t|\t**") + "**"
+      })).split(/\s| /);
+      if (!/^all$/.test(channels[0].trim()))
+        for (let channel of channels)
+          if (!all.inArray(channel))
+            throw "Invalid channel given **" + channel + "**.";
+      this.send([user], 0, [[user, /^all$/.test(channels[0].trim()) ? all : channels]]); //and send an array of length 1 to the all functions
+    } catch (e) {
+      if (e) this.Output.onError(e);
+    }
+  }
+
   async one() { //sends one ballot. Purpose is to test the all function
     try {
       if (this.server.states.voting && this.command === "mobile") throw "Cannot send ballots before voting has opened.";
@@ -27,6 +51,7 @@ class Ballots extends Main {
   async all () {
     try {
       if (this.server.states.election.voting) throw "This command cannot be used once voting has begun!"; //set to true at the end
+      await this.Output.confirm();
       let object = {};
       if (this.election.elections) for (let [type, data] of Object.entries(this.election.elections)) { //for each election
         if (type.startsWith("_")) continue;
@@ -44,16 +69,17 @@ class Ballots extends Main {
     }
   }
 
-  async send(users, mobile) {
+  async send(users, mobile, voterChannels) {
     try {
       let voterCount = users.length, ballotCount = 0;
       let msg = await this.Output.sender(new Embed()
         .setDescription(`Initiating sending ${mobile ? "mobile " : ""}ballots...`)
         .setFooter(`Sending 0 / 0 ballots to 0 / ${voterCount} voters.`)
       );
-      let voterChannels = users.map(user => [user, Main.validate(this.election, user)]); //Actually generate all the channels that need to be sent first!
-      for (let [user, channels] of voterChannels) //validate returns an array of channels (as ids) that the user is eligible to vote for
+      if (!voterChannels) voterChannels = users.map(user => [user, Main.validate(this.election, user)]); //Actually generate all the channels that need to be sent first!
+      for (let [user, channels] of voterChannels) {//validate returns an array of channels (as ids) that the user is eligible to vote for
         ballotCount += channels.length; //count them (for the beginning message)
+      };
       await this.Output.editor(new Embed()
         .setDescription(`Initiating sending ${mobile ? "mobile " : ""}ballots...`)
         .setFooter(`Sending 0 / ${ballotCount} ballots to 0 / ${voterCount} voters.`)
@@ -65,8 +91,7 @@ class Ballots extends Main {
           try {
             if (!mobile) {
               let ballot = Ballots.gen(this.election, user, channels);  //generate the full ballot for desktop users
-              this.Output.generic("This ballot was sent on error. Please do not try to vote with it or otherwise do anything.", user);
-              //this.Output.sender(ballot, user);
+              this.Output.sender(ballot, mobile === 0 ? this.channel : user);
             } else {
               let ballots = Ballots.fields(this.election, user, channels);  //otherwise just generate the fields
               for (let j = 0; j < ballots.length; j++) {
@@ -115,7 +140,7 @@ class Ballots extends Main {
           "url": election._url || "",
         },
         "title": "This constitutes your voting ballot for this election.",
-        "description": "- Please copy and paste the dark boxes below and fill in the checkboxes on the left with numbers, indicating your order of preference.\n- You do not have to fill every checkbox.\n- You must give numbers in ascending preference, for instance, filling in checkboxes with `[1]`, `[2]`, and [`4`] would constitute a spoiled ballot.\n- If you wish to vote for a candidate not listed, please replace the `Write-in` option with the user tag (username followed by 4-digit personal code) and assign it the intended number, otherwise you may not write a number in the 'Write-in' checkbox.\n- If you do not wish to vote for any of the balloted candidates, nor write-in any user, write a `1` in the option for `Blank Vote` and do not make any other modifications.\n- Do not make any other modifications or your vote will constitute a spoiled ballot.\nYou may resubmit a ballot for up to half an hour after voting. Simply copy and paste the updated ballot into your message field.",
+        "description": "- Please copy and paste the dark boxes below and fill in the checkboxes on the left with numbers, indicating your order of preference.\n- You do not have to fill every checkbox.\n- You must give numbers in ascending preference, for instance, filling in checkboxes with `[1]`, `[2]`, and [`4`] would be invalid.\n- If you wish to vote for an unlisted candidate not listed, please replace the `Write-in` option with a user tag (`Discord#2048`) and assign it your intended number, otherwise you may not write a number in the `Write-in` checkbox.\n- If you do not wish to vote for any candidate, write a `1` in the option for `Blank Vote` and do not make any other modifications.\n- If you neither wish to vote for a candidate, nor submit a `Blank Vote`, you may spoil your ballot by sending an empty ballot (no numbers).\n- Do not make any other modifications or your vote will constitute a spoiled ballot.\n- You may resubmit a ballot for up to half an hour after voting. Simply copy and paste the updated ballot into your message field.",
         "fields": Ballots.fields(election, user, channels),
         "footer": {
           "text": "Type '!mobile' to receive mobile-friendly versions of your ballots."
@@ -131,7 +156,7 @@ class Ballots extends Main {
   static fields(election, user, channels) {
     let fields = [];
     for (let channel of channels) {
-      let candidates = Object.keys(election.elections[channel].candidates || {}).filter(candidate => election[channel].candidates[candidate].length >= 2) || [];
+      let candidates = Object.keys(election.elections[channel].candidates || {}).filter(candidate => election.elections[channel].candidates[candidate].length >= 2) || [];
       let votingString = Ballots.candidates(candidates);
       fields.push({
         "name": `#${channel} Ballot:`,

@@ -47,7 +47,7 @@ class Config {
           try {
             let description = "Please list the channels or categories containing the channels to hold elections, separated by spaces.";
             let _channels = (await this.Output.response({description}))
-              .split(/\s /g)
+              .split(/\s| /g);
             let channels = _channels.map(channel => this.Search.channels.get(channel));
             for (let i = 0; i < channels.length; i++) { //error handling
               let channel = channels[i];

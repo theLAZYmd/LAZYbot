@@ -17,7 +17,8 @@ class Embeds extends Parse {
         for (let [key, embed] of Object.entries(collection)) {
           if (args[0] !== key) continue;
           let guide = Array.isArray(embed) ? embed : [embed];
-          return this.Paginator.sender(guide, 180000); 
+          if (this.command === "...") this.message.delete();
+          return this.Paginator.sender(guide, this.command === "..." ? Infinity : 180000); 
         }
       };
       let filter = m => m.author.bot;

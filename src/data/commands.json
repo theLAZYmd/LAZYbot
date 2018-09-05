@@ -768,10 +768,6 @@
           "open": "Opens candidate registration. Done automatically when voter lists are registered.",
           "close": "Closes candidate registration."
         }
-      ],
-      [
-        "channel",
-        {}
       ]
     ],
     "usage": [
@@ -1105,6 +1101,25 @@
       ".. anti",
       ".. guides",
       ".. flowers"
+    ],
+    "module": "Utility",
+    "file": "embeds",
+    "method": "find",
+    "arguments": ["args"],
+    "prefix": "nadeko",
+    "requires": {
+      "args": {
+        "length": 1
+      }
+    }
+  },
+  {
+    "aliases": [
+      "..."
+    ],
+    "description": "Posts a guide that haspages that can swtich permanently. Use `${nadeko}.. guides` to see info on how to contribute to them.",
+    "usage": [
+      "... cwc"
     ],
     "module": "Utility",
     "file": "embeds",

@@ -30,7 +30,7 @@ class Help extends Parse {
   }
 
   get title() {
-    return "`" + this.prefix + this.cmdInfo.aliases.join("`**/**`" + this.prefix) + "`";
+    return "`" + this.cmdInfo.aliases.map(alias => /\s| /.test(alias) ? alias : this.prefix + alias).join(" `**/**` ") + "`";
   }
 
   get description() {

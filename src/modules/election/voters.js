@@ -11,16 +11,22 @@ class Voters extends Main {
   
   async get() {
     try {
+      let election = this.election, instance;
       if (!(await this.Permissions.state("election.register", this) || await this.Permissions.state("election.voting", this))) throw "Registering for voters has not yet begun on server " + this.guild.name + ".";
-      if (this.channel.name !== this.server.channels.bot) throw "Wrong channel to use this command. Requires: #spam channel.";
-      let instance, election = this.election;
-      if (election.type === "channel") {
-        let argument = await this.Output.response({
-          "description": "Please state the channel for which you would like to view the voting list.",
-          "oneword": true
+      if (this.channel.name !== this.server.channels.bot && !this.Permissions.role("owner", this)) throw "Wrong channel to use this command. Requires: #spam channel.";
+      if (!Object.keys(election.elections).length === 0) throw "No elections registered. Use `" + this.server.prefixes.generic + "election config` to register a new election.";
+      if (this.args.length === 2) {
+        if (!election.elections.hasOwnProperty(this.args[1])) throw "Couldn't find matching election from name **" + this.args[1] + "**.";
+        instance = this.args[1];
+      } else
+      if (Object.keys(election.elections).length === 1) instance = Object.keys(election.elections)[0];
+      else if (election.type === "channel") {
+        instance = await this.Output.response({
+          "description": "Please state the election for which you would like to view the voting list.",
+          "filter": m => election.elections.hasOwnProperty(m.content)
         });
-        instance = await this.findChannel(argument);
-      } else instance = this.guild.name;
+      } else instance = "";
+      if (!instance) throw "Couldn't find matching election. Use `" + this.server.prefixes.generic + "election config` to configure elections.";
       let array = Object.keys(election.elections[instance].voters);
       this.Output.sender(new Embed()
         .setTitle(`Eligble voters for election ${election.type === "channel" ? "#" : ""}${instance.toProperCase()}`)
