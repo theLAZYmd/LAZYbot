@@ -39,7 +39,7 @@
             }
         },
         "paginator": {
-            "487052852141883414": {
+            "487053829783814165": {
                 "embedgroup": [
                     {
                         "image": {
@@ -63,23 +63,13 @@
                         "title": "Knockout Tournament Rules I",
                         "description": "You will be paired with a player for a round. There will be a week for you to play your round in, with a week in between rounds as breaks / negotiation periods. Please note the following stipulations:\n\n**1.** It is preferable if the games are rated. If **both** players agree then some or all games can be unrated.\n\n**2.** Results **and** games of each match should be messaged to the TD upon completion.\n\n**3.** All matches will consist of an equal number of White games per player.\n\n**4.** Each match will consist of ten (10) games of 3 + 2.\n\n**5.** If the score is 5-5 after 10 games then the tie-break will consist of games of 3 + 2, until one player is ahead after an even number of games.\n\n**6.** Either player can stop the match if someone reaches 5.5 points in the first 10 games, as long as the player stopping the match has not played more rated White games than their opponent.\n\n**7.** Each player is entitled to a short break of approximately 10 minutes after every 2 games (these breaks can be accumulated).\n\n**8.** The tournament main draw will have 128 players. If the number of entrants is not equal to 128 players, a qualification tournament will be held. The x number of top-finishers from said tournament will get a spot in the knockouts.",
                         "color": 53380,
-                        "thumbnail": {
-                            "url": "https://i.imgur.com/0koqrUA.png"
-                        },
-                        "footer": {
-                            "text": "3 / 8"
-                        }
+                        "thumbnail": "https://i.imgur.com/0koqrUA.png"
                     },
                     {
                         "title": "Knockout Tournament Rules II",
                         "description": "**9.** Assuming there are 128 players, after the first round there will be 64 players left and so on until there are 8 players left.\n\n**10.** The initial pairing will have the top seed vs. bottom seed, the second seed vs. second from bottom, etc. For example, in an eight player event: (1) vs. (8), (2) vs. (7), (3) vs. (6), (4) vs. (5). The winner of (1) vs. (8) will then play the winner of (4) vs. (5) and the winner of (2) vs. (7) will play the winner of (3) vs. (6). The winner of those matches would then contest the \"final\" (before the Candidates).(edited)\n\n**11.** The seeding will be based on the average between a player’s current rating and highest rating at the time their entry is received & logged.\n\n**12.** If somebody is unable to complete a series, or has to withdraw, their opponent is considered the victor. Only emergencies can exempt players from having this rule applied to them. Byes may be issued in the case of an odd number of players.\n\n**13.** If someone knows they will not be able to play a certain week when a round is scheduled, they must notify the TD before they play their prior match. At the TD's discretion their match may be moved to the following week. This will only occur a maximum of one time per player.\n\n**14.** After each match, players will typically have at least a week's rest until the next match. A possible exception is when a player has notified the TD of their unavailability (point 13).\n\n**15.** Once the knockout tournament cuts down the number of players to 8, a candidates tournament will take place.",
                         "color": 53380,
-                        "thumbnail": {
-                            "url": "https://i.imgur.com/0koqrUA.png"
-                        },
-                        "footer": {
-                            "text": "4 / 8"
-                        }
+                        "thumbnail": "https://i.imgur.com/0koqrUA.png"
                     },
                     {
                         "title": "Candidates Tournament Rules",
@@ -106,12 +96,11 @@
                         "thumbnail": "https://i.imgur.com/bzTbisk.png"
                     }
                 ],
-                "period": 180000,
-                "page": 3,
+                "period": "Infinity",
+                "page": 0,
                 "author": "185412969130229760"
             }
-        },
-        "undefined": {}
+        }
     },
     "430035841239220224": {
         "_id": "430035841239220224",
