@@ -125,7 +125,7 @@
             }
         },
         "bidamount": 500,
-        "lastupdate": 1536177253095
+        "lastupdate": 1536192222276
     },
     {
         "id": "390497170626707457",
@@ -361,9 +361,9 @@
         "id": "340160754936184832",
         "username": "chessguy101#2066",
         "messages": {
-            "count": 49226,
-            "last": "lets gooooo",
-            "lastSeen": 1536190919951
+            "count": 49232,
+            "last": "burak was talking about turkey to u",
+            "lastSeen": 1536192678040
         },
         "finger": "I am good at losing flowers. Please don't gamble with me.",
         "lichess": {
@@ -637,9 +637,9 @@
         "id": "330193848137678848",
         "username": "Raven#9079",
         "messages": {
-            "count": 101393,
-            "last": "<:seemsgood:372817382177243136>",
-            "lastSeen": 1536184290423
+            "count": 101396,
+            "last": "eVEN IF W I DEIE ORYHOU",
+            "lastSeen": 1536192220282
         },
         "trophy": [
             "April Fools 2018 Survivor 'bye'"
@@ -4862,7 +4862,7 @@
             "_country": "CA",
             "_language": "en-GB"
         },
-        "lastupdate": 1536178152786
+        "lastupdate": 1536192930551
     },
     {
         "id": "450198679463395339",
@@ -6645,7 +6645,7 @@
             "_language": "en-GB"
         },
         "lastUpdate": 1532749445908,
-        "lastupdate": 1536177852723
+        "lastupdate": 1536192822052
     },
     {
         "id": "401535400604073984",
@@ -7616,12 +7616,12 @@
         "lichess": {
             "_main": "grogers",
             "grogers": {
-                "maxRating": "2135",
+                "maxRating": "2119",
                 "blitz": "1464?",
                 "bullet": "2080?",
                 "rapid": "1487?",
                 "classical": "1500?",
-                "crazyhouse": "2135",
+                "crazyhouse": "2093",
                 "3-check": "1588?",
                 "anti": "2119",
                 "horde": "1619?",
@@ -7632,7 +7632,7 @@
             "_country": "US"
         },
         "lastUpdate": 1534798558266,
-        "lastupdate": 1536177552786
+        "lastupdate": 1536192522029
     },
     {
         "id": "289177026156560385",
@@ -8027,13 +8027,13 @@
             "Jetterna": {
                 "maxRating": "1414",
                 "bullet": "871?",
-                "lightning": "996",
+                "lightning": "975",
                 "rapid": "1103?",
                 "tactics": "415?",
                 "lessons": "1414"
             }
         },
-        "lastupdate": 1536167951686
+        "lastupdate": 1536191921903
     },
     {
         "id": "361251289776259072",

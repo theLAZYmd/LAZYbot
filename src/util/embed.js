@@ -64,6 +64,9 @@ class Embed extends RichEmbed {
   }
 
   static receiver(embed) {
+    let misprop = ["image", "thumbnail"];
+    for (let prop of misprop)
+      if (typeof embed[prop] === "string") embed[prop] = {  "url": embed[prop]  }
     return new Embed(embed); /*
     let embedinput = {};
     let property = ["content", "title", "url", "description", "color", "video", "timestamp"];
