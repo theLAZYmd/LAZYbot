@@ -1153,6 +1153,26 @@
   },
   {
     "aliases": [
+      "Markdownify"
+    ],
+    "description": "Fetches a message, but instead of outputting the same message, if the message has content, outputs the raw markdown required to produce that text. Developer's tool.",
+    "usage": [
+      "markdownify 390262198385246210 welcome",
+      "markdownify 470270623688425472"
+    ],
+    "module": "Utility",
+    "file": "utility",
+    "method": "markdownify",
+    "arguments": [],
+    "prefix": "generic",
+    "requires": {
+      "args": {
+        "length": [1, 2]
+      }
+    }
+  },
+  {
+    "aliases": [
       "JSONify"
     ],
     "description": "Fetches a message, but instead of outputting the same message, if and only if the message has an embed, outputs the raw JSON required to produce that embed. Developer's tool.",

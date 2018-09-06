@@ -42,8 +42,8 @@ class States extends Parse {
   bcp (forced) {
     let channel = this.channel ? this.channel : this.Search.channels.get(this.server.channels.bot);
     let members = [
-      this.Search.members.byUser(this.Search.members.get(config.ids.bouncer)), //bouncer member
-      this.Search.members.byUser(this.Search.members.get(config.ids.nadeko)) //nadeko member
+      this.Search.members.get(config.ids.bouncer), //bouncer member
+      this.Search.members.get(config.ids.nadeko) //nadeko member
     ];
     let role = this.Search.roles.get(this.server.roles.bot);
     let activeboolean = forced || this.Check.role(members[1], this.server.roles.bot); //does nadeko already have the role?

@@ -13,6 +13,7 @@ class Router {
     let Constructor = require("../modules/presence.js");
     let Instance = new Constructor({
       "guild": oldMember.guild,
+      "_guild": oldMember.guild,
       "member": oldMember
     });
     if (oldMember.user.bot) Instance.bot(oldMember.presence, newMember.presence);

@@ -68,7 +68,7 @@ class Embeds extends Parse {
   async getEmbeds () {
     if (this._embeds) return this._embeds;
     try {
-      if (this.client.user.id === config.ids.betabot) throw "";
+      //if (this.client.user.id === config.ids.betabot) throw "";
       let body = await rp(config.urls.embeds);
       this._embeds = JSON.parse(body);
     } catch (e) {

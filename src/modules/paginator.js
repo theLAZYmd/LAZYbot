@@ -56,7 +56,10 @@ class Paginator extends Parse {
       if (reaction.emoji.name === "⬅") data.page--;
       if (reaction.emoji.name === "🔄") data.page = 0;
       reaction.remove(user);
-      if (reaction.emoji.name === "❎" && user.id === data.author) reaction.message.delete();
+      if (reaction.emoji.name === "❎" && user.id === data.author) {
+        reaction.message.delete();
+        delete this.paginator[reaction.message.id];
+      };
       if (!/➡|⬅|🔄/.test(reaction.emoji.name)) throw "";
       if (data.page < 0 || data.page >= data.embedgroup.length) throw "";
       let embed = data.embedgroup[data.page];

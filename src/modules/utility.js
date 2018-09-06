@@ -17,10 +17,20 @@ class Utility extends Parse { //fairly miscelanneous functions
     return this.Output.generic(`**${time.days}** days, **${time.hours}** hours, **${time.minutes}** minutes, and **${time.seconds}** seconds since ${Math.random() > 0.5 ? "**bleep bloop! It's showtime**" : "last reboot"}.`);
   }
 
+  async markdownify () {
+    try {
+      let msg = await this.find()
+      if (!msg.content) throw "No embeds found to JSONify!";
+      this.Output.data(msg.content, this.channel, "md");
+    } catch(e) {
+      if (e) this.Output.onError(e);
+    }
+  }
+
   async jsonify () {
     try {
       let msg = await this.find()
-      if (!msg.embed) return this.Output.onError("No embeds found to JSONify!");
+      if (!msg.embed) throw "No embeds found to JSONify!";
       this.Output.data(msg.embed);
     } catch(e) {
       if (e) this.Output.onError(e);

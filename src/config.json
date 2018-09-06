@@ -40,7 +40,7 @@
         "repeat": 1800000
     },
     "urls": {
-        "embeds": "https://raw.githubusercontent.com/theLAZYmd/LAZYbot/master/src/data/embeds.json",
+        "embeds": "https://raw.githubusercontent.com/theLAZYmd/LAZYbot/embeds/src/data/embeds.json",
         "reddit": {
             "name": "/r/|",
             "link": "http://www.reddit.com/r/|",
