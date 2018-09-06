@@ -39,10 +39,13 @@ class Parse {
   }
 
   get reactionmessages() {
-    if (!this._reactionmessages) {
-      if (this.guild) this._reactionmessages = DataManager.getServer(this.guild.id, "./src/data/reactionmessages.json");
-    };
-    return this._reactionmessages || "";
+    if (!this._reactionmessages) if (this.guild) this._reactionmessages = DataManager.getServer(this.guild.id, "./src/data/reactionmessages.json");
+    return this._reactionmessages || {};
+  }
+
+  set reactionmessages(reactionmessages) {
+    DataManager.setServer(reactionmessages, "./src/data/reactionmessages.json");
+    this._reactionmessages = reactionmessages;
   }
 
   //Methods

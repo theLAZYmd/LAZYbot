@@ -13,12 +13,12 @@ class Embeds extends Parse {
   async find (args) {
     try {
       let file = await this.getEmbeds();
-      for (let collection of Object.values(file)) {
+      for (let [type, collection] of Object.entries(file)) {
         for (let [key, embed] of Object.entries(collection)) {
           if (args[0] !== key) continue;
           let guide = Array.isArray(embed) ? embed : [embed];
           if (this.command === "...") this.message.delete();
-          return this.Paginator.sender(guide, this.command === "..." ? Infinity : 180000); 
+          return this.Paginator.sender(guide, this.command === "..." ? Infinity : 180000, type + "." + key); 
         }
       };
       let filter = m => m.author.bot;
