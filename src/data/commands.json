@@ -575,7 +575,7 @@
       "botcontingencyplan",
       "bcp"
     ],
-    "description": "Switches whether Nadeko or Bouncer has 'Bot-in-Use' role (full permission for server). To be used when Bouncer is offline, triggers automaticalyl.",
+    "description": "Switches whether Nadeko or Bouncer has 'Bot-in-Use' role (full permission for server). To be used when Bouncer is offline, triggers automatically.",
     "usage": [
       "bcp"
     ],
