@@ -215,7 +215,7 @@ Date.getMonth = function (ms) {
 
 Array.prototype.inArray = function (string) {
   for (let i = 0; i < this.length; i++) {
-    if (string.toLowerCase().replace(/[^\s\w$£@!]/g, "").trim() === this[i].toLowerCase().replace(/[^\s\w$£@!]/g, "").trim()) return true;
+    if (string.toLowerCase().replace(/[^\s\w$.\?£@!]/g, "").trim() === this[i].toLowerCase().replace(/[^\s\w?$.?£.@!]/g, "").trim()) return true;
   }
   return false;
 }
