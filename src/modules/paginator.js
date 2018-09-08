@@ -69,6 +69,7 @@ class Paginator extends Parse {
         this.paginator = paginator;
       };
       if (!/➡|⬅|🔄/.test(reaction.emoji.name)) throw "";
+      let paginator = this.paginator;
       if (data.page < 0 || data.page >= data.embedgroup.length) throw "";
       let embed = data.embedgroup[data.page];
       if (!embed) throw "Couldn't generate embed for page " + (data.page + 1) + ".";

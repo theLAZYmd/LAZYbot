@@ -1,20 +1,5 @@
 {
     "314155682033041408": {
-        "url": "https://discordapp.com/channels/314155682033041408/407941353570304011/486981418719772683",
-        "_id": "314155682033041408",
-        "date": "Sep 2018",
-        "type": "server",
-        "criteria": "Everyone in the server",
-        "inactives": true,
-        "dupes": true,
-        "messages": 100,
-        "sponsors": 3,
-        "limit": 1,
-        "elections": {
-            "server": {
-                "voters": [],
-                "candidates": []
-            }
-        }
+        "_id": "314155682033041408"
     }
 }

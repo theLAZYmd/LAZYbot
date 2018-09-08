@@ -31,9 +31,9 @@
         "debug": false
     },
     "backupdb": [
-        "Wed Sep 05 2018 23:09:21",
-        "Wed Sep 05 2018 09:07:42",
-        "Sun Jun 17 2018 00:14:44 GMT+01"
+        "Sat Sep 08 2018 16:31:52",
+        "Sat Sep 08 2018 14:33:54",
+        "Sat Sep 08 2018 14:33:53"
     ],
     "delays": {
         "update": 300000,
@@ -233,7 +233,9 @@
             "id": "",
             "username": "",
             "messages": {
-                "count": 0
+                "count": 11,
+                "last": "So I've just come back to playing atomic after a few months",
+                "lastSeen": 1536403799472
             }
         },
         "server": {
@@ -278,7 +280,8 @@
             "trivia": {},
             "tickets": [],
             "getplaying": {},
-            "notify": {}
+            "notify": {},
+            "_id": "433936141989969931"
         }
     }
 }
