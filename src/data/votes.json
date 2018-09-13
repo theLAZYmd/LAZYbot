@@ -1,5 +1,63 @@
 {
     "314155682033041408": {
-        "_id": "314155682033041408"
+        "_id": "314155682033041408",
+        "date": "Sep 2018",
+        "type": "channel",
+        "criteria": "role-identical",
+        "inactives": true,
+        "dupes": false,
+        "messages": "50",
+        "sponsors": "2",
+        "limit": "2",
+        "elections": {
+            "960": {
+                "voters": {},
+                "candidates": {}
+            },
+            "bot": {
+                "voters": {},
+                "candidates": {}
+            },
+            "ultra": {
+                "voters": {},
+                "candidates": {}
+            },
+            "crazyhouse": {
+                "voters": {},
+                "candidates": {}
+            },
+            "3-check": {
+                "voters": {},
+                "candidates": {}
+            },
+            "racing-kings": {
+                "voters": {},
+                "candidates": {}
+            },
+            "atomic": {
+                "voters": {},
+                "candidates": {}
+            },
+            "koth": {
+                "voters": {},
+                "candidates": {}
+            },
+            "4-player": {
+                "voters": {},
+                "candidates": {}
+            },
+            "bughouse": {
+                "voters": {},
+                "candidates": {}
+            },
+            "s-chess": {
+                "voters": {},
+                "candidates": {}
+            },
+            "horde": {
+                "voters": {},
+                "candidates": {}
+            }
+        }
     }
 }

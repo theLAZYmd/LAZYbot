@@ -31,9 +31,9 @@
         "debug": false
     },
     "backupdb": [
-        "Sat Sep 08 2018 16:31:52",
-        "Sat Sep 08 2018 14:33:54",
-        "Sat Sep 08 2018 14:33:53"
+        "Thu Sep 13 2018 12:09:43",
+        "Thu Sep 13 2018 10:13:42",
+        "Thu Sep 13 2018 10:13:42"
     ],
     "delays": {
         "update": 300000,
@@ -233,9 +233,9 @@
             "id": "",
             "username": "",
             "messages": {
-                "count": 11,
-                "last": "So I've just come back to playing atomic after a few months",
-                "lastSeen": 1536403799472
+                "count": 24,
+                "last": "👀👀",
+                "lastSeen": 1536784368687
             }
         },
         "server": {
