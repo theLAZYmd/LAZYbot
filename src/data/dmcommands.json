@@ -1,7 +1,7 @@
 [
   {
     "module": "DMs",
-    "file": "ModMail",
+    "file": "modmail",
     "method": "dm",
     "guild": "Sending new ModMail on LAZYbot",
     "arguments": [],

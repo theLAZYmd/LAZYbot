@@ -31,9 +31,9 @@
         "debug": false
     },
     "backupdb": [
-        "Wed Sep 05 2018 23:09:21",
-        "Wed Sep 05 2018 09:07:42",
-        "Sun Jun 17 2018 00:14:44 GMT+01"
+        "Thu Sep 13 2018 12:09:43",
+        "Thu Sep 13 2018 10:13:42",
+        "Thu Sep 13 2018 10:13:42"
     ],
     "delays": {
         "update": 300000,
@@ -233,7 +233,9 @@
             "id": "",
             "username": "",
             "messages": {
-                "count": 0
+                "count": 24,
+                "last": "👀👀",
+                "lastSeen": 1536784368687
             }
         },
         "server": {
@@ -278,7 +280,8 @@
             "trivia": {},
             "tickets": [],
             "getplaying": {},
-            "notify": {}
+            "notify": {},
+            "_id": "433936141989969931"
         }
     }
 }
