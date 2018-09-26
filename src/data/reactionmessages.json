@@ -32,9 +32,1588 @@
                 "tag": "bakkouz#7251",
                 "lastMail": 1535316142818
             },
-            "_timeout": {}
+            "_timeout": {},
+            "491135990761521152": {
+                "tag": "Alihene22#3760",
+                "lastMail": 1537166345100
+            },
+            "494165178712326145": {
+                "tag": "ProgramFOX#1012",
+                "lastMail": 1537888559825
+            }
         },
-        "paginator": {}
+        "paginator": {
+            "487084340870643732": {
+                "embedgroup": [
+                    {
+                        "image": {
+                            "url": "https://i.imgur.com/ZSI6HEj.png"
+                        },
+                        "footer": {
+                            "text": "1 / 3"
+                        }
+                    },
+                    {
+                        "author": {
+                            "name": "CRAZYHOUSE WORLD CHAMPIONSHIP 2018"
+                        },
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/pMkkATk.png"
+                        },
+                        "title": "FOREWORD",
+                        "description": "Over a year has passed since lichess’s Crazyhouse World Championship (CWC) was created. Last time we had a qualification round with 64 players, then three knockout rounds (R64, R32 and R16), after which the eight Candidates remained. Those final eight players played a Candidates Tournament which led to the finals between **TwelveTeen** and **JannLee**. During three weeks, they played 60 thrilling games. After the dust settled, the final score was 31,5-28,5 in favor of **JannLee**, making him the first Crazyhouse World Champion. \n\nToday, it’s time to continue this story. Champions are not born; they are made in the quiet hours when nobody is watching. Sign-ups for the 2nd edition of the CWC start on February 1. Do you have what it takes to be the next champion?",
+                        "footer": {
+                            "text": "2 / 3"
+                        }
+                    },
+                    {
+                        "author": {
+                            "name": "CRAZYHOUSE WORLD CHAMPIONSHIP 2018"
+                        },
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/pMkkATk.png"
+                        },
+                        "title": "INFORMATION",
+                        "fields": [
+                            {
+                                "name": "Time Control",
+                                "value": "3 + 2 for the whole event",
+                                "inline": false
+                            },
+                            {
+                                "name": "Format",
+                                "value": "The championship will start out as a knockout, but when 8 players are left, they will play a round-robin Candidates tournament! The first place finisher of that tournament will play a WC match against the incumbent WC (1st CWC WC, JannLee).",
+                                "inline": false
+                            },
+                            {
+                                "name": "Prize Pool",
+                                "value": "$1000\n**Update:** upped by an additional $1100 from the generous fundraising of <@364388430412513281> through his Twitch donators to payout to the candidates.",
+                                "inline": false
+                            },
+                            {
+                                "name": "Prize Fund Distribution",
+                                "value": "$300 WC, $200 challenger, $50 for 8 candidates, 100$ Prediction tournament ($50 #1, $30 #2, $20 #3)\n<@364388430412513281> fundraising is distributed with $100 to each candidate.",
+                                "inline": false
+                            },
+                            {
+                                "name": "Start Date",
+                                "value": "Feb 15 2018",
+                                "inline": true
+                            },
+                            {
+                                "name": "Sign-Ups",
+                                "value": "Feb 1 2018 - Feb 14 2018",
+                                "inline": true
+                            },
+                            {
+                                "name": "Information and Rules",
+                                "value": "https://sites.google.com/site/2ndcrazyhouseworldchampionship/",
+                                "inline": false
+                            },
+                            {
+                                "name": "History",
+                                "value": "<https://sites.google.com/site/crazyhouseworldchampionship/home>\n<https://lichess.org/forum/team-crazyhouse-world-championship/time-control>\n<https://lichess.org/forum/team-crazyhouse-world-championship/time-control-voting>",
+                                "inline": false
+                            }
+                        ],
+                        "footer": {
+                            "text": "3 / 3"
+                        }
+                    }
+                ],
+                "period": "Infinity",
+                "page": 0,
+                "author": "185412969130229760",
+                "path": "utility.cwc"
+            },
+            "487084356309876757": {
+                "embedgroup": [
+                    {
+                        "image": {
+                            "url": "https://i.imgur.com/v5fg6wH.png"
+                        },
+                        "footer": {
+                            "text": "1 / 8"
+                        }
+                    },
+                    {
+                        "title": "Entrant Eligibility",
+                        "description": "Entrants who meet the following criteria will be accepted automatically:\n\n**1.** Have an established crazyhouse rating on lichess.\n\n**2.** Have played at least 50 rated crazyhouse games on lichess.\n\n**3.** Have had an account on lichess for over 1 month at the time of entry.\n\n**4.** Be participating only using their main account (no dupe accounts).\n\n**5.** Have messaged the TD (FischyVishy) with intent to join **within** the entry period.\n\n**6.** Have joined the Crazyhouse World Championship group.\n\nPoints 1, 2 and 3 above are aimed primarily at preventing duplicate accounts from entering. Entries not meeting these criteria may still be accepted and seeded at the TD's discretion.\n\nExceptions are most likely to be made for players known within the crazyhouse community who clearly are not using duplicate accounts.\n\nAny player attempting to use multiple accounts or computer assistance will be kicked out and if necessary reported to lichess moderators.",
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/AaQkW8G.png"
+                        },
+                        "footer": {
+                            "text": "2 / 8"
+                        }
+                    },
+                    {
+                        "title": "Knockout Tournament Rules I",
+                        "description": "You will be paired with a player for a round. There will be a week for you to play your round in, with a week in between rounds as breaks / negotiation periods. Please note the following stipulations:\n\n**1.** It is preferable if the games are rated. If **both** players agree then some or all games can be unrated.\n\n**2.** Results **and** games of each match should be messaged to the TD upon completion.\n\n**3.** All matches will consist of an equal number of White games per player.\n\n**4.** Each match will consist of ten (10) games of 3 + 2.\n\n**5.** If the score is 5-5 after 10 games then the tie-break will consist of games of 3 + 2, until one player is ahead after an even number of games.\n\n**6.** Either player can stop the match if someone reaches 5.5 points in the first 10 games, as long as the player stopping the match has not played more rated White games than their opponent.\n\n**7.** Each player is entitled to a short break of approximately 10 minutes after every 2 games (these breaks can be accumulated).\n\n**8.** The tournament main draw will have 128 players. If the number of entrants is not equal to 128 players, a qualification tournament will be held. The x number of top-finishers from said tournament will get a spot in the knockouts.",
+                        "color": 53380,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/0koqrUA.png"
+                        },
+                        "footer": {
+                            "text": "3 / 8"
+                        }
+                    },
+                    {
+                        "title": "Knockout Tournament Rules II",
+                        "description": "**9.** Assuming there are 128 players, after the first round there will be 64 players left and so on until there are 8 players left.\n\n**10.** The initial pairing will have the top seed vs. bottom seed, the second seed vs. second from bottom, etc. For example, in an eight player event: (1) vs. (8), (2) vs. (7), (3) vs. (6), (4) vs. (5). The winner of (1) vs. (8) will then play the winner of (4) vs. (5) and the winner of (2) vs. (7) will play the winner of (3) vs. (6). The winner of those matches would then contest the \"final\" (before the Candidates).\n\n**11.** The seeding will be based on the average between a player’s current rating and highest rating at the time their entry is received & logged.\n\n**12.** If somebody is unable to complete a series, or has to withdraw, their opponent is considered the victor. Only emergencies can exempt players from having this rule applied to them. Byes may be issued in the case of an odd number of players.\n\n**13.** If someone knows they will not be able to play a certain week when a round is scheduled, they must notify the TD before they play their prior match. At the TD's discretion their match may be moved to the following week. This will only occur a maximum of one time per player.\n\n**14.** After each match, players will typically have at least a week's rest until the next match. A possible exception is when a player has notified the TD of their unavailability (point 13).\n\n**15.** Once the knockout tournament cuts down the number of players to 8, a candidates tournament will take place.",
+                        "color": 53380,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/0koqrUA.png"
+                        },
+                        "footer": {
+                            "text": "4 / 8"
+                        }
+                    },
+                    {
+                        "title": "Candidates Tournament Rules",
+                        "description": "The candidates tournament will be a round robin event. Each player will play each of the other seven players in a 3 + 2 match similar to those matches of the knockout tournament stage. Thus, each player will play 90 games in the Candidates. The playing period of these matches will extend for two weeks. The winner of the candidates tournament will challenge the world champion ([JannLee](https://lichess.org/@/JannLee)) for a shot at the crazyhouse title.\n\n**1.** It is preferable if the games are rated. If **both** players agree then some or all games can be unrated.\n\n**2.** Results **and** games of each match should be messaged to the TD upon completion.\n\n**3.** All matches will consist of an equal number of White games per player.\n\n**4.** Each match will consist of ten (10) games of 3 + 2.\n\n**5.** Do note that there are no tie breaks and the matches cannot be stopped if a player reaches 5.5. Only in case of a tie after all 90 games will tiebreak rules apply (the tiebreaks are the same as those of the knockout tournament stage).\n\n**6.** Each player is entitled to a short break of 10 minutes after every 2 games (these breaks can be accumulated).\n\n**7.** If somebody is unable to complete a series, or has to withdraw, their opponent is considered the victor. Only emergencies can exempt players from having this rule applied to them.\n\n**8.** One candidates spot is reserved for last year's challenger to the crown ([TwelveTeen](https://lichess.org/@/TwelveTeen)) and another is reserved for a wild card ([opperwezen](https://lichess.org/@/opperwezen), third place in last year's Candidates). There will be 8 participants from the knockout event, so the number of Candidates tournament participants is 10 players.",
+                        "color": 53380,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/R6LA5bC.png"
+                        },
+                        "footer": {
+                            "text": "5 / 8"
+                        }
+                    },
+                    {
+                        "title": "Match Negotiations",
+                        "description": "**1.** Players may begin negotiating a playing start time as soon as their next pairing is known.\n\n**2.** Each player is responsible to offer at least three separate times for the match, during the rest week, unless an offer has been accepted before that number is reached.\n\n**3.** The three offered times should be no closer than three hours to each other and no more than two on a single date.\n\n**4.** If three offers are not made in time, the player at fault must accept a time chosen by the opponent.\n\n**5.** If both players fail to make three offers by the deadline, a match arbiter will assign a time.\n\n**6.** A player should respond to an offer by accepting or making a different offer, preferably within 24 hours.\n\n**7.** If a player is excessively or repeatedly late for scheduled matches, they may be forfeited.\n\n**8.** If both players make three offers but no agreement is made before the playing week begins, a match arbiter will determine if fault lies with a particular player.\n\n**9.** If a player is at fault, their opponent will decide the match time; if no player is at fault, the match arbiter will assign a match time.",
+                        "color": 53380,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/7Btk5jL.png"
+                        },
+                        "footer": {
+                            "text": "6 / 8"
+                        }
+                    },
+                    {
+                        "title": "World Championship Rules",
+                        "description": "The world championship will be played in a three-week period. In each week, two 10-game 3 + 2 matches will take place. The first player to reach 30.5 / 60 will be declared the winner. Please note the following stipulations:\n\n**1.** It is preferable if the games are rated. If **both** players agree then some or all games can be unrated.\n\n**2.** Results **and** games of each match should be messaged to the TD upon completion.\n\n**3.** All matches will consist of an equal number of White games per player.\n\n**4.** Each match will consist of ten (10) games of 3 + 2.\n\n**5.** Each player is entitled to a short break after every 2 games of approximately 10 minutes (these breaks can be accumulated).\n\n**6.** If somebody is unable to complete a series, or has to withdraw, their opponent is considered the victor. Only emergencies can exempt players from having this rule applied to them.\n\n**7.** Note that the final of the Crazyhouse World Championship will be played during three consecutive weeks – there will be no rest weeks.",
+                        "color": 53380,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/JbhAKpz.png"
+                        },
+                        "footer": {
+                            "text": "7 / 8"
+                        }
+                    },
+                    {
+                        "title": "Reporting Cheaters",
+                        "description": "**1.** Accusations of cheating must be made privately to a member of the anti-cheating panel.\n\n**2.** The accusation must make reference to at least one specific game.\n\n**3.** If an accusation is made publicly and does not lead to a guilty verdict, the accuser will be forfeited & banned from future events.\n\n**4.** The anti-cheating panel will consist of five members.\n\n**5.** The anti-cheating panel must all believe a player to be guilty 5-0 for a player to be forfeited. 100% proof is not required.\n\n**6.** If a member of the panel is either the accuser or accused, their place on the panel will be taken by a substitute.",
+                        "color": 53380,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/bzTbisk.png"
+                        },
+                        "footer": {
+                            "text": "8 / 8"
+                        }
+                    }
+                ],
+                "period": "Infinity",
+                "page": 0,
+                "author": "185412969130229760",
+                "path": "utility.cwc-rules"
+            },
+            "487084371472416768": {
+                "embedgroup": [
+                    {
+                        "image": {
+                            "url": "https://i.imgur.com/4zY6Neg.png"
+                        },
+                        "footer": {
+                            "text": "1 / 5"
+                        }
+                    },
+                    {
+                        "description": "```css\n| #   Name                 Rtng |       ​\n|                               |\n| 1   gnejs                2878 |\n| 2   allyouneedisluft     2870 |\n| 3   mastertan ∗          2837 |\n| 4   xuanet ∗             2748 |\n| 5   blitzbullet          2739 |\n| 6   FeegLood             2717 |\n| 7   littleplotkin ∗      2683 |\n| 8   penguingim1 ∗        2680 |\n| 9   Vempele ∗            2668 |\n| 10  B0N0B0               2658 |\n| 11  Mugwort ∗            2656 |\n| 12  garnek123 ∗          2628 |\n| 13  gsvc ∗               2625 |\n| 14  JohnStuckey          2615 |\n| 15  SpinalTap            2612 |\n| 16  helmsknight ∗        2605 |\n| 17  sexy_and_i_know_it ∗ 2601 |\n| 18  HighContrast ∗       2594 |\n| 19  atamek ∗             2583 |\n| 20  apterigo             2564 |\n| 21  profz                2563 |\n| 22  Kleerkast ∗          2562 |\n| 23  retardedplatypus123∗ 2561 |\n| 24  pknm                 2546 |\n| 25  CheeseMuffin         2542 |\n| 26  TaylorEternity       2534 |\n| 27  crosky ∗             2524 |\n| 28  Fumitoks ∗           2523 |\n| 29  chewythechewer       2518 |\n| 30  terra87              2515 |\n| 31  Gabix94              2513 |\n| 32  larso ∗              2504 |\n| 33  mathace ∗            2494 |\n| 34  exMOHAX ∗            2483 |\n| 35  ArtOfDeception ∗     2469 |\n| 36  matser               2460 |\n| 37  Kielileike ∗         2447 |\n| 38  ciw                  2443 |\n| 39  MrSok                2429 |\n| 40  amaidel              2418 |\n\n∗ Participant is a member of The House\n```",
+                        "color": 53380,
+                        "footer": {
+                            "text": "2 / 5"
+                        }
+                    },
+                    {
+                        "description": "```css\n| #   Name                 Rtng |       ​\n| 41  burpcow ∗            2415 |\n| 42  Chucklemagne ∗       2410 |\n| 43  emrty ∗              2403 |\n| 44  gekkokamen           2395 |\n| 45  KingSwitcher         2382 |\n| 46  MagicAndy            2382 |\n| 47  esken ∗              2379 |\n| 48  I0euros              2374 |\n| 49  arjelol              2373 |\n| 50  TcubesAK ∗           2366 |\n| 51  Arka50               2354 |\n| 52  vsshk ∗              2346 |\n| 53  onubense             2337 |\n| 54  VariantsOnly ∗       2329 |\n| 55  samuelhaupt3         2326 |\n| 56  anduchess            2314 |\n| 57  recastrov            2308 |\n| 58  KyleLegion ∗         2307 |\n| 59  Orlando_Gloom        2304 |\n| 60  theLAZYmd ∗          2302 |\n| 61  JakeF                2296 |\n| 62  BughouseMASTER       2285 |\n| 63  Antic ∗              2284 |\n| 64  wannabe2700          2280 |\n| 65  unjournakamura ∗     2280 |\n| 66  MrBadbeat            2279 |\n| 67  off_white            2278 |\n| 68  Melee                2271 |\n| 69  Mollus               2267 |\n| 70  Phuzer               2266 |\n| 71  PawnInTraining ∗     2260 |\n| 72  bennyk               2259 |\n| 73  Alexnader123         2249 |\n| 74  cross_online ∗       2248 |\n| 75  Nekipelov            2244 |\n| 76  AusHoin              2243 |\n| 77  CrazyHome ∗          2232 |\n| 78  dampooo              2230 |\n| 79  V2chess ∗            2227 |\n| 80  Cocaino74 ∗          2225 |\n\n∗ Participant is a member of The House\n```",
+                        "color": 53380,
+                        "footer": {
+                            "text": "3 / 5"
+                        }
+                    },
+                    {
+                        "description": "```css\n| #   Name                 Rtng |       ​\n| 81  Karagialis           2218 |\n| 82  Bofrostmann          2215 |\n| 83  kathiyitis           2213 |\n| 84  bferl                2208 |\n| 85  IgorBugMate ∗        2202 |\n| 86  ubdip                2192 |\n| 87  broskall6            2191 |\n| 88  isaacly ∗            2179 |\n| 89  Flourish ∗           2178 |\n| 90  anandthelegend       2171 |\n| 91  Yery                 2168 |\n| 92  TheBayArea           2162 |\n| 93  LegionDestroyer ∗    2149 |\n| 94  the-lone-wolf ∗      2148 |\n| 95  jbegis ∗             2145 |\n| 96  TrumPower            2140 |\n| 97  googa                2138 |\n| 98  RequiemZH ∗          2137 |\n| 99  Ominous ∗            2122 |\n| 100 samoyd ∗             2118 |\n| 101 blunderman1 ∗        2117 |\n| 102 chesssky2 ∗          2116 |\n| 103 syncopation ∗        2116 |\n| 104 amaan1               2109 |\n| 105 Schachmalanders      2109 |\n| 106 medeved9112          2104 |\n| 107 lovlas ∗             2097 |\n| 108 Toadofsky ∗          2085 |\n| 109 Simba7 ∗             2093 |\n| 110 Velpeau              2086 |\n| 111 blindlyzerking       2056 |\n| 112 Sonata2 ∗            2051 |\n| 113 RussianDragun        2041 |\n| 114 rohangupta4398       2037 |\n| 115 Andrey_2888 ∗        2018 |\n| 116 ilaaaaaaaaaaaaaaares 1996 |\n| 117 okei ∗               1993 |\n| 118 Superclass           1987 |\n| 119 Vycm                 1969 |\n| 120 szura                1968 |\n\n∗ Participant is a member of The House\n```",
+                        "color": 53380,
+                        "footer": {
+                            "text": "4 / 5"
+                        }
+                    },
+                    {
+                        "description": "```css\n| #   Name                 Rtng |       ​\n| 121 ProgramFOX ∗         1958 |\n| 122 DeepInTheHole ∗      1944 |\n| 123 Deadban ∗            1942 |\n| 124 kordet26             1940 |\n| 125 Shalter              1933 |\n| 126 just2play            1930 |\n| 127 yellowdragoon        1926 |\n| 128 Conquerrist          1910 |\n| 129 ilovepie             1910 |\n| 130 bermudas             1899 |\n| 131 Viktor_le_Terrible   1875 |\n| 132 andreijl ∗           1863 |\n| 133 staskamaev           1862 |\n| 134 vagician             1854 |\n| 135 MeetYourDemise       1831 |\n| 136 eashwar              1831 |\n| 137 viiiiiid             1813 |\n| 138 Snotaap              1781 |\n| 139 liamchez             1777 |\n| 140 Mis_Drndac           1765 |\n| 141 aljopeljhan          1748 |\n| 142 BigChicken           1745 |\n| 143 azuaga_casual        1735 |\n| 144 andreask27           1713 |\n| 145 chesscoachIM         1697 |\n| 146 adityapande9         1685 |\n| 147 marinavalenciamorena 1646 |\n| 148 Overliner            1642 |\n| 149 DraculeTheDarkOne    1641 |\n| 150 verdy ∗              1610 |\n| 151 acgusta2             1581 |\n| 152 Big_McLargeHuge      1567 |\n| 153 jg2017               1560 |\n| 154 surajaswath          1545 |\n| 155 Marafonez            1540 |\n| 156 J--p                 1510 |\n| 157 the_loving_boy       1448 |\n| 158 RisingChessStarMWOW  1422 |\n| 159 Kronsteen33          1403 |\n\n∗ Participant is a member of The House\n```",
+                        "color": 53380,
+                        "footer": {
+                            "text": "5 / 5"
+                        }
+                    }
+                ],
+                "period": "Infinity",
+                "page": 0,
+                "author": "185412969130229760",
+                "path": "utility.cwc-players"
+            },
+            "487445916127723522": {
+                "embedgroup": [
+                    {
+                        "title": " Profile for theLAZYmd#2353",
+                        "description": "```https://twitch.tv/zhbruhs follow that shit it's the future```",
+                        "color": 10181046,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "LazyMarkDownChampion",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Age: **19**\nSex: **<:male:430870358133047306>**\nLocation: **Toronto**\nRegion: **Americas**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **May 26 2016**\nThe House: **May 16 2017**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`185412969130229760`**\nPosition in Database: **0**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "70,716",
+                                "inline": true
+                            },
+                            {
+                                "name": "House Trophies",
+                                "value": ":trophy: **champion du mondeeeeeeee**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/185412969130229760/ab2051837af637ec01eebe084860728e.png?size=2048"
+                        },
+                        "footer": {
+                            "text": "1 / 2"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": " Profile for theLAZYmd#2353",
+                        "description": "```https://twitch.tv/zhbruhs follow that shit it's the future```",
+                        "color": 10181046,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[TheLAZYmd](https://lichess.org/@/TheLAZYmd)\nBlitz: **1890**\nBullet: **2018**\nRapid: **1997**\nClassical: 1500?\nCrazyhouse: **2244**\n3-check: **1720**\nAtomic: 1563?\nKing of the Hill: 1710?",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:chesscom:430038158244184064> Chess.com",
+                                "value": "[theLAZYbot](https://www.chess.com/member/theLAZYbot)\nBullet: 1817?\nCrazyhouse: **2104**\nBughouse: **2024**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/185412969130229760/ab2051837af637ec01eebe084860728e.png?size=2048"
+                        },
+                        "files": [],
+                        "footer": {
+                            "text": "2 / 2"
+                        }
+                    }
+                ],
+                "period": 30000,
+                "page": 1,
+                "author": "185412969130229760"
+            },
+            "487557100872925195": {
+                "embedgroup": [
+                    {
+                        "title": " Profile for theLAZYmd#2353",
+                        "description": "```https://twitch.tv/zhbruhs follow that shit it's the future```",
+                        "color": 10181046,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "LazyMarkDownChampion",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Age: **19**\nSex: **<:male:430870358133047306>**\nLocation: **Toronto**\nRegion: **Americas**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **May 26 2016**\nThe House: **May 16 2017**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`185412969130229760`**\nPosition in Database: **0**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "70,717",
+                                "inline": true
+                            },
+                            {
+                                "name": "House Trophies",
+                                "value": ":trophy: **champion du mondeeeeeeee**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/185412969130229760/ab2051837af637ec01eebe084860728e.png?size=2048"
+                        },
+                        "footer": {
+                            "text": "1 / 2"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": " Profile for theLAZYmd#2353",
+                        "description": "```https://twitch.tv/zhbruhs follow that shit it's the future```",
+                        "color": 10181046,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[TheLAZYmd](https://lichess.org/@/TheLAZYmd)\nBlitz: **1890**\nBullet: **2018**\nRapid: **1997**\nClassical: 1500?\nCrazyhouse: **2244**\n3-check: **1720**\nAtomic: 1563?\nKing of the Hill: 1710?",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:chesscom:430038158244184064> Chess.com",
+                                "value": "[theLAZYbot](https://www.chess.com/member/theLAZYbot)\nBullet: 1817?\nCrazyhouse: **2104**\nBughouse: **2024**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/185412969130229760/ab2051837af637ec01eebe084860728e.png?size=2048"
+                        },
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "330193848137678848"
+            },
+            "487558329053347840": {
+                "embedgroup": [
+                    {
+                        "title": " Profile for Kyle#4287",
+                        "description": "",
+                        "color": 16169471,
+                        "fields": [
+                            {
+                                "name": "Info",
+                                "value": "Region: **Europe**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Jun 17 2017**\nThe House: **Feb 11 2018**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`325736595980288010`**\nPosition in Database: **42**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "15,196",
+                                "inline": true
+                            },
+                            {
+                                "name": "House Trophies",
+                                "value": ":trophy: **surviv.io god**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/325736595980288010/e5591ca48655c84089ba429b15b88b1c.png?size=2048"
+                        },
+                        "footer": {
+                            "text": "1 / 2"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": " Profile for Kyle#4287",
+                        "description": "",
+                        "color": 16169471,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[KyleLegion](https://lichess.org/@/KyleLegion)\nBlitz: **1752**\nBullet: **2002**\nRapid: 1500?\nClassical: 1906?\nCrazyhouse: **2405**\n3-check: **1791**\nAntichess: **1878**\nHorde: **1642**\nAtomic: **1779**\nKing of the Hill: **1715**\nRacing Kings: **1765**",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:chesscom:430038158244184064> Chess.com",
+                                "value": "[KyleLegion](https://www.chess.com/member/KyleLegion)\nBullet: **1228**\nBlitz: **1174**\nRapid: 1377?\nCrazyhouse: **2098**\nBughouse: **2117**\nTactics: **1291**",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:bughousetest:433422387867025409> BughouseTest.com",
+                                "value": "[Kyle](http://bughousetest.com/@/Kyle)\nBughouse: **1831**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/325736595980288010/e5591ca48655c84089ba429b15b88b1c.png?size=2048"
+                        },
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "325736595980288010"
+            },
+            "487610878393319456": {
+                "embedgroup": [
+                    {
+                        "content": "**Welcome to The House %user.mention%!** Let's get the party started @welcome squad.\n",
+                        "description": "**We're the home of chess variants across lichess.org, chess.com, FICS, and anywhere else.**​",
+                        "color": 9359868,
+                        "footer": {
+                            "text": "1 / 5"
+                        },
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/YWF70U4.png"
+                        },
+                        "fields": [
+                            {
+                                "name": "View our channels",
+                                "value": "You won't be able to see most of our channels until you're a **Member.**\nFirstly, familiarise yourself with the rules in #welcome.\nThen, head to #role-assignment and assign yourself permissions to see the chat channels and your favourite variant channels.\n​",
+                                "inline": false
+                            },
+                            {
+                                "name": "How the hell do I use Discord?",
+                                "value": "First time? type `... discord` for our guide on navigating this place.\n​",
+                                "inline": false
+                            },
+                            {
+                                "name": "Link your accounts",
+                                "value": "Type `!lichess` followed by your account name.\nType `!chess.com` followed by your account name.\n​",
+                                "inline": false
+                            },
+                            {
+                                "name": "Crazyhouse World Championships",
+                                "value": "Type `.iam CWC` to see the CWC channels on the left.\n​",
+                                "inline": false
+                            },
+                            {
+                                "name": "Developers",
+                                "value": "If you're a dev, type `@mods I'm a dev` and you'll be added to #devs.",
+                                "inline": false
+                            }
+                        ]
+                    },
+                    {
+                        "content": "**Welcome to The House %user.mention%!** Let's get the party started @welcome squad.",
+                        "description": "**Bienvenue à \"Chez Nous\"!** C'est une plateforme géniale pour discuter les variantes d'échecs de lichess.org, chess.com, FICS, et n'importe où.\n\nVous ne pouvez pas voir et utiliser la majorité de salons de chat avant s'inscrire comme un Membre. Pour faire ça, après avoir lu les règles dans #welcome, allez à #role-assignment et lisez les instructions. Réagissez avec les emojis appropriés pour gagner l'accès aux salons.\n\nSi vous êtes en général plus confortables en parlant français, écrivez `.atl fr>en` pour faire traduire au bot automatiquement vos phrases.",
+                        "color": 12956504,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/E8S8QXE.png"
+                        }
+                    },
+                    {
+                        "content": "**Welcome to The House %user.mention%!** Let's get the party started @welcome squad.",
+                        "description": "**Willkommen in \"The House\"!** Wir sind dein Zuhause für Schachvarianten auf lichess.org, chess.com , FICS und an allen anderen Orten.\n\nDie meisten Kanäle werden für dich unsichtbar sein, solange du noch kein **Mitglied**bist. Wenn du die Regeln in #welcome durchgelesen hast, gehe bitte zu #role-assignment und weise dir die Berechtigungen zu, sodass du die Chat- und Varianten-Kanäle sehen kannst.\n\nFalls du nicht so gut mit English klarkommst, schreibe `.atl de>en`, um deine Nachrichten automatisch übersetzen zu lassen.",
+                        "color": 12956504,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/E8S8QXE.png"
+                        }
+                    },
+                    {
+                        "content": "**Welcome to The House %user.mention%!** Let's get the party started @welcome squad.",
+                        "description": "**Bienvenidos a \"Nuestra Casa\"!** Aquí podrás discutir los variantes de ajedrez de lichess.org, chess.com, FICS y otros sitios.\n\nLa mayoría de los canales aquí solo se pueden ver si eres un **Miembro.** Cuando te has familiarizado con las reglas en #welcome, por favor, ven a #role-assignment para asignarte unas roles y ver los canales de chat y los canales de tus variantes favoritos.\n\nSi prefirirías hablar español, escriba `.atl es>en` para que el bot traduzca automáticamenta lo que escribes.",
+                        "color": 12956504,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/E8S8QXE.png"
+                        }
+                    },
+                    {
+                        "content": "**Welcome to The House %user.mention%!** Let's get the party started @welcome squad.",
+                        "description": "**Benvenuto in \"The House!\"** Questa è la casa di tutte le varianti degli scacchi presenti su lichess.org, chess.com, FICS e in qualsiasi altro luogo.\n\nNon potrai vedere o usare molti dei nostri canali finchè non sarai un Membro degli stessi. Dopo aver  preso visione delle regole in #welcome, entra in #role-assignment e conferisciti i permessi per vedere le chat e i canali delle tue varianti preferite.\n\nSe in generale vi trovate più a vostro agio nel parlare Italiano, digitate `.atl it>en` così che il bot traduca automaticamente le vostre frasi.",
+                        "color": 12956504,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/E8S8QXE.png"
+                        }
+                    }
+                ],
+                "period": 180000,
+                "page": 0,
+                "author": "185412969130229760"
+            },
+            "487611048476803102": {
+                "embedgroup": [
+                    {
+                        "content": "**Welcome to The House %user.mention%!** Let's get the party started @welcome squad.\n",
+                        "description": "**We're the home of chess variants across lichess.org, chess.com, FICS, and anywhere else.**​",
+                        "color": 9359868,
+                        "footer": {
+                            "text": "1 / 5"
+                        },
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/YWF70U4.png"
+                        },
+                        "fields": [
+                            {
+                                "name": "View our channels",
+                                "value": "You won't be able to see most of our channels until you're a **Member.**\nFirstly, familiarise yourself with the rules in #welcome.\nThen, head to #role-assignment and assign yourself permissions to see the chat channels and your favourite variant channels.\n​",
+                                "inline": false
+                            },
+                            {
+                                "name": "How the hell do I use Discord?",
+                                "value": "First time? type `... discord` for our guide on navigating this place.\n​",
+                                "inline": false
+                            },
+                            {
+                                "name": "Link your accounts",
+                                "value": "Type `!lichess` followed by your account name.\nType `!chess.com` followed by your account name.\n​",
+                                "inline": false
+                            },
+                            {
+                                "name": "Crazyhouse World Championships",
+                                "value": "Type `.iam CWC` to see the CWC channels on the left.\n​",
+                                "inline": false
+                            },
+                            {
+                                "name": "Developers",
+                                "value": "If you're a dev, type `@mods I'm a dev` and you'll be added to #devs.",
+                                "inline": false
+                            }
+                        ]
+                    },
+                    {
+                        "content": "**Welcome to The House %user.mention%!** Let's get the party started @welcome squad.",
+                        "description": "**Bienvenue à \"Chez Nous\"!** C'est une plateforme géniale pour discuter les variantes d'échecs de lichess.org, chess.com, FICS, et n'importe où.\n\nVous ne pouvez pas voir et utiliser la majorité de salons de chat avant s'inscrire comme un Membre. Pour faire ça, après avoir lu les règles dans #welcome, allez à #role-assignment et lisez les instructions. Réagissez avec les emojis appropriés pour gagner l'accès aux salons.\n\nSi vous êtes en général plus confortables en parlant français, écrivez `.atl fr>en` pour faire traduire au bot automatiquement vos phrases.",
+                        "color": 12956504,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/E8S8QXE.png"
+                        }
+                    },
+                    {
+                        "content": "**Welcome to The House %user.mention%!** Let's get the party started @welcome squad.",
+                        "description": "**Willkommen in \"The House\"!** Wir sind dein Zuhause für Schachvarianten auf lichess.org, chess.com , FICS und an allen anderen Orten.\n\nDie meisten Kanäle werden für dich unsichtbar sein, solange du noch kein **Mitglied**bist. Wenn du die Regeln in #welcome durchgelesen hast, gehe bitte zu #role-assignment und weise dir die Berechtigungen zu, sodass du die Chat- und Varianten-Kanäle sehen kannst.\n\nFalls du nicht so gut mit English klarkommst, schreibe `.atl de>en`, um deine Nachrichten automatisch übersetzen zu lassen.",
+                        "color": 12956504,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/E8S8QXE.png"
+                        }
+                    },
+                    {
+                        "content": "**Welcome to The House %user.mention%!** Let's get the party started @welcome squad.",
+                        "description": "**Bienvenidos a \"Nuestra Casa\"!** Aquí podrás discutir los variantes de ajedrez de lichess.org, chess.com, FICS y otros sitios.\n\nLa mayoría de los canales aquí solo se pueden ver si eres un **Miembro.** Cuando te has familiarizado con las reglas en #welcome, por favor, ven a #role-assignment para asignarte unas roles y ver los canales de chat y los canales de tus variantes favoritos.\n\nSi prefirirías hablar español, escriba `.atl es>en` para que el bot traduzca automáticamenta lo que escribes.",
+                        "color": 12956504,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/E8S8QXE.png"
+                        }
+                    },
+                    {
+                        "content": "**Welcome to The House %user.mention%!** Let's get the party started @welcome squad.",
+                        "description": "**Benvenuto in \"The House!\"** Questa è la casa di tutte le varianti degli scacchi presenti su lichess.org, chess.com, FICS e in qualsiasi altro luogo.\n\nNon potrai vedere o usare molti dei nostri canali finchè non sarai un Membro degli stessi. Dopo aver  preso visione delle regole in #welcome, entra in #role-assignment e conferisciti i permessi per vedere le chat e i canali delle tue varianti preferite.\n\nSe in generale vi trovate più a vostro agio nel parlare Italiano, digitate `.atl it>en` così che il bot traduca automaticamente le vostre frasi.",
+                        "color": 12956504,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/E8S8QXE.png"
+                        }
+                    }
+                ],
+                "period": 180000,
+                "page": 0,
+                "author": "185412969130229760"
+            },
+            "487613237211299879": {
+                "embedgroup": [
+                    {
+                        "title": " Profile for Neeklicious#2674",
+                        "description": "```http://www.nicklong.net/chess/```",
+                        "color": 3447003,
+                        "fields": [
+                            {
+                                "name": "Info",
+                                "value": "Region: **Americas**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Mar 19 2018**\nThe House: **Mar 19 2018**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`425397119315214336`**\nPosition in Database: **164**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "22",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/425397119315214336/8feba4b96dfaceea04295c65b8174663.png?size=2048"
+                        },
+                        "footer": {
+                            "text": "1 / 2"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": " Profile for Neeklicious#2674",
+                        "description": "```http://www.nicklong.net/chess/```",
+                        "color": 3447003,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[Chronatog](https://lichess.org/@/Chronatog)\nBlitz: **2009**\nBullet: **2006**\nRapid: 1500?\nClassical: 1500?\nCrazyhouse: **2005**\n3-check: 1775?\nAntichess: **1929**\nHorde: 1696?\nAtomic: **2056**\nRacing Kings: 1461?",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/425397119315214336/8feba4b96dfaceea04295c65b8174663.png?size=2048"
+                        },
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "425397119315214336"
+            },
+            "487619499588059150": {
+                "embedgroup": [
+                    {
+                        "title": " Profile for ObiWanBenoni#3488",
+                        "description": "```Join team obi to get free flowers```",
+                        "color": 6557512,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "ObuWunBluburry",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Age: **25**\nSex: **jedi**\nLocation: **Tatooine**\nRegion: **Europe**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Oct 27 2017**\nThe House: **Jan 16 2018**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`373480715276517376`**\nPosition in Database: **6**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "62,143",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/373480715276517376/9465b8c5780dea627a31215a18f03220.png?size=2048"
+                        },
+                        "footer": {
+                            "text": "1 / 2"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": " Profile for ObiWanBenoni#3488",
+                        "description": "```Join team obi to get free flowers```",
+                        "color": 6557512,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[andreijl](https://lichess.org/@/andreijl)\nBlitz: **1762**\nBullet: **1856**\nRapid: **1792**\nClassical: 1788?\nCrazyhouse: **1972**\n3-check: **1611**\nAntichess: **1689**\nHorde: 1574?\nAtomic: **1476**\nKing of the Hill: 1636?\nRacing Kings: **1695**",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:chesscom:430038158244184064> Chess.com",
+                                "value": "[andreijl](https://www.chess.com/member/andreijl)\nBlitz: 1000?\nBughouse: **1518**\nTactics: 851?",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:bughousetest:433422387867025409> BughouseTest.com",
+                                "value": "[ObiWanBenoni](http://bughousetest.com/@/ObiWanBenoni)\nBughouse: **1052**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/373480715276517376/9465b8c5780dea627a31215a18f03220.png?size=2048"
+                        },
+                        "files": [],
+                        "footer": {
+                            "text": "2 / 2"
+                        }
+                    }
+                ],
+                "period": 30000,
+                "page": 1,
+                "author": "373480715276517376"
+            },
+            "487640691434848266": {
+                "embedgroup": [
+                    {
+                        "title": "<:bot:455847127365582864> Profile for LAZYbot#2309",
+                        "description": "",
+                        "color": 15461355,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "LAZYbot v.1.5.7",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Region: **None set.**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Jul 23 2017**\nThe House: **Mar 09 2018**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`338772451565502474`**\nPosition in Database: **86**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "0",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/338772451565502474/5aee3cf2f39150fa5ac534cd832279b1.png?size=2048"
+                        },
+                        "footer": {
+                            "text": "1 / 1"
+                        },
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "185412969130229760"
+            },
+            "487665998628126724": {
+                "embedgroup": [
+                    {
+                        "title": " Profile for theLAZYmd#2353",
+                        "description": "```https://twitch.tv/zhbruhs follow that shit it's the future```",
+                        "color": 10181046,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "LazyMarkDownChampion",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Age: **19**\nSex: **<:male:430870358133047306>**\nLocation: **Toronto**\nRegion: **Americas**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **May 26 2016**\nThe House: **May 16 2017**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`185412969130229760`**\nPosition in Database: **0**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "70,895",
+                                "inline": true
+                            },
+                            {
+                                "name": "House Trophies",
+                                "value": ":trophy: **champion du mondeeeeeeee**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/185412969130229760/ab2051837af637ec01eebe084860728e.png?size=2048"
+                        },
+                        "footer": {
+                            "text": "1 / 2"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": " Profile for theLAZYmd#2353",
+                        "description": "```https://twitch.tv/zhbruhs follow that shit it's the future```",
+                        "color": 10181046,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[TheLAZYmd](https://lichess.org/@/TheLAZYmd)\nBlitz: **1890**\nBullet: **2018**\nRapid: **1997**\nClassical: 1500?\nCrazyhouse: **2244**\n3-check: **1720**\nAtomic: 1563?\nKing of the Hill: 1710?",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:chesscom:430038158244184064> Chess.com",
+                                "value": "[theLAZYbot](https://www.chess.com/member/theLAZYbot)\nBullet: 1817?\nCrazyhouse: **2104**\nBughouse: **2024**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/185412969130229760/ab2051837af637ec01eebe084860728e.png?size=2048"
+                        },
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "185412969130229760"
+            },
+            "487760068788617223": {
+                "embedgroup": [
+                    {
+                        "title": " Profile for chessguy101#2066",
+                        "description": "```I am good at losing flowers. Please don't gamble with me.```",
+                        "color": 11126483,
+                        "fields": [
+                            {
+                                "name": "Info",
+                                "value": "Age: **12**\nSex: **<:male:430870358133047306>**\nLocation: **U.s**\nRegion: **Americas**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Jul 27 2017**\nThe House: **Aug 27 2018**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`340160754936184832`**\nPosition in Database: **8**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "49,312",
+                                "inline": true
+                            },
+                            {
+                                "name": "House Trophies",
+                                "value": ":trophy: **Shittest at surviv.io in the server**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/340160754936184832/fd47ad1a56727d8f6e870380e8698cd8.png?size=2048"
+                        },
+                        "footer": {
+                            "text": "1 / 2"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": " Profile for chessguy101#2066",
+                        "description": "```I am good at losing flowers. Please don't gamble with me.```",
+                        "color": 11126483,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[chesssky2](https://lichess.org/@/chesssky2)\nBlitz: **1968**\nBullet: **2160**\nRapid: **2003**\nClassical: **1815**\nCrazyhouse: **1947**\n3-check: **1734**\nAntichess: **1757**\nHorde: **1700**\nAtomic: **1726**\nKing of the Hill: **1899**\nRacing Kings: **1700**",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:chesscom:430038158244184064> Chess.com",
+                                "value": "[chessguy1012](https://www.chess.com/member/chessguy1012)\nBullet: **2017**\nBlitz: **1952**\nDaily: **1399**\nRapid: **1609**\nKing of the Hill: **1821**\nCrazyhouse: **1913**\nBughouse: **1775**\nTactics: **2458**\nLessons: **1905**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/340160754936184832/fd47ad1a56727d8f6e870380e8698cd8.png?size=2048"
+                        },
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "317034686973214720"
+            },
+            "489526060870795265": {
+                "embedgroup": [
+                    {
+                        "title": " Profile for Gopnik#4031",
+                        "description": "```А у вас Крылья Наутилуса есть?```",
+                        "color": 5066239,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "Fumi is mein spatz",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Age: **87**\nSex: **often**\nLocation: **Europe**\nRegion: **Europe**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **May 24 2017**\nThe House: **Sep 01 2018**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`317034686973214720`**\nPosition in Database: **52**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "15,188",
+                                "inline": true
+                            },
+                            {
+                                "name": "House Trophies",
+                                "value": ":trophy: **granade muster**\n:trophy: **champion du mondeeeeeeee**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/317034686973214720/1bb3dab660fe3bf473fb99fa0ab57f85.png?size=2048"
+                        },
+                        "footer": {
+                            "text": "1 / 2"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": " Profile for Gopnik#4031",
+                        "description": "```А у вас Крылья Наутилуса есть?```",
+                        "color": 5066239,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[Gopnikk](https://lichess.org/@/Gopnikk)\nBlitz: **1831**\nBullet: **2106**\nRapid: 1500?\nClassical: 1500?\nCrazyhouse: **1675**\nAtomic: **1512**\nKing of the Hill: **1496**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/317034686973214720/1bb3dab660fe3bf473fb99fa0ab57f85.png?size=2048"
+                        },
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "317034686973214720"
+            },
+            "489529726810062870": {
+                "embedgroup": [
+                    {
+                        "title": " Profile for no gulag or i suicide#6299",
+                        "description": "",
+                        "color": 15105570,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "dont feed THE burak",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Region: **Europe**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Mar 30 2018**\nThe House: **Sep 07 2018**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`429424582303154177`**\nPosition in Database: **89**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "2,917",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/429424582303154177/3c9d9501e8891e679241dda8b01024ea.png?size=2048"
+                        },
+                        "footer": {
+                            "text": "1 / 2"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": " Profile for no gulag or i suicide#6299",
+                        "description": "",
+                        "color": 15105570,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[BurakYarol](https://lichess.org/@/BurakYarol)\nBlitz: **1872**\nBullet: **2117**\nRapid: **1905**\nClassical: 1224?\nCrazyhouse: **2016**\n3-check: 1372?\nAntichess: **1738**\nHorde: 1908?\nAtomic: **1646**\nKing of the Hill: **1417**\nRacing Kings: **1679**",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:chesscom:430038158244184064> Chess.com",
+                                "value": "[GMWSO](https://www.chess.com/member/GMWSO)\nBullet: **2946**\nBlitz: **2959**\nKing of the Hill: **2985**\nCrazyhouse: **2854**\nBughouse: **2573**\nTactics: **3150**\nLessons: 1000?",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/429424582303154177/3c9d9501e8891e679241dda8b01024ea.png?size=2048"
+                        },
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "325736595980288010"
+            },
+            "490725196584583169": {
+                "embedgroup": [
+                    {
+                        "title": " Profile for Fumitoks#3763",
+                        "description": "```LaMadreDeKyle```",
+                        "color": 15105570,
+                        "fields": [
+                            {
+                                "name": "Info",
+                                "value": "Age: **17**\nSex: **gayforkyle**\nLocation: **toofarfromkyle**\nRegion: **Europe**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **May 20 2018**\nThe House: **Aug 18 2018**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`447723359317262336`**\nPosition in Database: **236**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "7,651",
+                                "inline": true
+                            },
+                            {
+                                "name": "House Trophies",
+                                "value": ":trophy: **The biggest pile of shit LegionDestroyer knows**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/EncsMs8.png"
+                        },
+                        "footer": {
+                            "text": "1 / 1"
+                        },
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "447723359317262336"
+            },
+            "490725243657125888": {
+                "embedgroup": [
+                    {
+                        "title": " Profile for Gopnik#4031",
+                        "description": "```А у вас Крылья Наутилуса есть?```",
+                        "color": 5066239,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "Fumi is mein spatz",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Age: **87**\nSex: **often**\nLocation: **Europe**\nRegion: **Europe**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **May 24 2017**\nThe House: **Sep 01 2018**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`317034686973214720`**\nPosition in Database: **52**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "15,685",
+                                "inline": true
+                            },
+                            {
+                                "name": "House Trophies",
+                                "value": ":trophy: **granade muster**\n:trophy: **champion du mondeeeeeeee**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/317034686973214720/1bb3dab660fe3bf473fb99fa0ab57f85.png?size=2048"
+                        },
+                        "footer": {
+                            "text": "1 / 2"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": " Profile for Gopnik#4031",
+                        "description": "```А у вас Крылья Наутилуса есть?```",
+                        "color": 5066239,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[Gopnikk](https://lichess.org/@/Gopnikk)\nBlitz: **1831**\nBullet: **2106**\nRapid: 1500?\nClassical: 1500?\nCrazyhouse: **1675**\nAtomic: **1512**\nKing of the Hill: **1496**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/317034686973214720/1bb3dab660fe3bf473fb99fa0ab57f85.png?size=2048"
+                        },
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "317034686973214720"
+            },
+            "490966848368541721": {
+                "embedgroup": [
+                    {
+                        "title": "Conditions for an accepted Type Entry",
+                        "description": "**Example**:\n`.typeadd And is he likely to be brave who has no spirit, whether horse or dog or any other animal? Have you never observed how invincible and unconquerable is spirit and how the presence of it makes the soul of any creature to be absolutely fearless and indomitable? Then we have found the desired natures. -The Republic`",
+                        "color": 53380,
+                        "footer": {
+                            "text": "Plz come up with interesting stuff!"
+                        },
+                        "fields": [
+                            {
+                                "name": "Body Text",
+                                "value": "• Must be between 265 and 529 characters long.\n• Cannot contain not latin alphabet characters.\n• Cannot contain line breaks or tabs.",
+                                "inline": false
+                            },
+                            {
+                                "name": "Source",
+                                "value": "•Must be included!\n• Comes after the Body Text.\n• Is introduced by a \"-\"\n• Should contain author or source book/movie/media.",
+                                "inline": false
+                            },
+                            {
+                                "name": "What happens next",
+                                "value": "• Entry is submitted to mods.\n• We approve it by pressing a button and immediately grant you flowers.\n• Anything that passes those conditions that is not inappropriate will be accepted.",
+                                "inline": false
+                            }
+                        ]
+                    }
+                ],
+                "period": 180000,
+                "page": 0,
+                "author": "486156791441522698"
+            },
+            "491134947814277121": {
+                "embedgroup": [
+                    {
+                        "title": "<:bot:455847127365582864> Profile for LAZYbot#2309",
+                        "description": "",
+                        "color": 15461355,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "LAZYbot v.1.5.7",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Region: **None set.**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Jul 23 2017**\nThe House: **Mar 09 2018**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`338772451565502474`**\nPosition in Database: **86**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "0",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/338772451565502474/5aee3cf2f39150fa5ac534cd832279b1.png?size=2048"
+                        },
+                        "footer": {
+                            "text": "1 / 1"
+                        },
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "185412969130229760"
+            },
+            "491141892709285890": {
+                "embedgroup": [
+                    {
+                        "description": "**#1** [schaker#9757](https://lichess.org/@/opperwezen) 2696\n**#2** [mastertan#2161](https://lichess.org/@/mastertan) 2644\n**#3** [gsvc#3746](https://lichess.org/@/gsvc) 2629\n**#4** [Mugwort#6375](https://lichess.org/@/Mugwort) 2559\n**#5** [penguingm1#1997](https://lichess.org/@/penguingim1) 2544\n**#6** [MMichael#3973](https://lichess.org/@/TheFinnisher) 2541\n**#7** [Mark Plotkin#1754](https://lichess.org/@/littleplotkin) 2537\n**#8** [retardedplatypus123#0264](https://lichess.org/@/retardedplatypus123) 2537\n**#9** [schwinggggg#6422](https://lichess.org/@/schwinggggg) 2452\n**#10** [TcubesAK#3940](https://lichess.org/@/TcubesAK) 2445\n",
+                        "title": "<:crazyhouse:471114113599406110> House leaderboard on Lichess.org for Crazyhouse players",
+                        "footer": {
+                            "text": "1 / 8"
+                        }
+                    },
+                    {
+                        "description": "**#11** [HighContrast#2584](https://lichess.org/@/HighContrast) 2421\n**#12** [MeneerMandje#9220](https://lichess.org/@/VariantsOnly) 2405\n**#13** [Atamek#9914](https://lichess.org/@/atamek) 2401\n**#14** [jazzii#1899](https://lichess.org/@/jazzii) 2364\n**#15** [Kyle#4287](https://lichess.org/@/KyleLegion) 2341\n**#16** [crptone#1398](https://lichess.org/@/crptone) 2326\n**#17** [PawnInTraining#5209](https://lichess.org/@/PawnInTraining) 2303\n**#18** [the420boss#8639](https://lichess.org/@/FreeBee) 2288\n**#19** [Alduto#8125](https://lichess.org/@/Alduto) 2255\n**#20** [aNOnyMOUSE#0801](https://lichess.org/@/HopelessWanderer) 2253\n",
+                        "title": "<:crazyhouse:471114113599406110> House leaderboard on Lichess.org for Crazyhouse players"
+                    },
+                    {
+                        "description": "**#21** [CrossOnline#6043](https://lichess.org/@/cross_online) 2247\n**#22** [theLAZYmd#2353](https://lichess.org/@/TheLAZYmd) 2244\n**#23** [Cocaino74#1198](https://lichess.org/@/Cocaino74) 2243\n**#24** [moonenane#3553](https://lichess.org/@/moonenaneBETA) 2212\n**#25** [LegionDestroyer#1652](https://lichess.org/@/LegionDestroyer) 2199\n**#26** [ZeroPride#3347](https://lichess.org/@/MangoKid) 2178\n**#27** [Maelstrom#5079](https://lichess.org/@/TooStrongTooFast) 2175\n**#28** [SREGORG#1204](https://lichess.org/@/grogers) 2174\n**#29** [nowayouwin#1285](https://lichess.org/@/Nowayouwin) 2167\n**#30** [Yeti#0449](https://lichess.org/@/yatinagarwal) 2161\n",
+                        "title": "<:crazyhouse:471114113599406110> House leaderboard on Lichess.org for Crazyhouse players"
+                    },
+                    {
+                        "description": "**#31** [Musickn#8622](https://lichess.org/@/Musicknight123) 2149\n**#32** [TheLoneWolf#4001](https://lichess.org/@/the-lone-wolf) 2147\n**#33** [Truthdoc#5694](https://lichess.org/@/FischyVishy) 2108\n**#34** [EF#3964](https://lichess.org/@/eflc) 2103\n**#35** [Boss#1582](https://lichess.org/@/Ingrid-Vengeance) 2075\n**#36** [chuckmoulton#2381](https://lichess.org/@/chuckmoulton) 2052\n**#37** [samoyd#2402](https://lichess.org/@/samoyd) 2023\n**#38** [okei#1207](https://lichess.org/@/okei) 2021\n**#39** [blunderman1#2451](https://lichess.org/@/blunderman1) 2019\n**#40** [Illion#1918](https://lichess.org/@/Illion) 2007\n",
+                        "title": "<:crazyhouse:471114113599406110> House leaderboard on Lichess.org for Crazyhouse players"
+                    },
+                    {
+                        "description": "**#41** [Neeklicious#2674](https://lichess.org/@/Chronatog) 2006\n**#42** [lasz1#0150](https://lichess.org/@/lasz1) 2005\n**#43** [ObiWanBenoni#3488](https://lichess.org/@/andreijl) 1942\n**#44** [Raven#9079](https://lichess.org/@/PepsiNGaming) 1927\n**#45** [ProgramFOX#1012](https://lichess.org/@/ProgramFOX) 1919\n**#46** [Morris#0116](https://lichess.org/@/Natso) 1918\n**#47** [ArdinB#9567](https://lichess.org/@/Sonata2) 1911\n**#48** [Tomitau#0423](https://lichess.org/@/tomitau) 1877\n**#49** [liamchez#8300](https://lichess.org/@/liamchez) 1850\n**#50** [poriluk#3839](https://lichess.org/@/Brokula) 1841\n",
+                        "title": "<:crazyhouse:471114113599406110> House leaderboard on Lichess.org for Crazyhouse players"
+                    },
+                    {
+                        "description": "**#51** [Mystiko#7318](https://lichess.org/@/marczhouse) 1808\n**#52** [hiiiii#7381](https://lichess.org/@/JaakkoT) 1806\n**#53** [beppos#0440](https://lichess.org/@/repetitaiuvant) 1798\n**#54** [IceFire19#8717](https://lichess.org/@/IceFire1921) 1795\n**#55** [jamarlo#8806](https://lichess.org/@/jamesog) 1769\n**#56** [javi0111#6730](https://lichess.org/@/Javi0111) 1738\n**#57** [TheUnknownGuyReborn#8226](https://lichess.org/@/TheUnknownGuyReborn) 1736\n**#58** [Forhavu#1168](https://lichess.org/@/Forhavu) 1720\n**#59** [Domstefrei#4030](https://lichess.org/@/Domstefrei) 1695\n**#60** [supunay#6696](https://lichess.org/@/supunay) 1674\n",
+                        "title": "<:crazyhouse:471114113599406110> House leaderboard on Lichess.org for Crazyhouse players"
+                    },
+                    {
+                        "description": "**#61** [hipno#0082](https://lichess.org/@/hipno) 1655\n**#62** [ericw31415#6314](https://lichess.org/@/ericw31415) 1655\n**#63** [luizfernandoalves#7863](https://lichess.org/@/luizfernandoalves) 1629\n**#64** [Juanma206#4765](https://lichess.org/@/SadLittleTurtle) 1572\n**#65** [TheM492017#5103](https://lichess.org/@/TheM492017) 1535\n**#66** [loukas435#2646](https://lichess.org/@/loukas435) 1515\n**#67** [Raven#2937](https://lichess.org/@/Antiprion) 1500\n**#68** [pethidine#2915](https://lichess.org/@/fgalla) 1492\n**#69** [townes-paycheck#4884](https://lichess.org/@/townes-paycheck) 1426\n**#70** [Andrew#5850](https://lichess.org/@/Link) 1421\n",
+                        "title": "<:crazyhouse:471114113599406110> House leaderboard on Lichess.org for Crazyhouse players"
+                    },
+                    {
+                        "description": "**#71** [Babosos#3628](https://lichess.org/@/Babosos) 1351\n**#72** [pydlv#9320](https://lichess.org/@/PMethod) 1348\n**#73** [stevis5#1056](https://lichess.org/@/stevis5) 1325\n",
+                        "title": "<:crazyhouse:471114113599406110> House leaderboard on Lichess.org for Crazyhouse players"
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "319901088557957122"
+            },
+            "491313430884515850": {
+                "embedgroup": [
+                    {
+                        "title": "What are flowers?",
+                        "description": "Flowers are the artificial currency we use on this Discord server. We use them for fun purposes, like betting on tournaments and challenging each other to achieve things.\n\nObviously it doesn't mean anything, but it's fun, and those who have lots are the best.",
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/Jnbg4fG.png"
+                        },
+                        "footer": {
+                            "text": "1 / 5"
+                        }
+                    },
+                    {
+                        "title": "How can I earn flowers?",
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/Jnbg4fG.png"
+                        },
+                        "fields": [
+                            {
+                                "name": "Invite people to the server",
+                                "value": "Inviting someone to the server nets 20 🌸! This is often best done through DMs on lichess or posting in tournament or game chats. Invite your opponents after long match series! The larger the community we build here the better this place becomes. Bonus 🌸 for inviting through tournaments.",
+                                "inline": false
+                            },
+                            {
+                                "name": "Create a House tournament",
+                                "value": "Hugely popular - create a tournament on lichess and we'll sponsor you 🌸! Type `... tournament` for details.",
+                                "inline": false
+                            },
+                            {
+                                "name": "Do something impressive",
+                                "value": "Get a a FIDE title; win a big Lichess shield or tournament; beat out some folk in a Titled Tuesday arena... let us know and we might dish out 🌸 for anything that sounds vaguely impressive.",
+                                "inline": false
+                            },
+                            {
+                                "name": "Complete a challenge",
+                                "value": "Listed in <#406161920308150272>. Ask someone to give you a challenge like reaching a high rating or high position in a tournament. The server might offer extremely high payouts on certain events.",
+                                "inline": false
+                            },
+                            {
+                                "name": "Leave us a great quote",
+                                "value": "We're looking for quotes to add to our typecontest game. Have a look at the criteria in `... typeadd` then leave us a quote. If we approve it you'll earn 🌸.",
+                                "inline": false
+                            }
+                        ],
+                        "footer": {
+                            "text": "2 / 5"
+                        }
+                    },
+                    {
+                        "title": "How can I get free flowers?",
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/Jnbg4fG.png"
+                        },
+                        "fields": [
+                            {
+                                "name": "React with 🌸 when there's an event",
+                                "value": "Every now and then, <@!185412969130229760> will create an event that gives out free flowers in <#390264166843154433>. Simply react with 🌸 to the message to get them, so check <#390264166843154433> frequently!",
+                                "inline": false
+                            },
+                            {
+                                "name": "Pick 🌸 when they appear in a text channel",
+                                "value": "Everyone message has a 2% of generating 🌸. Type `.pick` as they appear, alternatively people might type `.plant` to drop them for you.",
+                                "inline": false
+                            },
+                            {
+                                "name": "Collect `.timely` periodically",
+                                "value": "You may collect 2 🌸 every 2 hours from <#390273555084083210> using the command `.timely`",
+                                "inline": false
+                            },
+                            {
+                                "name": "Win Trivia games",
+                                "value": "The House's speciality game - trivia contests between its highly competetive members! Play at any time in <#390289422802747403> by typing `.t`, the first to 10 wins. Bigger and better games win more 🌸! `... tr` to see the rewards.",
+                                "inline": false
+                            }
+                        ]
+                    },
+                    {
+                        "title": "How can I get even more flowers?",
+                        "description": "You need to risk 🌸 to get 🌸. Here's some of the ways you can do that:",
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/Jnbg4fG.png"
+                        },
+                        "fields": [
+                            {
+                                "name": "Betting",
+                                "value": "The hallmark of this server - you can place bets on your friends and favourites playing matches and tournaments. Odds are offered by our @licensed bookies, become one simply by asking! Bookies will give odds on certain outcomes of those tournaments and matches, you can choose one to invest in, with the hope of a high return. See `...howtobet` for more information.",
+                                "inline": false
+                            },
+                            {
+                                "name": "Gambling",
+                                "value": "For the truly adventurous - gamble away your savings in our bot's in-built casino. Head to <#390259390709497857> and type `.commands gambling` to see what you can play. The list of commands is also written up in the **GAMBLING** section of <#390259315816005644>.",
+                                "inline": false
+                            }
+                        ]
+                    },
+                    {
+                        "title": "How can I spend my flowers?",
+                        "description": "Have you acquired a handy amount of flowers?\nHere’s few ways how you can spend them.",
+                        "color": 53380,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/YWF70U4.png"
+                        },
+                        "fields": [
+                            {
+                                "name": "Buying roles in the shop",
+                                "value": "You can certain roles from the shop. They will give you a special color flair and make you superior to other members on the right sidebar. If your level is high enough, you’re eligible for discount. See `… shop`.",
+                                "inline": false
+                            },
+                            {
+                                "name": "Offering challenges to other users",
+                                "value": "You can give a challenge, like reaching a high rating or high position in a tournament, to someone in order to encourage them to get better. Challenges are recorded in <#406161920308150272>.",
+                                "inline": false
+                            },
+                            {
+                                "name": "Claiming waifus and gifts",
+                                "value": "You can claim waifu(s) and give them gifts. See `.gift` and `.waifus`.",
+                                "inline": false
+                            },
+                            {
+                                "name": "Trying to get more flowers",
+                                "value": "You spend flowers by betting on odds offered by licensed bookies, or by gambling in <#390259390709497857>. See `… flowers`.",
+                                "inline": false
+                            }
+                        ]
+                    }
+                ],
+                "period": 180000,
+                "page": 1,
+                "author": "486156791441522698"
+            },
+            "491324855418093578": {
+                "embedgroup": [
+                    {
+                        "title": "What is Discord and how does it work?",
+                        "description": "**Discord**\nDiscord is a program which you can use on the web or download an app from, you can chat and voice chat in there, it has become more and more popular among gamers.\n\n**Channels**\nThere exist different channels which are used to keep the conversations on a specific topic, for instance there are different ones for each variant here. \n\n**Roles and bots**\nPeople can acquire roles which give them permissions to see certain channels, that is so you don't have to see the variant channels you are not interested in. There are also non-human members, known as bots, who react only to certain commands.",
+                        "color": 53380,
+                        "author": {
+                            "name": "House Guide to Discord"
+                        },
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/YWF70U4.png"
+                        },
+                        "fields": [],
+                        "footer": {
+                            "text": "1 / 1"
+                        }
+                    }
+                ],
+                "period": 180000,
+                "page": 0,
+                "author": "486156791441522698"
+            },
+            "492003735141220367": {
+                "embedgroup": [
+                    {
+                        "title": "Claim your flowers",
+                        "description": "Type `.ticket add [flowers] [reason]` to claim your 🌸.\n• If you claim 🌸 for a tournament please add the link to the tournament\n• If you claim for a match add timecontrol, number of games and the link of the first game\n• If you claim for inviting a user plug in his name as a reason",
+                        "footer": {
+                            "text": "Use `... tournament` if you need to calculate the amount first."
+                        },
+                        "fields": [
+                            {
+                                "name": "Example",
+                                "value": "`.ticket add 31 for this tournament https://lichess.org/tournament/4ihC4TfT`",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/Jnbg4fG.png"
+                        }
+                    }
+                ],
+                "period": 180000,
+                "page": 0,
+                "author": "486156791441522698"
+            },
+            "493309336718934027": {
+                "embedgroup": [
+                    {
+                        "title": " Profile for ObiWanBenoni#3488",
+                        "description": "```Join team obi to get free flowers```",
+                        "color": 6557512,
+                        "fields": [
+                            {
+                                "name": "Info",
+                                "value": "Age: **25**\nSex: **jedi**\nLocation: **Tatooine**\nRegion: **Europe**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Oct 27 2017**\nThe House: **Jan 16 2018**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`373480715276517376`**\nPosition in Database: **6**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "65,147",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/373480715276517376/9465b8c5780dea627a31215a18f03220.png?size=2048"
+                        },
+                        "footer": {
+                            "text": "1 / 2"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": " Profile for ObiWanBenoni#3488",
+                        "description": "```Join team obi to get free flowers```",
+                        "color": 6557512,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[andreijl](https://lichess.org/@/andreijl)\nBlitz: **1768**\nBullet: **1875**\nRapid: **1815**\nClassical: 1788?\nCrazyhouse: **1943**\n3-check: **1611**\nAntichess: **1668**\nHorde: 1574?\nAtomic: **1476**\nKing of the Hill: 1636?\nRacing Kings: **1715**",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[ObiWanBenoni](https://lichess.org/@/ObiWanBenoni)\nBlitz: 1500?\nBullet: **1801**\nRapid: 1500?\nClassical: 1500?\nAntichess: 1888?",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:chesscom:430038158244184064> Chess.com",
+                                "value": "[andreijl](https://www.chess.com/member/andreijl)\nBlitz: 1000?\nBughouse: **1518**\nTactics: 851?",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:bughousetest:433422387867025409> BughouseTest.com",
+                                "value": "[ObiWanBenoni](http://bughousetest.com/@/ObiWanBenoni)\nBughouse: **1052**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/373480715276517376/9465b8c5780dea627a31215a18f03220.png?size=2048"
+                        },
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "373480715276517376"
+            },
+            "494217023761547292": {
+                "embedgroup": [
+                    {
+                        "title": " Profile for Fumitoks#3763",
+                        "description": "```kyleisgod```",
+                        "color": 15105570,
+                        "fields": [
+                            {
+                                "name": "Info",
+                                "value": "Age: **17**\nSex: **gayforkyle**\nLocation: **toofarfromkyle**\nRegion: **Europe**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **May 20 2018**\nThe House: **Aug 18 2018**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`447723359317262336`**\nPosition in Database: **236**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "8,501",
+                                "inline": true
+                            },
+                            {
+                                "name": "House Trophies",
+                                "value": ":trophy: **The biggest pile of shit LegionDestroyer knows**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/EncsMs8.png"
+                        },
+                        "footer": {
+                            "text": "1 / 1"
+                        },
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "447723359317262336"
+            }
+        }
     },
     "430035841239220224": {
         "_id": "430035841239220224",

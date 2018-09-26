@@ -10,19 +10,20 @@ class Election extends Main {
     super(message);
     this.properties = [   //default settings
       ["date", Date.getMonth(Date.now()), "Date"],
+      ["system", "irv", "Voting System", key => Main.Systems[key]],
       ["type", "server", "Type of election"],
       ["criteria", "Everyone in the server", "Electorate list"],
-      ["inactives", true, "Inactive members voting"],
-      ["dupes", true, "Dupe members voting"],
+      ["inactives", true, "Inactive members voting", boolean => boolean.toString()],
+      ["dupes", true, "Dupe members voting", boolean => boolean.toString()],
       ["messages", 100, "Required messages"],
       ["sponsors", 3, "Required sponsors"],
       ["limit", 1, "Running limit"],
       ["elections", {
         "server": {
-          "voters": [],
-          "candidates": []
+          "voters": {},
+          "candidates": {}
         }
-      }, "Elections"],
+      }, "Elections", obj => "**" + Object.keys(obj).join("**\t|\t**") + "**"],
       ["role", undefined, "Corresponding role for voters"]
     ];
   }
@@ -44,19 +45,29 @@ class Election extends Main {
         return string += "Awaiting initialisation of candidate registration...";
       })(this.server.states.election)
       embed.addField("Status", value, false);
-      for (let [property, def, name] of this.properties) {
+      for (let [property,, name, f] of this.properties) {
         if (election[property] === undefined) continue;
+        let value = typeof f === "function" ? f(election[property]) : election[property];
         if (typeof election[property] === "object") {
           if (Object.keys(election[property]).length > 2) while ((embed.fields.length - 1) % 3 !== 0 && embed.fields[embed.fields.length - 1].inline === true) embed.addBlankField(true);
-          embed.addField(name, "**" + Object.keys(election[property]).join("**\t|\t**") + "**", Object.keys(election[property]).length < 2);
-        } else embed.addField(name, election[property].toString(), true);
+          embed.addField(name, value, Object.keys(election[property]).length < 2);
+        } else
+        if (value !== undefined) embed.addField(name, value, true);
       };
       if (init) { //if this method was called from this.initiate() or this.config()
         embed.setFooter("Verify and set these values?");
-        return !(await this.Output.confirm({embed,
+        let set = await this.Output.confirm({embed,
           "editor": typeof init === "object" ? init : "",
           "autodelete": false
-        }, true))
+        }, true);
+        let msg = this.guild.me.lastMessage; //workround
+        if (set) {
+          embed.setFooter("");
+          this.Output.editor(embed, msg);
+          election.url = msg.url;
+          this.election = election;        
+        };
+        return !set;
       } else {
         if (embed.fields.length === 0) embed.setDescription("No upcoming election data found!");
         this.Output.sender(embed);
@@ -108,7 +119,7 @@ class Election extends Main {
       let election = this.election, args = this.args.slice(1), data = {};
       if (args.length !== 0) for (let type in election) {
         if (!election.hasOwnProperty(type) || args.inArray(type)) continue;
-        data[type] = election.type;
+        data[type] = election[type];
       };
       do {
         let econfig = new Config(data, this);

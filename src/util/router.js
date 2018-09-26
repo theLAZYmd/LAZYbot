@@ -1,9 +1,10 @@
 const Parse = require("./parse.js");
 const DataManager = require("./datamanager.js");
-const Commands = require("../data/commands.json");
-const allMessageCommands = require("../data/allmessagecommands.json");
-const DMCommands = require("../data/dmcommands.json");
-const IntervalCommands = require("../data/intervalcommands.json");
+const Commands = require("../data/commands/message.json");
+const allMessageCommands = require("../data/commands/all.json");
+const DMCommands = require("../data/commands/dm.json");
+const IntervalCommands = require("../data/commands/interval.json");
+const reactionCommands = require("../data/commands/reaction.json");
 const Permissions = require("./permissions.js");
 const DM = require("../modules/dm.js");
 
@@ -20,14 +21,25 @@ class Router {
     Instance.streamer(oldMember.presence, newMember.presence);
   }
 
-  static async reaction(messageReaction, user) {
-    const reactionmessages = DataManager.getFile("./src/data/reactionmessages.json")[messageReaction.message.guild.id];
-    for (let type in reactionmessages) {
-      for (let messageID in reactionmessages[type]) {
-        if (messageReaction.message.id === messageID) {
-          let Constructor = require("../modules/" + type + ".js")
-          let Instance = new Constructor(messageReaction.message);
-          Instance.react(messageReaction, user, reactionmessages[type][messageID]);
+  static async reaction({messageReaction, user}) {
+    if (user.bot || !messageReaction.message.guild) return;
+    if (!messageReaction.message.author.bot) {
+      for (let cmdInfo of reactionCommands) {
+        if (cmdInfo.active !== false && (messageReaction.emoji.name === cmdInfo.name || messageReaction.emoji.id === cmdInfo.id)) {
+          let run = await Router.runCommand(data.message, data.argsInfo, cmdInfo);
+          if (run) throw await Router.logCommand(data.argsInfo, cmdInfo);
+          throw "";
+        }
+      }
+    } else { //For using emojis as "buttons". Only reactions done by users reacting to bot messages are of interest to us.
+      let reactionmessages = DataManager.getFile("./src/data/reactionmessages.json")[messageReaction.message.guild.id];
+      for (let [type, data] of Object.entries(reactionmessages)) {
+        for (let messageID of Object.keys(data)) {
+          if (messageReaction.message.id === messageID) {
+            let Constructor = require("../modules/" + (type + (type === "modmail" ? "/action" : "")).toLowerCase()  + ".js")
+            let Instance = new Constructor(messageReaction.message);
+            Instance.react(messageReaction, user, reactionmessages[type][messageID]);
+          }
         }
       }
     }
@@ -38,7 +50,7 @@ class Router {
       for (let cmdInfo of IntervalCommands) {
         if (!cmdInfo.file || !cmdInfo.method || !cmdInfo.args || !cmdInfo.interval) continue;
         setInterval(async () => {
-          let Constructor = require("../modules/" + cmdInfo.file + ".js");
+          let Constructor = require("../modules/" + cmdInfo.file.toLowerCase()  + ".js");
           await Constructor[cmdInfo.method](...cmdInfo.args);
         }, cmdInfo.interval)
       }
@@ -112,9 +124,8 @@ class Router {
     try {
       for (let cmdInfo of allMessageCommands) {
         cmdInfo.prefix = "";
-        let run = await Router.runCommand(data.message, data.argsInfo, cmdInfo);
-        throw "";
-      }
+        Router.runCommand(data.message, data.argsInfo, cmdInfo);
+      };
     } catch (e) {
       if (e) data.argsInfo.Output.onError(e);
     }
@@ -158,7 +169,7 @@ class Router {
       let args = [];
       for (let i = 0; i < cmdInfo.arguments.length; i++)
         args[i] = argsInfo[cmdInfo.arguments[i]]; //the arguments we take for new Instance input are what's listed
-      let Constructor = require("../modules/" + cmdInfo.file + ".js"); //Profile
+      let Constructor = require("../modules/" + cmdInfo.file.toLowerCase() + ".js"); //Profile
       let Instance = new Constructor(message); //profile = new Profile(message);
       if (typeof Instance[cmdInfo.method] === "function") Instance[cmdInfo.method](...args);
       //else if (typeof Instance._getDescendantProp(cmdInfo.method) === "function") Instance._getDescendantProp(cmdInfo.method)(...args);

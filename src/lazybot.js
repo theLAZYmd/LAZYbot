@@ -7,9 +7,10 @@ const express = require("express")();
 
 //the additional modules for debugging or only used sometimes
 const onStartup = require("./events/onStartup.js"); //doesn't require Parse
-const DebuggingConstructor = require("./util/debugging.js"); //doesn't require Parse
+const Router = require("./util/router.js");
 
 require('events').EventEmitter.prototype._maxListeners = 100;
+process.on("unhandledRejection", (e) => console.error(e));
 
 const events = [
   ["channelCreate", ["channel"]],
@@ -39,7 +40,7 @@ const events = [
   ["message", ["message"], "message"],
   ["messageDelete", ["message"]],
   ["messageDeleteBulk", ["messages"]],
-  ["messageReactionAdd", ["messageReaction", "user"]],
+  ["messageReactionAdd", ["messageReaction", "user"], "reaction"],
   ["messageReactionRemove", ["messageReaction", "user"]],
   ["messageReactionRemoveAll", ["message"]],
   ["messageUpdate", ["oldMessage", "newMessage"]],
@@ -58,15 +59,6 @@ const events = [
   ["warn", ["info"]]
 ];
 
-class Dummy {
-  constructor() {
-
-  }
-
-  get Router () {
-    return require("./util/router.js");
-  }
-}
 class Bot {
 
   static ready() {
@@ -75,29 +67,16 @@ class Bot {
 
   static run() {
 
-    let data;
-    let Router = (new Dummy()).Router;
-
     client.on("ready", () => { //console startup section
       try {
-        data = new onStartup(client);
-        if (data.modmail) () => {}; //used to cache the messages that might need to be reacted to
-        for (let guild of Array.from(client.guilds.values()))
-          console.log(`Loaded client server ${guild.name} in ${Date.now() - data.reboot}ms`);
-        console.log(data.bouncerbot ? `Noticed bot user ${data.bouncerbot.tag} in ${Date.now() - data.reboot}ms` : `Bouncer#8585 is not online!`);
-        console.log(data.nadekobot ? `Noticed bot user ${data.nadekobot.tag} in ${Date.now() - data.reboot}ms` : `Nadeko#6685 is not online!`);
-        console.log(data.harmonbot ? `Noticed bot user ${data.harmonbot.tag} in ${Date.now() - data.reboot}ms` : `Harmonbot#4049 is not online!`);
-        for (let owner of data.owners)
-          console.log(`Noticed bot owner ${owner.tag} in ${Date.now() - data.reboot}ms`);
+        let data = new onStartup(client);
+        for (let prop of Object.getOwnPropertyNames(onStartup.prototype)) {
+          if (prop === "constructor") continue;
+          if (typeof data[prop] === "function") data[prop]().catch((e) => console.log(e));
+        }
         console.log("bleep bloop! It's showtime.");
-        if (data.autoupdates) console.log("Beginning update cycle...");
         Router.intervals();
-        const Debugging = new DebuggingConstructor(client);
         if (config.states.debug) Bot.debug(data);
-        //Debugging.removeDuplicates();
-        //Debugging.convertCounttoObject();
-        //Debugging.updateDBUserFormat();
-        //Debugging.duplicateMains();
       } catch (e) {
         if (e) console.log(e);
       }
@@ -105,34 +84,15 @@ class Bot {
 
     for (let event of events) {
       if (!event[2]) continue;
-      client.on(event[0], function () {
+      client.on(event[0], function () {        
+        let data = {};
         for (let i = 0; i < event[1].length; i++) {
           data[event[1][i]] = arguments[i];
-          data.client = client;
-        };
-        Router[event[2]](data);
+        };        
+        data.client = client;
+        Router[event[2]](data).catch((e) => console.log(e));
       });
-    } /*
-
-    client.on("message", (message) => { //command handler
-      try {
-        data.message = message;
-        Router.command(data);
-      } catch (e) {
-        console.log(e);
-      }
-    }) */
-
-    client.on("messageReactionAdd", (messageReaction, user) => {
-      if (!messageReaction.message.guild) return;
-      if (user.bot || !messageReaction.message.author.bot) {
-        if (messageReaction.emoji.id === "481996881606475798" && !user.bot) return messageReaction.remove(user);
-      } //For using emojis as "buttons". Only reactions done by users reacting to bot messages are of interest to us.
-      else Router.reaction(messageReaction, user)
-      .catch((e) => {
-        if (e) console.log(e);
-      });
-    })
+    }
 
     client.on("presenceUpdate", (oldMember, newMember) => {
       Router.presence(oldMember, newMember)
@@ -164,27 +124,6 @@ class Bot {
     }, 280000);
 
   }
-/*
-  static debug(data) { //run through every command and try and run the examples to see if it throws errors
-    config.states.debug = true;
-    DataManager.setFile(config, "./src/config.json");
-    for (let i = 0; i < commands.length; i++) {
-      for (let j = 0; j < commands[i].usage.length; j++) {
-        data.message = Object.assign({}, DataManager.getFile("./src/data/genericmessage.json"));
-        if (commands[i].prefix === "generic") data.message.content = "!";
-        if (commands[i].prefix === "nadeko") data.message.content = ".";
-        data.message.content += commands[i].usage[j];
-        console.log(data.message.content);
-        Router.command(data);
-      }
-    }
-  }
-
-  static recordMessage(message) {
-    let _message = require("circular-json").stringify(message, null, 4);
-    console.log(_message);
-    require("fs").writeFileSync("./src/data/genericmessage.json", _message);
-  }*/
 
 }
 
@@ -214,8 +153,9 @@ Date.getMonth = function (ms) {
 }
 
 Array.prototype.inArray = function (string) {
+  let regex = /[a-z_$£@!.?]/gi;
   for (let i = 0; i < this.length; i++) {
-    if (string.toLowerCase().replace(/[^\s\w$.\?£@!]/g, "").trim() === this[i].toLowerCase().replace(/[^\s\w?$.?£.@!]/g, "").trim()) return true;
+    if ((string.match(regex) || "").join("").toLowerCase() === (this[i].match(regex) || "").join("").toLowerCase()) return true;
   }
   return false;
 }

@@ -3,30 +3,6 @@ const { RichEmbed } = require("discord.js");
 
 class Embed extends RichEmbed {
 
-  static async sender(inputobject, channel) {
-    try {
-      let object = Embed.receiver(inputobject);
-      if (!object.color) object.color = config.colors.generic;
-      return await channel.send(object.content, {
-        embed: object
-      })
-    } catch (e) {
-      if (e) console.log(e);
-    }
-  }
-
-  static async editor(inputobject, message) {
-    try {
-      let object = Embed.receiver(inputobject);
-      if (!object.color) object.color = config.colors.generic;
-      return await message.edit(object.content, {
-        embed: object
-      });
-    } catch (e) {
-      if (e) console.log(e);
-    }
-  }
-
   static fielder(fields = [], name = " \u200b", value = " \u200b", inline = false) {
     fields.push({
       name,
@@ -67,44 +43,12 @@ class Embed extends RichEmbed {
     let misprop = ["image", "thumbnail"];
     for (let prop of misprop)
       if (typeof embed[prop] === "string") embed[prop] = {  "url": embed[prop]  }
-    return new Embed(embed); /*
-    let embedinput = {};
-    let property = ["content", "title", "url", "description", "color", "video", "timestamp"];
-    for (let i = 0; i < property.length; i++) {
-      if (embed[property[i]]) embedinput[property[i]] = embed[property[i]];
+    for (let field of embed.fields || []) {
+      if (field.name === "") field.name = " \u200b";
+      if (field.value === "") field.value = " \u200b";
+      if (field.inline === undefined) field.inline = false;
     };
-    if (embed.author) {
-      let name = embed.author.name ? embed.author.name : "";
-      let url = embed.author.url ? embed.author.url : "";
-      let icon_url = embed.author.icon_url ? embed.author.icon_url : "";
-      if (embed.author.iconURL) icon_url = embed.author.iconURL;
-      embedinput.author = Embed.author(name, url, icon_url);
-    };
-    if (embed.footer) {
-      let text = embed.footer.text ? embed.footer.text : "";
-      let icon_url = embed.footer.icon_url ? embed.footer.icon_url : "";
-      if (embed.footer.iconURL) icon_url = embed.footer.iconURL;
-      if (text || icon_url) embedinput.footer = Embed.footer(text, icon_url);
-    };
-    if (embed.image) {
-      let url = embed.image.url ? embed.image.url : "";
-      if (url) embedinput.image = Embed.image(url);
-    };
-    if (embed.thumbnail) {
-      let url = typeof embed.thumbnail === "string" ? embed.thumbnail : "";
-      if (embed.thumbnail.url) url = embed.thumbnail.url;
-      if (url) embedinput.thumbnail = Embed.thumbnail(url);
-    };
-    if (embed.fields) {
-      embedinput.fields = [];
-      for (let i = 0; i < embed.fields.length; i++) {
-        let name = embed.fields[i].name ? embed.fields[i].name : "\u200b";
-        let value = embed.fields[i].value ? embed.fields[i].value : "\u200b";
-        let inline = embed.fields[i].inline ? embed.fields[i].inline : "false";
-        embedinput.fields[i] = {name, value, inline};
-      }
-    };
-    return embedinput;*/
+    return new Embed(embed);
   }
 
   /*

@@ -51,7 +51,7 @@ class TypeContest extends Parse {
           "footer": Embed.footer("Submitted: " + getISOtime(Date.now()) + ", " + text.length + " characters.")
         },
         "channel": this.Search.channels.get(this.server.channels.modmail),
-        "role": this.Search.roles.get(this.server.roles.admin)
+        "role": "admin"
       }, true);
       TicketsConstructor.set(msg.id, {
         "source": source,

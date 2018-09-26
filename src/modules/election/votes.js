@@ -1,6 +1,5 @@
 const Main = require("./main.js");
 const DataManager = require("../../util/datamanager.js");
-const IRV = require("./electorals/irv.js");
 
 class Votes extends Main {
 
@@ -28,20 +27,20 @@ class Votes extends Main {
       if (this.server.states.voting) throw "Cannot initiate voting while voting is still open.";
       let election = this.election;
       let msg = await this.Output.generic("Initialised final vote count for " + Object.keys(election).filter(property => !property.startsWith("_")).length + " elections...");
-      let system = config.electorals[this.election.system];
+      let system = config.electorals[election.system];
       if (!system) throw "Couldn't find valid electoral system by which to count up votes.";
       let Count = require("./electorals/" + system.file + ".js");
       if (!Count || typeof Count.rank !== "function") throw "Couldn't find valid process by which to count up votes.";
       await this.Output.editor("Counting up the votes...", msg)
-      for (let [channel, data] of Object.entries(this.election.elections)) {  //I say it's 'channel' but really it's any validated election
-        if (!this.election.hasOwnProperty(channel)) continue;
+      for (let [channel, data] of Object.entries(election.elections)) {  //I say it's 'channel' but really it's any validated election
+        if (!election.hasOwnProperty(channel)) continue;
         await this.Output.editor("Counting up the votes for election... **" + channel + "**", msg);
         let candidates = await this.parseCandidates(data.candidates);
         //create a map for the candidates
         //exclude candidates that couldn't be found
         let votes = await this.parseVotes(data.voters);
-        let raw = await IRV.rank(candidates, votes);  
-        this.election.elections[channel].results = await this.parseResults(raw); //need to use 'in' iterator for setters
+        let raw = await require("./" + election.system.toLowerCase() + "./main.js").rank(candidates, votes);  
+        election.elections[channel].results = await this.parseResults(raw); //need to use 'in' iterator for setters
       };
       await this.Output.editor("Setting the result...");
       this.election = election;

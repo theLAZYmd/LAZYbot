@@ -1,19 +1,62 @@
 {
     "314155682033041408": {
-        "url": "https://discordapp.com/channels/314155682033041408/407941353570304011/486981418719772683",
         "_id": "314155682033041408",
         "date": "Sep 2018",
-        "type": "server",
-        "criteria": "Everyone in the server",
+        "type": "channel",
+        "criteria": "role-identical",
         "inactives": true,
-        "dupes": true,
-        "messages": 100,
-        "sponsors": 3,
-        "limit": 1,
+        "dupes": false,
+        "messages": "50",
+        "sponsors": "2",
+        "limit": "2",
         "elections": {
-            "server": {
-                "voters": [],
-                "candidates": []
+            "960": {
+                "voters": {},
+                "candidates": {}
+            },
+            "bot": {
+                "voters": {},
+                "candidates": {}
+            },
+            "ultra": {
+                "voters": {},
+                "candidates": {}
+            },
+            "crazyhouse": {
+                "voters": {},
+                "candidates": {}
+            },
+            "3-check": {
+                "voters": {},
+                "candidates": {}
+            },
+            "racing-kings": {
+                "voters": {},
+                "candidates": {}
+            },
+            "atomic": {
+                "voters": {},
+                "candidates": {}
+            },
+            "koth": {
+                "voters": {},
+                "candidates": {}
+            },
+            "4-player": {
+                "voters": {},
+                "candidates": {}
+            },
+            "bughouse": {
+                "voters": {},
+                "candidates": {}
+            },
+            "s-chess": {
+                "voters": {},
+                "candidates": {}
+            },
+            "horde": {
+                "voters": {},
+                "candidates": {}
             }
         }
     }

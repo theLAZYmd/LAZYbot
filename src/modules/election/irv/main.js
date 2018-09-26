@@ -1,5 +1,4 @@
-
-class IRV {
+class Main {
 
   static rank(votes, candidates) { //main input, votes = [423, 124, 12, 1342], candidates = [1, 2, 3, 4, 5, 6]
     let data = {
@@ -114,4 +113,4 @@ class IRV {
 
 }
 
-module.exports = IRV;
+module.exports = Main;

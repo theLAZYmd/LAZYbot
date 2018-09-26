@@ -39,15 +39,15 @@ class Paginator extends Parse {
         embedgroup,
         "period": period === Infinity ? "Infinity" : (period || 30000),
         "page": 0,
-        "author": this.author.id
+        "author": this.author.id,
+        "cmdID": this.message.id
       };
       if (this.command === "...") paginator[msg.id].path = path;
       this.paginator = paginator;
       if (period === Infinity || period > 2147483647 || (this.command && this.command === "...")) return;
-      console.log(true);
       setTimeout(() => {
         msg.clearReactions()
-          .catch((e) => console.log(e));
+          .catch(() => {});
         delete paginator[msg.id];
         this.paginator = paginator;
       }, period);
@@ -61,23 +61,34 @@ class Paginator extends Parse {
       if (reaction.emoji.name === "➡") data.page++;
       if (reaction.emoji.name === "⬅") data.page--;
       if (reaction.emoji.name === "🔄") data.page = 0;
-      reaction.remove(user);
       if (reaction.emoji.name === "❎" && user.id === data.author) {
         reaction.message.delete();
-        let paginator = this.paginator;
+        let paginator = this.paginator;        
+        let msg = await this.channel.fetchMessage(paginator[reaction.message.id].cmdID).catch(() => {});
+        if (msg) msg.delete();
         delete paginator[reaction.message.id];
         this.paginator = paginator;
+        throw "";
       };
-      if (!/➡|⬅|🔄/.test(reaction.emoji.name)) throw "";
+      reaction.remove(user);
+      if (!/^(?:➡|⬅|🔄)$/.test(reaction.emoji.name)) throw "";
       if (data.page < 0 || data.page >= data.embedgroup.length) throw "";
+      let paginator = this.paginator;
       let embed = data.embedgroup[data.page];
       if (!embed) throw "Couldn't generate embed for page " + (data.page + 1) + ".";
       embed.footer = Embed.footer(`${data.page + 1} / ${data.embedgroup.length}`);
       this.Output.editor(embed, reaction.message);
       paginator[reaction.message.id] = data;
       this.paginator = paginator;
+      if (data.page === 0 || data.period !== "Infinity") throw "";
+      if (!this.client.timeouts) this.client.timeouts = {};
+      if (this.client.timeouts[reaction.message.id]) clearTimeout(this.client.timeouts[reaction.message.id]);
+      this.client.timeouts[reaction.message.id] = setTimeout(() => {
+        reaction.emoji.name = "🔄";
+        this.client.emit("messageReactionAdd", reaction, user);
+      }, 600000);
     } catch (e) {
-      if (e) this.Output.onError(e);
+      if (e) throw e;
     }
   }
 

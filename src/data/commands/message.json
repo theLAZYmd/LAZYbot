@@ -575,7 +575,7 @@
       "botcontingencyplan",
       "bcp"
     ],
-    "description": "Switches whether Nadeko or Bouncer has 'Bot-in-Use' role (full permission for server). To be used when Bouncer is offline, triggers automatically.",
+    "description": "Switches whether Nadeko or Bouncer has 'Bot-in-Use' role (full permission for server). To be used when Bouncer is offline, triggers automaticalyl.",
     "usage": [
       "bcp"
     ],
@@ -696,6 +696,7 @@
     "description": "Displays current election data. Use action to configure the election.",
     "subcommands": [
       ["action", {
+        "status": "Shows the status of an upcoming election on the server. Same as `!election`.",
         "initiate": "Readies a server for a new election, using default settings.",
         "config": "Changes the settings for an upcoming election, resetting any previous voting data and registered voters.",
         "reset": "Sets election config data to the default.",
@@ -723,6 +724,7 @@
     "subcommands": [
       ["action", {
         "register": "Registers voters ready for a new election. Resets previous voting data.",
+        "deregister": "Deletes voting data. Leave blank to run function for all.",
         "disqualify": "Removes a voter from all election records.",
         "get": "Gets the list of eligble voters for a channel. To be used in #spam only."
       }]
@@ -730,6 +732,7 @@
     "usage": [
       "voters",
       "voters register",
+      "voters deregister",
       "voters disqualify",
       "voters get"
     ],
@@ -1393,7 +1396,7 @@
       "send penguingim1"
     ],
     "module": "Administration",
-    "file": "modmail",
+    "file": "modmail/input",
     "method": "outgoing",
     "arguments": ["args"],
     "prefix": "generic"

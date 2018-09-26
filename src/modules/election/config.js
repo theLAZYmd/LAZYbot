@@ -1,3 +1,5 @@
+const Main = require("./main.js");
+
 class Config {
 
   /*
@@ -10,6 +12,7 @@ class Config {
       if (!data.hasOwnProperty(property)) continue;
       this["_" + property] = data[property];
     };
+    console.log(this);
     for (let property in argsInfo) {
       if (!argsInfo.hasOwnProperty(property)) continue;
       this[property] = argsInfo[property];
@@ -21,25 +24,42 @@ class Config {
 
   get date() {
     if (this._date) return this._date;
-    return this._date = (() => {
-      return Date.getMonth(Date.now())
+    return this._date = (async () => {
+      return await this.Output.response({
+        "description": "Please specify the date of the election."
+      })
+    })();
+  }
+
+  get system() {
+    if (this._system) return this._system;
+    return this._system = (async () => {
+      return Object.keys(Main.Systems)[await this.Output.choose({
+        "type": "electoral system",
+        "options": Object.values(Main.Systems)
+      })];
     })();
   }
 
   get type() {
     if (this._type) return this._type;
     return this._type = (async () => {
-      return await this.Output.response({
-        "description": "Please define the scope of the election (`server`|`channel`)",
-        "filter": msg => /server|channel/.test(msg.content)
-      })
+      let options = ["server", "channel"];
+      return options[await this.Output.choose({options,
+        "type": "election type"
+      })]
     })()
   }
 
   get elections() {
     if (this._elections) return this._elections;
     return this._elections = (async () => {
-      if (await this.type === "server") return this._elections = ["server"];
+      if (await this.type === "server") return this._elections = {
+        "server": {
+          "voters": {},
+          "candidates": {}
+        }
+      };
       if (await this.type === "channel") {
         let error = true;
         while (error) {
@@ -142,6 +162,7 @@ class Config {
   get limit() {
     if (this._limit) return this._limit;
     return this._limit = (async () => {
+      console.log(this.elections);
       let elections = Object.keys(await this.elections);
       if (elections.length === 1) return 1;
       let limit = await this.Output.response({

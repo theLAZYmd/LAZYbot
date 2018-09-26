@@ -12,19 +12,25 @@ class Output extends Parse {
     try {
       if (config.states.debug) throw "";
       if (!embed) throw "**this.Output.sender():** Embed object is undefined.";
-      return await Embed.sender(embed, NewChannel ? NewChannel : this.channel);
+      if (!embed.color) embed.color = config.colors.generic;
+      let channel = NewChannel || this.channel;
+      embed = Embed.receiver(embed);
+      if (typeof embed._apiTransform === "function") embed = embed._apiTransform();
+      return await channel.send(embed.content, {  embed  });
     } catch (e) {
-      if (e) this.onError(e);
+      if (e) console.log(e);
     }
   }
 
-  async editor(embed, NewMessage) {
+  async editor(embed, msg) {
     try {
-      if (!embed) throw "**this.Output.editor():** Embed object is undefined.";
-      if (!NewMessage) throw "**this.Output.editor():** Couldn't find message to edit.";
-      return await Embed.editor(embed, NewMessage);
+      if (!embed) throw "this.Output.editor(): Embed object is undefined.";
+      if (!msg) throw "this.Output.editor(): Couldn't find message to edit.";
+      embed = Embed.receiver(embed);
+      if (typeof embed._apiTransform === "function") embed = embed._apiTransform();
+      return await msg.edit(embed.content, {   embed   });
     } catch (e) {
-      if (e) this.onError(e);
+      if (e) console.log(e);
     }
   }
 
@@ -89,7 +95,7 @@ class Output extends Parse {
       let msg = await this[typeof channel.send === "function" ? "sender" : "editor"](embed, channel); //send it
       for (let i = 0; i < emojis.length; i++) { //then react to it
         setTimeout(() => {
-          msg.react(emojis[i]).catch(() => {});
+          if (msg) msg.react(emojis[i]).catch(() => {});
         }, i * 1000); //prevent api spam and to get the order right
       };
       return msg;
@@ -111,7 +117,7 @@ class Output extends Parse {
       let msg = await this.reactor(data.embed ? data.embed : {
         "description": data.description ? data.description : "**" + data.author.tag + "** Please confirm " + data.action + "."
       }, data.editor ? data.editor : data.channel, data.emojis);
-      let rfilter = (reaction, user) => data.emojis.includes(reaction.emoji.name) && (data.author.id === user.id || (data.role && this.Search.members.byUser(user).roles.has(data.role.id)));
+      let rfilter = (reaction, user) => data.emojis.includes(reaction.emoji.name) && (data.author.id === user.id || (data.role && this.Permissions.role("admin", this)));
       let mfilter = (m) => m.author.id === data.author.id && /y(?:es)?|n(?:o)?|true|false/i.test(m.content);
       let collected = await Promise.race([
         (async () => {

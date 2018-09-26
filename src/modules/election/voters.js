@@ -2,6 +2,7 @@ const Main = require("./main.js");
 const DataManager = require("../../util/datamanager.js");
 const DBuser = require("../../util/dbuser.js");
 const Embed = require("../../util/embed.js");
+const config = require("../../config.json");
 
 class Voters extends Main {
 
@@ -60,18 +61,43 @@ class Voters extends Main {
   }
 
   async register() {
-    let data = {}, msg = await this.Output.generic("Finding eligible voters... "), election = this.election;
-    try {
-      data = Object.assign({  "url": msg.url  }, election);
-      data = await Voters["by" + data.type.toProperCase()](data, this);
-      data = await Voters.filter(data, msg, this);
-      this.election = data;
-      this.generate(msg);
-      this.server.states.election.register = true;
+    try {  
+      if (this.server.states.election.register === true) throw "Voters have already been registered!";
+      let msg = await this.Output.generic("Finding eligible voters... ");
+      try {
+        let data = {}, election = this.election;
+        data = await Voters["by" + election.type.toProperCase()](election, this);
+        data = await Voters.filter(data, msg, this);
+        this.election = data;
+        this.generate(msg);
+        this.server.states.election.register = true;
+        DataManager.setServer(this.server);
+      } catch (e) {
+        if (msg) msg.delete();
+        throw e;
+      }
+    } catch (e) {
+      if (e) this.Output.onError(e);
+    }
+  }
+
+  async deregister() {
+    try {  
+      if (this.server.states.election.register !== true) throw "Voters have not yet been registered!";
+      let election = this.election;
+      for (let key of Object.keys(election.elections)) {
+        if (this.args.length === 0 || this.args.inArray(key))
+          election.elections[key] = {
+            "voters": {},
+            "candidates": {}
+          }
+      };
+      this.generate();
+      this.election = election;
+      this.server.states.election.register = false;
       DataManager.setServer(this.server);
     } catch (e) {
       if (e) this.Output.onError(e);
-      if (msg) msg.delete();
     }
   }
 
@@ -83,11 +109,12 @@ class Voters extends Main {
         let response = data.role.server;
         let role = argsInfo.Search.roles.get(response);
         while (!role) {
-          argsInfo.Output.onError("Couldn't find role " + response + ".");
+          let emsg = argsInfo.Output.onError("Couldn't find role **" + response + "&**.");
           response = await argsInfo.Output.response({
             "description": await argsInfo.criteria === "role-choose" ? "Please write the name of the role for channel **" + channel + "**." : "Please write the name of the role for the list of eligible voters."
           });
           role = argsInfo.Search.roles.get(response);
+          emsg.delete();
         };
         collection = role.members;
       } else
@@ -117,20 +144,16 @@ class Voters extends Main {
           if (data.criteria.includes("role")) {
             let response;
             if (data.criteria === "role-identical") response = channel.name;
-            else if (data.criteria === "role-choose") {
-              response = data.role[channel.name];
-              let role = argsInfo.Search.roles.get(response);
-              while (!role) {
-                argsInfo.Output.onError("Couldn't find role " + response + ".");
-                response = await argsInfo.Output.response({
-                  "description": await argsInfo.criteria === "role-choose" ? "Please write the name of the role for channel **" + channel + "**." : "Please write the name of the role for the list of eligible voters."
-                });
-                role = argsInfo.Search.roles.get(response);
-              };
-            }
-            else throw "Invalid criteria given!";
+            else if (data.criteria === "role-choose") response = data.role[channel.name];
             let role = argsInfo.Search.roles.get(response);
-            if (!role) throw "Couldn't find role for channel " + channel.name + ".";
+            while (!role) {
+              let emsg = await argsInfo.Output.onError("Couldn't find role **" + response + "**.");
+              response = await argsInfo.Output.response({
+                "description": await argsInfo.criteria === "role-choose" ? "Please write the name of the role for channel **" + channel + "**." : "Please write the name of the role for the list of eligible voters."
+              });
+              role = argsInfo.Search.roles.get(response);
+              emsg.delete();
+            };
             collection = role.members;
           } else
           if (data.criteria.includes("channel")) {

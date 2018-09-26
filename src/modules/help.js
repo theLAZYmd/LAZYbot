@@ -1,28 +1,41 @@
 const Parse = require("../util/parse.js");
 const Embed = require("../util/embed.js");
 const DataManager = require("../util/datamanager.js");
-const commands = DataManager.getFile("./src/data/commands.json");
+const commands = DataManager.getFile("./src/data/commands/message.json");
+const Package = require("../../package.json");
 
 class Help extends Parse {
   constructor(message) {
     super(message);
   }
 
-  run(args) {
-    for (let i = 0; i < commands.length; i++) {
-      for (let j = 0; j < commands[i].aliases.length; j++) {
-        if (commands[i].aliases[j].toLowerCase() === args[0].toLowerCase() || this.server.prefixes[commands[i].prefix] + commands[i].aliases[j].toLowerCase() === args[0].toLowerCase()) {
-          this.cmdInfo = commands[i];
-          break;
+  async run(args) {
+    try {
+      if (!args[0]) return this.Output.sender(new Embed()
+        .setTitle(Package.name + " v" + Package.version + " by theLAZYmd#2353")
+        .addField("Help on using Discord", "Type `... discord`", false)
+        .addField("View all commands", "Type `!commands`", false)
+        .addField("Get help on an individual command", "Type `!help commandName` for any given command", false)
+        .addField("View the bot's GitHub repo", "[theLAZYmd/LAZYbot](http://bit.ly/LAZYbot)", false)
+      );
+      if (args.length > 1 && this.guild) throw "Cannot use this command outside of a guild.";
+      for (let cmdInfo of commands) {
+        for (let alias of cmdInfo.aliases) {
+          if (alias.toLowerCase() === args[0].toLowerCase() || this.server.prefixes[cmdInfo.prefix] + alias.toLowerCase() === args[0].toLowerCase()) {
+            this.cmdInfo = cmdInfo;
+            break;
+          }
         }
-      }
-    };
-    if (!this.cmdInfo) return this.Output.onError("Couldn't find that command. Please verify that that command exists.\nNote: some commands get removed for stability issues.");
-    let embed = {};
-    let properties = ["title", "color", "thumbnail", "description", "fields", "footer"];
-    for (let property of properties)
-      embed[property] = this[property];
-    this.Output.sender(embed);
+      };
+      if (!this.cmdInfo) throw "Couldn't find that command. Please verify that that command exists.\nNote: some commands get removed for stability issues.";
+      let embed = {};
+      let properties = ["title", "color", "thumbnail", "description", "fields", "footer"];
+      for (let property of properties)
+        embed[property] = this[property];
+      this.Output.sender(embed);
+    } catch (e) {
+      if (e) this.Output.onError(e);
+    }
   }
 
   get color() {
@@ -154,13 +167,3 @@ class Help extends Parse {
 }
 
 module.exports = Help;
-
-String.prototype.toProperCase = function () {
-  let words = this.split(/ +/g);
-  let newArray = [];
-  for (let j = 0; j < words.length; j++) {
-    newArray[j] = words[j][0].toUpperCase() + words[j].slice(1, words[j].length).toLowerCase();
-  }
-  let newString = newArray.join(" ");
-  return newString;
-}

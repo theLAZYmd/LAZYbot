@@ -56,7 +56,7 @@ class Set extends Parse {
     if (!version) return this.Output.generic("You are using LAZYbot version v." + packagestuff.version);
     packagestuff.version = version[0];
     DataManager.setFile(packagestuff, "./package.json");
-    this.Search.members.byUser(this.client.user).setNickname(`LAZYbot${this.client.user.id === config.ids.betabot ? "beta" : ""} v.` + version)
+    this.guild.me.setNickname(`LAZYbot${this.client.user.id === config.ids.betabot ? "beta" : ""} v.` + version)
     this.Output.generic(`${packagestuff.name} version has been ${this.command === "upversion" ? "upped" : "modified"} to **v.${version}**!`);
   }
 

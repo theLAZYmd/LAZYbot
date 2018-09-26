@@ -40,4 +40,10 @@ class Main extends Parse {
 
 }
 
+Main.Systems = {
+  "irv": "[Instant Run-Off](https://en.wikipedia.org/wiki/Instant-runoff_voting#Examples)",
+  "fptp": "[First Past the Post](https://www.electoral-reform.org.uk/voting-systems/types-of-voting-system/first-past-the-post/)",
+  "stv": "[Single-Transferable Vote](https://www.electoral-reform.org.uk/voting-systems/types-of-voting-system/single-transferable-vote/)"
+};
+
 module.exports = Main;

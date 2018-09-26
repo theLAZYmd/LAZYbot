@@ -13,10 +13,9 @@ class MessageCount extends Parse {
       dbuser.messages.count = 0;
       this.Output.onError("Your message count data has been lost. Please alert a bot owner immediately.")
     };
-    if (!Object.values(this.server.prefixes).includes(this.prefix)) {
-      dbuser.messages.last = this.message.content.length > 1024 ? this.message.content.slice(0, 1021).replace("`", "") + "..." : this.message.content.replace(/\`/g,"");
-      dbuser.messages.lastSeen = this.message.createdTimestamp;
-    };
+    if (Object.values(this.server.prefixes).includes(this.prefix)) return;
+    dbuser.messages.last = this.message.content.length > 500 ? this.message.content.slice(0, 500).replace("`", "") + "..." : this.message.content.replace(/\`/g,"");
+    dbuser.messages.lastSeen = this.message.createdTimestamp;
     if(dbuser.username !== author.tag) dbuser.username = author.tag; 
     DBuser.setData(dbuser);
   }
