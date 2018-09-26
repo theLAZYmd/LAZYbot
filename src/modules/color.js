@@ -1,9 +1,5 @@
 const Parse = require("../util/parse.js");
-<<<<<<< HEAD
 const Maths = require("../maths.js");
-=======
-const Maths = require("./maths.js");
->>>>>>> 2a58cc4bb0a5655422e328701e8526328d9393a3
 const Router = require("../util/router.js");
 
 class Color extends Parse {
