@@ -155,7 +155,11 @@ Date.getMonth = function (ms) {
 Array.prototype.inArray = function (string) {
   let regex = /[a-z_$£@!.?]/gi;
   for (let i = 0; i < this.length; i++) {
+<<<<<<< HEAD
     if ((string.match(regex) || "").join("").toLowerCase() === (this[i].match(regex) || "").join("").toLowerCase()) return true;
+=======
+    if (string.toLowerCase().replace(/[^\s\w.\?$£@!]/g, "").trim() === this[i].toLowerCase().replace(/[^\s\w.\?$£@!]/g, "").trim()) return true;
+>>>>>>> 2a58cc4bb0a5655422e328701e8526328d9393a3
   }
   return false;
 }

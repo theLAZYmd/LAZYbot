@@ -1,8 +1,13 @@
 [
   {
     "module": "DMs",
+<<<<<<< HEAD:src/data/commands/dm.json
     "file": "modmail/input",
     "method": "incoming",
+=======
+    "file": "modmail",
+    "method": "dm",
+>>>>>>> 2a58cc4bb0a5655422e328701e8526328d9393a3:src/data/dmcommands.json
     "guild": "Sending new ModMail on LAZYbot",
     "arguments": [],
     "prefix": ""
