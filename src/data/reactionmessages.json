@@ -37,9 +37,37 @@
                 "tag": "Alihene22#3760",
                 "lastMail": 1537166345100
             },
-            "494165178712326145": {
+            "494909300242776085": {
+                "tag": "Alihene22#3760",
+                "lastMail": 1538065972264
+            },
+            "494950297832128532": {
+                "tag": "Alihene22#3760",
+                "lastMail": 1538075746851
+            },
+            "494951561840295937": {
+                "tag": "Alihene22#3760",
+                "lastMail": 1538076048158
+            },
+            "494951629213270017": {
+                "tag": "Alihene22#3760",
+                "lastMail": 1538076064338
+            },
+            "494951737254346785": {
+                "tag": "Alihene22#3760",
+                "lastMail": 1538076090013
+            },
+            "494952079169945605": {
+                "tag": "Alihene22#3760",
+                "lastMail": 1538076171546
+            },
+            "494952132563173388": {
+                "tag": "Alihene22#3760",
+                "lastMail": 1538076184294
+            },
+            "494966667621957673": {
                 "tag": "ProgramFOX#1012",
-                "lastMail": 1537888559825
+                "lastMail": 1538079649708
             }
         },
         "paginator": {
@@ -1613,141 +1641,67 @@
                 "page": 0,
                 "author": "447723359317262336"
             },
-            "494628603326103562": {
+            "494966874736427014": {
                 "embedgroup": [
                     {
-                        "title": " Profile for Kyle#4287",
-                        "description": "",
-                        "color": 16169471,
+                        "description": "**General**\nThe members of a variant channel elect two (2) channel moderators for that channel, meaning there will be independent elections for each channel. Elections are held every 4 weeks on Sundays. The voting will be open for 24(+) hours. It will happen through secret ballot. A form of [Proportional representation system](https://en.wikipedia.org/wiki/Instant-runoff_voting) is used.",
+                        "color": 53380,
+                        "author": {
+                            "name": "The House Elections",
+                            "icon_url": "https://i.imgur.com/MOBqJA6.png"
+                        },
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/VId4nJT.png"
+                        },
                         "fields": [
                             {
-                                "name": "Info",
-                                "value": "Region: **Europe**",
-                                "inline": true
+                                "name": "I want to run, what to do?",
+                                "value": "• You need at least two sponsors to get on the ballot. Sponsoring is like pledging to vote, so you can only sponsor 1 person.\n• You must declare your intention to run by Friday of election week. Let an admin know and tell them the names of your sponsors.",
+                                "inline": false
                             },
                             {
-                                "name": "Joined Date",
-                                "value": "Discord: **Jun 17 2017**\nThe House: **Feb 11 2018**",
-                                "inline": true
-                            },
-                            {
-                                "name": "Index",
-                                "value": "UID: **`325736595980288010`**\nPosition in Database: **42**",
-                                "inline": true
-                            },
-                            {
-                                "name": "Messages Sent",
-                                "value": "17,007",
-                                "inline": true
-                            },
-                            {
-                                "name": "House Trophies",
-                                "value": ":trophy: **surviv.io god**",
-                                "inline": true
+                                "name": "Electoral guidlines",
+                                "value": "• You can campaign.\n• You can run for a maximum of two channels (and win both or one or none).\nVoters and Candidates must have 50 messages (server-wide) and that channel’s role before the announcement date.",
+                                "inline": false
                             }
                         ],
-                        "thumbnail": {
-                            "url": "https://cdn.discordapp.com/avatars/325736595980288010/e5591ca48655c84089ba429b15b88b1c.png?size=2048"
-                        },
                         "footer": {
-                            "text": "1 / 2"
-                        },
-                        "files": []
-                    },
-                    {
-                        "title": " Profile for Kyle#4287",
-                        "description": "",
-                        "color": 16169471,
-                        "fields": [
-                            {
-                                "name": "<:lichess:430038207355420672> Lichess.org",
-                                "value": "[KyleLegion](https://lichess.org/@/KyleLegion)\nBlitz: **1901**\nBullet: **1923**\nRapid: 1500?\nClassical: 1906?\nCrazyhouse: **2277**\n3-check: **1791**\nAntichess: **1878**\nHorde: **1642**\nAtomic: **1779**\nKing of the Hill: **1715**\nRacing Kings: **1765**",
-                                "inline": true
-                            },
-                            {
-                                "name": "<:chesscom:430038158244184064> Chess.com",
-                                "value": "[KyleLegion](https://www.chess.com/member/KyleLegion)\nBullet: **1228**\nBlitz: **1174**\nRapid: 1377?\nCrazyhouse: **2098**\nBughouse: **2331**\nTactics: **1291**",
-                                "inline": true
-                            },
-                            {
-                                "name": "<:bughousetest:433422387867025409> BughouseTest.com",
-                                "value": "[Kyle](http://bughousetest.com/@/Kyle)\nBughouse: **1831**",
-                                "inline": true
-                            }
-                        ],
-                        "thumbnail": {
-                            "url": "https://cdn.discordapp.com/avatars/325736595980288010/e5591ca48655c84089ba429b15b88b1c.png?size=2048"
-                        },
-                        "files": []
+                            "text": "1 / 1"
+                        }
                     }
                 ],
-                "period": 30000,
+                "period": 180000,
                 "page": 0,
                 "author": "185412969130229760",
-                "cmdID": "494628601811959808"
+                "cmdID": "494966874518323210"
             },
-            "494628620556566528": {
+            "494971617198211072": {
                 "embedgroup": [
                     {
-                        "title": " Profile for TheLoneWolf#4001",
-                        "description": "",
-                        "color": 10181046,
+                        "title": "How to edit an Official™ House Discord Guide",
+                        "description": "Head to [this url](https://github.com/theLAZYmd/LAZYbot/edit/master/src/data/embeds.json) which is the bot's **GitHub Repo**.\nScroll down to the section of the data relevant to you. You can do that by viewing the `\"title`\" of each embed and making the correlation to the title you're looking for, or `Ctrl+F`-ing a suitable word or phrase that will help you identify it.",
                         "fields": [
                             {
-                                "name": "Info",
-                                "value": "Region: **Europe**",
-                                "inline": true
+                                "name": "1. Edit the JSON for that embed.",
+                                "value": "If it's a minor correction, this shouldn't be an issue, just add it in the change required. If you're doing something more complicated, or you don't understyand what's going on here, have a look at [this article](https://www.red-gate.com/simple-talk/sql/oracle/json-for-absolute-beginners-part-1-introduction/) or ask someone in #devs for help.\nSwitch to the `soft-wrap` mode in the top right of the editing box if that makes things easier.",
+                                "inline": false
                             },
                             {
-                                "name": "Joined Date",
-                                "value": "Discord: **Aug 14 2017**\nThe House: **Dec 12 2017**",
-                                "inline": true
-                            },
-                            {
-                                "name": "Index",
-                                "value": "UID: **`346485544848457728`**\nPosition in Database: **47**",
-                                "inline": true
-                            },
-                            {
-                                "name": "Messages Sent",
-                                "value": "33,220",
-                                "inline": true
+                                "name": "2. Submit the Pull Request.",
+                                "value": "Scroll down to the bottom.\nWrite a one-line description for what you've done to the file in the 'Update embeds.json' field, then write a more detailed description below if necessary.\nPress `Propose file change`! When the next page loads up, click `Create Pull Request` whenever it appears. \nWe'll review what you've done and correct it if necessary before approving! As soon as your changes are approved their live on the bot!",
+                                "inline": false
                             }
                         ],
-                        "thumbnail": {
-                            "url": "https://cdn.discordapp.com/avatars/346485544848457728/c9c6e571ee7db514147ba2c7db5d5585.png?size=2048"
-                        },
                         "footer": {
-                            "text": "1 / 2"
+                            "text": "1 / 1"
                         },
-                        "files": []
-                    },
-                    {
-                        "title": " Profile for TheLoneWolf#4001",
-                        "description": "",
-                        "color": 10181046,
-                        "fields": [
-                            {
-                                "name": "<:lichess:430038207355420672> Lichess.org",
-                                "value": "[the-lone-wolf](https://lichess.org/@/the-lone-wolf)\nBlitz: **1628**\nBullet: 1824?\nRapid: 1351?\nClassical: 1500?\nCrazyhouse: **2159**\n3-check: **1841**\nAntichess: **1967**\nHorde: 1526?\nAtomic: **1927**\nKing of the Hill: **1582**\nRacing Kings: 1430?",
-                                "inline": true
-                            },
-                            {
-                                "name": "<:chesscom:430038158244184064> Chess.com",
-                                "value": "[The-Lone-Wolf](https://www.chess.com/member/The-Lone-Wolf)\nBlitz: 770?\nDaily: 1189?\nCrazyhouse: **2161**\nBughouse: **2253**\nTactics: **511**",
-                                "inline": true
-                            }
-                        ],
-                        "thumbnail": {
-                            "url": "https://cdn.discordapp.com/avatars/346485544848457728/c9c6e571ee7db514147ba2c7db5d5585.png?size=2048"
-                        },
-                        "files": []
+                        "color": 53380
                     }
                 ],
-                "period": 30000,
+                "period": 180000,
                 "page": 0,
-                "author": "185412969130229760",
-                "cmdID": "494628618933239820"
+                "author": "246359309078888449",
+                "cmdID": "494971616632111134"
             }
         }
     },

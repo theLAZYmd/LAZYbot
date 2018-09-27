@@ -6,9 +6,9 @@
             "bcp": false,
             "au": true,
             "election": {
-                "register": true,
+                "register": false,
                 "candidates": true,
-                "voting": true,
+                "voting": false,
                 "count": false,
                 "results": false
             },
@@ -61,9 +61,21 @@
             ]
         ],
         "trivia": {
-            "min": 10,
-            "provisional": 10,
-            "players": {}
+            "players": {
+                "185412969130229760": true,
+                "207436604934062080": true,
+                "341611207062716418": true,
+                "312824560602841089": true,
+                "303609777756438529": true,
+                "324082212146249730": true,
+                "330193848137678848": true,
+                "326918898178064396": true,
+                "317034686973214720": true,
+                "363519664875372556": true,
+                "414816252733685760": true,
+                "471771674833059882": true,
+                "364227499728568320": true
+            }
         },
         "tickets": [
             {
