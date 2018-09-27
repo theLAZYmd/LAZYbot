@@ -1,48 +1,42 @@
 [
-  {
-    "module": "Profile",
-    "file": "messagecount",
-    "method": "log",
-    "arguments": ["author", "dbuser"],
-    "requires": {
-      "bot": false
-    }
-  },
-  {
-    "module": "CustomReactions",
-    "file": "customreactions",
-    "method": "text",
-    "arguments": [],
-    "requires": {
-      "bot": false
-    }
-  },
-  {
-    "module": "CustomReactions",
-    "file": "customreactions",
-    "method": "emoji",
-    "arguments": [],
-    "requires": {
-      "bot": false
-    }
-  },
-  {
-    "module": "Reddit",
-    "file": "reddit",
-    "method": "link",
-    "arguments": ["content"],
-    "requires": {
-      "bot": false
-    }
-  },
-  {
-    "module": "Trivia",
-    "file": "trivia",
-    "method": "onNewMessage",
-    "arguments": [],
-    "requires": {
-      "state": "trivia",
-      "channels": "trivia"
-    }
-  }
+	{
+		"module": "Profile",
+		"file": "messagecount",
+		"method": "log",
+		"arguments": [
+			"author",
+			"dbuser"
+		]
+	},
+	{
+		"module": "CustomReactions",
+		"file": "customreactions",
+		"method": "text",
+		"arguments": []
+	},
+	{
+		"module": "CustomReactions",
+		"file": "customreactions",
+		"method": "emoji",
+		"arguments": []
+	},
+	{
+		"module": "Reddit",
+		"file": "reddit",
+		"method": "link",
+		"arguments": [
+			"content"
+		]
+	},
+	{
+		"module": "Trivia",
+		"file": "trivia",
+		"method": "onNewMessage",
+		"arguments": [],
+		"requires": {
+			"state": "trivia",
+			"channels": "trivia",
+			"bot": false
+		}
+	}
 ]

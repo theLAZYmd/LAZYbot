@@ -169,6 +169,11 @@ class Parse {
 		return this._argument = this.args.join(" ") || "";
 	}
 
+	get embed() {
+		if (this._embed) return this._embed;
+		return this.message && this.message.embeds ? this.message.embeds[0] : null;
+	}
+
 	static ratingData(dbuser, source, username) {
 		try {
 			let account = dbuser[source.key][username];

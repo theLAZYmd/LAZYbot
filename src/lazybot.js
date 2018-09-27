@@ -285,3 +285,8 @@ Object.prototype._setDescendantProp = function (desc, value) {
     }
     return obj[arr[0]] = value;
 };
+
+Number.prototype.toSign = function() {
+	if (this > 0) return "+" + Math.round(this);
+	return Math.round(this).toString();
+}

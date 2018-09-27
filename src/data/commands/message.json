@@ -1788,8 +1788,8 @@
     },
     {
         "aliases": [
-            "t",
-            "trivia"
+            "trivia",
+            "t"
         ],
         "description": "Initiates new trivia game on Bouncer; begins process of registering rating on LAZYbot. Pokemon games are invalid.",
         "usage": [

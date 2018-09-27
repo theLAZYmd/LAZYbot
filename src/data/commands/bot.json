@@ -1,0 +1,13 @@
+[
+	{
+		"title": "Final Results",
+		"module": "Trivia",
+		"file": "trivia",
+		"method": "ratingUpdate",
+		"arguments": ["embed"],
+		"requires": {
+			"state": "trivia",
+			"channels": "trivia"
+		}
+	}
+]

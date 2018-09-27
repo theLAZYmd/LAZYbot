@@ -5,6 +5,7 @@ const allMessageCommands = require("../data/commands/all.json");
 const DMCommands = require("../data/commands/dm.json");
 const IntervalCommands = require("../data/commands/interval.json");
 const reactionCommands = require("../data/commands/reaction.json");
+const botCommands = require("../data/commands/bot.json");
 const Permissions = require("./permissions.js");
 const DM = require("../modules/dm.js");
 
@@ -62,12 +63,13 @@ class Router {
 	static async message(data) {
 		try {
 			data = await Router.checkErrors(data);
-			if (!data.argsInfo.author.bot && (data.message.channel.type === "dm" || data.message.channel.type === "group" || !data.message.guild)) {
-				await Router.DM(data);
-				throw "";
+			if (!data.argsInfo.author.bot) {
+				if (data.message.channel.type === "dm" || data.message.channel.type === "group" || !data.message.guild) return Router.DM(data);
+				Router.all(data);
+				Router.command(data);
+			} else {
+				Router.bot(data);
 			}
-			Router.all(data);
-			Router.command(data);
 		} catch (e) {
 			if (e && typeof e !== "boolean") console.log(e);
 		}
@@ -140,6 +142,22 @@ class Router {
 					cmdInfo.command = true;
 					let run = await Router.runCommand(data.message, data.argsInfo, cmdInfo);
 					if (run) throw await Router.logCommand(data.argsInfo, cmdInfo);
+					throw "";
+				}
+			}
+		} catch (e) {
+			if (e) data.argsInfo.Output.onError(e);
+		}
+	}
+
+	static async bot(data) {
+		try {
+			for (let cmdInfo of botCommands) {
+				if (cmdInfo.active === false || !data.argsInfo.message.embeds[0]) continue;
+				let embed = data.argsInfo.message.embeds[0];
+				if (embed.title && cmdInfo.title && embed.title === cmdInfo.title || embed.description && cmdInfo.description && embed.description === cmdInfo.description) {
+					let run = await Router.runCommand(data.message, data.argsInfo, cmdInfo);
+					if (run) await Router.logCommand(data.argsInfo, cmdInfo);
 					throw "";
 				}
 			}

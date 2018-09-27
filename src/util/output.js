@@ -146,7 +146,7 @@ class Output extends Parse {
 				})().catch(() => {
 				})
 			]);
-			if (typeof collected !== "boolean") throw "";
+			if (typeof collected !== "boolean") collected = false;
 			data.autodelete !== false ? msg.delete().catch(() => {
 			}) : msg.clearReactions().catch(() => {
 			});

@@ -56,14 +56,10 @@ class Permissions {
 	}
 
 	static async response(recipient, argsInfo) {
-		try {
-			return !(await argsInfo.channel.awaitMessages((m) => m.author.id === config.ids[recipient] && m.embeds && m.embeds[0], {
-				"time": 2000,
-				"max": 1
-			}))
-		} catch (e) {
-			if (e) console.log(e);
-		}
+		return argsInfo.channel.awaitMessages(m => m.author.id === config.ids[recipient] && m.embeds[0], {
+			"time": 2000,
+			"max": 1
+		}).then(() => {return true}).catch(() => {return false})
 	}
 
 	static output(key, argsInfo) {
