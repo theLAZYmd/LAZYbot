@@ -16,8 +16,8 @@ class Backup extends Parse {
       if (args[0]) {
         if (/^[1-3]/.test(args[0])) degree = args[0];
         else throw "Invalid backup degree!";
-      };
-      await Backup[this.command](degree);
+      }
+	    await Backup[this.command](degree);
       this.Output.generic(`Database ${this.command} successful to **dbbackup${degree}** at ${Date.getISOtime(Date.now())}.`)
     } catch (e) {
       if (!e) return;
@@ -31,9 +31,9 @@ class Backup extends Parse {
       "title": "Backup Databases Last Updated:",
       "fields": []
     };
-    Embed.fielder(embed.fields, "dbbackup1.json", config.backupdb[0], true)
-    Embed.fielder(embed.fields, "dbbackup2.json", config.backupdb[1], true)
-    Embed.fielder(embed.fields, "dbbackup3.json", config.backupdb[2], true)
+    Embed.fielder(embed.fields, "dbbackup1.json", config.backupdb[0], true);
+    Embed.fielder(embed.fields, "dbbackup2.json", config.backupdb[1], true);
+    Embed.fielder(embed.fields, "dbbackup3.json", config.backupdb[2], true);
     this.Output.sender(embed);
   }
 

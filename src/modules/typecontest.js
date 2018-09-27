@@ -26,8 +26,8 @@ class TypeContest extends Parse {
       if (invalids) {
         invalids.shift();
         throw `Invalid characters **${invalids.join(" ")}**. Please reformat your quote.`;
-      };
-      for (let i = args.length - 1; i >= 0; i--)
+      }
+	    for (let i = args.length - 1; i >= 0; i--)
         if (args[i].startsWith("-"))
           index = i;
       if (index === -1) throw "No source provided/Incorrect format!";

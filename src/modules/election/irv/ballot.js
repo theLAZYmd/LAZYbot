@@ -41,8 +41,8 @@ class Ballot { //create a bunch of properties for this instance/object. Cache ea
       for (let [index, tag] of this.raw)
         if (Number(index))
           this._votes[Number(index)] = tag ==="Blank Vote" ? "blank" : tag;
-    };
-    return this._votes;
+    }
+	  return this._votes;
   }
 
   //error checking
@@ -71,8 +71,8 @@ class Ballot { //create a bunch of properties for this instance/object. Cache ea
       if (!index) continue;
       if (obj[index]) return true; //if the index already exists in the object
       else obj[index] = true;
-    };
-    return false;
+    }
+	  return false;
   }
 
   get spoiled () {

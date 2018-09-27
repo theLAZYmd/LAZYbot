@@ -52,8 +52,8 @@ class Action extends Main {
         case "⏲":
           this.timeout(data);
           break;
-      };
-      reaction.remove(user);
+      }
+	    reaction.remove(user);
     } catch (e) {
       if (e) this.Output.onError(e);
     }
@@ -89,13 +89,14 @@ class Action extends Main {
       for (let id of Object.keys(this.modmail)) {
         if (this.modmail[id].tag === data.user.tag) {
           try {
-            let msg = await this.mchannel.fetchMessage(id)
+            let msg = await this.mchannel.fetchMessage(id);
             msg.delete();
-          } catch (e) {};
-          delete this.modmail[id];
+          } catch (e) {
+          }
+	        delete this.modmail[id];
         }
-      };
-      this.setData(this.modmail);
+      }
+	    this.setData(this.modmail);
       this.Output.generic("**" + data.mod.tag + "** closed the ModMail conversation for **" + data.user.tag + "**.");
       data.command = "close";
       this.log(data);

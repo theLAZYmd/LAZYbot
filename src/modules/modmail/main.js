@@ -67,10 +67,10 @@ class ModMail extends Parse {
           else this.output.renew(data);
         } catch (e) {
           if (e) this.Output.onError(e);
-        };
-        return; //only gets executed if managed to pass the 'continue's
-      };
-      await this.output.anew(data);
+        }
+	      return; //only gets executed if managed to pass the 'continue's
+      }
+	    await this.output.anew(data);
     } catch (e) {
       if (e) this.Output.onError(e);
       throw e;

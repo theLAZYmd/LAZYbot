@@ -35,7 +35,7 @@ class Trophy extends Parse {
 
   async update (dbuser) {
     try {
-      if (dbuser.trophy.length === 0) throw dbuser.username + " has no trophies yet."
+      if (dbuser.trophy.length === 0) throw dbuser.username + " has no trophies yet.";
       let index = await this.Output.choose({
         "title": dbuser.username + " has the following trophies. Please specify which to update.",
         "options": dbuser.trophy
@@ -47,7 +47,7 @@ class Trophy extends Parse {
       });
       if (oldTrophy === undefined || !newTrophy === undefined) throw "";
       dbuser.trophy.splice(index, 1, newTrophy);
-      this.Output.generic(`Updated :trophy: **${oldTrophy}** to :trophy: **${newTrophy}** for **${dbuser.username}**.\n**${dbuser.username}** now has **${dbuser.trophy.length}** trophies.`)
+      this.Output.generic(`Updated :trophy: **${oldTrophy}** to :trophy: **${newTrophy}** for **${dbuser.username}**.\n**${dbuser.username}** now has **${dbuser.trophy.length}** trophies.`);
       DBuser.setData(dbuser);
     } catch (e) {
       if (e) this.Output.onError(e)
@@ -56,7 +56,7 @@ class Trophy extends Parse {
 
   async remove (dbuser) {
     try {
-      if (dbuser.trophy.length === 0) throw dbuser.username + " has no trophies yet."
+      if (dbuser.trophy.length === 0) throw dbuser.username + " has no trophies yet.";
       let index = dbuser.trophy.length === 1 ? 0 : await this.Output.choose({
         "title": dbuser.username + " has the following trophies. Please specify which to remove.",
         "options": dbuser.trophy
@@ -64,7 +64,7 @@ class Trophy extends Parse {
       if (!index === undefined) throw "";
       let trophy = dbuser.trophy[index];  
       if (index === dbuser.trophy.length - 1) dbuser.trophy.length--;
-      this.Output.generic(`Removed :trophy: **${trophy}** from **${dbuser.username}**.\n**${dbuser.username}** now has **${dbuser.trophy.length}** trophies.`)
+      this.Output.generic(`Removed :trophy: **${trophy}** from **${dbuser.username}**.\n**${dbuser.username}** now has **${dbuser.trophy.length}** trophies.`);
       DBuser.setData(dbuser);
     } catch (e) {
       if (e) this.Output.onError(e);

@@ -20,8 +20,8 @@ class Embeds extends Parse {
           if (this.command === "...") this.message.delete();
           return this.Paginator.sender(guide, this.command === "..." ? Infinity : 180000, type + "." + key); 
         }
-      };
-      let filter = m => m.author.bot;
+      }
+	    let filter = m => m.author.bot;
       try {
         await this.channel.awaitMessages(filter, {
           "max": 1,
@@ -30,7 +30,7 @@ class Embeds extends Parse {
         })
       } catch (e) {
         throw "Couldn't find guide matching that name.";
-      };
+      }
     } catch (e) {
       if (e) this.Output.onError(e);
     }
@@ -55,11 +55,11 @@ class Embeds extends Parse {
           value += line; //necessary so that we can count line length
           value += (i < embeds.length - 1 && !(i & 1) ? " ".repeat(Math.max(0, 28 - line.length)) + "\u200b" : ""); //spacer
           value += (i & 1 ? "\n" : "");
-        };
-        value += "```";
+        }
+	      value += "```";
         embed.fields = Embed.fielder(embed.fields, name.toProperCase(), value, true);
-      };
-      this.Output.sender(embed);
+      }
+	    this.Output.sender(embed);
     } catch (e) {
       if (e) this.Output.onError(e);
     }
@@ -74,8 +74,8 @@ class Embeds extends Parse {
     } catch (e) {
       if (e) this.Output.onError(e);
       this._embeds = DataManager.getFile("./src/data/embeds.json");
-    };
-    return this._embeds;
+    }
+	  return this._embeds;
   }
 
 }
@@ -87,6 +87,6 @@ String.prototype.toProperCase = function () {
   let newArray = [];
   for (let i = 0; i < words.length; i++) {
     newArray[i] = words[i][0].toUpperCase() + words[i].slice(1, words[i].length).toLowerCase();
-  };
-  return newArray.join(" ");
-}
+  }
+	return newArray.join(" ");
+};

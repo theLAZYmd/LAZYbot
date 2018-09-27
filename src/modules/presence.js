@@ -40,8 +40,8 @@ class Presence extends Parse {
         streamersbox.overwritePermissions(this.Search.roles.get(region), {
           VIEW_CHANNEL: live
         })
-      };
-      Router.logCommand({
+      }
+	    Router.logCommand({
         "author": {
           "tag": "auto"
         },

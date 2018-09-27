@@ -28,32 +28,32 @@ class Tracker extends Parse {
           dbuser.left = true;
           DBuser.setData(dbuser);
           continue;
-        };
-        if (dbuser.left) {
+        }
+	      if (dbuser.left) {
           delete dbuser.left;
           DBuser.setData(dbuser);
-        };
-        if (!/online|idle|dnd/.test(member.presence.status)) continue;
+        }
+	      if (!/online|idle|dnd/.test(member.presence.status)) continue;
         foundUser = dbuser; //don't both searching anymore
         break;
-      };
-      if (dbuser.lastupdate < currentValue && dbuser.lastupdate < Date.now() - config.delays.repeat) {
+      }
+	    if (dbuser.lastupdate < currentValue && dbuser.lastupdate < Date.now() - config.delays.repeat) {
         let member = this.Search.members.byUser(dbuser);
         if (!member) {
           dbuser.left = true;
           DBuser.setData(dbuser);
           continue;
-        };
-        if (dbuser.left) {
+        }
+	      if (dbuser.left) {
           delete dbuser.left;
           DBuser.setData(dbuser);
-        };
-        if (!/online|idle|dnd/.test(member.presence.status)) continue;
+        }
+	      if (!/online|idle|dnd/.test(member.presence.status)) continue;
         currentValue = dbuser.lastupdate;
         foundUser = dbuser;
       }
-    };
-    return foundUser;
+    }
+	  return foundUser;
   }
 
   initUpdateCycle(guildID) {
@@ -62,8 +62,8 @@ class Tracker extends Parse {
     if (dbuser) {
       let sources = Object.values(config.sources).filter(source => dbuser[source.key]);
       this.track({dbuser, sources});
-    };
-    setTimeout(() => this.initUpdateCycle(guildID), config.delays.update);
+    }
+	  setTimeout(() => this.initUpdateCycle(guildID), config.delays.update);
   }
 
   updatepresence(member, nowonline) {
@@ -79,8 +79,8 @@ class Tracker extends Parse {
       } else {
         _command = command;
         command = "track";
-      };
-      let sources = Object.values(config.sources).filter(source => source.key === _command.replace(".", ""));
+      }
+	    let sources = Object.values(config.sources).filter(source => source.key === _command.replace(".", ""));
       if (args.length === 0) username = this.author.username;
       if (args.length === 1) username = args[0];
       if (args.length === 2) {
@@ -90,14 +90,14 @@ class Tracker extends Parse {
         this.user = user;
         this.member = this.Search.members.byUser(user);
         username = args[1];
-      };
-      let dbuser = this.dbuser; //otherwise this.dbuser gets called by a getter every time. This way it gets cached
+      }
+	    let dbuser = this.dbuser; //otherwise this.dbuser gets called by a getter every time. This way it gets cached
       username = username.replace(/["`']+/g, "");
       for (let _username in dbuser[sources[0].key]) 
         if (_username.toLowerCase() === username.toLowerCase()) username = _username;
       if (!username.match(/[a-z0-9][\w-]*[a-z0-9]/i)) throw "Invalid username.";
       this[command]({dbuser, sources, username})
-      .catch((e) => {throw e})
+      .catch((e) => {throw e});
       let newRole = this.Search.roles.get(this.server.roles.beta);
       if (!this.member.roles.has(newRole.id)) this.member.addRole(newRole).catch((e) => this.Output.onError(e));
     } catch(e) {
@@ -112,8 +112,8 @@ class Tracker extends Parse {
         let _user = this.Search.users.get(argument);
         if (!_user) throw "Couldn't find user **" + argument + "**!";
         else user = _user;
-      };
-      let dbuser = DBuser.getUser(user);
+      }
+	    let dbuser = DBuser.getUser(user);
       if (dbuser.username !== this.user.tag) dbuser.username = user.tag;
       let sources = Object.values(config.sources).filter(source => dbuser[source.key]);
       if (sources.length === 0) throw "No linked accounts found.\nPlease link an account to your profile through `!lichess\`, `!chess.com`, or `!bughousetest`.";
@@ -144,8 +144,8 @@ class Tracker extends Parse {
             data.username = "";
           }
         }
-      };
-      data.dbuser.lastupdate = Date.now(); //Mark the update time
+      }
+	    data.dbuser.lastupdate = Date.now(); //Mark the update time
       await DBuser.setData(data.dbuser); //set it
       if (data.successfulupdates.length > 0) {
         Router.logCommand({
@@ -158,8 +158,8 @@ class Tracker extends Parse {
           "file": "Tracker",
           "prefix": ""
         }); //log updates received as a command
-      };
-      if (this.command) this.trackOutput(data);
+      }
+	    if (this.command) this.trackOutput(data);
     } catch(e) {
       if (this.command && e) this.Output.onError(e);
     }
@@ -177,11 +177,11 @@ class Tracker extends Parse {
           if (data.dbuser[data.source.key]._main === account) {
             isMain = true;
             data.dbuser[data.source.key]._main = "";
-          };
-          break;
+          }
+	        break;
         }
-      };
-      if (!found) throw "Could not find username **" + data.username + "** linked to account **" + data.dbuser.username + "**.";
+      }
+	    if (!found) throw "Could not find username **" + data.username + "** linked to account **" + data.dbuser.username + "**.";
       for (let account in data.dbuser[data.source.key]) {
         if (!data.dbuser[data.source.key].hasOwnProperty(account)) continue;
         if (account.startsWith("_")) {
@@ -189,9 +189,9 @@ class Tracker extends Parse {
         } else {
           if (!data.dbuser[data.source.key]._main) data.dbuser[data.source.key] = account;
           NoAccountsLeft = true;
-        };
-      };
-      if (!NoAccountsLeft) delete data.dbuser[data.source.key];
+        }
+      }
+	    if (!NoAccountsLeft) delete data.dbuser[data.source.key];
       DBuser.setData(data.dbuser);
       this.removeOutput(data);
     } catch(e) {
@@ -219,8 +219,8 @@ class Tracker extends Parse {
             )
           }
         }
-      };
-      if (embed.fields.length > 0) this.Output[this.command === "update" ? "editor" : "sender"](embed, this.msg);
+      }
+	    if (embed.fields.length > 0) this.Output[this.command === "update" ? "editor" : "sender"](embed, this.msg);
       if (errors) throw errors;
     } catch (e) {
       if (e) this.Output.onError(e);
@@ -285,8 +285,8 @@ class Tracker extends Parse {
             if (Number(ratings[key]) > ratings.maxRating) ratings.maxRating = ratings[key]; //and if it's the biggest so far, set it.
           }
         }
-      };
-      if (allProvisional) throw "All ratings for " + lichessData.username + " are provisional.";
+      }
+	    if (allProvisional) throw "All ratings for " + lichessData.username + " are provisional.";
       if (lichessData.engine) ratings.cheating = "engine";
       if (lichessData.boosting) ratings.cheating = "boosting";
       if (ratings.cheating) console.log( //if found to be cheating, log it in database and tell mods
@@ -334,8 +334,8 @@ class Tracker extends Parse {
             }
           }
         }
-      };
-      if (allProvisional) throw "All chess.com ratings for " + username + " are provisional.";
+      }
+	    if (allProvisional) throw "All chess.com ratings for " + username + " are provisional.";
       return {
         "ratings": ratings,
         "username": username
@@ -357,14 +357,14 @@ class Tracker extends Parse {
         if (parsedData[property]) account[property] = parsedData[property]; //grab info
         else if (account[property]) delete account[property]; //keeps it in sync - if excess data, delete it
       }
-    };
-    data.username = parsedData.username;
+    }
+	  data.username = parsedData.username;
     data.dbuser[data.source.key] = account; //set it
     data.successfulupdates.push(data.source.key); //and push it to the updates information
     return data;
   }
 
-};
+}
 
 Tracker.updateQueue = {};
 

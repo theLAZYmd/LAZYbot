@@ -11,13 +11,13 @@ class Config {
     for (let property in data) {
       if (!data.hasOwnProperty(property)) continue;
       this["_" + property] = data[property];
-    };
-    console.log(this);
+    }
+	  console.log(this);
     for (let property in argsInfo) {
       if (!argsInfo.hasOwnProperty(property)) continue;
       this[property] = argsInfo[property];
-    };
-    this.server = argsInfo.server;
+    }
+	  this.server = argsInfo.server;
     this.Search = argsInfo.Search;
     this.Output = argsInfo.Output;
   }
@@ -76,8 +76,8 @@ class Config {
                 let collection = Array.from(channel.children.values()); //get the array of category
                 channels.splice(i, 1, ...collection); //exchange the channel in the array with the arrays from the category
               }
-            };
-            channels = channels.map(channel => channel.name);
+            }
+	          channels = channels.map(channel => channel.name);
             if (channels.length === 0) throw "No applicable channels given.";
             if (channels.length > 25) throw "Maximum number of elections that can be held at once is 25.";
             error = false;
@@ -100,7 +100,7 @@ class Config {
   get criteria() {
     if (this._criteria) return this._criteria;
     return this._criteria = (async () => {
-      let type = "method of obtaining list of eligible voters.", criteria = ["Everyone in the server", "role", "From all who can see channel " + this.channel]
+      let type = "method of obtaining list of eligible voters.", criteria = ["Everyone in the server", "role", "From all who can see channel " + this.channel];
       let options = [
         "All server members can vote in this election.",
         this.type === "channel" ? "There is a role corresponding to the list of eligible voters." : "There are roles corresponding to each channel.",
@@ -114,7 +114,7 @@ class Config {
           "Let me choose them each time."
         ],
         "description": "How do these roles correspond to the channels?"
-      })
+      });
       return ["role-identical", "role-choose"][roleindex];
     })()
   }
@@ -192,10 +192,10 @@ class Config {
               "description": await this.criteria === "role-choose" ? "Please write the name of the role for channel **" + channel + "**." : "Please write the name of the role for the list of eligible voters."
             });
             role = this.Search.roles.get(response);
-          };
-          obj[channel] = response;
-        };
-        return obj;
+          }
+	        obj[channel] = response;
+        }
+	      return obj;
       } else return undefined;
     })()
   }

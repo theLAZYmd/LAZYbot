@@ -23,7 +23,7 @@ class Eval extends Parse {
       eval(argument);
     } catch (e) {
       if (e) this.Output.onError(e)
-    };
+    }
   }
 }
 

@@ -79,8 +79,8 @@ class Vote extends Parse { //this module parses voting data
                 election.elections[ballot.channel].candidates[candidate] = [];
                 console.log(Date.getISOtime(Date.now()) + " | " + user.tag + " | " + "Election/vote" + " | " + "candidate register" + " | " + candidate);
               }
-            };
-            if (ballot.spoiled) this.resolve("spoiled revote", this.author, ballot.channel);
+            }
+	          if (ballot.spoiled) this.resolve("spoiled revote", this.author, ballot.channel);
             else this.resolve("revote", this.author, ballot.channel);
           }
         } else {
@@ -89,11 +89,11 @@ class Vote extends Parse { //this module parses voting data
               election.elections[ballot.channel].candidates[candidate] = [];
               console.log(Date.getISOtime(Date.now()) + " | " + user.tag + " | " + "Election/vote" + " | " + "candidate register" + " | " + candidate);
             }
-          };
-          if (ballot.spoiled) this.resolve("spoiled", this.author, ballot.channel);
+          }
+	        if (ballot.spoiled) this.resolve("spoiled", this.author, ballot.channel);
           else this.resolve("vote", this.author, ballot.channel);
-        };
-        election.elections[ballot.channel].voters[ballot.voter] = votes;
+        }
+	      election.elections[ballot.channel].voters[ballot.voter] = votes;
         successfulchannels.push(ballot.channel);
         this.election = election;
       } catch (e) {
@@ -108,7 +108,7 @@ class Vote extends Parse { //this module parses voting data
             "value": "```css\n" + match + " ".repeat(20) + "\n\u200b" + "```",
             "inline": false
           });
-          `[Vote, ${this.author.tag}, ${Errors[e]}]`
+          `[Vote, ${this.author.tag}, ${Errors[e]}]`;
           this.Output.sender(embed);
         } else
         if (typeof e === "string") {
@@ -118,9 +118,9 @@ class Vote extends Parse { //this module parses voting data
             "description": e
           });
         } else throw e;
-        continue;
+
       }
-      console.log(Date.getISOtime(Date.now()) + " | " + user.tag + " | " + "Election/vote" + " | " + "vote" + " | [" + successfulchannelchannels.join(", ") + "]")
+      console.log(Date.getISOtime(Date.now()) + " | " + user.tag + " | " + "Election/vote" + " | " + "vote" + " | [" + successfulchannelchannels.join(", ") + "]");
       if (this.guild) this.Output.sender({
         "title": "New vote from " + this.author.tag,
         "description": "```css\n#" + successfulchannels.join("\n#") + "\n```"

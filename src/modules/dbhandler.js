@@ -1,4 +1,4 @@
-const DataManager = new require("../util/datamanager.js")()
+const DataManager = new require("../util/datamanager.js")();
 const Embed = require("../util/embed.js");
 
 class DB {
@@ -8,7 +8,7 @@ class DB {
       let tally = DataManager.data;
       DataManager.setFile(tally, `./dbbackup${degree}.json`);
       console.log(`Database backed up to dbbackup${degree} at ${getISOtime(Date.now())}.`);
-      config.backupdb[degree - 1] = getISOtime (Date.now())
+      config.backupdb[degree - 1] = getISOtime (Date.now());
       DataManager.setFile(config, "./config.json");
       resolve()
     })
@@ -39,9 +39,9 @@ class DB {
   static status(message) {
     let embedoutput = {};
     embedoutput.title = "Backup Databases Last Updated:";
-    embedoutput.fields = Embed.fielder(embedoutput.fields, "dbbackup1.json", config.backupdb[0], true)
-    embedoutput.fields = Embed.fielder(embedoutput.fields, "dbbackup2.json", config.backupdb[1], true)
-    embedoutput.fields = Embed.fielder(embedoutput.fields, "dbbackup3.json", config.backupdb[2], true)
+    embedoutput.fields = Embed.fielder(embedoutput.fields, "dbbackup1.json", config.backupdb[0], true);
+    embedoutput.fields = Embed.fielder(embedoutput.fields, "dbbackup2.json", config.backupdb[1], true);
+    embedoutput.fields = Embed.fielder(embedoutput.fields, "dbbackup3.json", config.backupdb[2], true);
     Embed.sender(embedoutput, message.channel);
   }
 
@@ -58,8 +58,8 @@ function gettime(ms) {
   time.days = Math.floor(time.hours/24);
   time.hours = time.hours - (24 * time.days);
   return time;
-};
-
+}
 function getISOtime(ms) {
-  return gettime(ms).toString().slice(0, 31); 
-};
+  return gettime(ms).toString().slice(0, 31);
+
+}

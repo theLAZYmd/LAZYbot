@@ -34,7 +34,7 @@ class Calc extends Parse {
       "title": "Decimal to US Odds",
       "color": 431075,
       description
-    }
+    };
     this.Output.sender(embedoutput);
   }
 
@@ -45,7 +45,7 @@ class Calc extends Parse {
       "title": "US to Decimal Odds",
       "color": 431075,
       description
-    }
+    };
     this.Output.sender(embedoutput);
   }
 
@@ -66,4 +66,4 @@ module.exports = Calc;
 
 Number.prototype.round = function (places = 0) {
   return (Math.round(this * Math.pow(10, places)) / Math.pow(10, places)); 
-}
+};

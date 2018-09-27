@@ -20,10 +20,10 @@ class Debugging {
         tally.splice(i, 1);
         i--;
         continue;
-      };
-      duplicates[tally[i].id] = true;
-    };
-    DataManager.setData(tally);
+      }
+	    duplicates[tally[i].id] = true;
+    }
+	  DataManager.setData(tally);
     return "Done!";
   }
 
@@ -39,13 +39,13 @@ class Debugging {
       if(tally[i].lastmessage) {
         tally[i].messages.last = tally[i].lastmessage;
         delete tally[i].lastmessage;
-      };
-      if(tally[i].lastmessagedate) {
+      }
+	    if(tally[i].lastmessagedate) {
         tally[i].messages.lastSeen = tally[i].lastmessagedate;
         delete tally[i].lastmessagedate;
       }
-    };
-    DataManager.setData(tally);
+    }
+	  DataManager.setData(tally);
     return "Done!";
   }
 
@@ -61,22 +61,22 @@ class Debugging {
           if(tally[i].title) {
             if(source === "lichess") updated._title = tally[i].title;
             delete tally[i].title;
-          };
-          if(tally[i][source + "ratings"]) {
+          }
+	        if(tally[i][source + "ratings"]) {
             updated[username] = tally[i][source + "ratings"];
             if(tally[i][source + "ratings"].cheating) {
-              updated._cheating = tally[i][source + "ratings"].cheating
+              updated._cheating = tally[i][source + "ratings"].cheating;
               delete tally[i][source + "ratings"].cheating;
               console.log("Noted cheater " + tally[i].username + ".")
-            };
-            delete tally[i][source + "ratings"];
-          };
-          tally[i][source] = updated;
+            }
+	          delete tally[i][source + "ratings"];
+          }
+	        tally[i][source] = updated;
           console.log("Completed for " + tally[i].username + " with source " + source + ".");
-        };
+        }
       }
-    };
-    DataManager.setData(tally);
+    }
+	  DataManager.setData(tally);
     return "Done!"
   }
 
@@ -87,10 +87,10 @@ class Debugging {
         if(tally[i][source] && tally[i][source]._main._main) {
           tally[i][source] = tally[i][source]._main;
           console.log("Completed procedure for " + tally[i].username + ".");
-        };
+        }
       }
-    };
-    DataManager.setData(tally);
+    }
+	  DataManager.setData(tally);
     return "Done!";
   }
 

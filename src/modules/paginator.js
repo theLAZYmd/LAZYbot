@@ -69,8 +69,8 @@ class Paginator extends Parse {
         delete paginator[reaction.message.id];
         this.paginator = paginator;
         throw "";
-      };
-      reaction.remove(user);
+      }
+	    reaction.remove(user);
       if (!/^(?:➡|⬅|🔄)$/.test(reaction.emoji.name)) throw "";
       if (data.page < 0 || data.page >= data.embedgroup.length) throw "";
       let paginator = this.paginator;

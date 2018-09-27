@@ -19,14 +19,14 @@ class Finger extends Parse {
           if (!Permissions.role("admin", this)) throw Permissions.output(role);
           user = this.Search.users.get(args[0]);
           dbuser = DBuser.getUser(user);
-        };
-        return this.clear(dbuser);
-      };
-      if (args.length === 1) {
+        }
+	      return this.clear(dbuser);
+      }
+	    if (args.length === 1) {
         user = this.Search.users.get(args[0], true);
         if (user) return this.get(DBuser.getUser(user));
-      };   
-      this.update(dbuser, argument);
+      }
+	    this.update(dbuser, argument);
     } catch (e) {
       if (e) this.Output.onError(e);
     }

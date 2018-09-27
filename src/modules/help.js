@@ -26,8 +26,8 @@ class Help extends Parse {
             break;
           }
         }
-      };
-      if (!this.cmdInfo) throw "Couldn't find that command. Please verify that that command exists.\nNote: some commands get removed for stability issues.";
+      }
+	    if (!this.cmdInfo) throw "Couldn't find that command. Please verify that that command exists.\nNote: some commands get removed for stability issues.";
       let embed = {};
       let properties = ["title", "color", "thumbnail", "description", "fields", "footer"];
       for (let property of properties)
@@ -95,8 +95,8 @@ class Help extends Parse {
         "• " + type.toProperCase(),
         value.join(" or ")
       ])
-    };
-    this._requires = Embed.getFields(array);
+    }
+	  this._requires = Embed.getFields(array);
     return this._requires;
   }
 
@@ -112,8 +112,8 @@ class Help extends Parse {
           description
         ]);
       this._subcommands += Embed.getFields(array) + "\n";
-    };
-    return this._subcommands;
+    }
+	  return this._subcommands;
   }
 
   get footer() {
@@ -125,8 +125,8 @@ class Help extends Parse {
     if (this.cmdInfo.subcommands) {
       let subcommands = this.cmdInfo.subcommands.map(subcommand => subcommand[0]);
       string += "`" + this.prefix + this.cmdInfo.aliases[0] + "` ***" + subcommands.join(" ") + "***\n";
-    };
-    string += "`" + this.prefix + this.cmdInfo.usage.join("`\n`" + this.prefix) + "`";
+    }
+	  string += "`" + this.prefix + this.cmdInfo.usage.join("`\n`" + this.prefix) + "`";
     return string;
   }
 
@@ -158,8 +158,8 @@ class Help extends Parse {
             if (item.length[i] === "++")
               item.length[i] = "more";
           string += "`" + item.length.join("` or `") + "` arguments"
-        };
-        return string;
+        }
+	      return string;
       default:
         return undefined;
     }

@@ -33,12 +33,12 @@ class Input extends Main {
         };
         this.log(data);
         return this.output.anew(data);
-      };
-      if (this.modmail._timeout[this.author.tag]) { //check if they're timed out
+      }
+	    if (this.modmail._timeout[this.author.tag]) { //check if they're timed out
         if (Date.now() - this.modmail._timeout[this.author.tag] < 86400000) return; //if so, return completely
         delete this.modmail._timeout[this.author.tag]; //otherwise delete any old timeout
-      };
-      await this.log(data);
+      }
+	    await this.log(data);
       await this.sort(data);
       this.message.react("📨");
     } catch (e) {
@@ -60,16 +60,16 @@ class Input extends Main {
             data.mod.flair = true;
             continue;
           } else throw "Invalid flag given \"" + arg + "\"!";
-        };
-        let user = this.Search.users.get(arg);
+        }
+	      let user = this.Search.users.get(arg);
         if (!user) {
           this.Output.onError("Couldn't find user" + arg + "!");
           continue;
-        };  
-        data.users.push(user);
-      };
-      this.message.delete();
-      if (data.users.length === 0) throw "No valid users to whom a message can be sent."
+        }
+	      data.users.push(user);
+      }
+	    this.message.delete();
+      if (data.users.length === 0) throw "No valid users to whom a message can be sent.";
       let msg = await this.Output.response({
         "title": "Sending new ModMail to " + data.users.map(user => user.tag).join(", "),
         "description": "**" + data.mod.tag + "** Please type your message below (sending as " + (data.mod.flair ? "server" : "yourself") + ")"
@@ -84,8 +84,8 @@ class Input extends Main {
         data.user = user;
         this.output.send(data);
         await this.sort(Object.assign({}, data)); //{mod, content, user}
-      };
-      msg.delete();
+      }
+	    msg.delete();
     } catch (e) {
       if (e) this.Output.onError(e);
     }

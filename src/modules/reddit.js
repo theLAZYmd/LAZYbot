@@ -24,8 +24,8 @@ class Reddit extends Parse {
         });
         if (!body || body.error || body.message === "Not Found") throw "sub"; */
         string += `[${config.urls.reddit.name.replace("|", name)}](${config.urls.reddit.link.replace("|", name)})\n`
-      };
-      if (string) this.Output.generic(string);
+      }
+	    if (string) this.Output.generic(string);
     } catch (e) {
       if (e) this.Output.onError(e);
     }

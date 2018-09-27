@@ -42,13 +42,13 @@ class Emoji extends Parse {
         if (!emoji) {
           failed.push(args[i]);
           continue;
-        };
-        setTimeout(() => {
+        }
+	      setTimeout(() => {
           message.react(emoji);
         }, i * 1000);
         succeeded.push(emoji.id);
-      };
-      if (this.command === "gild") return succeeded;
+      }
+	    if (this.command === "gild") return succeeded;
       let filter = (reaction, user) => succeeded.includes(reaction.emoji.id) && !user.bot;
       let collector = message.createReactionCollector(filter, {
         "time": 180000

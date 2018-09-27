@@ -44,7 +44,6 @@ class Ballots extends Main {
 				if (_user) user = _user;
 				else throw "Couldn't find user **" + argument + "**."; //identify a user if argument given
 			}
-			;
 			this.send([user], this.message.content.includes("mobile")); //and send an array of length 1 to the all functions
 		} catch (e) {
 			if (e) this.Output.onError(e);
@@ -62,9 +61,7 @@ class Ballots extends Main {
 					if (!data.voters.hasOwnProperty(id)) continue;
 					if (!object[id]) object[id] = true; //if the id isn't a property of the object, make it so
 				}
-				;
 			}
-			;
 			let array = Object.keys(object).map(id => this.Search.users.byID(id)); //then take the keys, and turn each id into a user object
 			this.server.states.election.voting = true; //so this command cannot be used more than once
 			DataManager.setServer(this.server);
@@ -85,7 +82,6 @@ class Ballots extends Main {
 			for (let [user, channels] of voterChannels) {//validate returns an array of channels (as ids) that the user is eligible to vote for
 				ballotCount += channels.length; //count them (for the beginning message)
 			}
-			;
 			await this.Output.editor(new Embed()
 					.setDescription(`Initiating sending ${mobile ? "mobile " : ""}ballots...`)
 					.setFooter(`Sending 0 / ${ballotCount} ballots to 0 / ${voterCount} voters.`)
@@ -109,9 +105,7 @@ class Ballots extends Main {
 									}, 1000);
 								}, 2000 * j);
 							}
-							;
 						}
-						;
 						this.Output.editor(new Embed()  //on the aesthetic log message, edit it to 'sending' plus the user plus basic details
 								.setDescription(`Sending ${channels.length} ${mobile ? "mobile " : ""}ballots to **${user.tag}**`)
 								.setFooter(`Sent ${ballotRunning} / ${ballotCount} ballots to ${voterRunning} / ${voterCount} voters.`)
@@ -133,11 +127,10 @@ class Ballots extends Main {
 						this.Output.editor(embed, msg);
 						if (mobile) this.Output.sender(embed, user);
 						else this.Output.data(string, this.Search.channels.get(this.server.channels.mod), "css");
-						return;
+
 					}, 30000)
 				}, 1000 * i * (mobile ? channels.length * 2 : 1))
 			}
-			;
 		} catch (e) {
 			if (e) this.Output.onError(e);
 		}
@@ -183,7 +176,6 @@ class Ballots extends Main {
 				"inline": false
 			})
 		}
-		;
 		return fields;
 	}
 

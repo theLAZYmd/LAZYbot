@@ -25,8 +25,8 @@ class Rank extends Parse {
         if (!data.leaderboard || data.leaderboard.length === 0) {
           this.Output.onError("Couldn't fetch players for variant **" + data.variant.name + "**.");
           continue;
-        };
-        data = await Rank.parse(Object.assign(data, {
+        }
+	      data = await Rank.parse(Object.assign(data, {
           "ranking": [],
           "emoji": this.Search.emojis.get(data.variant.key),
           "username": data.dbuser[source.key]._main
@@ -35,8 +35,8 @@ class Rank extends Parse {
         let value = Embed.getFields(data.ranking);
         let inline = true;
         embed.fields = Embed.fielder(embed.fields, name + " ".repeat(Math.max(0, 18 - data.username.length)) + "\u200B", value, inline);
-      };
-      this.Output.sender(embed);
+      }
+	    this.Output.sender(embed);
     } catch (e) {
       if (e) this.Output.onError(e);
     }
@@ -79,8 +79,8 @@ class Rank extends Parse {
         let rating = data.account[variant.key];
         let rank = lb.indexOf(data.user.id) + 1;
         data.ranking.push([type, "**" + rating + "** (#" + (rank ? rank : lb.length) + ")"]);
-      };
-      return data;
+      }
+	    return data;
     } catch (e) {
       if (e) throw (e);
     }

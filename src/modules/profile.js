@@ -15,7 +15,7 @@ class Profile extends Parse {
 				let user = this.Search.users.get(this.args[0]);
 				if (user) this.member = this.Search.members.byUser(user);
 				else throw "Couldn't find user!";
-			};
+			}
 			this.user = this.member.user;
 			this._dbuser = Object.assign({}, this.dbuser);
 			this._dbindex = DBuser.getIndex(this._dbuser);
@@ -41,7 +41,7 @@ class Profile extends Parse {
 		if (!this._pages) {
 			let accounts = this.chessFields.length;
 			this._pages = 1 + Math.ceil(accounts / 4);
-		};
+		}
 		return this._pages;
 	}
 
@@ -89,7 +89,7 @@ class Profile extends Parse {
 			let minField = 4 * (this.page - 1);
 			let maxField = Math.max(this.chessFields.length, 4); //solved issue of making array longer than it was
 			return this.chessFields.slice(minField, maxField); //if page === 1, 1, 2, 3, 4; if page = 2, 5, 6, 7, 8
-		};
+		}
 	}
 
 	get ProfileFields() {
@@ -107,7 +107,7 @@ class Profile extends Parse {
 			];
 			for (let field of fields)
 				if (field[1]) Embed.fielder(this._ProfileFields, ...field);
-		};
+		}
 		return this._ProfileFields;
 	}
 
@@ -123,8 +123,8 @@ class Profile extends Parse {
 						true
 					);
 				}
-			};
-		};
+			}
+		}
 		return this._chessFields;
 	}
 
@@ -133,7 +133,7 @@ class Profile extends Parse {
 		for (let i = 0; i < config.sources.length; i++) {
 			let source = config.sources[i][1];
 			if (this._dbuser[source]) sourcecount++;
-		};
+		}
 		return sourcecount;
 	}
 
@@ -144,14 +144,14 @@ class Profile extends Parse {
 	}
 
 	get aliases() {
-		let specifiers = [this.member.nickname, this._dbuser.name]
+		let specifiers = [this.member.nickname, this._dbuser.name];
 		if (this._dbuser.lichess) specifiers.concat(Object.keys(this._dbuser.lichess).map(account => !account.startsWith("_")));
 		if (this._dbuser.chesscom) specifiers.concat(Object.keys(this._dbuser.chesscom).map(account => !account.startsWith("_")));
 		if (this._dbuser.bughousetest) specifiers.concat(Object.keys(this._dbuser.bughousetest).map(account => !account.startsWith("_")));
 		let found = [this.user.username];
 		for (let i = 0; i < specifiers.length; i++) {
 			if (specifiers[i] && !found.inArray(specifiers[i])) found.push(specifiers[i]);
-		};
+		}
 		return Embed.getFields(found.slice(1), "", true);
 		//no constant, bolded
 	}
@@ -161,7 +161,7 @@ class Profile extends Parse {
 		for (let i = 0; i < this.server.regions.length; i++) {
 			let role = this.Search.roles.get(this.server.regions[i]);
 			if (this.Check.role(this.member, role.name)) region = this.server.regions[i];
-		};
+		}
 		return Embed.getFields([
 			["Age", this._dbuser.age],
 			["Sex", this._dbuser.sex ? (this.Search.emojis.get(this._dbuser.sex) ? this.Search.emojis.get(this._dbuser.sex) : this._dbuser.sex) : ""],

@@ -50,8 +50,8 @@ class Voters extends Main {
         let voted = Object.values(data.voters).filter(array => array[0]);
         if (voters.length > 0) registered = true;
         embed.addField((election.type === "channel" ? "#" : "") + name, voters.length + " voters " + (votingBegun ? "(" + voted.length + " voted)" : ""), true);
-      };
-      embed.setTitle(`Voters for upcoming ${election.type ? election.type + " " : ""}election${embed.fields.length > 1 ? "s" : ""} on ${this.guild.name}`)
+      }
+	    embed.setTitle(`Voters for upcoming ${election.type ? election.type + " " : ""}election${embed.fields.length > 1 ? "s" : ""} on ${this.guild.name}`)
       .setFooter(registered ? `Use '${this.server.prefixes.generic}voters get' to view individual voters for an election. '${this.server.prefixes.generic}h ${this.server.prefixes.generic}voters' for more info.` : `Use '${this.server.prefixes.generic}voters register' to register voters for the elections.`)
       .setDescription(embed.fields.length === 0 ? "No upcoming elections found." : "");
       msg ? this.Output.editor(embed, msg) : this.Output.sender(embed);
@@ -91,8 +91,8 @@ class Voters extends Main {
             "voters": {},
             "candidates": {}
           }
-      };
-      this.generate();
+      }
+	    this.generate();
       this.election = election;
       this.server.states.election.register = false;
       DataManager.setServer(this.server);
@@ -115,8 +115,8 @@ class Voters extends Main {
           });
           role = argsInfo.Search.roles.get(response);
           emsg.delete();
-        };
-        collection = role.members;
+        }
+	      collection = role.members;
       } else
       if (data.criteria.includes("channel")) {
         let channel = argsInfo.Search.channels.byID(data.criteria);
@@ -153,8 +153,8 @@ class Voters extends Main {
               });
               role = argsInfo.Search.roles.get(response);
               emsg.delete();
-            };
-            collection = role.members;
+            }
+	          collection = role.members;
           } else
           if (data.criteria.includes("channel")) {
             let channel = argsInfo.Search.channels.byID(data.criteria);
@@ -164,10 +164,10 @@ class Voters extends Main {
           data.elections[channel.name.toLowerCase()].voters = collection;
         } catch (e) {
           if (e) argsInfo.Output.onError(e);
-          continue;
+
         }
-      };
-      return data;
+      }
+	    return data;
     } catch (e) {
       throw e;
     }
@@ -192,8 +192,8 @@ class Voters extends Main {
           acc[cur.id] = [];
           return acc;
         }, {});
-      };
-      await argsInfo.Output.editor({
+      }
+	    await argsInfo.Output.editor({
         "description": "Compiling voters to database... "
       }, msg);
       return data;
@@ -258,16 +258,16 @@ class Voters extends Main {
         for (let type in election.elections) {
           if (!election.hasOwnProperty(type)) continue;
           if (election.elections[type].voters[user.id]) delete election.elections[type].voters[user.id];
-        };
-        embed.description += user + "\n";
+        }
+	      embed.description += user + "\n";
         count++;
       } catch (e) {
         if (e) this.Output.onError(e);
-        continue;
+
       }
-    };
-    this.election = election;
-    embed.title = `Successfully removed the following user${count > 1 ? "s" : ""} from the ballot:`
+    }
+	  this.election = election;
+    embed.title = `Successfully removed the following user${count > 1 ? "s" : ""} from the ballot:`;
     if (!embed.description) embed.description = "None.";
     this.Output.sender(embed);
   }
@@ -283,8 +283,8 @@ class Voters extends Main {
       for (let type in election.elections) {
         if (!election.elections.hasOwnProperty(type)) continue;
         if (election.elections[type].voters[user.id]) embed.description += election.type === "channel" ? this.Search.channels.get(type) + "\n" : type + "\n";
-      };
-      embed.title = user.tag + " is eligible to vote in election" + (count > 1 ? "s" : "") + ":";
+      }
+	    embed.title = user.tag + " is eligible to vote in election" + (count > 1 ? "s" : "") + ":";
       if (!embed.description) embed.description = "None.";
       this.Output.sender(embed);
     } catch (e) {

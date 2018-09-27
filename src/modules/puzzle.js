@@ -35,8 +35,8 @@ class Puzzle extends Parse {
         array[i] = [];
         array[i][0] = Puzzle.stored[i].title;
         array[i][1] = Puzzle.stored[i].description;
-      }; //[[theLAZYmd#2353 #zh, link], ...]
-      let embedoutput = Embed.leaderboard(array, 0, false); //generates fields probably
+      } //[[theLAZYmd#2353 #zh, link], ...]
+	    let embedoutput = Embed.leaderboard(array, 0, false); //generates fields probably
       embedoutput.title = "Active Puzzles. " + fetchboolean ? "Type the index of the puzzle you would like to view below." : "Use `!puzzle [index]` to view a puzzle."; //informs about the await
       this.message.delete(); //deletes unnecessary command message
       this.Output.sender(embedoutput)
@@ -52,7 +52,7 @@ class Puzzle extends Parse {
       this.view(true) //if no arguments, post list of puzzles then wait for an index
       .then(originalmessage => {
         originalmessage.delete(10000)
-      })
+      });
       let filter = msg => msg.author.id === message.author.id && !isNaN(Number(msg.content));
       this.message.channel.awaitMessages(filter, {
         max: 1,
@@ -79,12 +79,12 @@ class Puzzle extends Parse {
     let puzzle = Puzzle.stored[Number(args[0]) - 1];
     if(!puzzle) {
       this.Output.onError("No puzzle found!");
-      return;
+
     } else 
     if(puzzle.authorid !== message.author.id) return this.Output.onError("You did not create this puzzle!"); //check that person created the puzzle
     else {
       Puzzle.stored.remove(puzzleindex); //use it using array remover
-      Output.generic(`**${this.message.author.tag}** successfully closed puzzle number ${puzzleindex + 1}.`)
+      Output.generic(`**${this.message.author.tag}** successfully closed puzzle number ${puzzleindex + 1}.`);
       this.message.delete();
     }
   }
@@ -100,15 +100,15 @@ Array.prototype.remove = function(index) {
   if(Array.isArray(index)) {
     index.sort(function(a, b) {
       return b - a;
-    })
-    for(let i = 0; i < index.length; i++) {;
-      this.splice(index[i], 1);
+    });
+	  for (let i = 0; i < index.length; i++) {
+		  this.splice(index[i], 1);
     }
   } else {
     this.splice(index, 1);
   }
   return this;
-}
+};
 
 Array.prototype.clean = function() {
   for(let i = 0; i < this.length; i++) {
@@ -118,4 +118,4 @@ Array.prototype.clean = function() {
     }
   }
   return this;
-}
+};

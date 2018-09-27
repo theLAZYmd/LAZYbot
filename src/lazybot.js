@@ -89,8 +89,7 @@ class Bot {
                 for (let i = 0; i < event[1].length; i++) {
                     data[event[1][i]] = arguments[i];
                 }
-                ;
-                data.client = client;
+	            data.client = client;
                 Router[event[2]](data).catch((e) => console.log(e));
             });
         }
@@ -100,7 +99,7 @@ class Bot {
                 .catch((e) => {
                     if (e) console.log(e);
                 });
-        })
+        });
 
         client.on("raw", async event => {
             if (event.t !== "MESSAGE_REACTION_ADD") return;
@@ -142,16 +141,16 @@ Date.getTime = function (ms) {
     time.days = Math.floor(time.hours / 24);
     time.hours = time.hours - (24 * time.days);
     return time;
-}
+};
 
 Date.getISOtime = function (ms) {
     return Date.getTime(ms).toString().slice(0, 31);
-}
+};
 
 Date.getMonth = function (ms) {
     let string = Date.getTime(ms).toString();
     return string.slice(4, 7) + " " + string.slice(11, 15);
-}
+};
 
 Array.prototype.inArray = function (string) {
     let regex = /[a-z_$£@!.?]/gi;
@@ -159,7 +158,7 @@ Array.prototype.inArray = function (string) {
         if ((string.match(regex) || "").join("").toLowerCase() === (this[i].match(regex) || "").join("").toLowerCase()) return true;
     }
     return false;
-}
+};
 
 Array.prototype.findAllIndexes = function (conditions) {
     let indexes = [];
@@ -168,16 +167,15 @@ Array.prototype.findAllIndexes = function (conditions) {
             indexes.push(i)
         }
     }
-    ;
-    return indexes;
-}
+	return indexes;
+};
 
 Array.prototype.swap = function (dbindex1, dbindex2) {
     let user = this[dbindex1];
     this[dbindex1] = this[dbindex2];
     this[dbindex2] = user;
     return this;
-}
+};
 
 String.prototype.occurrences = function (subString, allowOverlapping) {
     subString += "";
@@ -193,7 +191,7 @@ String.prototype.occurrences = function (subString, allowOverlapping) {
         } else break;
     }
     return n;
-}
+};
 
 String.prototype.toProperCase = function () {
     let words = this.split(/ +/g);
@@ -201,16 +199,15 @@ String.prototype.toProperCase = function () {
     for (let i = 0; i < words.length; i++) {
         newArray[i] = words[i][0].toUpperCase() + words[i].slice(1, words[i].length).toLowerCase();
     }
-    ;
-    let newString = newArray.join(" ");
+	let newString = newArray.join(" ");
     return newString;
-}
+};
 
 Array.prototype.toProperCase = function () {
     for (let i = 0; i < this.length; i++)
         this[i] = this[i].toProperCase();
     return this;
-}
+};
 
 Array.prototype.clean = function () {
     for (let i = 0; i < this.length; i++) {
@@ -220,7 +217,7 @@ Array.prototype.clean = function () {
         }
     }
     return this;
-}
+};
 
 Array.prototype.shuffle = function () {
     let currentIndex = this.length,
@@ -233,27 +230,26 @@ Array.prototype.shuffle = function () {
         this[randomIndex] = temporaryValue;
     }
     return this.clean();
-}
+};
 
 Array.prototype.remove = function (index) {
     if (index === 0) return;
     if (Array.isArray(index)) {
         index.sort(function (a, b) {
             return b - a;
-        })
+        });
         for (let i = 0; i < index.length; i++) {
-            ;
-            this.splice(index[i], 1);
+	        this.splice(index[i], 1);
         }
     } else {
         this.splice(index, 1);
     }
     return this;
-}
+};
 
 Math.randBetween = function (min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
-}
+};
 
 Math.genRange = function (number) {
     let range = [];
@@ -261,7 +257,7 @@ Math.genRange = function (number) {
         range.push(i + 1);
     }
     return range;
-}
+};
 
 Math.genRandomList = function (number, independentvariables) {
     let range = Math.genRange(number); //[1, 2, 3, 4, 5] up to number
@@ -271,9 +267,8 @@ Math.genRandomList = function (number, independentvariables) {
         let randIndex = Math.randBetween(0, range.length - 1); //extract a random number from the array
         randomrange.push(range.splice(randIndex, 1)[0]); //and push it, reducing the number of the original arrray
     }
-    ;
-    return randomrange; //[4, 2, 3]
-}
+	return randomrange; //[4, 2, 3]
+};
 
 Object.prototype._getDescendantProp = function (desc) {
     let arr = desc.split('.'), obj = this;
@@ -281,7 +276,7 @@ Object.prototype._getDescendantProp = function (desc) {
         obj = obj[arr.shift()];
     }
     return obj;
-}
+};
 
 Object.prototype._setDescendantProp = function (desc, value) {
     let arr = desc.split('.'), obj = this;
@@ -289,4 +284,4 @@ Object.prototype._setDescendantProp = function (desc, value) {
         obj = obj[arr.shift()];
     }
     return obj[arr[0]] = value;
-}
+};

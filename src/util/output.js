@@ -171,7 +171,7 @@ class Output extends Parse {
 				"time": 18000,
 				"title": "",
 				"type": "option"
-			}, data)
+			}, data);
 			let emojis = [],
 				description = "";
 			let author = data.title ? {
@@ -182,7 +182,6 @@ class Output extends Parse {
 				emojis.push((i + 1) + "⃣");
 				description += (i + 1) + "⃣ **" + data.options[i] + "**\n";
 			}
-			;
 			emojis.push("❎");
 			let msg = await this.reactor({
 				author,

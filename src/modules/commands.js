@@ -31,14 +31,14 @@ class Commands extends Parse {
         if (i < modules.length - 1 || !(modules.length & 1)) { //if we're not on the last module or we have an even number of modules
           value += "\n";
           continue;
-        };
-        if (j === collection.length - 1) continue; //if we're not at the last one of the group continue
+        }
+	      if (j === collection.length - 1) continue; //if we're not at the last one of the group continue
         value += !(j & 1) ? " ".repeat(Math.max(0, 28 - line.length)) + "\u200b" : "\n"; //spacer
-      };
-      value += "```";
+      }
+	    value += "```";
       Embed.fielder(embed.fields, name.toProperCase(), value, true); //return arguments for field, - a field
-    };
-    this.Output.sender(embed);
+    }
+	  this.Output.sender(embed);
   }
 
   static genObject (server) {
@@ -48,8 +48,8 @@ class Commands extends Parse {
       let aliases = Array.from(cmdInfo.aliases);
       let key = server.prefixes[cmdInfo.prefix] + aliases.shift(); //{module: {key: firstalias}}
       modules[cmdInfo.module][key] = aliases[0] ? aliases[0] : "";
-    };
-    return Object.keys(modules) //and return an object sorted alphabetically
+    }
+	  return Object.keys(modules) //and return an object sorted alphabetically
       .sort()
       .reduce((acc, key) => ({ //comment this out if we come up with logical order
         ...acc, [key]: modules[key]
@@ -65,7 +65,7 @@ String.prototype.toProperCase = function () {
   let newArray = [];
   for (let i = 0; i < words.length; i++) {
     newArray[i] = words[i][0].toUpperCase() + words[i].slice(1, words[i].length).toLowerCase();
-  };
-  let newString = newArray.join(" ");
+  }
+	let newString = newArray.join(" ");
   return newString;
-}
+};

@@ -45,7 +45,7 @@ class Output extends Main {
   async amend(data) { //called for a reply, adds a new field to the last message
     try {
       let name = "On " + Date.getISOtime(Date.now()) + ", " + data.mod.tag + (data.mod.flair ? " 🗣" : "") + " wrote:";
-      data.embed.fields = Embed.fielder(data.embed.fields, name, data.content, false)
+      data.embed.fields = Embed.fielder(data.embed.fields, name, data.content, false);
       this.editor(data); //and if they had last message, less than half an hour ago, merely append it with new line
       if (!data.mod) this.modmail[data.message.id].lastMail = Date.now();
       this.setData(this.modmail);
@@ -56,7 +56,7 @@ class Output extends Main {
 
   async moderate(data) { //adds a moderator message as a new field. Edits to do so.
     try {
-      data.embed.fields = Embed.fielder(data.embed.fields, data.name, "", false)
+      data.embed.fields = Embed.fielder(data.embed.fields, data.name, "", false);
       this.editor(data); //and if they had last message, less than half an hour ago, merely append it with new line
     } catch (e) {
       if (e) this.Output.onError(e);

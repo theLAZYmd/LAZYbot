@@ -20,7 +20,7 @@ class onStartup {
 			for (let alias of cmdInfo.aliases) {
 				commandlist[alias.toLowerCase()] = true;
 			}
-		};
+		}
 		return commandlist;
 	}
 
@@ -34,9 +34,9 @@ class onStartup {
 				} else {
 					sources[config.sources[i][1]] = true;
 					console.log(`Set data.${config.sources[i][1]}: ` + sources[config.sources[i][1]])
-				};
+				}
 			});
-		};
+		}
 		return sources;
 	}
 

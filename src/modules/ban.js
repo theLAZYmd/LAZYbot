@@ -18,7 +18,7 @@ class Ban extends Parse {
 
   async real (args) {
     try {
-      let member = await this.generate(args)
+      let member = await this.generate(args);
       member.ban({
         "days": !isNaN(args[1]) ? Number(args[1]) : 0, //if second argument is a number, delete that many messages
         "reason": args.slice(!isNaN(args[1]) ? 2 : 1).trim().join(" ") //anything else said is given as the reason
