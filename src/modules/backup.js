@@ -2,6 +2,7 @@ const Parse = require("../util/parse.js");
 const Embed = require("../util/embed.js");
 const config = require("../config.json");
 const DataManager = require("../util/datamanager.js");
+const Router = require("../util/router.js");
 
 class Backup extends Parse {
 

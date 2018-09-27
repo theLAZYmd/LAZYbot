@@ -1612,6 +1612,142 @@
                 "period": 30000,
                 "page": 0,
                 "author": "447723359317262336"
+            },
+            "494628603326103562": {
+                "embedgroup": [
+                    {
+                        "title": " Profile for Kyle#4287",
+                        "description": "",
+                        "color": 16169471,
+                        "fields": [
+                            {
+                                "name": "Info",
+                                "value": "Region: **Europe**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Jun 17 2017**\nThe House: **Feb 11 2018**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`325736595980288010`**\nPosition in Database: **42**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "17,007",
+                                "inline": true
+                            },
+                            {
+                                "name": "House Trophies",
+                                "value": ":trophy: **surviv.io god**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/325736595980288010/e5591ca48655c84089ba429b15b88b1c.png?size=2048"
+                        },
+                        "footer": {
+                            "text": "1 / 2"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": " Profile for Kyle#4287",
+                        "description": "",
+                        "color": 16169471,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[KyleLegion](https://lichess.org/@/KyleLegion)\nBlitz: **1901**\nBullet: **1923**\nRapid: 1500?\nClassical: 1906?\nCrazyhouse: **2277**\n3-check: **1791**\nAntichess: **1878**\nHorde: **1642**\nAtomic: **1779**\nKing of the Hill: **1715**\nRacing Kings: **1765**",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:chesscom:430038158244184064> Chess.com",
+                                "value": "[KyleLegion](https://www.chess.com/member/KyleLegion)\nBullet: **1228**\nBlitz: **1174**\nRapid: 1377?\nCrazyhouse: **2098**\nBughouse: **2331**\nTactics: **1291**",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:bughousetest:433422387867025409> BughouseTest.com",
+                                "value": "[Kyle](http://bughousetest.com/@/Kyle)\nBughouse: **1831**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/325736595980288010/e5591ca48655c84089ba429b15b88b1c.png?size=2048"
+                        },
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "185412969130229760",
+                "cmdID": "494628601811959808"
+            },
+            "494628620556566528": {
+                "embedgroup": [
+                    {
+                        "title": " Profile for TheLoneWolf#4001",
+                        "description": "",
+                        "color": 10181046,
+                        "fields": [
+                            {
+                                "name": "Info",
+                                "value": "Region: **Europe**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Aug 14 2017**\nThe House: **Dec 12 2017**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`346485544848457728`**\nPosition in Database: **47**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "33,220",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/346485544848457728/c9c6e571ee7db514147ba2c7db5d5585.png?size=2048"
+                        },
+                        "footer": {
+                            "text": "1 / 2"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": " Profile for TheLoneWolf#4001",
+                        "description": "",
+                        "color": 10181046,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[the-lone-wolf](https://lichess.org/@/the-lone-wolf)\nBlitz: **1628**\nBullet: 1824?\nRapid: 1351?\nClassical: 1500?\nCrazyhouse: **2159**\n3-check: **1841**\nAntichess: **1967**\nHorde: 1526?\nAtomic: **1927**\nKing of the Hill: **1582**\nRacing Kings: 1430?",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:chesscom:430038158244184064> Chess.com",
+                                "value": "[The-Lone-Wolf](https://www.chess.com/member/The-Lone-Wolf)\nBlitz: 770?\nDaily: 1189?\nCrazyhouse: **2161**\nBughouse: **2253**\nTactics: **511**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/346485544848457728/c9c6e571ee7db514147ba2c7db5d5585.png?size=2048"
+                        },
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "185412969130229760",
+                "cmdID": "494628618933239820"
             }
         }
     },

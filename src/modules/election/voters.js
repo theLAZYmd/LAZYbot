@@ -14,7 +14,7 @@ class Voters extends Main {
     try {
       let election = this.election, instance;
       if (!(await this.Permissions.state("election.register", this) || await this.Permissions.state("election.voting", this))) throw "Registering for voters has not yet begun on server " + this.guild.name + ".";
-      if (this.channel.name !== this.server.channels.bot && !this.Permissions.role("owner", this)) throw "Wrong channel to use this command. Requires: #spam channel.";
+      if (this.channel.name !== this.server.channels.bot && await !this.Permissions.role("owner", this)) throw "Wrong channel to use this command. Requires: #spam channel.";
       if (!Object.keys(election.elections).length === 0) throw "No elections registered. Use `" + this.server.prefixes.generic + "election config` to register a new election.";
       if (this.args.length === 2) {
         if (!election.elections.hasOwnProperty(this.args[1])) throw "Couldn't find matching election from name **" + this.args[1] + "**.";
@@ -42,7 +42,7 @@ class Voters extends Main {
   async generate(msg) {
     try {
       let embed = new Embed();
-      let votingBegun = await this.Permissions.state("election.voting", this);
+      let votingBegun = this.Permissions.state("election.voting", this);
       let election = this.election;
       let registered = false;
       for (let [name, data] of Object.entries(election.elections || {})) {

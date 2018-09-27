@@ -769,10 +769,44 @@
                 {
                     "register": "Registers a candidate. Give argument of channel that you wish to run for.",
                     "open": "Opens candidate registration. Done automatically when voter lists are registered.",
-                    "close": "Closes candidate registration."
+                    "close": "Closes candidate registration.",
+                    "sponsor": "Readies a new declaration of sponsorship in a given channel. Give single argument of the channel name."
                 }
             ]
-        ]
+        ],
+        "usage": [
+            "candidates",
+            "candidates register zh",
+            "candidates register zh littleplotkin",
+            "I declare my intention to run as candidate for #atomic"
+        ],
+        "module": "Election",
+        "file": "election/candidates",
+        "method": "run",
+        "arguments": ["args"],
+        "prefix": "generic"
+    },
+    {
+        "aliases": [
+            "sponsor",
+            "I sponsor"
+        ],
+        "description": "Sponsors a given candidate. Can only be used in the channel for which the election is taking place.",
+        "subcommands": [
+            [
+                "candidate",
+                {}
+            ]
+        ],
+        "usage": [
+            "sponsor",
+            "I sponsor Fumitoks"
+        ],
+        "module": "Election",
+        "file": "election/candidates",
+        "method": "getSponsor",
+        "arguments": ["channel", "args"],
+        "prefix": "generic"
     },
     {
         "aliases": [

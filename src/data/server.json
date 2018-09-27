@@ -6,9 +6,9 @@
             "bcp": false,
             "au": true,
             "election": {
-                "register": false,
+                "register": true,
                 "candidates": false,
-                "voting": false,
+                "voting": true,
                 "count": false,
                 "results": false
             },

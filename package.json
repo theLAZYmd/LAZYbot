@@ -28,7 +28,6 @@
         "discord.js": "^11.4.2",
         "enmap": "^0.3.2",
         "es6": "0.0.7",
-        "eslint": "^5.6.0",
         "express": "^4.16.0",
         "request": "^2.88.0",
         "request-promise": "^4.2.2",

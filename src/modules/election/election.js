@@ -80,7 +80,7 @@ class Election extends Main {
 
   async initiate() {
     try {
-      if (this.args[0] !== "reset" && this.election.type) throw "Election has already been initiated on server **" + this.guild.name + "**.";
+      if (!this.message.content.includes("reset") && this.election.type) throw "Election has already been initiated on server **" + this.guild.name + "**.";
       await this.Output.confirm();
       let election = this.election;
       for (let [property, value] of this.properties)
