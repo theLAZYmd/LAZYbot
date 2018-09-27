@@ -3,9 +3,9 @@
         "id": "185412969130229760",
         "username": "theLAZYmd#2353",
         "messages": {
-            "count": 73014,
-            "last": "variants",
-            "lastSeen": 1538081635738
+            "count": 73020,
+            "last": "but there you go",
+            "lastSeen": 1538082599185
         },
         "bidamount": 100000000000000000,
         "location": "Toronto",
@@ -312,7 +312,7 @@
             "_name": "JM Obi Wan Benoni"
         },
         "patron": false,
-        "lastupdate": 1538068418925,
+        "lastupdate": 1538082003814,
         "triviarating": 1501,
         "triviagames": 59,
         "triviaprovisional": true
@@ -729,7 +729,7 @@
             "_country": "RU",
             "_language": "nl-NL"
         },
-        "lastupdate": 1538070214123,
+        "lastupdate": 1538082566640,
         "triviarating": 1350,
         "triviagames": 1,
         "triviaprovisional": false,
@@ -1292,7 +1292,7 @@
                 "crazyhouse": "2663"
             }
         },
-        "lastupdate": 1538068716360,
+        "lastupdate": 1538082288310,
         "triviarating": 1246,
         "triviagames": 6,
         "triviaprovisional": false,
@@ -1335,7 +1335,7 @@
                 "lessons": "1789"
             }
         },
-        "lastupdate": 1538069914077
+        "lastupdate": 1538082335139
     },
     {
         "id": "200638507436212224",
@@ -1602,9 +1602,9 @@
         "id": "163325840136863744",
         "username": "ProgramFOX#1012",
         "messages": {
-            "count": 9182,
-            "last": "<:FoxThink:493664567055089675>",
-            "lastSeen": 1538081534269
+            "count": 9184,
+            "last": "it's a different message at least",
+            "lastSeen": 1538082597946
         },
         "lichess": {
             "_main": "ProgramFOX",
@@ -3778,19 +3778,19 @@
         "chesscom": {
             "_main": "thepiercingarrow",
             "thepiercingarrow": {
-                "maxRating": "1810",
-                "bullet": "1258",
+                "maxRating": "1827",
+                "bullet": "1271",
                 "lightning": "1213",
                 "chess": "1858?",
                 "rapid": "1203?",
                 "koth": "1279",
                 "crazyhouse": "1355",
-                "bughouse": "1810",
+                "bughouse": "1827",
                 "tactics": "1257",
                 "lessons": "1172?"
             }
         },
-        "lastupdate": 1538061212677
+        "lastupdate": 1538082522335
     },
     {
         "id": "366653947907276810",
@@ -6085,12 +6085,12 @@
             "last": "indeed",
             "lastSeen": 1534568959689
         },
-        "lastupdate": 1538069014399,
+        "lastupdate": 1538082300183,
         "chesscom": {
             "_main": "Juanma206",
             "Juanma206": {
                 "maxRating": "1699",
-                "bullet": "1590",
+                "bullet": "1585",
                 "lightning": "1274",
                 "chess": "1376",
                 "rapid": "1446",

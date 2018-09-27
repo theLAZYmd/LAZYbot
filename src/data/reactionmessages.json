@@ -1702,6 +1702,40 @@
                 "page": 0,
                 "author": "246359309078888449",
                 "cmdID": "494971616632111134"
+            },
+            "494977469615702017": {
+                "embedgroup": [
+                    {
+                        "description": "**General**\nThe members of a variant channel elect two (2) channel moderators for that channel, meaning there will be independent elections for each channel. Elections are held every 4 weeks on Sundays. The voting will be open for 24(+) hours. It will happen through secret ballot. A form of [Proportional representation system](https://en.wikipedia.org/wiki/Instant-runoff_voting) is used.",
+                        "color": 53380,
+                        "author": {
+                            "name": "The House Elections",
+                            "icon_url": "https://i.imgur.com/MOBqJA6.png"
+                        },
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/VId4nJT.png"
+                        },
+                        "fields": [
+                            {
+                                "name": "I want to run, what to do?",
+                                "value": "• You need at least two sponsors to get on the ballot. Sponsoring is like pledging to vote, so you can only sponsor 1 person.\n• You must declare your intention to run by Friday of election week. Let an admin know and tell them the names of your sponsors.",
+                                "inline": false
+                            },
+                            {
+                                "name": "Electoral guidlines",
+                                "value": "• You can campaign.\n• You can run for a maximum of two channels (and win both or one or none).\nVoters and Candidates must have 50 messages (server-wide) and that channel’s role before the announcement date.",
+                                "inline": false
+                            }
+                        ],
+                        "footer": {
+                            "text": "1 / 1"
+                        }
+                    }
+                ],
+                "period": 180000,
+                "page": 0,
+                "author": "447723359317262336",
+                "cmdID": "494977468327919617"
             }
         }
     },

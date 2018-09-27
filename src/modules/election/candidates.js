@@ -36,9 +36,11 @@ class Candidates extends Main {
 				if (this.Permissions.state("election.voting", this)) throw "Registering for candidates has closed on server " + this.guild.name + ".";
 				else throw "Registering for candidates has not yet begun on server " + this.guild.name + ".";
 			}
+			console.log(this.args);
 			let args = this.args, type = args[0], channel = type ? this.Search.channels.get(type) : "",
 				user = this.author, election = this.election;
 			if (channel) type = channel.name;
+			console.log(args);
 			if (args[1]) {
 				if (!this.Permissions.role("owner", this)) throw "Insufficient server permissions to use this command.";
 				user = this.Search.users.get(args[1]);
@@ -56,6 +58,7 @@ class Candidates extends Main {
 	async register() {
 		try {
 			let election = this.election;
+			console.log(this.author.tag);
 			let [type, user] = await this.handler();
 			if (type === undefined) throw "";
 			if (election.elections[type].candidates[user.tag]) throw `Already registered candidate **${user.tag}** for channel **${type}**.`;

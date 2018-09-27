@@ -22,7 +22,7 @@ class Main extends Parse {
 		try {
 			let command = this.args.shift() || "";
 			command = command.toLowerCase();
-			if (command && command !== "get" && !this.Permissions.role("owner", this)) throw this.Permissions.output("role");
+			if (command && command !== "get" && (this.command !== "candidates" && command !== "register") && !this.Permissions.role("owner", this)) throw this.Permissions.output("role");
 			if (/^(?:status)?$/.test(command)) command = "generate";
 			if (/^reset|init$/.test(command)) command = "initiate";
 			if (typeof this[command] === "function") this[command](); //looks for, this.register(), this.get(), this.disqualify()
