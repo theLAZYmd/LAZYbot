@@ -28,9 +28,7 @@ class Input extends Main {
         "command": "DM"
       };
       if (!this.modmail) { //if there's no modmail stored for this server 
-        this.modmail = {
-          "_timeout": {}
-        };
+        this.modmail = {  "_timeout": {}  };
         this.log(data);
         return this.output.anew(data);
       }
@@ -51,7 +49,7 @@ class Input extends Main {
       let data = {
         "command": "send",
         "users": []
-      };
+      }
       data.mod = this.author;
       data.mod.flair = false;
       for (let arg of args) {

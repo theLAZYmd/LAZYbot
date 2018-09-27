@@ -6,7 +6,6 @@
 		"method": "ratingUpdate",
 		"arguments": ["embed"],
 		"requires": {
-			"state": "trivia",
 			"channels": "trivia"
 		}
 	}

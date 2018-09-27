@@ -155,7 +155,7 @@ class Router {
 			for (let cmdInfo of botCommands) {
 				if (cmdInfo.active === false || !data.argsInfo.message.embeds[0]) continue;
 				let embed = data.argsInfo.message.embeds[0];
-				if (embed.title && cmdInfo.title && embed.title === cmdInfo.title || embed.description && cmdInfo.description && embed.description === cmdInfo.description) {
+				if ((embed.title && embed.title === cmdInfo.title) || (embed.description && embed.description === cmdInfo.description)) {
 					let run = await Router.runCommand(data.message, data.argsInfo, cmdInfo);
 					if (run) await Router.logCommand(data.argsInfo, cmdInfo);
 					throw "";

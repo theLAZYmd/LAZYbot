@@ -51,15 +51,16 @@ class Trivia extends Parse {
 		let data = lines.map(line => {
 			let [name,, score] = line.match(/[^\s]+/gi); //[**ObiWanBenoni#3488**, has, 3, points]
 			let user = this.Search.users.byTag(name); //byTag filters out the **
+			if (!user) return null;
 			let dbuser = DBuser.getUser(user);
 			if (!dbuser.trivia) dbuser.trivia = {
 				"rating": 1500,
-				"games": 0,
-				"provisional": true
+				"games": 0
 			}
 			let estimate = Math.pow(10, (dbuser.trivia.rating - config.trivia.initial) / config.trivia.spread); //ex: (2000 - 1500) / 1589 or (1400 - 1500 / 1589
-			return [dbuser, estimate, score]; //a number from 0 to 10. If less than 1500, it's between 0 and 1. Realistically not above 5
+			return [dbuser, estimate, Number(score)]; //a number from 0 to 10. If less than 1500, it's between 0 and 1. Realistically not above 5
 		})
+		data = data.filter(d => d);
 		let totalEstimate = data.reduce((a, [, estimate]) => a + estimate, 0);
 		let totalScore = data.reduce((a, [,, score]) => a + score, 0);
 		if (totalScore < this.server.trivia.min) return setTimeout(this.Output.onError("**Only 10+ Point Games Are Rated**"), 5000);
@@ -70,8 +71,7 @@ class Trivia extends Parse {
 			let difference = RD * (score - shareEstimate);
 			dbuser.trivia.rating = Math.round(difference + dbuser.trivia.rating);
 			dbuser.trivia.games++;
-			if (dbuser.trivia.games >= this.server.trivia.provisional) dbuser.trivia.provisional = false;
-			description += "**" + dbuser.username + "** " + score + (dbuser.trivia.provisional ? "?" : "") + " (" + difference.toSign() + ")\n";
+			description += "**" + dbuser.username + "** " + dbuser.trivia.rating + (dbuser.trivia.games < this.server.trivia.provisional ? "?" : "") + " (" + difference.toSign() + ")\n";
 			DBuser.setData(dbuser);
 		}
 		await this.Output.sender(new Embed()
@@ -82,37 +82,18 @@ class Trivia extends Parse {
 	}
 
 
-	async rank(message, args, command, argument) {
-		if (args.length === 0) {
-			let user = message.author;
-			let dbuser = getdbuserfromuser(user);
-			message.channel.send({
-				embed: {
-					title: "**Trivia Rating**",
-					description: `**${dbuser.username}** ${dbuser.triviarating || 1500}${!dbuser.triviaprovisional ? "?" : ""}`,
-					color: 53380
-				}
-			});
-		} else {
-			let user = getuser(message.channel, args[0]);
-			let dbuser = getdbuserfromuser(user);
-			if (dbuser) {
-				message.channel.send({
-					embed: {
-						title: "**Trivia Rating**",
-						description: `**${dbuser.username}** ${dbuser.triviarating}${!dbuser.triviaprovisional ? "?" : ""}`,
-						color: 53380
-					}
-				});
-			} else {
-				message.channel.send({
-					embed: {
-						title: "**Trivia Rating**",
-						description: `**User Not Found**`,
-						color: 53380
-					}
-				});
-			}
+	async rating(argument) {
+		try {
+			let user = this.user;
+			if (argument) user = this.Search.users.get(argument);
+			if (!user) throw "Couldn't find user **" + user + "**!";
+			let dbuser = DBuser.getUser(user);
+			this.Output.sender(new Embed()
+				.setTitle("Trivia Rating")
+				.setDescription("**" + dbuser.username + "** " + (dbuser.trivia.rating || 1500) + (dbuser.trivia.games < this.server.trivia.provisional ? "?" : ""))
+			)
+		} catch (e) {
+			if (e) this.Output.onError(e)
 		}
 	}
 

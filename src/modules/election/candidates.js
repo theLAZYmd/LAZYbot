@@ -112,7 +112,7 @@ class Candidates extends Main {
 		try {
 			let election = this.election;
 			if (candidate.id === user.id) throw `**${user.tag}** You may not sponsor yourself.`;
-			if (!election.elections[type].candidates[candidate.tag]) throw `**${user.tag}** has not registered as candidate for channel **${type}**.`;
+			if (!election.elections[type].candidates[candidate.tag]) throw `**${candidate.tag}** has not registered as candidate for channel **${type}**.`;
 			if (!election.elections[type].voters[user.id] && !this.Permissions.role("owner", this)) throw "**" + user.tag + "** You are not a member of the electorate.\nYou may not declare sponsorship for a candidate for election **" + type + "**.";
 			if (election.elections[type].candidates[candidate.tag].includes(user.id)) throw `Already registered sponsor **${user.tag}** for candidate **${user.tag}** in election **${type}**!`;
 			for (let [c, sponsors] of Object.entries(election.elections[type].candidates)) {
