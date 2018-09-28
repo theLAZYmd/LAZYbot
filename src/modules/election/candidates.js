@@ -58,7 +58,6 @@ class Candidates extends Main {
 	async register() {
 		try {
 			let election = this.election;
-			console.log(this.author.tag);
 			let [type, user] = await this.handler();
 			if (type === undefined) throw "";
 			if (election.elections[type].candidates[user.tag]) throw `Already registered candidate **${user.tag}** for channel **${type}**.`;
@@ -67,6 +66,21 @@ class Candidates extends Main {
 			election.elections[type].candidates[user.tag] = []; //register it as an empty array ready to add sponsors
 			this.election = election;
 			this.Output.generic(`Registered candidate **${user.tag}** for election **${type}**.`)
+		} catch (e) {
+			if (e) this.Output.onError(e);
+		}
+	}
+
+	async deregister() {
+		try {
+			let election = this.election;
+			let [type, user] = await this.handler();
+			if (type === undefined) throw "";
+			if (!election.elections[type].candidates[user.tag]) throw `**${user.tag}** is not a candidate for channel **${type}**.`;
+			let channels = Main.validate(election, user, "candidates");
+			delete election.elections[type].candidates[user.tag]; //register it as an empty array ready to add sponsors
+			this.election = election;
+			this.Output.generic(`Deregistered candidate **${user.tag}** for election **${type}**.`)
 		} catch (e) {
 			if (e) this.Output.onError(e);
 		}
@@ -81,8 +95,8 @@ class Candidates extends Main {
 				"description": "Please write the name of your chosen candidate to sponsor below.",
 				"filter": m => this.Search.users.get(m.content)
 			}));
-			else candidate = this.Search.users.get(args[0]);
-			if (!candidate) throw `**${args[0]}** has not registered as candidate for channel **${type}**.`;
+			else candidate = this.Search.users.get(argument);
+			if (!candidate) throw `**${argument}** has not registered as candidate for channel **${type}**.`;
 			if (args[1]) {
 				if (!this.Permissions.role("owner", this)) throw "Insufficient server permissions to use this command.";
 				user = this.Search.users.get(args[1]);
@@ -114,7 +128,7 @@ class Candidates extends Main {
 			if (candidate.id === user.id) throw `**${user.tag}** You may not sponsor yourself.`;
 			if (!election.elections[type].candidates[candidate.tag]) throw `**${candidate.tag}** has not registered as candidate for channel **${type}**.`;
 			if (!election.elections[type].voters[user.id] && !this.Permissions.role("owner", this)) throw "**" + user.tag + "** You are not a member of the electorate.\nYou may not declare sponsorship for a candidate for election **" + type + "**.";
-			if (election.elections[type].candidates[candidate.tag].includes(user.id)) throw `Already registered sponsor **${user.tag}** for candidate **${user.tag}** in election **${type}**!`;
+			if (election.elections[type].candidates[candidate.tag].includes(user.id)) throw `Already registered sponsor **${user.tag}** for candidate **${candidate.tag}** in election **${type}**!`;
 			for (let [c, sponsors] of Object.entries(election.elections[type].candidates)) {
 				if (sponsors.includes(user.id)) throw `Already registered **${user.tag}** as sponsor for candidate **${c}** for election **${type}**.`;
 			}
