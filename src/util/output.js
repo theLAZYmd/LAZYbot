@@ -113,7 +113,8 @@ class Output extends Parse {
 				"action": "this action",
 				"channel": this.channel,
 				"author": this.author,
-				"time": 30000
+				"time": 30000,
+				"errors": []
 			}, data);
 			data.emojis = ["✅", "❎"];
 			let msg = await this.reactor(data.embed ? data.embed : {
@@ -145,11 +146,15 @@ class Output extends Parse {
 					if (/n(?:o)?|false/i.test(mcollected.first().content)) return false;
 				})().catch(() => {
 				})
-			]);
-			if (typeof collected !== "boolean") collected = false;
+			])
 			data.autodelete !== false ? msg.delete().catch(() => {
 			}) : msg.clearReactions().catch(() => {
-			});
+			})
+			if (typeof collected !== "boolean") {
+				collected = false;
+				if (data.cancel) return true;
+				if (data.errors.includes("time")) throw "";
+			}
 			if (!collected && !r) throw "";
 			return collected;
 		} catch (e) {
