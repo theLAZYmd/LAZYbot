@@ -368,7 +368,7 @@
             },
             "fields": [{
                     "name": "I want to run, what to do?",
-                    "value": "• You need at least two sponsors to get on the ballot. Sponsoring is like pledging to vote, so you can only sponsor 1 person.\n• You must declare your intention to run by Friday of election week. Let an admin know and tell them the names of your sponsors.",
+                    "value": "• You need at least two sponsors to get on the ballot. Sponsoring is like pledging to vote, so you can only sponsor 1 person.\n• You must declare your intention to run by Friday of election week.",
                     "inline": false
                 },
                 {  
