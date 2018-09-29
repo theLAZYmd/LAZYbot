@@ -108,7 +108,7 @@ class Trivia extends Parse {
 			let dbuser = DBuser.getUser(user);
 			this.Output.sender(new Embed()
 				.setTitle("Trivia Rating")
-				.setDescription("**" + dbuser.username + "** " + (dbuser.trivia ? dbuser.trivia.rating || 1500) + (dbuser.trivia.games < this.server.trivia.provisional ? "?" : ""))
+				.setDescription("**" + dbuser.username + "** " + (dbuser.trivia ? dbuser.trivia.rating : 1500) + (dbuser.trivia.games < this.server.trivia.provisional ? "?" : ""))
 			)
 		} catch (e) {
 			if (e) this.Output.onError(e)

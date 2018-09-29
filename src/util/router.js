@@ -147,8 +147,8 @@ class Router {
 						for (let [s, v] of Object.entries(type)) {
 							if (!v.aliases) continue;
 							for (let a of v.aliases) {
-								if (!argsInfo.message.content.toLowerCase().includes(a)) continue;
-								argsInfo.message.content = cmdInfo.prefix + cmdInfo.aliases[0] + " " + s;
+								if (!argsInfo.message.content.toLowerCase().includes(a.toLowerCase())) continue;
+								argsInfo.message.content = argsInfo.message.content.replace(new RegExp(a, "gi"), argsInfo.server.prefixes[cmdInfo.prefix] + cmdInfo.aliases[0] + " " + s);
 								return true;
 							}
 						}
