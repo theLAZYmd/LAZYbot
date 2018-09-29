@@ -34,7 +34,7 @@ class Main extends Parse {
 
 	static validate(election, user, type = "voters") { //returns an array of channels
 		return Object.entries(election.elections) //get rid of the extra properties. if a user object is provided, check if the user is in the voters data
-			.filter(([channel, data]) => data[type] && (!user || Object.keys(data[type]).includes(user.id)))
+			.filter(([channel, data]) => data[type] && (!user || Object.keys(data[type]).includes(user[type === "voters" ? "id" : "tag"])))
 			.map(([channel]) => channel);
 	}
 

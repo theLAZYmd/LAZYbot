@@ -49,7 +49,7 @@ class Input extends Main {
       let data = {
         "command": "send",
         "users": []
-      }
+      };
       data.mod = this.author;
       data.mod.flair = false;
       for (let arg of args) {

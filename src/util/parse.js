@@ -17,11 +17,11 @@ class Parse {
 				.replace("—", "--")
 				.replace("“", "\"")
 				.replace("”", "\"")
-				.replace(/[\u200B-\u200D\uFEFF]/g, '');
+				.replace(/[\u200B-\u200D\uFEFF]/g, ''); /*
 			if (server)
 				for (let [key, alias] of guild ? Aliases._all.concat(Aliases[guild.id] || []) : Aliases.all)
 					if (content.toLowerCase().includes(key.toLowerCase()))
-						content = content.replace(key, alias.replace(/\${([a-z]+)}/gi, value => server.prefixes[value.match(/[a-z]+/i)]));
+						content = content.replace(key, alias.replace(/\${([a-z]+)}/gi, value => server.prefixes[value.match(/[a-z]+/i)]));*/
 			this.message.content = content || "";
 		}
 	}

@@ -121,7 +121,7 @@ class Output extends Parse {
 				"description": data.description ? data.description : "**" + data.author.tag + "** Please confirm " + data.action + "."
 			}, data.editor ? data.editor : data.channel, data.emojis);
 			let rfilter = (reaction, user) => data.emojis.includes(reaction.emoji.name) && (data.author.id === user.id || (data.role && this.Permissions.role(data.role, new Parse(msg))));
-			let mfilter = (m) => m.author.id === data.author.id && /y(?:es)?|n(?:o)?|true|false/i.test(m.content);
+			let mfilter = (m) => m.author.id === data.author.id && /^(?:y(?:es)?|n(?:o)?|true|false)$/i.test(m.content);
 			let collected = await Promise.race([
 				(async () => {
 					let rcollected = await msg.awaitReactions(rfilter, { //wait for them to react back
@@ -142,14 +142,14 @@ class Output extends Parse {
 					});
 					mcollected.first().delete(1000).catch(() => {
 					});
-					if (/y(?:es)?|true/i.test(mcollected.first().content)) return true;
-					if (/n(?:o)?|false/i.test(mcollected.first().content)) return false;
+					if (/^(?:y(?:es)?|true)$/i.test(mcollected.first().content)) return true;
+					if (/^(?:n(?:o)?|false)$/i.test(mcollected.first().content)) return false;
 				})().catch(() => {
 				})
-			])
+			]);
 			data.autodelete !== false ? msg.delete().catch(() => {
 			}) : msg.clearReactions().catch(() => {
-			})
+			});
 			if (typeof collected !== "boolean") {
 				collected = false;
 				if (data.cancel) return true;

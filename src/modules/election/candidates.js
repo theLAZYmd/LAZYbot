@@ -36,11 +36,9 @@ class Candidates extends Main {
 				if (this.Permissions.state("election.voting", this)) throw "Registering for candidates has closed on server " + this.guild.name + ".";
 				else throw "Registering for candidates has not yet begun on server " + this.guild.name + ".";
 			}
-			console.log(this.args);
 			let args = this.args, type = args[0], channel = type ? this.Search.channels.get(type) : "",
 				user = this.author, election = this.election;
 			if (channel) type = channel.name;
-			console.log(args);
 			if (args[1]) {
 				if (!this.Permissions.role("owner", this)) throw "Insufficient server permissions to use this command.";
 				user = this.Search.users.get(args[1]);
@@ -62,6 +60,7 @@ class Candidates extends Main {
 			if (type === undefined) throw "";
 			if (election.elections[type].candidates[user.tag]) throw `Already registered candidate **${user.tag}** for channel **${type}**.`;
 			let channels = Main.validate(election, user, "candidates");
+			console.log(channels);
 			if (election.limit && channels.length >= election.limit) throw `Already registered candidate **${user.tag}** for channels **${channels.join(", ")}**!\nCannot run for more than ${election.limit} channels.`;
 			election.elections[type].candidates[user.tag] = []; //register it as an empty array ready to add sponsors
 			this.election = election;
@@ -71,22 +70,20 @@ class Candidates extends Main {
 		}
 	}
 
-	async deregister() {
+	async withdraw() {
 		try {
 			let election = this.election;
 			let [type, user] = await this.handler();
-			if (type === undefined) throw "";
-			if (!election.elections[type].candidates[user.tag]) throw `**${user.tag}** is not a candidate for channel **${type}**.`;
-			let channels = Main.validate(election, user, "candidates");
-			delete election.elections[type].candidates[user.tag]; //register it as an empty array ready to add sponsors
+			if (!election.elections[type].candidates[user.tag]) throw `**${user.tag}** has not registered as candidate for channel **${type}**.`;
+			delete election.elections[type].candidates[user.tag]; //if can, then find it
 			this.election = election;
-			this.Output.generic(`Deregistered candidate **${user.tag}** for election **${type}**.`)
+			this.Output.generic(`Withdrew candidate **${user.tag}** from ballot for channel **${type}**.`)
 		} catch (e) {
 			if (e) this.Output.onError(e);
 		}
 	}
 
-	async getSponsor(channel, args) { //assumes the channel you are in
+	async getSponsor(channel, args, argument) { //assumes the channel you are in
 		try {
 			let election = this.election, user = this.user;
 			if (!election.elections[channel.name]) throw `Couldn't find election for channel ${channel}!\nPlease use command \`${this.server.prefixes.generic}candidates\` to view list of elections.`;
@@ -113,10 +110,10 @@ class Candidates extends Main {
 			let [type, user] = await this.handler();
 			if (type === undefined) throw "";
 			let candidate = this.Search.users.get(await this.Output.response({
-				"description": "Please write the name of your chosen candidate to sponsor below.",
+				"description": "Please write the name of your chosen candidate to " + this.command + " below.",
 				"filter": m => this.Search.users.get(m.content)
 			}));
-			await this.runSponsor(user, type, candidate);
+			await this["run" + this.command.toProperCase()](user, type, candidate);
 		} catch (e) {
 			if (e) this.Output.onError(e)
 		}
@@ -140,14 +137,14 @@ class Candidates extends Main {
 		}
 	}
 
-	async withdraw() {
+	async runUnsponsor (user, type, candidate) {
 		try {
 			let election = this.election;
-			let [type, user] = await this.handler();
-			if (!election.elections[type].candidates[user.tag]) throw `**${user.tag}** has not registered as candidate for channel **${type}**.`;
-			delete election.elections[type].candidates[user.tag]; //if can, then find it
+			if (!election.elections[type].candidates[candidate.tag]) throw `**${candidate.tag}** has not registered as candidate for channel **${type}**.`;
+			if (!election.elections[type].candidates[candidate.tag].includes(user.id)) throw `You were not registered sponsor **${user.tag}** for candidate **${candidate.tag}** in election **${type}**!`;
+			election.elections[type].candidates.splice(election.elections[type].candidates.indexOf(candidate.tag), 1); //register it as an empty array ready to add sponsors
 			this.election = election;
-			this.Output.generic(`Withdrew candidate **${user.tag}** from ballot for channel **${type}**.`)
+			this.Output.generic(`**${user.tag}** Unregistered as sponsor for **${candidate.tag}** for channel **${type}**.`)
 		} catch (e) {
 			if (e) this.Output.onError(e);
 		}
