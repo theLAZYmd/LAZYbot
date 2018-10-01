@@ -901,7 +901,9 @@
                     "value": "Champion: tipau \nRunner-up: onubense",
                     "inline": false
                 }
-                ],{
+                ]
+            },
+                        {
                 "title": "INFORMATION",
                 "color": 53380,
                 "fields": [
@@ -975,7 +977,7 @@
                 "description": "**1.** Accusations of cheating must be made privately to a member of the anti-cheat panel.\n\n**2.** The accusation must make reference to at least one specific game.\n\n**3.**  If an accusation is made publicly and does not lead to a guilty verdict the accuser will be forfeited & banned from future events.\n\n**4.** The anti-cheat panel must all believe a player to be guilty for a player to be forfeited. 100% proof is not required.\n\n**5.** If a member of the panel is either the accuser or accused their place on the panel will be taken by another.",
                 "color": 53380,
                 "thumbnail": "https://i.imgur.com/JbhAKpz.png"
-            }
+            },
             {
                 "title": " Team/Contacts ",
                 "description": "Tournament officials consist from the following teams.\n\n**Tournament Director (TD)**\ntipau:  https://en.lichess.org/@/tipau\n\n**Anti-Cheat Panel**\nProgramFox: https://lichess.org/@/Programfox\ntipau:  https://en.lichess.org/@/tipau\n\n**Entry Approvals Panel**\nProgramFox: https://lichess.org/@/Programfox\ntipau:  https://en.lichess.org/@/tipau\n\n**Match Arbiters**\ntipau:  https://en.lichess.org/@/tipau",
