@@ -1,170 +1,119 @@
 const Parse = require("../util/parse.js");
+const Embed = require("../util/embed.js");
+const DBuser = require("../util/dbuser.js");
 const DataManager = require("../util/datamanager.js");
+const Permissions = require("../util/permissions.js");
+const config = require("../config.json");
 
 class Trivia extends Parse {
 
-  constructor(message) {
-    super(message)
-  }
+	constructor(message) {
+		super(message)
+	}
 
-  init (args) {
-    if(this.server.states.trivia) return;
-    for(let i = 0; i < args.length; i++) {
-      if(args[i] === "--pokemon" || args[i] === "-p") return;
-    };
-    this.server.states.trivia = true;
-    DataManager.setServer(this.server);
-  }
+	async init(args) {
+		if (this.server.states.trivia) return;
+		for (let arg of args)
+			if (/^(:?--pokemon|-p)$/.test(arg)) return;
+		this.server.states.trivia = true;
+		DataManager.setServer(this.server);
+	}
 
-  end () {
-    if(!this.server.states.trivia) return;
-    this.server.states.trivia = false;
-    if(this.server.trivia.players) {
-      for(let player in this.server.trivia.players) {
-        delete this.server.trivia.players[player];
-      }
-    };
-    DataManager.setServer(this.server);
-  }
+	async end() {
+		if (!this.server.states.trivia) return;
+		this.server.states.trivia = false;
+		this.server.trivia.players = {};
+		DataManager.setServer(this.server);
+	}
 
-  onNewMessage () {
-    if(this.author.bot) return;
-    let trivia = this.server.trivia || {};
-    let players = trivia.players || {};
-    if(players[this.author.id] || players[this.author.id] === false) return;
-    players[this.author.id] = true;
-    this.Output.generic(`**${this.author.tag}**: joined rated trivia. Type \`cancel\` in 10s to cancel.`)
-    .then(message => {
-      let filter = msg => !msg.author.bot && msg.author.id === this.author.id && msg.content && msg.content.toLowerCase() === "cancel";
-      let collector = message.channel.createMessageCollector(filter, {
-        "time": 10000,
-        "max": 1
-      })
-      collector.on("collect", (msg) => {
-        delete players[this.author.id];
-        this.Output.generic(`**${this.author.tag}**: is not playing this round of trivia.`);
-        msg.delete()
-        .catch(e => console.log(e));
-      });
-      collector.on("end", (collected) => {
-        message.delete()
-        .catch(e => console.log(e));
-      })
-    })
-    .catch(e => console.log(e));
-    trivia.players = players;
-    this.server.trivia = trivia;
-    DataManager.setServer(this.server);
-  }
+	async onNewMessage() {
+		try {
+			let trivia = this.server.trivia || {};
+			let players = trivia.players || {};
+			if (players[this.author.tag] || players[this.author.tag] === false) return;
+			players[this.author.tag] = true;
+			DataManager.setServer(this.server);
+			let playing = await this.Output.confirm({
+				"description": `**${this.author.tag}** joined rated trivia.\nType \`n\` or press ❎ in 10s to cancel.`,
+				"errors": ["time"],
+				"cancel": true
+			}, true);
+			if (playing) this.Output.sender(new Embed()
+				.setTitle(`Now playing rated trivia`)
+				.setDescription(Object.entries(players)
+					.filter(([, playing]) => playing)
+					.map(([player]) => player === this.author.tag ? "**" + player + "**" : player)
+					.reverse()
+					.join("\n")
+				)
+			);
+			else players[this.author.tag] = false;
+			trivia.players = players;
+			this.server.trivia = trivia;
+			DataManager.setServer(this.server);
+		} catch (e) {
+			this.Output.onError("error");
+			if (e) this.Output.onError(e)
+		}
+	}
 
-  rank (message, args, command, argument) {
-    if(args.length === 0) {
-      let user = message.author;
-      let dbuser = getdbuserfromuser(user);
-      message.channel.send({embed: {
-          title: "**Trivia Rating**",
-          description: `**${dbuser.username}** ${dbuser.triviarating || 1500}${!dbuser.triviaprovisional ? "?" : ""}`,
-          color: 53380
-        }
-      });
-    } else {
-      let user = getuser(message.channel, args[0]);
-      let dbuser = getdbuserfromuser(user);
-      if(dbuser) { 
-        message.channel.send({embed:{
-            title: "**Trivia Rating**",
-            description: `**${dbuser.username}** ${dbuser.triviarating}${!dbuser.triviaprovisional ? "?" : ""}`,
-            color: 53380
-          }
-        });
-      } else {
-        message.channel.send({embed:{
-            title: "**Trivia Rating**",
-            description: `**User Not Found**`,
-            color: 53380
-          }
-        });
-      }
-    }
-  }
-  
-  ratingUpdate (message) {
-    if(!this.server.states.trivia) return;
-    if(message.embeds[0].title === 'Trivia Game Ended' || message.embeds[0].title === 'Final Results') {
-      const initialRating = 1500;
-      const ratingSpread = 1589;
-      let triviagame = {
-        "header": message.embeds[0].author.name,
-        "title": message.embeds[0].title,
-        "description": message.embeds[0].description
-      };
-      const args = triviagame.description.split("\n");
-      let allString = [];
-      let totalSuccessNumber = 0;
-      let continueProgram = true;
-      let runOnce = true;
-      let totalScore = 0;
-      let tally = DataManager.getData();
-      for(let i = 0; i < args.length; i++) {
-        let desArray = args[i].split(' '); 
-        let name = args[i].split("*").join("").split(/ +/g).shift();
-        let user = getuser(message.guild, name);
-        let dbuser = getdbuserfromuser(user) || { "triviarating": 1500  };
-        let currentRating = dbuser.triviarating || 1500;
-        let successNumber = Math.pow(10, (currentRating - initialRating) / ratingSpread);
-        totalSuccessNumber += successNumber;
-        totalScore += Number(desArray[2]);
-      };
-      for(let i = 0; i < args.length; i++) {
-        let desArray = args[i].split(' ');
-        let name = args[i].split("*").join("").split(/ +/g).shift();
-        let user = getuser(message.guild, name);
-        let dbuser = getdbuserfromuser(user);
-        if(!dbuser) break;
-        let dbindex = getdbindexfromdbuser(dbuser);
-        let currentRating = dbuser.triviarating || 1500;
-        let successNumber = Math.pow(10, (currentRating - initialRating) / ratingSpread);
-        if(runOnce === true) {
-          if(desArray[2] >= 10) {
-            runOnce = false;
-            continueProgram = true;
-            runOnce = false;
-          } else
-          if(desArray[2] < 10) {
-            continueProgram = false;
-            break;
-          }
-        };
-        let successNumberShare = successNumber / totalSuccessNumber;
-        let estimatedScore = successNumberShare * totalScore;
-        let newRating = Math.max(50 - (dbuser.triviagames || 0) * 3, 10) * (desArray[2] - estimatedScore);
-        let theRating = Number(newRating) + Number(currentRating);
-        let sign = "";
-        if(Math.round(newRating) > 0) sign = "+";
-        let ratingmsg = `**${name}** ${Math.round(theRating)}${(dbuser.triviagames || 0) < 10 ? "?" : ""} (${sign}${Math.round(newRating)})`;
-        allString.push(ratingmsg);
-        tally[dbindex].triviarating = Math.round(theRating);
-        if(tally[dbindex].triviagames) tally[dbindex].triviagames++;
-        else tally[dbindex].triviagames = 1;
-        if(!!tally[dbindex].triviagames && tally[dbindex].triviagames >= 10) tally[dbindex].triviaprovisional = true;
-        else tally[dbindex].triviaprovisional = false;
-      };
-      DataManager.setData(tally);
-      if(continueProgram) {
-          message.channel.send({embed:{
-              title: "**Trivia Rating Update**",
-              description: allString.join("\n"),
-              color: 53380
-            }});
-      } else {
-        let triviaembed = {};
-        triviaembed.title = "**Trivia Update**";
-        triviaembed.description = "__**Only 10+ Point Games Are Rated**__";
-        setTimeout(embedsender(message.channel, triviaembed), 5000);
-      }
-    }
-    this.end();
-  }
+	async ratingUpdate(embed) {
+		try {
+			const lines = embed.description.split("\n");
+			let data = lines.map(line => {
+				let [name, , score] = line.match(/[^\s]+/gi); //[**ObiWanBenoni#3488**, has, 3, points]
+				let user = this.Search.users.byTag(name.replace(/\*/g, "")); //byTag filters out the **
+				if (!user) return null;
+				let dbuser = DBuser.getUser(user);
+				if (!dbuser.trivia) dbuser.trivia = {
+					"rating": 1500,
+					"games": 0
+				};
+				let estimate = Math.pow(10, (dbuser.trivia.rating - config.trivia.initial) / config.trivia.spread); //ex: (2000 - 1500) / 1589 or (1400 - 1500 / 1589
+				return [dbuser, estimate, Number(score)]; //a number from 0 to 10. If less than 1500, it's between 0 and 1. Realistically not above 5
+			});
+			data = data.filter(d => d && this.server.trivia.players[d[0].username]);    //d is dbuser, not user
+			if (data.length < 2) throw "Only games with 2 or more players are rated.";
+			let totalEstimate = data.reduce((a, [, estimate]) => a + estimate, 0);
+			let totalScore = data.reduce((a, [, , score]) => a + score, 0);
+			if (totalScore < this.server.trivia.min) throw "Only 10+ point games are rated.";
+			let description = "";
+			console.log(Object.keys(this.server.trivia.players));
+			for (let [dbuser, estimate, score] of data) {
+				let shareEstimate = (estimate / totalEstimate) * totalScore;
+				let RD = Math.max(50 - (dbuser.trivia.games || 0) * 3, 10);
+				let difference = RD * (score - shareEstimate);
+				dbuser.trivia.rating = Math.round(difference + dbuser.trivia.rating);
+				dbuser.trivia.games++;
+				description += "**" + dbuser.username + "** " + dbuser.trivia.rating + (dbuser.trivia.games < this.server.trivia.provisional ? "?" : "") + " (" + difference.toSign() + ")\n";
+				DBuser.setData(dbuser);
+			}
+			await this.Output.sender(new Embed()
+				.setTitle("Trivia Rating Update")
+				.setDescription(description)
+			)
+			throw "";
+		} catch (e) {
+			this.end();
+			if (e) this.Output.onError(e);
+		}
+	}
+
+
+	async rating(argument) {
+		try {
+			let user = this.user;
+			if (argument) user = this.Search.users.get(argument);
+			if (!user) throw "Couldn't find user **" + argument + "**!";
+			let dbuser = DBuser.getUser(user);
+			this.Output.sender(new Embed()
+				.setTitle("Trivia Rating")
+				.setDescription("**" + dbuser.username + "** " + (dbuser.trivia ? dbuser.trivia.rating : 1500) + (dbuser.trivia.games < this.server.trivia.provisional ? "?" : ""))
+			)
+		} catch (e) {
+			if (e) this.Output.onError(e)
+		}
+	}
 
 }
 

@@ -42,7 +42,7 @@ class FEN extends Parse {
       "(\\d+)" + //Fullmove number
       "\\s*" + //white space, may or may not exist
       "(\\+[0-3]\\+[0-3])?"; //three-check extra group, may or may not exist
-    const regex = /((?:(?:[pnbrqkPNBRQK1-8]{1,8})\/?){8})\s?((?:[pnbrqkPNBRQK]{1,8})\/?)?\s+(b|w)\s+(-|K?Q?k?q?)\s+(-|[a-h][3-6])\s+(\d+)\s+(\d+)\s*(\+[0-3]\+[0-3])?/ //for syntax highlighting + copy/paste to debugger
+    const regex = /((?:(?:[pnbrqkPNBRQK1-8]{1,8})\/?){8})\s?((?:[pnbrqkPNBRQK]{1,8})\/?)?\s+(b|w)\s+(-|K?Q?k?q?)\s+(-|[a-h][3-6])\s+(\d+)\s+(\d+)\s*(\+[0-3]\+[0-3])?/; //for syntax highlighting + copy/paste to debugger
     let fenRegExp = new RegExp(fenRegExpString);
     let fenArray = this.argument.match(fenRegExp);
     if(fenArray) return fenArray; //returns matches witch capture groups [full string, ...each () match group]
@@ -101,18 +101,18 @@ class FEN extends Parse {
       let binhand = this.inhand[2].split(""); //white in-hand pieces, black in-hand pieces
       for(let i = 0; i < winhand.length; i++) {
         winhand[i] = this.Search.emojis.get("white" + winhand[i].toLowerCase());
-      };
-      for(let i = 0; i < binhand.length; i++) {
+      }
+	    for(let i = 0; i < binhand.length; i++) {
         binhand[i] = this.Search.emojis.get("black" + binhand[i]);
-      };
-      winhandstring = winhand.join(" ");
+      }
+	    winhandstring = winhand.join(" ");
       binhandstring = binhand.join(" ");
     } else
     if(this.variant === "threeCheck") {
       winhandstring = "White checks: " + "**+**".repeat(this.checks[1]);
       binhandstring = "Black checks: " + "**+**".repeat(this.checks[2]);
-    };
-    return this.flip ? winhandstring + "\n" + binhandstring : binhandstring + "\n" + winhandstring;
+    }
+	  return this.flip ? winhandstring + "\n" + binhandstring : binhandstring + "\n" + winhandstring;
   }
 
   get hint () {
@@ -155,15 +155,15 @@ Array.prototype.remove = function(index) {
   if(Array.isArray(index)) {
     index.sort(function(a, b) {
       return b - a;
-    })
-    for(let i = 0; i < index.length; i++) {;
-      this.splice(index[i], 1);
+    });
+	  for (let i = 0; i < index.length; i++) {
+		  this.splice(index[i], 1);
     }
   } else {
     this.splice(index, 1);
   }
   return this;
-}
+};
 
 Array.prototype.clean = function() {
   for(let i = 0; i < this.length; i++) {
@@ -173,4 +173,4 @@ Array.prototype.clean = function() {
     }
   }
   return this;
-}
+};

@@ -20,6 +20,10 @@ class Currency extends Parse {
     }
   }
 
+  gild (messageReaction, user) {
+    if (messageReaction.emoji.id === "481996881606475798" && !user.bot) return messageReaction.remove(user);
+  }
+
 }
 
 module.exports = Currency;

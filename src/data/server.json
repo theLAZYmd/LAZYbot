@@ -61,21 +61,9 @@
             ]
         ],
         "trivia": {
-            "players": {
-                "185412969130229760": true,
-                "207436604934062080": true,
-                "341611207062716418": true,
-                "312824560602841089": true,
-                "303609777756438529": true,
-                "324082212146249730": true,
-                "330193848137678848": true,
-                "326918898178064396": true,
-                "317034686973214720": true,
-                "363519664875372556": true,
-                "414816252733685760": true,
-                "471771674833059882": true,
-                "364227499728568320": true
-            }
+            "min": 10,
+            "provisional": 10,
+            "players": {}
         },
         "tickets": [
             {
@@ -142,7 +130,10 @@
             ]
         },
         "notify": {
-            "185412969130229760": 1532129995175
+            "185412969130229760": 1536336039927,
+            "330193848137678848": 1537861116668,
+            "471771674833059882": 1536439043906,
+            "407662597555617802": 1537932887680
         }
     },
     "430035841239220224": {
@@ -188,5 +179,50 @@
         "tickets": [],
         "getplaying": {},
         "notify": {}
+    },
+    "433936141989969931": {
+        "id": "",
+        "states": {
+            "tm": false,
+            "bcp": false,
+            "election": false,
+            "trivia": false
+        },
+        "prefixes": {
+            "generic": "!",
+            "nadeko": "."
+        },
+        "channels": {
+            "announcements": "announcements",
+            "bot": "bot",
+            "bot2": "bot",
+            "modmail": "modmail",
+            "log": "log",
+            "join": "join",
+            "leave": "leave",
+            "trivia": "trivia",
+            "welcome": "welcome"
+        },
+        "colors": {
+            "generic": 53380,
+            "error": 15406156,
+            "ratings": 9359868
+        },
+        "roles": {
+            "admin": "admin",
+            "mod": "mod",
+            "bot": "bot",
+            "muted": "muted",
+            "arena": "arena",
+            "beta": "",
+            "livenotifications": "live"
+        },
+        "regions": [],
+        "shadowbanned": [],
+        "trivia": {},
+        "tickets": [],
+        "getplaying": {},
+        "notify": {},
+        "_id": "433936141989969931"
     }
 }

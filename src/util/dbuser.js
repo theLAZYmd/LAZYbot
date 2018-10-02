@@ -31,8 +31,8 @@ class DBuser {
       DataManager.setData(tally);
       console.log("User " + newuser.username + " has been logged in the database!");
       dbuser = tally.find(dbuser => user.id === dbuser.id);
-    };
-    return dbuser;
+    }
+	  return dbuser;
   }
 
   static getIndex(dbuser) {
@@ -70,8 +70,8 @@ class DBuser {
           }
         }
       }
-    };
-    return "";
+    }
+	  return "";
   }
 
 }

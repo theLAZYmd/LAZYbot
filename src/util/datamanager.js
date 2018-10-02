@@ -32,8 +32,8 @@ class DataManager {
       DataManager.setServer(object, filepath); //set it
       console.log("Server " + object._id + " has been logged in the database!");
       return object; //and return the object
-    };
-    return server; //and return the object
+    }
+	  return server; //and return the object
   }
 
   static setServer(newServer, newfilepath) {

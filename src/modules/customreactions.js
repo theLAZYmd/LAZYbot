@@ -1,6 +1,6 @@
 const Parse = require("../util/parse.js");
 const CRFile = require("../data/customreactions.json");
-const DataManager = require("../util/datamanager.js")
+const DataManager = require("../util/datamanager.js");
 
 class CustomReactions extends Parse {
 
@@ -17,7 +17,7 @@ class CustomReactions extends Parse {
   react (SearchArray, functionOnTrue) { //router
     for(let i = 0; i < SearchArray.length; i++) {
       if(this.message.content === SearchArray[i].trigger) {
-        functionOnTrue(SearchArray[i].reaction)
+        functionOnTrue(SearchArray[i].reaction);
         break;
       } else {
         for(let j = 0; j < this.args.length; j++) {
@@ -36,13 +36,13 @@ class CustomReactions extends Parse {
       if(SearchArray[i].trigger === this.args[0]) {
         functionOnFound(SearchArray[i]);
         foundboolean = true;
-      };
-      if(!SearchArray[i].trigger) {
+      }
+	    if(!SearchArray[i].trigger) {
         SearchArray.remove(i); //removes null ones
         i--;
-      };
-    };
-    if(foundboolean) {
+      }
+    }
+	  if(foundboolean) {
       this.onUpdate()
       .then(() => this.message.react(this.Search.emojis.get("true")))
       .catch((e) => {
@@ -114,9 +114,9 @@ Array.prototype.remove = function(index) {
   if(Array.isArray(index)) {
     index.sort(function(a, b) {
       return b - a;
-    })
-    for(let i = 0; i < index.length; i++) {;
-      this.splice(index[i], 1);
+    });
+	  for (let i = 0; i < index.length; i++) {
+		  this.splice(index[i], 1);
     }
   } else {
     this.splice(index, 1);

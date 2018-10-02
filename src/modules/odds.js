@@ -62,8 +62,8 @@ class Series extends All {
       (1 / Math.E) //divided by (e), now a number between 0 and 1
       *
       0.25); //now a number between 0 and 0.25
-    data.confidence = 0.45 + data.reliability + data.accuracy //base value
-    console.log("data.reliability: " + data.reliability + "\n", "data.accuracy:" + data.accuracy + "\n", "data.confidence: " + data.confidence)
+    data.confidence = 0.45 + data.reliability + data.accuracy; //base value
+    console.log("data.reliability: " + data.reliability + "\n", "data.accuracy:" + data.accuracy + "\n", "data.confidence: " + data.confidence);
     for (let player of data.players) { //for each player
       player.discrete = {
         "probability": [],
@@ -79,13 +79,13 @@ class Series extends All {
         player.discrete.decimal[j] = data.confidence / player.discrete.probability[j];
         player.cumulative.probability[j] = 1 - Maths.binomial(data.length, player.winchance, j - 1, true);
         player.cumulative.decimal[j] = data.confidence / player.cumulative.probability[j];
-      };
-    };
-    let embedgroup = [];
+      }
+    }
+	  let embedgroup = [];
     for (let j = 0; j < 2; j++) { //maxpages is 2
       embedgroup.push(this.build(data, j));
-    };
-    this.Paginator.sender(embedgroup, 180000)
+    }
+	  this.Paginator.sender(embedgroup, 180000)
   }
 
   build(data, page) {
@@ -103,16 +103,16 @@ class Series extends All {
         array.push([
           (type === "discrete" ? "Exactly " : "At least ") + j, !decimal || decimal > 80 ? "-" : "**" + decimal + "** (" + us + ")"
         ]);
-      };
-      let w = Math.floor((data.length - 1) / 2);
+      }
+	    let w = Math.floor((data.length - 1) / 2);
       let matchodds = player.cumulative.decimal[w] && player.cumulative.decimal[w] > 1 ? player.cumulative.decimal[w].toFixed(2) : "";
       let usmatchodds = matchodds ? (matchodds > 2 ? "+" : "") + Calc.tous(matchodds).toFixed() : null;
       array.push([
         "The match", !matchodds || matchodds > 80 ? "-" : "**" + matchodds + "** (" + usmatchodds + ")"
-      ])
+      ]);
       Embed.fielder(embed.fields, "How many games will " + player.name + " win?    \u200b", Embed.getFields(array), true);
-    };
-    return embed;
+    }
+	  return embed;
   }
 
 }
@@ -147,7 +147,7 @@ module.exports = Odds;
 Number.prototype.round = function (places) {
   (Math.round(this * Math.pow(10, places)) / Math.pow(10, places));
   return this;
-}
+};
 
 String.prototype.toProperCase = function () {
   let words = this.split(/ +/g);
@@ -157,7 +157,7 @@ String.prototype.toProperCase = function () {
   }
   let newString = newArray.join(" ");
   return newString;
-}
+};
 
 /*
 EXAMPLE data object produced from series odds

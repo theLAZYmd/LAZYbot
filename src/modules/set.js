@@ -21,7 +21,7 @@ class Set extends Parse {
 
   genericprefix(argument) {
     let newPrefix = argument.replace("\"", "").replace("`", "");
-    this.server.prefixes.generic = newPrefix
+    this.server.prefixes.generic = newPrefix;
     DataManager.setServer(this.server);
     this.Output.generic(`**${this.author.tag}** has updated the generic prefix on **${this.guild.name}** to **${newPrefix}** !`);
     console.log(`${this.author.username} [${this.author.id}] has updated the generic prefix to ${newPrefix}.`);
@@ -29,7 +29,7 @@ class Set extends Parse {
 
   nadekoprefix(argument) {
     let newPrefix = argument.replace("\"", "").replace("`", "");
-    this.server.prefixes.nadeko = newPrefix
+    this.server.prefixes.nadeko = newPrefix;
     DataManager.setServer(this.server);
     this.Output.generic(`**${this.author.tag}** has updated the nadeko prefix on **${this.guild.name}** to **${newPrefix}** !`);
     console.log(`${this.author.username} [${this.author.id}] has updated the nadeko prefix to ${newPrefix}.`);
@@ -56,7 +56,7 @@ class Set extends Parse {
     if (!version) return this.Output.generic("You are using LAZYbot version v." + packagestuff.version);
     packagestuff.version = version[0];
     DataManager.setFile(packagestuff, "./package.json");
-    this.Search.members.byUser(this.client.user).setNickname(`LAZYbot${this.client.user.id === config.ids.betabot ? "beta" : ""} v.` + version)
+    this.guild.me.setNickname(`LAZYbot${this.client.user.id === config.ids.betabot ? "beta" : ""} v.` + version);
     this.Output.generic(`${packagestuff.name} version has been ${this.command === "upversion" ? "upped" : "modified"} to **v.${version}**!`);
   }
 

@@ -13,15 +13,15 @@ class Embeds extends Parse {
   async find (args) {
     try {
       let file = await this.getEmbeds();
-      for (let collection of Object.values(file)) {
+      for (let [type, collection] of Object.entries(file)) {
         for (let [key, embed] of Object.entries(collection)) {
           if (args[0] !== key) continue;
           let guide = Array.isArray(embed) ? embed : [embed];
           if (this.command === "...") this.message.delete();
-          return this.Paginator.sender(guide, this.command === "..." ? Infinity : 180000); 
+          return this.Paginator.sender(guide, this.command === "..." ? Infinity : 180000, type + "." + key); 
         }
-      };
-      let filter = m => m.author.bot;
+      }
+	    let filter = m => m.author.bot;
       try {
         await this.channel.awaitMessages(filter, {
           "max": 1,
@@ -30,7 +30,7 @@ class Embeds extends Parse {
         })
       } catch (e) {
         throw "Couldn't find guide matching that name.";
-      };
+      }
     } catch (e) {
       if (e) this.Output.onError(e);
     }
@@ -55,11 +55,11 @@ class Embeds extends Parse {
           value += line; //necessary so that we can count line length
           value += (i < embeds.length - 1 && !(i & 1) ? " ".repeat(Math.max(0, 28 - line.length)) + "\u200b" : ""); //spacer
           value += (i & 1 ? "\n" : "");
-        };
-        value += "```";
+        }
+	      value += "```";
         embed.fields = Embed.fielder(embed.fields, name.toProperCase(), value, true);
-      };
-      this.Output.sender(embed);
+      }
+	    this.Output.sender(embed);
     } catch (e) {
       if (e) this.Output.onError(e);
     }
@@ -68,14 +68,14 @@ class Embeds extends Parse {
   async getEmbeds () {
     if (this._embeds) return this._embeds;
     try {
-      //if (this.client.user.id === config.ids.betabot) throw "";
+      if (this.client.user.id === config.ids.betabot) throw "";
       let body = await rp(config.urls.embeds);
       this._embeds = JSON.parse(body);
     } catch (e) {
       if (e) this.Output.onError(e);
       this._embeds = DataManager.getFile("./src/data/embeds.json");
-    };
-    return this._embeds;
+    }
+	  return this._embeds;
   }
 
 }
@@ -87,6 +87,6 @@ String.prototype.toProperCase = function () {
   let newArray = [];
   for (let i = 0; i < words.length; i++) {
     newArray[i] = words[i][0].toUpperCase() + words[i].slice(1, words[i].length).toLowerCase();
-  };
-  return newArray.join(" ");
-}
+  }
+	return newArray.join(" ");
+};

@@ -1,8 +1,12 @@
 {
-  "_all": [
-    [
-      "I declare my intention to run as candidate for",
-      "${generic}candidates register"
-    ]
-  ]
+	"_all": [
+		[
+			"I declare my intention to run as candidate for",
+			"${generic}candidates register"
+		],
+		[
+			"I sponsor",
+			"${generic}sponsor"
+		]
+	]
 }

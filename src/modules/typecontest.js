@@ -26,8 +26,8 @@ class TypeContest extends Parse {
       if (invalids) {
         invalids.shift();
         throw `Invalid characters **${invalids.join(" ")}**. Please reformat your quote.`;
-      };
-      for (let i = args.length - 1; i >= 0; i--)
+      }
+	    for (let i = args.length - 1; i >= 0; i--)
         if (args[i].startsWith("-"))
           index = i;
       if (index === -1) throw "No source provided/Incorrect format!";
@@ -51,7 +51,7 @@ class TypeContest extends Parse {
           "footer": Embed.footer("Submitted: " + getISOtime(Date.now()) + ", " + text.length + " characters.")
         },
         "channel": this.Search.channels.get(this.server.channels.modmail),
-        "role": this.Search.roles.get(this.server.roles.admin)
+        "role": "admin"
       }, true);
       TicketsConstructor.set(msg.id, {
         "source": source,

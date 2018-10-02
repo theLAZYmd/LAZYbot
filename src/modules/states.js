@@ -31,8 +31,8 @@ class States extends Parse {
         'READ_MESSAGES': this.server.states.tm ? false : null, //if testing mode is disabled, permissions are allowed
         'SEND_MESSAGES': this.server.states.tm ? false : null
       });
-    };
-    DataManager.setServer(this.server);
+    }
+	  DataManager.setServer(this.server);
     this.Output.sender({
       "description": `**Testing mode ${this.server.states.tm ? "enabled" : "disabled"}.**`,
       "color": this.server.states.tm ? config.colors.generic : config.colors.error

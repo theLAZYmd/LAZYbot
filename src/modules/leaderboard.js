@@ -33,16 +33,16 @@ class Leaderboard extends Parse {
           if (arg.toLowerCase().replace(/[^a-z]/gi, "") === key.toLowerCase()) {
             source = _source;
             break sourceloop;
-          };
-      let active = /-a|--active/gi.test(content); //active is just if the message contains the word
+          }
+	    let active = /-a|--active/gi.test(content); //active is just if the message contains the word
       let found = {}, variant; //variant found, and variant used. Running one
       for (let [key, _variant] of Object.entries(config.variants[source.key])) {
         if (content.includes(key)) found.args = _variant, variant = _variant; //if in args, match it.
         if (channel.topic && channel.topic.includes(key)) found.channel = _variant, variant = _variant; //if in topic match it.
         if (channel.name.includes(key)) found.channel = _variant, variant = _variant; //if in channel name, match it.
         if (found.channel) break;
-      };
-      if (found.args && found.channel && found.channel !== found.args) throw "Wrong channel to summon this leaderboard!"; //if no possibilities or match conflict, return.
+      }
+	    if (found.args && found.channel && found.channel !== found.args) throw "Wrong channel to summon this leaderboard!"; //if no possibilities or match conflict, return.
       if (!variant) throw "Couldn't find matching variant"; //if none found, return.
       return {variant, source, active}; //data object for generating leaderboard
     } catch (e) {
@@ -62,16 +62,16 @@ class Leaderboard extends Parse {
         if (!username || !dbuser[data.source.key][username]) {
           console.log("No main registered for " + dbuser.username + ".");
           continue; //trust that it will be fixed in updates
-        };
-        if (data.variant.key !== "all" && (!dbuser[data.source.key][username][data.variant.key] || dbuser[data.source.key][username][data.variant.key].endsWith("?"))) continue;
+        }
+	      if (data.variant.key !== "all" && (!dbuser[data.source.key][username][data.variant.key] || dbuser[data.source.key][username][data.variant.key].endsWith("?"))) continue;
         data.leaderboard.push({
           "tag": dbuser.username,
           "username": username,
           "id": dbuser.id,
           "rating": data.variant.key === "all" ? dbuser[data.source.key][username] : dbuser[data.source.key][username][data.variant.key]
         });
-      };
-      if (data.leaderboard.length !== 0 && data.variant.key !== "all") data.leaderboard.sort((a, b) => parseInt(b.rating) - parseInt(a.rating));
+      }
+	    if (data.leaderboard.length !== 0 && data.variant.key !== "all") data.leaderboard.sort((a, b) => parseInt(b.rating) - parseInt(a.rating));
       return data;
     } catch (e) {
       if (e) throw e;
@@ -86,8 +86,8 @@ class Leaderboard extends Parse {
         if (!entry) continue;
         let urllink = data.source.url.profile.replace("|", entry.username); //lichess.org/@/V2chess
         array[i] = ["[" + entry.tag + "](" + urllink + ") " + entry.rating];
-      };
-      let lbembed = Embed.leaderboard(array, page, false, 10); //Case 2 Leaderboard: 
+      }
+	    let lbembed = Embed.leaderboard(array, page, false, 10); //Case 2 Leaderboard:
       lbembed.title = `${data.emoji} House leaderboard on ${data.source.name} for${data.active ? "active ": " "}${data.variant.name} players`;
       return lbembed;
     } catch (e) {

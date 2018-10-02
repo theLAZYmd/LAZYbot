@@ -20,8 +20,8 @@ class ASL extends Parse {
           this.Output.generic(`Data on **age**, **sex**, and **location** cleared for **${this.user.tag}**.`)
         } else throw "Incorrect number of parameters specified. Please specify **age**, **sex**, and **location**.";
         return;
-      };
-      if (args.length === 3) {
+      }
+	    if (args.length === 3) {
         let [age, sex, location] = args;
         console.log(age, sex, location);
         if (isNaN(age) && age !== "-") throw "Please specify a number for **age**.";
@@ -61,8 +61,8 @@ class ASL extends Parse {
               (aslarray.length === 3 ? "," : ``) +
               " and ")
           ); //punctuation, just go with it
-      };
-      if (asl) this.Output.generic(`Hello **${this.author.username}**, I see you're ${asl}.`);
+      }
+	    if (asl) this.Output.generic(`Hello **${this.author.username}**, I see you're ${asl}.`);
       else throw "No **age**, **sex**, and **location** found, please specify.";
     } catch (e) {
       this.Output.onError(e);
@@ -81,19 +81,19 @@ Array.prototype.clean = function () {
     }
   }
   return this;
-}
+};
 
 Array.prototype.remove = function (index) {
   if (!index && index !== 0) return;
   if (Array.isArray(index)) {
     index.sort(function (a, b) {
       return b - a;
-    })
-    for (let i = 0; i < index.length; i++) {;
-      this.splice(index[i], 1);
+    });
+	  for (let i = 0; i < index.length; i++) {
+		  this.splice(index[i], 1);
     }
   } else {
     this.splice(index, 1);
   }
   return this;
-}
+};

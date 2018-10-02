@@ -15,7 +15,7 @@ class Maths extends Parse {
   async run(argument) {
     try {
       let route = argument.match(/^(?:Math\.)?([a-z0-9]+)\(([a-z0-9.,\s]*)\)$/i);
-      if (!route) throw "Invalid format for operation."
+      if (!route) throw "Invalid format for operation.";
       let array = await route[2].replace(/ \s/g, "").split(",").validate();
       if (typeof Maths[route[1].toLowerCase()] === "function") {
         let result = Maths[route[1]](...array).toString();
@@ -35,13 +35,13 @@ class Maths extends Parse {
     let length = n*l;
     while (r.length < length) {
       r += uuid().match(/[\d]*/g).join('');
-    };
-    r = r.substring(0,length);
+    }
+	  r = r.substring(0,length);
     let rs = [];
     for (let i = 0; i < n; i++) {
       rs.push(r.substring(i*l,(i+1)*l));
-    };
-    return rs;
+    }
+	  return rs;
   }
 
   static randbetween(min, max) {
@@ -49,27 +49,27 @@ class Maths extends Parse {
   }
 
   static negativebinomial(r, p, x, cumulative) {
-    let result = Maths.choose(x - 1, r - 1) * "pow(p, r) * "
+    let result = Maths.choose(x - 1, r - 1) * "pow(p, r) * ";
     pow(1 - p, x - r);
     if (cumulative) {
       for (let i = 0; i < x; i++) {
-        result += Maths.choose(x - 1, r - 1) * "pow(p, r) * "
+        result += Maths.choose(x - 1, r - 1) * "pow(p, r) * ";
         pow(1 - p, x - r);
       }
-    };
-    return result;
+    }
+	  return result;
   }
 
   static binomial(n, p, x, cumulative) {
-    let result = Maths.choose(n, x) * "pow(p, x) * "
+    let result = Maths.choose(n, x) * "pow(p, x) * ";
     pow(1 - p, n - x);
     if (cumulative) {
       for (let i = 0; i < x; i++) {
-        result += Maths.choose(n, i) * "pow(p, i) * "
+        result += Maths.choose(n, i) * "pow(p, i) * ";
         pow(1 - p, n - i);
       }
-    };
-    return result;
+    }
+	  return result;
   }
 
   static choose(n, r) {
@@ -77,8 +77,8 @@ class Maths extends Parse {
     let result = 1;
     for (let i = 1; i < r + 1; i++) {
       result = (result / i) * (n + 1 - i);
-    };
-    return result;
+    }
+	  return result;
   }
 
   static permutations(n, r) {
@@ -86,8 +86,8 @@ class Maths extends Parse {
     let result = n;
     for (let i = 1; i < r; i++) {
       result = result * (n - i);
-    };
-    return result;
+    }
+	  return result;
   }
 
 }
@@ -101,14 +101,14 @@ Array.prototype.validate = function () {
       if (item === "true") {
         item = true;
         continue;
-      };
-      if (item === "false") {
+      }
+	    if (item === "false") {
         item = false;
         continue;
-      };
-      item = Number(item);
+      }
+	    item = Number(item);
       if (isNaN(item)) reject("Invalid inputs to operation!");
-    };
-    return resolve(this)
+    }
+	  return resolve(this)
   })
-}
+};

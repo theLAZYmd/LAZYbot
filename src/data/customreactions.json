@@ -103,6 +103,11 @@
                 "trigger": "shegg",
                 "reaction": "shegg",
                 "anyword": true
+            },
+            {
+                "trigger": "lazy",
+                "reaction": "lazy",
+                "anyword": false
             }
         ]
     }

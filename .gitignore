@@ -9,6 +9,7 @@ node_modules/
 alt-script/
 .history/
 .git/
+.idea/
 lazybotv2.js
 token.json
 package-lock.json

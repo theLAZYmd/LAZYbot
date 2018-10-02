@@ -1,5 +1,5 @@
 const Parse = require("../util/parse.js");
-const Maths = require("../util/maths.js");
+const Maths = require("./maths.js");
 const Router = require("../util/router.js");
 
 class Color extends Parse {
@@ -17,8 +17,8 @@ class Color extends Parse {
       args = args.slice(1); 
       argument = args.join(" ").replace(/[^a-zA-Z0-9\.!\?',;:"£\$%~\+=()\s\u200B-\u200D\uFEFF-]+/g, "");
       modboolean = true; //need permissions to change somebody else's colour.
-    };
-    if(!args[0] || !argument) return this.get(member); //if there's no arguments left, view
+    }
+	  if(!args[0] || !argument) return this.get(member); //if there's no arguments left, view
     if(modboolean && !this.Check.role(this.member, this.server.roles.admin)) return; //to set need permissions.
     return this.set(member, argument);
   }
@@ -38,8 +38,8 @@ class Color extends Parse {
       for(let i = 0; i < color.length; i++) {
         color[i] = Number(color[i]);
       }
-    };
-    if(this.Check.role(member, "choosecolor")) {
+    }
+	  if(this.Check.role(member, "choosecolor")) {
       let role = this.Search.roles.get(member.user.username + "CustomColor");
       if(role) {
         role.setColor(color)
