@@ -815,7 +815,74 @@
                 ]
             }
         ],
-        "cwc": [{
+        "cwc": [
+            {
+                "image": "https://i.imgur.com/ZSI6HEj.png"
+            },
+            {
+                "author": {
+                    "name": "CRAZYHOUSE WORLD CHAMPIONSHIP 2018"
+                },
+                "thumbnail": {
+                    "url": "https://i.imgur.com/pMkkATk.png"
+                },
+                "title": "FOREWORD",
+                "description": "Over a year has passed since lichess’s Crazyhouse World Championship (CWC) was created. Last time we had a qualification round with 64 players, then three knockout rounds (R64, R32 and R16), after which the eight Candidates remained. Those final eight players played a Candidates Tournament which led to the finals between **TwelveTeen** and **JannLee**. During three weeks, they played 60 thrilling games. After the dust settled, the final score was 31,5-28,5 in favor of **JannLee**, making him the first Crazyhouse World Champion. \n\nToday, it’s time to continue this story. Champions are not born; they are made in the quiet hours when nobody is watching. Sign-ups for the 2nd edition of the CWC start on February 1. Do you have what it takes to be the next champion?"
+            },
+            {
+                "author": {
+                    "name": "CRAZYHOUSE WORLD CHAMPIONSHIP 2018"
+                },
+                "thumbnail": {
+                    "url": "https://i.imgur.com/pMkkATk.png"
+                },
+                "title": "INFORMATION",
+                "fields": [
+                    {
+                        "name": "Time Control",
+                        "value": "3 + 2 for the whole event",
+                        "inline": false
+                    },
+                    {
+                        "name": "Format",
+                        "value": "The championship will start out as a knockout, but when 8 players are left, they will play a round-robin Candidates tournament! The first place finisher of that tournament will play a WC match against the incumbent WC (1st CWC WC, JannLee).",
+                        "inline": false
+                    },
+                    {
+                        "name": "Prize Pool",
+                        "value": "$1000\n**Update:** upped by an additional $1100 from the generous fundraising of <@364388430412513281> through his Twitch donators to payout to the candidates.",
+                        "inline": false
+                    },
+                    {
+                        "name": "Prize Fund Distribution",
+                        "value": "$300 WC, $200 challenger, $50 for 8 candidates, 100$ Prediction tournament ($50 #1, $30 #2, $20 #3)\n<@364388430412513281> fundraising is distributed with $100 to each candidate.",
+                        "inline": false
+                    },
+                    {
+                        "name": "Start Date",
+                        "value": "Feb 15 2018",
+                        "inline": true
+                    },
+                    {
+                        "name": "Sign-Ups",
+                        "value": "Feb 1 2018 - Feb 14 2018",
+                        "inline": true
+                    },
+                    {
+                        "name": "Information and Rules",
+                        "value": "https://sites.google.com/site/2ndcrazyhouseworldchampionship/",
+                        "inline": false
+                    },
+                    {
+                        "name": "History",
+                        "value": "<https://sites.google.com/site/crazyhouseworldchampionship/home>\n<https://lichess.org/forum/team-crazyhouse-world-championship/time-control>\n<https://lichess.org/forum/team-crazyhouse-world-championship/time-control-voting>",
+                        "inline": false
+                    }
+                ]
+            }
+        ],
+        "cwc-rules": [
+            {
                 "image": {
                     "url": "https://i.imgur.com/v5fg6wH.png"
                 }
@@ -861,7 +928,8 @@
                 "thumbnail": "https://i.imgur.com/bzTbisk.png"
             }
         ],
-        "cwc-players": [{
+        "cwc-players": [
+            {
             "image": {
                 "url": "https://i.imgur.com/4zY6Neg.png"
             }
