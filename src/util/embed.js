@@ -222,11 +222,10 @@ class Embed extends RichEmbed {
 	  Double embeds can be annoying and complicated so make sure to include line breaks to add clarity and well-formatted for(let loops.
 	*/
 
-	static leaderboard(array, page, inline, _pagekey) { //see explanation at bottom
+	static leaderboard(array, page, inline, pagekey = 9) { //see explanation at bottom
 		let embed = {
 			"description": ""
 		};
-		let pagekey = _pagekey ? _pagekey : 9;
 		let beginfields = false;
 		for (let i = 0; i < array.length; i++) { //if i is less than point where second field starts appearing, add to description
 			if (!!array[i][1] || array[i][1] === 0 || !beginfields) {
@@ -250,6 +249,13 @@ class Embed extends RichEmbed {
 			}
 		}
 		return embed;
+	}
+
+	static rank(array, page = 0, pagekey = 9) {
+		let string = "";
+		for (let i = 0; i < array.length; i++)
+			string += "**#" + (i + 1 + page * pagekey) + "** " + array[i] + (i < 10 ? "\n" : ""); //CLASS 2
+		return string;
 	}
 
 }

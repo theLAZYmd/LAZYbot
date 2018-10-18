@@ -3,15 +3,15 @@
         "id": "185412969130229760",
         "username": "theLAZYmd#2353",
         "messages": {
-            "count": 74016,
-            "last": "any idea what to do about ties?",
-            "lastSeen": 1539834150396
+            "count": 74018,
+            "last": "<@128940476282830848>  secret channel",
+            "lastSeen": 1539870191263
         },
         "bidamount": 100000000000000000,
         "location": "Toronto",
         "sex": "male",
         "patron": false,
-        "lastupdate": 1539825965912,
+        "lastupdate": 1539868750898,
         "trophy": [
             "champion du mondeeeeeeee"
         ],
@@ -127,7 +127,7 @@
             }
         },
         "bidamount": 500,
-        "lastupdate": 1539826265983
+        "lastupdate": 1539868785610
     },
     {
         "id": "390497170626707457",
@@ -483,7 +483,7 @@
                 "bughouse": "1217"
             }
         },
-        "lastupdate": 1539832270154,
+        "lastupdate": 1539869465797,
         "trivia": {
             "rating": 1772,
             "games": 21
@@ -561,14 +561,14 @@
                 "3-check": "1496",
                 "anti": "2058",
                 "horde": "1452",
-                "atomic": "1693",
+                "atomic": "1682",
                 "koth": "1541",
                 "racing-kings": "1658"
             },
             "_country": "US",
             "_language": "en"
         },
-        "lastupdate": 1539829566718
+        "lastupdate": 1539869002131
     },
     {
         "id": "317767348566097930",
@@ -582,7 +582,7 @@
             "_main": "PawnInTraining",
             "PawnInTraining": {
                 "maxRating": "2252",
-                "blitz": "1977",
+                "blitz": "1978",
                 "bullet": "1880",
                 "rapid": "2112",
                 "classical": "2112?",
@@ -599,7 +599,7 @@
             "SonOfANimzovich": {
                 "maxRating": "2180",
                 "bullet": "1689",
-                "lightning": "1772",
+                "lightning": "1794",
                 "koth": "1351",
                 "crazyhouse": "2120",
                 "bughouse": "2180",
@@ -607,7 +607,7 @@
                 "lessons": "1000?"
             }
         },
-        "lastupdate": 1539828666827
+        "lastupdate": 1539870279796
     },
     {
         "id": "340287144448884748",
@@ -1259,7 +1259,7 @@
                 "lessons": "1646"
             }
         },
-        "lastupdate": 1539798239639,
+        "lastupdate": 1539870509993,
         "lastUpdate": 1534703268221
     },
     {
@@ -1309,7 +1309,7 @@
                 "crazyhouse": "2663"
             }
         },
-        "lastupdate": 1539810663221,
+        "lastupdate": 1539868128157,
         "lastUpdate": 1535046032253,
         "trivia": {
             "rating": 1246,
@@ -1353,7 +1353,7 @@
                 "lessons": "1789"
             }
         },
-        "lastupdate": 1539827466276
+        "lastupdate": 1539868808654
     },
     {
         "id": "200638507436212224",
@@ -1415,7 +1415,7 @@
             "_language": "nl",
             "_name": "Piet Paaltjes"
         },
-        "lastupdate": 1539804961476,
+        "lastupdate": 1539870599527,
         "bughousetest": {
             "_main": "bringiton",
             "bringiton": {
@@ -1699,7 +1699,7 @@
             "_name": "Lone Wolf",
             "_country": "IT"
         },
-        "lastupdate": 1539817863466
+        "lastupdate": 1539870995788
     },
     {
         "id": "413007142673711125",
@@ -2492,7 +2492,7 @@
             "lastSeen": 1529498685836
         },
         "chesscomratings": {},
-        "lastupdate": 1539832567857,
+        "lastupdate": 1539869568475,
         "lichess": {
             "_main": "TwitchWainaut",
             "TwitchWainaut": {
@@ -2531,7 +2531,7 @@
             "_language": "en-GB"
         },
         "finger": "I have  a chess YT channel btw!",
-        "lastupdate": 1539810360762
+        "lastupdate": 1539870885350
     },
     {
         "id": "128940476282830848",
@@ -3033,7 +3033,7 @@
             },
             "_country": "CA"
         },
-        "lastupdate": 1539824465209
+        "lastupdate": 1539834336185
     },
     {
         "id": "402122806063529984",
@@ -3180,7 +3180,7 @@
             },
             "_language": "en-GB"
         },
-        "lastupdate": 1539790734251
+        "lastupdate": 1539867538305
     },
     {
         "id": "293457973039071232",
@@ -3577,15 +3577,15 @@
         "chesscom": {
             "_main": "chuckmoulton",
             "chuckmoulton": {
-                "maxRating": "2251",
-                "bughouse": "2251"
+                "maxRating": "2209",
+                "bughouse": "2209"
             }
         },
         "age": "39",
         "sex": "male",
         "location": "Philadelphia",
         "finger": "https://www.twitch.tv/chuckmoulton",
-        "lastupdate": 1539828967023
+        "lastupdate": 1539868956320
     },
     {
         "id": "95048365607223296",
@@ -3644,7 +3644,7 @@
             "_main": "Brokula",
             "Brokula": {
                 "maxRating": "1895",
-                "blitz": "1697",
+                "blitz": "1683",
                 "bullet": "1740",
                 "rapid": "1895",
                 "classical": "1500?",
@@ -3659,7 +3659,7 @@
             "_country": "HR",
             "_language": "hr-HR"
         },
-        "lastupdate": 1539802857514
+        "lastupdate": 1539869983710
     },
     {
         "id": "300644131284189184",
@@ -4110,7 +4110,7 @@
             },
             "_language": "it-IT"
         },
-        "lastupdate": 1539803757755
+        "lastupdate": 1539870580370
     },
     {
         "id": "214291895969513473",
@@ -4546,7 +4546,7 @@
             "_title": "IM"
         },
         "lastUpdate": 1532733234992,
-        "lastupdate": 1539833468217
+        "lastupdate": 1539869684173
     },
     {
         "id": "263716135801847808",
@@ -5242,7 +5242,7 @@
             "_country": "SG",
             "_language": "fr-FR"
         },
-        "lastupdate": 1539791034258,
+        "lastupdate": 1539869192663,
         "trivia": {
             "rating": 1500,
             "games": 2
@@ -5286,7 +5286,7 @@
             },
             "_country": "IE"
         },
-        "lastupdate": 1539833168134
+        "lastupdate": 1539869584573
     },
     {
         "id": "277142335425478657",
@@ -6096,7 +6096,7 @@
             "last": "The <#407612549022875668> channel.  Where are those ratings from?",
             "lastSeen": 1530206681899
         },
-        "lastupdate": 1539826565909,
+        "lastupdate": 1539868791390,
         "lichess": {
             "_main": "colwem",
             "colwem": {
@@ -6481,7 +6481,7 @@
             "last": "blitz game # 40... only 11 wins 😂",
             "lastSeen": 1531525825002
         },
-        "lastupdate": 1539819664218,
+        "lastupdate": 1539868323434,
         "chesscom": {
             "_main": "jonasd12321",
             "jonasd12321": {
@@ -7102,7 +7102,7 @@
         "lichess": {
             "_main": "Natso",
             "Natso": {
-                "maxRating": "2291",
+                "maxRating": "2278",
                 "blitz": "2000",
                 "bullet": "1500?",
                 "rapid": "2107",
@@ -7111,7 +7111,7 @@
                 "3-check": "1917",
                 "anti": "1832",
                 "horde": "1476?",
-                "atomic": "2291",
+                "atomic": "2278",
                 "koth": "1818",
                 "racing-kings": "1865"
             },
@@ -7120,7 +7120,7 @@
             "_name": "Natso Dragneel"
         },
         "lastUpdate": 1533055686786,
-        "lastupdate": 1539829866819
+        "lastupdate": 1539869183086
     },
     {
         "id": "365673273704579074",
@@ -7211,7 +7211,7 @@
             }
         },
         "lastUpdate": 1532812011296,
-        "lastupdate": 1539800940658
+        "lastupdate": 1539869377290
     },
     {
         "id": "450315296998293534",
@@ -7312,7 +7312,7 @@
             }
         },
         "lastUpdate": 1533211267932,
-        "lastupdate": 1539559294602
+        "lastupdate": 1539870781496
     },
     {
         "id": "472293316025647105",
@@ -7701,7 +7701,7 @@
             "_main": "Tysace",
             "Tysace": {
                 "maxRating": "1783",
-                "blitz": "1648",
+                "blitz": "1658",
                 "bullet": "1783",
                 "rapid": "1717",
                 "classical": "1707",
@@ -7716,7 +7716,7 @@
             "_language": "en-GB"
         },
         "lastUpdate": 1534774235565,
-        "lastupdate": 1539679655354
+        "lastupdate": 1539869722821
     },
     {
         "id": "364227499728568320",
@@ -7981,7 +7981,7 @@
         "lichess": {
             "Koffheat": {
                 "maxRating": "1783",
-                "blitz": "1527",
+                "blitz": "1537",
                 "bullet": "1415",
                 "rapid": "1630",
                 "classical": "1566",
@@ -7993,7 +7993,7 @@
                 "racing-kings": "1783"
             }
         },
-        "lastupdate": 1539799136937
+        "lastupdate": 1539870433677
     },
     {
         "id": "299529390696562688",
@@ -8027,7 +8027,7 @@
                 "crazyhouse": "2150"
             }
         },
-        "lastupdate": 1539793437722,
+        "lastupdate": 1539869882808,
         "chesscom": {
             "AfuroZamurai": {
                 "maxRating": "2512",
@@ -8120,7 +8120,7 @@
             "last": "<@!185412969130229760> thank you",
             "lastSeen": 1535641578533
         },
-        "lastupdate": 1539824765275,
+        "lastupdate": 1539868623293,
         "lichess": {
             "_main": "Relmcheatham",
             "Relmcheatham": {
@@ -8866,7 +8866,7 @@
             },
             "_language": "en-GB"
         },
-        "lastupdate": 1539828066311
+        "lastupdate": 1539868847952
     },
     {
         "id": "200850254990540801",
@@ -10160,7 +10160,7 @@
                 "classical": "1500?"
             }
         },
-        "lastupdate": 1539830166900
+        "lastupdate": 1539869248543
     },
     {
         "id": "497528297920659457",

@@ -1,43 +1,41 @@
+class Data {
+	constructor(candidates, votes, ties, cycle = 0) {
+		this.count = candidates.length;
+		this.candidates = candidates.slice(0);
+		this.eliminated = [];
+		this.eliminate = ties ? candidates.filter(c => !ties.includes(c.toString())) : [];
+		this.finished = false;
+		this.votes = votes.slice(0);
+		this.cycle = cycle;
+	}
+}
+
 class Main {
 
-	static rank(candidates, votes) { //main input, votes = [423, 124, 12, 1342], candidates = [1, 2, 3, 4, 5, 6]
+	static rank(candidates, votes) {
 		try {
-			/*
-			[ '319901088557957122',
-			  '414816252733685760',
-			  'blank',
-			  '356192671750029313' ],
-				[ '0', '0', '10', '2', '03', '', '0', '03', '0', '0', '0', '0' ]
-			 */
-			let data = {
-				"count": candidates.length,
-				"candidates": candidates.slice(0),
-				"eliminated": [],
-				"finished": false,
-				"votes": votes.slice(0),
-				"cycle": 0
-			};
+			let data = new Data(candidates, votes);
 			while (!data.finished) {
 				data = Main.cycle(data);
 			}
-			let order = data.eliminated.reverse(); /*
+			let order = data.eliminated.reverse();
 			for (let i = 0; i < order.length; i++) {
 				let t = order[i].split("");
 				if (t.length < 2) continue;
-				let _data = {
-					"count": candidates.length,
-					"candidates": candidates,
-					"eliminated": [],
-					"eliminate": candidates.filter(c => !t.includes(c.toString())),
-					"finished": false,
-					"votes": votes,
-					"cycle": 0
-				};
-				while (!_data.finished)  {
-					_data = Main.cycle(_data);
+				data = new Data(candidates, votes, t, data.cycle);
+				while (!data.finished)  {
+					data = Main.cycle(data);
 				}
-				order.splice(i, 1, _data.eliminated.reverse());
-			}*/
+				let sub = data.eliminated.splice(1).reverse();
+				order.splice(i, 1, ...sub);
+				i++;
+			}
+			for (let i = 0; i < order.length; i++) {
+				let t = order[i].split("");
+				if (t.length < 2) continue;
+				order.splice(i, 1, ...t);   //fudge for ties
+				i++;
+			}
 			return order;
 		} catch (e) {
 			if (e) throw e;
@@ -47,7 +45,11 @@ class Main {
 	static cycle(data) {
 		try {
 			let m = Main.getMap(data.votes, data.candidates); //create a new map from {  candidates => no. of first preference votes for candidate }
-			let removeList = data.cycle === 0 && data.eliminate ? data.eliminate : Main.findElims(m);
+			let removeList;
+			if (data.eliminate.length > 0) {
+				removeList = data.eliminate;
+				data.eliminate = [];
+			} else removeList = Main.findElims(m);
 			for (let r of removeList) { //for everyone that needs to be removed
 				data.votes = Main.remove(r, data.votes);
 				data.candidates = Main.eliminate(r, data.candidates);
@@ -95,13 +97,13 @@ class Main {
 
 	static remove(r, votes) {
 		for (let i = 0; i < votes.length; i++) {
-			votes[i] = votes[i].replace(r, "");
+			votes[i] = votes[i].replace(r.toString(), "");
 		}
 		return votes;
 	}
 
 	static eliminate(r, candidates) {
-		candidates.splice(candidates.map(c => c.toString()).indexOf(r), 1);
+		candidates.splice(candidates.map(c => c.toString()).indexOf(r.toString()), 1);
 		return candidates;
 	}
 

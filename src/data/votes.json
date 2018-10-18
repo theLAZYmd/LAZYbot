@@ -10,6 +10,7 @@
         "messages": "50",
         "sponsors": "2",
         "limit": "2",
+        "reveal": 5,
         "elections": {
             "960": {
                 "voters": {

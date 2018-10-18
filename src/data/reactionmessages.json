@@ -1737,6 +1737,22 @@
                 "author": "447723359317262336",
                 "cmdID": "494977468327919617"
             }
+        },
+        "election/votes": {
+            "502526476864978994": {
+                "960": 0,
+                "anti": 0,
+                "ultra": 0,
+                "crazyhouse": 0,
+                "3-check": 0,
+                "racing-kings": 1,
+                "atomic": 0,
+                "koth": 0,
+                "4-player": 0,
+                "bughouse": 0,
+                "s-chess": 0,
+                "horde": 0
+            }
         }
     },
     "430035841239220224": {

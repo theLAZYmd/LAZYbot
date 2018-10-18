@@ -122,7 +122,7 @@ class Channel extends Search {
 	}
 
 	byName(name) {
-		return (this.guild || this._guild).channels.find(channel => channel.name && name.toLowerCase() === channel.name.toLowerCase()) || null;
+		return (this.guild || this._guild).channels.find(channel => channel.name && name.replace(/[^a-z]+/gi, "").toLowerCase() === channel.name.replace(/[^a-z]+/gi, "").toLowerCase()) || null;
 	}
 
 }

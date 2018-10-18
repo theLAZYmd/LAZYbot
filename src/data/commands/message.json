@@ -997,14 +997,18 @@
 				{
 					"close": "Closes voting on this server for all elections.",
 					"open": "Reopens voting on a server for all elections.",
-					"count": "Counts up the votes and saves the results, ready to be outputted."
+					"count": "Counts up the votes and saves the results, ready to be outputted.",
+					"recount": "Forcibly recounts the votes and overwrites the results, ready to be outputted.",
+					"output": "Outputs the results of an election."
 				}
 			]
 		],
 		"usage": [
 			"votes close",
 			"votes open",
-			"votes count"
+			"votes count",
+			"votes recount",
+			"votes output"
 		],
 		"module": "Election",
 		"file": "election/votes",

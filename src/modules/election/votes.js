@@ -29,6 +29,15 @@ class Votes extends Main {
 
 	async count() {
 		try {
+			if (Permissions.state("election.count", this)) throw "Election results have already been counted.";
+			await this.recount();
+		} catch (e) {
+			if (e) this.Output.onError(e);
+		}
+	}
+
+	async recount() {
+		try {
 			if (!Permissions.state("election.register", this) || Permissions.state("election.candidates", this)) throw "Cannot begin voter count before voting has begun.";
 			if (Permissions.state("election.voting", this)) throw "Cannot initiate count while voting is still open.";
 			let election = this.election;
@@ -41,6 +50,7 @@ class Votes extends Main {
 			}, msg);
 			for (let [channel, data] of Object.entries(election.elections)) {
 				await this.Output.editor({  "description": "Counting up the votes for election... **" + channel + "**"  }, msg);
+				console.log("Counting #" + channel);
 				let candidates = await this.parseCandidates(data);
 				let votes = await this.parseVotes(data.voters, candidates);
 				let raw = await require("./" + election.system.toLowerCase() + "/main.js").rank(candidates.map(c => candidates.indexOf(c)), votes);
@@ -48,10 +58,13 @@ class Votes extends Main {
 				console.log(election.elections[channel].results);
 			}
 			await this.Output.editor({  "description": "Setting the result..."  }, msg);
-			//this.election = election;
+			this.election = election;
+			this.server.states.election.count = true;
+			DataManager.setServer(this.server);
 			await this.Output.editor({
-				"description": `Ready for output from command \`${this.server.prefixes.generic}output\``
+				"description": `Ready for output from command \`${this.server.prefixes.generic}votes output\``
 			}, msg);
+			this.output();
 		} catch (e) {
 			if (e) this.Output.onError(e)
 		}
@@ -86,45 +99,73 @@ class Votes extends Main {
 		)
 	}
 
-	async output(resultsData) { //this method is currently the outputter. Really we just need the reverse of this.parseCandidates()
-		console.log(resultsData);
-		for (let channel of resultsData) { //for each channel
-			this.server.election[channel].results = [];
-			for (let i = 0; i < resultsData[channel].length; i++) { //for each placing in that channel [ '2', '1', '3', '456' ]
-				console.log(resultsData[channel]);
-				let placing = {
-					"title": "House Server #" + channel + " Mod Elections",
-					"description": ""
-				};
-				for (let j = 0; j < resultsData[channel][i].length; j++) { //for each number in that result
+	async output() {
+		try {
+			if (!Permissions.state("election.count", this)) throw "Cannot output results before results have been counted.";
+			let election = this.election;
+			let embed = new Embed()
+				.setTitle((this.server.emoji ? this.Search.emojis.get(this.server.emoji) + " " : "") + this.guild.name + " " + election.type.toProperCase() + " Mod Elections")
+				.setDescription("Election results modelled using " + Main.Systems[election.system] + " electoral system.\n" +
+					"'**----------**' denotes a blank vote. No candidate placed underneath a blank vote, regardless of whether they reached the threshold for election may take up their position as elected mod.")
+				.setFooter("A result is revealed when " + election.reveal + "members of a respective electorate react to this message.");
+			let emojis = [], data = {};
+			Object.keys(election.elections).forEach(async (channel) => {
+				embed.addField((election.type === "channel" ? "#" : "") + channel, "\u200b", true);
+				data[channel] = 0;
+				let emoji = this.Search.emojis.get(channel);
+				if (emoji) return emojis.push(emoji);
+				return emojis.push(this.Search.emojis.get(await this.Output.response({
+					"description": "Please enter an emoji corresponding to the channel " + channel + ".",
+					"filter": argument => this.Search.emojis.get(argument)
+				})));
+			});
+			let msg = await this.Output.reactor(embed, this.channel, emojis);
+			let reactionmessages = this.reactionmessages;
+			if (!reactionmessages["election/votes"]) reactionmessages["election/votes"] = {};
+			reactionmessages["election/votes"][msg.id] = data;
+			this.reactionmessages = reactionmessages;
 
-				}
-				console.log(placing);
-				this.server.election[channel].results.push(placing);
-			}
-			this.server.election[channel].results.reverse();
+		} catch (e) {
+			if (e) this.Output.onError(e);
 		}
-		DataManager.setServer(this.server);
 	}
 
-	async gen() {
+	async react(messageReaction, user, data) {  //reaction comes in
 		try {
-			let channel = this.channel; //modified later
-			let embed = new Embed()
-				.setTitle("House Server #" + channel + " Mod Elections");
-			for (let i = 0; i < this.election.elections[channel].results.length; i++) { //for all the candidates
-				let candidate = this.election.elections[channel].results[i];
-				let user = candidate === "blank" ? {
-					"tag": "A blank vote entry"
-				} : this.Search.members.get(candidate);
-				let title = "#" + i + ": Election Candidate";
-				if (i === 0) title += "🥇";
-				if (i === 1) title += "🥈";
-				embed.addField(title, user.tag, false);
+			let reactionmessages = this.reactionmessages;
+			if (messageReaction.emoji.name === "❎" && this.author.id === "185412969130229760") {
+				delete reactionmessages["election/votes"][messageReaction.message.id];
+				this.reactionmessages = reactionmessages; //and set it
+				messageReaction.message.delete();
+				return;
 			}
-			this.Output.sender(embed);
+			let _channel = this.Search.channels.get(messageReaction.emoji.name);
+			if (!_channel) return;
+			let channel = _channel.name;   //channel name parsed from emoji name
+			let election = this.election;
+			if (!election.elections[channel].voters[user.id]) return messageReaction.remove(user);  //if not a member of the electorate, remove that emoji
+			data[channel]++;    //increase the data count
+			reactionmessages["election/votes"][messageReaction.message.id] = data;
+			this.reactionmessages = reactionmessages; //and set it
+			if (data[channel] < Number(election.reveal)) throw "";
+			let embed = new Embed(messageReaction.message.embeds[0]);   //if we've reached the threshold, begin the editing process
+			let d = embed.fields.map(({ name }) => name.slice(1).replace(/[^a-z]+/gi, ""));  //shallow-copy the fields array mapped by name
+			let i = d.indexOf(channel.replace(/[^a-z]+/gi, ""));     //search for the channel name in that array
+			if (i === -1) throw "Couldn't find election '" + channel + "' for which to reveal results!";    //and if we can't find it, throw an error
+			let j = 0;
+			let r = election.elections[channel].results.map((s) => {    //   [["ProgramFOX#1012"],["hauptschule#7105"],["Andrew#5850"],["Raven#9079"],["ijh#0966"],["blank"]]
+				for (let k in Object.keys(s))
+					if (s[k] === "blank") s[k] = "----------";
+				s = s.join("; ");   //for ties, shouldn't really happen anymore
+				if (j === 0) s = "**" + s + "** 🥇";
+				else if (j === 1) s = "**" + s + "** 🥈";
+				j++;
+				return s;
+			});
+			embed.fields[i].value = Embed.rank(r);
+			this.Output.editor(embed, messageReaction.message);
 		} catch (e) {
-			if (e) this.Output.onError(e)
+			if (e) this.Output.onError(e);
 		}
 	}
 
