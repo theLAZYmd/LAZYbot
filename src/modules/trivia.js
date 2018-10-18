@@ -73,12 +73,12 @@ class Trivia extends Parse {
 				return [dbuser, estimate, Number(score)]; //a number from 0 to 10. If less than 1500, it's between 0 and 1. Realistically not above 5
 			});
 			data = data.filter(d => d && this.server.trivia.players[d[0].username]);    //d is dbuser, not user
-			if (data.length < 2) throw "Only games with 2 or more players are rated.";
+			if (data.length === 0) throw "";
 			let totalEstimate = data.reduce((a, [, estimate]) => a + estimate, 0);
 			let totalScore = data.reduce((a, [, , score]) => a + score, 0);
-			if (totalScore < this.server.trivia.min) throw "Only 10+ point games are rated.";
+			if (totalScore < this.server.trivia.min) throw `Only ${this.server.trivia.min}+ point games are rated.`;
+			if (data.length < 2) throw "Only games with 2+ players are rated.";
 			let description = "";
-			console.log(Object.keys(this.server.trivia.players));
 			for (let [dbuser, estimate, score] of data) {
 				let shareEstimate = (estimate / totalEstimate) * totalScore;
 				let RD = Math.max(50 - (dbuser.trivia.games || 0) * 3, 10);

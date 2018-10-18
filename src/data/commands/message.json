@@ -540,10 +540,11 @@
 		"prefix": "nadeko",
 		"requires": {
 			"house": true,
+			"state": "tm",
 			"channels": [
 				"bot"
 			],
-			"response": "bouncer",
+			"response": "^bouncer",
 			"args": {
 				"length": 0
 			}

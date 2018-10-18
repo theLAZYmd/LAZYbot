@@ -71,7 +71,7 @@ class Ballots extends Main {
 		}
 	}
 
-	async send(users, mobile, voterChannels) {
+	async send(users = [], mobile, voterChannels) {
 		try {
 			let voterCount = users.length, ballotCount = 0;
 			let msg = await this.Output.sender(new Embed()

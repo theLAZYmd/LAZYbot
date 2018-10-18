@@ -29,37 +29,44 @@ class Votes extends Main {
 
 	async count() {
 		try {
-			if (!Permissions.state("election.register", this) || Permissions.states("election.candidates", this)) throw "Cannot begin voter count before voting has begun.";
+			if (!Permissions.state("election.register", this) || Permissions.state("election.candidates", this)) throw "Cannot begin voter count before voting has begun.";
 			if (Permissions.state("election.voting", this)) throw "Cannot initiate count while voting is still open.";
 			let election = this.election;
 			let msg = await this.Output.generic("Initialised final vote count for " + Object.keys(election.elections).length + " elections...");
 			if (!election.system) throw "Couldn't find valid electoral system by which to count up votes.";
 			let Count = require("./" + election.system + "/main.js");
 			if (!Count || typeof Count.rank !== "function") throw "Couldn't find valid process by which to count up votes.";
-			await this.Output.editor("Counting up the votes...", msg);
+			await this.Output.editor({
+				"description": "Counting up the votes..."
+			}, msg);
 			for (let [channel, data] of Object.entries(election.elections)) {
-				if (!election.hasOwnProperty(channel)) continue;
-				await this.Output.editor("Counting up the votes for election... **" + channel + "**", msg);
+				await this.Output.editor({  "description": "Counting up the votes for election... **" + channel + "**"  }, msg);
 				let candidates = await this.parseCandidates(data);
 				let votes = await this.parseVotes(data.voters, candidates);
-				let raw = await require("./" + election.system.toLowerCase() + "./main.js").rank(candidates, votes);
-				election.elections[channel].results = await this.parseResults(raw); //need to use 'in' iterator for setters
+				let raw = await require("./" + election.system.toLowerCase() + "/main.js").rank(candidates.map(c => candidates.indexOf(c)), votes);
+				election.elections[channel].results = await this.parseResults(raw, candidates); //need to use 'in' iterator for setters
+				console.log(election.elections[channel].results);
 			}
-			await this.Output.editor("Setting the result...");
-			this.election = election;
-			await this.Output.editor(`Ready for output from command \`${this.server.prefixes.generic}output\``);
+			await this.Output.editor({  "description": "Setting the result..."  }, msg);
+			//this.election = election;
+			await this.Output.editor({
+				"description": `Ready for output from command \`${this.server.prefixes.generic}output\``
+			}, msg);
 		} catch (e) {
 			if (e) this.Output.onError(e)
 		}
 	}
 
 	async parseCandidates(data) { //returns an array with userIDs ["133249411303211008", "333586342275710978", "340160754936184832"]
-		let array = Object.keys(data.candidates);
-		for (let votes of Object.values(data.voters))
-			for (let i = 1; i < votes.length; i++)
-				if (!array.includes(votes[i])) array.push(votes[i]);
+		let array = Object.keys(data.candidates)    //turn the original list of candidates into ids
+			.filter(candidate => candidate === "blank" || this.Search.members.get(candidate)) //excludes users who aren't part of the server anymore
+			.map(candidate => candidate === "blank" ? "blank" : this.Search.users.get(candidate).id) //maps them all to their ids);
+		for (let votes of Object.values(data.voters))   //for each vote, if someone voted for a candidate not on the list, include them
+			for (let vote of Object.values(votes))
+				if (!array.includes(vote))
+					array.push(vote);
 		return array.filter(candidate => candidate === "blank" || this.Search.members.get(candidate)) //excludes users who aren't part of the server anymore
-			.map(candidate => candidate === "blank" ? "blank" : this.Search.users.get(candidate)[id]) //maps them all to their ids
+			//.map(candidate => candidate === "blank" ? "blank" : this.Search.users.get(candidate).id) //maps them all to their ids, should be superfluous
 	}
 
 	async parseVotes(voters, candidates) {
@@ -73,8 +80,15 @@ class Votes extends Main {
 		return array;
 	}
 
-	async parseResults(resultsData) { //this method is currently the outputter. Really we just need the reverse of this.parseCandidates()
-		for (let channel in resultsData) { //for each channel
+	async parseResults(raw, candidates) { //returns an array with userIDs ["133249411303211008", "333586342275710978", "340160754936184832"]
+		return raw.map(string => string.split("")
+			.map(index => candidates.map(candidate => candidate === "blank" ? "blank" : this.Search.users.get(candidate).tag)[Number(index)])
+		)
+	}
+
+	async output(resultsData) { //this method is currently the outputter. Really we just need the reverse of this.parseCandidates()
+		console.log(resultsData);
+		for (let channel of resultsData) { //for each channel
 			this.server.election[channel].results = [];
 			for (let i = 0; i < resultsData[channel].length; i++) { //for each placing in that channel [ '2', '1', '3', '456' ]
 				console.log(resultsData[channel]);

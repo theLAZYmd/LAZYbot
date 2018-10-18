@@ -8,6 +8,15 @@ const reactionCommands = require("../data/commands/reaction.json");
 const botCommands = require("../data/commands/bot.json");
 const Permissions = require("./permissions.js");
 const DM = require("../modules/dm.js");
+const winston = require("winston");
+const logger = winston.createLogger({
+	"level": "info",
+	"format": winston.format.json(),
+	"transports": [
+		new winston.transports.Console(),
+		new winston.transports.File({   "filename": "combined.log"  })
+	]
+})
 
 class Router {
 
@@ -104,8 +113,8 @@ class Router {
 					return false;
 				}
 			})
-			if (!f) f = Commands[0];
-			f.command = true;
+			if (!f) f = DMCommands[0];
+			else f.command = true;
 			if (f.guild) {
 				let guild = await DM.setGuild(argsInfo, f.guild); //now passed, just check if it needs a guild
 				if (!guild) throw "";
@@ -188,6 +197,10 @@ class Router {
 			let Constructor = cmdInfo.file.toProperCase();
 			let command = (cmdInfo.command ? argsInfo.server.prefixes[cmdInfo.prefix] : cmdInfo.prefix) + argsInfo.command;
 			let args = argsInfo.args;
+			//logger.log({
+			//	"level": "info",
+			//	"message": time + " | " + author + " | " + Constructor + " | " + command + " | [" + args + "]"
+			//});
 			console.log(time + " | " + author + " | " + Constructor + " | " + command + " | [" + args + "]");
 			return "";
 		} catch (e) {

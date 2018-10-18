@@ -1,6 +1,7 @@
 const Main = require("./main.js");
 const DataManager = require("../../util/datamanager.js");
 const Embed = require("../../util/embed.js");
+const Leaderboard = require("../leaderboard.js");
 
 class Candidates extends Main {
 
@@ -13,14 +14,16 @@ class Candidates extends Main {
 			let election = this.election;
 			let embed = new Embed()
 				.setDescription(`Use \`${this.server.prefixes.generic}candidates sponsor\` to sponsor a candidate for an election, mentioning both channel and candidate.`)
-				.setFooter("A candidate requires " + election.sponsors + " sponsors to be included on the ballot.");
+				.setFooter(election.sponsors ? "A candidate requires " + election.sponsors + " sponsors to be included on the ballot." : "");
 			let registeringBegun = this.Permissions.state("election.candidates", this);
 			for (let [name, data] of Object.entries(election.elections)) {
-				let string = "";
+				let arr = [], eligibles = [];
 				for (let [candidate, sponsors] of Object.entries(data.candidates || {})) { //["candidate#1024", [Array: List of Sponsors]]
-					string += candidate + (registeringBegun ? " (" + sponsors.length + ")\n" : "\n");
+					let e = sponsors.length >= (election.sponsors || 0);
+					arr.push(candidate + (registeringBegun ? " (" + (e ? "**" + sponsors.length + "**" : sponsors.length) + ")" : ""));
+					if (e) eligibles.push(candidate.id);
 				}
-				embed.addField((election.type === "channel" ? "#" : "") + name, string || "None.", true);
+				embed.addField((election.type === "channel" ? "#" : "") + name + (registeringBegun ? " (" + eligibles.length + ")" : ""), arr.join("\n") || "None.", true);
 			}
 			embed.setTitle(`Candidates for upcoming ${election.type ? election.type + " " : ""}election${embed.fields.length > 1 ? "s" : ""} on ${this.guild.name}`)
 				.setDescription(embed.fields.length === 0 ? "No upcoming elections found." : "");
@@ -60,7 +63,6 @@ class Candidates extends Main {
 			if (type === undefined) throw "";
 			if (election.elections[type].candidates[user.tag]) throw `Already registered candidate **${user.tag}** for channel **${type}**.`;
 			let channels = Main.validate(election, user, "candidates");
-			console.log(channels);
 			if (election.limit && channels.length >= election.limit) throw `Already registered candidate **${user.tag}** for channels **${channels.join(", ")}**!\nCannot run for more than ${election.limit} channels.`;
 			election.elections[type].candidates[user.tag] = []; //register it as an empty array ready to add sponsors
 			this.election = election;

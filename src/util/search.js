@@ -84,7 +84,7 @@ class Member extends Search {
 	}
 
 	get(searchstring, exactmode) {
-		let user = this.User.get(searchstring, exactmode);
+		let user = this.users.get(searchstring, exactmode);
 		return user ? this.byUser(user) : null;
 	}
 

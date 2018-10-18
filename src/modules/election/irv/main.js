@@ -1,97 +1,125 @@
 class Main {
 
-	static rank(votes, candidates) { //main input, votes = [423, 124, 12, 1342], candidates = [1, 2, 3, 4, 5, 6]
-		let data = {
+	static rank(candidates, votes) { //main input, votes = [423, 124, 12, 1342], candidates = [1, 2, 3, 4, 5, 6]
+		try {
+			/*
+			[ '319901088557957122',
+			  '414816252733685760',
+			  'blank',
+			  '356192671750029313' ],
+				[ '0', '0', '10', '2', '03', '', '0', '03', '0', '0', '0', '0' ]
+			 */
+			let data = {
 				"count": candidates.length,
-				"candidates": candidates,
+				"candidates": candidates.slice(0),
 				"eliminated": [],
 				"finished": false,
-				"votes": votes,
-			},
-			order;
-		let i = 0;
-		while (!data.finished) {
-			console.log('Cycle ' + i);
-			data.cycle = i;
-			data = AV.cycle(data);
-			i++;
+				"votes": votes.slice(0),
+				"cycle": 0
+			};
+			while (!data.finished) {
+				data = Main.cycle(data);
+			}
+			let order = data.eliminated.reverse(); /*
+			for (let i = 0; i < order.length; i++) {
+				let t = order[i].split("");
+				if (t.length < 2) continue;
+				let _data = {
+					"count": candidates.length,
+					"candidates": candidates,
+					"eliminated": [],
+					"eliminate": candidates.filter(c => !t.includes(c.toString())),
+					"finished": false,
+					"votes": votes,
+					"cycle": 0
+				};
+				while (!_data.finished)  {
+					_data = Main.cycle(_data);
+				}
+				order.splice(i, 1, _data.eliminated.reverse());
+			}*/
+			return order;
+		} catch (e) {
+			if (e) throw e;
 		}
-		order = data.eliminated.reverse();
-		console.log(order);
-		return order;
 	}
 
 	static cycle(data) {
-		let resultsMap = AV.getMap(data.votes, data.candidates); //create a new map from votes and candidates
-		console.log(resultsMap);
-		let toRemoveList = AV.findElims(resultsMap);
-		for (let i = 0; i < toRemoveList.length; i++) { //for everyone that needs to be removed
-			let toRemove = toRemoveList[i]; //take the single person who needs to be removed
-			data.votes = AV.iterate(toRemove, data.votes);
-			let index = -1;
-			for (let j = 0; j < data.candidates.length; j++) {
-				if (data.candidates[j].toString() === toRemove.toString()) index = j;
+		try {
+			let m = Main.getMap(data.votes, data.candidates); //create a new map from {  candidates => no. of first preference votes for candidate }
+			let removeList = data.cycle === 0 && data.eliminate ? data.eliminate : Main.findElims(m);
+			for (let r of removeList) { //for everyone that needs to be removed
+				data.votes = Main.remove(r, data.votes);
+				data.candidates = Main.eliminate(r, data.candidates);
 			}
-			data.candidates.splice(index, 1);
+			data.eliminated.push(removeList.join(""));
+			if (data.eliminated.join("").length === data.count) data.finished = true;
+			console.log('Cycle ' + data.cycle + "; " + "Eliminated: " + data.eliminated.join("").length + ", Target: " + data.count + "\n",
+				m,
+				//"\nEliminated Candidates: '" + data.eliminated.join("', '") + "'"
+			);
+			data.cycle++;
+			return data;
+		} catch (e) {
+			if (e) throw e;
 		}
-		resultsMap = AV.getMap(data.votes, data.candidates); //create a new map from votes and candidates
-		console.log(resultsMap);
-		data.eliminated[data.cycle] = toRemoveList.join("");
-		if (data.eliminated.join("").length === data.count) data.finished = true;
-		return data;
 	}
+
+	/*
+		Cycle 0; Eliminated: 1, Target: 4
+		Map { '0' => 9, '1' => 1, '2' => 1, '3' => 0 }
+		Eliminated Candidates: '3'
+		Cycle 1; Eliminated: 3, Target: 4
+		Map { '0' => 9, '1' => 1, '2' => 1 }
+		Eliminated Candidates: '3', '12'
+		Cycle 2; Eliminated: 4, Target: 4
+		Map { '0' => 10 }
+		Eliminated Candidates: '3', '12', '0'
+		[ '0', '12', '3' ]
+	 */
 
 	static getMap(votes, candidates) { //returns a map based on first preference votes
 		let range = new Map(); //creates an map []
-		for (let i = 0; i < candidates.length; i++) {
-			range.set(candidates[i].toString(), 0); //sets array index(candidate) value(0), ex: [1: 0, 2: 0]
+		for (let c of candidates) {
+			range.set(c.toString(), 0); //sets array index(candidate) value(0), ex: [1: 0, 2: 0]
 		}
-		for (let i = 0; i < votes.length; i++) {
-			let initVote = votes[i].charAt(0); //first preference vote
+		for (let v of votes) {
+			let initVote = v.charAt(0); //first preference vote
 			if (initVote !== '') {
 				let mapGet = range.get(initVote);
-				if (mapGet === undefined) range.set(initVote, 1);
-				else range.set(initVote, mapGet + 1);
+				if (mapGet !== undefined) range.set(initVote, mapGet + 1);
 			}
 		}
 		return range; //ex: [1: 4, 2: 7...] etc.
 	}
 
-	static iterate(toRemove, votes) {
+	static remove(r, votes) {
 		for (let i = 0; i < votes.length; i++) {
-			votes[i] = votes[i].replace(toRemove, "");
+			votes[i] = votes[i].replace(r, "");
 		}
 		return votes;
 	}
 
+	static eliminate(r, candidates) {
+		candidates.splice(candidates.map(c => c.toString()).indexOf(r), 1);
+		return candidates;
+	}
+
 	static findElims(map) {
-		let elims = [];
-		if (!elims[0]) elims = AV.findZeroes(map);
-		if (!elims[0]) elims = AV.findLowest(map);
-		return elims;
-	}
-
-	static findZeroes(map) { //
-		let zeroes = [];
-		map.forEach((value, key) => {
-			if (value === 0) zeroes.push(key);
-		});
-		return zeroes;
-	}
-
-	static findLowest(map) { //edited so that they return arrays now, not single instances
+		let zeroes = Array.from(map).filter(([, v]) => v === 0).map(([k]) => k);
+		if (zeroes.length !== 0) return zeroes;
 		let lowest = [];
 		let lowestValue = Infinity;
-		map.forEach((value, key) => {
+		map.forEach((value) => {
 			if (value < lowestValue) lowestValue = value;
 		});
-		map.forEach((value, key) => {
-			if (value === lowestValue) lowest.push(key);
+		map.forEach((v, k) => {
+			if (v === lowestValue) lowest.push(k);
 		});
 		return lowest;
 	}
 
-	static findHighest(map) { //
+	static findHighest(map) { //for STV stuff
 		let highest = [];
 		let highestValue = 0;
 		map.forEach((value, key) => {

@@ -27,7 +27,7 @@ class Permissions {
 	}
 
 	static channels(channelName, argsInfo) {
-		if (!argsInfo.guild.channels.some(channel => channel.name = channelName)) channelName === "general";
+		if (!argsInfo.guild.channels.some(channel => channel.name.toLowerCase() === argsInfo.server.channels[channelName].toLowerCase())) channelName = "general";
 		return argsInfo.channel.name.toLowerCase() === argsInfo.server.channels[channelName].toLowerCase();
 	}
 
@@ -56,10 +56,17 @@ class Permissions {
 	}
 
 	static async response(recipient, argsInfo) {
-		return argsInfo.channel.awaitMessages(m => m.author.id === config.ids[recipient] && m.embeds[0], {
+		let i = true;
+		if (recipient.startsWith("^")) {
+			i = false;
+			recipient.splice(0, 1);
+		}
+		let j = await argsInfo.channel.awaitMessages(m => m.author.id === config.ids[recipient] && m.embeds[0], {
 			"time": 2000,
 			"max": 1
 		}).then(() => {return true}).catch(() => {return false})
+		if (i) return j;
+		else return !j;
 	}
 
 	static output(key, argsInfo) {
