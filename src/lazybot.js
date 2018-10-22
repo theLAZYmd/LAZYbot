@@ -2,8 +2,6 @@
 const Discord = require("discord.js");
 const config = require("./config.json");
 const client = new Discord.Client();
-const http = require("http");
-const express = require("express")();
 
 //the additional modules for debugging or only used sometimes
 const onStartup = require("./events/onStartup.js"); //doesn't require Parse
@@ -113,16 +111,6 @@ class Bot {
 			client.emit("messageReactionAdd", reaction, user);
 		});
 
-		express.get("/", (request, response) => { //interacting with glitch.com
-			response.sendStatus(200);
-		});
-
-		express.listen(process.env.PORT);
-
-		setInterval(() => {
-			http.get(`http://${process.env.lazybot || "houselazybot"}.glitch.me/`); //pinging glitch.com
-		}, 280000);
-
 	}
 
 }
@@ -132,14 +120,17 @@ Bot.ready();
 
 //UNIVERSAL FUNCTIONS
 
+Date.prototype.getUTCDays = function () {
+	return Math.floor(this.getTime() / 86400000);
+}
+
 Date.getTime = function (ms) {
 	let time = new Date(ms);
+	time.days = time.getUTCDays();
 	time.hours = time.getUTCHours();
 	time.minutes = time.getUTCMinutes();
 	time.seconds = time.getUTCSeconds();
 	time.milliseconds = time.getUTCMilliseconds();
-	time.days = Math.floor(time.hours / 24);
-	time.hours = time.hours - (24 * time.days);
 	return time;
 };
 

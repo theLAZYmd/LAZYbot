@@ -28,10 +28,9 @@
 		"discord.js": "^11.4.2",
 		"enmap": "^0.3.2",
 		"es6": "0.0.7",
-		"express": "^4.16.0",
 		"request": "^2.88.0",
 		"request-promise": "^4.2.2",
 		"winston": "^3.1.0",
-		"yarn": "^1.9.4"
+		"yarn": "^1.10.1"
 	}
 }

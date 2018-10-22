@@ -31,9 +31,9 @@
         "debug": false
     },
     "backupdb": [
-        "Thu Oct 18 2018 16:15:07 GMT+01",
-        "Tue Sep 25 2018 00:53:10",
-        "Sun Jun 17 2018 00:14:44 GMT+01"
+        "Mon Oct 22 2018 13:47:42 GMT+01",
+        "Mon Oct 22 2018 13:47:41 GMT+01",
+        "Mon Oct 22 2018 11:47:41 GMT+01"
     ],
     "delays": {
         "update": 300000,
@@ -237,7 +237,7 @@
             "id": "",
             "username": "",
             "messages": {
-                "count": 24,
+                "count": 25,
                 "last": "👀👀",
                 "lastSeen": 1536784368687
             }
