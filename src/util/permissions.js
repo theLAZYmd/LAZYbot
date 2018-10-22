@@ -26,7 +26,13 @@ class Permissions {
 		return (argsInfo.member.roles.some(role => role.name.toLowerCase().startsWith(roleName)) || argsInfo.guild.ownerID === argsInfo.member.id);
 	}
 
-	static channels(channelName, argsInfo) {
+	static channels(channelResolvable, argsInfo) {
+		let channelName;
+		if (typeof channelResolvable === "string") channelName = channelResolvable;
+		else if (typeof channelResolvable === "object") {
+			if (channelResolvable.name) channelName = channelResolvable.name;
+			else if (channelResolvable.type) return channelResolvable.type === argsInfo.channel.type;
+		}
 		if (!argsInfo.guild.channels.some(channel => channel.name.toLowerCase() === argsInfo.server.channels[channelName].toLowerCase())) channelName = "general";
 		return argsInfo.channel.name.toLowerCase() === argsInfo.server.channels[channelName].toLowerCase();
 	}

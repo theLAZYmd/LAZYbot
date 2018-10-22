@@ -1748,6 +1748,82 @@
                 "page": 0,
                 "author": "447723359317262336",
                 "cmdID": "494977468327919617"
+            },
+            "503282733724991500": {
+                "embedgroup": [
+                    {
+                        "title": " Profile for theLAZYmd#2353",
+                        "description": "```testie```",
+                        "color": 16761035,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "lazy-loading",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Age: **19**\nSex: **<:male:430870358133047306>**\nLocation: **Toronto**\nRegion: **Europe**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **May 26 2016**\nThe House: **May 16 2017**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`185412969130229760`**\nPosition in Database: **0**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "74,041",
+                                "inline": true
+                            },
+                            {
+                                "name": "House Trophies",
+                                "value": ":trophy: **champion du mondeeeeeeee**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/185412969130229760/ab2051837af637ec01eebe084860728e.png?size=2048"
+                        },
+                        "footer": {
+                            "text": "1 / 2"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": " Profile for theLAZYmd#2353",
+                        "description": "```testie```",
+                        "color": 16761035,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[TheLAZYmd](https://lichess.org/@/TheLAZYmd)\nBlitz: **1890**\nBullet: **1998**\nRapid: **1997**\nClassical: 1500?\nCrazyhouse: **2260**\n3-check: **1720**\nAtomic: 1563?\nKing of the Hill: 1710?",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:chesscom:430038158244184064> Chess.com",
+                                "value": "[theLAZYbot](https://www.chess.com/member/theLAZYbot)\nBullet: 1817?\nCrazyhouse: **2104**\nBughouse: **2024**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/185412969130229760/ab2051837af637ec01eebe084860728e.png?size=2048"
+                        },
+                        "files": [],
+                        "footer": {
+                            "text": "2 / 2"
+                        }
+                    }
+                ],
+                "period": 30000,
+                "page": 1,
+                "author": "185412969130229760",
+                "cmdID": "503282730952294410"
             }
         },
         "election/votes": {
@@ -1759,6 +1835,34 @@
                 "3-check": 0,
                 "racing-kings": 1,
                 "atomic": 0,
+                "koth": 0,
+                "4-player": 0,
+                "bughouse": 0,
+                "s-chess": 0,
+                "horde": 0
+            },
+            "502528154334789632": {
+                "960": 0,
+                "anti": 5,
+                "ultra": 0,
+                "crazyhouse": 0,
+                "3-check": 0,
+                "racing-kings": 0,
+                "atomic": 0,
+                "koth": 0,
+                "4-player": 0,
+                "bughouse": 0,
+                "s-chess": 0,
+                "horde": 0
+            },
+            "502528329581068289": {
+                "960": 5,
+                "anti": 5,
+                "ultra": 5,
+                "crazyhouse": 5,
+                "3-check": 5,
+                "racing-kings": 5,
+                "atomic": 5,
                 "koth": 0,
                 "4-player": 0,
                 "bughouse": 0,
