@@ -9,10 +9,10 @@ class Output extends Main {
 
 	async send(data) {
 		try {
-			this.Output.sender({
-				"title": data.title ? data.title : "New mail from " + (data.mod.flair ? "server " : data.mod.tag + " via ") + this.guild.name + ":",
-				"description": data.content
-			}, data.user);
+			this.Output.sender(new Embed()
+					.setTitle(data.title ? data.title : "New mail from " + (data.mod.flair ? "server " : data.mod.tag + " via ") + this.guild.name + ":")
+					.setDescription(data.content)
+				, data.user);
 		} catch (e) {
 			if (e) this.Output.onError(e);
 		}
@@ -20,9 +20,16 @@ class Output extends Main {
 
 	async anew(data = {}) { //called for any new modmail conversation
 		try {
+			let member = this.Search.members.byUser(data.user);
 			this.renew(Object.assign({
 				"embed": {
 					"title": "ModMail Conversation for " + data.user.tag,
+					"description": "User " + data.user + " has **" + Math.max(0, (member.roles.size - 1)) + "** roles.\n" + Embed.getFields([
+						["Joined Discord", Date.getISOtime(data.user.createdTimestamp).slice(4, 15)],
+						["Joined " + this.guild.name, Date.getISOtime(member.joinedTimestamp).slice(4, 15)]
+					], {
+						"bold": true
+					}),
 					"fields": data.embed && data.embed.fields ? data.embed.fields.slice(-1) : []
 				}
 			}, data))

@@ -1,5 +1,5 @@
 const Main = require("./main.js");
-const Embed = require("../util/embed.js");
+const Embed = require("../../util/embed.js");
 
 class Input extends Main {
 
@@ -30,15 +30,13 @@ class Input extends Main {
 			};
 			if (!this.modmail || !this.modmail._timeout) { //if there's no modmail stored for this server
 				this.modmail = {"_timeout": {}};
-				this.log(data);
-				return this.output.anew(data);
-			}
+				this.output.anew(data);
+			} else
 			if (this.modmail._timeout[this.author.tag]) { //check if they're timed out
 				if (Date.now() - this.modmail._timeout[this.author.tag] < 86400000) return; //if so, return completely
 				delete this.modmail._timeout[this.author.tag]; //otherwise delete any old timeout
-			}
+			} else await this.sort(data);
 			await this.log(data);
-			await this.sort(data);
 			this.message.react("📨");
 		} catch (e) {
 			if (e) this.Output.onError(e)
