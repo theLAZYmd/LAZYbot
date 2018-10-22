@@ -68,6 +68,14 @@ class Parse {
 		return this._Paginator;
 	}
 
+	get Embeds() {
+		if (!this._Paginator) {
+			let EmbedsConstructor = require("../modules/embeds");
+			this._Embeds = new EmbedsConstructor(this.message);
+		}
+		return this._Embeds;
+	}
+
 	get Search() {
 		let SearchConstructor = require("./search.js");
 		return new SearchConstructor(this.message);

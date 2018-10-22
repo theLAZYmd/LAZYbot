@@ -45,6 +45,30 @@ class Output extends Parse {
 		}
 	}
 
+	async embed(name) {
+		try {
+			try {
+				let embed = await this.Embeds.find(name);
+				if (!embed) throw "";
+				if (this.command === "...") this.message.delete();
+				return this.Paginator.sender(embed, this.command === "..." ? Infinity : 180000, name);
+			} catch (e) {
+				let filter = m => m.author.bot;
+				try {
+					await this.channel.awaitMessages(filter, {
+						"max": 1,
+						"time": 1000,
+						"errors": ["time"]
+					})
+				} catch (e) {
+					throw "Couldn't find guide matching that name.";
+				}
+			}
+		} catch (e) {
+			if (e) this.onError(e);
+		}
+	}
+
 	async data(json, NewChannel, type = "json") {
 		try {
 			let string = (typeof json === "object" ? JSON.stringify((typeof json._apiTransform === "function" ? json._apiTransform() : json), null, 2) : json).replace(/`/g, "\\`");

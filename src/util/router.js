@@ -32,26 +32,33 @@ class Router {
 	}
 
 	static async reaction({messageReaction, user}) {
-		if (user.bot || !messageReaction.message.guild) return;
-		if (!messageReaction.message.author.bot) {
-			for (let cmdInfo of reactionCommands) {
-				if (cmdInfo.active !== false && (messageReaction.emoji.name === cmdInfo.name || messageReaction.emoji.id === cmdInfo.id)) {
-					let run = await Router.runCommand(new Parse(messageReaction.message), cmdInfo);
-					if (run) throw await Router.logCommand(new Parse(messageReaction.message), cmdInfo);
-					throw "";
-				}
-			}
-		} else { //For using emojis as "buttons". Only reactions done by users reacting to bot messages are of interest to us.
-			let reactionmessages = DataManager.getFile("./src/data/reactionmessages.json")[messageReaction.message.guild.id];
-			for (let [type, data] of Object.entries(reactionmessages)) {
-				for (let messageID of Object.keys(data)) {
-					if (messageReaction.message.id === messageID) {
-						let Constructor = require("../modules/" + (type + (type === "modmail" ? "/action" : "")).toLowerCase() + ".js");
-						let Instance = new Constructor(messageReaction.message);
-						Instance.react(messageReaction, user, reactionmessages[type][messageID]);
+		try {
+			if (user.bot) throw "";
+			if (messageReaction.message.author.bot) {
+				let reactionmessages = DataManager.getFile("./src/data/reactionmessages.json")[messageReaction.message.guild.id];
+				for (let [type, data] of Object.entries(reactionmessages)) {
+					for (let messageID of Object.keys(data)) {
+						if (messageReaction.message.id === messageID) {
+							let Constructor = require("../modules/" + (type + (type === "modmail" ? "/action" : "")).toLowerCase() + ".js");
+							let Instance = new Constructor(messageReaction.message);
+							Instance.react(messageReaction, user, reactionmessages[type][messageID]);
+						}
 					}
 				}
 			}
+			let f = Array.from(reactionCommands).find(cmdInfo => {
+				if (cmdInfo.active === false) return false;
+				if (cmdInfo.name === messageReaction.emoji.name) return true;
+				if (cmdInfo.id === messageReaction.emoji.id) return true;
+				return false;
+			});
+			if (f) {
+				let Constructor = require("../modules/" + f.file.toLowerCase() + ".js");
+				let Instance = new Constructor(messageReaction.message);
+				Instance[f.method.toLowerCase()](messageReaction, user);
+			}
+		} catch (e) {
+			if (e) console.log(e);
 		}
 	}
 

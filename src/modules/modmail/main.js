@@ -7,7 +7,7 @@ class ModMail extends Parse {
 	constructor(message) {
 		super(message);
 		this.modmail = this.reactionmessages.modmail || {};
-		this.mchannel = this.Search.channels.get(this.server.channels.modmail);
+		this.mchannel = this.server ? this.Search.channels.get(this.server.channels.modmail) : null;
 	}
 
 	get output() {
@@ -42,36 +42,33 @@ class ModMail extends Parse {
 
 	async sort(data) {  //find the relevant modmil
 		try {
-			for (let [id, mailInfo] of Object.entries(this.modmail)) { //for each record
-				if (id.startsWith("_") || mailInfo.tag !== data.user.tag || mailInfo.overflow) continue;
-				try {
-					console.log(id);
-					let modmail = await this.mchannel.fetchMessage(id)
-						.catch(async () => {
-							let user = data.mod || data.user;
-							await this.Output.confirm({ //if couldn't find the message
-								"channel": this.mchannel,
-								"description": "**" + user.tag + "** Couldn't find message. Please confirm that message no longer exists.",
-								"role": "admin"
-							});
-							delete this.modmail[id]; //and delete the record
-							this.setData(this.modmail);
-							await this.output.anew(data); //and make a new post
-							throw "";
-						}); //so if they have a chat history, find it
-					data = Object.assign(data, {
-						"message": modmail,
-						"embed": Embed.receiver(modmail.embeds[0])
+			let [id, mailInfo] = Object.entries(this.modmail).find(([i, m]) => {
+				if (i.startsWith("_")) return false;
+				if (m.tag !== data.user.tag) return false;
+				if (m.overflow) return false;
+				return true;
+			});
+			if (!id || !mailInfo) return await this.Output.anew(data);
+			let modmail = await this.mchannel.fetchMessage(id)
+				.catch(async () => {
+					let user = data.mod || data.user;
+					await this.Output.confirm({ //if couldn't find the message
+						"channel": this.mchannel,
+						"description": "**" + user.tag + "** Couldn't find message. Please confirm that message no longer exists.",
+						"role": "admin"
 					});
-					console.log(Date.now() - mailInfo.lastMail < 1800000, !data.mod, data.embed.fields[data.embed.fields.length - 1].name.includes("user wrote:"));
-					if (Date.now() - mailInfo.lastMail < 1800000 && !data.mod && data.embed.fields[data.embed.fields.length - 1].name.includes("user wrote:")) await this.output.append(data);
-					else await this.output.renew(data);
-				} catch (e) {
-					if (e) this.Output.onError(e);
-				}
-				return; //only gets executed if managed to pass the 'continue's
-			}
-			await this.output.anew(data);
+					delete this.modmail[id]; //and delete the record
+					this.setData(this.modmail);
+					await this.output.anew(data); //and make a new post
+					throw "";
+				}); //so if they have a chat history, find it
+			data = Object.assign(data, {
+				"message": modmail,
+				"embed": Embed.receiver(modmail.embeds[0])
+			});
+			console.log(Date.now() - mailInfo.lastMail < 1800000, !data.mod, data.embed.fields[data.embed.fields.length - 1].name.includes("user wrote:"));
+			if (Date.now() - mailInfo.lastMail < 1800000 && !data.mod && data.embed.fields[data.embed.fields.length - 1].name.includes("user wrote:")) await this.output.append(data);
+			else await this.output.renew(data);
 		} catch (e) {
 			if (e) this.Output.onError(e);
 			throw e;

@@ -31,7 +31,7 @@ class Output extends Main {
 		}
 	}
 
-	async append(data) { //called for a reply where the previous messages sent by the user was in the last half an hour. Adds to last field.
+	async append(data) { // Adds to last field. Called for a reply where the previous messages sent by the user was in the last half an hour.
 		try {
 			data.embed.fields[data.embed.fields.length - 1].value += "\n" + data.content;
 			this.editor(data); //and if they had last message, less than half an hour ago, merely append it with new line
@@ -93,7 +93,7 @@ class Output extends Main {
 			data.message.clearReactions(); //clear reactions from the old message
 			this.modmail[message.id].overflow = msg.id; //set the overflow to true
 			this.setData(this.modmail);
-			let msg = await this.anew(data);
+			return await this.anew(data);
 		} catch (e) {
 			if (e) this.Output.onError(e);
 		}

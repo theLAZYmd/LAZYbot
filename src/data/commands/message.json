@@ -189,7 +189,7 @@
 			"message",
 			"args"
 		],
-		"prefix": "nadeko"
+		"prefix": "generic"
 	},
 	{
 		"aliases": [
@@ -1343,7 +1343,7 @@
 		],
 		"module": "Utility",
 		"file": "embeds",
-		"method": "find",
+		"method": "post",
 		"arguments": [
 			"args"
 		],
@@ -1358,13 +1358,13 @@
 		"aliases": [
 			"..."
 		],
-		"description": "Posts a guide that haspages that can swtich permanently. Use `${nadeko}.. guides` to see info on how to contribute to them.",
+		"description": "Posts a guide that has pages that can switch permanently. Use `${nadeko}.. guides` to see info on how to contribute to them.",
 		"usage": [
 			"... cwc"
 		],
 		"module": "Utility",
 		"file": "embeds",
-		"method": "find",
+		"method": "post",
 		"arguments": [
 			"args"
 		],
@@ -1667,7 +1667,7 @@
 			"send penguingim1"
 		],
 		"module": "Administration",
-		"file": "modmail",
+		"file": "modmail/input",
 		"method": "outgoing",
 		"arguments": [
 			"args"
