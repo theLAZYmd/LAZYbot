@@ -6,8 +6,17 @@ const Router = require("../../util/router.js");
 class ModMail extends Parse {
 	constructor(message) {
 		super(message);
-		this.modmail = this.reactionmessages.modmail || {};
 		this.mchannel = this.server ? this.Search.channels.get(this.server.channels.modmail) : null;
+	}
+
+	get modmail () {
+		let reactionmessages = this.reactionmessages;
+		return reactionmessages.modmail || {};
+	}
+
+	set modmail (modmail) {
+		this.reactionmessages.modmail = modmail;
+		DataManager.setServer(this.reactionmessages, "./src/data/reactionmessages.json");
 	}
 
 	get output() {
@@ -42,13 +51,14 @@ class ModMail extends Parse {
 
 	async sort(data) {  //find the relevant modmil
 		try {
-			let [id, mailInfo] = Object.entries(this.modmail).find(([i, m]) => {
+			let f = Object.entries(this.modmail).find(([i, m]) => {
 				if (i.startsWith("_")) return false;
 				if (m.tag !== data.user.tag) return false;
 				if (m.overflow) return false;
 				return true;
 			});
-			if (!id || !mailInfo) return await this.Output.anew(data);
+			if (!f) return await this.output.anew(data);
+			let [id, mailInfo] = f;
 			let modmail = await this.mchannel.fetchMessage(id)
 				.catch(async () => {
 					let user = data.mod || data.user;
@@ -66,7 +76,6 @@ class ModMail extends Parse {
 				"message": modmail,
 				"embed": Embed.receiver(modmail.embeds[0])
 			});
-			console.log(Date.now() - mailInfo.lastMail < 1800000, !data.mod, data.embed.fields[data.embed.fields.length - 1].name.includes("user wrote:"));
 			if (Date.now() - mailInfo.lastMail < 1800000 && !data.mod && data.embed.fields[data.embed.fields.length - 1].name.includes("user wrote:")) await this.output.append(data);
 			else await this.output.renew(data);
 		} catch (e) {

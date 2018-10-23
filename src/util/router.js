@@ -34,7 +34,7 @@ class Router {
 	static async reaction({messageReaction, user}) {
 		try {
 			if (user.bot) throw "";
-			if (messageReaction.message.author.bot) {
+			if (messageReaction.message.guild && messageReaction.message.author.bot) {
 				let reactionmessages = DataManager.getFile("./src/data/reactionmessages.json")[messageReaction.message.guild.id];
 				for (let [type, data] of Object.entries(reactionmessages)) {
 					for (let messageID of Object.keys(data)) {
