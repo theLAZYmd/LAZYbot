@@ -1,5 +1,5 @@
 const Main = require("./main.js");
-const Embed = require("../util/embed.js");
+const Embed = require("../../util/embed.js");
 
 class Input extends Main {
 
@@ -96,7 +96,7 @@ class Input extends Main {
 	async reaction() {
 		return this.Output.sender(new Embed()
 			.setTitle("On " + Date.getISOtime(this.message.createdTimestamp) + ", you successfully sent to ModMail:")
-			.setDescription(this.message.content)
+			.setDescription(this.message.content + "\n**The reaction '📨' marks a successful message sent.\nIf your message did not receive a '📨' or you received an error message, please contact theLAZYmd#2353**.")
 		)
 	}
 

@@ -65,6 +65,11 @@ class Bot {
 
 	static run() {
 
+		client.on("error", (e) => {
+			console.log(e);
+			Bot.ready();
+		})
+
 		client.on("ready", () => { //console startup section
 			try {
 				let data = new onStartup(client);
