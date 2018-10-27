@@ -91,13 +91,10 @@ class onStartup {
 	}
 	
 	async autoupdates() {
-		let TrackerConstructor = require("../modules/tracker.js");
+		let TrackerConstructor = require("../modules/tracker/tracker.js");
 		for (let [id, server] of Object.entries(DataManager.getFile("./src/data/server.json"))) {
 			if (server.states.au) {
-				this.Tracker = new TrackerConstructor({
-					"client": this.client
-				}, id);
-				this.Tracker.initUpdateCycle(id);
+				TrackerConstructor.initUpdateCycle(this.client, id)
 				console.log("Beginning update cycle...");
 			}
 		}
