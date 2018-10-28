@@ -14,3 +14,4 @@ lazybotv2.js
 token.json
 package-lock.json
 requireForce: false
+tsconfig.json

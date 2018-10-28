@@ -1135,7 +1135,7 @@
 			"lichess littleplotkin"
 		],
 		"module": "Chess",
-		"file": "tracker",
+		"file": "tracker/tracker",
 		"method": "run",
 		"arguments": [
 			"command",
@@ -1163,7 +1163,7 @@
 			"chesscom schoolmeester"
 		],
 		"module": "Chess",
-		"file": "tracker",
+		"file": "tracker/tracker",
 		"method": "run",
 		"arguments": [
 			"command",
@@ -1191,7 +1191,7 @@
 			"bughousetest thepinky"
 		],
 		"module": "Chess",
-		"file": "tracker",
+		"file": "tracker/tracker",
 		"method": "run",
 		"arguments": [
 			"command",
@@ -1218,7 +1218,7 @@
 			"remove lichess theLAZYmd"
 		],
 		"module": "Chess",
-		"file": "tracker",
+		"file": "tracker/tracker",
 		"method": "run",
 		"arguments": [
 			"command",
@@ -1245,7 +1245,7 @@
 			"update theLAZYmd"
 		],
 		"module": "Chess",
-		"file": "tracker",
+		"file": "tracker/tracker",
 		"method": "update",
 		"arguments": [
 			"argument"

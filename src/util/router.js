@@ -9,6 +9,7 @@ const botCommands = require("../data/commands/bot.json");
 const Permissions = require("./permissions.js");
 const DM = require("../modules/dm.js");
 const winston = require("winston");
+const fs = require("fs");
 const logger = winston.createLogger({
 	"level": "info",
 	"format": winston.format.json(),
@@ -222,7 +223,10 @@ class Router {
 			let args = [];
 			for (let i = 0; i < cmdInfo.arguments.length; i++)
 				args[i] = argsInfo[cmdInfo.arguments[i]]; //the arguments we take for new Instance input are what's listed
-			let Constructor = require("../modules/" + cmdInfo.file.toLowerCase() + ".js"); //Profile
+			let path = "modules/" + cmdInfo.file.toLowerCase() + ".js";
+			if (!fs.existsSync("./src/" + path)) path = "modules/" + cmdInfo.file.toLowerCase() + ".ts";
+			if (!fs.existsSync("./src/" + path)) throw "Couldn't find module ./src/modules/" + cmdInfo.file.toLowerCase();
+			let Constructor = require("../" + path); //Profile
 			let Instance = new Constructor(argsInfo.message); //profile = new Profile(message);
 			if (typeof Instance[cmdInfo.method] === "function") Instance[cmdInfo.method](...args);
 			//else if (typeof Instance._getDescendantProp(cmdInfo.method) === "function") Instance._getDescendantProp(cmdInfo.method)(...args);
