@@ -19,10 +19,9 @@ class Embeds extends Parse {
 					return Array.isArray(embed) ? embed : [embed];
 				}
 			}
+			return null;
 		} catch (e) {
 			if (e) throw e;
-		} finally {
-			return null;
 		}
 	}
 

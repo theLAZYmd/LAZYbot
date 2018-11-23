@@ -1,7 +1,7 @@
 const Parse = require("../util/parse.js");
 const Embed = require("../util/embed.js");
 const DataManager = require("../util/datamanager.js");
-const commands = DataManager.getFile("./src/data/commands/message.json");
+const commands = DataManager.getFile("./src/commands/message.json");
 const Package = require("../../package.json");
 
 class Help extends Parse {
@@ -14,8 +14,8 @@ class Help extends Parse {
 			if (!args[0]) return this.Output.sender(new Embed()
 				.setTitle(Package.name + " v" + Package.version + " by theLAZYmd#2353")
 				.addField("Help on using Discord", "Type `... discord`", false)
-				.addField("View all commands", "Type `!commands`", false)
-				.addField("Get help on an individual command", "Type `!help commandName` for any given command", false)
+				.addField(`View all commands", "Type \`${this.server.prefixes.generic}commands\``, false)
+				.addField(`Get help on an individual command", "Type \`${this.server.prefixes.generic}help commandName\` for any given command`, false)
 				.addField("View the bot's GitHub repo", "[theLAZYmd/LAZYbot](http://bit.ly/LAZYbot)", false)
 			);
 			if (args.length > 1 && this.guild) throw "Cannot use this command outside of a guild.";
@@ -61,21 +61,21 @@ class Help extends Parse {
 
 	get fields() {
 		let fields = [];
-		if (this.cmdInfo.subcommands) fields = Embed.fielder(fields,
-			"Subcommands",
-			this.subcommands,
-			false
-		)
-		fields = Embed.fielder(fields,
-			"Usage",
-			this.usage,
-			false
-		)
-		if (this.cmdInfo.requires && this.requires.trim()) fields = Embed.fielder(fields,
-			"Requirements",
-			this.requires,
-			false
-		)
+		if (this.cmdInfo.subcommands) fields.push({
+			"name": "Subcommands",
+			"value": this.subcommands,
+			"inline": false
+		});
+		fields.push({
+			"name": "Usage",
+			"value": this.usage,
+			"inline": false
+		});
+		if (typeof this.cmdInfo.requires === "string" && this.requires.trim()) fields.push({
+			"name": "Requirements",
+			"value": this.requires,
+			"inline": false
+		});
 		return fields;
 	}
 
@@ -86,8 +86,7 @@ class Help extends Parse {
 			let value = !Array.isArray(_value) ? [_value] : _value; //if it's not array (i.e. multiple possible satisfactory conditions)
 			value = value.map((item) => {
 				let _item = this.map(type, item);
-				if (_item === null || _item === "") return item;
-				if (_item === undefined) return _item;
+				if (typeof _item === "undefined") return _item; //if couldn't find lookup value, just use the given value
 				return _item;
 			});
 			if (value.includes("undefined")) continue;

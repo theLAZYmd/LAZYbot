@@ -26,10 +26,10 @@ class FEN extends Parse {
 	*/
 
 	get fenArray() {
+		if (this._fenArray) return this._fenArray;
 		const fenRegExpString =
-			"((?:(?:[pnbrqkPNBRQK1-8]{1,8})\\/?){8})" + //Piece Placement: any of those characters, allow 1 to 8 of each, folloed by a slash, all that repeated 8 times. Standard chess FEN produced. Slash is optional (0 or 1).
-			"\\s?" + //white space
-			"((?:[pnbrqkPNBRQK]{1,8})\\/?)?" + //Second group: crazyhouse additional inhand pieces, if they exist.
+			"((?:(?:[pnbrqkPNBRQK1-8]{1,8})\\/?){8})" + //Piece Placement: any of those characters, allow 1 to 8 of each, folloed by a slash, all that repeated 8 times. Standard chess FEN produced. Slash is optional (0 or 1). 
+			"((?:[pnbrqkPNBRQK]{1,16})\\/?)?" + //Second group: crazyhouse additional inhand pieces, if they exist.
 			"\\s+" + //white space
 			"(b|w)" + //Side to Move
 			"\\s+" + //white space
@@ -42,11 +42,11 @@ class FEN extends Parse {
 			"(\\d+)" + //Fullmove number
 			"\\s*" + //white space, may or may not exist
 			"(\\+[0-3]\\+[0-3])?"; //three-check extra group, may or may not exist
-		const regex = /((?:(?:[pnbrqkPNBRQK1-8]{1,8})\/?){8})\s?((?:[pnbrqkPNBRQK]{1,8})\/?)?\s+(b|w)\s+(-|K?Q?k?q?)\s+(-|[a-h][3-6])\s+(\d+)\s+(\d+)\s*(\+[0-3]\+[0-3])?/; //for syntax highlighting + copy/paste to debugger
+		const regex = /((?:(?:[pnbrqkPNBRQK1-8]{1,31})\/?){8})\s?((?:[pnbrqkPNBRQK]{1,16})\/?)?\s+(b|w)\s+(-|K?Q?k?q?)\s+(-|[a-h][3-6])\s+(\d+)\s+(\d+)\s*(\+[0-3]\+[0-3])?/; //for syntax highlighting + copy/paste to debugger
 		let fenRegExp = new RegExp(fenRegExpString);
 		let fenArray = this.argument.match(fenRegExp);
-		if (fenArray) return fenArray; //returns matches witch capture groups [full string, ...each () match group]
-		return [];
+		console.log(fenArray);
+		return this._fenArray = fenArray || []; //returns matches witch capture groups [full string, ...each () match group]
 	}
 
 	get positionfenArray() { //array of 6 items, beginning at 0 ending with 5.

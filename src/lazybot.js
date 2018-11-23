@@ -8,7 +8,7 @@ const onStartup = require("./events/onStartup.js"); //doesn't require Parse
 const Router = require("./util/router.js");
 
 require('events').EventEmitter.prototype._maxListeners = 100;
-process.on("unhandledRejection", (e) => console.error(e));
+process.on("unhandledRejection", e => console.error(e));
 
 const events = [
 	["channelCreate", ["channel"]],
@@ -57,71 +57,59 @@ const events = [
 	["warn", ["info"]]
 ];
 
-class Bot {
+client.on("error", (e) => {
+	console.log(e);
+	client.login(process.env.TOKEN ? process.env.TOKEN : require("./token.json").token)
+})
 
-	static ready() {
-		return client.login(process.env.TOKEN ? process.env.TOKEN : require("./token.json").token)
-	}
-
-	static run() {
-
-		client.on("error", (e) => {
-			console.log(e);
-			Bot.ready();
-		})
-
-		client.on("ready", () => { //console startup section
-			try {
-				let data = new onStartup(client);
-				for (let prop of Object.getOwnPropertyNames(onStartup.prototype)) {
-					if (prop === "constructor") continue;
-					if (typeof data[prop] === "function") data[prop]().catch((e) => console.log(e));
-				}
-				console.log("bleep bloop! It's showtime.");
-				Router.intervals();
-				if (config.states.debug) Bot.debug(data);
-			} catch (e) {
-				if (e) console.log(e);
-			}
-		});
-
-		for (let event of events) {
-			if (!event[2]) continue;
-			client.on(event[0], function () {
-				let data = {};
-				for (let i = 0; i < event[1].length; i++) {
-					data[event[1][i]] = arguments[i];
-				}
-				data.client = client;
-				Router[event[2]](data).catch((e) => console.log(e));
-			});
+client.on("ready", () => { //console startup section
+	try {
+		let data = new onStartup(client);
+		for (let prop of Object.getOwnPropertyNames(onStartup.prototype)) {
+			if (prop === "constructor") continue;
+			if (typeof data[prop] === "function") data[prop]().catch((e) => console.log(e));
 		}
-
-		client.on("presenceUpdate", (oldMember, newMember) => {
-			Router.presence(oldMember, newMember)
-				.catch((e) => {
-					if (e) console.log(e);
-				});
-		});
-
-		client.on("raw", async event => {
-			if (event.t !== "MESSAGE_REACTION_ADD") return;
-			let data = event.d;
-			let user = client.users.get(data.user_id);
-			let channel = client.channels.get(data.channel_id) || await user.createDM();
-			if (channel.messages.has(data.message_id)) return;
-			let message = await channel.fetchMessage(data.message_id);
-			let emojiKey = (data.emoji.id) ? `${data.emoji.name}:${data.emoji.id}` : data.emoji.name;
-			let reaction = message.reactions.get(emojiKey);
-			client.emit("messageReactionAdd", reaction, user);
-		});
-
+		console.log("bleep bloop! It's showtime.");
+		Router.intervals();
+		if (config.states.debug) Bot.debug(data);
+	} catch (e) {
+		if (e) console.log(e);
 	}
+});
 
+for (let event of events) {
+	if (!event[2]) continue;
+	client.on(event[0], function () {
+		let data = {};
+		for (let i = 0; i < event[1].length; i++) {
+			data[event[1][i]] = arguments[i];
+		}
+		data.client = client;
+		Router[event[2]](data).catch((e) => console.log(e));
+	});
 }
 
-Bot.run();
-Bot.ready();
+client.on("presenceUpdate", (oldMember, newMember) => {
+	try {
+		Router.presence(oldMember, newMember)
+	} catch (e) {
+		if (e) console.log(e);
+	}
+});
+
+client.on("raw", async event => {
+	if (event.t !== "MESSAGE_REACTION_ADD") return;
+	let data = event.d;
+	let user = client.users.get(data.user_id);
+	let channel = client.channels.get(data.channel_id) || await user.createDM();
+	if (channel.messages.has(data.message_id)) return;
+	let message = await channel.fetchMessage(data.message_id);
+	let emojiKey = (data.emoji.id) ? `${data.emoji.name}:${data.emoji.id}` : data.emoji.name;
+	let reaction = message.reactions.get(emojiKey);
+	client.emit("messageReactionAdd", reaction, user);
+});
+
+client.login(process.env.TOKEN ? process.env.TOKEN : require("./token.json").token)
 
 //UNIVERSAL FUNCTIONS
 
