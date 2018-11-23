@@ -32,5 +32,8 @@
 		"request-promise": "^4.2.2",
 		"winston": "^3.1.0",
 		"yarn": "^1.10.1"
+	},
+	"nodemonConfig": {
+		"ignore": "/*.json"
 	}
 }

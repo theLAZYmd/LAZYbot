@@ -73,17 +73,25 @@
                 "tag": "Gopnik#4031",
                 "lastMail": 1540329795113
             },
-            "504456960096337920": {
-                "tag": "chessguy101#2066",
-                "lastMail": 1540342313653
+            "506664826647609414": {
+                "tag": "Andrew#5850",
+                "lastMail": 1540868708182
             },
-            "504570531270623242": {
-                "tag": "schaker#9757",
-                "lastMail": 1540369389211
+            "508321725981786112": {
+                "tag": "ijh#0966",
+                "lastMail": 1541263743804
             },
-            "505917772803473409": {
+            "511716691290488863": {
                 "tag": "Raven#9079",
-                "lastMail": 1540690596692
+                "lastMail": 1542073166564
+            },
+            "511997364307886080": {
+                "tag": "johnny#1243",
+                "lastMail": 1542140084181
+            },
+            "514474225818533909": {
+                "tag": "MMichael#3973",
+                "lastMail": 1542730614003
             }
         },
         "paginator": {
@@ -270,7 +278,8 @@
                         },
                         "footer": {
                             "text": "1 / 5"
-                        }
+                        },
+                        "color": 53380
                     },
                     {
                         "description": "```css\n| #   Name                 Rtng |       ​\n|                               |\n| 1   gnejs                2878 |\n| 2   allyouneedisluft     2870 |\n| 3   mastertan ∗          2837 |\n| 4   xuanet ∗             2748 |\n| 5   blitzbullet          2739 |\n| 6   FeegLood             2717 |\n| 7   littleplotkin ∗      2683 |\n| 8   penguingim1 ∗        2680 |\n| 9   Vempele ∗            2668 |\n| 10  B0N0B0               2658 |\n| 11  Mugwort ∗            2656 |\n| 12  garnek123 ∗          2628 |\n| 13  gsvc ∗               2625 |\n| 14  JohnStuckey          2615 |\n| 15  SpinalTap            2612 |\n| 16  helmsknight ∗        2605 |\n| 17  sexy_and_i_know_it ∗ 2601 |\n| 18  HighContrast ∗       2594 |\n| 19  atamek ∗             2583 |\n| 20  apterigo             2564 |\n| 21  profz                2563 |\n| 22  Kleerkast ∗          2562 |\n| 23  retardedplatypus123∗ 2561 |\n| 24  pknm                 2546 |\n| 25  CheeseMuffin         2542 |\n| 26  TaylorEternity       2534 |\n| 27  crosky ∗             2524 |\n| 28  Fumitoks ∗           2523 |\n| 29  chewythechewer       2518 |\n| 30  terra87              2515 |\n| 31  Gabix94              2513 |\n| 32  larso ∗              2504 |\n| 33  mathace ∗            2494 |\n| 34  exMOHAX ∗            2483 |\n| 35  ArtOfDeception ∗     2469 |\n| 36  matser               2460 |\n| 37  Kielileike ∗         2447 |\n| 38  ciw                  2443 |\n| 39  MrSok                2429 |\n| 40  amaidel              2418 |\n\n∗ Participant is a member of The House\n```",
@@ -1828,6 +1837,167 @@
                 "page": 1,
                 "author": "185412969130229760",
                 "cmdID": "503282730952294410"
+            },
+            "509458742891380746": {
+                "embedgroup": [
+                    {
+                        "title": " Profile for Gopnik#4031",
+                        "description": "```А у вас Крылья Наутилуса есть?```",
+                        "color": 3329330,
+                        "fields": [
+                            {
+                                "name": "Info",
+                                "value": "Age: **87**\nSex: **often**\nLocation: **Europe**\nRegion: **Middle East / Africa**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **May 24 2017**\nThe House: **Oct 21 2018**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`317034686973214720`**\nPosition in Database: **52**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "16,952",
+                                "inline": true
+                            },
+                            {
+                                "name": "House Trophies",
+                                "value": ":trophy: **granade muster**\n:trophy: **champion du mondeeeeeeee**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/317034686973214720/38380e0b760aebb995a9cbc12cd3a0e1.png?size=2048"
+                        },
+                        "footer": {
+                            "text": "1 / 2"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": " Profile for Gopnik#4031",
+                        "description": "```А у вас Крылья Наутилуса есть?```",
+                        "color": 3329330,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[Gopnikk](https://lichess.org/@/Gopnikk)\nBlitz: **1831**\nBullet: **2106**\nRapid: 1500?\nClassical: 1500?\nCrazyhouse: **1675**\nAtomic: **1512**\nKing of the Hill: **1496**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/317034686973214720/38380e0b760aebb995a9cbc12cd3a0e1.png?size=2048"
+                        },
+                        "files": [],
+                        "footer": {
+                            "text": "2 / 2"
+                        }
+                    }
+                ],
+                "period": 30000,
+                "page": 1,
+                "author": "133249411303211008",
+                "cmdID": "509458741486157828"
+            },
+            "509460276329054209": {
+                "embedgroup": [
+                    {
+                        "title": " Profile for Gopnik#4031",
+                        "description": "```А у вас Крылья Наутилуса есть?```",
+                        "color": 3329330,
+                        "fields": [
+                            {
+                                "name": "Info",
+                                "value": "Age: **87**\nSex: **often**\nLocation: **Europe**\nRegion: **Middle East / Africa**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **May 24 2017**\nThe House: **Oct 21 2018**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`317034686973214720`**\nPosition in Database: **52**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "16,968",
+                                "inline": true
+                            },
+                            {
+                                "name": "House Trophies",
+                                "value": ":trophy: **granade muster**\n:trophy: **champion du mondeeeeeeee**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/317034686973214720/38380e0b760aebb995a9cbc12cd3a0e1.png?size=2048"
+                        },
+                        "footer": {
+                            "text": "1 / 2"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": " Profile for Gopnik#4031",
+                        "description": "```А у вас Крылья Наутилуса есть?```",
+                        "color": 3329330,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[Gopnikk](https://lichess.org/@/Gopnikk)\nBlitz: **1831**\nBullet: **2106**\nRapid: 1500?\nClassical: 1500?\nCrazyhouse: **1675**\nAtomic: **1512**\nKing of the Hill: **1496**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/317034686973214720/38380e0b760aebb995a9cbc12cd3a0e1.png?size=2048"
+                        },
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "317034686973214720",
+                "cmdID": "509460274072256542"
+            },
+            "514333178547273728": {
+                "embedgroup": [
+                    {
+                        "description": "**#1** [townes-paycheck#4884](https://lichess.org/@/townes-paycheck) 2432\n**#2** [hauptschule#7105](https://lichess.org/@/hauptschuleBOT) 2403\n**#3** [fins-love#5553](https://lichess.org/@/Fins-Love) 2400\n**#4** [tolius#9778](https://lichess.org/@/tolius) 2252\n**#5** [penguingm1#2467](https://lichess.org/@/penguingim1) 2249\n**#6** [Raven#9079](https://lichess.org/@/PepsiNGaming) 2221\n**#7** [ProgramFOX#1012](https://lichess.org/@/ProgramFOX) 2202\n**#8** [Cran#1010](https://lichess.org/@/Shibb) 2148\n**#9** [SREGORG#1204](https://lichess.org/@/grogers) 2119\n**#10** [schaker#9757](https://lichess.org/@/opperwezen) 2069\n",
+                        "title": "<:anti:471114115478192128> House leaderboard on Lichess.org for Antichess players",
+                        "footer": {
+                            "text": "1 / 5"
+                        },
+                        "color": 53380
+                    },
+                    {
+                        "description": "**#11** [TheUnknownGuyReborn#8226](https://lichess.org/@/TheUnknownGuyReborn) 2059\n**#12** [aNOnyMOUSE#0801](https://lichess.org/@/HopelessWanderer) 2053\n**#13** [ilares#0829](https://lichess.org/@/ilaaaaaaaaaaaaaaares) 2023\n**#14** [TheLoneWolf#4001](https://lichess.org/@/the-lone-wolf) 2020\n**#15** [hipno#0082](https://lichess.org/@/hipno) 2013\n**#16** [Andrew#5850](https://lichess.org/@/Link) 1983\n**#17** [Chronatog#2674](https://lichess.org/@/Chronatog) 1959\n**#18** [rapidplayer#6192](https://lichess.org/@/Rapidplayer) 1939\n**#19** [Sinamon#7982](https://lichess.org/@/Sinamon73) 1923\n**#20** [ijh#0966](https://lichess.org/@/ijh) 1918\n",
+                        "title": "<:anti:471114115478192128> House leaderboard on Lichess.org for Antichess players"
+                    },
+                    {
+                        "description": "**#21** [Wildfire#9567](https://lichess.org/@/Sonata2) 1899\n**#22** [Kyle#4287](https://lichess.org/@/KyleLegion) 1878\n**#23** [MeneerMandje#9220](https://lichess.org/@/VariantsOnly) 1876\n**#24** [Morris#0116](https://lichess.org/@/Natso) 1832\n**#25** [MasterTrap#3941](https://lichess.org/@/TrapAlert) 1832\n**#26** [TheM492017#5103](https://lichess.org/@/TheM492017) 1826\n**#27** [hiiiii#7381](https://lichess.org/@/JaakkoT) 1809\n**#28** [ObiWanBenoni#3488](https://lichess.org/@/andreijl) 1807\n**#29** [Truthdoc#5694](https://lichess.org/@/FischyVishy) 1801\n**#30** [Musickn#8622](https://lichess.org/@/Musicknight123) 1799\n",
+                        "title": "<:anti:471114115478192128> House leaderboard on Lichess.org for Antichess players"
+                    },
+                    {
+                        "description": "**#31** [a_47#4756](https://lichess.org/@/a_47) 1775\n**#32** [okei#1207](https://lichess.org/@/okei) 1769\n**#33** [EF#3964](https://lichess.org/@/eflc) 1767\n**#34** [TcubesAK#3940](https://lichess.org/@/TcubesAK) 1751\n**#35** [Yeti#0449](https://lichess.org/@/yatinagarwal) 1641\n**#36** [PsyMar#2210](https://lichess.org/@/PsyMar2) 1626\n**#37** [javi0111#6730](https://lichess.org/@/Javi0111) 1579\n**#38** [blunderman1#2451](https://lichess.org/@/blunderman1) 1572\n**#39** [Juanma206#4765](https://lichess.org/@/SadLittleTurtle) 1521\n**#40** [jamarlo#8806](https://lichess.org/@/jamesog) 1515\n",
+                        "title": "<:anti:471114115478192128> House leaderboard on Lichess.org for Antichess players"
+                    },
+                    {
+                        "description": "**#41** [loukas435#2646](https://lichess.org/@/loukas435) 1462\n**#42** [stevis5#7413](https://lichess.org/@/stevis5) 1459\n**#43** [Forhavu#1168](https://lichess.org/@/Forhavu) 1457\n**#44** [stevis5#1056](https://lichess.org/@/stevis5) 1453\n**#45** [Knautschknödel#9424](https://lichess.org/@/Knautschknoedel) 1399\n**#46** [nunners60007#7781](https://lichess.org/@/Nunners) 1353\n**#47** [liamchez#8300](https://lichess.org/@/liamchez) 1345\n**#48** [rizka#7593](https://lichess.org/@/rizka10) 1313\n",
+                        "title": "<:anti:471114115478192128> House leaderboard on Lichess.org for Antichess players"
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "324082212146249730",
+                "cmdID": "514333177620332564"
             }
         },
         "election/votes": {
