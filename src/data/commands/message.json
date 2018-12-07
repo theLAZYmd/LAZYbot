@@ -564,9 +564,7 @@
 		"method": "add",
 		"arguments": [
 			"message",
-			"argument",
-			"author",
-			"channel"
+			"argument"
 		],
 		"prefix": "generic"
 	},
@@ -624,8 +622,11 @@
 		"module": "Chess",
 		"file": "puzzle",
 		"method": "view",
-		"arguments": [],
-		"prefix": "generic"
+		"arguments": ["args"],
+        "prefix": "generic",
+        "requires": {
+            "args": 1
+        }
 	},
 	{
 		"aliases": [
