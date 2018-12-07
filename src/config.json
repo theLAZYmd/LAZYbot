@@ -31,9 +31,9 @@
         "debug": false
     },
     "backupdb": [
-        "Fri Nov 23 2018 17:23:58 GMT+00",
-        "Fri Nov 23 2018 16:50:33 GMT+00",
-        "Fri Nov 23 2018 16:50:33 GMT+00"
+        "Fri Dec 07 2018 02:52:02 GMT+00",
+        "Fri Dec 07 2018 02:52:02 GMT+00",
+        "Fri Dec 07 2018 00:52:02 GMT+00"
     ],
     "delays": {
         "update": 300000,
@@ -237,9 +237,9 @@
             "id": "",
             "username": "",
             "messages": {
-                "count": 61,
-                "last": "@mods I'm a dev",
-                "lastSeen": 1542934311960
+                "count": 102,
+                "last": "There we go, had to find the right role assignment",
+                "lastSeen": 1544137270065
             }
         },
         "server": {

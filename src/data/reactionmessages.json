@@ -15,11 +15,6 @@
                 "tag": "Kebab#6299",
                 "lastMail": 1534896051415
             },
-            "481800500916912138": {
-                "tag": "Raven#9079",
-                "lastMail": 1534940635646,
-                "overflow": "481802222091370498"
-            },
             "483373919282266122": {
                 "tag": "Fumitoks#3763",
                 "lastMail": 1535315453487
@@ -81,17 +76,17 @@
                 "tag": "ijh#0966",
                 "lastMail": 1541263743804
             },
-            "511716691290488863": {
-                "tag": "Raven#9079",
-                "lastMail": 1542073166564
-            },
-            "511997364307886080": {
-                "tag": "johnny#1243",
-                "lastMail": 1542140084181
-            },
             "514474225818533909": {
                 "tag": "MMichael#3973",
                 "lastMail": 1542730614003
+            },
+            "516968060100542466": {
+                "tag": "FalconTheSnowman#6507",
+                "lastMail": 1543325213699
+            },
+            "519983445993062414": {
+                "tag": "claracotton#2521",
+                "lastMail": 1544044114412
             }
         },
         "paginator": {
@@ -103,7 +98,8 @@
                         },
                         "footer": {
                             "text": "1 / 3"
-                        }
+                        },
+                        "color": 53380
                     },
                     {
                         "author": {
@@ -116,7 +112,8 @@
                         "description": "Over a year has passed since lichess’s Crazyhouse World Championship (CWC) was created. Last time we had a qualification round with 64 players, then three knockout rounds (R64, R32 and R16), after which the eight Candidates remained. Those final eight players played a Candidates Tournament which led to the finals between **TwelveTeen** and **JannLee**. During three weeks, they played 60 thrilling games. After the dust settled, the final score was 31,5-28,5 in favor of **JannLee**, making him the first Crazyhouse World Champion. \n\nToday, it’s time to continue this story. Champions are not born; they are made in the quiet hours when nobody is watching. Sign-ups for the 2nd edition of the CWC start on February 1. Do you have what it takes to be the next champion?",
                         "footer": {
                             "text": "2 / 3"
-                        }
+                        },
+                        "color": 53380
                     },
                     {
                         "author": {
@@ -170,7 +167,8 @@
                         ],
                         "footer": {
                             "text": "3 / 3"
-                        }
+                        },
+                        "color": 53380
                     }
                 ],
                 "period": "Infinity",
@@ -186,7 +184,8 @@
                         },
                         "footer": {
                             "text": "1 / 8"
-                        }
+                        },
+                        "color": 53380
                     },
                     {
                         "title": "Entrant Eligibility",
@@ -196,7 +195,8 @@
                         },
                         "footer": {
                             "text": "2 / 8"
-                        }
+                        },
+                        "color": 53380
                     },
                     {
                         "title": "Knockout Tournament Rules I",
@@ -1998,6 +1998,287 @@
                 "page": 0,
                 "author": "324082212146249730",
                 "cmdID": "514333177620332564"
+            },
+            "518226874296565775": {
+                "embedgroup": [
+                    {
+                        "title": "What are flowers?",
+                        "description": "Flowers are the artificial currency we use on this Discord server. We use them for fun purposes, like betting on tournaments and challenging each other to achieve things.\n\nObviously it doesn't mean anything, but it's fun, and those who have lots are the best.",
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/Jnbg4fG.png"
+                        },
+                        "footer": {
+                            "text": "1 / 5"
+                        },
+                        "color": 53380
+                    },
+                    {
+                        "title": "How can I earn flowers?",
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/Jnbg4fG.png"
+                        },
+                        "fields": [
+                            {
+                                "name": "Invite people to the server",
+                                "value": "Inviting someone to the server nets 20 🌸! This is often best done through DMs on lichess or posting in tournament or game chats. Invite your opponents after long match series! The larger the community we build here the better this place becomes. Bonus 🌸 for inviting through tournaments.",
+                                "inline": false
+                            },
+                            {
+                                "name": "Create a House tournament",
+                                "value": "Hugely popular - create a tournament on lichess and we'll sponsor you 🌸! Type `... tournament` for details.",
+                                "inline": false
+                            },
+                            {
+                                "name": "Do something impressive",
+                                "value": "Get a a FIDE title; win a big Lichess shield or tournament; beat out some folk in a Titled Tuesday arena... let us know and we might dish out 🌸 for anything that sounds vaguely impressive.",
+                                "inline": false
+                            },
+                            {
+                                "name": "Complete a challenge",
+                                "value": "Listed in <#406161920308150272>. Ask someone to give you a challenge like reaching a high rating or high position in a tournament. The server might offer extremely high payouts on certain events.",
+                                "inline": false
+                            },
+                            {
+                                "name": "Leave us a great quote",
+                                "value": "We're looking for quotes to add to our typecontest game. Have a look at the criteria in `... typeadd` then leave us a quote. If we approve it you'll earn 🌸.",
+                                "inline": false
+                            }
+                        ]
+                    },
+                    {
+                        "title": "How can I get free flowers?",
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/Jnbg4fG.png"
+                        },
+                        "fields": [
+                            {
+                                "name": "React with 🌸 when there's an event",
+                                "value": "Every now and then, <@!185412969130229760> will create an event that gives out free flowers in <#390264166843154433>. Simply react with 🌸 to the message to get them, so check <#390264166843154433> frequently!",
+                                "inline": false
+                            },
+                            {
+                                "name": "Pick 🌸 when they appear in a text channel",
+                                "value": "Everyone message has a 2% of generating 🌸. Type `.pick` as they appear, alternatively people might type `.plant` to drop them for you.",
+                                "inline": false
+                            },
+                            {
+                                "name": "Collect `.timely` periodically",
+                                "value": "You may collect 2 🌸 every 2 hours from <#390273555084083210> using the command `.timely`",
+                                "inline": false
+                            },
+                            {
+                                "name": "Win Trivia games",
+                                "value": "The House's speciality game - trivia contests between its highly competetive members! Play at any time in <#390289422802747403> by typing `.t`, the first to 10 wins. Bigger and better games win more 🌸! `... tr` to see the rewards.",
+                                "inline": false
+                            }
+                        ]
+                    },
+                    {
+                        "title": "How can I get even more flowers?",
+                        "description": "You need to risk 🌸 to get 🌸. Here's some of the ways you can do that:",
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/Jnbg4fG.png"
+                        },
+                        "fields": [
+                            {
+                                "name": "Betting",
+                                "value": "The hallmark of this server - you can place bets on your friends and favourites playing matches and tournaments. Odds are offered by our @licensed bookies, become one simply by asking! Bookies will give odds on certain outcomes of those tournaments and matches, you can choose one to invest in, with the hope of a high return. See `...howtobet` for more information.",
+                                "inline": false
+                            },
+                            {
+                                "name": "Gambling",
+                                "value": "For the truly adventurous - gamble away your savings in our bot's in-built casino. Head to <#390259390709497857> and type `.commands gambling` to see what you can play. The list of commands is also written up in the **GAMBLING** section of <#390259315816005644>.",
+                                "inline": false
+                            }
+                        ]
+                    },
+                    {
+                        "title": "How can I spend my flowers?",
+                        "description": "Have you acquired a handy amount of flowers?\nHere’s few ways how you can spend them.",
+                        "color": 53380,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/YWF70U4.png"
+                        },
+                        "fields": [
+                            {
+                                "name": "Buying roles in the shop",
+                                "value": "You can certain roles from the shop. They will give you a special color flair and make you superior to other members on the right sidebar. If your level is high enough, you’re eligible for discount. See `… shop`.",
+                                "inline": false
+                            },
+                            {
+                                "name": "Offering challenges to other users",
+                                "value": "You can give a challenge, like reaching a high rating or high position in a tournament, to someone in order to encourage them to get better. Challenges are recorded in <#406161920308150272>.",
+                                "inline": false
+                            },
+                            {
+                                "name": "Claiming waifus and gifts",
+                                "value": "You can claim waifu(s) and give them gifts. See `.gift` and `.waifus`.",
+                                "inline": false
+                            },
+                            {
+                                "name": "Trying to get more flowers",
+                                "value": "You spend flowers by betting on odds offered by licensed bookies, or by gambling in <#390259390709497857>. See `… flowers`.",
+                                "inline": false
+                            }
+                        ]
+                    }
+                ],
+                "period": 180000,
+                "page": 0,
+                "author": "455961235658244096",
+                "cmdID": "518226872929222666"
+            },
+            "518410955089117195": {
+                "embedgroup": [
+                    {
+                        "title": " Profile for Nobody#4620",
+                        "description": "",
+                        "color": 2067276,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "savagechess2k",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Region: **Middle East / Africa**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Jul 31 2017**\nThe House: **Jan 21 2018**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`341618941317349376`**\nPosition in Database: **28**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "2,081",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/341618941317349376/8a0d99397854a4c9bc1da9f3e24927c8.png?size=2048"
+                        },
+                        "footer": {
+                            "text": "1 / 1"
+                        },
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "341618941317349376",
+                "cmdID": "518410954375954432"
+            },
+            "520068550157795340": {
+                "embedgroup": [
+                    {
+                        "title": " Profile for chuckmoulton#2381",
+                        "description": "```https://www.twitch.tv/chuckmoulton```",
+                        "color": 61951,
+                        "fields": [
+                            {
+                                "name": "Info",
+                                "value": "Age: **39**\nSex: **<:male:430870358133047306>**\nLocation: **Philadelphia**\nRegion: **Americas**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Sep 30 2017**\nThe House: **Apr 26 2018**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`363519664875372556`**\nPosition in Database: **170**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "1,796",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/EncsMs8.png"
+                        },
+                        "footer": {
+                            "text": "1 / 2"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": " Profile for chuckmoulton#2381",
+                        "description": "```https://www.twitch.tv/chuckmoulton```",
+                        "color": 61951,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[chuckmoulton](https://lichess.org/@/chuckmoulton)\nBlitz: **1634**\nBullet: 1637?\nRapid: 1317?\nClassical: 1500?\nCrazyhouse: **2067**",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:chesscom:430038158244184064> Chess.com",
+                                "value": "[chuckmoulton](https://www.chess.com/member/chuckmoulton)\nBughouse: **2204**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/EncsMs8.png"
+                        },
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "363519664875372556",
+                "cmdID": "520068549503614987"
+            },
+            "520360681556541450": {
+                "embedgroup": [
+                    {
+                        "title": " Profile for FalconTheSnowman#6507",
+                        "description": "",
+                        "color": 12884558,
+                        "fields": [
+                            {
+                                "name": "Info",
+                                "value": "Region: **Americas**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Jul 25 2018**\nThe House: **Oct 31 2018**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`471771674833059882`**\nPosition in Database: **438**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "13,167",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/471771674833059882/fc58e10153b92f99a86d24466a70a48b.png?size=2048"
+                        },
+                        "footer": {
+                            "text": "1 / 1"
+                        },
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "471771674833059882",
+                "cmdID": "520360679367114754"
             }
         },
         "election/votes": {
