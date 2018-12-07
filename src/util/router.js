@@ -29,7 +29,7 @@ class Router {
 			"member": oldMember
 		});
 		if (oldMember.user.bot) Instance.bot(oldMember.presence, newMember.presence);
-		Instance.streamer(oldMember.presence, newMember.presence);
+		else Instance.streamer(oldMember.presence, newMember.presence);
 	}
 
 	static async reaction({messageReaction, user}) {
