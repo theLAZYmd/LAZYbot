@@ -1,21 +1,60 @@
 const Parse = require("../util/parse.js");
 const Embed = require("../util/embed.js");
 const config = require("../config.json");
-const request = require('request');
+const rp = require("request-promise");
 
 class FEN extends Parse {
 
-	constructor(message) {
-		super(message)
+    static get regexVerifier () {
+        return "(?:(?:(?:[pnbrqkPNBRQK1-8]{1,8})\\/?){8})" + //Piece Placement: any of those characters, allow 1 to 8 of each, folloed by a slash, all that repeated 8 times. Standard chess FEN produced. Slash is optional (0 or 1). 
+            "(?:(?:[pnbrqkPNBRQK]{1,16})\\/?)?" + //Second group: crazyhouse additional inhand pieces, if they exist.
+            "\\s+" + //white space
+            "(?:b|w)" + //Side to Move
+            "\\s+" + //white space
+            "(?:-|K?Q?k?q?)" + //Castling Rights. Matches 0 or 1 of each, so optional.
+            "\\s+" + //white space
+            "(?:-|[a-h][3-6])" + //En Passant Possible Target Squares
+            "\\s+" + //white space
+            "(?:\\d+)" + //Half-Move Clock since last capture or pawn advance for 50 move rule
+            "\\s+" + //white space
+            "(?:\\d+)" + //Fullmove number
+            "\\s*" + //white space, may or may not exist
+            "(?:\\+[0-3]\\+[0-3])?"; //three-check extra group, may or may not exist
+    }
+
+    static get regexString () {
+        return "((?:(?:[pnbrqkPNBRQK1-8]{1,8})\\/?){8})" + //Piece Placement: any of those characters, allow 1 to 8 of each, folloed by a slash, all that repeated 8 times. Standard chess FEN produced. Slash is optional (0 or 1). 
+            "((?:[pnbrqkPNBRQK]{1,16})\\/?)?" + //Second group: crazyhouse additional inhand pieces, if they exist.
+            "\\s+" + //white space
+            "(b|w)" + //Side to Move
+            "\\s+" + //white space
+            "(-|K?Q?k?q?)" + //Castling Rights. Matches 0 or 1 of each, so optional.
+            "\\s+" + //white space
+            "(-|[a-h][3-6])" + //En Passant Possible Target Squares
+            "\\s+" + //white space
+            "(\\d+)" + //Half-Move Clock since last capture or pawn advance for 50 move rule
+            "\\s+" + //white space
+            "(\\d+)" + //Fullmove number
+            "\\s*" + //white space, may or may not exist
+            "(\\+[0-3]\\+[0-3])?"; //three-check extra group, may or may not exist
+    }
+
+    static get regex () {
+        if (FEN._regex) return FEN._regex;
+        //const regex = /((?:(?:[pnbrqkPNBRQK1-8]{1,31})\/?){8})\s?((?:[pnbrqkPNBRQK]{1,16})\/?)?\s+(b|w)\s+(-|K?Q?k?q?)\s+(-|[a-h][3-6])\s+(\d+)\s+(\d+)\s*(\+[0-3]\+[0-3])?/; //for syntax highlighting + copy/paste to debugger
+		return FEN._regex = new RegExp(FEN.regexString);
+    }
+
+	constructor(message, argument) {
+        super(message);
+        this.a = argument || this.argument;
 	}
 
-	run() {
+	async run() {
 		if (!this.fen) return this.Output.onError("Invalid FEN!");
 		let Output = this.Output;
-		let embed = this.embed;
-		request(this.imageURL, function (error, response, body) {
-			if (response.statusCode != "404") Output.sender(embed);
-		})
+        let embed = this.embed;
+        if (await rp.get(this.imageURL)) Output.sender(embed);
 	}
 
 	/* The difficulty here is, not parsing the url to the analysis board, which thank to lichess is just some variant of their analysis url followed by the fen,
@@ -27,25 +66,7 @@ class FEN extends Parse {
 
 	get fenArray() {
 		if (this._fenArray) return this._fenArray;
-		const fenRegExpString =
-			"((?:(?:[pnbrqkPNBRQK1-8]{1,8})\\/?){8})" + //Piece Placement: any of those characters, allow 1 to 8 of each, folloed by a slash, all that repeated 8 times. Standard chess FEN produced. Slash is optional (0 or 1). 
-			"((?:[pnbrqkPNBRQK]{1,16})\\/?)?" + //Second group: crazyhouse additional inhand pieces, if they exist.
-			"\\s+" + //white space
-			"(b|w)" + //Side to Move
-			"\\s+" + //white space
-			"(-|K?Q?k?q?)" + //Castling Rights. Matches 0 or 1 of each, so optional.
-			"\\s+" + //white space
-			"(-|[a-h][3-6])" + //En Passant Possible Target Squares
-			"\\s+" + //white space
-			"(\\d+)" + //Half-Move Clock since last capture or pawn advance for 50 move rule
-			"\\s+" + //white space
-			"(\\d+)" + //Fullmove number
-			"\\s*" + //white space, may or may not exist
-			"(\\+[0-3]\\+[0-3])?"; //three-check extra group, may or may not exist
-		const regex = /((?:(?:[pnbrqkPNBRQK1-8]{1,31})\/?){8})\s?((?:[pnbrqkPNBRQK]{1,16})\/?)?\s+(b|w)\s+(-|K?Q?k?q?)\s+(-|[a-h][3-6])\s+(\d+)\s+(\d+)\s*(\+[0-3]\+[0-3])?/; //for syntax highlighting + copy/paste to debugger
-		let fenRegExp = new RegExp(fenRegExpString);
-		let fenArray = this.argument.match(fenRegExp);
-		console.log(fenArray);
+		let fenArray = this.a.match(FEN.regex);
 		return this._fenArray = fenArray || []; //returns matches witch capture groups [full string, ...each () match group]
 	}
 
@@ -113,7 +134,8 @@ class FEN extends Parse {
 	}
 
 	get hint() {
-		return this.argument.replace(this.fen, "").trim();
+        console.log(this.a, this.puzzleURL, this.a.replace(this.puzzleURL || "", ""));
+		return this.a.replace(this.fen, "").replace(this.puzzleURL || "", "").trim();
 	}
 
 	get imageURL() {
@@ -126,7 +148,13 @@ class FEN extends Parse {
 			"&flip=" + (this.flip ? 1 : 0) +
 			"&ext=.png"
 		)
-	}
+    }
+    
+    get puzzleURL() {
+        if (this._puzzleURL) return this._puzzleURL;
+        let regex = new RegExp(config.sources.lichess.url.puzzle.slice(0, -1).replace(/\//g, "\\/") + "([0-9]+)");
+        return this._puzzleURL = (this.a.match(regex) || [, null])[0];
+    }
 
 	get analysisURL() { //encode for chess
 		if (this.variant === "chess") return config.fen.url.analysis.replace("|", encodeURIComponent(this.fen));
@@ -134,12 +162,11 @@ class FEN extends Parse {
 	} //as is with modified spaces for variants
 
 	get embed() {
-		let embed = {
-			"title": (this.flip ? "Black" : "White") + " to move." + (this.hint ? " " + this.hint : ""),
-			"url": this.analysisURL,
-			"image": Embed.image(this.imageURL)
-		};
-		if (this.variant !== "chess") embed.description = this.description;
+		let embed = new Embed()
+			.setTitle((this.flip ? "Black" : "White") + " to move." + (this.hint ? " " + this.hint : ""))
+			.setURL(this.puzzleURL || this.analysisURL)
+			.setImage(this.imageURL)
+		if (this.variant !== "chess") embed.setDescription(this.description);
 		return embed;
 	}
 

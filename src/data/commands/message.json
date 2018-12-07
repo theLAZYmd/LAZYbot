@@ -586,16 +586,30 @@
 	},
 	{
 		"aliases": [
-			"puzzle"
+			"getpuzzle"
 		],
 		"description": "Fetches an active puzzle by its index. If no arguments provided, displays all puzzles and awaits index input.",
 		"usage": [
-			"puzzle",
-			"puzzle 1"
+			"getpuzzle",
+			"getpuzzle 1"
 		],
 		"module": "Chess",
 		"file": "puzzle",
 		"method": "view",
+		"arguments": [],
+		"prefix": "generic"
+    },
+    {
+		"aliases": [
+			"puzzle"
+		],
+		"description": "Posts the daily puzzle from lichess. **BETA**",
+		"usage": [
+			"puzzle"
+		],
+		"module": "Chess",
+		"file": "puzzle",
+		"method": "daily",
 		"arguments": [],
 		"prefix": "generic"
 	},
