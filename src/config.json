@@ -31,9 +31,9 @@
         "debug": false
     },
     "backupdb": [
-        "Sat Dec 08 2018 04:16:33 GMT+00",
-        "Sat Dec 08 2018 04:16:32 GMT+00",
-        "Sat Dec 08 2018 02:16:32 GMT+00"
+        "Sat Dec 08 2018 19:43:44 GMT+00",
+        "Sat Dec 08 2018 18:43:44 GMT+00",
+        "Sat Dec 08 2018 18:43:44 GMT+00"
     ],
     "delays": {
         "update": 300000,
@@ -232,7 +232,7 @@
                 "key": "racing-kings",
                 "api": "RacingKings"
             }
-        }        
+        }
     },
     "sources": {
         "lichess": {
@@ -284,7 +284,7 @@
             "id": "",
             "username": "",
             "messages": {
-                "count": 114,
+                "count": 115,
                 "last": "<@!330193848137678848>  real me",
                 "lastSeen": 1544207131185
             }

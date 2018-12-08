@@ -2363,6 +2363,57 @@
                 "page": 0,
                 "author": "185412969130229760",
                 "cmdID": "520709289073967122"
+            },
+            "520981808393879563": {
+                "embedgroup": [
+                    {
+                        "title": "House Guide to Crazyhouse",
+                        "description": "\n__**ABOUT**__\n\n#zh\n\n**Crazyhouse** (ZH) is a chess variant in which an opponent's captured pieces can be dropped back on the board instead of moving a piece. Crazyhouse is a variant similar to bughouse chess, but with only two players.\n\nOther names for this variant are drop chess, mad chess, reinforcement chess, turnabout chess and schizo-chess. It’s also known as wild 23. \n\n__**RULES**__\n\nAll the rules and conventions of standard chess apply, with the addition of drops, as explained below.\n\n • A captured piece reverses colour and goes to the capturing player's pocket. At any time, instead of making a move with a piece on the board, a player can drop a piece from their pocket onto an empty square on the board.\n• Drops resulting in immediate checkmate are permitted.\n• Pawns may not be dropped on the players' 1st or 8th ranks.\n• Promoted but captured pawns are dropped as pawns.\n\nRules-page on lichess with video: https://lichess.org/variant/crazyhouse\n\n__**WHERE?**__\n\n● [lichess.org](https://lichess.org)\n● [chess.com](https://chess.com)\n● [Free Internet Chess Server](http://www.freechess.org/)\n● [Internet Chess Club](https://www.chessclub.com/)",
+                        "color": 14841132,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/pMkkATk.png"
+                        },
+                        "footer": {
+                            "text": "1 / 5"
+                        }
+                    },
+                    {
+                        "title": "House Guide to Crazyhouse",
+                        "description": "**__IMPROVE__**\n\nCrazyhouse is a fast-paced game that needs strong tactics and a good awareness of positional weaknesses. Unlike regular chess, draws are rare because new pieces keep being reintroduced to the board. Check out [crosky’s crazyhouse overview](http://bit.ly/2FfYYMX).\n\n• As GM Yasser Seirawan would say, **king safety** comes first and foremost. Ensure that your king's position is safe from attack; this does not necessarily imply castling – dropping pieces around your king can effectively guard it from serious threats.\n\n• **Develop** your pieces in the opening and **control key squares**, especially around your king.\n\n• Beware of **holes** in your position. A hole provides an opening for an opponent's piece which can lead to a strong attack. If pieces do enter, chase them away and secure your position. As helmsknight would say, “get out of my house!” Similarly, seek to exploit any holes your opponent leaves in their position.\n\n• Beware of **piece sacs** on [f2/f7](https://youtu.be/kZPSNF8XHQI) or [g2/g7](https://youtu.be/6Gh2n9kWdb8), especially if the opponent has many pieces in hand.\n\n• Often the best defence is **attack**, as any mating sequence threatened must be dealt; the majority of crazyhouse moves have an **attacking purpose**. As Vempele says, the best defence against @h3 might be @h6. Launch counter-attacks that are faster and cannot be ignored.\n\n• **Initiative** is more important than material. If a player has initiative they can drop their pieces in hand with check and threats and dominate the board. It’s important to utilise positional dominance because if the initiative runs out, the opponent can take back initiative with pieces in hand and reassert control.",
+                        "color": 14841132,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/pMkkATk.png"
+                        }
+                    },
+                    {
+                        "title": "House Guide to Crazyhouse",
+                        "description": "**__MATERIAL__**\n\n• **Pawns** are more valuable than in regular chess, because they can be dropped anywhere on the board including the seventh rank. A minor pieces can be happily traded for 2 pawns in most situations. Unlike chess, **Doubled Pawns** are less of a weakness because pawn structures can be fixed with pawns in hand, and a doubled pawn can even be a strength because it controls squares of both colours. \n\n• **Knights** are wonderful attackers because their threats can’t be blocked [...].\n\n• **Bishops** are strong defenders as they cover diagonals going backwards as well as forwards. A Bishop on g2, for instance, is able to take on h3 and still cover g2. They can also be good attackers because they control channels of a single colour. Pawns and Bishops are known as **\"diags”** because they can penetrate an opponent position along diagonals of a single colour. If all your pawns are on light squares for example, you must take care to defend dark square weaknesses. For more on the importance of colour complexes, check out [mastertan’s visual guide](http://bit.ly/2FQmVZn).\n\n• **Rooks** are useful to defend and attack open files. Dropping a rook on the back rank with check is a good way to force an opponent to “waste” a piece; combined with a pawn drop on the 7th exploiting the pin, this combination can have lethal effect. Rooks are often sacked on the backrank promoting a pawn to remove defenders. [Example](https://lichess.org/yUwqzUBO/black#27).\n\n• **Queens** are worth less in crazyhouse than in normal chess, because they can be hit with a tempo by minors, especially when dropped. Crazyhouse favors numeracy in pieces; a Bishop and Knight in hand have more versatility than a Queen. In general, Queens are worth about 2 minors.",
+                        "color": 14841132,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/pMkkATk.png"
+                        }
+                    },
+                    {
+                        "title": "House Guide to Crazyhouse",
+                        "description": "**__STRATEGY__**\n\n• Crazyhouse is still chess, so **common chess tactics** still apply: try not to hang pieces or block in your own pieces; trap opponent pieces and use forks, pins and discovered checks. Because pieces can land anywhere on the board, one must be even more alert.\n\n• **Defending**. Under heavy attack, it is important to evaluate your position. You usually have three options: **First**, you could take your opponent’s attackers, try to stay safe and hope the attack exhausts itself and they run out of material. You might try to limit the flow of exchanges to give time to get the king safe and not give pieces that the opponent needs to mate you. **Second**, if a sacrifice is too dangerous to take, you could focus on defending, dropping pieces near your king to cover important squares. One could also make luft, giving the king a flight path, or a safe square it can fall back or run up to. **The third option** is to ignore the threat and start an attack of your own: if you are the one getting to the opponent’s king first, go for it! Going all in can also be a last resort hoping your opponent makes a mistake.\n\n• **Attacking**. To keep initiative, it is common for mating sequences to comprise purely of checks: [drawing the king out and/or cornering it](https://goo.gl/QLp4DY), [picking up pieces needed for mate](https://goo.gl/uNPKqG), [cutting off escape squares](https://goo.gl/2okT35), [luring the king to a mating square](https://goo.gl/Dd4BvF), [deflecting defending pieces](https://goo.gl/hX6Q85), and [opening up a file, diagonal or key square](https://goo.gl/AqLN86).\n\n• It is important to be familiar with [common mating patterns](https://goo.gl/7ejioW).",
+                        "color": 14841132,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/pMkkATk.png"
+                        }
+                    },
+                    {
+                        "title": "House Guide to Crazyhouse",
+                        "description": "**__VIDEOS__**\n\nStreaming chess has become more popular in the past few years and crazyhouse has shared the fruits of this growing trend. The House presents to you the best and most famous streamers of crazyhouse.\n\n• **JannLee**: [YouTube](<https://www.youtube.com/channel/UCbo8-5AEH7u3lE-yOGeNW1Q>), [Twitch](<https://www.twitch.tv/jannleecrazyhouse>).\n• **Nikolas Theiss**: [YouTube](<https://www.youtube.com/channel/UCsjRN9g1AYODJZOPVJKzUmw/>).\n• **Thomas Crosky**: [YouTube](<https://www.youtube.com/channel/UCvowgcm56sLguWxYp8oqI1w>).\n• **Helmsknight**: [YouTube](<https://www.youtube.com/channel/UCcKXwA_lo3Zpz3_Mc-WVLtw>), [Twitch](<https://www.twitch.tv/helmsknight>).\n• **Okei**: [Twitch](<https://www.twitch.tv/okeizh>).\n• **Mugwort**: [YouTube](https://www.youtube.com/channel/UCNMhNQybeLGJHWJv5qT1liQ), [Twitch](https://www.twitch.tv/mugwortcrazyhouse).\n  \nWant your stream to appear here? Let the mods know.\nWhat to create a bio page for your stream? Type `... embedex` and design yourself a page; alternatively send one of the mods the details you want to be included.",
+                        "color": 14841132,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/pMkkATk.png"
+                        }
+                    }
+                ],
+                "period": 180000,
+                "page": 0,
+                "author": "185412969130229760",
+                "cmdID": "520981805986349143"
             }
         },
         "election/votes": {
