@@ -134,8 +134,12 @@ class FEN extends Parse {
 	}
 
 	get hint() {
-		return this.a.replace(this.fen, "").replace(this.puzzleURL || "", "").trim();
-	}
+		return this.a.replace(this.fen, "").replace(this.puzzleURL || "", "").trim() + (this.lastMove ? "\n" + this.lastMove : "");
+    }
+    
+    get lastMove() {
+        return null;
+    }
 
 	get imageURL() {
 		return config.fen.url.board.replace("|",
@@ -151,8 +155,13 @@ class FEN extends Parse {
     
     get puzzleURL() {
         if (this._puzzleURL) return this._puzzleURL;
-        let regex = new RegExp(config.sources.lichess.url.puzzle.slice(0, -1).replace(/\//g, "\\/") + "([0-9]+)");
-        return this._puzzleURL = (this.a.match(regex) || [, null])[0];
+        for (let s of Object.values(config.sources)) {
+            if (!s.url || !s.url.puzzle) continue;
+            let u = s.url.puzzle.replace(/\//g, "\\/").replace("|", "([0-9]+)");
+            let regex = new RegExp(u);
+            if (regex.test(this.a)) return this.a.match(regex)[0];
+        }
+        return null;
     }
 
 	get analysisURL() { //encode for chess

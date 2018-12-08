@@ -273,8 +273,9 @@
             "name": "ChessVariants.training",
             "key": "cvt",
             "url": {
-                "puzzle": "https://chessvariants.training/Puzzle/Train/GetOneRandomly/|",
-                "setup": "https://chessvariants.training/Puzzle/Train/Setup"
+                "api": "https://chessvariants.training/Puzzle/Train/GetOneRandomly/|",
+                "setup": "https://chessvariants.training/Puzzle/Train/Setup",
+                "puzzle": "https://chessvariants.training/Puzzle/|"
             }
         }
     },

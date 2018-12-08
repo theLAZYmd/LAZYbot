@@ -41,7 +41,7 @@ const events = [
 	["messageReactionAdd", ["messageReaction", "user"], true],
 	["messageReactionRemove", ["messageReaction", "user"]],
 	["messageReactionRemoveAll", ["message"]],
-	["messageUpdate", ["oldMessage", "newMessage"]],
+    ["messageUpdate", ["oldMessage", "newMessage"]],
     ["presenceUpdate", ["oldMember", "newMember"], true],
 	["ready", [], true],
 	["reconnecting", []],

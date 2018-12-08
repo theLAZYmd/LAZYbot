@@ -33,23 +33,24 @@ class Puzzle extends Parse {
     async variant() {
         try {
             let {   variant   } = await require("../util/variant")(this.message.content, this.channel, this.args, this);
-            let body = JSON.parse((await rp(config.sources.cvt.url.puzzle.replace("|", config.variants.cvt[variant.key].api))).toString());
+            let body = JSON.parse((await rp(config.sources.cvt.url.api.replace("|", config.variants.cvt[variant.key].api))).toString());
             if (!body.success) throw JSON.stringify(body, null, 4);
             if (!body.id) throw "Not given an ID property!";
-            this.log(body.id);
             let options = {
                 "method": "POST",
                 "uri": config.sources.cvt.url.setup,
                 "headers": {
                     "Origin": "https://chessvariants.training"
                 },
-                "body": {
+                "form": {
                     "id": body.id
                 },
                 "timeout": 5000,
                 "json": true
             };
-            this.log(await rp.post(options));
+            let {   fen   } = await rp.post(options); //success, trainingSessionId, author, fen, whoseTurn, variant, additionalInfo, authorUrl, pocket, check
+            let fenConstructor = new FEN(this.message, fen + " " + config.sources.cvt.url.puzzle.replace("|", body.id));
+            fenConstructor.run();
         } catch (e) {
             if (e) this.Output.onError(e);
         }
