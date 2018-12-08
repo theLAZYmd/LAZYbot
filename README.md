@@ -1,28 +1,68 @@
-# LAZYbot
+#LAZYbot
 
-Discord bot operating in [the House server](http://dscrd.me/housechessvariants) to further lazy's understanding of basic js.
-Written in JavaScript, hosted on glitch.com.
+Discord bot operating in [the House server](http://dscrd.me/housechessvariants), servicing just over 1,100 members [December 2018].
+Has helped LAZY's understanding of basic js.
+Written in Node.JS.
+Currently (due to lack of confidence in the bot's database system and concerns over pricing for hosting) not available on multiple servers. If/when the bot is switched over to a (cheaper) linux server, and the database system is revamped, an add-server link will be added.
 
-**It's main modules are:**
-- A profile generator which includes:
-  - Integration with the lichess and chess.com API to support account linking;
-  - Customisable finger notes;
-  - Count messages sent in the server;
-- Handles Mod Mail DM-ed to the bot;
-- Has a custom reactions system:
-  - Responding with either set phrases, embeds, or reacting with emojis;
-- Displays all commands with `!commands` and individual help messages with `!help`;
+This bot has also spawned off [LAZYmail](https://github.com/theLAZYmd/LAZYmail), a version of the bot with just the below-mentioned ModMail module. This is in use in the official [IBO Discord server](https://discord.gg/IBO) and services over 10,000 members [December 2018]. 
+
+###Hosting
+- **Provider:** Amazon EC2 Instance
+- **Region:** eu-west-2a
+- **Instance Type:** t2.small
+- **OS:** Windows (for now)
+- **Running Cost:** £0.28 [November 2018]
+
+###Highlights
+- [Election module](https://github.com/theLAZYmd/LAZYbot/tree/master/src/modules/election) - runs a fully-automated election system on Discord with no third-party libs that, in order:
+  - Allow choosing of customisable settings, such as date, voting system, scope of election, electorate list, various rules such as whether to find and exclude dupe accounts, where to set a minimum threshold on messages, on sponsors required for nominations, on number of elections able to run for (if holding several at the several time), and who the voters are.
+  - Allows a 'sponsoring' system to nominate candidates
+  - Registers candidates, registers votes (based on members in Discord server)
+  - Sends round customisable ballots
+  - Receives votes through DM channels (for secret ballots), parses the information, and stores them
+  - Counts them and parses results
+  - Outputs winners using an 'emoji react' system - when a sufficient number of emojis are pressed, results are revealed
+- [Profile module](https://github.com/theLAZYmd/LAZYbot/blob/master/src/modules/profile.js) - creates a 'profile' for each Discord user with:
+  - Basic administratory information (user ID, date joined and the like from Discord API)
+  - Integration with the lichess and chess.com API to support account linking
+  - Customisable finger notes
+  - Count messages sent in the server
+  - Ability for moderators to add Trophies to certain users
+- [ModMail module](https://github.com/theLAZYmd/LAZYbot/tree/master/src/modules/modmail) - new modmail created from scratch that's intuitive, aesthetic, and easy to use
+  - Specifically designed to not rely on a database of messages
+  - Allows actions on mods' side: 'close', 'reply anonymously', 'reply', 'warn user', 'timeout user'
+  - Supports image attachment
+  - Display basic user information
+- Systemised event handler through the [router module](https://github.com/theLAZYmd/LAZYbot/tree/master/src/router)
+  - Handles events generated from the Discord client in an expandable and readable way
+- An effective [Parse API](https://github.com/theLAZYmd/LAZYbot/blob/master/src/util/parse.js) that takes data stored in a Discord message and parses it into a useful object that can be interacted with for the purposes of the bot
+- An effective [Search-resolvable API](https://github.com/theLAZYmd/LAZYbot/blob/master/src/util/search.js) where functions using Discord members, channels, servers, roles, and emojis can search for them by ID, tag, username, aliases, or nickname.
+- [Permissions system](https://github.com/theLAZYmd/LAZYbot/blob/master/src/util/permissions.js) that allows limitations on certain commands to who can use them
+- [Linking of Discord account](https://github.com/theLAZYmd/LAZYbot/tree/master/src/modules/tracker) with Lichess and Chess.com, parsing data from their APIs
+  - Parses rating data and automatically updates it, available through `!profile`
+  - Parses other personal information (like name, country) and makes it available through `!profile`
+  - Compares that data in the database with that of other users, for comparison in [leaderboards](https://github.com/theLAZYmd/LAZYbot/blob/master/src/modules/leaderboard.js) through the command `!lb`
+  - Allows users to use `!myrank` to display one's ranking compared to all other users for all variants
+
+###Other features (src/modules)
+- Custom reactions system  with either set phrases, embeds, or emojis
+- Help modules with `!commands` and individual messages with `!help`
 - Stores and returns embeds which are editable:
-  - Some of which are multiple pages long;
-  - Accepts emoji reactions as acceptable inputs to turn pages;
-- Runs an 'election':
-  - Registers candidates, registers voters;
-  - Validates votes and stores them;
-  - Countes them and parses them using an AV (Instant Run-Off system);
-  - Outputs winners;
-- Allows users to change their only username colour;
+  - Some of which are [multiple pages](https://github.com/theLAZYmd/LAZYbot/blob/master/src/modules/paginator.js) long;
+  - Accepts emoji reactions as acceptable inputs to turn pages
+- Backs up data periodically
+- Allows users to change their username colour
+- Extends the native maths library to include:
+  - Combinations and permuations
+  - Binomial calculations
+  - Random generators
+- Reddit API to detect when subreddits are mentioned and provide a link to them
+- [Odds generator](https://github.com/theLAZYmd/LAZYbot/blob/master/src/modules/odds.js) for betting between any two matches based on percentage change of winning a single game
+- Uses an API from [chessvariants.training](https://chessvariants.training) to get, parse, and generate random puzzles from the `!puzzle` command. Also, displays the daily puzzle from lichess by crawling the lichess puzzle
+- Handles, parses, and generates boards using the chess.com API from FENs (Forsyth-Edwards Notation, a format of representing a position on a chess board)
+- Utility functions such as setting bot username, nickname, streaming link and title, bot version
+- As well as basic utility functions such as get ping, uptime, and quote messages
+- As well as developers utility functions such as convert a Discord Embed to raw JSON, convert Discord text to Markdown, output JSONs, output various strings and errors
 
-**In active development**
-
-- More modules available on a (shoddy) previous version, the bot is currently in the transition to a rewrite to the class-based system.
-- The repo available on this remote origin is the rewritten class based version.
+#In active development

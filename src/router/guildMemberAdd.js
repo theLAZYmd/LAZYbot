@@ -1,3 +1,5 @@
 module.exports = async (member) => {
-    require("../modules/shadowban.js").sbusername(member);
+    let Constructor = require("../modules/shadowban.js");
+    let Instance = new Constructor({ member })
+    Instance.sbusername(member);
 }

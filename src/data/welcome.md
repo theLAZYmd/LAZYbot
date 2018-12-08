@@ -2,45 +2,31 @@
 
 Please react to the messages below with the appropriate emojis to be given a role so that lets you view the channels you want.
 Posterity reaction roles included for sentimental/statistical reasons: https://i.imgur.com/dWsMMGS.png
+
 __**REGION**__
 
-Which **region** do you live in? This role grants you access to the server as a **Member**, which lets you see all the #main channels of the server.
+Which **region** do you live in? This role lets you join the server as a **Member** and see its main channels.
 
-:americas: Americas
-:europe: Europe
-:middleeast: Middle East
-:africa: Africa
-:asia: Asia
-:australia: Australia
+:americas: Americas | :europe: Europe | :middleeast: Middle East | :africa: Africa | :asia: Asia | :australia: Australia
+
 .rero excl Americas :americas: Europe :europe: "Middle East / Africa" :middleeast: "Middle East / Africa" :africa: "Asia / Australia" :asia: "Asia / Australia" :australia:
+
 __**VARIANTS**__
 
-What chess variants do you play?
+Which chess variants do you play?
 
-:crazyhouse: #zh 
-:bughouse: #bug 
-:3check: #3-check 
-:4player: #4-player 
-:anti: #anti 
-:horde: #horde 
-:atomic: #atomic 
-:schess: #s-chess 
-:960: #960 
-:koth: #koth 
-:racingkings: #racing-kings 
-:ultra: #ultra
-.rero zh :zh: crazyhouse :bughouse: "3 check" :3check: "4 player" :4player: anti :anti: horde :horde: atomic :atomic: "seirawan capablanca" :schess: 960 :960: "king of the hill" :koth: "racing kings" :racingkings: ultra :ultra:
+:crazyhouse: #crazyhouse  | :bughouse: #bug-fics-friday-2230gmt | :3check: #3-check | :4player: #4-player | :anti: #anti | :horde: #horde | :atomic: #atomic | :schess: #s-chess | :960: #960 | :koth: #koth | :racingkings: #racing-kings | :ultra: #ultra
+
+.rero crazyhouse :crazyhouse: bughouse :bughouse: 3-check :3check: 4-player :4player: anti :anti: horde :horde: atomic :atomic: s-chess :schess: 960 :960: koth :koth: racing-kings :racingkings: ultra :ultra:
+
 __**TEAM**__
 
-Which team are you on? It doesn't mean anything at all but you can only be one :biblethump: 
+Which **team** are you on? It doesn't mean anything at all but you can only be one
 
-:lazy: Team Lazy
-:cubes: Team Cubica
-:suomi: Team Suomi
-:wolf~1: Team Wolf
-:obi: Team Obi
+:spqr: Team Lazy | :suomi: Team Suomi | :wolf~1: Team Wolf | :obi: Team Obi
 
-.rero excl "Team Lazy" :lazy: "Team Cubica" :cubes: "Team Suomi" :suomi: "Team Wolf" :wolf~1: "Team Obi" :obi:
+.rero excl "Team Lazy" :lazy: "Team Suomi" :suomi: "Team Wolf" :wolf~1: "Team Obi" :obi:
+
 **__EXTRA ROLES__**
 
 :newodds: Receives a ping every time new betting odds are released
@@ -52,11 +38,11 @@ Which team are you on? It doesn't mean anything at all but you can only be one :
 :wutface: Receives a ping for news relating to the chess.com PRO Chess League's #fantasy-chess 
 :feelsgoodman: Receives a ping every time a new member joins the server
 
-.rero "new odds" :newodds: voting :upvote: dragonmatez :feelsbadman: subs :FailFish: cwc :shield~1: fantasychess :wutface: "welcome squad" :feelsgoodman: 
+.rero "new odds" :newodds: voting :upvote: dragonmatez :feelsbadman: subs :FailFish: "welcome squad" :feelsgoodman: puzzles :puzzles: seeking :seeking:
 
 **That's all and have fun about our server.**
-If you're a new user you should try and leave at least 1 reaction anywhere about #welcome .
-theLAZYmd#2353 I will always auto-delete messages which successfully execute commands on this channel, regardless of the server setting.
+If you've reached the end, leave 1 reaction somewhere in #welcome.
+
 https://i.imgur.com/pyZ5scg.png
 Welcome to the House Chess Variants Community Discord Server!
 Discord provides a chat server for members of your variants community to congregate and chat, discussing games, offering help, playing games, betting, and organising matches.
