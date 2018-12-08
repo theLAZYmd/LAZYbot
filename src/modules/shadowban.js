@@ -28,9 +28,9 @@ class Shadowban extends Parse {
         let shadowbanned = this.shadowbanned;
         this.Output.sender(new Embed()
             .setTitle("⛔️ List of shadowban conditions on " + this.guild.name)
-            .addField("By Username", shadowbanned.usernames.join("\n") || "\u200b", false)            
-            .addField("By User", shadowbanned.users.join("\n") || "\u200b", false)            
-            .addField("By Message Content", shadowbanned.newMessages.join("\n") || "\u200b", false)
+            .addField("By Username", shadowbanned.usernames.join("\n").format("css") || "\u200b", false)            
+            .addField("By User", shadowbanned.users.join("\n").format("fix") || "\u200b", false)            
+            .addField("By Message Content", shadowbanned.newMessages.join("\n").format("css") || "\u200b", false)
         )
     }
 
@@ -80,8 +80,10 @@ class Shadowban extends Parse {
                             .addField("Author", this.author.tag, true)
                             .addField("Channel", this.channel, true)
                             .addField("Time", message.editedAt || message.createdAt, true)
+                            .addField("Rule", r.toString().format("css"), false)
                             .addField("Content", message.content, false)
                         , this.Search.channels.get(this.server.channels.modmail));
+                        return;
                     }
                 }
             } catch (e) {
@@ -96,7 +98,6 @@ class Shadowban extends Parse {
 		try {
             let command = "add" + (/User|Username|NewMessage/i.test(args[0]) ? args.shift() : "User");
             for (let f of Object.getOwnPropertyNames(Shadowban.prototype)) {
-                console.log(f, command, f.toLowerCase() === command.toLowerCase());
                 if (f.toLowerCase() === command.toLowerCase() && typeof this[f] === "function") return this[f](args);
             };
 			throw "Invalid second parameter given **" + this.args[0] + "**.";
@@ -112,7 +113,6 @@ class Shadowban extends Parse {
             let shadowbanned = this.shadowbanned;
             shadowbanned.users.push(user.id);
             this.shadowbanned = shadowbanned;
-            if (!member) throw "No member found!";
             this.Output.sender(new Embed()
                 .setTitle("⛔️ User Shadowbanned")
                 .addField("Username", user, true)
@@ -129,11 +129,11 @@ class Shadowban extends Parse {
             let regex = new RegExp(array.slice(0, -1).join("/"), array.pop());
             if (!regex) throw "Invalid RegExp to validate new users!";
             let shadowbanned = this.shadowbanned;
-            shadowbanned.users.push(username);
+            shadowbanned.usernames.push(username);
             this.shadowbanned = shadowbanned;
             this.Output.sender(new Embed()
                 .setTitle("⛔️ Username Shadowbanned")
-                .addField("Username", username, true)
+                .addField("Username", username.format("css"), true)
                 .addField("Channel", this.server.channels.join, true)
             );
         } catch (e) {
@@ -150,10 +150,9 @@ class Shadowban extends Parse {
             let shadowbanned = this.shadowbanned;
             shadowbanned.newMessages.push(msg);
             this.shadowbanned = shadowbanned;
-            if (!member) throw "No member found!";
             this.Output.sender(new Embed()
                 .setTitle("⛔️ Message Content Shadowbanned")
-                .addField("Message Content", msg, true)
+                .addField("Message Content", msg.format("css"), true)
                 .addField("Channel", this.server.channels.join, true)
             );
         } catch (e) {

@@ -2414,6 +2414,96 @@
                 "page": 0,
                 "author": "185412969130229760",
                 "cmdID": "520981805986349143"
+            },
+            "521059006039457792": {
+                "embedgroup": [
+                    {
+                        "content": "**Welcome to The House %user.mention%!** Let's get the party started @welcome squad.\n",
+                        "description": "**We're the home of chess variants across lichess.org, chess.com, FICS, and anywhere else.**​",
+                        "color": 9359868,
+                        "footer": {
+                            "text": "1 / 5"
+                        },
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/YWF70U4.png"
+                        },
+                        "fields": [
+                            {
+                                "name": "View our channels",
+                                "value": "You won't be able to see most of our channels until you're a **Member.**\nFirstly, familiarise yourself with the rules in #welcome.\nThen, head to #role-assignment and assign yourself permissions to see the chat channels and your favourite variant channels.\n​",
+                                "inline": false
+                            },
+                            {
+                                "name": "How the hell do I use Discord?",
+                                "value": "First time? type `... discord` for our guide on navigating this place.\n​",
+                                "inline": false
+                            },
+                            {
+                                "name": "Link your accounts",
+                                "value": "Type `!lichess` followed by your account name.\nType `!chess.com` followed by your account name.\n​",
+                                "inline": false
+                            },
+                            {
+                                "name": "Crazyhouse World Championships",
+                                "value": "Type `.iam CWC` to see the CWC channels on the left.\n​",
+                                "inline": false
+                            },
+                            {
+                                "name": "Developers",
+                                "value": "If you're a dev, type `@mods I'm a dev` and you'll be added to #devs.",
+                                "inline": false
+                            }
+                        ]
+                    },
+                    {
+                        "content": "**Welcome to The House %user.mention%!** Let's get the party started @welcome squad.",
+                        "description": "**Bienvenue à \"Chez Nous\"!** C'est une plateforme géniale pour discuter les variantes d'échecs de lichess.org, chess.com, FICS, et n'importe où.\n\nVous ne pouvez pas voir et utiliser la majorité de salons de chat avant s'inscrire comme un Membre. Pour faire ça, après avoir lu les règles dans #welcome, allez à #role-assignment et lisez les instructions. Réagissez avec les emojis appropriés pour gagner l'accès aux salons.\n\nSi vous êtes en général plus confortables en parlant français, écrivez `.atl fr>en` pour faire traduire au bot automatiquement vos phrases.",
+                        "color": 12956504,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/E8S8QXE.png"
+                        },
+                        "footer": {
+                            "text": "2 / 5"
+                        }
+                    },
+                    {
+                        "content": "**Welcome to The House %user.mention%!** Let's get the party started @welcome squad.",
+                        "description": "**Willkommen in \"The House\"!** Wir sind dein Zuhause für Schachvarianten auf lichess.org, chess.com , FICS und an allen anderen Orten.\n\nDie meisten Kanäle werden für dich unsichtbar sein, solange du noch kein **Mitglied**bist. Wenn du die Regeln in #welcome durchgelesen hast, gehe bitte zu #role-assignment und weise dir die Berechtigungen zu, sodass du die Chat- und Varianten-Kanäle sehen kannst.\n\nFalls du nicht so gut mit English klarkommst, schreibe `.atl de>en`, um deine Nachrichten automatisch übersetzen zu lassen.",
+                        "color": 12956504,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/E8S8QXE.png"
+                        },
+                        "footer": {
+                            "text": "3 / 5"
+                        }
+                    },
+                    {
+                        "content": "**Welcome to The House %user.mention%!** Let's get the party started @welcome squad.",
+                        "description": "**Bienvenidos a \"Nuestra Casa\"!** Aquí podrás discutir los variantes de ajedrez de lichess.org, chess.com, FICS y otros sitios.\n\nLa mayoría de los canales aquí solo se pueden ver si eres un **Miembro.** Cuando te has familiarizado con las reglas en #welcome, por favor, ven a #role-assignment para asignarte unas roles y ver los canales de chat y los canales de tus variantes favoritos.\n\nSi prefirirías hablar español, escriba `.atl es>en` para que el bot traduzca automáticamenta lo que escribes.",
+                        "color": 12956504,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/E8S8QXE.png"
+                        },
+                        "footer": {
+                            "text": "4 / 5"
+                        }
+                    },
+                    {
+                        "content": "**Welcome to The House %user.mention%!** Let's get the party started @welcome squad.",
+                        "description": "**Benvenuto in \"The House!\"** Questa è la casa di tutte le varianti degli scacchi presenti su lichess.org, chess.com, FICS e in qualsiasi altro luogo.\n\nNon potrai vedere o usare molti dei nostri canali finchè non sarai un Membro degli stessi. Dopo aver  preso visione delle regole in #welcome, entra in #role-assignment e conferisciti i permessi per vedere le chat e i canali delle tue varianti preferite.\n\nSe in generale vi trovate più a vostro agio nel parlare Italiano, digitate `.atl it>en` così che il bot traduca automaticamente le vostre frasi.",
+                        "color": 12956504,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/E8S8QXE.png"
+                        },
+                        "footer": {
+                            "text": "5 / 5"
+                        }
+                    }
+                ],
+                "period": 180000,
+                "page": 1,
+                "author": "185412969130229760",
+                "cmdID": "521059004877766658"
             }
         },
         "election/votes": {

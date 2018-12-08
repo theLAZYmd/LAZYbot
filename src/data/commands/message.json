@@ -845,7 +845,7 @@
 		"arguments": [],
 		"prefix": "generic",
 		"requires": {
-			"role": "admin"
+			"role": ["admin", "mod"]
 		}
     },
     {

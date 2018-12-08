@@ -131,11 +131,16 @@
             "312824560602841089": 1539306542761
         },
         "shadowbanned": {
-            "usernames": [],
-            "users": [
+            "usernames": [
                 "/golam/i"
             ],
-            "newMessages": []
+            "users": [
+                "521024815608496129"
+            ],
+            "newMessages": [
+                "/thats[\\w\\s]*jew/i",
+                "/kill[\\w\\s]*jew/i"
+            ]
         }
     },
     "430035841239220224": {

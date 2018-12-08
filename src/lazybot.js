@@ -159,6 +159,11 @@ String.prototype.bold = function () {
 	return "";
 };
 
+String.prototype.format = function (type = "") {
+	if (this.length > 0) return "```" + type + "\n" + this + "```";
+	return "";
+}
+
 Array.prototype.toProperCase = function () {
 	for (let i = 0; i < this.length; i++)
 		this[i] = this[i].toProperCase();
