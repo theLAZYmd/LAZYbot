@@ -3,15 +3,15 @@
         "id": "185412969130229760",
         "username": "theLAZYmd#2353",
         "messages": {
-            "count": 74861,
-            "last": "Take a look at this <https://github.com/theLAZYmd/LAZYbot/blob/89336285943661d206089f7324d0b64a3826c800/src/modules/puzzle.js#L33-L56> this is where I'm making the request from\nAll seems fine tbh",
-            "lastSeen": 1544242477937
+            "count": 74867,
+            "last": "What's the difference between body and form?",
+            "lastSeen": 1544277645224
         },
         "bidamount": 100000000000000000,
         "location": "Toronto",
         "sex": "male",
         "patron": false,
-        "lastupdate": 1544241696315,
+        "lastupdate": 1544278602883,
         "trophy": [
             "champion du mondeeeeeeee"
         ],
@@ -127,7 +127,7 @@
             }
         },
         "bidamount": 500,
-        "lastupdate": 1544241699456
+        "lastupdate": 1544263898805
     },
     {
         "id": "390497170626707457",
@@ -251,7 +251,7 @@
             "_country": "AQ",
             "_language": "en-US"
         },
-        "lastupdate": 1544241101931,
+        "lastupdate": 1544278005233,
         "trivia": {
             "rating": 1980,
             "games": 7
@@ -316,7 +316,7 @@
             "_name": "JM Obi Wan Benoni"
         },
         "patron": false,
-        "lastupdate": 1544241401936,
+        "lastupdate": 1544260303509,
         "trivia": {
             "rating": 1586,
             "games": 69
@@ -438,9 +438,9 @@
         "id": "319901088557957122",
         "username": "okei#1207",
         "messages": {
-            "count": 63446,
-            "last": "zooey is playing well",
-            "lastSeen": 1544236639527
+            "count": 63454,
+            "last": "Bh5 I guess",
+            "lastSeen": 1544276834407
         },
         "finger": "Check out zhchess.blogspot.com",
         "chesscom": {
@@ -462,7 +462,7 @@
                 "maxRating": "2052",
                 "blitz": "1705",
                 "bullet": "1745",
-                "rapid": "1897",
+                "rapid": "1905",
                 "classical": "1929",
                 "crazyhouse": "2052",
                 "3-check": "1750",
@@ -481,7 +481,7 @@
                 "bughouse": "1217"
             }
         },
-        "lastupdate": 1544235401020,
+        "lastupdate": 1544276504082,
         "trivia": {
             "rating": 1772,
             "games": 21
@@ -543,21 +543,21 @@
         "id": "303609777756438529",
         "username": "Andrew#5850",
         "messages": {
-            "count": 12788,
-            "last": "Congrats to you",
-            "lastSeen": 1544238767401
+            "count": 12789,
+            "last": "It literally says how in the video Raven",
+            "lastSeen": 1544244404697
         },
         "lichess": {
             "_main": "Link",
             "Link": {
-                "maxRating": "2027",
+                "maxRating": "1993",
                 "blitz": "1353",
                 "bullet": "1441",
                 "rapid": "1395",
                 "classical": "1427",
                 "crazyhouse": "1421",
                 "3-check": "1540",
-                "anti": "2027",
+                "anti": "1993",
                 "horde": "1471",
                 "atomic": "1717",
                 "koth": "1520",
@@ -566,15 +566,15 @@
             "_country": "US",
             "_language": "en"
         },
-        "lastupdate": 1544241995727
+        "lastupdate": 1544278298644
     },
     {
         "id": "317767348566097930",
         "username": "PawnInTraining#5209",
         "messages": {
-            "count": 3790,
-            "last": "there would have to be changes to the rules like maybe can't place mate or draw by repetition would be a win for black, black would need additional resources or rules to help minimize the white advantage",
-            "lastSeen": 1544237660427
+            "count": 3805,
+            "last": "Sometimes, the best thing to do is nothing",
+            "lastSeen": 1544251099037
         },
         "lichess": {
             "_main": "PawnInTraining",
@@ -597,15 +597,15 @@
             "SonOfANimzovich": {
                 "maxRating": "2179",
                 "bullet": "1800",
-                "lightning": "1731",
+                "lightning": "1765",
                 "koth": "1351",
-                "crazyhouse": "2147",
+                "crazyhouse": "2171",
                 "bughouse": "2179",
                 "tactics": "1686",
                 "lessons": "1000?"
             }
         },
-        "lastupdate": 1544238098676
+        "lastupdate": 1544251300824
     },
     {
         "id": "340287144448884748",
@@ -657,9 +657,9 @@
         "id": "330193848137678848",
         "username": "Raven#9079",
         "messages": {
-            "count": 147265,
-            "last": "<:NotLikeThis:452061773709836288>",
-            "lastSeen": 1544240985065
+            "count": 147348,
+            "last": "<:pogchamp:450699459853156352>",
+            "lastSeen": 1544262572166
         },
         "trophy": [
             "April Fools 2018 Survivor 'bye'",
@@ -683,14 +683,14 @@
         "lichess": {
             "_main": "PepsiNGaming",
             "PepsiNGaming": {
-                "maxRating": "2226",
-                "blitz": "1808",
-                "bullet": "1834",
+                "maxRating": "2227",
+                "blitz": "1811",
+                "bullet": "1835",
                 "rapid": "1326?",
                 "classical": "1429",
                 "crazyhouse": "1891",
                 "3-check": "1768",
-                "anti": "2226",
+                "anti": "2227",
                 "horde": "1887",
                 "atomic": "2039",
                 "koth": "1716",
@@ -700,7 +700,7 @@
             "_country": "US",
             "_language": "en-US"
         },
-        "lastupdate": 1544242300077,
+        "lastupdate": 1544278302816,
         "finger": "Hauptschule",
         "trivia": {
             "rating": 1332,
@@ -711,9 +711,9 @@
         "id": "293465140739964929",
         "username": "MeneerMandje#9220",
         "messages": {
-            "count": 24536,
-            "last": "<:seemsgood:372817382177243136>",
-            "lastSeen": 1544219135777
+            "count": 24537,
+            "last": "Yes",
+            "lastSeen": 1544259310008
         },
         "finger": "Fully in die D2",
         "trophy": [
@@ -739,14 +739,14 @@
             "_country": "FI",
             "_language": "nl-NL"
         },
-        "lastupdate": 1544219195306,
+        "lastupdate": 1544276803198,
         "chesscom": {
             "_main": "kleinebeer98",
             "kleinebeer98": {
                 "maxRating": "2748",
                 "bullet": "2748",
                 "lightning": "2659",
-                "chess": "1983",
+                "chess": "1998",
                 "rapid": "800",
                 "koth": "2504",
                 "crazyhouse": "2216",
@@ -866,9 +866,9 @@
         "id": "324082212146249730",
         "username": "Mark Plotkin#1754",
         "messages": {
-            "count": 39249,
-            "last": "to get muted 3 times",
-            "lastSeen": 1544242132342
+            "count": 39287,
+            "last": "sleep is best",
+            "lastSeen": 1544253703263
         },
         "finger": "i love thelazymd",
         "lastupdate": 1542697014601,
@@ -932,7 +932,7 @@
             "_country": "US",
             "_language": "en-GB"
         },
-        "lastupdate": 1544242595832,
+        "lastupdate": 1544258800795,
         "trivia": {
             "rating": 1887,
             "games": 17
@@ -986,9 +986,9 @@
         "id": "407662597555617802",
         "username": "moonenane#3553",
         "messages": {
-            "count": 13783,
-            "last": "just bar m1901",
-            "lastSeen": 1544242354079
+            "count": 13785,
+            "last": "m1918*",
+            "lastSeen": 1544244956394
         },
         "finger": "bughouse",
         "chesscom": {
@@ -1081,10 +1081,10 @@
             "_main": "Sonata2",
             "Sonata2": {
                 "maxRating": "2211",
-                "blitz": "2111",
+                "blitz": "2136",
                 "bullet": "2116",
                 "rapid": "2211",
-                "classical": "2210",
+                "classical": "2200",
                 "crazyhouse": "1911",
                 "3-check": "1852",
                 "anti": "1899",
@@ -1099,7 +1099,7 @@
         "age": "21",
         "sex": "wolfkin",
         "location": "Netherlands",
-        "lastupdate": 1544228198866,
+        "lastupdate": 1544278903358,
         "trivia": {
             "rating": 2094,
             "games": 10
@@ -1109,9 +1109,9 @@
         "id": "414816252733685760",
         "username": "antic#0405",
         "messages": {
-            "count": 5325,
-            "last": "i just have no idea how other than throwing pawns at them and seeing what happens",
-            "lastSeen": 1544240693986
+            "count": 5333,
+            "last": "2100 bullet chess too",
+            "lastSeen": 1544245383111
         }
     },
     {
@@ -1363,7 +1363,7 @@
                 "lessons": "1789"
             }
         },
-        "lastupdate": 1544242000071,
+        "lastupdate": 1544279200098,
         "trivia": {
             "rating": 1705,
             "games": 2
@@ -1402,15 +1402,15 @@
                 "lessons": "1596"
             }
         },
-        "lastupdate": 1544242298452
+        "lastupdate": 1544254600708
     },
     {
         "id": "356192671750029313",
         "username": "schaker#9757",
         "messages": {
-            "count": 40399,
-            "last": "<@319901088557957122> got a dinner now",
-            "lastSeen": 1544221626709
+            "count": 40409,
+            "last": "with jannlee",
+            "lastSeen": 1544269682178
         },
         "lichess": {
             "_main": "opperwezen",
@@ -1432,7 +1432,7 @@
             "_country": "NL",
             "_language": "nl"
         },
-        "lastupdate": 1544223700149,
+        "lastupdate": 1544270504636,
         "bughousetest": {
             "_main": "bringiton",
             "bringiton": {
@@ -1559,7 +1559,7 @@
                 "bughouse": "1831"
             }
         },
-        "lastupdate": 1544206898598,
+        "lastupdate": 1544277405191,
         "trophy": [
             "surviv.io god"
         ],
@@ -1643,15 +1643,15 @@
         "id": "163325840136863744",
         "username": "ProgramFOX#1012",
         "messages": {
-            "count": 13628,
-            "last": "<@185412969130229760> oh yes, Origin or Referer https://chessvariants.training/. Security measure against CSRF. if you don't, you get 400 Bad Request.",
-            "lastSeen": 1544223656926
+            "count": 13651,
+            "last": "woah",
+            "lastSeen": 1544279181358
         },
         "lichess": {
             "_main": "ProgramFOX",
             "ProgramFOX": {
                 "maxRating": "2304",
-                "blitz": "1782",
+                "blitz": "1801",
                 "bullet": "2052",
                 "rapid": "1767",
                 "classical": "1785?",
@@ -1667,7 +1667,7 @@
             "_country": "BE",
             "_language": "en-GB"
         },
-        "lastupdate": 1544206596359,
+        "lastupdate": 1544277698635,
         "trivia": {
             "rating": 1144,
             "games": 9
@@ -1704,14 +1704,14 @@
         "lichess": {
             "_main": "the-lone-wolf",
             "the-lone-wolf": {
-                "maxRating": "2124",
+                "maxRating": "2134",
                 "blitz": "1628",
                 "bullet": "1824?",
                 "rapid": "1351?",
                 "classical": "1500?",
-                "crazyhouse": "2124",
+                "crazyhouse": "2134",
                 "3-check": "1841",
-                "anti": "2039",
+                "anti": "2011",
                 "horde": "1526?",
                 "atomic": "1927",
                 "koth": "1582",
@@ -1720,7 +1720,7 @@
             "_name": "Lone Wolf",
             "_country": "IT"
         },
-        "lastupdate": 1544202696714
+        "lastupdate": 1544275598644
     },
     {
         "id": "413007142673711125",
@@ -2154,7 +2154,7 @@
                 "lessons": "1446"
             }
         },
-        "lastupdate": 1544242600097
+        "lastupdate": 1544266602241
     },
     {
         "id": "341611207062716418",
@@ -2365,22 +2365,22 @@
         "id": "317375246388953089",
         "username": "TheUnknownGuyReborn#8226",
         "messages": {
-            "count": 1079,
-            "last": "i mean mine was 2500 until i lost 3 straight then drew soooo 😦",
-            "lastSeen": 1544238921553
+            "count": 1101,
+            "last": "i had 100% until i drew kotov...",
+            "lastSeen": 1544279292087
         },
         "chesscomratings": {},
         "lichess": {
             "_main": "TheUnknownGuyReborn",
             "TheUnknownGuyReborn": {
-                "maxRating": "2090",
+                "maxRating": "2202",
                 "blitz": "1674",
                 "bullet": "1739",
                 "rapid": "1575",
                 "classical": "1647?",
                 "crazyhouse": "1708",
                 "3-check": "1598",
-                "anti": "2090",
+                "anti": "2202",
                 "horde": "1446?",
                 "atomic": "1723",
                 "koth": "1735?",
@@ -2389,7 +2389,7 @@
             "_country": "CA",
             "_language": "en-GB"
         },
-        "lastupdate": 1544238744888,
+        "lastupdate": 1544277701635,
         "trivia": {
             "rating": 1514,
             "games": 1
@@ -2474,9 +2474,9 @@
         "id": "312824560602841089",
         "username": "DuskyMountain#2584",
         "messages": {
-            "count": 1787,
-            "last": "Take that Europe",
-            "lastSeen": 1544239796838
+            "count": 1788,
+            "last": "Ff",
+            "lastSeen": 1544259859482
         },
         "finger": "NOOOOO! LAZYBOT!",
         "chesscom": {
@@ -2516,7 +2516,7 @@
             "lastSeen": 1543536098348
         },
         "chesscomratings": {},
-        "lastupdate": 1544193693263,
+        "lastupdate": 1544269000861,
         "lichess": {
             "_main": "TwitchWainaut",
             "TwitchWainaut": {
@@ -2555,7 +2555,7 @@
             "_language": "en-GB"
         },
         "finger": "I have  a chess YT channel btw!",
-        "lastupdate": 1543758949446
+        "lastupdate": 1544278600696
     },
     {
         "id": "128940476282830848",
@@ -2591,9 +2591,9 @@
         "id": "373803387705098250",
         "username": "TheBigNico#7881",
         "messages": {
-            "count": 1329,
-            "last": "he is enough of a top player",
-            "lastSeen": 1544219395108
+            "count": 1330,
+            "last": "I can cuz I am big asf",
+            "lastSeen": 1544268645535
         },
         "chesscomratings": {}
     },
@@ -2648,12 +2648,12 @@
         "lichess": {
             "_main": "Nowayouwin",
             "Nowayouwin": {
-                "maxRating": "2238",
+                "maxRating": "2266",
                 "blitz": "1870",
                 "bullet": "1900",
                 "rapid": "1875",
                 "classical": "1710?",
-                "crazyhouse": "2238",
+                "crazyhouse": "2266",
                 "3-check": "1698",
                 "anti": "1351?",
                 "horde": "1765",
@@ -2677,7 +2677,7 @@
                 "lessons": "1250?"
             }
         },
-        "lastupdate": 1544026438719
+        "lastupdate": 1544262998195
     },
     {
         "id": "428398365504438272",
@@ -3109,7 +3109,7 @@
                 "lessons": "2128"
             }
         },
-        "lastupdate": 1543906560985
+        "lastupdate": 1544248897939
     },
     {
         "id": "408030597035065364",
@@ -3359,9 +3359,9 @@
         "id": "373770768938434570",
         "username": "fins-love#5553",
         "messages": {
-            "count": 1999,
-            "lastSeen": 1543012154673,
-            "last": "😄"
+            "count": 2047,
+            "lastSeen": 1544261711491,
+            "last": "Titled"
         },
         "lastmessage": "",
         "lichess": {
@@ -3583,9 +3583,9 @@
         "id": "363519664875372556",
         "username": "chuckmoulton#2381",
         "messages": {
-            "count": 1820,
-            "last": "I am streaming with TheFuzzician",
-            "lastSeen": 1544227076594
+            "count": 1823,
+            "last": "I'm in the house party channel.",
+            "lastSeen": 1544249005005
         },
         "lichess": {
             "_main": "chuckmoulton",
@@ -3603,15 +3603,15 @@
         "chesscom": {
             "_main": "chuckmoulton",
             "chuckmoulton": {
-                "maxRating": "2204",
-                "bughouse": "2204"
+                "maxRating": "2218",
+                "bughouse": "2218"
             }
         },
         "age": "39",
         "sex": "male",
         "location": "Philadelphia",
         "finger": "https://www.twitch.tv/chuckmoulton",
-        "lastupdate": 1543823155897
+        "lastupdate": 1544278899186
     },
     {
         "id": "95048365607223296",
@@ -3670,7 +3670,7 @@
             "_main": "Brokula",
             "Brokula": {
                 "maxRating": "1895",
-                "blitz": "1754",
+                "blitz": "1738",
                 "bullet": "1740",
                 "rapid": "1895",
                 "classical": "1500?",
@@ -3685,7 +3685,7 @@
             "_country": "HR",
             "_language": "hr-HR"
         },
-        "lastupdate": 1543575645785
+        "lastupdate": 1544279202754
     },
     {
         "id": "300644131284189184",
@@ -4419,11 +4419,11 @@
         "id": "166996362716512258",
         "username": "JuiceMitApfelnDrin#2937",
         "messages": {
-            "count": 2211,
-            "last": "¯\\_(ツ)_/¯",
-            "lastSeen": 1544224509287
+            "count": 2212,
+            "last": "<@!330193848137678848> <:cmonBruh:504335346390007848>",
+            "lastSeen": 1544260223313
         },
-        "lastupdate": 1543235108981,
+        "lastupdate": 1544272602125,
         "lichess": {
             "_main": "penguingm1",
             "penguingm1": {
@@ -4570,9 +4570,9 @@
         "id": "449995873133527040",
         "username": "gsvc#3746",
         "messages": {
-            "count": 1051,
-            "last": "like 1h before we started bug, it would not connect to discord server",
-            "lastSeen": 1544235223059
+            "count": 1062,
+            "last": "first time i watch luft playing zh",
+            "lastSeen": 1544244057355
         },
         "lichess": {
             "_main": "gsvc",
@@ -5578,7 +5578,7 @@
             },
             "_language": "en-GB"
         },
-        "lastupdate": 1543052093624
+        "lastupdate": 1544254899775
     },
     {
         "id": "101143512812113920",
@@ -5688,9 +5688,9 @@
         "id": "458318569260974081",
         "username": "hipno#0082",
         "messages": {
-            "count": 2438,
-            "last": "<:feelsgoodman:376785491057442816>",
-            "lastSeen": 1543686327561
+            "count": 2440,
+            "last": "U should stream 4th one",
+            "lastSeen": 1544265831436
         },
         "lastupdate": 1542986056903,
         "lichess": {
@@ -5989,15 +5989,15 @@
             "last": "<@471771674833059882> , did FischyVishy give you the RK Revolutions price?",
             "lastSeen": 1542435480584
         },
-        "lastupdate": 1542438071289,
+        "lastupdate": 1544251599516,
         "lichess": {
             "_main": "Javi0111",
             "Javi0111": {
                 "maxRating": "1964",
-                "blitz": "1833",
-                "bullet": "1732",
-                "rapid": "1771",
-                "classical": "1829?",
+                "blitz": "1759",
+                "bullet": "1761",
+                "rapid": "1760",
+                "classical": "1810?",
                 "crazyhouse": "1738",
                 "3-check": "1252?",
                 "anti": "1579",
@@ -7184,9 +7184,9 @@
         "id": "471771674833059882",
         "username": "FalconTheSnowman#6507",
         "messages": {
-            "count": 13399,
-            "last": "Antichess tournament #3",
-            "lastSeen": 1544242146808
+            "count": 13437,
+            "last": "<:pogchamp:450699459853156352>",
+            "lastSeen": 1544279155583
         },
         "lastupdate": 1544134039957
     },
@@ -7238,10 +7238,10 @@
             "_main": "raphdel2007",
             "raphdel2007": {
                 "maxRating": "1947",
-                "blitz": "1576",
-                "bullet": "1804",
+                "blitz": "1561",
+                "bullet": "1809",
                 "rapid": "1528",
-                "classical": "1990?",
+                "classical": "1913?",
                 "crazyhouse": "1956?",
                 "3-check": "1402",
                 "anti": "1316?",
@@ -7261,7 +7261,7 @@
             }
         },
         "lastUpdate": 1532812011296,
-        "lastupdate": 1542985772711
+        "lastupdate": 1544264803336
     },
     {
         "id": "450315296998293534",
@@ -7368,9 +7368,9 @@
         "id": "472293316025647105",
         "username": "Fusions#2135",
         "messages": {
-            "count": 175,
-            "last": "How long did it take on chess.com, if you have an account there?",
-            "lastSeen": 1544122209407
+            "count": 176,
+            "last": "Those are the same game",
+            "lastSeen": 1544267085419
         }
     },
     {
@@ -7468,7 +7468,8 @@
             "_name": "The Chess Guy 2.0!!!",
             "_country": "US",
             "_language": "en-US"
-        }
+        },
+        "left": true
     },
     {
         "id": "230382599867072512",
@@ -7818,7 +7819,7 @@
             "_country": "US"
         },
         "lastUpdate": 1534798558266,
-        "lastupdate": 1542988875664
+        "lastupdate": 1544265101481
     },
     {
         "id": "289177026156560385",
@@ -8156,9 +8157,9 @@
         "id": "225853045248884736",
         "username": "itsrs#1860",
         "messages": {
-            "count": 121,
-            "last": "i finished all of my exams for this week so i feel liberated",
-            "lastSeen": 1543980011328
+            "count": 131,
+            "last": "what's going on",
+            "lastSeen": 1544251070029
         },
         "lichess": {},
         "lastupdate": 1542963971321
@@ -8716,9 +8717,9 @@
         "id": "481935105326186506",
         "username": "tolius#9778",
         "messages": {
-            "count": 320,
-            "last": "it seems i had the best performance. but that doesn't help 😃",
-            "lastSeen": 1544239101890
+            "count": 321,
+            "last": "<@471771674833059882> I can't be shadiiiii coz I'm slow asf",
+            "lastSeen": 1544266136446
         },
         "lichess": {
             "_main": "tolius",
@@ -8827,9 +8828,9 @@
         "id": "225331635334283264",
         "username": "ZeroPride#3347",
         "messages": {
-            "count": 1128,
-            "last": "Illusion 100",
-            "lastSeen": 1544219860660
+            "count": 1131,
+            "last": "So in this position, he goes Kh7 and then asks for a takeback",
+            "lastSeen": 1544268299706
         },
         "lichess": {
             "_main": "MangoKid",
@@ -11402,9 +11403,9 @@
         "id": "423132579453992960",
         "username": "nasty_turtle123#7946",
         "messages": {
-            "count": 80,
-            "last": "Sure",
-            "lastSeen": 1543960885784
+            "count": 81,
+            "last": "That applies to a lot of variants though. It is like +2 for white in zh and about the same or even more in atomic.",
+            "lastSeen": 1544257782772
         }
     },
     {
@@ -11447,17 +11448,17 @@
         "chesscom": {
             "_main": "Waredude",
             "Waredude": {
-                "maxRating": "1608",
-                "bullet": "1238",
-                "lightning": "1158",
-                "chess": "1259",
+                "maxRating": "1610",
+                "bullet": "1243",
+                "lightning": "1242",
+                "chess": "1258",
                 "rapid": "990",
                 "bughouse": "451",
-                "tactics": "1608",
+                "tactics": "1610",
                 "lessons": "1542"
             }
         },
-        "lastupdate": 1543623798037
+        "lastupdate": 1544249180789
     },
     {
         "id": "124402273383219200",

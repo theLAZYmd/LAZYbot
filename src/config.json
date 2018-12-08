@@ -31,9 +31,9 @@
         "debug": false
     },
     "backupdb": [
-        "Sat Dec 08 2018 04:16:33 GMT+00",
-        "Sat Dec 08 2018 04:16:32 GMT+00",
-        "Sat Dec 08 2018 02:16:32 GMT+00"
+        "Sat Dec 08 2018 14:16:33 GMT+00",
+        "Sat Dec 08 2018 14:16:32 GMT+00",
+        "Sat Dec 08 2018 14:16:32 GMT+00"
     ],
     "delays": {
         "update": 300000,
@@ -195,44 +195,7 @@
                 "api": "bughouse",
                 "key": "bughouse"
             }
-        },
-        "cvt": {
-            "anti": {
-                "name": "Antichess",
-                "key": "anti",
-                "api": "Antichess"
-            },
-            "atomic": {
-                "name": "Atomic",
-                "api": "Atomic",
-                "key": "atomic"
-            },
-            "crazyhouse": {
-                "name": "Crazyhouse",
-                "api": "Crazyhouse",
-                "key": "crazyhouse"
-            },
-            "horde": {
-                "name": "Horde",
-                "api": "Horde",
-                "key": "horde"
-            },
-            "koth": {
-                "name": "King of the Hill",
-                "api": "KingOfTheHill",
-                "key": "kingOfTheHill"
-            },
-            "3-check": {
-                "name": "Three-check",
-                "key": "3-check",
-                "api": "ThreeCheck"
-            },
-            "racing-kings": {
-                "name": "Racing Kings",
-                "key": "racing-kings",
-                "api": "RacingKings"
-            }
-        }        
+        }
     },
     "sources": {
         "lichess": {
@@ -267,14 +230,6 @@
                 "user": "http://bughousetest.com/api/user/|",
                 "status": "http://bughousetest.com/api/users/status?ids=|",
                 "game": "http://bughousetest.com/api/game/|"
-            }
-        },
-        "cvt": {
-            "name": "ChessVariants.training",
-            "key": "cvt",
-            "url": {
-                "puzzle": "https://chessvariants.training/Puzzle/Train/GetOneRandomly/|",
-                "setup": "https://chessvariants.training/Puzzle/Train/Setup"
             }
         }
     },
