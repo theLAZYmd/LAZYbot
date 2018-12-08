@@ -48,9 +48,11 @@ class Puzzle extends Parse {
                 "timeout": 5000,
                 "json": true
             };
-            let {   fen   } = await rp.post(options); //success, trainingSessionId, author, fen, whoseTurn, variant, additionalInfo, authorUrl, pocket, check
+            let data = await rp.post(options); //success, trainingSessionId, author, fen, whoseTurn, variant, additionalInfo, authorUrl, pocket, check
+            let {   fen   } = data;
             let fenConstructor = new FEN(this.message, fen + " " + config.sources.cvt.url.puzzle.replace("|", body.id));
             fenConstructor.run();
+            return data;
         } catch (e) {
             if (e) this.Output.onError(e);
         }
