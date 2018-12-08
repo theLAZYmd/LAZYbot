@@ -155,7 +155,8 @@ String.prototype.toProperCase = function () {
 };
 
 String.prototype.bold = function () {
-	if (this.length > 0) return "**" + this + "";
+	if (this.length > 0) return "**" + this + "**";
+	return "";
 };
 
 Array.prototype.toProperCase = function () {

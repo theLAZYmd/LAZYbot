@@ -106,10 +106,11 @@ class FEN extends Parse {
 	}
 
 	get checks() {
+		if (this._checks) return this._checks;
 		if (!this.fenArray[8]) return "";
 		let threeCheckRegExp = /\+([0-3])\+([0-3])/;
-		let checks = this.fenArray[8].match(threeCheckRegExp);
-		return checks || [];
+		let checks = this.fenArray[8].match(threeCheckRegExp).map(c => !isNaN(Number(c)) ? Number(c) : c);
+		return this._checks = checks || [this.fenArray[8], 0, 0];
 	}
 
 	get description() {
@@ -127,8 +128,8 @@ class FEN extends Parse {
 			winhandstring = winhand.join(" ");
 			binhandstring = binhand.join(" ");
 		} else if (this.variant === "threeCheck") {
-			winhandstring = "White checks: " + "+".repeat(this.checks[1]).bold();
-			binhandstring = "Black checks: " + "+".repeat(this.checks[2]).bold();
+			winhandstring = "White checks: " + ("+".repeat(this.checks[1]) || "").bold();
+			binhandstring = "Black checks: " + ("+".repeat(this.checks[2]) || "").bold();
 		}
 		return this.flip ? winhandstring + "\n" + binhandstring : binhandstring + "\n" + winhandstring;
 	}

@@ -3,9 +3,9 @@
         "id": "185412969130229760",
         "username": "theLAZYmd#2353",
         "messages": {
-            "count": 74867,
-            "last": "What's the difference between body and form?",
-            "lastSeen": 1544277645224
+            "count": 74877,
+            "last": "you're ok now",
+            "lastSeen": 1544280230502
         },
         "bidamount": 100000000000000000,
         "location": "Toronto",
@@ -251,7 +251,7 @@
             "_country": "AQ",
             "_language": "en-US"
         },
-        "lastupdate": 1544278005233,
+        "lastupdate": 1544279893307,
         "trivia": {
             "rating": 1980,
             "games": 7
@@ -481,7 +481,7 @@
                 "bughouse": "1217"
             }
         },
-        "lastupdate": 1544276504082,
+        "lastupdate": 1544279505367,
         "trivia": {
             "rating": 1772,
             "games": 21
@@ -550,14 +550,14 @@
         "lichess": {
             "_main": "Link",
             "Link": {
-                "maxRating": "1993",
+                "maxRating": "1998",
                 "blitz": "1353",
                 "bullet": "1441",
                 "rapid": "1395",
                 "classical": "1427",
                 "crazyhouse": "1421",
                 "3-check": "1540",
-                "anti": "1993",
+                "anti": "1998",
                 "horde": "1471",
                 "atomic": "1717",
                 "koth": "1520",
@@ -566,7 +566,7 @@
             "_country": "US",
             "_language": "en"
         },
-        "lastupdate": 1544278298644
+        "lastupdate": 1544280186374
     },
     {
         "id": "317767348566097930",
@@ -700,7 +700,7 @@
             "_country": "US",
             "_language": "en-US"
         },
-        "lastupdate": 1544278302816,
+        "lastupdate": 1544280226217,
         "finger": "Hauptschule",
         "trivia": {
             "rating": 1332,
@@ -1559,7 +1559,7 @@
                 "bughouse": "1831"
             }
         },
-        "lastupdate": 1544277405191,
+        "lastupdate": 1544279617457,
         "trophy": [
             "surviv.io god"
         ],
@@ -1612,8 +1612,8 @@
             "_main": "retardedplatypus123",
             "retardedplatypus123": {
                 "maxRating": "2513",
-                "blitz": "2221",
-                "bullet": "2282",
+                "blitz": "2276",
+                "bullet": "2293",
                 "rapid": "2101",
                 "classical": "2055",
                 "crazyhouse": "2513",
@@ -1628,7 +1628,7 @@
             "_language": "en-GB"
         },
         "finger": "zh noob",
-        "lastupdate": 1544240799901,
+        "lastupdate": 1544280056707,
         "chesscom": {
             "_main": "homeless_patzer",
             "homeless_patzer": {
@@ -1643,9 +1643,9 @@
         "id": "163325840136863744",
         "username": "ProgramFOX#1012",
         "messages": {
-            "count": 13651,
-            "last": "woah",
-            "lastSeen": 1544279181358
+            "count": 13656,
+            "last": "nice!",
+            "lastSeen": 1544279776149
         },
         "lichess": {
             "_main": "ProgramFOX",
@@ -1667,7 +1667,7 @@
             "_country": "BE",
             "_language": "en-GB"
         },
-        "lastupdate": 1544277698635,
+        "lastupdate": 1544279761639,
         "trivia": {
             "rating": 1144,
             "games": 9
@@ -2365,22 +2365,22 @@
         "id": "317375246388953089",
         "username": "TheUnknownGuyReborn#8226",
         "messages": {
-            "count": 1103,
-            "last": "and now im 7th",
-            "lastSeen": 1544279307706
+            "count": 1105,
+            "last": "9th now large oof",
+            "lastSeen": 1544279934396
         },
         "chesscomratings": {},
         "lichess": {
             "_main": "TheUnknownGuyReborn",
             "TheUnknownGuyReborn": {
-                "maxRating": "2202",
+                "maxRating": "2154",
                 "blitz": "1674",
                 "bullet": "1739",
                 "rapid": "1575",
                 "classical": "1647?",
                 "crazyhouse": "1708",
                 "3-check": "1598",
-                "anti": "2202",
+                "anti": "2154",
                 "horde": "1446?",
                 "atomic": "1723",
                 "koth": "1735?",
@@ -2389,7 +2389,7 @@
             "_country": "CA",
             "_language": "en-GB"
         },
-        "lastupdate": 1544277701635,
+        "lastupdate": 1544279976241,
         "trivia": {
             "rating": 1514,
             "games": 1
@@ -7184,9 +7184,9 @@
         "id": "471771674833059882",
         "username": "FalconTheSnowman#6507",
         "messages": {
-            "count": 13437,
-            "last": "<:pogchamp:450699459853156352>",
-            "lastSeen": 1544279155583
+            "count": 13441,
+            "last": "at the end",
+            "lastSeen": 1544279657607
         },
         "lastupdate": 1544134039957
     },
