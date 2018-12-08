@@ -2279,6 +2279,90 @@
                 "page": 0,
                 "author": "471771674833059882",
                 "cmdID": "520360679367114754"
+            },
+            "520681946288881704": {
+                "embedgroup": [
+                    {
+                        "title": "Official House Shop Roles",
+                        "description": "Congrats on accumulating a whole bunch of flowers. Here are the roles you can buy; they will give you a special colour flair and make you superior to other members on the right sidebar! The colors look really nice.\n\nCheck savings by `.$`. Check level by `.xp`\n\n__Bronze__: 200 🌸; **if level 5**, 90 🌸\n__Silver__: 360 🌸; **if level 10**, 180 🌸 \n__Gold__: 680 🌸; **if level 20**, 370 🌸 \n__Diamond__: 1320 🌸; **if level 30**, 760 🌸 \n\nAre you just that special that you want your own colour? Well then buy:\n\n__ChooseColor__: 500 🌸 \n\nChange your colour to whatever you want using the `!color` command.\n Does not affect your right sidebar standings; it's for ye vain ones.",
+                        "footer": {
+                            "text": "Role rewards must be bought in order."
+                        },
+                        "color": 53380
+                    }
+                ],
+                "period": 180000,
+                "page": 0,
+                "author": "373480715276517376",
+                "cmdID": "520681944833458210"
+            },
+            "520709290152165377": {
+                "embedgroup": [
+                    {
+                        "title": " Profile for <:im:455855147168301056> schaker#9757",
+                        "description": "",
+                        "color": 15105570,
+                        "fields": [
+                            {
+                                "name": "Info",
+                                "value": "Region: **Europe**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Sep 09 2017**\nThe House: **Dec 12 2017**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`356192671750029313`**\nPosition in Database: **39**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "40,336",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/356192671750029313/a06f88d52b61e5d7e7ecc44704e44e28.png?size=2048"
+                        },
+                        "footer": {
+                            "text": "1 / 2"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": " Profile for <:im:455855147168301056> schaker#9757",
+                        "description": "",
+                        "color": 15105570,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[opperwezen](https://lichess.org/@/opperwezen)\nBlitz: **2671**\nBullet: **2642**\nRapid: **2630**\nClassical: **2309**\nCrazyhouse: **2637**\n3-check: **2318**\nAntichess: **2069**\nHorde: **2239**\nAtomic: **2019**\nKing of the Hill: **2435**\nRacing Kings: **2024**",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:chesscom:430038158244184064> Chess.com",
+                                "value": "[schoolmeester](https://www.chess.com/member/schoolmeester)\nBullet: **2804**\nBlitz: **2727**\nDaily: **1848**\nRapid: 800?\nCrazyhouse: **2583**\nBughouse: **2348**",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:bughousetest:433422387867025409> BughouseTest.com",
+                                "value": "[bringiton](http://bughousetest.com/@/bringiton)\nBughouse: **2204**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/356192671750029313/a06f88d52b61e5d7e7ecc44704e44e28.png?size=2048"
+                        },
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "185412969130229760",
+                "cmdID": "520709289073967122"
             }
         },
         "election/votes": {
