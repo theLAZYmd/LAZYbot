@@ -231,6 +231,15 @@
                 "status": "http://bughousetest.com/api/users/status?ids=|",
                 "game": "http://bughousetest.com/api/game/|"
             }
+        },
+        "cvt": {
+            "name": "ChessVariants.training",
+            "key": "cvt",
+            "url": {
+                "api": "https://chessvariants.training/Puzzle/Train/GetOneRandomly/|",
+                "setup": "https://chessvariants.training/Puzzle/Train/Setup",
+                "puzzle": "https://chessvariants.training/Puzzle/|"
+            }
         }
     },
     "templates": {
