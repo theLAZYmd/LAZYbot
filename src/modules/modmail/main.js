@@ -1,7 +1,7 @@
 const Parse = require("../../util/parse.js");
 const Embed = require("../../util/embed.js");
 const DataManager = require("../../util/datamanager.js");
-const Router = require("../../util/router.js");
+const Logger = require("../../util/logger.js");
 
 class ModMail extends Parse {
 	constructor(message) {
@@ -36,7 +36,7 @@ class ModMail extends Parse {
 			if (data.mod && data.user) args.unshift(data.user.tag);
 			if (data.mod && data.users) args.unshift(...data.users.map(user => user.tag));
 			if (data.mod && /reply|send/.test(data.command)) args.unshift(data.mod.flair ? "server" : "self");
-			Router.logCommand({
+			Logger.command({
 				"author": data.mod ? data.mod : data.user,
 				"args": args,
 				"command": data.command

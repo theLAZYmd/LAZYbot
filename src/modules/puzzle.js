@@ -30,7 +30,32 @@ class Puzzle extends Parse {
         fen.run();
     }
 
-    add(message, argument) {
+    async variant() {
+        try {
+            let {   variant   } = await require("../util/variant")(this.message.content, this.channel, this.args, this);
+            let body = JSON.parse((await rp(config.sources.cvt.url.puzzle.replace("|", config.variants.cvt[variant.key].api))).toString());
+            if (!body.success) throw JSON.stringify(body, null, 4);
+            if (!body.id) throw "Not given an ID property!";
+            this.log(body.id);
+            let options = {
+                "method": "POST",
+                "uri": config.sources.cvt.url.setup,
+                "headers": {
+                    "Origin": "https://chessvariants.training"
+                },
+                "body": {
+                    "id": body.id
+                },
+                "timeout": 5000,
+                "json": true
+            };
+            this.log(await rp.post(options));
+        } catch (e) {
+            if (e) this.Output.onError(e);
+        }
+    }
+
+    async add(message, argument) {
         try {
             let imageURL;
             let fen = new FEN(this.message, argument);
@@ -89,17 +114,16 @@ class Puzzle extends Parse {
         }
     }
 
-    async close(args) {
+    async close() {
         try {
-            let index = Number(args[0]) - 1;
-            let puzzle = this.puzzles[args];
-            if (!puzzle) throw "No puzzle found!";
-            if (puzzle.authorid !== message.author.id) throw "You did not create this puzzle!"; //check that person created the puzzle
-            else {
-                Puzzle.stored.remove(index); //use it using array remover
-                this.Output.generic(`**${this.author.tag}**: successfully closed puzzle number ${index + 1}.`);
-                this.message.delete();
-            }
+            let index = await this.Output.choose({
+                "options": this.puzzles,
+                "type": "puzzle to remove"
+            });
+            if (puzzle.authorid !== message.author.id) throw "You did not create this puzzle!";
+            Puzzle.stored.remove(index); //use it using array remover
+            this.Output.generic(`**${this.author.tag}**: successfully closed puzzle number ${index + 1}.`);
+            this.message.delete();
         } catch (e) {
             if (e) this.Output.onError(e);
         }

@@ -2,7 +2,7 @@ const Parse = require("../../util/parse.js");
 const rp = require("request-promise");
 const DataManager = require("../../util/datamanager.js");
 const DBuser = require("../../util/dbuser.js");
-const Router = require("../../util/router.js");
+const Logger = require("../../util/logger.js");
 const Assign = require("./assign.js");
 const config = DataManager.getFile("./src/config.json")
 
@@ -131,7 +131,7 @@ class Tracker extends Parse {
 			data.dbuser.lastupdate = Date.now(); //Mark the update time
 			await DBuser.setData(data.dbuser); //set it
 			if (data.successfulupdates.length > 0) {
-				Router.logCommand({
+				Logger.command({
 					"author": {
 						"tag": this.command ? this.author.tag : "auto"
 					},

@@ -134,7 +134,6 @@ class FEN extends Parse {
 	}
 
 	get hint() {
-        console.log(this.a, this.puzzleURL, this.a.replace(this.puzzleURL || "", ""));
 		return this.a.replace(this.fen, "").replace(this.puzzleURL || "", "").trim();
 	}
 

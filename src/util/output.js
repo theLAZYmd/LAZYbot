@@ -18,7 +18,7 @@ class Output extends Parse {
 			if (typeof embed._apiTransform === "function") embed = embed._apiTransform();
 			return await channel.send(embed.content, {embed});
 		} catch (e) {
-			if (e) console.log(e);
+			if (e) this.log(e);
 		}
 	}
 
@@ -31,7 +31,7 @@ class Output extends Parse {
 			if (typeof embed._apiTransform === "function") embed = embed._apiTransform();
 			return await msg.edit(embed.content, {embed});
 		} catch (e) {
-			if (e) console.log(e);
+			if (e) this.log(e);
 		}
 	}
 
@@ -75,7 +75,7 @@ class Output extends Parse {
 			let index = Math.ceil(string.length / 2000);
 			let keylength = Math.floor(string.length / index);
 			for (let i = 0; i < index; i++) {
-				console.log(i === index.length - 1);
+				this.log(i === index.length - 1);
 				this.sender({
 					"color": 9359868,
 					"description": "```" + type + "\n" + string.slice(i * keylength, (i === index.length - 1 ? string.length + 2 : i * keylength + keylength)) + " ".repeat(48) + "\u200b" + "```",
@@ -90,7 +90,7 @@ class Output extends Parse {
 	async onError(error, channel = this.channel) {
 		try {
 			if (!error) throw "";
-			console.log(error);
+			this.error(error);
 			let description = error;
 			if (typeof error === "object") {
 				if (error.name && error.message) description = "**" + error.name + ":** " + error.message;
@@ -101,7 +101,7 @@ class Output extends Parse {
 				"color": config.colors.error
 			}, channel)
 		} catch (e) {
-			if (e) console.log(e);
+			if (e) this.log(e);
 		}
 	}
 

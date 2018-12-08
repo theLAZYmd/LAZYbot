@@ -1,107 +1,15 @@
-const Parse = require("./parse.js");
-const Logger = require("./logger.js");
-const DataManager = require("./datamanager.js");
+const Parse = require("../util/parse.js");
+const Logger = require("../util/logger.js");
+const Permissions = require("../util/permissions.js");
+const DM = require("../modules/dm.js");
+
 const Commands = require("../data/commands/message.json");
 const allMessageCommands = require("../data/commands/all.json");
 const DMCommands = require("../data/commands/dm.json");
-const IntervalCommands = require("../data/commands/interval.json");
-const reactionCommands = require("../data/commands/reaction.json");
 const botCommands = require("../data/commands/bot.json");
-const Permissions = require("./permissions.js");
-const DM = require("../modules/dm.js");
-const winston = require("winston");
 const fs = require("fs");
-const logger = winston.createLogger({
-	"level": "info",
-	"format": winston.format.json(),
-	"transports": [
-		new winston.transports.Console(),
-		new winston.transports.File({   "filename": "combined.log"  })
-	]
-})
 
-class Router {
-
-	static async presence(oldMember, newMember) {
-		let Constructor = require("../modules/presence.js");
-		let Instance = new Constructor({
-			"guild": oldMember.guild,
-			"_guild": oldMember.guild,
-			"member": oldMember
-		});
-		if (oldMember.user.bot) Instance.bot(oldMember.presence, newMember.presence);
-		Instance.streamer(oldMember.presence, newMember.presence);
-	}
-
-	static async reaction({messageReaction, user}) {
-		try {
-			if (user.bot) throw "";
-			if (messageReaction.message.guild && messageReaction.message.author.bot) {
-				let reactionmessages = DataManager.getFile("./src/data/reactionmessages.json")[messageReaction.message.guild.id];
-				for (let [type, data] of Object.entries(reactionmessages)) {
-					for (let messageID of Object.keys(data)) {
-						if (messageReaction.message.id === messageID) {
-							let Constructor = require("../modules/" + (type + (type === "modmail" ? "/action" : "")).toLowerCase() + ".js");
-							let Instance = new Constructor(messageReaction.message);
-							Instance.react(messageReaction, user, reactionmessages[type][messageID]);
-						}
-					}
-				}
-			}
-			let f = Array.from(reactionCommands).find(cmdInfo => {
-				if (cmdInfo.active === false) return false;
-				if (cmdInfo.name === messageReaction.emoji.name) return true;
-				if (cmdInfo.id === messageReaction.emoji.id) return true;
-				return false;
-			});
-			if (f) {
-				let Constructor = require("../modules/" + f.file.toLowerCase() + ".js");
-				let Instance = new Constructor(messageReaction.message);
-				Instance[f.method.toLowerCase()](messageReaction, user);
-			}
-		} catch (e) {
-			if (e) Logger.error(e);
-		}
-	}
-
-	static async intervals() {
-		try {
-			for (let cmdInfo of IntervalCommands) {
-				if (!cmdInfo.file || !cmdInfo.method || !cmdInfo.args || !cmdInfo.interval) continue;
-				setInterval(async () => {
-					let Constructor = require("../modules/" + cmdInfo.file.toLowerCase() + ".js");
-					await Constructor[cmdInfo.method](...cmdInfo.args);
-				}, cmdInfo.interval)
-			}
-		} catch (e) {
-			if (e) Logger.error(e);
-		}
-	}
-
-	static async message(data) {
-		try {
-			let {  argsInfo  } = await Router.checkErrors(data);
-			if (!argsInfo.author.bot) {
-				if (argsInfo.message.channel.type === "dm" || argsInfo.message.channel.type === "group" || !argsInfo.message.guild) return Router.DM(argsInfo);
-				Router.all(argsInfo);
-				Router.command(argsInfo);
-			} else Router.bot(argsInfo);
-		} catch (e) {
-			if (e && typeof e !== "boolean") Logger.error(e);
-		}
-	}
-
-	static async checkErrors(data) {
-		try {
-			if (data.message.author.id === data.client.user.id) throw "";
-			if (data.message.content.length === 1) throw "";
-			data.client.reboot = data.readyTimestamp;
-			data.argsInfo = new Parse(data.message);
-			return data;
-		} catch (e) {
-			throw e;
-		}
-	}
+class Message {
 
 	static async DM(argsInfo) {
 		try {
@@ -129,8 +37,8 @@ class Router {
 				if (!guild) throw "";
 				argsInfo.message._guild = guild;
 			}
-			let run = await Router.runCommand(argsInfo, f);
-			if (run) await Router.logCommand(argsInfo, f);
+			let run = Message.run(argsInfo, f);
+			if (run) Logger.command(argsInfo, f);
 		} catch (e) {
 			if (e) argsInfo.Output.onError(e);
 		}
@@ -140,7 +48,7 @@ class Router {
 		try {
 			for (let cmdInfo of allMessageCommands) {
 				cmdInfo.prefix = "";
-				Router.runCommand(argsInfo, cmdInfo);
+				Message.run(argsInfo, cmdInfo);
 			}
 		} catch (e) {
 			if (e) argsInfo.Output.onError(e);
@@ -175,8 +83,8 @@ class Router {
 			})
 			if (f) {
 				f.command = true;
-				let run = await Router.runCommand(argsInfo, f);
-				if (run) await Router.logCommand(argsInfo, f);
+				let run = Message.run(argsInfo, f);
+				if (run) Logger.command(argsInfo, f);
 			}
 		} catch (e) {
 			if (e) argsInfo.Output.onError(e);
@@ -189,38 +97,20 @@ class Router {
 				if (cmdInfo.active === false || !argsInfo.message.embeds[0]) continue;
 				let embed = argsInfo.message.embeds[0];
 				if ((embed.title && embed.title === cmdInfo.title) || (embed.description && embed.description === cmdInfo.description)) {
-					let run = await Router.runCommand(argsInfo, cmdInfo);
-					if (run) await Router.logCommand(argsInfo, cmdInfo);
+					let run = Message.run(argsInfo, cmdInfo);
+					if (run) Logger.command(argsInfo, cmdInfo);
 					throw "";
 				}
 			}
 		} catch (e) {
 			if (e) argsInfo.Output.onError(e);
 		}
-	}
+    }
 
-	static async logCommand(argsInfo, cmdInfo) {
-		try {
-			let time = Date.getISOtime(Date.now()).slice(0, 24);
-			let author = argsInfo.author.tag;
-			let Constructor = cmdInfo.file.toProperCase();
-			let command = (cmdInfo.command ? argsInfo.server.prefixes[cmdInfo.prefix] : cmdInfo.prefix) + argsInfo.command;
-			let args = argsInfo.args;
-			//logger.log({
-			//	"level": "info",
-			//	"message": time + " | " + author + " | " + Constructor + " | " + command + " | [" + args + "]"
-			//});
-			Logger.log([time, author, Constructor, command, "[" + args + "]"]);
-			return "";
-		} catch (e) {
-			if (e) Logger.error(e);
-		}
-	}
-
-	static async runCommand(argsInfo, cmdInfo) {
+    static async run(argsInfo, cmdInfo) {
 		argsInfo.Output._onError = cmdInfo.command ? argsInfo.Output.onError : Logger.error;
 		try {
-			if (cmdInfo.requires) await Router.requires(argsInfo, cmdInfo); //halts it if fails permissions test
+			if (cmdInfo.requires) await Message.requires(argsInfo, cmdInfo); //halts it if fails permissions test
 			let args = [];
 			for (let i = 0; i < cmdInfo.arguments.length; i++)
 				args[i] = argsInfo[cmdInfo.arguments[i]]; //the arguments we take for new Instance input are what's listed
@@ -259,6 +149,20 @@ class Router {
 		return true;
 	}
 
+    
 }
 
-module.exports = Router;
+module.exports = async (client, message) => {
+    try {
+        if (message.author.id === client.user.id) throw "";
+        if (message.content.length === 1) throw "";
+        let argsInfo = new Parse(message);
+        if (!argsInfo.author.bot) {
+            if (argsInfo.message.channel.type === "dm" || argsInfo.message.channel.type === "group" || !argsInfo.message.guild) return Message.DM(argsInfo);
+            Message.all(argsInfo);
+            Message.command(argsInfo);
+        } else Message.bot(argsInfo);
+    } catch (e) {
+        if (e && typeof e !== "boolean") Logger.error(e);
+    }
+}

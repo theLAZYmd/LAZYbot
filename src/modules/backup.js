@@ -2,7 +2,7 @@ const Parse = require("../util/parse.js");
 const Embed = require("../util/embed.js");
 const config = require("../config.json");
 const DataManager = require("../util/datamanager.js");
-const Router = require("../util/router.js");
+const Logger = require("../util/logger.js");
 
 class Backup extends Parse {
 
@@ -22,7 +22,7 @@ class Backup extends Parse {
     } catch (e) {
       if (!e) return;
       if (this.command) this.Output.onError(e);
-      else console.log(e);
+      else Logger.error(e);
     }
   }
   
@@ -60,7 +60,7 @@ class Backup extends Parse {
   }
 
   static async log(command, degree) {
-    Router.logCommand({
+    Logger.command({
       "author": {
         "tag": "auto"
       },

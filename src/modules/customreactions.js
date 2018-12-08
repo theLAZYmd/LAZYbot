@@ -1,6 +1,7 @@
 const Parse = require("../util/parse.js");
 const CRFile = require("../data/customreactions.json");
 const DataManager = require("../util/datamanager.js");
+const Logger = require("../util/logger.js");
 
 class CustomReactions extends Parse {
 
@@ -47,7 +48,7 @@ class CustomReactions extends Parse {
       .then(() => this.message.react(this.Search.emojis.get("true")))
       .catch((e) => {
         this.message.react(this.Search.emojis.get("false"));
-        console.log(e);
+        Logger.error(e);
       })
     }
     else this.message.react(this.Search.emojis.get("false"));

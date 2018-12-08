@@ -109,8 +109,8 @@ class Ballots extends Main {
 						this.Output.editor(new Embed()  //on the aesthetic log message, edit it to 'sending' plus the user plus basic details
 								.setDescription(`Sending ${channels.length} ${mobile ? "mobile " : ""}ballots to **${user.tag}**`)
 								.setFooter(`Sent ${ballotRunning} / ${ballotCount} ballots to ${voterRunning} / ${voterCount} voters.`)
-							, msg);
-						console.log(Date.getISOtime(Date.now()) + " | " + user.tag + " | " + "Election/ballots" + " | " + "command-request" + " | [" + channels.join(", ") + "]");  //log it. Add to text string
+                            , msg);
+                        this.log([user.tag, "Election/ballots", "command-request", "[" + channels.join(", ") + "]"]);  //log it. Add to text string
 						string += `#${user.tag}: [${channels.join(", ")}]\n`;
 						ballotRunning += channels.length; //up the running totals to edit our aesthetic footer message
 						voterRunning++;

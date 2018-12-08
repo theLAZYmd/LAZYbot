@@ -50,12 +50,12 @@ class Votes extends Main {
 			}, msg);
 			for (let [channel, data] of Object.entries(election.elections)) {
 				await this.Output.editor({  "description": "Counting up the votes for election... **" + channel + "**"  }, msg);
-				console.log("Counting #" + channel);
+				this.log("Counting #" + channel);
 				let candidates = await this.parseCandidates(data);
 				let votes = await this.parseVotes(data.voters, candidates);
 				let raw = await require("./" + election.system.toLowerCase() + "/main.js").rank(candidates.map(c => candidates.indexOf(c)), votes);
 				election.elections[channel].results = await this.parseResults(raw, candidates); //need to use 'in' iterator for setters
-				console.log(election.elections[channel].results);
+				this.log(election.elections[channel].results);
 			}
 			await this.Output.editor({  "description": "Setting the result..."  }, msg);
 			this.election = election;

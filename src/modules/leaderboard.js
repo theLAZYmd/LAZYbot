@@ -3,6 +3,7 @@ const DataManager = require("../util/datamanager.js");
 const Parse = require("../util/parse.js");
 const Embed = require("../util/embed.js");
 const Permissions = require("../util/permissions.js");
+const Logger = require("../util/logger.js");
 
 class Leaderboard extends Parse {
 
@@ -12,7 +13,7 @@ class Leaderboard extends Parse {
 
 	async variant(channel, args) {
 		try {
-			let data = await Leaderboard.find(this.message.content, channel, args, this); //variant, source, active
+			let data = await require("../util/variant.js")(this.message.content, channel, args, this); //variant, source, active
 			data = data.variant.key === "trivia" ? await Leaderboard.generateTrivia(data) : await Leaderboard.generate(data); //leaderboard
 			if (!data.leaderboard || data.leaderboard.length === 0) throw "Couldn't fetch players for **" + data.variant.name + "**.";
 			let embedgroup = [];
@@ -22,37 +23,6 @@ class Leaderboard extends Parse {
 			this.Paginator.sender(embedgroup, 30000);
 		} catch (e) {
 			if (e) this.Output.onError(e);
-		}
-	}
-
-	static async find(content, channel, args, argsInfo) { //this function finds input parameters and returns an embed. Needs source, variant, and active.
-		try {
-			let source = config.sources[(channel.name === "bughouse" || channel.topic.includes("bughouse") || content.includes("bughouse")) ? "chesscom" : "lichess"]; //bug channel exception, default source is chess.com
-			sourceloop: //find source requested in the message, if none found, assume lichess
-				for (let [key, _source] of Object.entries(config.sources))
-					for (let arg of args)
-						if (arg.toLowerCase().replace(/[^a-z]/gi, "") === key.toLowerCase()) {
-							source = _source;
-							break sourceloop;
-						}
-			let active = /-a|--active/gi.test(content); //active is just if the message contains the word
-			let found = {}, variant; //variant found, and variant used. Running one
-			for (let [key, _variant] of Object.entries(config.variants[source.key])) {
-				if (content.includes(key)) found.args = _variant, variant = _variant; //if in args, match it.
-				if (channel.topic && channel.topic.includes(key)) found.channel = _variant, variant = _variant; //if in topic match it.
-				if (channel.name.includes(key)) found.channel = _variant, variant = _variant; //if in channel name, match it.
-				if (found.channel) break;
-			}
-			if (found.args && found.channel && found.channel !== found.args) throw "Wrong channel to summon this leaderboard!"; //if no possibilities or match conflict, return.
-			if (!variant && await Permissions.channels("trivia", argsInfo)) variant = {
-				"name": "Trivia",
-				"api": "trivia",
-				"key": "trivia"
-			};
-			if (!variant) throw "Couldn't find matching variant";   //if none found, return.
-			return {variant, source, active, argsInfo}; //data object for generating leaderboard
-		} catch (e) {
-			if (e) throw e;
 		}
 	}
 
@@ -66,7 +36,7 @@ class Leaderboard extends Parse {
 				if (!dbuser[data.source.key] || dbuser[data.source.key]._cheating) continue; //skip ppl not tracked on that source and cheaters
 				let username = dbuser[data.source.key]._main;
 				if (!username || !dbuser[data.source.key][username]) {
-					console.log("No main registered for " + dbuser.username + ".");
+					Logger.error("No main registered for " + dbuser.username + ".");
 					continue; //trust that it will be fixed in updates
 				}
 				if (data.variant.key !== "all" && (!dbuser[data.source.key][username][data.variant.key] || dbuser[data.source.key][username][data.variant.key].endsWith("?"))) continue;

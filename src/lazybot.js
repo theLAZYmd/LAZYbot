@@ -1,14 +1,14 @@
 //the permanent requires that access data files or modules
 const Discord = require("discord.js");
 const config = require("./config.json");
+const fs = require("fs");
 const client = new Discord.Client();
 
-//the additional modules for debugging or only used sometimes
-const onStartup = require("./events/onStartup.js"); //doesn't require Parse
-const Router = require("./util/router.js");
+const Logger = require("./util/logger.js");
+const router = "router/";
 
 require('events').EventEmitter.prototype._maxListeners = 100;
-process.on("unhandledRejection", e => console.error(e));
+process.on("unhandledRejection", Logger.error);
 
 const events = [
 	["channelCreate", ["channel"]],
@@ -22,12 +22,12 @@ const events = [
 	["emojiCreate", ["emoji"]],
 	["emojiDelete", ["emoji"]],
 	["emojiUpdate", ["oldEmoji", "newEmoji"]],
-	["error", ["error"]],
+	["error", ["error"], true],
 	["guildBanAdd", ["guild", "user"]],
 	["guildBanRemove", ["guild", "user"]],
 	["guildCreate", ["guild"]],
 	["guildDelete", ["guild"]],
-	["guildMemberAdd", ["member"]],
+	["guildMemberAdd", ["member"], true],
 	["guildMemberAvailable", ["member"]],
 	["guildMemberRemove", ["member"]],
 	["guildMembersChunk", ["member", "guild"]],
@@ -35,15 +35,15 @@ const events = [
 	["guildMemberUpdate", ["oldMember", "newMember"]],
 	["guildUnavailable", ["guild"]],
 	["guildUpdate", ["oldGuild", "newGuild"]],
-	["message", ["message"], "message"],
+	["message", ["message"], true],
 	["messageDelete", ["message"]],
 	["messageDeleteBulk", ["messages"]],
-	["messageReactionAdd", ["messageReaction", "user"], "reaction"],
+	["messageReactionAdd", ["messageReaction", "user"], true],
 	["messageReactionRemove", ["messageReaction", "user"]],
 	["messageReactionRemoveAll", ["message"]],
 	["messageUpdate", ["oldMessage", "newMessage"]],
-	["presenceUpdate", ["oldMember", "newMember"]],
-	["ready", []],
+    ["presenceUpdate", ["oldMember", "newMember"], true],
+	["ready", [], true],
 	["reconnecting", []],
 	["resume", ["replayed"]],
 	["roleCreate", ["role"]],
@@ -57,57 +57,24 @@ const events = [
 	["warn", ["info"]]
 ];
 
-client.on("error", (e) => {
-	console.log(e);
-	client.login(process.env.TOKEN ? process.env.TOKEN : require("./token.json").token)
+fs.readdir("./src/" + router, (err, _files) => {
+    try {
+        if (err) throw err;
+        let files = _files.map(f => f.split(".").slice(0, -1).join("."));
+        for (let event of events) try {
+            if (!event[2]) continue;
+            if (!files.find(f => f === event[0])) throw "Couldn't find matching event handler.";
+            client.on(event[0], async function () {
+                let Instance = require("./" + router + event[0] + ".js");
+                Instance(client, ...arguments);
+            });
+        } catch (e) {
+            if (e) Logger.error(e);
+        }
+    } catch (e) {
+        if (e) Logger.error(e);
+    }
 })
-
-client.on("ready", () => { //console startup section
-	try {
-		let data = new onStartup(client);
-		for (let prop of Object.getOwnPropertyNames(onStartup.prototype)) {
-			if (prop === "constructor") continue;
-			if (typeof data[prop] === "function") data[prop]().catch((e) => console.log(e));
-		}
-		console.log("bleep bloop! It's showtime.");
-		Router.intervals();
-		if (config.states.debug) Bot.debug(data);
-	} catch (e) {
-		if (e) console.log(e);
-	}
-});
-
-for (let event of events) {
-	if (!event[2]) continue;
-	client.on(event[0], function () {
-		let data = {};
-		for (let i = 0; i < event[1].length; i++) {
-			data[event[1][i]] = arguments[i];
-		}
-		data.client = client;
-		Router[event[2]](data).catch((e) => console.log(e));
-	});
-}
-
-client.on("presenceUpdate", (oldMember, newMember) => {
-	try {
-		Router.presence(oldMember, newMember)
-	} catch (e) {
-		if (e) console.log(e);
-	}
-});
-
-client.on("raw", async event => {
-	if (event.t !== "MESSAGE_REACTION_ADD") return;
-	let data = event.d;
-	let user = client.users.get(data.user_id);
-	let channel = client.channels.get(data.channel_id) || await user.createDM();
-	if (channel.messages.has(data.message_id)) return;
-	let message = await channel.fetchMessage(data.message_id);
-	let emojiKey = (data.emoji.id) ? `${data.emoji.name}:${data.emoji.id}` : data.emoji.name;
-	let reaction = message.reactions.get(emojiKey);
-	client.emit("messageReactionAdd", reaction, user);
-});
 
 client.login(process.env.TOKEN ? process.env.TOKEN : require("./token.json").token)
 

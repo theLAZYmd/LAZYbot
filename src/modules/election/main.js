@@ -18,9 +18,9 @@ class Main extends Parse {
 		return election;
 	}
 
-	async run() { //router
+	async run(args) { //router
 		try {
-			let command = this.args.shift() || "";
+			let command = (args.shift() || "").toLowerCase();
 			command = command.toLowerCase();
 			if (command && command !== "get" && (this.command !== "candidates" && command !== "register") && !this.Permissions.role("owner", this)) throw this.Permissions.output("role");
 			if (/^(?:status)?$/.test(command)) command = "generate";
