@@ -7,7 +7,23 @@
 			"author",
 			"dbuser"
 		]
-	},
+    },
+    {
+        "module": "Shadowban",
+		"file": "shadowban",
+		"method": "sbuser",
+		"arguments": [
+			"message"
+		]
+    },
+    {
+        "module": "Shadowban",
+		"file": "shadowban",
+		"method": "sbnm",
+		"arguments": [
+			"message"
+		]
+    },
 	{
 		"module": "CustomReactions",
 		"file": "customreactions",

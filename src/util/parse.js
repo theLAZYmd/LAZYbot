@@ -4,6 +4,7 @@ const DataManager = require("./datamanager.js");
 const Embed = require("./embed.js");
 const Aliases = DataManager.getFile("./src/data/aliases.json");
 const Permissions = require("./permissions.js");
+const Logger = require("./logger.js");
 
 class Parse {
 
@@ -33,7 +34,12 @@ class Parse {
 			if (this.guild) this._server = DataManager.getServer(this.guild.id);
 		}
 		return this._server || "";
-	}
+    }
+    
+    set server(server) {
+        DataManager.setServer(server);
+        this._server = server;
+    }
 
 	get reactionmessages() {
 		if (!this._reactionmessages) if (this.guild) this._reactionmessages = DataManager.getServer(this.guild.id, "./src/data/reactionmessages.json");
@@ -84,10 +90,20 @@ class Parse {
 	get Check() {
 		if (!this._Check) {
 			let CheckConstructor = require("./check.js");
-			return new CheckConstructor(this.message);
+			return this._Check = new CheckConstructor(this.message);
 		}
 		return this._Check;
-	}
+    }
+
+    get error() {
+        if (!this._log) return this._log = Logger.error;
+        return this._log;
+    }
+    
+    get log() {
+        if (!this._log) return this._log = Logger.log;
+        return this._log;
+    }
 
 	//argsInfo
 

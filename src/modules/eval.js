@@ -3,7 +3,7 @@ const DBuser = require("../util/dbuser.js");
 const DataManager = require("../util/datamanager.js");
 const Embed = require("../util/embed.js");
 const DebuggingConstructor = require("../util/debugging.js");
-const Router = require("../util/router.js");
+const Logger = require("../util/logger.js");
 const request = require("request");
 const rp = require("request-promise");
 

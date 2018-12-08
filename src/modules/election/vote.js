@@ -67,7 +67,7 @@ class Vote extends Main { //this module parses voting data
 						for (let candidate of votes) {
 							if (!election.elections[ballot.channel].candidates[candidate]) {
 								election.elections[ballot.channel].candidates[candidate] = [];
-								console.log(Date.getISOtime(Date.now()) + " | " + this.author.tag + " | " + "Election/vote" + " | " + "candidate register" + " | " + candidate);
+								this.log(Date.getISOtime(Date.now()) + " | " + this.author.tag + " | " + "Election/vote" + " | " + "candidate register" + " | " + candidate);
 							}
 						} */ //for registering new candidates posted. Decided was a bad idea
 						if (ballot.spoiled) this.resolve("spoiled revote", this.author, ballot.channel);
@@ -86,13 +86,13 @@ class Vote extends Main { //this module parses voting data
 						.setColor(config.colors.error)
 						.setDescription(Errors[e]);
 					if (this.matches.length >= 2) embed.addField("Invalid Ballot:", "```css\n" + match + " ".repeat(20) + "\n\u200b" + "```", false);
-					console.log(`[Vote, ${this.author.tag}, ${Errors[e]}]`);
+					this.log(`[Vote, ${this.author.tag}, ${Errors[e]}]`);
 					this.Output.sender(embed);
 				} else if (typeof e === "string") this.Output.onError(e);
 				else throw e;
 			}
 			if (successfulchannels.length > 0) {
-				console.log(Date.getISOtime(Date.now()) + " | " + this.author.tag + " | " + "Election/vote" + " | " + "vote" + " | [" + successfulchannels.join(", ") + "]");
+				this.log([this.author.tag, "Election/vote", "vote", "[" + successfulchannels.join(", ") + "]"]);
 				if (this.guild) this.Output.sender(new Embed()
 					.setTitle("New vote from " + this.author.tag)
 					.setDescription("```css\n#" + successfulchannels.join("\n#") + "\n```"), this.Search.channels.get(this.server.channels.mod));

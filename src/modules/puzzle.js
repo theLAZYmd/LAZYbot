@@ -4,10 +4,21 @@ const config = require("../config.json");
 const rp = require("request-promise");
 const FEN = require("./fen.js");
 
+class P {
+    constructor (imageURL, argument, channel, author) {
+        this.authorid = author.id;
+        this.title = `${author.tag} #${channel.name}`;
+        this.description = argument || "\u200b";
+        this.image = imageURL;
+        this.dateAdded = Date.now();
+    }
+}
+
 class Puzzle extends Parse {
 
     constructor(message) {
-        super(message)
+        super(message);
+        this.puzzles = this.server.puzzles || [];
     }
 
     async daily() {
@@ -19,115 +30,105 @@ class Puzzle extends Parse {
         fen.run();
     }
 
-    add(message, argument, author, channel) {
-        let imageurl = "";
-        let url = argument.match(/(https?:\/\/[\S\.]+\.\w+\/?)\s?/);
-        if (url) {
-            imageurl = url[0]; //is there a url attached? if so, that's the puzzle picture
-        } else
-        if (message.attachments.first()) { //but if there's an image attached, have that as the puzzle picture
-            imageurl = message.attachments.first().url //in the form of a url
-        } else return this.Output.onError(`Incorrect format! No link or image provided.`); //otherwise return
-        let puzzle = {
-            "authorid": author.id, //18 digit discord code
-            "title": `${author.tag} #${channel.name}`, //Puzzle by theLAZYmd#2353 for #zh
-            "description": argument ? argument : "\u200b",
-            "image": Embed.image(imageurl)
-        };
-        if (!Puzzle.stored) Puzzle.stored[0] = puzzle;
-        else Puzzle.stored.push(puzzle); //pushh it to the stored array
-        puzzle.content = this.Search.roles.get("puzzles") + ""; //ping puzzles when posted
-        this.Output.sender(puzzle);
+    async variant() {
+        try {
+            let {   variant   } = await require("../util/variant")(this.message.content, this.channel, this.args, this);
+            let body = JSON.parse((await rp(config.sources.cvt.url.puzzle.replace("|", config.variants.cvt[variant.key].api))).toString());
+            if (!body.success) throw JSON.stringify(body, null, 4);
+            if (!body.id) throw "Not given an ID property!";
+            this.log(body.id);
+            let options = {
+                "method": "POST",
+                "uri": config.sources.cvt.url.setup,
+                "headers": {
+                    "Origin": "https://chessvariants.training"
+                },
+                "body": {
+                    "id": body.id
+                },
+                "timeout": 5000,
+                "json": true
+            };
+            this.log(await rp.post(options));
+        } catch (e) {
+            if (e) this.Output.onError(e);
+        }
     }
 
-    view(fetchboolean) {
-        return new Promise((resolve, reject) => { //so that awaitMessages can be used on it when fetching
-            let array = [];
-            for (let i = 0; i < Puzzle.stored.length; i++) {
-                array[i] = [];
-                array[i][0] = Puzzle.stored[i].title;
-                array[i][1] = Puzzle.stored[i].description;
-            } //[[theLAZYmd#2353 #zh, link], ...]
-            let embedoutput = Embed.leaderboard(array, 0, false); //generates fields probably
-            embedoutput.title = "Active Puzzles. " + fetchboolean ? "Type the index of the puzzle you would like to view below." : "Use `!puzzle [index]` to view a puzzle."; //informs about the await
+    async add(message, argument) {
+        try {
+            let imageURL;
+            let fen = new FEN(this.message, argument);
+            if (message.attachments.first()) imageURL = message.attachments.first().url;
+            else if (fen.fenArray && fen.imageURL) imageURL = fen.imageURL;
+            else if (/(https?:\/\/[\S\.]+\.\w+\/?)\s?/.test(argument)) imageURL = argument.match(/(https?:\/\/[\S\.]+\.\w+\/?)\s?/)[0];
+            else throw "Incorrect format! No link or image provided.";
+            let puzzle = new P(imageURL, argument, this.channel, this.author)
+            this.puzzles.push(puzzle);
+            puzzle.content = this.Search.roles.get("puzzles") + ""; //ping puzzles when posted
+            this.Output.sender(puzzle);
+            this.server.puzzles = this.puzzles;
+            DataManager.setServer(this.server);
+        } catch (e) {
+            if (e) this.Output.onError(e);
+        }
+    }
+
+    async view(fetchboolean) {
+        try {
+            let embed = Embed.leaderboard(this.puzzles.map(p => [p.title, p.description]), 0, false); //generates fields probably
+            embed.title = "Active Puzzles. " + fetchboolean ? "Type the index of the puzzle you would like to view below." : "Use `!puzzle [index]` to view a puzzle."; //informs about the await
             this.message.delete(); //deletes unnecessary command message
-            this.Output.sender(embedoutput)
-                .then(message => resolve(message));
-        })
-    }
-
-    fetch(args) {
-        if (args.length === 1) {
-            this.fetchfromindex(Number(args[0]) - 1); //if '!puzzle 0' take args[0] as index
-        } else
-        if (args.length === 0) {
-            this.view(true) //if no arguments, post list of puzzles then wait for an index
-                .then(originalmessage => {
-                    originalmessage.delete(10000)
-                });
-            let filter = msg => msg.author.id === message.author.id && !isNaN(Number(msg.content));
-            this.message.channel.awaitMessages(filter, {
-                    max: 1,
-                    time: 30000,
-                    errors: ['time']
-                })
-                .then(collected => this.fetchfromindex(Number(collected.first().content) - 1))
+            this.Output.sender(embed);
+        } catch (e) {
+            if (e) this.Output.onError(e);
         }
     }
 
-    fetchfromindex(index) {
-        let puzzle = Puzzle.stored[index];
-        if (!puzzle) return this.Output.onError("No puzzle found!", this.message.channel); //if the index is wrong, return
+    async fetch(args) {
+        try {
+        if (args.length === 1) this.fetchfromindex(Number(args[0]) - 1); //if '!puzzle 0' take args[0] as index
         else {
-            let embed = puzzle;
-            delete embed.content; //otherwise, without the pinging subs
-            this.Output.sender(embed); //post the puzzle
-            this.message.delete();
+            this.fetchfromindex(this.Output.choose({
+                embed,
+                "options": this.puzzles.map(p => p.title + " " + p.description),
+                "type": "puzzle to view"
+            }))
+        }
+        } catch (e) {
+            if (e) this.Output.onError(e);
         }
     }
 
-    close(args) {
-        if (args.length !== 1) return;
-        let puzzle = Puzzle.stored[Number(args[0]) - 1];
-        if (!puzzle) {
-            this.Output.onError("No puzzle found!");
+    async fetchfromindex(index) {
+        try {
+            let puzzle = this.puzzles[index];
+            if (!puzzle) throw "No puzzle found!";
+            else {
+                if (puzzle.content) delete puzzle.content;
+                this.Output.sender(puzzle);
+                this.message.delete();
+            }
+        } catch (e) {
+            if (e) this.Output.onError(e);
+        }
+    }
 
-        } else
-        if (puzzle.authorid !== message.author.id) return this.Output.onError("You did not create this puzzle!"); //check that person created the puzzle
-        else {
-            Puzzle.stored.remove(puzzleindex); //use it using array remover
-            Output.generic(`**${this.message.author.tag}** successfully closed puzzle number ${puzzleindex + 1}.`);
+    async close() {
+        try {
+            let index = await this.Output.choose({
+                "options": this.puzzles,
+                "type": "puzzle to remove"
+            });
+            if (puzzle.authorid !== message.author.id) throw "You did not create this puzzle!";
+            Puzzle.stored.remove(index); //use it using array remover
+            this.Output.generic(`**${this.author.tag}**: successfully closed puzzle number ${index + 1}.`);
             this.message.delete();
+        } catch (e) {
+            if (e) this.Output.onError(e);
         }
     }
 
 }
 
-Puzzle.stored = [];
-
 module.exports = Puzzle;
-
-Array.prototype.remove = function (index) {
-    if (!index && index !== 0) return;
-    if (Array.isArray(index)) {
-        index.sort(function (a, b) {
-            return b - a;
-        });
-        for (let i = 0; i < index.length; i++) {
-            this.splice(index[i], 1);
-        }
-    } else {
-        this.splice(index, 1);
-    }
-    return this;
-};
-
-Array.prototype.clean = function () {
-    for (let i = 0; i < this.length; i++) {
-        if (!this[i]) {
-            this.splice(i, 1);
-            i--;
-        }
-    }
-    return this;
-};

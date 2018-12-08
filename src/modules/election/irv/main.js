@@ -1,3 +1,5 @@
+const Logger = require("../../../util/logger.js");
+
 class Data {
 	constructor(candidates, votes, ties, cycle = 0) {
 		this.count = candidates.length;
@@ -56,7 +58,7 @@ class Main {
 			}
 			data.eliminated.push(removeList.join(""));
 			if (data.eliminated.join("").length === data.count) data.finished = true;
-			console.log('Cycle ' + data.cycle + "; " + "Eliminated: " + data.eliminated.join("").length + ", Target: " + data.count + "\n",
+			Logger.log('Cycle ' + data.cycle + "; " + "Eliminated: " + data.eliminated.join("").length + ", Target: " + data.count + "\n",
 				m,
 				//"\nEliminated Candidates: '" + data.eliminated.join("', '") + "'"
 			);

@@ -183,7 +183,7 @@ class Voters extends Main {
 					let dbuser = DBuser.getUser(member.user);
 					if (!data.inactives && (Date.now() - (dbuser.messages.lastSeen || 0) > 1210000000)) return false;
 					if (dbuser.messages.count < data.messages) return false;
-					console.log(`[Register, ${type}, ${member.user.tag}]`);
+					this.log(`[Register, ${type}, ${member.user.tag}]`);
 					return true;
 				});
 				data.elections[type].voters = voters.reduce((acc, cur) => { //converts the collection to an object with keys as items and values []
@@ -206,7 +206,6 @@ class Voters extends Main {
 		  let election = {
 			"elections": {}
 		  };
-		  console.log(data);
 		  for (let [property, value] of Object.entries(data)) {
 			if (property !== "elections") {
 			  election[property] = value;

@@ -1,5 +1,6 @@
 const DataManager = require("./datamanager.js");
 const config = require("../config.json");
+const Logger = require("./logger.js");
 
 class Debugging {
 
@@ -67,12 +68,12 @@ class Debugging {
             if(tally[i][source + "ratings"].cheating) {
               updated._cheating = tally[i][source + "ratings"].cheating;
               delete tally[i][source + "ratings"].cheating;
-              console.log("Noted cheater " + tally[i].username + ".")
+              Logger.log("Noted cheater " + tally[i].username + ".")
             }
 	          delete tally[i][source + "ratings"];
           }
 	        tally[i][source] = updated;
-          console.log("Completed for " + tally[i].username + " with source " + source + ".");
+          Logger.log("Completed for " + tally[i].username + " with source " + source + ".");
         }
       }
     }
@@ -86,7 +87,7 @@ class Debugging {
       for(let source in config.sources) {
         if(tally[i][source] && tally[i][source]._main._main) {
           tally[i][source] = tally[i][source]._main;
-          console.log("Completed procedure for " + tally[i].username + ".");
+          Logger.log("Completed procedure for " + tally[i].username + ".");
         }
       }
     }

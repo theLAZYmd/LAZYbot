@@ -3,6 +3,7 @@ const chrome = require('chromedriver');
 const { lichess } = require("./config.json");
 var { username, password, subject, body, recipients } = lichess;
 let driver = new Builder().forBrowser('chrome').build();
+const Logger = require("../../util/logger.js");
 
 class Verify {
 
@@ -27,7 +28,7 @@ class Verify {
             await driver.wait(until.titleIs('lichess.org • Free Online Chess'), 1000);
             return true;
         } catch (e) {
-            if (e) console.error(e);
+            if (e) Logger.error(e);
         }
     }
 
@@ -39,7 +40,7 @@ class Verify {
             await driver.findElement(By.className('goto_compose button text')).click();            
             await driver.wait(until.titleIs('Compose message • lichess.org'), 1000);
         } catch (e) {
-            if (e) console.error(e);
+            if (e) Logger.error(e);
         }
     }
 
@@ -48,7 +49,7 @@ class Verify {
             await driver.get('https://lichess.org/inbox/new');          
             await driver.wait(until.titleIs('Compose message • lichess.org'), 1000);
         } catch (e) {
-            if (e) console.error(e);
+            if (e) Logger.error(e);
         }
     }
 
@@ -59,9 +60,9 @@ class Verify {
             await driver.findElement(By.name("text")).sendKeys(body, Key.RETURN);
             await driver.findElement(By.className('send button')).click();
             await driver.wait(until.titleIs(subject + ' • Free Online Chess'), 1000);                
-            console.log("Done for " + r + "!");
+            Logger.log("Done for " + r + "!");
         } catch (e) {
-            if (e) console.error(e);
+            if (e) Logger.error(e);
         }
     }
 }

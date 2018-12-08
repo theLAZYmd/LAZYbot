@@ -564,9 +564,7 @@
 		"method": "add",
 		"arguments": [
 			"message",
-			"argument",
-			"author",
-			"channel"
+			"argument"
 		],
 		"prefix": "generic"
 	},
@@ -601,18 +599,32 @@
     },
     {
 		"aliases": [
-			"puzzle"
+			"daily"
 		],
 		"description": "Posts the daily puzzle from lichess. **BETA**",
 		"usage": [
-			"puzzle"
+			"daily"
 		],
 		"module": "Chess",
 		"file": "puzzle",
 		"method": "daily",
 		"arguments": [],
 		"prefix": "generic"
-	},
+    },
+    {
+        "aliases": [
+            "puzzle"
+        ],
+        "description": "Posts a random variant puzzle depending on the channel or arguments specified.",
+        "usage": [
+            "puzzle"
+        ],
+        "module": "Chess",
+        "file": "puzzle",
+        "method": "variant",
+        "arguments": [],
+        "prefix": "generic"
+    },
 	{
 		"aliases": [
 			"puzzleclose"
@@ -624,8 +636,11 @@
 		"module": "Chess",
 		"file": "puzzle",
 		"method": "view",
-		"arguments": [],
-		"prefix": "generic"
+		"arguments": ["args"],
+        "prefix": "generic",
+        "requires": {
+            "args": 1
+        }
 	},
 	{
 		"aliases": [
@@ -774,6 +789,77 @@
 		"module": "Administration",
 		"file": "ban",
 		"method": "real",
+		"arguments": [
+			"args"
+		],
+		"prefix": "generic",
+		"requires": {
+			"role": "admin"
+		}
+    },
+    {
+		"aliases": [
+            "shadowban",
+            "sb",
+            "shadowbanadd",
+            "sbadd"
+		],
+		"description": "Adds a new shadowban criteria. Only to be used in extrenuating circumstances.",
+		"usage": [
+			"sb user"
+		],
+		"module": "Administration",
+		"file": "shadowban",
+        "method": "adder",
+        "subcommands": [
+			[
+				"condition",
+				{
+					"user": "Adds a specific user to the shadowban list.",
+					"username": "Adds a new regex to ban new users upon arrival.",
+					"newMessage": "Adds a new regex to vet messages from new users."
+				}
+			]
+		],
+		"arguments": [
+			"args"
+		],
+		"prefix": "generic",
+		"requires": {
+			"role": "admin"
+		}
+    },
+    {
+		"aliases": [
+            "shadowbanlist",
+            "sbl",
+            "sblist"
+		],
+		"description": "Lists the new shadowban criteria.",
+		"usage": [
+			"sbl"
+		],
+		"module": "Administration",
+		"file": "shadowban",
+        "method": "list",
+		"arguments": [],
+		"prefix": "generic",
+		"requires": {
+			"role": "admin"
+		}
+    },
+    {
+		"aliases": [
+            "shadowbanremove",
+            "sbrem"
+		],
+		"description": "Brings up a dialogue to removes shadowban criteria.",
+		"usage": [
+			"sbrem"
+		],
+		"module": "Administration",
+		"file": "shadowban",
+        "method": "remove",
 		"arguments": [
 			"args"
 		],
