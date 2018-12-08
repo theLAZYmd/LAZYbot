@@ -163,7 +163,7 @@ class Tracker extends Parse {
 					break;
 				}
 			}
-			if (!found) throw this.Search.emojis.get(data.source.key) + "Couldn't remove " + account + "' on " + data.source.name + ": Couldn't find username linked to account.";
+			if (!found) throw this.Search.emojis.get(data.source.key) + "Couldn't remove " + data.username + "' on " + data.source.name + ": Couldn't find username linked to account.";
 			for (let account of Object.keys(data.dbuser[data.source.key])) {
 				if (account.startsWith("_")) {
 					if (isMain) delete data.dbuser[data.source.key][account];
@@ -210,7 +210,7 @@ class Tracker extends Parse {
 					});
 				if (x) return x;
 			} catch (e) {
-				if (e) throw "Either request timed out or account doesn't exist.";
+				if (e) throw "Either request timed out or account doesn't exist. If account exists, please try again in 30 seconds.";
 			}
 		} catch (e) {
 			if (e) throw e;
