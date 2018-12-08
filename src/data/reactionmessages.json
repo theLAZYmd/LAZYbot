@@ -2280,37 +2280,89 @@
                 "author": "471771674833059882",
                 "cmdID": "520360679367114754"
             },
-            "520813755702050837": {
+            "520681946288881704": {
                 "embedgroup": [
                     {
-                        "description": "**#1** [penguingm1#2467](https://www.chess.com/member/penguingm1) 2650\n**#2** [schaker#9757](https://www.chess.com/member/schoolmeester) 2583\n**#3** [MMichael#3973](https://www.chess.com/member/MMichael) 2433\n**#4** [Grindonmygrande#6203](https://www.chess.com/member/grindonmygrande) 2427\n**#5** [Mugwort#6375](https://www.chess.com/member/Mugwort) 2407\n**#6** [TcubesAK#3940](https://www.chess.com/member/TcubesAK) 2359\n**#7** [the420boss#8639](https://www.chess.com/member/khiggins89) 2336\n**#8** [MeneerMandje#9220](https://www.chess.com/member/kleinebeer98) 2216\n**#9** [jazzii#1899](https://www.chess.com/member/p00pfacek1ll3r) 2204\n**#10** [Cocaino74#1198](https://www.chess.com/member/Cocaino74) 2184\n",
-                        "title": "<:crazyhouse:471114113599406110> House leaderboard on Chess.com for Crazyhouse players",
+                        "title": "Official House Shop Roles",
+                        "description": "Congrats on accumulating a whole bunch of flowers. Here are the roles you can buy; they will give you a special colour flair and make you superior to other members on the right sidebar! The colors look really nice.\n\nCheck savings by `.$`. Check level by `.xp`\n\n__Bronze__: 200 🌸; **if level 5**, 90 🌸\n__Silver__: 360 🌸; **if level 10**, 180 🌸 \n__Gold__: 680 🌸; **if level 20**, 370 🌸 \n__Diamond__: 1320 🌸; **if level 30**, 760 🌸 \n\nAre you just that special that you want your own colour? Well then buy:\n\n__ChooseColor__: 500 🌸 \n\nChange your colour to whatever you want using the `!color` command.\n Does not affect your right sidebar standings; it's for ye vain ones.",
                         "footer": {
-                            "text": "1 / 5"
+                            "text": "Role rewards must be bought in order."
                         },
                         "color": 53380
+                    }
+                ],
+                "period": 180000,
+                "page": 0,
+                "author": "373480715276517376",
+                "cmdID": "520681944833458210"
+            },
+            "520709290152165377": {
+                "embedgroup": [
+                    {
+                        "title": " Profile for <:im:455855147168301056> schaker#9757",
+                        "description": "",
+                        "color": 15105570,
+                        "fields": [
+                            {
+                                "name": "Info",
+                                "value": "Region: **Europe**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Sep 09 2017**\nThe House: **Dec 12 2017**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`356192671750029313`**\nPosition in Database: **39**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "40,336",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/356192671750029313/a06f88d52b61e5d7e7ecc44704e44e28.png?size=2048"
+                        },
+                        "footer": {
+                            "text": "1 / 2"
+                        },
+                        "files": []
                     },
                     {
-                        "description": "**#11** [PawnInTraining#5209](https://www.chess.com/member/SonOfANimzovich) 2147\n**#12** [TheLoneWolf#4001](https://www.chess.com/member/The-Lone-Wolf) 2126\n**#13** [theLAZYmd#2353](https://www.chess.com/member/theLAZYbot) 2104\n**#14** [Kyle#4287](https://www.chess.com/member/KyleLegion) 2098\n**#15** [Alduto#8125](https://www.chess.com/member/beastlybishops) 2058\n**#16** [moonenane#3553](https://www.chess.com/member/hydrosuit) 2051\n**#17** [Maelstrom#5079](https://www.chess.com/member/challengerin24hours) 2047\n**#18** [thelastpolymath#5047](https://www.chess.com/member/JohnGalt) 2028\n**#19** [Yeti#0449](https://www.chess.com/member/bugging_lie) 1970\n**#20** [hans#8619](https://www.chess.com/member/HansCoolNiemann) 1970\n",
-                        "title": "<:crazyhouse:471114113599406110> House leaderboard on Chess.com for Crazyhouse players"
-                    },
-                    {
-                        "description": "**#21** [DuskyMountain#2584](https://www.chess.com/member/wildllama) 1948\n**#22** [aNOnyMOUSE#0801](https://www.chess.com/member/AHopelessWanderer) 1937\n**#23** [sdf#8138](https://www.chess.com/member/shift3) 1925\n**#24** [Prometheus#4964](https://www.chess.com/member/sleipnir1216) 1887\n**#25** [okei#1207](https://www.chess.com/member/okeizh) 1851\n**#26** [nowayouwin#1285](https://www.chess.com/member/Nowayouwin) 1842\n**#27** [samoyd#2402](https://www.chess.com/member/silvershell) 1830\n**#28** [nfink#2630](https://www.chess.com/member/nfink) 1794\n**#29** [Lasker#4807](https://www.chess.com/member/largecheeseburger) 1793\n**#30** [liamchez#8300](https://www.chess.com/member/Liamchez) 1783\n",
-                        "title": "<:crazyhouse:471114113599406110> House leaderboard on Chess.com for Crazyhouse players"
-                    },
-                    {
-                        "description": "**#31** [Mystiko#7318](https://www.chess.com/member/marccervera) 1701\n**#32** [\\⎝ 🅾🅵🅵🅸🅲🅸🅰🅻🅳🅴🅽🆈🅻🆈🆃 ⎠/#9028](https://www.chess.com/member/Indomega6000) 1666\n**#33** [marktearle7#5586](https://www.chess.com/member/MarkEarle) 1575\n**#34** [jamarlo#8806](https://www.chess.com/member/Jamarlo1) 1569\n**#35** [HornyForPawn#8283](https://www.chess.com/member/HornyForPawn) 1533\n**#36** [XxX_JMC_XxX#6180](https://www.chess.com/member/Programmer57) 1502\n**#37** [JustinJuiceman#7136](https://www.chess.com/member/JustinJuiceman) 1480\n**#38** [Raven#9079](https://www.chess.com/member/PepsiNGaming) 1417\n**#39** [no#4880](https://www.chess.com/member/thepiercingarrow) 1351\n**#40** [stevis5#7413](https://www.chess.com/member/stevis5) 1241\n",
-                        "title": "<:crazyhouse:471114113599406110> House leaderboard on Chess.com for Crazyhouse players"
-                    },
-                    {
-                        "description": "**#41** [stevis5#1056](https://www.chess.com/member/stevis5) 1227\n**#42** [Juanma206#4765](https://www.chess.com/member/Juanma206) 1191\n**#43** [IceFire19#8717](https://www.chess.com/member/Saketh1905) 1191\n**#44** [CervonWong#8006](https://www.chess.com/member/cerv0nw0ng) 1147\n**#45** [TheM492017#5103](https://www.chess.com/member/TheM492017) 1086\n**#46** [Alihene22#3760](https://www.chess.com/member/Alihene) 995\n**#47** [Wafinator#1824](https://www.chess.com/member/Wafinator) 699\n",
-                        "title": "<:crazyhouse:471114113599406110> House leaderboard on Chess.com for Crazyhouse players"
+                        "title": " Profile for <:im:455855147168301056> schaker#9757",
+                        "description": "",
+                        "color": 15105570,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[opperwezen](https://lichess.org/@/opperwezen)\nBlitz: **2671**\nBullet: **2642**\nRapid: **2630**\nClassical: **2309**\nCrazyhouse: **2637**\n3-check: **2318**\nAntichess: **2069**\nHorde: **2239**\nAtomic: **2019**\nKing of the Hill: **2435**\nRacing Kings: **2024**",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:chesscom:430038158244184064> Chess.com",
+                                "value": "[schoolmeester](https://www.chess.com/member/schoolmeester)\nBullet: **2804**\nBlitz: **2727**\nDaily: **1848**\nRapid: 800?\nCrazyhouse: **2583**\nBughouse: **2348**",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:bughousetest:433422387867025409> BughouseTest.com",
+                                "value": "[bringiton](http://bughousetest.com/@/bringiton)\nBughouse: **2204**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/356192671750029313/a06f88d52b61e5d7e7ecc44704e44e28.png?size=2048"
+                        },
+                        "files": []
                     }
                 ],
                 "period": 30000,
                 "page": 0,
                 "author": "185412969130229760",
-                "cmdID": "520813753709887498"
+                "cmdID": "520709289073967122"
             }
         },
         "election/votes": {
