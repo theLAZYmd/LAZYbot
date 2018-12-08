@@ -1389,6 +1389,25 @@
 			"argument"
 		],
 		"prefix": "generic"
+    },
+    {
+		"aliases": [
+			"about"
+		],
+		"description": "Posts the bot's current ReadME file.",
+		"usage": [
+			"about"
+		],
+		"module": "Help",
+		"file": "commands",
+		"method": "about",
+		"arguments": [],
+		"prefix": "generic",
+		"requires": {
+			"args": {
+				"length": 0
+			}
+		}
 	},
 	{
 		"aliases": [

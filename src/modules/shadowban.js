@@ -1,5 +1,6 @@
 const Parse = require("../util/parse.js");
 const Embed = require("../util/embed.js");
+const Logger = require("../util/logger.js");
 
 class Shadowban extends Parse {
 
@@ -43,7 +44,7 @@ class Shadowban extends Parse {
                 })
             }
         } catch (e) {
-            if (e) this.Output.onError(e);
+            if (e) Logger.error(e);
         }
     }
 
