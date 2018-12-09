@@ -34,14 +34,19 @@ class Shadowban extends Parse {
         )
     }
 
-    static async sbusername({  user  }) { //if a new User's username matches a regex, BAN them
+    async sbusername({  user  }) { //if a new User's username matches a regex, BAN them
         try {
             for (let n of this.shadowbanned.usernames) {
-                let array = n.split("/");
+                let array = n.slice(1).split("/");
                 let r = new RegExp(array.slice(0, -1).join("/"), array.pop());
-                if (r.test(user.username)) await this.guild.ban(user, {
-                    "days": 0
-                })
+                console.log(r, user.username, r.test(user.username));
+                if (r.test(user.username)) {
+                    Logger.log(["auto", "Shadowban", "byUser", "[" + [member.user.tag, r].join(", ") + "]"]);
+                    this.guild.ban(user, {
+                        "days": 0
+                    })
+                    return;
+                }
             }
         } catch (e) {
             if (e) Logger.error(e);
@@ -77,11 +82,11 @@ class Shadowban extends Parse {
                         }
                         else this.Output.sender(new Embed()
                             .setTitle("Automod filtered message")
-                            .addField("Author", this.author.tag, true)
+                            .addField("Author", this.author, true)
                             .addField("Channel", this.channel, true)
-                            .addField("Time", message.editedAt || message.createdAt, true)
+                            .addField("Time", "[" + (message.editedAt || message.createdAt).slice(0, 24) + "](" + message.url + ")", true)
                             .addField("Rule", r.toString().format("css"), false)
-                            .addField("Content", message.content, false)
+                            .addField("Content", message.content.format(), false)
                         , this.Search.channels.get(this.server.channels.modmail));
                         return;
                     }
@@ -134,7 +139,7 @@ class Shadowban extends Parse {
             this.Output.sender(new Embed()
                 .setTitle("⛔️ Username Shadowbanned")
                 .addField("Username", username.format("css"), true)
-                .addField("Channel", this.server.channels.join, true)
+                .addField("Channel", this.Search.channels.get(this.server.channels.join), true)
             );
         } catch (e) {
             if (e) this.Output.onError(e);
@@ -153,7 +158,7 @@ class Shadowban extends Parse {
             this.Output.sender(new Embed()
                 .setTitle("⛔️ Message Content Shadowbanned")
                 .addField("Message Content", msg.format("css"), true)
-                .addField("Channel", this.server.channels.join, true)
+                .addField("Channel", this.Search.channels.get(this.server.channels.join), true)
             );
         } catch (e) {
             if (e) this.Output.onError(e);
@@ -169,7 +174,7 @@ class Shadowban extends Parse {
             });
             let type = Object.keys(shadowbanned)[key];
             let index = await this.Output.choose({
-                "options": this.shadowbanned[type],
+                "options":  this.shadowbanned[type].map(c => c.format(/usernames|newMessages/.test(type) ? "css" : "fix")),
                 "type": "data entry to remove."
             });
             shadowbanned[type] = shadowbanned[type].remove(index);
