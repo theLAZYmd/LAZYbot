@@ -1371,6 +1371,25 @@
 		"requires": {
 			"user": "owner"
 		}
+    },
+    {
+		"aliases": [
+			"call"
+		],
+		"description": "Use to call a given function inside a module.",
+		"usage": [
+			"call Puzzle.variant()"
+		],
+		"module": "Administration",
+		"file": "eval",
+		"method": "call",
+		"arguments": [
+			"argument"
+		],
+		"prefix": "generic",
+		"requires": {
+			"user": "owner"
+		}
 	},
 	{
 		"aliases": [
