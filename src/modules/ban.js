@@ -21,7 +21,7 @@ class Ban extends Parse {
             let member = await this.generate(args);
             member.ban({
                 "days": !isNaN(args[1]) ? Number(args[1]) : 0, //if second argument is a number, delete that many messages
-                "reason": args.slice(!isNaN(args[1]) ? 2 : 1).trim().join(" ") //anything else said is given as the reason
+                "reason": (args.slice(!isNaN(args[1]) ? 2 : 1) || []).join(" ").trim() //anything else said is given as the reason
             });
         } catch (e) {
             if (e) this.Output.onError(e);

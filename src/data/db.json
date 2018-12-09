@@ -3,15 +3,15 @@
         "id": "185412969130229760",
         "username": "theLAZYmd#2353",
         "messages": {
-            "count": 74971,
-            "last": "if anyone else uses those words we get a notification here and then we can decide what to do with them",
-            "lastSeen": 1544368993234
+            "count": 75065,
+            "last": "which just bans everyone who's been shadowbanned to prevent clog",
+            "lastSeen": 1544374395964
         },
         "bidamount": 100000000000000000,
         "location": "Toronto",
         "sex": "male",
         "patron": false,
-        "lastupdate": 1544369125418,
+        "lastupdate": 1544372897474,
         "trophy": [
             "champion du mondeeeeeeee"
         ],
@@ -133,9 +133,9 @@
         "id": "390497170626707457",
         "username": "CHIRYO#4757",
         "messages": {
-            "count": 9946,
-            "last": "whats the story",
-            "lastSeen": 1544137183821
+            "count": 9953,
+            "last": "why would he hmm",
+            "lastSeen": 1544373824496
         },
         "bidamount": 17,
         "lastupdate": 1529517193627
@@ -251,7 +251,7 @@
             "_country": "AQ",
             "_language": "en-US"
         },
-        "lastupdate": 1544369184416,
+        "lastupdate": 1544373068139,
         "trivia": {
             "rating": 1980,
             "games": 7
@@ -438,9 +438,9 @@
         "id": "319901088557957122",
         "username": "okei#1207",
         "messages": {
-            "count": 63510,
-            "last": "Saying you're not allowed to help your partner means not allowed to ask for pieces which is crazy",
-            "lastSeen": 1544365722007
+            "count": 63511,
+            "last": "And doing that 6 times to win top prize",
+            "lastSeen": 1544370506101
         },
         "finger": "Check out zhchess.blogspot.com",
         "chesscom": {
@@ -481,7 +481,7 @@
                 "bughouse": "1217"
             }
         },
-        "lastupdate": 1544365139354,
+        "lastupdate": 1544370548728,
         "trivia": {
             "rating": 1772,
             "games": 21
@@ -566,7 +566,7 @@
             "_country": "US",
             "_language": "en"
         },
-        "lastupdate": 1544368580717
+        "lastupdate": 1544373130637
     },
     {
         "id": "317767348566097930",
@@ -700,7 +700,7 @@
             "_country": "US",
             "_language": "en-US"
         },
-        "lastupdate": 1544369348082,
+        "lastupdate": 1544373431377,
         "finger": "Hauptschule",
         "trivia": {
             "rating": 1332,
@@ -1081,7 +1081,7 @@
             "_main": "Sonata2",
             "Sonata2": {
                 "maxRating": "2211",
-                "blitz": "2140",
+                "blitz": "2139",
                 "bullet": "2116",
                 "rapid": "2211",
                 "classical": "2200",
@@ -1099,7 +1099,7 @@
         "age": "21",
         "sex": "wolfkin",
         "location": "Netherlands",
-        "lastupdate": 1544367836037,
+        "lastupdate": 1544373731648,
         "trivia": {
             "rating": 2094,
             "games": 10
@@ -1109,9 +1109,9 @@
         "id": "414816252733685760",
         "username": "antic#0405",
         "messages": {
-            "count": 5334,
-            "last": "opper doesnt have his zh champion trophy yet?",
-            "lastSeen": 1544287209234
+            "count": 5335,
+            "last": "whats this about",
+            "lastSeen": 1544371114884
         }
     },
     {
@@ -1276,9 +1276,9 @@
         "id": "333586342275710978",
         "username": "MMichael#3973",
         "messages": {
-            "count": 27656,
-            "last": "i'm having some pc problems here and have been too busy to fix them yet",
-            "lastSeen": 1544299529111
+            "count": 27658,
+            "last": "and power button led doesn't work",
+            "lastSeen": 1544373308048
         },
         "chesscom": {
             "_main": "MMichael",
@@ -1319,7 +1319,7 @@
                 "crazyhouse": "2663"
             }
         },
-        "lastupdate": 1544281428769,
+        "lastupdate": 1544374505620,
         "lastUpdate": 1535046032253,
         "trivia": {
             "rating": 1246,
@@ -1363,7 +1363,7 @@
                 "lessons": "1789"
             }
         },
-        "lastupdate": 1544367842150,
+        "lastupdate": 1544373809613,
         "trivia": {
             "rating": 1705,
             "games": 2
@@ -1408,9 +1408,9 @@
         "id": "356192671750029313",
         "username": "schaker#9757",
         "messages": {
-            "count": 40523,
-            "last": "https://youtu.be/DZXZnAutDtA",
-            "lastSeen": 1544358535331
+            "count": 40526,
+            "last": "yesterday",
+            "lastSeen": 1544371640502
         },
         "lichess": {
             "_main": "opperwezen",
@@ -1432,7 +1432,7 @@
             "_country": "NL",
             "_language": "nl"
         },
-        "lastupdate": 1544358236753,
+        "lastupdate": 1544370248677,
         "bughousetest": {
             "_main": "bringiton",
             "bringiton": {
@@ -1454,7 +1454,8 @@
         },
         "trophy": [
             "Crazyhouse World Champion"
-        ]
+        ],
+        "left": true
     },
     {
         "id": "123574379601723392",
@@ -1559,7 +1560,7 @@
                 "bughouse": "1831"
             }
         },
-        "lastupdate": 1544368825569,
+        "lastupdate": 1544374138040,
         "trophy": [
             "surviv.io god"
         ],
@@ -1611,12 +1612,12 @@
         "lichess": {
             "_main": "retardedplatypus123",
             "retardedplatypus123": {
-                "maxRating": "2513",
-                "blitz": "2276",
+                "maxRating": "2344",
+                "blitz": "2201",
                 "bullet": "2293",
                 "rapid": "2101",
                 "classical": "2055",
-                "crazyhouse": "2513",
+                "crazyhouse": "2344",
                 "3-check": "1780",
                 "anti": "1321?",
                 "horde": "1417",
@@ -1628,7 +1629,7 @@
             "_language": "en-GB"
         },
         "finger": "zh noob",
-        "lastupdate": 1544280056707,
+        "lastupdate": 1544373953170,
         "chesscom": {
             "_main": "homeless_patzer",
             "homeless_patzer": {
@@ -1643,9 +1644,9 @@
         "id": "163325840136863744",
         "username": "ProgramFOX#1012",
         "messages": {
-            "count": 13888,
-            "last": "also he's back again <@!185412969130229760>",
-            "lastSeen": 1544368878475
+            "count": 13928,
+            "last": "after some time? yeah good idea",
+            "lastSeen": 1544374418580
         },
         "lichess": {
             "_main": "ProgramFOX",
@@ -1667,7 +1668,7 @@
             "_country": "BE",
             "_language": "en-GB"
         },
-        "lastupdate": 1544368141890,
+        "lastupdate": 1544372595609,
         "trivia": {
             "rating": 1144,
             "games": 9
@@ -1686,9 +1687,9 @@
         "id": "346485544848457728",
         "username": "TheLoneWolf#4001",
         "messages": {
-            "count": 37421,
-            "last": "<:feelsbadman:376491872283262996>",
-            "lastSeen": 1544366820773
+            "count": 37422,
+            "last": "ye it will be bit boring",
+            "lastSeen": 1544371510764
         },
         "chesscom": {
             "_main": "The-Lone-Wolf",
@@ -1839,9 +1840,9 @@
         "id": "291630149655330817",
         "username": "Miloш#2459",
         "messages": {
-            "count": 162,
-            "last": "<:yasserWOOT:493674106722451466> <:plotkin:478284968351629322> <:opper:498655230905548829> <:kcrage:503972556315951106> <:JannLee:498654220996837396> <:helms:508710310425657374> <:fischy:513933959156072448>",
-            "lastSeen": 1543187266117
+            "count": 163,
+            "last": "Ree",
+            "lastSeen": 1544374164499
         }
     },
     {
@@ -2061,9 +2062,9 @@
         "id": "259383384109744138",
         "username": "bakkouz#7251",
         "messages": {
-            "count": 11371,
-            "last": "puzzle from lichess, image from chess.com",
-            "lastSeen": 1544216636201
+            "count": 11380,
+            "last": "you think it's because he didn't receive his trophy or the money?",
+            "lastSeen": 1544372744523
         },
         "trophy": [
             "April Fools 2018 Survivor 'whats the problem' + 2"
@@ -2541,9 +2542,9 @@
         "lichess": {
             "_main": "DynamoAlchemyst",
             "DynamoAlchemyst": {
-                "maxRating": "1943",
-                "blitz": "1706",
-                "bullet": "1943",
+                "maxRating": "1945",
+                "blitz": "1719",
+                "bullet": "1945",
                 "rapid": "1869",
                 "classical": "1500?",
                 "crazyhouse": "1622?",
@@ -2555,7 +2556,7 @@
             "_language": "en-GB"
         },
         "finger": "I have  a chess YT channel btw!",
-        "lastupdate": 1544368652653
+        "lastupdate": 1544373994794
     },
     {
         "id": "128940476282830848",
@@ -2677,7 +2678,7 @@
                 "lessons": "1250?"
             }
         },
-        "lastupdate": 1544336033499
+        "lastupdate": 1544374038183
     },
     {
         "id": "428398365504438272",
@@ -3109,7 +3110,7 @@
                 "lessons": "2128"
             }
         },
-        "lastupdate": 1544346236047
+        "lastupdate": 1544374203427
     },
     {
         "id": "408030597035065364",
@@ -4223,9 +4224,9 @@
         "id": "278941339809218561",
         "username": "hiiiii#7381",
         "messages": {
-            "count": 1431,
-            "last": "<:banhammer:372821267260375040>",
-            "lastSeen": 1544365963734
+            "count": 1436,
+            "last": "how do you know?",
+            "lastSeen": 1544373820388
         },
         "lichess": {
             "_main": "JaakkoT",
@@ -4570,9 +4571,9 @@
         "id": "449995873133527040",
         "username": "gsvc#3746",
         "messages": {
-            "count": 1062,
-            "last": "first time i watch luft playing zh",
-            "lastSeen": 1544244057355
+            "count": 1063,
+            "last": "is everybody closing their accounts?",
+            "lastSeen": 1544373204511
         },
         "lichess": {
             "_main": "gsvc",
@@ -9709,9 +9710,9 @@
         "id": "380112733489594369",
         "username": "Hyzer#8745",
         "messages": {
-            "count": 24,
-            "last": "👀👀",
-            "lastSeen": 1536784368687
+            "count": 26,
+            "last": "<@259383384109744138> https://www.youtube.com/watch?v=F03f1_VQxwg",
+            "lastSeen": 1544372649732
         }
     },
     {
@@ -11595,10 +11596,30 @@
         "id": "515993222586171407",
         "username": "jojoyxu#0072",
         "messages": {
-            "count": 97,
-            "last": ":ultrabullet;",
-            "lastSeen": 1544049930178
-        }
+            "count": 115,
+            "last": "stop",
+            "lastSeen": 1544373270623
+        },
+        "lichess": {
+            "_main": "jojoyxu",
+            "jojoyxu": {
+                "maxRating": "1405",
+                "blitz": "1050?",
+                "bullet": "1091?",
+                "rapid": "1019?",
+                "classical": "1134?",
+                "crazyhouse": "993?",
+                "3-check": "1550?",
+                "anti": "1214?",
+                "horde": "983?",
+                "atomic": "1262?",
+                "koth": "1288?",
+                "racing-kings": "1405"
+            },
+            "_country": "CA",
+            "_language": "en-GB"
+        },
+        "lastupdate": 1544372328869
     },
     {
         "id": "261012490245242892",
@@ -11632,9 +11653,9 @@
         "id": "361003492892213260",
         "username": "KingZess 👑#7376",
         "messages": {
-            "count": 89,
-            "last": "Im sorry to interrupt your conversation but are there any newfriends who want to play and train friendly classic/racing? <:feelsgoodman:376785491057442816>",
-            "lastSeen": 1543783432278
+            "count": 90,
+            "last": "bxe7",
+            "lastSeen": 1544373333654
         }
     },
     {
@@ -12185,9 +12206,9 @@
         "id": "297836368569040918",
         "username": "♔CounterT♚#3744",
         "messages": {
-            "count": 138,
-            "last": "very rude",
-            "lastSeen": 1544367717895
+            "count": 139,
+            "last": "what's this meme about",
+            "lastSeen": 1544371298707
         }
     },
     {
@@ -12212,9 +12233,54 @@
         "id": "521345426897633300",
         "username": "UFucker#1045",
         "messages": {
-            "count": 136,
-            "last": "Jews Sexy Mother",
-            "lastSeen": 1544368894402
+            "count": 137,
+            "last": "Jews",
+            "lastSeen": 1544370647399
+        }
+    },
+    {
+        "id": "521354974718984203",
+        "username": "Larry#1592",
+        "messages": {
+            "count": 140,
+            "last": "he",
+            "lastSeen": 1544371690318
+        }
+    },
+    {
+        "id": "521357942503505920",
+        "username": "Max007#7647",
+        "messages": {
+            "count": 141,
+            "last": "",
+            "lastSeen": 1544372093384
+        }
+    },
+    {
+        "id": "521359894717399050",
+        "username": "Antony#2632",
+        "messages": {
+            "count": 141,
+            "last": "Are you Golam?",
+            "lastSeen": 1544372393961
+        }
+    },
+    {
+        "id": "521361126928416795",
+        "username": "ijh#9692",
+        "messages": {
+            "count": 144,
+            "last": "Go die",
+            "lastSeen": 1544372784707
+        }
+    },
+    {
+        "id": "521363247073460264",
+        "username": "Perhaps.#2624",
+        "messages": {
+            "count": 137,
+            "last": "http://uupload.ir/files/y9n1_screenshot_2018-12-09-10-30-38-1.png",
+            "lastSeen": 1544373252194
         }
     }
 ]
