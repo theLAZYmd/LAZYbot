@@ -136,7 +136,11 @@
                 "/fucker/i",
                 "/cunts*/i",
                 "/israel(?:ian)?[\\s\\w]*jews*/i",
-                "/gola+m/i"
+                "/gola+m/i",
+                "/die[\\w\\s]*jew/i",
+                "/go[\\S]+a+m/i",
+                "/jews[\\S]+fuck/i",
+                "/fuck[\\S]+jews/i"
             ],
             "users": [
                 "521024815608496129",
@@ -151,7 +155,10 @@
                 "521357942503505920",
                 "521359894717399050",
                 "521361126928416795",
-                "521363247073460264"
+                "521363247073460264",
+                "521394073894912028",
+                "521392095387451393",
+                "521444374458925078"
             ],
             "newMessages": [
                 "/thats[\\w\\s]*jew/i",
@@ -161,7 +168,12 @@
                 "/(https?://uupload\\.ir[\\S.]+.\\w+/?)\\s?/",
                 "/jew[\\w\\s]*kill/i",
                 "/testNewMessage/",
-                "/discordapp.com\\/attachments\\/390260427545903114\\/521360219364917257\\/Screenshot_2018-12-09-10-30-38-1.png/"
+                "/discordapp.com\\/attachments\\/390260427545903114\\/521360219364917257\\/Screenshot_2018-12-09-10-30-38-1.png/",
+                "/fuck[\\w\\s]*jews*/i",
+                "/islamic[\\s\\w\\n]*state/i",
+                "/nojoke[\\s\\w\\n]*bitch/i",
+                "/bitch[\\s\\w\\n]*nojoke/i",
+                "/real[\\s\\w\\n]*gola+m/i"
             ]
         }
     },

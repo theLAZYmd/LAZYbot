@@ -37,13 +37,18 @@ class Shadowban extends Parse {
     async sbusername({  user  }) { //if a new User's username matches a regex, BAN them
         try {
             for (let n of this.shadowbanned.usernames) {
-                let array = n.slice(1).split("/");
+                let array = n.split("/");
                 let r = new RegExp(array.slice(1, -1).join("/"), array.pop());
                 if (r.test(user.username)) {
                     Logger.log(["auto", "Shadowban", "byUsername", "[" + [user.tag, r].join(", ") + "]"]);
                     this.guild.ban(user, {
                         "days": 0
                     })
+                    this.Output.sender(new Embed()
+                        .setTitle("⛔️ User Shadowbanned")
+                        .addField("Username", user.tag, true)
+                        .addField("ID", user.id, true)
+                    )
                     return;
                 }
             }
@@ -80,6 +85,11 @@ class Shadowban extends Parse {
                             if (this.dbuser.messages.count < 50) await this.guild.ban(message.author, {
                                 "days": 0
                             });
+                            this.Output.sender(new Embed()
+                                .setTitle("⛔️ User Shadowbanned")
+                                .addField("Username", message.author.tag, true)
+                                .addField("ID", message.author.id, true)
+                            )
                         } else this.Output.sender(new Embed()
                             .setTitle("Automod filtered message")
                             .addField("Author", this.author, true)
