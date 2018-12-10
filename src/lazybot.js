@@ -78,55 +78,7 @@ fs.readdir("./src/" + router, (err, _files) => {
 
 client.login(process.env.TOKEN ? process.env.TOKEN : require("./token.json").token)
 
-//UNIVERSAL FUNCTIONS
-
-Date.prototype.getUTCDays = function () {
-	return Math.floor(this.getTime() / 86400000);
-}
-
-Date.getTime = function (ms) {
-	let time = new Date(ms);
-	time.days = time.getUTCDays();
-	time.hours = time.getUTCHours();
-	time.minutes = time.getUTCMinutes();
-	time.seconds = time.getUTCSeconds();
-	time.milliseconds = time.getUTCMilliseconds();
-	return time;
-};
-
-Date.getISOtime = function (ms) {
-	return Date.getTime(ms).toString().slice(0, 31);
-};
-
-Date.getMonth = function (ms) {
-	let string = Date.getTime(ms).toString();
-	return string.slice(4, 7) + " " + string.slice(11, 15);
-};
-
-Array.prototype.inArray = function (string) {
-	let regex = /[a-z_$£@!.?]/gi;
-	for (let i = 0; i < this.length; i++) {
-		if ((string.match(regex) || []).join("").toLowerCase() === (this[i].match(regex) || []).join("").toLowerCase()) return true;
-	}
-	return false;
-};
-
-Array.prototype.findAllIndexes = function (conditions) {
-	let indexes = [];
-	for (let i = 0; i < this.length; i++) {
-		if (conditions(this[i])) {
-			indexes.push(i)
-		}
-	}
-	return indexes;
-};
-
-Array.prototype.swap = function (dbindex1, dbindex2) {
-	let user = this[dbindex1];
-	this[dbindex1] = this[dbindex2];
-	this[dbindex2] = user;
-	return this;
-};
+//PROTOTYPE MODIFIERS
 
 String.prototype.occurrences = function (subString, allowOverlapping) {
 	subString += "";
@@ -163,6 +115,31 @@ String.prototype.format = function (type = "") {
 	if (this.length > 0) return "```" + type + "\n" + this + "```";
 	return "";
 }
+
+Array.prototype.inArray = function (string) {
+	let regex = /[a-z_$£@!.?]/gi;
+	for (let i = 0; i < this.length; i++) {
+		if ((string.match(regex) || []).join("").toLowerCase() === (this[i].match(regex) || []).join("").toLowerCase()) return true;
+	}
+	return false;
+};
+
+Array.prototype.findAllIndexes = function (conditions) {
+	let indexes = [];
+	for (let i = 0; i < this.length; i++) {
+		if (conditions(this[i])) {
+			indexes.push(i)
+		}
+	}
+	return indexes;
+};
+
+Array.prototype.swap = function (dbindex1, dbindex2) {
+	let user = this[dbindex1];
+	this[dbindex1] = this[dbindex2];
+	this[dbindex2] = user;
+	return this;
+};
 
 Array.prototype.toProperCase = function () {
 	for (let i = 0; i < this.length; i++)
@@ -208,6 +185,50 @@ Array.prototype.remove = function (index) {
 	return this;
 };
 
+Object.prototype._getDescendantProp = function (desc) {
+	let arr = desc.split('.'), obj = this;
+	while (arr.length) {
+		obj = obj[arr.shift()];
+	}
+	return obj;
+};
+
+Object.prototype._setDescendantProp = function (desc, value) {
+	let arr = desc.split('.'), obj = this;
+	while (arr.length > 1) {
+		obj = obj[arr.shift()];
+	}
+	return obj[arr[0]] = value;
+};
+
+Number.prototype.toSign = function () {
+	if (this > 0) return "+" + Math.round(this);
+	return Math.round(this).toString();
+};
+
+Date.prototype.getUTCDays = function () {
+	return Math.floor(this.getTime() / 86400000);
+};
+
+Date.getTime = function (ms) {
+	let time = new Date(ms);
+	time.days = time.getUTCDays();
+	time.hours = time.getUTCHours();
+	time.minutes = time.getUTCMinutes();
+	time.seconds = time.getUTCSeconds();
+	time.milliseconds = time.getUTCMilliseconds();
+	return time;
+};
+
+Date.getISOtime = function (ms) {
+	return Date.getTime(ms).toString().slice(0, 31);
+};
+
+Date.getMonth = function (ms) {
+	let string = Date.getTime(ms).toString();
+	return string.slice(4, 7) + " " + string.slice(11, 15);
+};
+
 Math.randBetween = function (min, max) {
 	return Math.floor(Math.random() * (max - min + 1) + min);
 };
@@ -229,25 +250,4 @@ Math.genRandomList = function (number, independentvariables) {
 		randomrange.push(range.splice(randIndex, 1)[0]); //and push it, reducing the number of the original arrray
 	}
 	return randomrange; //[4, 2, 3]
-};
-
-Object.prototype._getDescendantProp = function (desc) {
-	let arr = desc.split('.'), obj = this;
-	while (arr.length) {
-		obj = obj[arr.shift()];
-	}
-	return obj;
-};
-
-Object.prototype._setDescendantProp = function (desc, value) {
-	let arr = desc.split('.'), obj = this;
-	while (arr.length > 1) {
-		obj = obj[arr.shift()];
-	}
-	return obj[arr[0]] = value;
-};
-
-Number.prototype.toSign = function () {
-	if (this > 0) return "+" + Math.round(this);
-	return Math.round(this).toString();
 };

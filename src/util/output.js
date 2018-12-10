@@ -202,18 +202,17 @@ class Output extends Parse {
 				"time": 18000,
 				"title": "",
 				"type": "option"
-			}, data);
-			let emojis = [],
-				description = "";
+            }, data);
+            let description = "";
+			let emojis = this.Search.Emojis.unicodes.slice(1, data.options.length + 1);
 			let author = data.title ? {
 				"name": data.title
 			} : {};
-			let title = data.description ? data.description : `Please choose a${/^(a|e|i|o|u)/.test(data.type) ? "n" : ""} ${data.type}:`;
-			for (let i = 0; i < data.options.length; i++) {
-				emojis.push((i + 1) + "⃣");
-				description += (i + 1) + "⃣ **" + data.options[i] + "**\n";
-			}
-			emojis.push("❎");
+            let title = data.description ? data.description : `Please choose a${/^(a|e|i|o|u)/.test(data.type) ? "n" : ""} ${data.type}:`;
+            for (let i = 0; i < data.options.length; i++) {
+                description += this.Search.emojis.get(emojis[i]) + "**" + data.options[i] + "**\n";
+            }
+            emojis.push("❎");
 			let msg = await this.reactor({
 				author,
 				title,
@@ -222,46 +221,49 @@ class Output extends Parse {
 			let rfilter = (reaction, user) => {
 				if (user.id !== data.author.id) return false;
 				if (reaction.emoji.name === "❎") return true;
-				let number = reaction.emoji.name.match(/([1-9])⃣/);
-				if (Number(number[1]) > data.options.length) return false;
+				if (this.Search.Emojis.unicodes.indexOf(reaction.emoji.name) < 1) return false;
+				if (this.Search.Emojis.unicodes.indexOf(reaction.emoji.name) > data.options.length) return false;
 				return true;
 			};
 			let mfilter = (m) => {
 				if (m.author.id !== data.author.id) return false;
-				if (!m.content) return false;
-				if (isNaN(m.content)) return false;
-				if (parseInt(m.content) > data.options.length) return false;
+                if (!m.content) return false;
+                if (m.content === "cancel") return true;
+                if (m.content.length !== 1) return false;
+                if (this.Search.Emojis.hexatrigintamals.indexOf(m.content) < 1) return false;
+				if (this.Search.Emojis.hexatrigintamals.indexOf(m.content) > data.options.length) return false;
 				return true;
-			};
-			let number = await Promise.race([
-				(async () => {
-					let rcollected = await msg.awaitReactions(rfilter, { //wait for them to react back
-						"max": 1,
-						"time": data.time,
-						"errors": ["time"]
-					}).catch(() => {
-					});
-					if (rcollected.first().emoji.name === "❎") throw "";
-					return Number(rcollected.first().emoji.name.match(/([1-9])⃣/)[1]);
-				})().catch(() => {
-				}),
-				(async () => {
-					let mcollected = await msg.channel.awaitMessages(mfilter, {
-						"max": 1,
-						"time": data.time,
-						"errors": ["time"]
-					});
-					mcollected.first().delete(1000).catch(() => {
-					});
-					return parseInt(mcollected.first().content);
-				})().catch(() => {
-				})
-			]);
-			if (!number) throw "";
-			data.autodelete !== false ? msg.delete().catch(() => {
-			}) : msg.clearReactions().catch(() => {
-			});
-			return (number - 1); //and if valid input, send of modmail for that guild
+            };
+            try {
+                let number = await Promise.race([
+                    (async () => {
+                        let rcollected = await msg.awaitReactions(rfilter, { //wait for them to react back
+                            "max": 1,
+                            "time": data.time,
+                            "errors": ["time"]
+                        }).catch(() => {});
+                        console.log(rcollected.first());
+                        if (rcollected.first().emoji.name === "❎") throw "";
+                        return this.Search.Emojis.hexatrigintamals[this.Search.Emojis.unicodes.indexOf(rcollected.first().emoji.name)];
+                    })().catch(() => {}),
+                    (async () => {
+                        let mcollected = await msg.channel.awaitMessages(mfilter, {
+                            "max": 1,
+                            "time": data.time,
+                            "errors": ["time"]
+                        }).catch(() => {});                          
+                        mcollected.first().delete(1000).catch(() => {}); 
+                        if (mcollected.first().content === "cancel") throw ""; 
+                        return this.Search.Emojis.hexatrigintamals.indexOf(mcollected.first().content);
+                    })().catch(() => {})
+                ]);
+                if (!number) throw null;                
+                data.autodelete !== false ? msg.delete().catch(() => {}) : msg.clearReactions().catch(() => {});
+                return number - 1; //and if valid input, send of modmail for that guild
+            } catch (e) {
+                data.autodelete !== false ? msg.delete().catch(() => {}) : msg.clearReactions().catch(() => {});
+                throw e;
+            }
 		} catch (e) {
 			if (e) this.onError(e);
 		}

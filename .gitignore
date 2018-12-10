@@ -16,3 +16,5 @@ package-lock.json
 requireForce: false
 tsconfig.json
 src/modules/tracker/config.json
+LAZYbot.code-workspace
+LAZYbot.code-workspace

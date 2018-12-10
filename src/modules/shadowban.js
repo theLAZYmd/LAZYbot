@@ -42,7 +42,7 @@ class Shadowban extends Parse {
                 if (r.test(user.username)) {
                     Logger.log(["auto", "Shadowban", "byUsername", "[" + [user.tag, r].join(", ") + "]"]);
                     this.guild.ban(user, {
-                        "days": 0
+                        "days": 1
                     })
                     this.Output.sender(new Embed()
                         .setTitle("⛔️ User Shadowbanned")
@@ -64,8 +64,13 @@ class Shadowban extends Parse {
                 message.delete();
                 if (message.mentions.everyone || message.mentions.users.size > 0) {
                     this.guild.ban(message.author, {
-                        "days": 0
+                        "days": 1
                     })
+                    this.Output.sender(new Embed()
+                        .setTitle("⛔️ User Shadowbanned")
+                        .addField("Username", message.author.tag, true)
+                        .addField("ID", message.author.id, true)
+                    )
                 }
             }
         } catch (e) {
@@ -82,8 +87,8 @@ class Shadowban extends Parse {
                     if (r.test(message.content || "")) {
                         Logger.log(["auto", "Shadowban", "byNewMessage", "[" + [message.author.tag, message.content].join(", ") + "]"]);
                         if (Date.now() - this.member.joinedTimestamp < 24 * 60 * 60 * 1000) {
-                            if (this.dbuser.messages.count < 50) await this.guild.ban(message.author, {
-                                "days": 0
+                            if (this.dbuser.messages.count < 50) this.guild.ban(message.author, {
+                                "days": 1
                             });
                             this.Output.sender(new Embed()
                                 .setTitle("⛔️ User Shadowbanned")
@@ -123,11 +128,19 @@ class Shadowban extends Parse {
 
     async addUser([_user]) { //if a user has a specific ID, DELETE all their messages
         try {
-            let user = this.Search.users.get(_user, true);
-            if (!user) throw "Couldn't find matching user to shadowban.";
+            let member = this.Search.members.get(_user, true);
+            if (!member) throw "Couldn't find matching member to shadowban.";
+            let user = member.user;
             let shadowbanned = this.shadowbanned;
             shadowbanned.users.push(user.id);
             this.shadowbanned = shadowbanned;
+            if (!/false/.test(this.argument)) {
+                let all = await member.lastMessage.channel.fetchMessages({
+                    "around": member.lastMessage.id
+                })
+                let cache = await all.filter(m => m.author.id === user.id);
+                member.lastMessage.channel.bulkDelete(cache);
+            }
             this.Output.sender(new Embed()
                 .setTitle("⛔️ User Shadowbanned")
                 .addField("Username", user, true)
@@ -180,16 +193,23 @@ class Shadowban extends Parse {
             let shadowbanned = this.shadowbanned;
             let key = await this.Output.choose({
                 "options": Object.keys(shadowbanned),
-                "type": "condition of shadowbanning to modify."
+                "type": "condition of shadowbanning to modify"
             });
+            if (!key) return;
             let type = Object.keys(shadowbanned)[key];
             let index = await this.Output.choose({
                 "options":  this.shadowbanned[type].map(c => c.format(/usernames|newMessages/.test(type) ? "css" : "fix")),
-                "type": "data entry to remove."
+                "type": "data entry to remove"
             });
+            if (!index) return;
+            let entry = shadowbanned[type][index];
             shadowbanned[type] = shadowbanned[type].remove(index);
             this.shadowbanned = shadowbanned;
-            this.list();
+            this.Output.sender(new Embed()
+                .setTitle("Removed shadowban condition")
+                .addField(type, entry.format(/usernames|newMessages/.test(type) ? "css" : "fix"), true)
+                .addField("Admin", this.author, true)                
+            )
         } catch (e) {
             if (e) this.Output.onError(e);
         }
