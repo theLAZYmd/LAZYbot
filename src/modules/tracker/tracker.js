@@ -35,7 +35,6 @@ class Tracker extends Parse {
 	get LUTDU() { //Least Up-to-Date User
 		let currentValue = Infinity;
 		return DataManager.getData().find((dbuser) => {
-			if (dbuser.left) return false; //if they're not in the server, stop updating them
 			if (Object.values(config.sources).filter(source => dbuser[source.key]).length === 0) return false; //sources
 			let member = this.Search.members.byUser(dbuser);
 			if (!member) {
@@ -104,7 +103,42 @@ class Tracker extends Parse {
 		} catch (e) {
 			if (e && this.command) this.Output.onError(e);
 		}
-	}
+    }
+    
+    async updateAll() {
+        try {
+            let mapper = [];
+            let ids = [];
+            let i = -1;
+            let tally = DataManager.getFile();
+            for (let dbuser of tally) {
+                i++;
+                if (!dbuser.lichess || !dbuser.lichess._main) continue;
+                ids.push(dbuser.lichess._main);
+                mapper.push(i);
+            }
+            let data = {
+                "source": config.sources.lichess
+            }
+            let result = await Tracker.requestAll(data.source, ids);
+            let successfulupdates = 0;
+            for (let i = 0; i < result.length; i++) {
+                let raw = result[i];
+                if (!raw) continue;
+                data.dbuser = tally[mapper[i]];
+                let Constructor = require("./lichess.js");
+                let parsedData = await new Constructor(raw, data);
+                data = await new Assign(data, parsedData);                
+                data.dbuser.lastupdate = Date.now(); //Mark the update time
+                tally[mapper[i]] = data.dbuser;
+                successfulupdates++;
+            }            
+            DataManager.setData(tally);
+            this.Output.generic("Successfully updated " + successfulupdates + " users on " + data.sources.name + ".");
+        } catch (e) {
+            if (e) this.Output.onError(e);
+        }
+    }
 
 	async track(data) {
 		try {
@@ -129,7 +163,7 @@ class Tracker extends Parse {
 				if (e) data.errors[data.source.key] = e;
 			}
 			data.dbuser.lastupdate = Date.now(); //Mark the update time
-			await DBuser.setData(data.dbuser); //set it
+			DBuser.setData(data.dbuser); //set it
 			if (data.successfulupdates.length > 0) {
 				Logger.command({
 					"author": {
@@ -142,7 +176,7 @@ class Tracker extends Parse {
 					"prefix": ""
 				}); //log updates received as a command
 			}
-			if (this.command) await this.output.track(data, this.msg);
+			if (this.command) this.output.track(data, this.msg);
 		} catch (e) {
 			if (e) throw e;
 		}
@@ -212,6 +246,26 @@ class Tracker extends Parse {
 			} catch (e) {
 				if (e) throw "Either request timed out or account doesn't exist. If account exists, please try again in 30 seconds.";
 			}
+		} catch (e) {
+			if (e) throw e;
+		}
+    }
+    
+    static
+	async requestAll(source, ids) {
+		try {
+            let options = {
+                "method": "POST",
+                "uri": config.sources[source.key].url.users,
+                "body": {
+                    "text": {
+                        "plain": ids.join(",")
+                    }
+                },
+                "timeout": 5000,
+                "json": true
+            };
+            let data = await rp.post(options); //success, trainingSessionId, author, fen, whoseTurn, variant, additionalInfo, authorUrl, pocket, check
 		} catch (e) {
 			if (e) throw e;
 		}
