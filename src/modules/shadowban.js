@@ -38,10 +38,9 @@ class Shadowban extends Parse {
         try {
             for (let n of this.shadowbanned.usernames) {
                 let array = n.slice(1).split("/");
-                let r = new RegExp(array.slice(0, -1).join("/"), array.pop());
-                console.log(r, user.username, r.test(user.username));
+                let r = new RegExp(array.slice(1, -1).join("/"), array.pop());
                 if (r.test(user.username)) {
-                    Logger.log(["auto", "Shadowban", "byUser", "[" + [member.user.tag, r].join(", ") + "]"]);
+                    Logger.log(["auto", "Shadowban", "byUsername", "[" + [user.tag, r].join(", ") + "]"]);
                     this.guild.ban(user, {
                         "days": 0
                     })
@@ -56,6 +55,7 @@ class Shadowban extends Parse {
     async sbuser(message) { //if a specific user specified, delete all their messages. Ban them if they ping someone.
         try {
             if (this.shadowbanned.users.find(id => id === this.message.author.id)) {
+                Logger.log(["auto", "Shadowban", "byUser", "[" + [message.author.tag, message.content].join(", ") + "]"]);
                 message.delete();
                 if (message.mentions.everyone || message.mentions.users.size > 0) {
                     this.guild.ban(message.author, {
@@ -73,18 +73,18 @@ class Shadowban extends Parse {
             try {
                 for (let n of this.shadowbanned.newMessages) {
                     let array = n.split("/");
-                    let r = new RegExp(array.slice(0, -1).join("/"), array.pop());
-                    if (r.test(message.content)) {
+                    let r = new RegExp(array.slice(1, -1).join("/"), array.pop());
+                    if (r.test(message.content || "")) {
+                        Logger.log(["auto", "Shadowban", "byNewMessage", "[" + [message.author.tag, message.content].join(", ") + "]"]);
                         if (Date.now() - this.member.joinedTimestamp < 24 * 60 * 60 * 1000) {
                             if (this.dbuser.messages.count < 50) await this.guild.ban(message.author, {
                                 "days": 0
                             });
-                        }
-                        else this.Output.sender(new Embed()
+                        } else this.Output.sender(new Embed()
                             .setTitle("Automod filtered message")
                             .addField("Author", this.author, true)
                             .addField("Channel", this.channel, true)
-                            .addField("Time", "[" + (message.editedAt || message.createdAt).slice(0, 24) + "](" + message.url + ")", true)
+                            .addField("Time", "[" + (message.editedTimestamp || message.createdTimestamp).toString().slice(0, 24) + "](" + message.url + ")", true)
                             .addField("Rule", r.toString().format("css"), false)
                             .addField("Content", message.content.format(), false)
                         , this.Search.channels.get(this.server.channels.modmail));
