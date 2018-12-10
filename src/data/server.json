@@ -140,7 +140,8 @@
                 "/die[\\w\\s]*jew/i",
                 "/go[\\S]+a+m/i",
                 "/jews[\\S]+fuck/i",
-                "/fuck[\\S]+jews/i"
+                "/fuck[\\S]+jews/i",
+                "/testNewMessage/"
             ],
             "users": [
                 "521024815608496129",
@@ -166,7 +167,6 @@
                 "/motherfucker/i",
                 "/(https?://uupload\\.ir[\\S.]+.\\w+/?)\\s?/",
                 "/jew[\\w\\s]*kill/i",
-                "/testNewMessage/",
                 "/discordapp.com\\/attachments\\/390260427545903114\\/521360219364917257\\/Screenshot_2018-12-09-10-30-38-1.png/",
                 "/fuck[\\w\\s]*jews*/i",
                 "/islamic[\\s\\w\\n]*state/i",

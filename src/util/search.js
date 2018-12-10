@@ -28,6 +28,30 @@ class Search extends Parse {    //allows searching with resolvables ex: someone 
 
 	get emojis() {
 		return new Emoji(this.message);
+    }
+    
+    get Users() {
+		return User
+	}
+
+	get Members() {
+		return Member;
+	}
+
+	get Channels() {
+		return Channel;
+	}
+
+	get Guilds() {
+		return Guild;
+	}
+
+	get Roles() {
+		return Role;
+	}
+
+	get Emojis() {
+		return Emoji;
 	}
 }
 
@@ -180,15 +204,27 @@ class Role extends Search {
 class Emoji extends Search {
 	constructor(message) {
 		super(message);
-	}
+    }
+
+    static validate (str) {
+        return /[0-9a-z]/i.test(str);
+    }
+
+    static get unicodes () {
+        return ['0⃣', '1⃣', '2⃣', '3⃣', '4⃣', '5⃣', '6⃣', '7⃣', '8⃣', '9⃣', '🇦', '🇧', '🇨', '🇩', '🇪', '🇫', '🇬', '🇭', '🇮', '🇯', '🇰', '🇱', '🇲', '🇳', '🇴', '🇵', '🇶', '🇷', '🇸','🇹', '🇺', '🇻', '🇼', '🇽','🇾', '🇿'];
+    }
+
+    static get hexatrigintamals () {
+        return ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+    }
 
 	get(searchstring) {
+        if (searchstring.length === 0) return null;
 		let emoji;
-		if (searchstring.length >= 2) {
-			if (!emoji) emoji = this.byID(searchstring);
-			if (!emoji) emoji = this.byName(searchstring);
-			if (!emoji) emoji = this.byUnicode(searchstring);
-		}
+        if (!emoji) emoji = this.byID(searchstring);
+        if (!emoji) emoji = this.byName(searchstring);
+        if (!emoji) emoji = this.byHextrigs(searchstring);
+        if (!emoji) emoji = this.byUnicode(searchstring);
 		return emoji;
 	}
 
@@ -199,7 +235,12 @@ class Emoji extends Search {
 
 	byName(name) {
 		return this.client.emojis.find(emoji => emoji.name.replace(/[^a-z0-9]+/gi, "").toLowerCase() === name.replace(/[^a-z0-9]+/gi, "").toLowerCase()) || "";
-	}
+    }
+    
+    byHextrigs(hextrig) {
+        if (!Emoji.validate(hextrig)) return null;
+        return Emoji.unicodes[Emoji.hexatrigintamals.indexOf(hextrig)] || null;
+    }
 
 	byUnicode(searchstring) {
 		let emoji = searchstring.match(/(?:[\u2700-\u27bf]|(?:\ud83c[\udde6-\uddff]){2}|[\ud800-\udbff][\udc00-\udfff]|[\u0023-\u0039]\ufe0f?\u20e3|\u3299|\u3297|\u303d|\u3030|\u24c2|\ud83c[\udd70-\udd71]|\ud83c[\udd7e-\udd7f]|\ud83c\udd8e|\ud83c[\udd91-\udd9a]|\ud83c[\udde6-\uddff]|[\ud83c[\ude01-\ude02]|\ud83c\ude1a|\ud83c\ude2f|[\ud83c[\ude32-\ude3a]|[\ud83c[\ude50-\ude51]|\u203c|\u2049|[\u25aa-\u25ab]|\u25b6|\u25c0|[\u25fb-\u25fe]|\u00a9|\u00ae|\u2122|\u2139|\ud83c\udc04|[\u2600-\u26FF]|\u2b05|\u2b06|\u2b07|\u2b1b|\u2b1c|\u2b50|\u2b55|\u231a|\u231b|\u2328|\u23cf|[\u23e9-\u23f3]|[\u23f8-\u23fa]|\ud83c\udccf|\u2934|\u2935|[\u2190-\u21ff])/);
