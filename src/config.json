@@ -242,6 +242,7 @@
                 "ping": "https://lichess.org/",
                 "profile": "https://lichess.org/@/|",
                 "user": "https://lichess.org/api/user/|",
+                "users": "https://lichess.org/api/users/",
                 "status": "https://lichess.org/api/users/status?ids=|",
                 "game": "https://lichess.org/api/game/|",
                 "puzzle": "https://lichess.org/training/|"
