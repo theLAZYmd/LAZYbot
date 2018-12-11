@@ -31,9 +31,9 @@
         "debug": false
     },
     "backupdb": [
-        "Mon Dec 10 2018 15:05:22 GMT+00",
-        "Mon Dec 10 2018 12:06:33 GMT+00",
-        "Mon Dec 10 2018 10:06:33 GMT+00"
+        "Tue Dec 11 2018 22:11:53 GMT+00",
+        "Tue Dec 11 2018 22:11:53 GMT+00",
+        "Tue Dec 11 2018 22:11:53 GMT+00"
     ],
     "delays": {
         "update": 300000,
@@ -285,9 +285,9 @@
             "id": "",
             "username": "",
             "messages": {
-                "count": 137,
-                "last": "Jews Motherfucker",
-                "lastSeen": 1544423188149
+                "count": 139,
+                "last": "you should taken the rook for the bishop earlier  but anyway nice game",
+                "lastSeen": 1544510810383
             }
         },
         "server": {

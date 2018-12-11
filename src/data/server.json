@@ -12,7 +12,7 @@
                 "count": true,
                 "results": false
             },
-            "trivia": false
+            "trivia": true
         },
         "prefixes": {
             "generic": "!",

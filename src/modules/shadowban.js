@@ -41,7 +41,7 @@ class Shadowban extends Parse {
                 let r = new RegExp(array.slice(1, -1).join("/"), array.pop());
                 if (r.test(user.username)) {
                     Logger.log(["auto", "Shadowban", "byUsername", "[" + [user.tag, r].join(", ") + "]"]);
-                    this.guild.ban(user, {
+                    await this.guild.ban(user, {
                         "days": 1
                     })
                     this.Output.sender(new Embed()
@@ -86,15 +86,17 @@ class Shadowban extends Parse {
                     let r = new RegExp(array.slice(1, -1).join("/"), array.pop());
                     if (r.test(message.content || "")) {
                         Logger.log(["auto", "Shadowban", "byNewMessage", "[" + [message.author.tag, message.content].join(", ") + "]"]);
-                        if (Date.now() - this.member.joinedTimestamp < 24 * 60 * 60 * 1000) {
-                            if (this.dbuser.messages.count < 50) this.guild.ban(message.author, {
+                        if (Date.now() - this.member.joinedTimestamp < 48 * 60 * 60 * 1000) {
+                            if (this.dbuser.messages.count < 100) {
+                                await this.guild.ban(message.author, {
                                 "days": 1
-                            });
-                            this.Output.sender(new Embed()
-                                .setTitle("⛔️ User Shadowbanned")
-                                .addField("Username", message.author.tag, true)
-                                .addField("ID", message.author.id, true)
-                            )
+                                });
+                                this.Output.sender(new Embed()
+                                    .setTitle("⛔️ User Shadowbanned")
+                                    .addField("Username", message.author.tag, true)
+                                    .addField("ID", message.author.id, true)
+                                , this.Search.channels.get(this.server.channels.modmail));
+                            }
                         } else this.Output.sender(new Embed()
                             .setTitle("Automod filtered message")
                             .addField("Author", this.author, true)
@@ -145,7 +147,7 @@ class Shadowban extends Parse {
                 .setTitle("⛔️ User Shadowbanned")
                 .addField("Username", user, true)
                 .addField("ID", user.id, true)
-            );
+            , this.Search.channels.get(this.server.channels.modmail));
         } catch (e) {
             if (e) this.Output.onError(e);
         }
@@ -163,7 +165,7 @@ class Shadowban extends Parse {
                 .setTitle("⛔️ Username Shadowbanned")
                 .addField("Username", username.format("css"), true)
                 .addField("Channel", this.Search.channels.get(this.server.channels.join), true)
-            );
+            , this.Search.channels.get(this.server.channels.modmail));
         } catch (e) {
             if (e) this.Output.onError(e);
         }
