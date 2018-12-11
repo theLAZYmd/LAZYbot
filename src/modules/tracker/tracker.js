@@ -18,11 +18,6 @@ class Tracker extends Parse {
 		return new OutputConstructor(this.message, this.msg);
 	}
 
-	static async initUpdateCycle(client, guildID) {
-		let Track = new Tracker({		client	}, guildID);
-		Track.updateCycle();
-	}
-
 	async updateCycle () {
 		let dbuser = this.LUTDU;
 		if (dbuser) {
@@ -30,30 +25,7 @@ class Tracker extends Parse {
 			this.track({dbuser, sources});
 		}
 		setTimeout(() => this.updateCycle(), config.delays.update);
-	}
-
-	get LUTDU() { //Least Up-to-Date User
-		let currentValue = Infinity;
-		return DataManager.getData().find((dbuser) => {
-			if (Object.values(config.sources).filter(source => dbuser[source.key]).length === 0) return false; //sources
-			let member = this.Search.members.byUser(dbuser);
-			if (!member) {
-				dbuser.left = true;
-				DBuser.setData(dbuser);
-				return false;
-			}
-			if (dbuser.left) {
-				delete dbuser.left;
-				DBuser.setData(dbuser);
-			}			
-			if (!/online|idle|dnd/.test(member.presence.status)) return false;
-			if (!dbuser.lastupdate) return true;
-			if (dbuser.lastupdate < currentValue && dbuser.lastupdate < Date.now() - config.delays.repeat) {
-				currentValue = dbuser.lastupdate;
-				return dbuser;
-			}
-		})
-	}
+    }
 
 	async run(command, args) { //both !remove and the linking commands start here
 		try {
@@ -63,7 +35,7 @@ class Tracker extends Parse {
 				_command = command;
 				command = "track";
 			}
-			let sources = Object.values(config.sources).filter(source => source.key === _command.replace(".", ""));
+			let sources = Object.values(config.sources).filter(source => source.key === _command.toLowerCase().replace(/\./g, ""));
 			if (args.length === 0) username = this.author.username;
 			if (args.length === 1) username = args[0];
 			if (args.length === 2) {
@@ -212,10 +184,37 @@ class Tracker extends Parse {
 		} catch (e) {
 			if (e) this.Output.onError(e);
 		}
+    }
+     
+    static async initUpdateCycle(client, guildID) {
+		let Track = new Tracker({		client	}, guildID);
+		Track.updateCycle();
 	}
 
-	static
-	async handle(data) {
+	get LUTDU() { //Least Up-to-Date User
+        let currentValue = Infinity;
+		return DataManager.getData().findd((dbuser) => {
+			if (Object.values(config.sources).filter(source => dbuser[source.key]).length === 0) return false; //sources
+			let member = this.Search.members.byUser(dbuser);
+			if (!member) {
+				dbuser.left = true;
+				DBuser.setData(dbuser);
+				return false;
+			}
+			if (dbuser.left) {
+				delete dbuser.left;
+				DBuser.setData(dbuser);
+			}			
+			if (!/online|idle|dnd/.test(member.presence.status)) return false;
+			if (!dbuser.lastupdate) return true;
+			if (dbuser.lastupdate < currentValue && dbuser.lastupdate < Date.now() - config.delays.repeat) {
+				currentValue = dbuser.lastupdate;
+				return dbuser;
+			}
+        });      
+	}
+
+	static async handle(data) {
 		try {
 			let sourceData = await Tracker.request(data);
 			if (!sourceData) throw "No source data.";
@@ -231,8 +230,7 @@ class Tracker extends Parse {
 		}
 	}
 
-	static
-	async request(data) {
+	static async request(data) {
 		try {
 			if (!data.username) throw "Invalid username.";
 			try {
@@ -251,8 +249,7 @@ class Tracker extends Parse {
 		}
     }
     
-    static
-	async requestAll(source, ids) {
+    static async requestAll(source, ids) {
 		try {
             let options = {
                 "method": "POST",
