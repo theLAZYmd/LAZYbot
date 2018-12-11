@@ -114,6 +114,11 @@ String.prototype.bold = function () {
 String.prototype.format = function (type = "") {
 	if (this.length > 0) return "```" + type + "\n" + this + "```";
 	return "";
+};
+
+Array.prototype.findd = function (f) {
+    let array = this.filter(f);
+    return array.length > 0 ? array.pop() : null;
 }
 
 Array.prototype.inArray = function (string) {
