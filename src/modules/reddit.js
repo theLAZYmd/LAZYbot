@@ -5,31 +5,48 @@ const rp = require("request-promise");
 
 class Reddit extends Parse {
 
-  constructor(message) {
-    super(message);
-  }
-
-  async link() {
-    try {
-      if (!this.message.content) throw "";
-      let subreddits = this.message.content.match(/(^|\b)\/*r\/([a-z]{2,21})/gi);
-      if (!subreddits || !Array.isArray(subreddits)) throw "";
-      let string = "";
-      for (let sub of subreddits) {
-        let name = sub.replace(/^\/*r\//, ""); /*
-        let uri = config.urls.reddit.api.replace("|", name);
-        let body = await rp({uri,
-          "json": true,
-          "timeout": 2000
-        });
-        if (!body || body.error || body.message === "Not Found") throw "sub"; */
-        string += `[${config.urls.reddit.name.replace("|", name)}](${config.urls.reddit.link.replace("|", name)})\n`
-      }
-	    if (string) this.Output.generic(string);
-    } catch (e) {
-      if (e) this.Output.onError(e);
+    constructor(message) {
+        super(message);
     }
-  }
+
+    async link() {
+        try {
+            let content = this.message.content;
+            if (!content || !/(?:^|\b)\/?r\/(\w{2,21})(?:^|\b)/gi.test(content)) throw "";
+            let arr = await Reddit.stringToLinks(content);
+            this.Output.generic(arr.join("\n"));
+            return arr;
+        } catch (e) {
+            if (e) this.Output.onError(e);
+        }
+    }
+
+    static async stringToLinks(str) {
+        try {
+            return str.match(/(?:^|\b)\/?r\/(\w{2,21})(?:^|\b)/gi)
+                .map(n => n.match(/(?:^|\b)\/?r\/(\w{2,21})(?:^|\b)/i)[1])
+                .filter(async (name) => {
+                    try {
+                        let uri = config.urls.reddit.api.replace("|", name);
+                        let body = JSON.parse(await rp({uri,
+                            "json": true,
+                            "timeout": 2000
+                        }).toString());
+                        console.log(body);
+                        if (!body) return false;
+                        if (body.error) return false;
+                        if (body.message === "Not Found") return false;
+                        if (!body.after) return false;
+                        return true;
+                    } catch (e) {
+                        return false;
+                    }
+                })
+                .map(n => `[${config.urls.reddit.name.replace("|", n)}](${config.urls.reddit.link.replace("|", n)})`)
+        } catch (e) {
+            if (e) throw e;
+        }
+    }
 
 }
 

@@ -1,6 +1,18 @@
-const {RichEmbed} = require("discord.js");
+const { RichEmbed   } = require("discord.js");
 
 class Embed extends RichEmbed {
+
+    constructor(data = {}) {
+        super(data);
+        this.content = data.content;
+    }
+
+    setContent(content) {
+        content = resolveString(content);
+        if (content.length > 2000) throw new RangeError('Message content may not exceed 2000 characters.');
+        this.embed = embed;
+        return this;
+    }
 
 	static fielder(fields = [], name = " \u200b", value = " \u200b", inline = false) {
 		fields.push({
@@ -261,3 +273,9 @@ class Embed extends RichEmbed {
 }
 
 module.exports = Embed;
+
+function resolveString(data) {
+    if (typeof data === 'string') return data;
+    if (data instanceof Array) return data.join('\n');
+    return String(data);
+  }

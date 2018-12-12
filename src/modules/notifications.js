@@ -7,22 +7,28 @@ class Notifications extends Parse {
         super(message);
     }
 
-    run(args, argument) {
-        if (!this.Check.role(this.member, "Bronze") || !args[0]) return; //temporary permissions, but this command really needs it
-        let notify = this.server.notify || {};
-        if (notify[this.author.id] && Date.now() - notify[this.author.id] < 3600000) return this.Output.onError(`You're using that command too frequently.\nPlease wait **${Math.ceil((3600000 - (Date.now() - notify[this.author.id]))/60000)}** minutes.`);
-        let link = args[0];
-        let ETA = argument.slice(link.length).trim();
-        if (link.match(/(lichess.org\/tournament\/)|(chess\.com)|(bughousetest\.com\/tournament\/)/g)) {
-            this.Output.sender({
-                "content": "@here",
-                "title": "Tournament Starting!",
-                "description": `Greeetings ${this.channel}. You have been invited to join a tournament by **${this.author.tag}**.${ETA ? ` Tournament starting... ${ETA}!` : " Join now!"}\n${link}`
-            });
-            this.log(`${this.author.tag} has sent out a ping for ${link}.`);
+    async run(argument) {
+        try {
+            if (!this.Check.role(this.member, "Bronze") || !argument) return; //temporary permissions, but this command really needs it
+            let server = this.server;
+            let notify = server.notify || {};
+            if (!/https?:\/\/(lichess\.org|chess\.com|bughousetest\.com)(?:\/tournament\/)?[\S\.]*\.*\w+\/?\s?/.test(link)) return;
+            if (notify[this.author.id] && Date.now() - notify[this.author.id] < 3600000) throw `You're using that command too frequently.\nPlease wait **${Math.ceil((3600000 - (Date.now() - notify[this.author.id]))/60000)}** minutes.`;
+            let [link, site] = argument.match(/https?:\/\/(lichess\.org|chess\.com|bughousetest\.com)(?:\/tournament\/)?[\S\.]*\.*\w+\/?\s?/);
+            argument = argument.replace(link, "").trim();
+            let [hours, minutes, seconds] = argument.parseTime();
+            argument = argument.replace(hours, "").replace(minutes, "").replace(seconds, "").replace(/\s\s/g, " ").trim();
+            let embed = new Embed()
+                .setContent("@here")
+                .setTitle("Notification for a tournament!")
+                .setDescription(`Greetings ${this.channel}. You have been invited to join a tournament. [Join now!](${link})`, true)
+                .addField("Author", this.author.tag, true);
+            if (hours || minutes || seconds) embed.addField("ETA", (hours || "0") + "h " + (minutes || "0") + "m " + (seconds || "0") + "s ");
             notify[this.author.id] = Date.now();
-            this.server.notify = notify;
-            DataManager.setServer(this.server);
+            server.notify = notify;
+            DataManager.setServer(server);
+        } catch (e) {
+            if (e) this.Output.onError(e);
         }
     }
 

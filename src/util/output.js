@@ -76,11 +76,11 @@ class Output extends Parse {
 			let keylength = Math.floor(string.length / index);
 			for (let i = 0; i < index; i++) {
 				this.log(i === index.length - 1);
-				this.sender({
-					"color": 9359868,
-					"description": "```" + type + "\n" + string.slice(i * keylength, (i === index.length - 1 ? string.length + 2 : i * keylength + keylength)) + " ".repeat(48) + "\u200b" + "```",
-					"footer": Embed.footer((i + 1) + " / " + index)
-				}, NewChannel);
+				this.sender(new Embed()
+					.setColor(9359868)
+					.setDescription((string.slice(i * keylength, (i === index.length - 1 ? string.length + 2 : i * keylength + keylength)) + " ".repeat(48) + "\u200b").format())
+					.setFooter((i + 1) + " / " + index)
+				, NewChannel);
 			}
 		} catch (e) {
 			if (e) this.onError(e);
@@ -97,10 +97,10 @@ class Output extends Parse {
 				if (error.name && error.message) description = "**" + error.name + ":** " + error.message;
 				else return;
 			}
-			return await this.sender({
-				"description": description.replace(/\${([a-z]+)}/gi, value => this.server.prefixes[value.match(/[a-z]+/i)]),
-				"color": config.colors.error
-			}, channel)
+			return await this.sender(new Embed()
+				.setDescription(description.replace(/\${([a-z]+)}/gi, value => this.server.prefixes[value.match(/[a-z]+/i)]))
+				.setColor(config.colors.error)
+			, channel)
 		} catch (e) {
 			if (e) this.log(e);
 		}

@@ -94,7 +94,7 @@ class Input extends Main {
 	async reaction() {
 		return this.Output.sender(new Embed()
 			.setTitle("On " + Date.getISOtime(this.message.createdTimestamp) + ", you successfully sent to ModMail:")
-			.setDescription("```" + this.message.content.replace(/`/g, "\\`") + "```" + "\n'📨' constitutes a successful message sent. If your message did not receive a '📨' or you received an error message, please contact theLAZYmd#2353**.", false)
+			.setDescription(this.message.content.format() + "\n'📨' constitutes a successful message sent. If your message did not receive a '📨' or you received an error message, please contact theLAZYmd#2353**.", false)
 		)
 	}
 

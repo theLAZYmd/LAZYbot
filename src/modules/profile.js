@@ -78,8 +78,8 @@ class Profile extends Parse {
 
 	get description() {
 		let string = "";
-		if (this._dbuser.finger) string += "```" + this._dbuser.finger + "```";
-		if (this._dbuser.modnotes) string += "```diff\n-mod notes\n" + this._dbuser.modnotes + "```";
+		if (this._dbuser.finger) string += this._dbuser.finger.format();
+		if (this._dbuser.modnotes) string += ("-mod notes\n" + this._dbuser.modnotes).format("diff");
 		return string;
 	}
 
@@ -158,7 +158,7 @@ class Profile extends Parse {
 
 	get info() {
 		let region = "None set."; //default region sign if none found, measure of number of sources
-		for (let i = 0; i < this.server.regions.length; i++) {
+		for (let i = 0; i < (this.server.regions || []).length; i++) {
 			let role = this.Search.roles.get(this.server.regions[i]);
 			if (this.Check.role(this.member, role.name)) region = this.server.regions[i];
 		}

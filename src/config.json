@@ -11,7 +11,8 @@
         "owner": [
             "185412969130229760",
             "372355465939779595"
-        ]
+        ],
+        "reddit": "ZL3w4njYxfGIAQ"
     },
     "colors": {
         "generic": 53380,
@@ -31,7 +32,7 @@
         "debug": false
     },
     "backupdb": [
-        "Tue Dec 11 2018 22:11:53 GMT+00",
+        "Wed Dec 12 2018 04:04:14 GMT+00",
         "Tue Dec 11 2018 22:11:53 GMT+00",
         "Tue Dec 11 2018 22:11:53 GMT+00"
     ],
@@ -44,7 +45,8 @@
         "reddit": {
             "name": "/r/|",
             "link": "http://www.reddit.com/r/|",
-            "api": "https://api.reddit.com/r/|.json"
+            "api": "https://api.reddit.com/r/|.json",
+            "oauth": "https://www.reddit.com/api/v1/authorize?client_id=CLIENT_ID&response_type=TYPE&state=RANDOM_STRING&redirect_uri=URI&duration=DURATION&scope=SCOPE_STRING"
         }
     },
     "electorals": {
