@@ -10,8 +10,8 @@
 	"keywords": [
 		"lazy",
 		"discord",
-        "node",
-        "utility"
+		"node",
+		"utility"
 	],
 	"homepage": "https://github.com/theLAZYmd/LAZYbot/blob/master/README.md",
 	"releases": "https://github.com/theLAZYmd/LAZYbot/releases",
@@ -27,8 +27,11 @@
 		"discord.js": "^11.4.2",
 		"enmap": "^0.3.2",
 		"es6": "0.0.7",
+		"express": "^4.16.4",
+		"opusscript": "0.0.6",
 		"request": "^2.88.0",
 		"request-promise": "^4.2.2",
+		"simple-oauth2": "^2.2.1",
 		"winston": "^3.1.0",
 		"yarn": "^1.10.1"
 	},
