@@ -112,9 +112,16 @@ String.prototype.bold = function () {
 };
 
 String.prototype.format = function (type = "") {
-	if (this.length > 0) return "```" + type + "\n" + this + "```";
+	if (this.length > 0) return "```" + type.replace(/```/g, "\\`\\`\\`") + "\n" + this + "```";
 	return "";
 };
+
+String.prototype.parseTime = function () {    
+    let hours = argument.match(/\b([0-9])+\s*h(?:ours?)?\b/)[1] || 0;
+    let minutes = argument.match(/\b([0-9])+\s*m(?:inutes?)?\b/)[1] || 0;
+    let seconds = argument.match(/\b([0-9])+\s*s(?:econds?)?\b/)[1] || 0;
+    return [Number(hours) || null, Number(minutes) || null, Number(seconds) || null]
+}
 
 Array.prototype.findd = function (f) {
     let array = this.filter(f);

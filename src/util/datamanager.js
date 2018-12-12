@@ -1,6 +1,7 @@
 const fs = require("fs");
 const config = require("../config.json");
 const Logger = require("./logger.js");
+const Server = require("../templates/server.js");
 
 class DataManager {
 
@@ -25,14 +26,9 @@ class DataManager {
         let file = DataManager.getFile(filepath);
         let server = file[_id]; //get the specific info for that server
         if (!server) { //if there's no data for that server
-            let object = newfilepath ? {
-                _id
-            } : Object.assign(config.templates.server, {
-                _id
-            }); //create a new object with object.id === the id in question
+            server = new Server;
             DataManager.setServer(object, filepath); //set it
-            Logger.log("Server " + object._id + " has been logged in the database!");
-            return object; //and return the object
+            Logger.log("Server " + server._id + " has been logged in the database!");
         }
         return server; //and return the object
     }

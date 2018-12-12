@@ -52,17 +52,17 @@ class MessageCount extends Parse {
         }
     }
 
-    last(argument) {
+    async last(argument) {
         try {
             let user = this.author;
             if (argument) user = this.Search.users.get(argument);
             if (!user) throw "Couldn't find user **" + argument + "**!";
             let dbuser = DBuser.getUser(user);
             if (!dbuser.messages.last) throw "Last message was not logged for user **" + user.tag + "**.";
-            this.Output.sender({
-                "title": "Last Message of " + user.tag + "\n",
-                "description": "```" + dbuser.messages.last + "```"
-            });
+            this.Output.sender(new Embed()
+                .setTitle("Last Message of " + user.tag + "\n")
+                .setDescription(dbuser.messages.last.format())
+            );
         } catch (e) {
             if (e) this.Output.onError(e)
         }

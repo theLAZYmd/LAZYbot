@@ -1,9 +1,11 @@
 const commands = require("../data/commands/message.json");
 const config = require("../config.json");
 const request = require('request');
+const rp = require('request-promise');
 const DataManager = require("../util/datamanager.js");
 const Package = require("../../package.json");
 const Logger = require("../util/logger.js");
+const token = require("../token.json");
 
 class onStartup {
 
@@ -96,11 +98,17 @@ class onStartup {
 		for (let [id, server] of Object.entries(DataManager.getFile("./src/data/server.json"))) {
 			if (server.states.au) {
 				TrackerConstructor.initUpdateCycle(this.client, id)
-				Logger.log("Beginning update cycle...");
+				return Logger.log("Beginning update cycle...");
 			}
 		}
-	}
-
+    }
+    /*  
+    async reddit() {
+        let str = Math.random().toString().replace(/[^a-z]+/g, '')
+        let url = config.urls.reddit.oauth.replace("CLIENT_ID", config.ids.reddit).replace("TYPE", token.reddit).replace("RANDOM_STRING", str).replace("URL", "http://localhost").replace("SCOPE_STRING", "identity");
+        Logger.log(await rp.get(url));
+    }
+    */
 }
 
 module.exports = onStartup;
