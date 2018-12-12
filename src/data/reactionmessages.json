@@ -2550,6 +2550,72 @@
                 "page": 0,
                 "author": "373480715276517376",
                 "cmdID": "521671356497133569"
+            },
+            "522465750674440224": {
+                "embedgroup": [
+                    {
+                        "title": " Profile for PepsiLover#3547",
+                        "description": "",
+                        "color": 15105570,
+                        "fields": [
+                            {
+                                "name": "Info",
+                                "value": "Region: **Europe**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Dec 04 2018**\nThe House: **Dec 04 2018**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`519602977380761621`**\nPosition in Database: **773**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "741",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/EncsMs8.png"
+                        },
+                        "footer": {
+                            "text": "1 / 2"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": " Profile for PepsiLover#3547",
+                        "description": "",
+                        "color": 15105570,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[PepsiNGaming](https://lichess.org/@/PepsiNGaming)\nBlitz: **1869**\nBullet: **1947**\nRapid: 1326?\nClassical: **1429**\nCrazyhouse: **1891**\n3-check: **1768**\nAntichess: **2192**\nHorde: **1887**\nAtomic: **2050**\nKing of the Hill: **1716**\nRacing Kings: **1908**",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[Ogul1](https://lichess.org/@/Ogul1)\nBlitz: **1444**\nBullet: **1682**\nRapid: 1533?\nClassical: 1500?\nCrazyhouse: **1583**\n3-check: **1434**\nAntichess: **2412**\nHorde: **1660**\nAtomic: **1657**\nKing of the Hill: 1322?\nRacing Kings: **1766**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/EncsMs8.png"
+                        },
+                        "files": [],
+                        "footer": {
+                            "text": "2 / 2"
+                        }
+                    }
+                ],
+                "period": 30000,
+                "page": 1,
+                "author": "317034686973214720",
+                "cmdID": "522465750015934474"
             }
         },
         "election/votes": {

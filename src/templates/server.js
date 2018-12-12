@@ -1,13 +1,13 @@
 class Server {
     constructor(id) {
-        this._id = "433936141989969931";
+        this._id = id;
         this.prefix = {
             "generic": "!",
             "nadeko": "."
         },
         this.states = {
             "election": {
-                "register": true,
+                "register": false,
                 "candidates": false,
                 "voting": false,
                 "count": false,
@@ -42,3 +42,5 @@ class Server {
         }
     }
 }
+
+module.exports = Server;

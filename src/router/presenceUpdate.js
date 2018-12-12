@@ -36,21 +36,12 @@ class PresenceUpdate extends Parse {
             if (live === undefined) return;
             let streamersbox = this.Search.channels.get("Streamers Box");
             if (!streamersbox) return;
-            for (let region of this.server.regions) {
+            for (let region of this.server.regions || []) {
                 streamersbox.overwritePermissions(this.Search.roles.get(region), {
                     VIEW_CHANNEL: live
                 })
             }
-            Logger.command({
-                "author": {
-                    "tag": "auto"
-                },
-                "args": [live],
-                "command": "streamers box"
-            }, {
-                "file": "Presence",
-                "prefix": ""
-            }); //log updates received as a command
+            Logger.log(["auto", "Presence", "streamers box", "[" + ["live"].join(", ") + "]"]);
         } catch (e) {
             if (e) this.Output.onError(e);
         }

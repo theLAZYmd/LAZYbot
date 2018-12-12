@@ -26,8 +26,8 @@ class DataManager {
         let file = DataManager.getFile(filepath);
         let server = file[_id]; //get the specific info for that server
         if (!server) { //if there's no data for that server
-            server = new Server;
-            DataManager.setServer(object, filepath); //set it
+            server = new Server(_id);
+            DataManager.setServer(server, filepath); //set it
             Logger.log("Server " + server._id + " has been logged in the database!");
         }
         return server; //and return the object

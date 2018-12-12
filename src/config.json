@@ -32,9 +32,9 @@
         "debug": false
     },
     "backupdb": [
-        "Wed Dec 12 2018 04:04:14 GMT+00",
-        "Tue Dec 11 2018 22:11:53 GMT+00",
-        "Tue Dec 11 2018 22:11:53 GMT+00"
+        "Wed Dec 12 2018 16:18:55 GMT+00",
+        "Wed Dec 12 2018 16:18:55 GMT+00",
+        "Wed Dec 12 2018 16:18:55 GMT+00"
     ],
     "delays": {
         "update": 300000,
@@ -280,62 +280,6 @@
                 "setup": "https://chessvariants.training/Puzzle/Train/Setup",
                 "puzzle": "https://chessvariants.training/Puzzle/|"
             }
-        }
-    },
-    "templates": {
-        "dbuser": {
-            "id": "",
-            "username": "",
-            "messages": {
-                "count": 139,
-                "last": "you should taken the rook for the bishop earlier  but anyway nice game",
-                "lastSeen": 1544510810383
-            }
-        },
-        "server": {
-            "id": "",
-            "states": {
-                "tm": false,
-                "bcp": false,
-                "election": false,
-                "trivia": false
-            },
-            "prefixes": {
-                "generic": "!",
-                "nadeko": "."
-            },
-            "channels": {
-                "announcements": "announcements",
-                "bot": "bot",
-                "bot2": "bot",
-                "modmail": "modmail",
-                "log": "log",
-                "join": "join",
-                "leave": "leave",
-                "trivia": "trivia",
-                "welcome": "welcome"
-            },
-            "colors": {
-                "generic": 53380,
-                "error": 15406156,
-                "ratings": 9359868
-            },
-            "roles": {
-                "admin": "admin",
-                "mod": "mod",
-                "bot": "bot",
-                "muted": "muted",
-                "arena": "arena",
-                "beta": "",
-                "livenotifications": "live"
-            },
-            "regions": [],
-            "shadowbanned": [],
-            "trivia": {},
-            "tickets": [],
-            "getplaying": {},
-            "notify": {},
-            "_id": "433936141989969931"
         }
     }
 }

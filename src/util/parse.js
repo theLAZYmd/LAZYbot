@@ -31,9 +31,11 @@ class Parse {
 
 	get server() {
 		if (!this._server) {
-			if (this.guild) this._server = DataManager.getServer(this.guild.id);
+			if (this.guild) {
+                this._server = DataManager.getServer(this.guild.id);
+            }
 		}
-		return this._server || "";
+		return this._server || null;
     }
     
     set server(server) {
