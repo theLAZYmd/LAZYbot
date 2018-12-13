@@ -4,7 +4,73 @@ const DataManager = require("../../util/datamanager.js");
 const DBuser = require("../../util/dbuser.js");
 const Logger = require("../../util/logger.js");
 const Assign = require("./assign.js");
-const config = DataManager.getFile("./src/config.json")
+const config = DataManager.getFile("./src/config.json");
+
+class Track {
+
+    constructor(content, argsInfo) {
+        this.content = content;
+        this.server = argsInfo.server;
+        this.argsInfo = argsInfo;
+    }
+
+    get command () {
+        if (this._command) return this._command;
+        return this._command = /remove/i.test(this.content) ? "remove" : "track";
+    }
+
+    get source () {
+        if (this._source) return this._source;
+        let regex = new RegExp("(?:" + Object.keys(config.sources).join("|") + ")");
+        if (!regex.test(this.content)) throw "Please specify a source to remove linked account.";
+        return this._source = this.content.match(regex)[0];
+    }
+
+    get sources() {
+        if (this._sources) return this._sources;
+        return this._sources = [Object.values(config.sources).find(s => s.key === this.source)];
+    }
+
+    get argument() {
+        if (this._argument) return this._argument;
+        let argument = this.content
+            .replace(this.argsInfo.server.prefixes.generic, "")
+            .replace(this.command, "")
+            .replace(this.source, "")
+            .trim();
+        if (!argument) argument = this.argsInfo.author.username;
+        if (!/(?:^|\b)([a-z0-9][\w-]*[a-z0-9])$/i.test(argument)) throw "Invalid username.";
+        return this._argument = argument;
+    }
+
+    get username() {
+        if (this._username) return this._username;
+        let username = this.argument.match(/(?:^|\b)([a-z0-9][\w-]*[a-z0-9])$/i)[1];
+        return this._username = username;
+    }
+
+    get user() {
+        if (this._user) return this._user;
+        let arg = this.argument.replace(this.username, "").trim();
+        if (!arg) return this._user = this.argsInfo.user;
+        if (!this.argsInfo.Check.role(this.argsInfo.member, this.argsInfo.server.roles.admin)) throw "Insufficient permissions to perform this command.";
+        let user = this.argsInfo.Search.users.get(arg);
+        if (!user) throw "Invalid user given.";
+        this._user = user;
+    }
+
+    get dbuser() {
+        if (this._dbuser) return this._dbuser;
+        let dbuser = DBuser.getUser(this.user);
+        for (let _username in dbuser[this.source]) {
+            if (_username.toLowerCase() === this._username.toLowerCase()) {
+                this._username = _username;
+            }
+        }
+        return this._dbuser = dbuser;
+    }
+
+}
 
 class Tracker extends Parse {
 
@@ -28,9 +94,12 @@ class Tracker extends Parse {
     }
 
 	async run(command, args) { //both !remove and the linking commands start here
-		try {
+		try {/*
+            let track = await new Track(this.message.content, this);
+            this[track.command](track); /* */
+
 			let username, _command, dbuser = this.dbuser;	//otherwise this.dbuser gets called by a getter every time. This way it gets cached
-			if (command === "remove") _command = args.shift(); //it's all the same functions for `!remove just with one extra argument
+            if (command === "remove") _command = args.shift(); //it's all the same functions for `!remove just with one extra argument
 			else {
 				_command = command;
 				command = "track";
@@ -52,7 +121,7 @@ class Tracker extends Parse {
 				if (_username.toLowerCase() === username.toLowerCase()) username = _username;
 			await this[command]({		dbuser, sources, username		});
 			let newRole = this.Search.roles.get(this.server.roles.beta);
-			if (!this.member.roles.has(newRole.id)) this.member.addRole(newRole).catch((e) => this.Output.onError(e));
+			if (!this.member.roles.has(newRole.id)) this.member.addRole(newRole).catch((e) => this.Output.onError(e));//*/
 		} catch (e) {
 			if (e) this.Output.onError(e);
 		}

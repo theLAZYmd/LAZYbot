@@ -162,7 +162,7 @@ class Votes extends Main {
 				j++;
 				return s;
 			});
-			embed.fields[i].value = Embed.rank(r);
+			embed.fields[i].value = r.toRank();
 			this.Output.editor(embed, messageReaction.message);
 		} catch (e) {
 			if (e) this.Output.onError(e);

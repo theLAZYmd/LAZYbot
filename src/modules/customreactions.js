@@ -109,18 +109,3 @@ class CustomReactions extends Parse {
 }
 
 module.exports = CustomReactions;
-
-Array.prototype.remove = function(index) {
-  if(!index && index !== 0) return;
-  if(Array.isArray(index)) {
-    index.sort(function(a, b) {
-      return b - a;
-    });
-	  for (let i = 0; i < index.length; i++) {
-		  this.splice(index[i], 1);
-    }
-  } else {
-    this.splice(index, 1);
-  }
-  return this;
-};

@@ -47,8 +47,9 @@ class Profile extends Parse {
 
 	get title() {
 		let chessTitle;
-		for (let source in config.sources)
-			if (this._dbuser[source] && this._dbuser[source]._title) chessTitle = this._dbuser[source]._title;
+		for (let source in config.sources.filter(source => this._dbuser[source] && this._dbuser[source]._title)) {
+            chessTitle = this._dbuser[source]._title;
+        }
 		let title =
 			this.flair.join(" ") + " " +
 			"Profile for " +
@@ -58,14 +59,10 @@ class Profile extends Parse {
 	}
 
 	get flair() {
-		let flair = [];
-		let conditions = {
+        return Object.entries({
 			"bot": this.user.bot,
 			"patron": this._dbuser.patron
-		};
-		for (let [key, value] of Object.entries(conditions))
-			if (value) flair.push(this.Search.emojis.get(key));
-		return flair;
+        }).filter(([, value]) => value).map(([key]) => this.Search.emojis.get(key))
 	}
 
 	get color() {
@@ -144,54 +141,52 @@ class Profile extends Parse {
 	}
 
 	get aliases() {
-		let specifiers = [this.member.nickname, this._dbuser.name];
-		if (this._dbuser.lichess) specifiers.concat(Object.keys(this._dbuser.lichess).map(account => !account.startsWith("_")));
-		if (this._dbuser.chesscom) specifiers.concat(Object.keys(this._dbuser.chesscom).map(account => !account.startsWith("_")));
-		if (this._dbuser.bughousetest) specifiers.concat(Object.keys(this._dbuser.bughousetest).map(account => !account.startsWith("_")));
-		let found = [this.user.username];
-		for (let i = 0; i < specifiers.length; i++) {
-			if (specifiers[i] && !found.inArray(specifiers[i])) found.push(specifiers[i]);
-		}
-		return Embed.getFields(found.slice(1), "", true);
-		//no constant, bolded
+        let specifiers = this.member.nickname ? [this.member.nickname] : [];
+        for (let source of Object.keys(config.sources).filter(s => this._dbuser[s])) {
+            specifiers.push(Object.keys(this._dbuser[source])
+                .filter(account => !account.startsWith("_"))
+            //    .map(account => account.url(config.sources[source].url.profile.replace("|", account)))
+                .join(" | ")
+            );
+            if (this._dbuser[source]._name) specifiers.unshift(this._dbuser[source]._name)
+        }
+        specifiers = specifiers.reduce((acc, curr) => {
+            if (acc.inArray(curr)) return acc;
+            acc.push(curr);
+            return acc;
+        }, [this.user.username]).slice(1);
+        return specifiers.toPairs();
 	}
 
 	get info() {
-		let region = "None set."; //default region sign if none found, measure of number of sources
+        let region = "None set."; //default region sign if none found, measure of number of sources
+        //let region = this.member.roles.find(r => r.name )
+        //if (!region) region = "None set.";
 		for (let i = 0; i < (this.server.regions || []).length; i++) {
 			let role = this.Search.roles.get(this.server.regions[i]);
 			if (this.Check.role(this.member, role.name)) region = this.server.regions[i];
 		}
-		return Embed.getFields([
+		return [
 			["Age", this._dbuser.age],
 			["Sex", this._dbuser.sex ? (this.Search.emojis.get(this._dbuser.sex) ? this.Search.emojis.get(this._dbuser.sex) : this._dbuser.sex) : ""],
 			//check if emoji exists, otherwise just display text
 			["Location", this._dbuser.location],
 			["Region", region]
-		], {
-			"bold": true
-		})
-		//4 fields stringified, "Key: value" format, no 'constant'
+		].toPairs("bold");
 	}
 
 	get joined() {
-		return Embed.getFields([
+		return [
 			["Discord", Date.getISOtime(this.user.createdTimestamp).slice(4, 15)],
 			[this.guild.name, Date.getISOtime(this.member.joinedTimestamp).slice(4, 15)]
-		], {
-			"bold": true
-		})
-		//2 fields stringified, "Key; value" format, no 'constant'
+		].toPairs("bold");
 	}
 
 	get ids() {
-		return Embed.getFields([
+		return [
 			["UID", "`" + this.user.id + "`", false],
 			["Position in Database", this._dbindex]
-		], {
-			"bold": true
-		})
-		//2 fields stringified, "Key; value" format, no 'constant'
+		].toPairs("bold")
 	}
 
 	get lastMessage() {
@@ -207,7 +202,7 @@ class Profile extends Parse {
 
 	get roles() {
 		let rolelist = this.Search.members.get(this.member).splice(0, 1);
-		return rolelist ? Embed.getFields(rolelist) : ""; //in case we want to display roles in the future.
+		return rolelist ? rolelist.toPairs() : ""; //in case we want to display roles in the future.
 	}
 
 	get award() {
@@ -227,14 +222,11 @@ class Profile extends Parse {
 	}
 
 	get trophies() {
-		return (this._dbuser.trophy ? Embed.getFields(this._dbuser.trophy, {
-			"constant": ":trophy: ",
-			"bold": true
-		}) : "");
+		return (this._dbuser.trophy ? this._dbuser.trophy.toPairs("bold", ":trophy: ") : "");
 	}
 
 	get modnotes() {
-		return (this._dbuser.modnotes ? Embed.getFields(this._dbuser.modnotes, "") : "");
+		return (this._dbuser.modnotes ? this._dbuser.modnotes.toPairs() : "");
 	}
 
 }

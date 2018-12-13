@@ -90,11 +90,9 @@ class Series extends All {
 
     build(data, page) {
         let type = page === 0 ? "discrete" : "cumulative";
-        let embed = {
-            "title": this.Search.emojis.get("lazyslack") + " LAZY odds for match " + data.players[0].name + " vs " + data.players[1].name,
-            "description": "Showing " + type + " odds...\n**Note:** these odds are not valid unless it is <@!185412969130229760> who has request them.",
-            "fields": []
-        };
+        let embed = new Embed()
+            .setTitle(this.Search.emojis.get("lazyslack") + " LAZY odds for match " + data.players[0].name + " vs " + data.players[1].name)
+            .setDescription("Showing " + type + " odds...\n**Note:** these odds are not valid unless it is <@!185412969130229760> who has request them.");
         for (let player of data.players) {
             let array = [];
             for (let j = 0; j < data.length + 1; j++) {
@@ -110,7 +108,7 @@ class Series extends All {
             array.push([
                 "The match", !matchodds || matchodds > 80 ? "-" : "**" + matchodds + "** (" + usmatchodds + ")"
             ]);
-            Embed.fielder(embed.fields, "How many games will " + player.name + " win?    \u200b", Embed.getFields(array), true);
+            embed.addField("How many games will " + player.name + " win?    \u200b", array.toPairs(), true);
         }
         return embed;
     }
@@ -143,21 +141,6 @@ class Odds {
 }
 
 module.exports = Odds;
-
-Number.prototype.round = function (places) {
-    (Math.round(this * Math.pow(10, places)) / Math.pow(10, places));
-    return this;
-};
-
-String.prototype.toProperCase = function () {
-    let words = this.split(/ +/g);
-    let newArray = [];
-    for (let j = 0; j < words.length; j++) {
-        newArray[j] = words[j][0].toUpperCase() + words[j].slice(1, words[j].length).toLowerCase();
-    }
-    let newString = newArray.join(" ");
-    return newString;
-};
 
 /*
 EXAMPLE data object produced from series odds

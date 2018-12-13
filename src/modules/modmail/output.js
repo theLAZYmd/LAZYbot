@@ -24,12 +24,10 @@ class Output extends Main {
 			this.renew(Object.assign({
 				"embed": {
 					"title": "ModMail Conversation for " + data.user.tag,
-					"description": "User " + data.user + " has **" + Math.max(0, (member.roles.size - 1)) + "** roles.\n" + Embed.getFields([
+					"description": "User " + data.user + " has **" + Math.max(0, (member.roles.size - 1)) + "** roles.\n" + [
 						["Joined Discord", Date.getISOtime(data.user.createdTimestamp).slice(4, 15)],
 						["Joined " + this.guild.name, Date.getISOtime(member.joinedTimestamp).slice(4, 15)]
-					], {
-						"bold": true
-					}),
+					].toPairs("bold"),
 					"fields": data.embed && data.embed.fields ? data.embed.fields.slice(-1) : []
 				}
 			}, data))
