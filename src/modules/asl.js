@@ -12,14 +12,13 @@ class ASL extends Parse {
             if (args.length === 0) return this.output(dbuser);
             if (args.length === 1) {
                 if (args[0] === "clear") { //clear asl values
-                    if (dbuser.age) delete tally[dbindex].age;
-                    if (dbuser.sex) delete tally[dbindex].sex;
-                    if (dbuser.location) delete tally[dbindex].location;
-                    if (dbuser.modverified) delete tally[dbindex].modverified; //delete mod given tick
+                    if (dbuser.age) delete dbuser.age;
+                    if (dbuser.sex) delete dbuser.sex;
+                    if (dbuser.location) delete dbuser.location;
+                    if (dbuser.modverified) delete dbuser.modverified; //delete mod given tick
                     DBuser.setData(dbuser);
-                    this.Output.generic(`Data on **age**, **sex**, and **location** cleared for **${this.user.tag}**.`)
+                    return this.Output.generic(`Data on **age**, **sex**, and **location** cleared for **${this.user.tag}**.`)
                 } else throw "Incorrect number of parameters specified. Please specify **age**, **sex**, and **location**.";
-                return;
             }
             if (args.length === 3) {
                 let [age, sex, location] = args;
@@ -33,7 +32,7 @@ class ASL extends Parse {
                 else dbuser.sex = sex;
                 if (!location) delete dbuser.location;
                 else dbuser.location = location;
-                if (dbuser.modverified) delete tally[dbindex].modverified;
+                if (dbuser.modverified) delete dbuser.modverified;
                 DBuser.setData(dbuser);
                 this.output(dbuser);
             }
@@ -71,28 +70,3 @@ class ASL extends Parse {
 }
 
 module.exports = ASL;
-
-Array.prototype.clean = function () {
-    for (let i = 0; i < this.length; i++) {
-        if (!this[i]) {
-            this.splice(i, 1);
-            i--;
-        }
-    }
-    return this;
-};
-
-Array.prototype.remove = function (index) {
-    if (!index && index !== 0) return;
-    if (Array.isArray(index)) {
-        index.sort(function (a, b) {
-            return b - a;
-        });
-        for (let i = 0; i < index.length; i++) {
-            this.splice(index[i], 1);
-        }
-    } else {
-        this.splice(index, 1);
-    }
-    return this;
-};

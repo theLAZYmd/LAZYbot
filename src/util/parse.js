@@ -207,7 +207,7 @@ class Parse {
 			let rating = [];
 			for (let [key, variant] of Object.entries(config.variants[source.key]))
 				if (account[key]) rating.push([variant.name, (account[key].endsWith("?") ? "" : "**") + account[key] + (account[key].endsWith("?") ? "" : "**")]);
-			return Embed.getFields(rating);
+			return rating.toPairs();
 		} catch (e) {
 			if (e) throw e;
 		}

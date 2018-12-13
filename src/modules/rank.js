@@ -26,7 +26,7 @@ class Rank extends Parse {
 					"username": data.dbuser[source.key]._main
 				}));
 				let name = `${this.Search.emojis.get(source.key)} ${data.username} Rankings`;
-				let value = Embed.getFields(data.ranking);
+				let value = data.ranking.toPairs();
 				let inline = true;
 				embed.addField(name + " ".repeat(Math.max(0, 18 - data.username.length)) + "\u200B", value, inline);
 			} catch (e) {

@@ -80,12 +80,3 @@ class Embeds extends Parse {
 }
 
 module.exports = Embeds;
-
-String.prototype.toProperCase = function () {
-	let words = this.split(/ +/g);
-	let newArray = [];
-	for (let i = 0; i < words.length; i++) {
-		newArray[i] = words[i][0].toUpperCase() + words[i].slice(1, words[i].length).toLowerCase();
-	}
-	return newArray.join(" ");
-};

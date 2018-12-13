@@ -80,7 +80,9 @@ class Puzzle extends Parse {
 
     async view(fetchboolean) {
         try {
-            let embed = Embed.leaderboard(this.puzzles.map(p => [p.title, p.description]), 0, false); //generates fields probably
+            let embed = this.puzzles
+                .map(p => [p.title, p.description])
+                .toLeaderboard(0, 0, false); //generates fields probably
             embed.title = "Active Puzzles. " + fetchboolean ? "Type the index of the puzzle you would like to view below." : "Use `!puzzle [index]` to view a puzzle."; //informs about the await
             this.message.delete(); //deletes unnecessary command message
             this.Output.sender(embed);

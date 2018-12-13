@@ -18,8 +18,9 @@ class Leaderboard extends Parse {
 			if (!data.leaderboard || data.leaderboard.length === 0) throw "Couldn't fetch players for **" + data.variant.name + "**.";
 			let embedgroup = [];
 			data.emoji = this.Search.emojis.get(data.variant.key);
-			for (let i = 0; i < Math.ceil(data.leaderboard.length / 10); i++)
-				embedgroup.push(await Leaderboard.build(data, i));
+			for (let i = 0; i < Math.ceil(data.leaderboard.length / 10); i++) {
+                embedgroup.push(await Leaderboard.build(data, i));
+            }
 			this.Paginator.sender(embedgroup, 30000);
 		} catch (e) {
 			if (e) this.Output.onError(e);
@@ -89,7 +90,7 @@ class Leaderboard extends Parse {
 					array[i] = [entry.tag + " " + entry.rating]
 				}
 			}
-			let lbembed = Embed.leaderboard(array, page, false, 10); //Case 2 Leaderboard:
+            let lbembed = array.toLeaderboard(page, 10, false); //Case 2 Leaderboard:
 			lbembed.title = `${data.emoji} House leaderboard${data.source ? " on " + data.source.name : ""} for${data.active ? "active " : " "}${data.variant.name} players`;
 			return lbembed;
 		} catch (e) {

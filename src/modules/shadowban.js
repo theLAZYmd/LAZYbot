@@ -62,7 +62,14 @@ class Shadowban extends Parse {
             if (this.shadowbanned.users.find(id => id === this.message.author.id)) {
                 Logger.log(["auto", "Shadowban", "byUser", "[" + [message.author.tag, message.content].join(", ") + "]"]);
                 message.delete();
-                if (message.mentions.everyone || message.mentions.users.size > 0) {
+                if (((m) => {
+                    if (m.mentions.everyone) return true;
+                    if (m.mentions.users.size > 0) return true;
+                    for (let p of this.server.prefixes) {
+                        if (m.content.startsWith(p)) return true;
+                    }
+                    return false;
+                })(message)) {
                     this.guild.ban(message.author, {
                         "days": 1
                     })

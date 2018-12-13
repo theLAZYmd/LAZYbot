@@ -95,7 +95,7 @@ class Help extends Parse {
 				value.join(" or ")
 			])
 		}
-		this._requires = Embed.getFields(array);
+		this._requires = array.toPairs();
 		return this._requires;
 	}
 
@@ -110,7 +110,7 @@ class Help extends Parse {
 					"- `" + ex + (v.aliases && v.aliases.length > 0 ? " ` / ` " + v.aliases.join(" ` / ` ") + "`" : "`"),
 					typeof v === "string" ? v : v.description
 				])
-			this._subcommands += Embed.getFields(array) + "\n";
+			this._subcommands += array.toPairs() + "\n";
 		}
 		return this._subcommands;
 	}

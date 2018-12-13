@@ -63,7 +63,3 @@ class Calc extends Parse {
 }
 
 module.exports = Calc;
-
-Number.prototype.round = function (places = 0) {
-  return (Math.round(this * Math.pow(10, places)) / Math.pow(10, places)); 
-};
