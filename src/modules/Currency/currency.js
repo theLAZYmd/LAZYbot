@@ -1,5 +1,5 @@
-const Parse = require("../util/parse.js");
-const Color = require("./color.js");
+const Parse = require("../../util/parse.js");
+const Color = require("../Profile/color.js");
 
 class Currency extends Parse {
 

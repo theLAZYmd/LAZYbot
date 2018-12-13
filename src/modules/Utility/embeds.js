@@ -1,9 +1,9 @@
-const Parse = require("../util/parse.js");
-const DataManager = require("../util/datamanager.js");
+const Parse = require("../../util/parse.js");
+const DataManager = require("../../util/datamanager.js");
 const request = require("request");
 const rp = require("request-promise");
 const config = require("../config.json");
-const Embed = require("../util/embed.js");
+const Embed = require("../../util/embed.js");
 
 class Embeds extends Parse {
 	constructor(message) {

@@ -1,7 +1,7 @@
-const Parse = require("../util/parse.js");
+const Parse = require("../../util/parse.js");
 const CRFile = require("../data/customreactions.json");
-const DataManager = require("../util/datamanager.js");
-const Logger = require("../util/logger.js");
+const DataManager = require("../../util/datamanager.js");
+const Logger = require("../../util/logger.js");
 
 class CustomReactions extends Parse {
 

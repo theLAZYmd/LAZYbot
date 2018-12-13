@@ -1,7 +1,7 @@
 //the permanent requires that access data files or modules
 const Discord = require("discord.js");
 const fs = require("fs");
-const client = new Discord.Client();
+let client = new Discord.Client();
 
 const Logger = require("./util/logger.js");
 const router = "router/";
@@ -43,7 +43,6 @@ const events = [
 	["messageReactionRemoveAll", ["message"]],
     ["messageUpdate", ["oldMessage", "newMessage"]],
     ["presenceUpdate", ["oldMember", "newMember"], true],
-	["ready", [], true],
 	["reconnecting", []],
 	["resume", ["replayed"]],
 	["roleCreate", ["role"]],
@@ -57,10 +56,14 @@ const events = [
 	["warn", ["info"]]
 ];
 
-fs.readdir("./src/" + router, (err, _files) => {
+fs.readdir("./src/" + router, async (err, _files) => {
     try {
         if (err) throw err;
         let files = _files.map(f => f.split(".").slice(0, -1).join("."));
+        client.on("ready", async function () {
+            let Instance = require("./" + router + "ready.js");
+            client = await Instance(client);
+        }) 
         for (let event of events) try {
             if (!event[2]) continue;
             if (!files.find(f => f === event[0])) throw "Couldn't find matching event handler.";

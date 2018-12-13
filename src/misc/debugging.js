@@ -1,28 +1,42 @@
 const DataManager = require("../util/datamanager.js");
 const config = require("../config.json");
 const Logger = require("../util/logger.js");
-const Commands = DataManager.getFile("../data/commands/message.json");
+const Commands = DataManager.getFile("./src/data/commands/message.json");
 
 class Debugging {
 
     constructor(client) {
         this.client = client;
-        this.guild = this.client.guilds.get(config.houseid);
+        this.guild = client ? client.guilds.get(config.houseid) : null;
+        this.commandsReformat();
     }
 
     get tally() {
         return DataManager.getData();
     }
 
-    comandsReformat() {
-        let unsortedCommands = commands;
+    commandsReformat() {
+        let unsortedCommands = {};
         let commands = {};
         let modules = [];
-        for (let c of commands) try {
-
+        for (let c of Commands) try {
+            let m = c.module;
+            if (!unsortedCommands[m]) {
+                unsortedCommands[m] = [];
+                modules.push(m);
+            }
+            unsortedCommands[m].push(c);
         } catch (e) {
             if (e) console.error(e);
         }
+        //DataManager.setFile(unsortedCommands, "./src/data/commands/message.json");
+        modules = modules.sort();
+        for (let m of modules) try {
+            commands[m] = unsortedCommands[m];
+        } catch (e) {
+            if (e) console.error(e);
+        }
+        DataManager.setFile(commands, "./src/data/commands/message.json");
     }
 
     removeDuplicates() {
@@ -126,5 +140,7 @@ class Debugging {
     }
 
 }
+
+new Debugging();
 
 module.exports = Debugging;

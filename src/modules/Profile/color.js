@@ -1,6 +1,6 @@
-const Parse = require("../util/parse.js");
-const Maths = require("./maths.js");
-const Logger = require("../util/logger.js");
+const Parse = require("../../util/parse.js");
+const Maths = require("../maths.js");
+const Logger = require("../../util/logger.js");
 
 class Color extends Parse {
 

@@ -3,11 +3,10 @@ const Logger = require("../util/logger.js");
 const Permissions = require("../util/permissions.js");
 const DM = require("../modules/dm.js");
 
-const Commands = require("../data/commands/message.json");
-const allMessageCommands = require("../data/commands/all.json");
-const DMCommands = require("../data/commands/dm.json");
-const botCommands = require("../data/commands/bot.json");
 const fs = require("fs");
+
+const CommandConstructor = require("../util/commands.json");
+const Commands = new CommandConstructor();
 
 class Message {
 
@@ -57,7 +56,17 @@ class Message {
 
 	static async command(argsInfo) {
 		try {
-			let f = Array.from(Commands).find(command => {
+            let f = ((key) => {
+                let cmdInfo = Commands.message.get(key);
+                if (cmdInfo.prefix !== argsInfo.prefix) return null;
+                if (cmdInfo.active === false) return false;
+            })(argsInfo.command);
+            if (f) {
+				f.command = true;
+				let run = Message.run(argsInfo, f);
+				if (run) Logger.command(argsInfo, f);
+            }
+			/*let f = Object.values(commands).flatten().find(command => {
 				let cmdInfo = Object.assign({}, command);
 				if (cmdInfo.active === false) return false;
 				if (argsInfo.prefix) {
@@ -85,7 +94,7 @@ class Message {
 				f.command = true;
 				let run = Message.run(argsInfo, f);
 				if (run) Logger.command(argsInfo, f);
-			}
+            }*/
 		} catch (e) {
 			if (e) argsInfo.Output.onError(e);
 		}
@@ -112,10 +121,11 @@ class Message {
 		try {
 			if (cmdInfo.requires) await Message.requires(argsInfo, cmdInfo); //halts it if fails permissions test
 			let args = [];
-			for (let i = 0; i < cmdInfo.arguments.length; i++)
-				args[i] = argsInfo[cmdInfo.arguments[i]]; //the arguments we take for new Instance input are what's listed
-			let path = "modules/" + cmdInfo.file.toLowerCase() + ".js";
-			if (!fs.existsSync("./src/" + path)) path = "modules/" + cmdInfo.file.toLowerCase() + ".ts";
+			for (let i = 0; i < cmdInfo.arguments.length; i++) {
+                args[i] = argsInfo[cmdInfo.arguments[i]]; //the arguments we take for new Instance input are what's listed
+            }
+			let path = "modules/" + cmdInfo.module + "/" + cmdInfo.file.toLowerCase() + ".js";
+			if (!fs.existsSync("./src/" + path)) path = path.replace(".js", ".ts");
 			if (!fs.existsSync("./src/" + path)) throw "Couldn't find module ./src/modules/" + cmdInfo.file.toLowerCase();
 			let Constructor = require("../" + path); //Profile
 			let Instance = new Constructor(argsInfo.message); //profile = new Profile(message);

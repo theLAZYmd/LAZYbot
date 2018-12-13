@@ -1,6 +1,6 @@
-const Parse = require("../util/parse.js");
-const Embed = require("../util/embed.js");
-const DataManager = require("../util/datamanager.js");
+const Parse = require("../../util/parse.js");
+const Embed = require("../../util/embed.js");
+const DataManager = require("../../util/datamanager.js");
 const commands = DataManager.getFile("./src/data/commands/message.json");
 const fs = require("fs");
 

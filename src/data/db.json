@@ -1315,12 +1315,13 @@
                 "crazyhouse": "2663"
             }
         },
-        "lastupdate": 1544643819814,
+        "lastupdate": 1544716483140,
         "lastUpdate": 1535046032253,
         "trivia": {
             "rating": 1246,
             "games": 6
-        }
+        },
+        "location": "Finland"
     },
     {
         "id": "179603851073028100",
@@ -1648,7 +1649,7 @@
             "_main": "ProgramFOX",
             "ProgramFOX": {
                 "maxRating": "2294",
-                "blitz": "1776",
+                "blitz": "1739",
                 "bullet": "2052",
                 "rapid": "1767",
                 "classical": "1785?",
@@ -1664,11 +1665,12 @@
             "_country": "BE",
             "_language": "en-GB"
         },
-        "lastupdate": 1544653773917,
+        "lastupdate": 1544716805920,
         "trivia": {
             "rating": 1144,
             "games": 9
-        }
+        },
+        "location": "Belgium"
     },
     {
         "id": "299119819985518592",
@@ -1717,7 +1719,8 @@
             "_name": "Lone Wolf",
             "_country": "IT"
         },
-        "lastupdate": 1544651058747
+        "lastupdate": 1544716504904,
+        "location": "Italy"
     },
     {
         "id": "413007142673711125",
@@ -1978,7 +1981,7 @@
             "last": "<:wutface:376491869162700803>",
             "lastSeen": 1544647133451
         },
-        "lastupdate": 1544635734754,
+        "lastupdate": 1544715969307,
         "finger": "ProgramFOX for admin",
         "lichess": {
             "_main": "hauptschuleBOT",
@@ -2008,7 +2011,8 @@
                 "racing-kings": "1766"
             }
         },
-        "lastUpdate": 1533638105792
+        "lastUpdate": 1533638105792,
+        "location": "Germany"
     },
     {
         "id": "273152076421529601",
@@ -2768,7 +2772,7 @@
             "last": "I am not the greatest of players though",
             "lastSeen": 1543340688680
         },
-        "lastupdate": 1544638386786,
+        "lastupdate": 1544717107813,
         "lichess": {
             "_main": "Whitedancingrockstar",
             "Whitedancingrockstar": {
@@ -2789,7 +2793,8 @@
                 "lightning": "1750"
             }
         },
-        "finger": "Finger message"
+        "finger": "Finger message",
+        "location": "Sweden"
     },
     {
         "id": "315133605619957760",
@@ -4235,7 +4240,7 @@
         "lichess": {
             "_main": "JaakkoT",
             "JaakkoT": {
-                "maxRating": "2267",
+                "maxRating": "2219",
                 "blitz": "1640",
                 "bullet": "2003",
                 "rapid": "1761",
@@ -4244,14 +4249,14 @@
                 "3-check": "1845",
                 "anti": "1806",
                 "horde": "1480",
-                "atomic": "2267",
+                "atomic": "2219",
                 "koth": "1723",
                 "racing-kings": "1601"
             },
             "_name": "Someone Who Really Sucks",
             "_language": "en-GB"
         },
-        "lastupdate": 1544647739035,
+        "lastupdate": 1544716253993,
         "finger": "blablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablabla"
     },
     {
@@ -5698,7 +5703,7 @@
             "last": "I find it totally useless..and pls don't wait for falcon...he can never come back... <@488512119004987446>",
             "lastSeen": 1544632681014
         },
-        "lastupdate": 1544627270474,
+        "lastupdate": 1544715643304,
         "lichess": {
             "_main": "hipno",
             "hipno": {
@@ -5713,7 +5718,7 @@
                 "horde": "1658",
                 "atomic": "2214",
                 "koth": "1637",
-                "racing-kings": "2035"
+                "racing-kings": "2066"
             }
         }
     },
@@ -10936,7 +10941,7 @@
                 "classical": "1500?"
             }
         },
-        "lastupdate": 1544640798982
+        "lastupdate": 1544715342390
     },
     {
         "id": "513729968883236865",
@@ -11015,18 +11020,20 @@
         "lichess": {
             "_main": "Isachess",
             "Isachess": {
-                "maxRating": "1791",
-                "blitz": "1765",
-                "bullet": "1502",
-                "rapid": "1791",
-                "classical": "1771",
-                "crazyhouse": "1519"
+                "maxRating": "1811",
+                "blitz": "1787",
+                "bullet": "1541",
+                "rapid": "1811",
+                "classical": "1757",
+                "crazyhouse": "1526",
+                "3-check": "1398?"
             },
             "_name": "Cole",
             "_country": "US",
             "_language": "en-GB"
         },
-        "lastupdate": 1542859754165
+        "lastupdate": 1544716018028,
+        "location": "United States"
     },
     {
         "id": "341275354020839424",

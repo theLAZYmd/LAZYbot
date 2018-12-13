@@ -1,4 +1,4 @@
-const Parse = require("../util/parse.js");
+const Parse = require("../../util/parse.js");
 
 class Calc extends Parse {
 

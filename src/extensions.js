@@ -61,6 +61,12 @@ String.prototype.occurrences = function (subString, allowOverlapping = false) { 
 
 //ARRAY PROTOTYPE METHODS
 
+Array.prototype.flat = function (depth) { // this method implemented https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat
+    return this.reduce(function (flat, toFlatten) {
+        return flat.concat((Array.isArray(toFlatten) && (depth - 1)) ? toFlatten.flat(depth - 1) : toFlatten);
+    }, []);
+}
+
 Array.prototype.toPairs = function (bold = false, constant = "") { //returns an array concatenated to a "key: value\n" format
     return array.map((entry) => {
         if (Array.isArray(entry)) {

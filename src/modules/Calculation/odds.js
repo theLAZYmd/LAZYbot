@@ -1,7 +1,7 @@
-const Parse = require("../util/parse.js");
+const Parse = require("../../util/parse.js");
+const Embed = require("../../util/embed.js");
 const Maths = require("./maths.js");
 const Calc = require("./calc.js");
-const Embed = require("../util/embed.js");
 
 class All extends Parse {
     constructor(message) {

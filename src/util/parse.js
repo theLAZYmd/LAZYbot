@@ -78,7 +78,7 @@ class Parse {
 
 	get Embeds() {
 		if (!this._Paginator) {
-			let EmbedsConstructor = require("../modules/embeds");
+			let EmbedsConstructor = require("../modules/Utility/embeds");
 			this._Embeds = new EmbedsConstructor(this.message);
 		}
 		return this._Embeds;
