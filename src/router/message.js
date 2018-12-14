@@ -1,12 +1,10 @@
 const Parse = require("../util/parse.js");
 const Logger = require("../util/logger.js");
 const Permissions = require("../util/permissions.js");
-const DM = require("../modules/dm.js");
-
-const fs = require("fs");
-
 const CommandConstructor = require("../util/commands.js");
 const Commands = new CommandConstructor();
+
+const fs = require("fs");
 
 class Message {
 
@@ -14,11 +12,11 @@ class Message {
         this.argsInfo = argsInfo;
     }
 
-	async DM(key) {
+	async dm(key) {
         const { aliases, regexes, def  } = Commands.dm;
         let cmdInfo = aliases.get(key.toLowerCase());
-        if (!cmdInfo) cmdInfo = aliases.get(aliases.keys().find(alias.toLowerCase() === this.message.content.toLowerCase()));
-        if (!cmdInfo) cmdInfo = regexes.get(regexes.keys().find((string) => {
+        if (!cmdInfo) cmdInfo = aliases.get(Array.from(aliases.keys()).find(alias => alias.toLowerCase() === this.argsInfo.message.content.toLowerCase()));
+        if (!cmdInfo) cmdInfo = regexes.get(Array.from(regexes.keys()).find((string) => {
             let regex = new RegExp(string.toString(), "mg");
             if (regex.test(this.argsInfo.message.content)) return true;
             return false;
@@ -88,7 +86,25 @@ class Message {
             throw Permissions.output(type, argsInfo) ? Permissions.output(type, argsInfo) + "\nUse `" + cmdInfo.prefix + "help` followed by command name to see command info." : ""; //if no Permissions, kill it
         }
 		return true;
-	}
+    }
+    
+    static async setGuild(argsInfo, title) { //handles the input for dms
+        try {
+            let guilds = [];
+            for (let guild of Array.from(argsInfo.client.guilds.values()))
+                if (guild.members.has(argsInfo.author.id))
+                    guilds.push(guild); //and fill it with all guilds the bot has access to that the user is a member of.
+            let index = guilds.length === 1 ? 0 : await argsInfo.Output.choose({
+                title,
+                "type": "server",
+                "options": guilds.map(guild => guild.name)
+            });
+            return guilds[index]; //and if valid input, send of modmail for that guild
+        } catch (e) {
+            if (e) argsInfo.Output.onError("incoming" + e);
+        }
+    }
+    
 }
 
 module.exports = async (client, message) => {
@@ -104,7 +120,7 @@ module.exports = async (client, message) => {
         if (!argsInfo.message.guild) {
             let cmdInfo = await Command.dm(argsInfo.command);
             if (cmdInfo.guild) {
-                rgsInfo.message._guild = await DM.setGuild(argsInfo, cmdInfo.guild); //now passed, just check if it needs a guild
+                argsInfo.message._guild = await Message.setGuild(argsInfo, cmdInfo.guild); //now passed, just check if it needs a guild
                 if (!argsInfo.message._guild) throw "";
             }
             return Message.run(argsInfo, cmdInfo);

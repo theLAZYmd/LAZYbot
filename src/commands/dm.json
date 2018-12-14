@@ -71,7 +71,8 @@
             "method": "incoming",
             "guild": "Sending new ModMail on LAZYbot",
             "arguments": [],
-            "prefix": ""
+            "prefix": "",
+            "default": true
         }
     ]
 }

@@ -241,7 +241,6 @@ class Output extends Parse {
                             "time": data.time,
                             "errors": ["time"]
                         }).catch(() => {});
-                        console.log(rcollected.first());
                         if (rcollected.first().emoji.name === "❎") throw "";
                         return this.Search.Emojis.hexatrigintamals[this.Search.Emojis.unicodes.indexOf(rcollected.first().emoji.name)];
                     })().catch(() => {}),

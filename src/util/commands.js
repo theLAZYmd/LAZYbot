@@ -10,16 +10,24 @@ class Commands {
     constructor() {
     }
 
-    static parse (c, base = {}) {
-        return {
-            "prefix": c.prefix || base.prefix,
-            "module": c.module || base.module,
-            "file": c.file || base.file,
-            "method": c.method,
-            "arguments": c.arguments,
-            "requires": c.requires,
-            "active": c.active
+    static parse () {
+
+        class cmdInfo {
+
+            constructor(c, base = {}) {
+                if (c.prefix || base.prefix) this.prefix = c.prefix || base.prefix;
+                this.module = c.module || base.module;
+                this.file = c.file || base.file;
+                this.method = c.method;
+                if (c.arguments) this.arguments = c.arguments;
+                if (c.requires) this.requires = c.requires;
+                if (c.active) this.active = c.active;
+                if (c.guild) this.guild = c.guild;
+            }
+
         }
+        
+        return new cmdInfo(...arguments);
     }
 
     get all () {
@@ -46,7 +54,7 @@ class Commands {
                     aliases.set(alias, info);
                 }
             }
-            if (c.regex) regexes.set(regex, info);
+            if (c.regex) regexes.set(c.regex, info);
             if (c.default) def = info;
         }
         return this._dm = {    aliases, regexes, def    };
