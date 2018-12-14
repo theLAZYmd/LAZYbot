@@ -1,5 +1,5 @@
-const Parse = require("../util/parse.js");
-const Embed = require("../util/embed.js");
+const Parse = require("../../util/parse.js");
+const Embed = require("../../util/embed.js");
 
 class Paginator extends Parse {
   constructor(message) {

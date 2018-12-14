@@ -70,7 +70,7 @@ class Parse {
 
 	get Paginator() {
 		if (!this._Paginator) {
-			let PaginatorConstructor = require("../modules/paginator");
+			let PaginatorConstructor = require("../modules/Utility/paginator");
 			this._Paginator = new PaginatorConstructor(this.message);
 		}
 		return this._Paginator;

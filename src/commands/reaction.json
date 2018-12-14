@@ -34,10 +34,10 @@
             "method": "react"
         }
     ],
-    "Paginator": [
+    "Utility": [
         {
             "key": "paginator",
-            "module": "",
+            "module": "Utility",
             "file": "paginator",
             "method": "react"
         }
