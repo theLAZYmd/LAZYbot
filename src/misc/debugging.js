@@ -1,21 +1,68 @@
 const DataManager = require("../util/datamanager.js");
 const config = require("../config.json");
 const Logger = require("../util/logger.js");
-const Commands = DataManager.getFile("./src/data/commands/message.json");
 
 class Debugging {
 
     constructor(client) {
         this.client = client;
         this.guild = client ? client.guilds.get(config.houseid) : null;
-        this.commandsReformat();
+        //this.commandsReformat();
+        this.subcommandsReformat();
     }
 
     get tally() {
         return DataManager.getData();
     }
 
+    subcommandsReformat() {
+        try {
+            let Commands = DataManager.getFile("./src/commands/message.json");
+            for (let [m, set] of Object.entries(Commands)) {
+                for (let [i, c] of Object.entries(set)) {
+                    if (!c.subcommands) continue;
+                    if (!Array.isArray(c.subcommands)) continue;
+                    if (c.subcommands.length < 1) delete c.subcommands;
+                    if (!c.subcommands) continue;
+                    if (!Array.isArray(c.subcommands[0])) continue;
+                    for (let [j, sc] of Object.entries(c.subcommands)) {
+                        //console.log(sc);
+                        let [type, obj] = sc;
+                        if (!Commands[m][i].syntax) Commands[m][i].syntax = [];
+                        Commands[m][i].syntax[j] = type;                
+                    }
+                    Commands[m][i].subcommands = Object.entries(c.subcommands[0][1])
+                        .map(([alias, description]) => {
+                            let aliases = [];
+                            if (typeof description === "object") {
+                                aliases = description.aliases || [];
+                                description = description.description || "";
+                            };
+                            aliases.unshift(alias);
+                            return {
+                                aliases,
+                                description,
+                                "method": alias,
+                                "arguments": [],
+                                "requires": {
+                                    "args": {
+                                        "length": 0
+                                    }
+                                }
+                            }
+                        })
+                    //console.log(Commands[m][i].subcommands);
+                }
+            };
+            DataManager.setFile(Commands, "./src/commands/message.json");
+        } catch (e) {
+            if (e) console.error(e);
+        }
+    }
+
     commandsReformat() {
+        const Commands = DataManager.getFile("./src/commands/message.json");
+        if (!Array.isArray(Commands)) return;
         let unsortedCommands = {};
         let commands = {};
         let modules = [];
@@ -29,14 +76,14 @@ class Debugging {
         } catch (e) {
             if (e) console.error(e);
         }
-        //DataManager.setFile(unsortedCommands, "./src/data/commands/message.json");
+        //DataManager.setFile(unsortedCommands, "./src/commands/message.json");
         modules = modules.sort();
         for (let m of modules) try {
             commands[m] = unsortedCommands[m];
         } catch (e) {
             if (e) console.error(e);
         }
-        DataManager.setFile(commands, "./src/data/commands/message.json");
+        DataManager.setFile(commands, "./src/commands/message.json");
     }
 
     removeDuplicates() {

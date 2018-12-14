@@ -2,7 +2,7 @@ const express = require('express');
 const simpleOauth = require('simple-oauth2');
 const axios = require('axios');
 const config = require("../../config.json");
-const Token = require("../../token.json");
+const Token = require("../../../token.json");
 
 const clientId = config.ids.lichess;
 const clientSecret = Token.lichess;

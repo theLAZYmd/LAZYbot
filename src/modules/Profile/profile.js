@@ -1,7 +1,7 @@
-const config = require("../config.json");
-const Parse = require("../util/parse.js");
-const Embed = require("../util/embed.js");
-const DBuser = require("../util/dbuser.js");
+const config = require("../../config.json");
+const Parse = require("../../util/parse.js");
+const Embed = require("../../util/embed.js");
+const DBuser = require("../../util/dbuser.js");
 
 class Profile extends Parse {
 
@@ -47,7 +47,7 @@ class Profile extends Parse {
 
 	get title() {
 		let chessTitle;
-		for (let source in config.sources.filter(source => this._dbuser[source] && this._dbuser[source]._title)) {
+		for (let source of Object.keys(config.sources).filter(source => this._dbuser[source] && this._dbuser[source]._title)) {
             chessTitle = this._dbuser[source]._title;
         }
 		let title =

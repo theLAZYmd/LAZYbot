@@ -112,14 +112,45 @@
             "file": "shadowban",
             "method": "adder",
             "subcommands": [
-                [
-                    "condition",
-                    {
-                        "user": "Adds a specific user to the shadowban list.",
-                        "username": "Adds a new regex to ban new users upon arrival.",
-                        "newMessage": "Adds a new regex to vet messages from new users."
+                {
+                    "aliases": [
+                        "user"
+                    ],
+                    "description": "Adds a specific user to the shadowban list.",
+                    "method": "user",
+                    "arguments": [],
+                    "requires": {
+                        "args": {
+                            "length": 0
+                        }
                     }
-                ]
+                },
+                {
+                    "aliases": [
+                        "username"
+                    ],
+                    "description": "Adds a new regex to ban new users upon arrival.",
+                    "method": "username",
+                    "arguments": [],
+                    "requires": {
+                        "args": {
+                            "length": 0
+                        }
+                    }
+                },
+                {
+                    "aliases": [
+                        "newMessage"
+                    ],
+                    "description": "Adds a new regex to vet messages from new users.",
+                    "method": "newMessage",
+                    "arguments": [],
+                    "requires": {
+                        "args": {
+                            "length": 0
+                        }
+                    }
+                }
             ],
             "arguments": [
                 "args"
@@ -127,7 +158,10 @@
             "prefix": "generic",
             "requires": {
                 "role": "admin"
-            }
+            },
+            "syntax": [
+                "condition"
+            ]
         },
         {
             "aliases": [
@@ -274,6 +308,23 @@
         },
         {
             "aliases": [
+                "send"
+            ],
+            "description": "Sends a ModMail to a specified user. Use `-s` or `--server` flag to send as anonymous.",
+            "usage": [
+                "send bakkouz -s",
+                "send penguingim1"
+            ],
+            "module": "Administration",
+            "file": "modmail/input",
+            "method": "outgoing",
+            "arguments": [
+                "args"
+            ],
+            "prefix": "generic"
+        },
+        {
+            "aliases": [
                 "backup"
             ],
             "description": "Backs up the database to a given file.",
@@ -331,7 +382,7 @@
             "arguments": [
                 "args"
             ],
-            "prefix": "generic",
+            "prefix": "nadeko",
             "requires": {
                 "args": {
                     "length": 1
@@ -353,7 +404,7 @@
             "arguments": [
                 "args"
             ],
-            "prefix": "generic",
+            "prefix": "nadeko",
             "requires": {
                 "args": {
                     "length": 1
@@ -376,7 +427,7 @@
             "arguments": [
                 "args"
             ],
-            "prefix": "generic",
+            "prefix": "nadeko",
             "requires": {
                 "args": {
                     "length": 3
@@ -389,14 +440,45 @@
             ],
             "description": "Begins process to generate a given type of odds. Please specify type requested.",
             "subcommands": [
-                [
-                    "type",
-                    {
-                        "series": "A fixed number of games between two players.",
-                        "match": "A set that ends when one player reaches a certain score (ex: first to 10).",
-                        "arena": "A tournament for which there are no fixed 'rounds'."
+                {
+                    "aliases": [
+                        "series"
+                    ],
+                    "description": "A fixed number of games between two players.",
+                    "method": "series",
+                    "arguments": [],
+                    "requires": {
+                        "args": {
+                            "length": 0
+                        }
                     }
-                ]
+                },
+                {
+                    "aliases": [
+                        "match"
+                    ],
+                    "description": "A set that ends when one player reaches a certain score (ex: first to 10).",
+                    "method": "match",
+                    "arguments": [],
+                    "requires": {
+                        "args": {
+                            "length": 0
+                        }
+                    }
+                },
+                {
+                    "aliases": [
+                        "arena"
+                    ],
+                    "description": "A tournament for which there are no fixed 'rounds'.",
+                    "method": "arena",
+                    "arguments": [],
+                    "requires": {
+                        "args": {
+                            "length": 0
+                        }
+                    }
+                }
             ],
             "usage": [
                 "odds series",
@@ -416,7 +498,10 @@
                         1
                     ]
                 }
-            }
+            },
+            "syntax": [
+                "type"
+            ]
         },
         {
             "aliases": [
@@ -803,7 +888,7 @@
                 "gild fumitoks",
                 "gild 481994356106985493"
             ],
-            "module": "Custom Reactions",
+            "module": "Currency",
             "file": "emoji",
             "method": "gild",
             "arguments": [
@@ -1044,16 +1129,71 @@
             ],
             "description": "Displays current election data. Use action to configure the election.",
             "subcommands": [
-                [
-                    "action",
-                    {
-                        "status": "Shows the status of an upcoming election on the server. Same as `!election`.",
-                        "initiate": "Readies a server for a new election, using default settings.",
-                        "config": "Changes the settings for an upcoming election, resetting any previous voting data and registered voters.",
-                        "reset": "Sets election config data to the default.",
-                        "clear": "Resets previous voting data."
+                {
+                    "aliases": [
+                        "status"
+                    ],
+                    "description": "Shows the status of an upcoming election on the server. Same as `!election`.",
+                    "method": "status",
+                    "arguments": [],
+                    "requires": {
+                        "args": {
+                            "length": 0
+                        }
                     }
-                ]
+                },
+                {
+                    "aliases": [
+                        "initiate"
+                    ],
+                    "description": "Readies a server for a new election, using default settings.",
+                    "method": "initiate",
+                    "arguments": [],
+                    "requires": {
+                        "args": {
+                            "length": 0
+                        }
+                    }
+                },
+                {
+                    "aliases": [
+                        "config"
+                    ],
+                    "description": "Changes the settings for an upcoming election, resetting any previous voting data and registered voters.",
+                    "method": "config",
+                    "arguments": [],
+                    "requires": {
+                        "args": {
+                            "length": 0
+                        }
+                    }
+                },
+                {
+                    "aliases": [
+                        "reset"
+                    ],
+                    "description": "Sets election config data to the default.",
+                    "method": "reset",
+                    "arguments": [],
+                    "requires": {
+                        "args": {
+                            "length": 0
+                        }
+                    }
+                },
+                {
+                    "aliases": [
+                        "clear"
+                    ],
+                    "description": "Resets previous voting data.",
+                    "method": "clear",
+                    "arguments": [],
+                    "requires": {
+                        "args": {
+                            "length": 0
+                        }
+                    }
+                }
             ],
             "usage": [
                 "election",
@@ -1063,12 +1203,15 @@
                 "election clear"
             ],
             "module": "Election",
-            "file": "election",
+            "file": "election/election",
             "method": "run",
             "arguments": [
                 "args"
             ],
-            "prefix": "generic"
+            "prefix": "generic",
+            "syntax": [
+                "action"
+            ]
         },
         {
             "aliases": [
@@ -1076,15 +1219,58 @@
             ],
             "description": "Performs an action on the voters register for an upcoming election on the server. Leave blank to display list of voters and elections.",
             "subcommands": [
-                [
-                    "action",
-                    {
-                        "register": "Registers voters ready for a new election. Resets previous voting data.",
-                        "deregister": "Deletes voting data. Leave blank to run function for all.",
-                        "disqualify": "Removes a voter from all election records.",
-                        "get": "Gets the list of eligble voters for a channel. To be used in #spam only."
+                {
+                    "aliases": [
+                        "register"
+                    ],
+                    "description": "Registers voters ready for a new election. Resets previous voting data.",
+                    "method": "register",
+                    "arguments": [],
+                    "requires": {
+                        "args": {
+                            "length": 0
+                        }
                     }
-                ]
+                },
+                {
+                    "aliases": [
+                        "deregister"
+                    ],
+                    "description": "Deletes voting data. Leave blank to run function for all.",
+                    "method": "deregister",
+                    "arguments": [],
+                    "requires": {
+                        "args": {
+                            "length": 0
+                        }
+                    }
+                },
+                {
+                    "aliases": [
+                        "disqualify"
+                    ],
+                    "description": "Removes a voter from all election records.",
+                    "method": "disqualify",
+                    "arguments": [],
+                    "requires": {
+                        "args": {
+                            "length": 0
+                        }
+                    }
+                },
+                {
+                    "aliases": [
+                        "get"
+                    ],
+                    "description": "Gets the list of eligble voters for a channel. To be used in #spam only.",
+                    "method": "get",
+                    "arguments": [],
+                    "requires": {
+                        "args": {
+                            "length": 0
+                        }
+                    }
+                }
             ],
             "usage": [
                 "voters",
@@ -1094,12 +1280,15 @@
                 "voters get"
             ],
             "module": "Election",
-            "file": "voters",
+            "file": "election/voters",
             "method": "run",
             "arguments": [
                 "args"
             ],
-            "prefix": "generic"
+            "prefix": "generic",
+            "syntax": [
+                "action"
+            ]
         },
         {
             "aliases": [
@@ -1111,7 +1300,7 @@
                 "eligible hauptschule"
             ],
             "module": "Election",
-            "file": "voters",
+            "file": "election/voters",
             "method": "eligible",
             "arguments": [
                 "argument"
@@ -1124,25 +1313,60 @@
             ],
             "description": "Displays the list of candidates for an upcoming election.",
             "subcommands": [
-                [
-                    "action",
-                    {
-                        "open": "Opens candidate registration. Done automatically when voter lists are registered.",
-                        "close": "Closes candidate registration.",
-                        "register": {
-                            "aliases": [
-                                "I declare my intention to run as candidate for"
-                            ],
-                            "description": "Registers a candidate. Give argument of channel that you wish to run for."
-                        },
-                        "sponsor": {
-                            "aliases": [
-                                "I sponsor"
-                            ],
-                            "description": "Readies a new declaration of sponsorship in a given channel. Give single argument of the channel name."
+                {
+                    "aliases": [
+                        "open"
+                    ],
+                    "description": "Opens candidate registration. Done automatically when voter lists are registered.",
+                    "method": "open",
+                    "arguments": [],
+                    "requires": {
+                        "args": {
+                            "length": 0
                         }
                     }
-                ]
+                },
+                {
+                    "aliases": [
+                        "close"
+                    ],
+                    "description": "Closes candidate registration.",
+                    "method": "close",
+                    "arguments": [],
+                    "requires": {
+                        "args": {
+                            "length": 0
+                        }
+                    }
+                },
+                {
+                    "aliases": [
+                        "register",
+                        "I declare my intention to run as candidate for"
+                    ],
+                    "description": "Registers a candidate. Give argument of channel that you wish to run for.",
+                    "method": "register",
+                    "arguments": [],
+                    "requires": {
+                        "args": {
+                            "length": 0
+                        }
+                    }
+                },
+                {
+                    "aliases": [
+                        "sponsor",
+                        "I sponsor"
+                    ],
+                    "description": "Readies a new declaration of sponsorship in a given channel. Give single argument of the channel name.",
+                    "method": "sponsor",
+                    "arguments": [],
+                    "requires": {
+                        "args": {
+                            "length": 0
+                        }
+                    }
+                }
             ],
             "usage": [
                 "candidates",
@@ -1151,12 +1375,15 @@
                 "I sponsor littleplotkin"
             ],
             "module": "Election",
-            "file": "candidates",
+            "file": "election/candidates",
             "method": "run",
             "arguments": [
                 "args"
             ],
-            "prefix": "generic"
+            "prefix": "generic",
+            "syntax": [
+                "action"
+            ]
         },
         {
             "aliases": [
@@ -1164,25 +1391,23 @@
                 "I sponsor"
             ],
             "description": "Sponsors a given candidate. Can only be used in the channel for which the election is taking place.",
-            "subcommands": [
-                [
-                    "candidate",
-                    {}
-                ]
-            ],
+            "subcommands": [],
             "usage": [
                 "sponsor",
                 "I sponsor Fumitoks"
             ],
             "module": "Election",
-            "file": "candidates",
+            "file": "election/candidates",
             "method": "getSponsor",
             "arguments": [
                 "channel",
                 "args",
                 "argument"
             ],
-            "prefix": "generic"
+            "prefix": "generic",
+            "syntax": [
+                "candidate"
+            ]
         },
         {
             "aliases": [
@@ -1190,14 +1415,45 @@
             ],
             "description": "Sends ballots.",
             "subcommands": [
-                [
-                    "number",
-                    {
-                        "all": "Sends all ballots, initiates the voting stage of the election.",
-                        "one": "Sends one ballot to a specified user.",
-                        "mobile": "Sends mobile ballots to a specified user. `${generic}mobile` in DMs does the same thing."
+                {
+                    "aliases": [
+                        "all"
+                    ],
+                    "description": "Sends all ballots, initiates the voting stage of the election.",
+                    "method": "all",
+                    "arguments": [],
+                    "requires": {
+                        "args": {
+                            "length": 0
+                        }
                     }
-                ]
+                },
+                {
+                    "aliases": [
+                        "one"
+                    ],
+                    "description": "Sends one ballot to a specified user.",
+                    "method": "one",
+                    "arguments": [],
+                    "requires": {
+                        "args": {
+                            "length": 0
+                        }
+                    }
+                },
+                {
+                    "aliases": [
+                        "mobile"
+                    ],
+                    "description": "Sends mobile ballots to a specified user. `${generic}mobile` in DMs does the same thing.",
+                    "method": "mobile",
+                    "arguments": [],
+                    "requires": {
+                        "args": {
+                            "length": 0
+                        }
+                    }
+                }
             ],
             "usage": [
                 "ballots all",
@@ -1205,7 +1461,7 @@
                 "ballots mobile littleplotkin"
             ],
             "module": "Election",
-            "file": "ballots",
+            "file": "election/ballots",
             "method": "run",
             "arguments": [
                 "args"
@@ -1219,7 +1475,10 @@
                         "++"
                     ]
                 }
-            }
+            },
+            "syntax": [
+                "number"
+            ]
         },
         {
             "aliases": [
@@ -1227,16 +1486,71 @@
             ],
             "description": "Collates valid votes received for an election.",
             "subcommands": [
-                [
-                    "action",
-                    {
-                        "close": "Closes voting on this server for all elections.",
-                        "open": "Reopens voting on a server for all elections.",
-                        "count": "Counts up the votes and saves the results, ready to be outputted.",
-                        "recount": "Forcibly recounts the votes and overwrites the results, ready to be outputted.",
-                        "output": "Outputs the results of an election."
+                {
+                    "aliases": [
+                        "close"
+                    ],
+                    "description": "Closes voting on this server for all elections.",
+                    "method": "close",
+                    "arguments": [],
+                    "requires": {
+                        "args": {
+                            "length": 0
+                        }
                     }
-                ]
+                },
+                {
+                    "aliases": [
+                        "open"
+                    ],
+                    "description": "Reopens voting on a server for all elections.",
+                    "method": "open",
+                    "arguments": [],
+                    "requires": {
+                        "args": {
+                            "length": 0
+                        }
+                    }
+                },
+                {
+                    "aliases": [
+                        "count"
+                    ],
+                    "description": "Counts up the votes and saves the results, ready to be outputted.",
+                    "method": "count",
+                    "arguments": [],
+                    "requires": {
+                        "args": {
+                            "length": 0
+                        }
+                    }
+                },
+                {
+                    "aliases": [
+                        "recount"
+                    ],
+                    "description": "Forcibly recounts the votes and overwrites the results, ready to be outputted.",
+                    "method": "recount",
+                    "arguments": [],
+                    "requires": {
+                        "args": {
+                            "length": 0
+                        }
+                    }
+                },
+                {
+                    "aliases": [
+                        "output"
+                    ],
+                    "description": "Outputs the results of an election.",
+                    "method": "output",
+                    "arguments": [],
+                    "requires": {
+                        "args": {
+                            "length": 0
+                        }
+                    }
+                }
             ],
             "usage": [
                 "votes close",
@@ -1246,7 +1560,7 @@
                 "votes output"
             ],
             "module": "Election",
-            "file": "votes",
+            "file": "election/votes",
             "method": "run",
             "arguments": [
                 "args"
@@ -1257,7 +1571,10 @@
                 "args": {
                     "length": 1
                 }
-            }
+            },
+            "syntax": [
+                "action"
+            ]
         },
         {
             "aliases": [
@@ -1280,19 +1597,26 @@
             ],
             "description": "Display information about an Instant Run Off Election.",
             "subcommands": [
-                [
-                    "action",
-                    {
-                        "mock": "Generates mock data for an IRV election."
+                {
+                    "aliases": [
+                        "mock"
+                    ],
+                    "description": "Generates mock data for an IRV election.",
+                    "method": "mock",
+                    "arguments": [],
+                    "requires": {
+                        "args": {
+                            "length": 0
+                        }
                     }
-                ]
+                }
             ],
             "usage": [
                 "IRV",
                 "IRV mock"
             ],
             "module": "Election",
-            "file": "electorals/irv",
+            "file": "election/electorals/irv",
             "method": "run",
             "arguments": [],
             "prefix": "generic",
@@ -1303,7 +1627,10 @@
                         1
                     ]
                 }
-            }
+            },
+            "syntax": [
+                "action"
+            ]
         }
     ],
     "Help": [
@@ -1360,25 +1687,6 @@
             "module": "Help",
             "file": "help",
             "method": "run",
-            "arguments": [
-                "args"
-            ],
-            "prefix": "generic"
-        }
-    ],
-    "ModMail": [
-        {
-            "aliases": [
-                "send"
-            ],
-            "description": "Sends a ModMail to a specified user. Use `-s` or `--server` flag to send as anonymous.",
-            "usage": [
-                "send bakkouz -s",
-                "send penguingim1"
-            ],
-            "module": "Administration",
-            "file": "input",
-            "method": "outgoing",
             "arguments": [
                 "args"
             ],
@@ -1672,20 +1980,32 @@
                 "tm"
             ],
             "subcommands": [
-                [
-                    "Bouncer",
-                    {
-                        "true": "Allows Bouncer individually to view the testing channels.",
-                        "false": "Blocks Bouncer individually from viewing the testing channels."
+                {
+                    "aliases": [
+                        "true"
+                    ],
+                    "description": "Allows Bouncer individually to view the testing channels.",
+                    "method": "true",
+                    "arguments": [],
+                    "requires": {
+                        "args": {
+                            "length": 0
+                        }
                     }
-                ],
-                [
-                    "LAZYbot",
-                    {
-                        "true": "Allows LAZYbot individually to view the testing channels.",
-                        "false": "Blocks LAZYbot individually from viewing the testing channels."
+                },
+                {
+                    "aliases": [
+                        "false"
+                    ],
+                    "description": "Blocks Bouncer individually from viewing the testing channels.",
+                    "method": "false",
+                    "arguments": [],
+                    "requires": {
+                        "args": {
+                            "length": 0
+                        }
                     }
-                ]
+                }
             ],
             "description": "Toggles testing mode, which disables LAZYbot and Bouncer's permissions in the #spam and #devs channels. Specify 'true false' to just apply to one or the other.",
             "usage": [
@@ -1693,16 +2013,20 @@
                 "tm true false",
                 "tm false true"
             ],
-            "module": "Administration",
+            "module": "Utility",
             "file": "states",
             "method": "tm",
             "arguments": [
                 "args"
             ],
-            "prefix": "generic",
+            "prefix": "nadeko",
             "requires": {
                 "house": true
-            }
+            },
+            "syntax": [
+                "Bouncer",
+                "LAZYbot"
+            ]
         },
         {
             "aliases": [
@@ -1717,7 +2041,7 @@
             "file": "states",
             "method": "bcp",
             "arguments": [],
-            "prefix": "generic",
+            "prefix": "nadeko",
             "requires": {
                 "house": true
             }

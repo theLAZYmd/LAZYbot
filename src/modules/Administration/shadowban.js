@@ -1,6 +1,6 @@
-const Parse = require("../util/parse.js");
-const Embed = require("../util/embed.js");
-const Logger = require("../util/logger.js");
+const Parse = require("../../util/parse.js");
+const Embed = require("../../util/embed.js");
+const Logger = require("../../util/logger.js");
 
 class Shadowban extends Parse {
 

@@ -1,9 +1,9 @@
-const config = require("../config.json");
-const DataManager = require("../util/datamanager.js");
-const Parse = require("../util/parse.js");
-const Embed = require("../util/embed.js");
-const Permissions = require("../util/permissions.js");
-const Logger = require("../util/logger.js");
+const config = require("../../config.json");
+const DataManager = require("../../util/datamanager.js");
+const Parse = require("../../util/parse.js");
+const Embed = require("../../util/embed.js");
+const Permissions = require("../../util/permissions.js");
+const Logger = require("../../util/logger.js");
 
 class Leaderboard extends Parse {
 
@@ -13,7 +13,7 @@ class Leaderboard extends Parse {
 
 	async variant(channel, args) {
 		try {
-			let data = await require("../util/variant.js")(this.message.content, channel, args, this); //variant, source, active
+			let data = await require("../../util/variant.js")(this.message.content, channel, args, this); //variant, source, active
 			data = data.variant.key === "trivia" ? await Leaderboard.generateTrivia(data) : await Leaderboard.generate(data); //leaderboard
 			if (!data.leaderboard || data.leaderboard.length === 0) throw "Couldn't fetch players for **" + data.variant.name + "**.";
 			let embedgroup = [];

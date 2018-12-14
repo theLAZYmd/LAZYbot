@@ -1,7 +1,7 @@
-const Parse = require("../util/parse.js");
-const DBuser = require("../util/dbuser.js");
-const Embed = require("../util/embed.js");
-const Permissions = require("../util/permissions.js");
+const Parse = require("../../util/parse.js");
+const DBuser = require("../../util/dbuser.js");
+const Embed = require("../../util/embed.js");
+const Permissions = require("../../util/permissions.js");
 
 class Finger extends Parse {
 

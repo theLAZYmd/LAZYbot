@@ -1,6 +1,6 @@
-const Parse = require("../util/parse.js");
-const DataManager = require("../util/datamanager.js");
-const config = require("../config.json");
+const Parse = require("../../util/parse.js");
+const DataManager = require("../../util/datamanager.js");
+const config = require("../../config.json");
 
 class States extends Parse {
 

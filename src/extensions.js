@@ -68,10 +68,10 @@ Array.prototype.flat = function (depth) { // this method implemented https://dev
 }
 
 Array.prototype.toPairs = function (bold = false, constant = "") { //returns an array concatenated to a "key: value\n" format
-    return array.map((entry) => {
+    return this.map((entry) => {
         if (Array.isArray(entry)) {
             let [k, v] = entry;
-            return k + ": " + (bold ? v.bold() : v)
+            return k + ": " + (bold ? v.toString().bold() : v)
         } else
         if (/string|number/.test(typeof entry)) {
             return constant + (bold ? entry.bold() : entry);

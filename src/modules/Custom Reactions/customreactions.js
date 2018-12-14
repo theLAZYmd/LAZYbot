@@ -1,5 +1,5 @@
 const Parse = require("../../util/parse.js");
-const CRFile = require("../data/customreactions.json");
+const CRFile = require("../../data/customreactions.json");
 const DataManager = require("../../util/datamanager.js");
 const Logger = require("../../util/logger.js");
 

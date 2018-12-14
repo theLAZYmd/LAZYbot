@@ -1,4 +1,4 @@
-const Parse = require("../util/parse.js");
+const Parse = require("../../util/parse.js");
 const uuid = require("uuid/v4");
 
 class Maths extends Parse {

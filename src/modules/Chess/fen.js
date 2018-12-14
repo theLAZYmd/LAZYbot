@@ -1,6 +1,6 @@
 const Parse = require("../../util/parse.js");
 const Embed = require("../../util/embed.js");
-const config = require("../config.json");
+const config = require("../../config.json");
 const rp = require("request-promise");
 
 class FEN extends Parse {

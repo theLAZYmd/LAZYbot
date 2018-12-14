@@ -5,11 +5,11 @@ const DM = require("../modules/dm.js");
 
 const fs = require("fs");
 
-const CommandConstructor = require("../util/commands.json");
+const CommandConstructor = require("../util/commands.js");
 const Commands = new CommandConstructor();
 
 class Message {
-
+/*
 	static async DM(argsInfo) {
 		try {
 			let f = Array.from(DMCommands).slice(1).find(command => {
@@ -53,13 +53,15 @@ class Message {
 			if (e) argsInfo.Output.onError(e);
 		}
 	}
-
+*/
 	static async command(argsInfo) {
 		try {
             let f = ((key) => {
                 let cmdInfo = Commands.message.get(key);
-                if (cmdInfo.prefix !== argsInfo.prefix) return null;
+                if (!cmdInfo) return null;
+                if (argsInfo.server.prefixes[cmdInfo.prefix] !== argsInfo.prefix) return null;
                 if (cmdInfo.active === false) return false;
+                return cmdInfo;
             })(argsInfo.command);
             if (f) {
 				f.command = true;
@@ -99,7 +101,7 @@ class Message {
 			if (e) argsInfo.Output.onError(e);
 		}
 	}
-
+/*
 	static async bot(argsInfo) {
 		try {
 			for (let cmdInfo of botCommands) {
@@ -115,22 +117,17 @@ class Message {
 			if (e) argsInfo.Output.onError(e);
 		}
     }
-
+*/
     static async run(argsInfo, cmdInfo) {
 		argsInfo.Output._onError = cmdInfo.command ? argsInfo.Output.onError : Logger.error;
 		try {
-			if (cmdInfo.requires) await Message.requires(argsInfo, cmdInfo); //halts it if fails permissions test
-			let args = [];
-			for (let i = 0; i < cmdInfo.arguments.length; i++) {
-                args[i] = argsInfo[cmdInfo.arguments[i]]; //the arguments we take for new Instance input are what's listed
-            }
+			if (cmdInfo.requires) await Message.requires(argsInfo, cmdInfo);                        //halts it if fails permissions test
 			let path = "modules/" + cmdInfo.module + "/" + cmdInfo.file.toLowerCase() + ".js";
 			if (!fs.existsSync("./src/" + path)) path = path.replace(".js", ".ts");
-			if (!fs.existsSync("./src/" + path)) throw "Couldn't find module ./src/modules/" + cmdInfo.file.toLowerCase();
+			if (!fs.existsSync("./src/" + path)) throw "Couldn't find module ./src/" + path;
 			let Constructor = require("../" + path); //Profile
 			let Instance = new Constructor(argsInfo.message); //profile = new Profile(message);
-			if (typeof Instance[cmdInfo.method] === "function") Instance[cmdInfo.method](...args);
-			//else if (typeof Instance._getDescendantProp(cmdInfo.method) === "function") Instance._getDescendantProp(cmdInfo.method)(...args);
+			if (typeof Instance[cmdInfo.method] === "function") Instance[cmdInfo.method](...cmdInfo.arguments.map(a => argsInfo[a]));
 			else return !!eval("Instance." + cmdInfo.method + "(...args)");
 			return true;
 		} catch (e) {
@@ -169,9 +166,9 @@ module.exports = async (client, message) => {
         let argsInfo = new Parse(message);
         if (!argsInfo.author.bot) {
             if (argsInfo.message.channel.type === "dm" || argsInfo.message.channel.type === "group" || !argsInfo.message.guild) return Message.DM(argsInfo);
-            Message.all(argsInfo);
+            //Message.all(argsInfo);
             Message.command(argsInfo);
-        } else Message.bot(argsInfo);
+        } //else Message.bot(argsInfo);
     } catch (e) {
         if (e && typeof e !== "boolean") Logger.error(e);
     }

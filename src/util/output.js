@@ -10,7 +10,6 @@ class Output extends Parse {
 
 	async sender(embed, NewChannel) {
 		try {
-			if (config.states.debug) throw "";
 			if (!embed) throw "**this.Output.sender():** Embed object is undefined.";
 			if (!embed.color) embed.color = config.colors.generic;
 			let channel = NewChannel || this.channel;

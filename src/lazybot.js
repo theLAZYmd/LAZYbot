@@ -3,6 +3,7 @@ const Discord = require("discord.js");
 const fs = require("fs");
 let client = new Discord.Client();
 
+const {    token   } = require("../token.json");
 const Logger = require("./util/logger.js");
 const router = "router/";
 
@@ -79,4 +80,4 @@ fs.readdir("./src/" + router, async (err, _files) => {
     }
 })
 
-client.login(process.env.TOKEN ? process.env.TOKEN : require("./token.json").token)
+client.login(process.env.TOKEN ? process.env.TOKEN : token)

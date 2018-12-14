@@ -1,9 +1,9 @@
-const Parse = require("../util/parse.js");
-const Embed = require("../util/embed.js");
-const DBuser = require("../util/dbuser.js");
-const DataManager = require("../util/datamanager.js");
-const Permissions = require("../util/permissions.js");
-const config = require("../config.json");
+const Parse = require("../../util/parse.js");
+const Embed = require("../../util/embed.js");
+const DBuser = require("../../util/dbuser.js");
+const DataManager = require("../../util/datamanager.js");
+const Permissions = require("../../util/permissions.js");
+const config = require("../../config.json");
 
 class Trivia extends Parse {
 

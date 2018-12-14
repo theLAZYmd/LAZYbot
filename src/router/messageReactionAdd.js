@@ -1,9 +1,9 @@
 const DataManager = require("../util/datamanager.js");
-const reactionCommands = require("../data/commands/reaction.json");
+const reactionCommands = require("../commands/reaction.json");
 const Logger = require("../util/logger.js");
 
 module.exports = async (client, messageReaction, user) => {
-    try {
+    try { /*
         if (user.bot) throw "";
         if (messageReaction.message.guild && messageReaction.message.author.bot) {
             let reactionmessages = DataManager.getFile("./src/data/reactionmessages.json")[messageReaction.message.guild.id];
@@ -27,7 +27,7 @@ module.exports = async (client, messageReaction, user) => {
             let Constructor = require("../modules/" + f.file.toLowerCase() + ".js");
             let Instance = new Constructor(messageReaction.message);
             Instance[f.method.toLowerCase()](messageReaction, user);
-        }
+        }*/
     } catch (e) {
         if (e) Logger.error(e);
     }

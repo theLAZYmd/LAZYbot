@@ -1,5 +1,5 @@
 const Parse = require("../../util/parse.js");
-const UtilityConstructor = require("../utility.js");
+const UtilityConstructor = require("../../utility.js");
 
 class Emoji extends Parse {
     constructor(message) {

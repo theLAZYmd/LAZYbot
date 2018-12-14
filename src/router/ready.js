@@ -1,8 +1,6 @@
 
 const config = require("../config.json");
-const token = require("../token.json");
 const Package = require("../../package.json");
-const Commands = require("../data/commands/message.json");
 
 const rp = require('request-promise');
 const DataManager = require("../util/datamanager.js");
@@ -14,7 +12,7 @@ class Ready {
         this.client = client;
     }
 
-	get sources() {
+	async getSources() {
 		let sources = new Map();
 		for (let source of Object.values(config.sources)) try {
             let body = await rp(source.url.ping);
@@ -23,7 +21,7 @@ class Ready {
         } catch (e) {
             sources.set(source, false);
         }
-		return sources;
+		this.sources = sources;
 	}
 
 	async guilds() {
@@ -70,7 +68,7 @@ class Ready {
 			}
 		}
 	}
-	
+	/*
 	async autoupdates() {
 		let TrackerConstructor = require("../modules/tracker/tracker.js");
 		for (let [id, server] of Object.entries(DataManager.getFile("./src/data/server.json"))) {
@@ -79,7 +77,7 @@ class Ready {
 				return Logger.log("Beginning update cycle...");
 			}
 		}
-    }
+    }*/
     /*  
     async reddit() {
         let str = Math.random().toString().replace(/[^a-z]+/g, '')
@@ -101,7 +99,7 @@ module.exports = async (client) => {
             if (e) Logger.error(e);
         }
         Logger.log("bleep bloop! It's showtime.");
-        require("./intervals.js")();
+        //require("./intervals.js")();
         client.sources = ready.sources;
         return client;
     } catch (e) {

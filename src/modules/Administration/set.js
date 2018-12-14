@@ -1,5 +1,5 @@
-const Parse = require("../util/parse.js");
-const DataManager = require("../util/datamanager.js");
+const Parse = require("../../util/parse.js");
+const DataManager = require("../../util/datamanager.js");
 const packagestuff = DataManager.getFile("./package.json");
 const config = DataManager.getFile("./src/config.json");
 

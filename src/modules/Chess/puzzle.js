@@ -32,7 +32,7 @@ class Puzzle extends Parse {
 
     async variant() {
         try {
-            let {   variant   } = await require("../util/variant")(this.message.content, this.channel, this.args, this);
+            let {   variant   } = await require("../../util/variant")(this.message.content, this.channel, this.args, this);
             if (!config.variants.cvt[variant.key]) throw "Invalid variant with which to summon a puzzle from [CVT](https://chessvariants.training)";
             let body = JSON.parse((await rp(config.sources.cvt.url.api.replace("|", config.variants.cvt[variant.key].api))).toString());
             if (!body.success) throw JSON.stringify(body, null, 4);

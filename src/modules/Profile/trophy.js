@@ -1,6 +1,6 @@
 const Parse = require ("../util/parse.js");
-const DBuser = require("../util/dbuser.js");
-const Embed = require("../util/embed.js");
+const DBuser = require("../../util/dbuser.js");
+const Embed = require("../../util/embed.js");
 
 class Trophy extends Parse {
   constructor(message) {

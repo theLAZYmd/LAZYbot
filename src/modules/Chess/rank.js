@@ -1,8 +1,8 @@
 const Leaderboard = require("./leaderboard.js");
-const Parse = require("../util/parse.js");
-const config = require("../config.json");
-const Embed = require("../util/embed.js");
-const DBuser = require("../util/dbuser.js");
+const Parse = require("../../util/parse.js");
+const config = require("../../config.json");
+const Embed = require("../../util/embed.js");
+const DBuser = require("../../util/dbuser.js");
 
 class Rank extends Parse {
 

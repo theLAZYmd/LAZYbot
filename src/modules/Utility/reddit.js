@@ -1,5 +1,5 @@
-const Parse = require("../util/parse.js");
-const config = require("../config.json");
+const Parse = require("../../util/parse.js");
+const config = require("../../config.json");
 const request = require("request");
 const rp = require("request-promise");
 
