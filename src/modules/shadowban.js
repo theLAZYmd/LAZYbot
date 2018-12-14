@@ -65,7 +65,7 @@ class Shadowban extends Parse {
                 if (((m) => {
                     if (m.mentions.everyone) return true;
                     if (m.mentions.users.size > 0) return true;
-                    for (let p of this.server.prefixes) {
+                    for (let p of Object.values(this.server.prefixes)) {
                         if (m.content.startsWith(p)) return true;
                     }
                     return false;
