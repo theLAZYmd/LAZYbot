@@ -9,7 +9,7 @@
 		]
     },
     {
-        "module": "Shadowban",
+        "module": "Administration",
 		"file": "shadowban",
 		"method": "sbuser",
 		"arguments": [
@@ -17,7 +17,7 @@
 		]
     },
     {
-        "module": "Shadowban",
+        "module": "Administration",
 		"file": "shadowban",
 		"method": "sbnm",
 		"arguments": [
@@ -25,19 +25,19 @@
 		]
     },
 	{
-		"module": "CustomReactions",
+		"module": "Custom Reactions",
 		"file": "customreactions",
 		"method": "text",
 		"arguments": []
 	},
 	{
-		"module": "CustomReactions",
+		"module": "Custom Reactions",
 		"file": "customreactions",
 		"method": "emoji",
 		"arguments": []
 	},
 	{
-		"module": "Reddit",
+		"module": "Utility",
 		"file": "reddit",
 		"method": "link",
 		"arguments": [

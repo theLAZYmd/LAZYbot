@@ -1,19 +1,45 @@
-[
-	{
-		"name": "gild",
-		"module": "Currency",
-		"file": "currency",
-		"method": "gild"
-	},
-	{
-		"name": "📨",
-		"module": "Modmail",
-		"file": "modmail/input",
-		"method": "reaction",
-		"requires": {
-			"channel": {
-				"type": "dm"
-			}
-		}
-	}
-]
+{
+    "Currency": [
+        {
+            "name": "gild",
+            "module": "Currency",
+            "file": "currency",
+            "method": "gild"
+        }
+    ],
+    "Election": [
+        {
+            "key": "election",
+            "module": "Election",
+            "file": "votes",
+            "method": "react"
+        }
+    ],
+    "ModMail": [
+        {
+            "name": "📨",
+            "module": "ModMail",
+            "file": "input",
+            "method": "reaction",
+            "requires": {
+                "channel": {
+                    "type": "dm"
+                }
+            }
+        },
+        {  
+            "key": "modmail",
+            "module": "ModMail",
+            "file": "action",
+            "method": "react"
+        }
+    ],
+    "Paginator": [
+        {
+            "key": "paginator",
+            "module": "",
+            "file": "paginator",
+            "method": "react"
+        }
+    ]
+}

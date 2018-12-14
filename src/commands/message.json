@@ -308,23 +308,6 @@
         },
         {
             "aliases": [
-                "send"
-            ],
-            "description": "Sends a ModMail to a specified user. Use `-s` or `--server` flag to send as anonymous.",
-            "usage": [
-                "send bakkouz -s",
-                "send penguingim1"
-            ],
-            "module": "Administration",
-            "file": "modmail/input",
-            "method": "outgoing",
-            "arguments": [
-                "args"
-            ],
-            "prefix": "generic"
-        },
-        {
-            "aliases": [
                 "backup"
             ],
             "description": "Backs up the database to a given file.",
@@ -1203,7 +1186,7 @@
                 "election clear"
             ],
             "module": "Election",
-            "file": "election/election",
+            "file": "election",
             "method": "run",
             "arguments": [
                 "args"
@@ -1280,7 +1263,7 @@
                 "voters get"
             ],
             "module": "Election",
-            "file": "election/voters",
+            "file": "voters",
             "method": "run",
             "arguments": [
                 "args"
@@ -1300,7 +1283,7 @@
                 "eligible hauptschule"
             ],
             "module": "Election",
-            "file": "election/voters",
+            "file": "voters",
             "method": "eligible",
             "arguments": [
                 "argument"
@@ -1375,7 +1358,7 @@
                 "I sponsor littleplotkin"
             ],
             "module": "Election",
-            "file": "election/candidates",
+            "file": "candidates",
             "method": "run",
             "arguments": [
                 "args"
@@ -1397,7 +1380,7 @@
                 "I sponsor Fumitoks"
             ],
             "module": "Election",
-            "file": "election/candidates",
+            "file": "candidates",
             "method": "getSponsor",
             "arguments": [
                 "channel",
@@ -1461,7 +1444,7 @@
                 "ballots mobile littleplotkin"
             ],
             "module": "Election",
-            "file": "election/ballots",
+            "file": "ballots",
             "method": "run",
             "arguments": [
                 "args"
@@ -1560,7 +1543,7 @@
                 "votes output"
             ],
             "module": "Election",
-            "file": "election/votes",
+            "file": "votes",
             "method": "run",
             "arguments": [
                 "args"
@@ -1616,7 +1599,7 @@
                 "IRV mock"
             ],
             "module": "Election",
-            "file": "election/electorals/irv",
+            "file": "electorals/irv",
             "method": "run",
             "arguments": [],
             "prefix": "generic",
@@ -1631,6 +1614,25 @@
             "syntax": [
                 "action"
             ]
+        }
+    ],
+    "ModMail": [
+        {
+            "aliases": [
+                "send"
+            ],
+            "description": "Sends a ModMail to a specified user. Use `-s` or `--server` flag to send as anonymous.",
+            "usage": [
+                "send bakkouz -s",
+                "send penguingim1"
+            ],
+            "module": "ModMail",
+            "file": "input",
+            "method": "outgoing",
+            "arguments": [
+                "args"
+            ],
+            "prefix": "generic"
         }
     ],
     "Help": [

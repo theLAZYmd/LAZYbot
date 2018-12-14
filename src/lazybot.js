@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 const fs = require("fs");
 let client = new Discord.Client();
 
-const {    token   } = require("../token.json");
+const {    token   } = require("./token.json");
 const Logger = require("./util/logger.js");
 const router = "router/";
 

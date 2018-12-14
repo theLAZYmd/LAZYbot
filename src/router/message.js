@@ -9,118 +9,56 @@ const CommandConstructor = require("../util/commands.js");
 const Commands = new CommandConstructor();
 
 class Message {
-/*
-	static async DM(argsInfo) {
-		try {
-			let f = Array.from(DMCommands).slice(1).find(command => {
-				let cmdInfo = Object.assign({
-					"prefix": ""
-				}, command);
-				if (cmdInfo.active === false) return false;
-				if (!cmdInfo.regex && !cmdInfo.aliases) return false;
-				if (cmdInfo.regex) {
-					let regex = new RegExp(cmdInfo.regex.toString(), "mg");
-					if (regex.test(argsInfo.message.content)) return true;
-				}
-				if (cmdInfo.aliases) {
-					if (cmdInfo.prefix !== argsInfo.prefix) return false;
-					if (cmdInfo.aliases.inArray(argsInfo.command)) return true;
-					if (cmdInfo.aliases.inArray(argsInfo.message.content)) return true;
-					return false;
-				}
-			})
-			if (!f) f = DMCommands[0];
-			else f.command = true;
-			if (f.guild) {
-				let guild = await DM.setGuild(argsInfo, f.guild); //now passed, just check if it needs a guild
-				if (!guild) throw "";
-				argsInfo.message._guild = guild;
-			}
-			let run = Message.run(argsInfo, f);
-			if (run) Logger.command(argsInfo, f);
-		} catch (e) {
-			if (e) argsInfo.Output.onError(e);
-		}
+
+    constructor(argsInfo) {
+        this.argsInfo = argsInfo;
+    }
+
+	async DM(key) {
+        const { aliases, regexes, def  } = Commands.dm;
+        let cmdInfo = aliases.get(key.toLowerCase());
+        if (!cmdInfo) cmdInfo = aliases.get(aliases.keys().find(alias.toLowerCase() === this.message.content.toLowerCase()));
+        if (!cmdInfo) cmdInfo = regexes.get(regexes.keys().find((string) => {
+            let regex = new RegExp(string.toString(), "mg");
+            if (regex.test(this.argsInfo.message.content)) return true;
+            return false;
+        }));
+        if (!cmdInfo) return def;
+        if (cmdInfo.active === false) return def;
+        if (cmdInfo.prefix !== this.argsInfo.prefix) return def;
+        return cmdInfo;
+	}
+    
+	async command(key) {
+        const { commands, aliases  } = Commands.message;
+        let cmdInfo = commands.get(key.toLowerCase());
+        if (!cmdInfo) cmdInfo = aliases.get(this.argsInfo.message.content);
+        if (!cmdInfo) return null;
+        if (cmdInfo.active === false) return null;
+        if (this.argsInfo.server.prefixes[cmdInfo.prefix] !== this.argsInfo.prefix) return null;
+        return cmdInfo;
 	}
 
-	static async all(argsInfo) {
-		try {
-			for (let cmdInfo of allMessageCommands) {
-				cmdInfo.prefix = "";
-				Message.run(argsInfo, cmdInfo);
-			}
-		} catch (e) {
-			if (e) argsInfo.Output.onError(e);
-		}
-	}
-*/
-	static async command(argsInfo) {
-		try {
-            let f = ((key) => {
-                let cmdInfo = Commands.message.get(key);
-                if (!cmdInfo) return null;
-                if (argsInfo.server.prefixes[cmdInfo.prefix] !== argsInfo.prefix) return null;
-                if (cmdInfo.active === false) return false;
-                return cmdInfo;
-            })(argsInfo.command);
-            if (f) {
-				f.command = true;
-				let run = Message.run(argsInfo, f);
-				if (run) Logger.command(argsInfo, f);
-            }
-			/*let f = Object.values(commands).flatten().find(command => {
-				let cmdInfo = Object.assign({}, command);
-				if (cmdInfo.active === false) return false;
-				if (argsInfo.prefix) {
-					cmdInfo.prefix = argsInfo.server.prefixes[cmdInfo.prefix];
-					if (cmdInfo.prefix !== argsInfo.prefix) return false;
-					if (cmdInfo.aliases.inArray(argsInfo.command)) return true;
-					if (cmdInfo.aliases.inArray(argsInfo.message.content)) return true;
-					return false;
-				} else {
-					if (!cmdInfo.subcommands) return false;
-					for (let [, type] of cmdInfo.subcommands) {
-						if (!type || typeof type !== "object") continue;
-						for (let [s, v] of Object.entries(type)) {
-							if (!v.aliases) continue;
-							for (let a of v.aliases) {
-								if (!argsInfo.message.content.toLowerCase().includes(a.toLowerCase())) continue;
-								argsInfo.message.content = argsInfo.message.content.replace(new RegExp(a, "gi"), argsInfo.server.prefixes[cmdInfo.prefix] + cmdInfo.aliases[0] + " " + s);
-								return true;
-							}
-						}
-					}
-				}
-			})
-			if (f) {
-				f.command = true;
-				let run = Message.run(argsInfo, f);
-				if (run) Logger.command(argsInfo, f);
-            }*/
-		} catch (e) {
-			if (e) argsInfo.Output.onError(e);
-		}
-	}
-/*
-	static async bot(argsInfo) {
-		try {
-			for (let cmdInfo of botCommands) {
-				if (cmdInfo.active === false || !argsInfo.message.embeds[0]) continue;
-				let embed = argsInfo.message.embeds[0];
-				if ((embed.title && embed.title === cmdInfo.title) || (embed.description && embed.description === cmdInfo.description)) {
-					let run = Message.run(argsInfo, cmdInfo);
-					if (run) Logger.command(argsInfo, cmdInfo);
-					throw "";
-				}
-			}
-		} catch (e) {
-			if (e) argsInfo.Output.onError(e);
-		}
+	async bot(embed) {
+        if (!embed) return null;
+        if (!embed.title) return null;
+        let cmdInfo = Commands.bot.get(title);
+        if (!cmdInfo) return null;
+        if (!cmdInfo.active) return null;
+        return cmdInfo;
     }
-*/
+
+    async all(argsInfo) {
+        for (let cmdInfo of Commands.all) {
+            cmdInfo.prefix = "";
+            Message.run(argsInfo, cmdInfo);
+        }
+	}
+
     static async run(argsInfo, cmdInfo) {
 		argsInfo.Output._onError = cmdInfo.command ? argsInfo.Output.onError : Logger.error;
 		try {
+            if (cmdInfo.command) Logger.command(argsInfo, cmdInfo);
 			if (cmdInfo.requires) await Message.requires(argsInfo, cmdInfo);                        //halts it if fails permissions test
 			let path = "modules/" + cmdInfo.module + "/" + cmdInfo.file.toLowerCase() + ".js";
 			if (!fs.existsSync("./src/" + path)) path = path.replace(".js", ".ts");
@@ -132,43 +70,49 @@ class Message {
 			return true;
 		} catch (e) {
 			if (e) argsInfo.Output._onError(e);
-			return false;
+			return null;
 		}
 	}
 
 	static async requires(argsInfo, cmdInfo) {
-		for (let [type, value] of Object.entries(cmdInfo.requires)) { //[channel: "spam"]
-			try {
-				if (!Array.isArray(value)) value = [value]; //if it's not array (i.e. multiple possible satisfactory conditions)
-				let kill = true;
-				for (let passable of value) {
-					try {
-						kill = !(await Permissions[type](passable, argsInfo));
-					} catch (e) {
-						Logger.error(e); //THERE SHOULD NOT BE ERRORS HERE, SO IF WE'RE RECEIVING ONE, DEAL WITH IT
-					}
-				}
-				if (kill) throw cmdInfo.method;
-			} catch (e) { //if it fails any of requirements, throw
-				throw Permissions.output(type, argsInfo) ? Permissions.output(type, argsInfo) + "\nUse `" + cmdInfo.prefix + "help` followed by command name to see command info." : ""; //if no Permissions, kill it
-			}
-		}
+		for (let [type, value] of Object.entries(cmdInfo.requires)) try {
+            if (!Array.isArray(value)) value = [value]; //if it's not array (i.e. multiple possible satisfactory conditions)
+            let kill = true;
+            for (let passable of value) try {
+                kill = !(await Permissions[type](passable, argsInfo));
+            } catch (e) {
+                Logger.error(e); //THERE SHOULD NOT BE ERRORS HERE, SO IF WE'RE RECEIVING ONE, DEAL WITH IT
+            }
+            if (kill) throw cmdInfo.method;
+        } catch (e) { //if it fails any of requirements, throw
+            throw Permissions.output(type, argsInfo) ? Permissions.output(type, argsInfo) + "\nUse `" + cmdInfo.prefix + "help` followed by command name to see command info." : ""; //if no Permissions, kill it
+        }
 		return true;
 	}
-
-    
 }
 
 module.exports = async (client, message) => {
     try {
         if (message.author.id === client.user.id) throw "";
-        if (message.content.length === 1) throw "";
+        if (!/[a-z]+/.test(message.content)) throw "";
         let argsInfo = new Parse(message);
-        if (!argsInfo.author.bot) {
-            if (argsInfo.message.channel.type === "dm" || argsInfo.message.channel.type === "group" || !argsInfo.message.guild) return Message.DM(argsInfo);
-            //Message.all(argsInfo);
-            Message.command(argsInfo);
-        } //else Message.bot(argsInfo);
+        let Command = new Message(argsInfo);
+        if (argsInfo.author.bot) {
+            let cmdInfo = await Command.bot(message.embeds[0]);
+            if (cmdInfo) Message.run(argsInfo, cmdInfo);
+        } else
+        if (!argsInfo.message.guild) {
+            let cmdInfo = await Command.dm(argsInfo.command);
+            if (cmdInfo.guild) {
+                rgsInfo.message._guild = await DM.setGuild(argsInfo, cmdInfo.guild); //now passed, just check if it needs a guild
+                if (!argsInfo.message._guild) throw "";
+            }
+            return Message.run(argsInfo, cmdInfo);
+        } else {
+            Command.all(argsInfo);
+            let cmdInfo = await Command.command(argsInfo.command);
+            if (cmdInfo) Message.run(argsInfo, cmdInfo);
+        }
     } catch (e) {
         if (e && typeof e !== "boolean") Logger.error(e);
     }

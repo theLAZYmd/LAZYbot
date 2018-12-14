@@ -7,8 +7,8 @@ class Debugging {
     constructor(client) {
         this.client = client;
         this.guild = client ? client.guilds.get(config.houseid) : null;
-        //this.commandsReformat();
-        this.subcommandsReformat();
+        this.commandsReformat();
+        //this.subcommandsReformat();
     }
 
     get tally() {
@@ -61,7 +61,7 @@ class Debugging {
     }
 
     commandsReformat() {
-        const Commands = DataManager.getFile("./src/commands/message.json");
+        const Commands = DataManager.getFile("./src/commands/reaction.json");
         if (!Array.isArray(Commands)) return;
         let unsortedCommands = {};
         let commands = {};
@@ -83,7 +83,7 @@ class Debugging {
         } catch (e) {
             if (e) console.error(e);
         }
-        DataManager.setFile(commands, "./src/commands/message.json");
+        DataManager.setFile(commands, "./src/commands/reaction.json");
     }
 
     removeDuplicates() {
