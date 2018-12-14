@@ -1,4 +1,5 @@
-const DataManager = require("./datamanager.js");
+const DataManager = require("./datamanager");
+const Logger = require("./logger");
 const All = DataManager.getFile("./src/commands/all.json");
 const Bot = DataManager.getFile("./src/commands/bot.json");
 const DM = DataManager.getFile("./src/commands/DM.json");
@@ -30,20 +31,47 @@ class Commands {
         return new cmdInfo(...arguments);
     }
 
-    get all () {
-        if (this._all) return this._all;
-        return this._all = Array.from(All);
+    static get all () {
+        if (Commands._all) return Commands._all;
+        return Commands.getAll();
     }
 
-    get bot () {
-        if (this._bot) return this._bot;
-        return this._bot = new Map(Array.from(Bot)
+    static get bot () {
+        if (Commands._bot) return Commands._bot;
+        return Commands.getBot();
+    }
+    
+    static get dm () {
+        if (Commands._dm) return Commands._dm;
+        return Commands.getDM();
+    }
+    
+    static get message () {
+        if (Commands._message) return Commands._message;
+        return Commands.getMessage();
+    }
+    
+    static get reaction () {
+        if (Commands._reaction) return Commands._reaction;
+        return Commands.getReaction();
+    }
+    
+    static getAll (time = Date.now()) {
+        let map = Array.from(All);
+        Logger.load(time, [[map.length, "All message commands"]], [map.size, "Bot message commands"]);
+        return Commands._all = map;
+    }
+
+    static getBot (time = Date.now()) {
+        let map = new Map(Array.from(Bot)
             .map(c => [c.title, Commands.parse(c)])
-        )  
+        )
+        Logger.load(time, [[map.size, "Bot message commands"]], [map.size, "Bot message commands"]);
+        return Commands._bot = map;
     }
 
-    get dm () {
-        if (this._dm) return this._dm;
+    static getDM (time = Date.now()) {
+        let i = 0;
         let aliases = new Map();
         let regexes = new Map();
         let def;
@@ -57,11 +85,12 @@ class Commands {
             if (c.regex) regexes.set(c.regex, info);
             if (c.default) def = info;
         }
-        return this._dm = {    aliases, regexes, def    };
+        Logger.load(time, [[aliases.size, "Command keys"], [regexes.size, "Regexes"]], [i, "DM commands"]);
+        return Commands._dm = {    aliases, regexes, def    };
     }
 
-    get message () {
-        if (this._message) return this._message;
+    static getMessage (time = Date.now()) {
+        let i = 0;
         let commands = new Map();
         let aliases = new Map();
         for (let c of Object.values(Message).flat().filter(c => Array.isArray(c.aliases))) {
@@ -77,23 +106,25 @@ class Commands {
                 if (alias.split(/\s/g).length < 2) commands.set(alias, info);
                 else aliases.set(alias, info);
             }
+            i++;
         }
-        return this._message = {    commands, aliases    };
+        Logger.load(time, [[commands.size, "Command keys"], [aliases.size, "Aliases"]], [i, "command files"]);
+        return Commands._message = {    commands, aliases    };
     }
 
-    get reaction () {
-        if (this._reaction) return this._reaction;
+    static getReaction (time = Date.now()) {
+        let i = 0;
         let name = new Map();
         let key = new Map();
         for (let c of Object.values(Reaction).flat()) {
+            i++;
             let info = Commands.parse(c);
             if (c.name) name.set(c.name, info);
             if (c.key) key.set(c.key, info);
         }
-        return this._reaction = {   name, key   }
+        Logger.load(time, [[name.size, "Emoji names"], [key.size, "ID-constructor keys"]], [i, "emoji data files"]);
+        return Commands._reaction = {   name, key   }
     }
 }
-
-new Commands();
 
 module.exports = Commands;

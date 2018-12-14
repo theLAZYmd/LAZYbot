@@ -1,8 +1,7 @@
 const DataManager = require("../util/datamanager.js");
 const Logger = require("../util/logger.js");
 
-const CommandConstructor = require("../util/commands.js");
-const Commands = new CommandConstructor();
+const Commands = require("../util/commands.js");
 const {    name, key    } = Commands.reaction;
 
 class messageReactionAdd {

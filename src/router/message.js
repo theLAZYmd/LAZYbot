@@ -1,8 +1,7 @@
 const Parse = require("../util/parse.js");
 const Logger = require("../util/logger.js");
 const Permissions = require("../util/permissions.js");
-const CommandConstructor = require("../util/commands.js");
-const Commands = new CommandConstructor();
+const Commands = require("../util/commands.js");
 
 const fs = require("fs");
 

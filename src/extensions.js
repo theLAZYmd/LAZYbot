@@ -61,6 +61,15 @@ String.prototype.occurrences = function (subString, allowOverlapping = false) { 
 
 //ARRAY PROTOTYPE METHODS
 
+Array.prototype.partition = function (f) { //like Array.prototype.filter but creates an array for elements that fail the test too
+    let res = [], rej = [];  
+    for (let element of this) {
+        if (f.call(null, element)) res.push(element);
+        else rej.push(element);
+    }
+    return [res, rej];
+  };
+
 Array.prototype.flat = function (depth) { // this method implemented https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat
     return this.reduce(function (flat, toFlatten) {
         return flat.concat((Array.isArray(toFlatten) && (depth - 1)) ? toFlatten.flat(depth - 1) : toFlatten);
@@ -152,7 +161,7 @@ Array.prototype.inArray = function (string) { //same as Array.prototype.indexOf(
 Array.prototype.findIndex = function (f) { //same as Array.prototype.find() but returns an index. Like if .indexOf() took a function
     if (typeof f !== "function") return -1;
     for (let i = 0; i < this.length; i++) {
-        if (f(this[i])) {
+        if (f.call(this[i])) {
             return i;
         }
     }
@@ -163,7 +172,7 @@ Array.prototype.findIndexes = function (f) { //same as Array.prototype.findIndex
     if (typeof f !== "function") return [];
 	let indexes = [];
 	for (let i = 0; i < this.length; i++) {
-		if (f(this[i])) {
+		if (f.call(this[i])) {
 			indexes.push(i)
 		}
 	}

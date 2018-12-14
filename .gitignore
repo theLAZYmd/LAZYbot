@@ -4,17 +4,16 @@ node_modules/
 
 src/.vscode/
 src/.history
-non-project files/
 node_modules/
 alt-script/
 .history/
 .git/
 .idea/
-lazybotv2.js
 token.json
 package-lock.json
 requireForce: false
 tsconfig.json
 src/modules/tracker/config.json
 LAZYbot.code-workspace
-LAZYbot.code-workspace
+combined.log
+watch.json
