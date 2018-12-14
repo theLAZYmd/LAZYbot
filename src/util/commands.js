@@ -5,10 +5,22 @@ const Bot = DataManager.getFile("./src/commands/bot.json");
 const DM = DataManager.getFile("./src/commands/DM.json");
 const Message = DataManager.getFile("./src/commands/Message.json");
 const Reaction = DataManager.getFile("./src/commands/Reaction.json");
+const fs = require('fs');
 
 class Commands {
 
-    constructor() {
+    static run (cmdInfo) {
+        let directory = "modules/" + cmdInfo.module + "/" + cmdInfo.file.toLowerCase();
+        let path = "modules/" + cmdInfo.module + "/" + cmdInfo.file.toLowerCase();
+        let extensions = [".js", ".ts", ".mjs"]
+        while (!fs.existsSync("./src/" + path)) {
+            if (extensions.length === 0) throw "Couldn't find module ./src/" + directory;
+            path += directory + extensions.shift();
+        }
+        let Constructor = require("../" + path);
+        let Instance = new Constructor(argsInfo.message);
+        if (typeof Instance[cmdInfo.method] === "function") return Instance[cmdInfo.method](...cmdInfo.arguments);
+        return !!eval("Instance." + cmdInfo.method + "(...cmdInfo.arguments)");
     }
 
     static parse () {
@@ -126,5 +138,7 @@ class Commands {
         return Commands._reaction = {   name, key   }
     }
 }
+
+Commands.run();
 
 module.exports = Commands;

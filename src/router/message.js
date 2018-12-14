@@ -53,20 +53,13 @@ class Message {
 	}
 
     static async run(argsInfo, cmdInfo) {
-		argsInfo.Output._onError = cmdInfo.command ? argsInfo.Output.onError : Logger.error;
 		try {
             if (cmdInfo.command) Logger.command(argsInfo, cmdInfo);
 			if (cmdInfo.requires) await Message.requires(argsInfo, cmdInfo);                        //halts it if fails permissions test
-			let path = "modules/" + cmdInfo.module + "/" + cmdInfo.file.toLowerCase() + ".js";
-			if (!fs.existsSync("./src/" + path)) path = path.replace(".js", ".ts");
-			if (!fs.existsSync("./src/" + path)) throw "Couldn't find module ./src/" + path;
-			let Constructor = require("../" + path); //Profile
-			let Instance = new Constructor(argsInfo.message); //profile = new Profile(message);
-			if (typeof Instance[cmdInfo.method] === "function") Instance[cmdInfo.method](...cmdInfo.arguments.map(a => argsInfo[a]));
-			else return !!eval("Instance." + cmdInfo.method + "(...args)");
-			return true;
+            cmdInfo.arguments = cmdInfo.arguments.map(a => argsInfo[a]);
+            await Commands.run(cmdInfo);
 		} catch (e) {
-			if (e) argsInfo.Output._onError(e);
+			if (e) cmdInfo.command ? argsInfo.Output.onError(e) : Logger.error(e);
 			return null;
 		}
 	}
