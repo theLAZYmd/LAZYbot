@@ -111,7 +111,10 @@ module.exports = async (client, message) => {
         } else {
             Command.all(argsInfo);
             let cmdInfo = await Command.command(argsInfo.command);
-            if (cmdInfo) Message.run(argsInfo, cmdInfo);
+            if (cmdInfo) {
+                cmdInfo.command = true;
+                Message.run(argsInfo, cmdInfo);
+            }
         }
     } catch (e) {
         if (e && typeof e !== "boolean") Logger.error(e);

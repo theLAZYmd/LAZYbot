@@ -35,8 +35,8 @@ class Set extends Parse {
     upversion(argument) {
         let version = packagestuff.version.split(".", 3);
         if (!argument) version[2] = (Number(version[2]) + 1).toString();
-        else if (argument.toLowerCase().includes("big")) version[1] = (Number(version[1]) + 1).toString();
-        else if (argument.toLowerCase().includes("huge")) version[0] = (Number(version[0]) + 1).toString();
+        else if (argument.toLowerCase().includes("big")) version = [version[0], (Number(version[1]) + 1).toString(), "0"];
+        else if (argument.toLowerCase().includes("huge")) version = [(Number(version[0]) + 1).toString(), "0", "0"];
         this.version(version.join("."));
     }
 
