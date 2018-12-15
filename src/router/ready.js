@@ -99,8 +99,9 @@ class Ready {
 module.exports = async (client) => {
     try {
         let data = new Ready(client);
-        for (let prop of Object.getOwnPropertyNames(Ready)) try {
-            if (typeof data[prop] === "function") data[prop]();
+        for (let prop of Object.getOwnPropertyNames(Ready.prototype)) try {
+            if (prop === "constructor") continue;
+            if (typeof data[prop] === "function") await data[prop]();
         } catch (e) {
             if (e) Logger.error(e);
         }

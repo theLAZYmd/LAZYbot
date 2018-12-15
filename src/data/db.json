@@ -3,9 +3,9 @@
         "id": "185412969130229760",
         "username": "theLAZYmd#2353",
         "messages": {
-            "count": 75272,
-            "last": "ignore <@!422847086145568769>",
-            "lastSeen": 1544839649661
+            "count": 75273,
+            "last": "Hey guys. <@!338772451565502474> has just undergone an ambitious new rewrite, which means lots of things are liable to breaking. If you notice anything, please let me know",
+            "lastSeen": 1544842661407
         },
         "bidamount": 100000000000000000,
         "location": "Toronto",
@@ -3609,9 +3609,9 @@
         "id": "363519664875372556",
         "username": "chuckmoulton#2381",
         "messages": {
-            "count": 1855,
-            "last": "<@!185412969130229760> Join the discord when ready.",
-            "lastSeen": 1544831837833
+            "count": 1856,
+            "last": "Thanks everyone for watching and thanks to <@!185412969130229760> for partnering!",
+            "lastSeen": 1544839850141
         },
         "lichess": {
             "_main": "chuckmoulton",
@@ -11858,9 +11858,9 @@
         "id": "492819875270623244",
         "username": "claracotton#2521",
         "messages": {
-            "count": 113,
-            "last": "<a:PoggersHype:515036540464922633>",
-            "lastSeen": 1544839617121
+            "count": 117,
+            "last": "<:feelsgoodman:423429038225358858>",
+            "lastSeen": 1544843131490
         },
         "lichess": {
             "_main": "clearlyclara",
@@ -12529,7 +12529,7 @@
     {
         "id": "213000676442243072",
         "username": "Yellow",
-        "message": {
+        "messages": {
             "count": 0,
             "last": "!lichess Yellow987",
             "lastSeen": 1544829246718
