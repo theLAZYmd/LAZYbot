@@ -3,7 +3,7 @@ const chrome = require('chromedriver');
 const { lichess } = require("./config.json");
 var { username, password, subject, body, recipients } = lichess;
 let driver = new Builder().forBrowser('chrome').build();
-const Logger = require("../../util/logger.js");
+const Logger = require("../../../util/logger.js");
 
 class Verify {
 

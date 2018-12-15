@@ -1,10 +1,10 @@
-const Parse = require("../../util/parse.js");
-const rp = require("request-promise");
-const DataManager = require("../../util/datamanager.js");
-const DBuser = require("../../util/dbuser.js");
-const Logger = require("../../util/logger.js");
-const Assign = require("./assign.js");
-const config = DataManager.getFile("./src/config.json");
+const Parse = require('../../../util/parse');
+const rp = require('request-promise');
+const DataManager = require('../../../util/datamanager');
+const DBuser = require('../../../util/dbuser');
+const Logger = require('../../../util/logger');
+const Assign = require('./assign');
+const config = DataManager.getFile('./src/config.json');
 
 class Track {
 
@@ -86,7 +86,11 @@ class Tracker extends Parse {
 
 	async updateCycle () {
 		let dbuser = this.LUTDU;
-		if (!dbuser) return;
+        Tracker.lastDBuser = dbuser;
+		if (!dbuser) {
+            if (Tracker.lastDBuser) Logger.error("All users are up to date.");
+            return;
+        }
         let sources = Object.values(config.sources).filter(source => dbuser[source.key]);
         this.track({dbuser, sources});
     }
@@ -262,17 +266,9 @@ class Tracker extends Parse {
         let currentValue = Infinity;
 		return DataManager.getData().findd((dbuser) => {
 			if (Object.values(config.sources).filter(source => dbuser[source.key]).length === 0) return false; //sources
-			let member = this.Search.members.byUser(dbuser);
-			if (!member) {
-				dbuser.left = true;
-				DBuser.setData(dbuser);
-				return false;
-			}
-			if (dbuser.left) {
-				delete dbuser.left;
-				DBuser.setData(dbuser);
-			}			
-			if (!/online|idle|dnd/.test(member.presence.status)) return false;
+            if (dbuser.left) return false;
+            let user = this.client.users.get(dbuser.id);	
+			if (!/online|idle|dnd/.test(user.presence.status)) return false;
 			if (!dbuser.lastupdate) return true;
 			if (dbuser.lastupdate < currentValue && dbuser.lastupdate < Date.now() - config.delays.repeat) {
 				currentValue = dbuser.lastupdate;

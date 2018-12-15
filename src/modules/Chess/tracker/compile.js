@@ -1,5 +1,5 @@
-const DataManager = require("../../util/datamanager.js");
-const config = require("../../config.json");
+const DataManager = require("../../../util/datamanager.js");
+const config = require("../../../config.json");
 
 module.exports = (client) => {
     let map = new Map();

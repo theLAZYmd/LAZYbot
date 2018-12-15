@@ -176,12 +176,13 @@ class Parse {
 	}
 
 	get words() {
-		if (this._words) return this._words;
+        if (this._words) return this._words;
+        if (!this.message || !this.message.content) return [];
 		return this._words = this.message.content.slice(this.prefix.length).match(/[^\s]+/gi) || [];
 	}
 
 	get command() {
-		if (this._command) return this._command;
+        if (this._command) return this._command;
 		return this._command = this.words.length > 0 ? this.words[0] : "";
 	}
 

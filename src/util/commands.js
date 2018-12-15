@@ -3,14 +3,14 @@ const Logger = require("./logger");
 const All = DataManager.getFile("./src/commands/all.json");
 const Bot = DataManager.getFile("./src/commands/bot.json");
 const DM = DataManager.getFile("./src/commands/DM.json");
-const Message = DataManager.getFile("./src/commands/Message.json");
-const Reaction = DataManager.getFile("./src/commands/Reaction.json");
+const Message = DataManager.getFile("./src/commands/message.json");
+const Reaction = DataManager.getFile("./src/commands/reaction.json");
+const Interval = DataManager.getFile("./src/commands/interval.json");
 const fs = require('fs');
 
 class Commands {
 
     static async run (cmdInfo, message) {
-        if (!message) return console.error(cmdInfo);
         let directory = "modules/" + cmdInfo.module + "/" + cmdInfo.file.toLowerCase();
         let path = "modules/" + cmdInfo.module + "/" + cmdInfo.file.toLowerCase();
         let extensions = [".js", ".ts", ".mjs"]
@@ -67,6 +67,11 @@ class Commands {
     static get reaction () {
         if (Commands._reaction) return Commands._reaction;
         return Commands.getReaction();
+    }
+
+    static get interval () {
+        if (Commands._interval) return Commands._interval;
+        return Commands.getInterval();
     }
     
     static getAll (time = Date.now()) {
@@ -138,6 +143,11 @@ class Commands {
         Logger.load(time, [[name.size, "Emoji names"], [key.size, "ID-constructor keys"]], [i, "emoji data files"]);
         return Commands._reaction = {   name, key   }
     }
+
+    static getInterval (time = Date.now()) {
+        return Commands._interval = Object.entries(Interval);
+    }
+
 }
 
 module.exports = Commands;

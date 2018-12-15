@@ -102,6 +102,18 @@ class Ready {
 			}
 		}
     }
+
+    async intervals() {
+        for (let [_time, cmds] of Commands.interval) {
+            let time = Number(_time);
+            setInterval(() => {
+                for (let cmdInfo of cmds) {
+                    this.client.emit("interval", cmdInfo)
+                }
+            }, time)
+        }
+    }
+
 }
 
 module.exports = async (client) => {

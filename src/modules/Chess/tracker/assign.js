@@ -1,4 +1,4 @@
-const DataManager = require("../../util/datamanager.js");
+const DataManager = require("../../../util/datamanager.js");
 const Countries = new Map(Object.entries(DataManager.getFile("./src/data/countries.json")));
 
 class Data {

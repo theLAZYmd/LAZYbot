@@ -1,7 +1,7 @@
-const Tracker = require("./tracker.js");
-const Parse = require("../../util/parse.js");
-const Embed = require("../../util/embed.js");
-const config = require("../../config.json");
+const Tracker = require("./tracker");
+const Parse = require("../../../util/parse");
+const Embed = require("../../../util/embed");
+const config = require("../../../config.json");
 
 class Output extends Tracker {
   
