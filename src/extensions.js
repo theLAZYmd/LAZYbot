@@ -62,7 +62,7 @@ String.prototype.occurrences = function (subString, allowOverlapping = false) { 
 //ARRAY PROTOTYPE METHODS
 
 Array.prototype.toPairs = function (bold = false, constant = "") { //returns an array concatenated to a "key: value\n" format
-    return array.map((entry) => {
+    return this.map((entry) => {
         if (Array.isArray(entry)) {
             let [k, v] = entry;
             return k + ": " + (bold ? v.bold() : v)

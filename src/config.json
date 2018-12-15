@@ -29,10 +29,13 @@
         }
     },
     "avatar": "https://i.imgur.com/Yl4Xoku.jpg",
+    "states": {
+        "debug": false
+    },
     "backupdb": [
-        "Fri Dec 14 2018 17:33:48 GMT+00",
-        "Fri Dec 14 2018 16:33:48 GMT+00",
-        "Fri Dec 14 2018 16:33:47 GMT+00"
+        "Sat Dec 15 2018 01:33:48 GMT+00",
+        "Sat Dec 15 2018 00:33:48 GMT+00",
+        "Sat Dec 15 2018 00:33:47 GMT+00"
     ],
     "delays": {
         "update": 300000,
@@ -275,7 +278,6 @@
             "name": "ChessVariants.training",
             "key": "cvt",
             "url": {
-                "ping": "https://chessvariants.training/",
                 "api": "https://chessvariants.training/Puzzle/Train/GetOneRandomly/|",
                 "setup": "https://chessvariants.training/Puzzle/Train/Setup",
                 "puzzle": "https://chessvariants.training/Puzzle/|"

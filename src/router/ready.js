@@ -9,7 +9,7 @@ const DataManager = require("../util/datamanager.js");
 const Logger = require("../util/logger.js");
 
 class Ready {
-
+/*
 	static async get commands() {
 		let commandlist = {};
 		for (let cmdInfo of commands) {
@@ -31,7 +31,7 @@ class Ready {
             Map.set(source, false);
         }
 		return sources;
-	}
+	}*/
 
 	static async guilds() {
 		for (let guild of Array.from(client.guilds.values()))
@@ -98,7 +98,7 @@ class Ready {
 
 module.exports = async (client) => {
     try {
-        let data = new onStartup(client);
+        let data = new Ready(client);
         for (let prop of Object.getOwnPropertyNames(Ready)) try {
             if (typeof data[prop] === "function") data[prop]();
         } catch (e) {
