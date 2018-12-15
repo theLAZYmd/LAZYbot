@@ -35,7 +35,6 @@
         "Thu Dec 13 2018 01:32:50 GMT+00"
     ],
     "delays": {
-        "update": 300000,
         "repeat": 1800000
     },
     "urls": {

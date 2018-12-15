@@ -9,17 +9,18 @@ const fs = require('fs');
 
 class Commands {
 
-    static run (cmdInfo) {
+    static async run (cmdInfo, message) {
+        if (!message) return console.error(cmdInfo);
         let directory = "modules/" + cmdInfo.module + "/" + cmdInfo.file.toLowerCase();
         let path = "modules/" + cmdInfo.module + "/" + cmdInfo.file.toLowerCase();
         let extensions = [".js", ".ts", ".mjs"]
         while (!fs.existsSync("./src/" + path)) {
             if (extensions.length === 0) throw "Couldn't find module ./src/" + directory;
-            path += directory + extensions.shift();
+            path = directory + extensions.shift();
         }
         let Constructor = require("../" + path);
-        let Instance = new Constructor(argsInfo.message);
-        if (typeof Instance[cmdInfo.method] === "function") return Instance[cmdInfo.method](...cmdInfo.arguments);
+        let Instance = await new Constructor(message);
+        if (typeof Instance[cmdInfo.method] === "function") return Instance[cmdInfo.method](...(cmdInfo.args || []));
         return !!eval("Instance." + cmdInfo.method + "(...cmdInfo.arguments)");
     }
 
@@ -138,7 +139,5 @@ class Commands {
         return Commands._reaction = {   name, key   }
     }
 }
-
-Commands.run();
 
 module.exports = Commands;

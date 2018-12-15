@@ -9,6 +9,7 @@ class MessageCount extends Parse {
 
     async log(author, dbuser) { //section for message logging
         try {
+            if (!author || !dbuser) console.log(this);
             if (!isNaN(dbuser.messages.count)) dbuser.messages.count++;
             else {
                 dbuser.messages.count = 0;

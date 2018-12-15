@@ -86,11 +86,9 @@ class Tracker extends Parse {
 
 	async updateCycle () {
 		let dbuser = this.LUTDU;
-		if (dbuser) {
-			let sources = Object.values(config.sources).filter(source => dbuser[source.key]);
-			this.track({dbuser, sources});
-		}
-		setTimeout(() => this.updateCycle(), config.delays.update);
+		if (!dbuser) return;
+        let sources = Object.values(config.sources).filter(source => dbuser[source.key]);
+        this.track({dbuser, sources});
     }
 
 	async run(command, args) { //both !remove and the linking commands start here

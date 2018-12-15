@@ -3,7 +3,7 @@ class DBuser {
     constructor(user) {
         this.id = user.id,
         this.username = user.username,
-        this.message = {
+        this.messages = {
             "count": 0,
             "last": user.lastMessage.content,
             "lastSeen": Date.now()

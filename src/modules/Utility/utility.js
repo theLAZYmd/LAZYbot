@@ -1,11 +1,12 @@
-const Parse = require("../../util/parse.js");
-const Embed = require("../../util/embed.js");
+const Parse = require("../../util/parse");
+const Embed = require("../../util/embed");
+const DataManager = require("../../util/datamanager")
 
 class Utility extends Parse { //fairly miscelanneous functions
 
     async members() {
         let tally = DataManager.getData();
-        this.Output.generic(`There are ${tally.length} unique users registered to the database.`);
+        this.Output.generic(`There are **${tally.length}** unique users registered to the database.`);
     }
 
     async ping() {

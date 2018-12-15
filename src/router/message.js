@@ -56,8 +56,8 @@ class Message {
 		try {
             if (cmdInfo.command) Logger.command(argsInfo, cmdInfo);
 			if (cmdInfo.requires) await Message.requires(argsInfo, cmdInfo);                        //halts it if fails permissions test
-            cmdInfo.arguments = cmdInfo.arguments.map(a => argsInfo[a]);
-            await Commands.run(cmdInfo);
+            if (cmdInfo.arguments) cmdInfo.args = cmdInfo.arguments.map(a => argsInfo[a]);
+            await Commands.run(cmdInfo, argsInfo.message);
 		} catch (e) {
 			if (e) cmdInfo.command ? argsInfo.Output.onError(e) : Logger.error(e);
 			return null;
