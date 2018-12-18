@@ -59,12 +59,17 @@ String.prototype.occurrences = function (subString, allowOverlapping = false) { 
 	return n;
 };
 
+String.prototype.stripQuotes = function() {
+    if (this.startsWith('"') && this.endsWith('"')) return this.slice(1, -1);
+    return this;
+};
+
 //ARRAY PROTOTYPE METHODS
 
 Array.prototype.partition = function (f) { //like Array.prototype.filter but creates an array for elements that fail the test too
     let res = [], rej = [];  
     for (let element of this) {
-        if (f.call(null, element)) res.push(element);
+        if (f(element)) res.push(element);
         else rej.push(element);
     }
     return [res, rej];
@@ -158,10 +163,11 @@ Array.prototype.inArray = function (string) { //same as Array.prototype.indexOf(
 	return false;
 };
 
-Array.prototype.findIndex = function (f) { //same as Array.prototype.find() but returns an index. Like if .indexOf() took a function
+Array.prototype.findIndex = function (f, startIndex = 0) { //same as Array.prototype.find() but returns an index. Like if .indexOf() took a function
     if (typeof f !== "function") return -1;
-    for (let i = 0; i < this.length; i++) {
-        if (f.call(this[i])) {
+    if (startIndex >= this.length) throw "Invalid start index.";
+    for (let i = startIndex; i < this.length; i++) {
+        if (f(this[i])) {
             return i;
         }
     }
@@ -172,7 +178,7 @@ Array.prototype.findIndexes = function (f) { //same as Array.prototype.findIndex
     if (typeof f !== "function") return [];
 	let indexes = [];
 	for (let i = 0; i < this.length; i++) {
-		if (f.call(this[i])) {
+		if (f(this[i])) {
 			indexes.push(i)
 		}
 	}
