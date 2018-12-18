@@ -12,7 +12,7 @@
                 "count": false,
                 "results": true
             },
-            "trivia": true
+            "trivia": false
         },
         "prefixes": {
             "generic": "!",
@@ -97,7 +97,8 @@
                 "521394073894912028",
                 "521392095387451393",
                 "521444374458925078",
-                "521754298711932939"
+                "521754298711932939",
+                "523175821783990282"
             ],
             "newMessages": [
                 "/thats[\\w\\s]*jew/i",
@@ -112,7 +113,8 @@
                 "/nojoke[\\s\\w\\n]*bitch/i",
                 "/bitch[\\s\\w\\n]*nojoke/i",
                 "/real[\\s\\w\\n]*gola+m/i",
-                "/Screen_Shot_2018-12-12_at_8.15.33_PM.png/"
+                "/Screen_Shot_2018-12-12_at_8.15.33_PM.png/",
+                "/documentingreality.com\\/forum\\/f10\\//"
             ]
         }
     },

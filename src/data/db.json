@@ -613,9 +613,9 @@
         "id": "340287144448884748",
         "username": "TcubesAK#3940",
         "messages": {
-            "count": 54659,
-            "last": "ggs",
-            "lastSeen": 1543549418386
+            "count": 54664,
+            "last": "15+2?",
+            "lastSeen": 1544744587081
         },
         "trophy": [
             "House Trivia Champion"
@@ -1522,9 +1522,9 @@
         "id": "325736595980288010",
         "username": "Kyle#4287",
         "messages": {
-            "count": 18229,
-            "last": "I'm too dumb to play slow chess",
-            "lastSeen": 1544675365743
+            "count": 18244,
+            "last": "https://www.twitch.tv/littleplotkin",
+            "lastSeen": 1544769044283
         },
         "lichess": {
             "_main": "KyleLegion",
@@ -1769,9 +1769,9 @@
         "id": "317034686973214720",
         "username": "Gopnik#4031",
         "messages": {
-            "count": 17865,
-            "last": "let me in the fanclub",
-            "lastSeen": 1544646904464
+            "count": 17866,
+            "last": "<@!278941339809218561> <:kappa:392195924258193410>",
+            "lastSeen": 1544730678195
         },
         "finger": "А у вас Крылья Наутилуса есть?",
         "age": "87",
@@ -1871,11 +1871,11 @@
         "trophy": [
             "Plus Jeune Dans Le Serveur"
         ],
-        "lastupdate": 1544213197002,
+        "lastupdate": 1544807245385,
         "lichess": {
             "_main": "Lesau",
             "Lesau": {
-                "maxRating": "1792",
+                "maxRating": "1798",
                 "blitz": "1498?",
                 "bullet": "1271?",
                 "rapid": "1500?",
@@ -1883,12 +1883,13 @@
                 "crazyhouse": "1718?",
                 "3-check": "1422?",
                 "anti": "1718?",
-                "atomic": "1792",
+                "atomic": "1798",
                 "racing-kings": "1591?"
             },
             "_name": "Erwan ————————",
             "_country": "FR"
-        }
+        },
+        "location": "France"
     },
     {
         "id": "412434401700347905",
@@ -2197,14 +2198,14 @@
         "lastupdate": 1545100353740,
         "chesscom": {
             "dimitarmar": {
-                "maxRating": "2265",
-                "bullet": "2265",
-                "lightning": "2135",
+                "maxRating": "2256",
+                "bullet": "2256",
+                "lightning": "2064",
                 "chess": "Unrated?",
-                "rapid": "1859",
+                "rapid": "1723",
                 "koth": "1930",
                 "crazyhouse": "2151",
-                "bughouse": "1514",
+                "bughouse": "1546",
                 "tactics": "1746"
             }
         },
@@ -2526,7 +2527,7 @@
                 "atomic": "1661?"
             }
         },
-        "lastupdate": 1544671577197
+        "lastupdate": 1544696455431
     },
     {
         "id": "278828709975162882",
@@ -2782,9 +2783,9 @@
         "id": "386649194582245380",
         "username": "Whitedancingrockstar#8646",
         "messages": {
-            "count": 561,
-            "last": "I am not the greatest of players though",
-            "lastSeen": 1543340688680
+            "count": 563,
+            "last": "<:kcrage:503972556315951106>",
+            "lastSeen": 1544772752936
         },
         "lastupdate": 1545089908952,
         "lichess": {
@@ -5632,9 +5633,9 @@
         "id": "457948505495961601",
         "username": "a_47#4756",
         "messages": {
-            "count": 297,
-            "last": "Im not mod",
-            "lastSeen": 1544463084749
+            "count": 298,
+            "last": "What is the result of my game in RKCW? <@488512119004987446>",
+            "lastSeen": 1544799175915
         },
         "lastupdate": 1545078112759,
         "lichess": {
@@ -6575,7 +6576,7 @@
             "jonasd12321": {
                 "maxRating": "1487",
                 "lightning": "852",
-                "chess": "1208",
+                "chess": "1185",
                 "tactics": "873",
                 "lessons": "1487"
             }
@@ -6867,11 +6868,11 @@
         "id": "118174734176223243",
         "username": "the420boss#8639",
         "messages": {
-            "count": 198,
-            "last": "I'll leave the money on the night stand",
-            "lastSeen": 1544496768843
+            "count": 201,
+            "last": "No response yet",
+            "lastSeen": 1544727367046
         },
-        "lastupdate": 1542933851033,
+        "lastupdate": 1544718792145,
         "chesscom": {
             "_main": "khiggins89",
             "khiggins89": {
@@ -6889,17 +6890,18 @@
         "lichess": {
             "_main": "FreeBee",
             "FreeBee": {
-                "maxRating": "2288",
+                "maxRating": "2261",
                 "blitz": "1487?",
                 "bullet": "1890?",
                 "rapid": "1500?",
                 "classical": "1500?",
-                "crazyhouse": "2288"
+                "crazyhouse": "2261"
             },
             "_name": "Atonawanda!Suya",
             "_country": "ZW",
             "_language": "en"
-        }
+        },
+        "location": "Zimbabwe"
     },
     {
         "id": "265704631840014338",
@@ -7312,7 +7314,9 @@
         "id": "450315296998293534",
         "username": "Raphdel49#4970",
         "messages": {
-            "count": 4
+            "count": 5,
+            "last": "dont know",
+            "lastSeen": 1544725438570
         },
         "lichess": {
             "_main": "raphdel2007",
@@ -7458,16 +7462,16 @@
         "lichess": {
             "_main": "Gsharp159",
             "Gsharp159": {
-                "maxRating": "875",
+                "maxRating": "857",
                 "blitz": "991?",
-                "bullet": "875",
+                "bullet": "857",
                 "rapid": "1095?",
                 "classical": "1500?",
                 "crazyhouse": "1720?"
             },
             "_language": "en-GB"
         },
-        "lastupdate": 1544660714234
+        "lastupdate": 1544741733653
     },
     {
         "id": "459047957296316416",
@@ -8141,9 +8145,9 @@
         "id": "267660192294895618",
         "username": "tipau#0023",
         "messages": {
-            "count": 204,
-            "last": "but waiting final confirmation from Arka",
-            "lastSeen": 1544209396089
+            "count": 205,
+            "last": "I think maybe 1.Bxb6 axb5 2.Kh7 - the idea is to eventually force zugzwang e.g. 2...Kh8 3.Bg4 Kg8 4.Be6 Kh8 5.Bg8 or 2...Kf8 3.Bg4 Ke8 4.Bd7 Kd8 5.d5",
+            "lastSeen": 1544789382707
         }
     },
     {
@@ -8776,9 +8780,9 @@
         "id": "481935105326186506",
         "username": "tolius#9778",
         "messages": {
-            "count": 381,
-            "last": "😃",
-            "lastSeen": 1544658439529
+            "count": 382,
+            "last": "only 4 pages for Nh3 😦",
+            "lastSeen": 1544734479959
         },
         "lichess": {
             "_main": "tolius",
@@ -11088,9 +11092,9 @@
         "id": "341275354020839424",
         "username": "Sean B#6257",
         "messages": {
-            "count": 243,
-            "last": "Thanks mods",
-            "lastSeen": 1544364162244
+            "count": 256,
+            "last": "It's a recent change",
+            "lastSeen": 1544762256864
         },
         "lichess": {
             "_main": "seanysean",
@@ -11483,9 +11487,9 @@
         "id": "218138989649985538",
         "username": "Romeore#5887",
         "messages": {
-            "count": 75,
-            "last": "oh cool",
-            "lastSeen": 1543622792620
+            "count": 77,
+            "last": "lol",
+            "lastSeen": 1544793741101
         },
         "lichess": {
             "_main": "Opening_Player",
@@ -12117,9 +12121,9 @@
         "id": "286187926000500736",
         "username": "LoliconLover#3237",
         "messages": {
-            "count": 155,
-            "last": "You're not the only one, I've seen plenty of people say the same stuff lately",
-            "lastSeen": 1544532468077
+            "count": 157,
+            "last": "Kinda like Pepsi",
+            "lastSeen": 1544726736265
         }
     },
     {
@@ -12306,9 +12310,9 @@
         "id": "297836368569040918",
         "username": "♔CounterT♚#3744",
         "messages": {
-            "count": 145,
-            "last": "expect yeet",
-            "lastSeen": 1544648338935
+            "count": 147,
+            "last": "meh",
+            "lastSeen": 1544797582864
         }
     },
     {
