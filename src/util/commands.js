@@ -33,6 +33,7 @@ class Commands {
                 this.module = c.module || base.module;
                 this.file = c.file || base.file;
                 this.method = c.method;
+                this.description = c.description;
                 if (c.arguments) this.arguments = c.arguments;
                 if (c.requires) this.requires = c.requires;
                 if (c.active) this.active = c.active;

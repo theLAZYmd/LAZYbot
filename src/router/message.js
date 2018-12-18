@@ -32,7 +32,7 @@ class Message {
         if (!cmdInfo) cmdInfo = aliases.get(this.argsInfo.message.content);
         if (!cmdInfo) return null;
         if (cmdInfo.active === false) return null;
-        if (this.argsInfo.server.prefixes[cmdInfo.prefix] !== this.argsInfo.prefix) return null;
+        if (this.argsInfo.prefixes.get(cmdInfo.prefix) !== this.argsInfo.prefix) return null;
         return cmdInfo;
 	}
 

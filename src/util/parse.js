@@ -165,15 +165,20 @@ class Parse {
 
 	get prefix() {
 		if (this._prefix) return this._prefix;
-		let prefixes = this.server ? this.server.prefixes : {
-			"generic": "!",
-			"nadeko": "."
-		};
-		for (let prefix of Object.values(prefixes))
+		for (let prefix of Array.from(this.prefixes.values()))
 			if (this.message.content.startsWith(prefix))
 				return this._prefix = prefix;
 		return "";
-	}
+    }
+    
+    get prefixes() {
+        if (this._prefixes) return this._prefixes;
+        let prefixes = this.server ? this.server.prefixes : {
+            "generic": "!",
+            "nadeko": "."
+        }
+        return this._prefixes = new Map(Object.entries(prefixes));
+    }
 
 	get words() {
         if (this._words) return this._words;

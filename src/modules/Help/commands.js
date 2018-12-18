@@ -1,7 +1,7 @@
-const Parse = require("../../util/parse.js");
-const Embed = require("../../util/embed.js");
-const DataManager = require("../../util/datamanager.js");
-const commands = DataManager.getFile("./src/data/commands/message.json");
+const Parse = require("../../util/parse");
+const Embed = require("../../util/embed");
+const DataManager = require("../../util/datamanager");
+const Message = DataManager.getFile("./src/commands/message.json");
 const fs = require("fs");
 
 class Commands extends Parse {
@@ -53,55 +53,32 @@ class Commands extends Parse {
         this.Output.sender(embed);
     }
 
-    async list() { //command to generate all listing
-        let embed = { //define embed first
-            "color": 11126483,
-            "fields": [],
-            "footer": Embed.footer(`Type "${this.server.prefixes.generic}h CommandName" to see help for a specified command. e.g. "${this.server.prefixes.generic}h !profile"`)
-        };
-        let modules = Object.entries(Commands.genObject(this.server)); //get parsed command list of {module: {command: firstalias}}
-        for (let i = 0; i < modules.length; i++) {
-            let name = modules[i][0];
-            let collection = Object.entries(modules[i][1]);
-            let value = "```css\n";
-            for (let j = 0; j < collection.length; j++) {
-                let [command, alias] = collection[j];
-                if (!modules[i][1].hasOwnProperty(command)) continue;
-                let line = command +
-                    " ".repeat(Math.max(1, 18 - command.length)) //spacer, 18 allows 2 across per embed
-                    +
-                    "[" + (alias && alias.length <= 5 ? alias : "")
-                    //display aliases if aliases are shortcuts
-                    +
-                    "]"; //spacer
+    async list() {
+        let prefix = this.prefixes.get("generic");
+        let embed = new Embed()
+            .setColor(11126483)
+            .setTitle(`Type "${prefix}h CommandName" to see help for a specified command. e.g. "${prefix}h ${prefix}profile"`)
+        let i = 0; 
+        let length = Object.keys(Message).length;
+        for (let [name, collection] of Object.entries(Message)) {
+            let value = "";
+            for (let [j, cmdInfo] of Object.entries(collection)) {
+                let [command, alias] = cmdInfo.aliases;
+                command = this.prefixes.get(cmdInfo.prefix) + command;
+                let line = command + " ".repeat(Math.max(1, 18 - command.length)) + //spacer, 18 allows 2 across per embed
+                    "[" + (alias && alias.length <= 5 ? alias : "") + "]"; //spacer
                 value += line;
-                if (i < modules.length - 1 || !(modules.length & 1)) { //if we're not on the last module or we have an even number of modules
+                if (i < length - 1 || !(length & 1)) { //if we're not on the last module or we have an even number of modules
                     value += "\n";
                     continue;
                 }
                 if (j === collection.length - 1) continue; //if we're not at the last one of the group continue
                 value += !(j & 1) ? " ".repeat(Math.max(0, 28 - line.length)) + "\u200b" : "\n"; //spacer
             }
-            value += "```";
-            Embed.fielder(embed.fields, name.toProperCase(), value, true); //return arguments for field, - a field
+            embed.addField(name.toProperCase(), value.format("css"), true); //return arguments for field, - a field
+            i++;
         }
         this.Output.sender(embed);
-    }
-
-    static genObject(server) {
-        let modules = {}; //we're creating a big object
-        for (let cmdInfo of commands) { //for each cmdInfo
-            if (!modules[cmdInfo.module]) modules[cmdInfo.module] = {}; //if the object doesn't have that module as a key already, create it. {module: {}}
-            let aliases = Array.from(cmdInfo.aliases);
-            let key = server.prefixes[cmdInfo.prefix] + aliases.shift(); //{module: {key: firstalias}}
-            modules[cmdInfo.module][key] = aliases[0] ? aliases[0] : "";
-        }
-        return Object.keys(modules) //and return an object sorted alphabetically
-            .sort()
-            .reduce((acc, key) => ({ //comment this out if we come up with logical order
-                ...acc,
-                [key]: modules[key]
-            }), {});
     }
 
 }

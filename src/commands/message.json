@@ -1178,13 +1178,7 @@
                     }
                 }
             ],
-            "usage": [
-                "election",
-                "election initiate",
-                "election config",
-                "election reset",
-                "election clear"
-            ],
+            "usage": [],
             "module": "Election",
             "file": "election",
             "method": "run",
@@ -1255,13 +1249,7 @@
                     }
                 }
             ],
-            "usage": [
-                "voters",
-                "voters register",
-                "voters deregister",
-                "voters disqualify",
-                "voters get"
-            ],
+            "usage": [],
             "module": "Election",
             "file": "voters",
             "method": "run",
@@ -1279,7 +1267,6 @@
             ],
             "description": "Lists the ballots for which a user is eligible to vote. Defaults to self.",
             "usage": [
-                "eligible",
                 "eligible hauptschule"
             ],
             "module": "Election",
@@ -1439,7 +1426,6 @@
                 }
             ],
             "usage": [
-                "ballots all",
                 "ballots one MMichael",
                 "ballots mobile littleplotkin"
             ],
@@ -1535,13 +1521,7 @@
                     }
                 }
             ],
-            "usage": [
-                "votes close",
-                "votes open",
-                "votes count",
-                "votes recount",
-                "votes output"
-            ],
+            "usage": [],
             "module": "Election",
             "file": "votes",
             "method": "run",
