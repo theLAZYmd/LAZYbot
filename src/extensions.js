@@ -226,7 +226,7 @@ Array.prototype.remove = function (index) { //remove an index or a set of indexe
 
 //OBJECT PROTOTYPE METHODS
 
-Object.prototype._getDescendantProp = function (desc) {
+Object.prototype.getProp = function (desc) {
 	let arr = desc.split('.'), obj = this;
 	while (arr.length) {
 		obj = obj[arr.shift()];
@@ -234,12 +234,26 @@ Object.prototype._getDescendantProp = function (desc) {
 	return obj;
 };
 
-Object.prototype._setDescendantProp = function (desc, value) {
+Object.prototype.setProp = function (desc, value) {
 	let arr = desc.split('.'), obj = this;
 	while (arr.length > 1) {
 		obj = obj[arr.shift()];
 	}
 	return obj[arr[0]] = value;
+};
+
+//FUNCTION PROTOTYPE METHODS (note: mdn says these are 'uneditable'. Oh well.)
+
+Function.prototype.getInputs = function() {
+    let str = this.toString().trim();
+    let arrowRegex = /^\(?([\w\s,]+)\)?\s*\=\>/;
+    let functionRegex = /^(?:function|static|async)?\s*\w+\s?\(([\w\s,]*)\)/;
+    let input;
+    if (arrowRegex.test(str)) input = str.match(arrowRegex)[1];
+    else if (functionRegex.test(str)) input = str.match(functionRegex)[1];
+    if (!input) throw str;
+    let inputs = input.split(",").map(i => i.trim());
+    return inputs;
 };
 
 //NUMBER PROTOTYPE METHODS

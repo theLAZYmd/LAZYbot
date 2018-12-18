@@ -24,6 +24,22 @@ class Commands {
         return !!eval("Instance." + cmdInfo.method + "(...cmdInfo.arguments)");
     }
 
+    static getFunction (cmdInfo) {
+        let directory = "modules/" + cmdInfo.module + "/" + cmdInfo.file.toLowerCase();
+        let path = "modules/" + cmdInfo.module + "/" + cmdInfo.file.toLowerCase();
+        let extensions = [".js", ".ts", ".mjs"]
+        while (!fs.existsSync("./src/" + path)) {
+            if (extensions.length === 0) throw "Couldn't find module ./src/" + directory;
+            path = directory + extensions.shift();
+        }
+        let Constructor = require("../" + path);
+        let method = Constructor.prototype[cmdInfo.method];
+        if (typeof method !== "function") method = Constructor.prototype.getProp(cmdInfo.method); // eval("Constructor.prototype." + cmdInfo.method);
+        if (typeof method !== "function") console.error(path, cmdInfo.method);
+        if (typeof method !== "function") return null;
+        return method;
+    }
+
     static parse () {
 
         class cmdInfo {
@@ -41,7 +57,6 @@ class Commands {
             }
 
         }
-        
         return new cmdInfo(...arguments);
     }
 

@@ -102,7 +102,7 @@ class Message {
 module.exports = async (client, message) => {
     try {
         if (message.author.id === client.user.id) throw "";
-        if (!/[a-z]+/.test(message.content)) throw "";
+        if (!/[a-z]/i.test(message.content)) throw "";
         let argsInfo = new Parse(message);
         let Command = new Message(argsInfo);
         if (argsInfo.author.bot) {

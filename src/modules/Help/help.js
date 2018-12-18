@@ -102,7 +102,6 @@ class Help extends Parse {
 	get usage() {
         let string = "";
         for (let alias of this.cmdInfo.aliases.filter(alias => alias.split(/\s+/).length < 2)) {
-            console.log(alias);
             string += "`" + this.prefix + alias + "`\n";
         }
 		if (this.cmdInfo.subcommands) {

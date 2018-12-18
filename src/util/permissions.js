@@ -39,7 +39,7 @@ class Permissions {
 
 	static state(state, data) {
 		if (typeof state !== "string") return true;
-		return data.server.states._getDescendantProp(state.toLowerCase());
+		return data.server.states.getProp(state.toLowerCase());
 	}
 
 	static bot(bot, data) {
