@@ -26,7 +26,7 @@ module.exports = async (content, channel, args, argsInfo) => { //this function f
                 }
                 if (found.args && found.channel && found.channel !== found.args) throw "Wrong channel to summon this leaderboard!"; //if no possibilities or match conflict, return.
             } else if (defsources.length === 0) throw "Couldn't find matching variant";   //if none found, return.
-            source = defsources.shift();
+            if (!variant) source = defsources.shift();
         }
         return {variant, source, active, argsInfo}; //data object for generating leaderboard
     } catch (e) {

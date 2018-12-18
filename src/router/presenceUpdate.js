@@ -1,6 +1,6 @@
 const Parse = require("../util/parse.js");
 const config = require("../config.json");
-const StatesConstructor = require("../modules/states.js");
+const StatesConstructor = require("../modules/Administration/states.js");
 const Logger = require("../util/logger.js");
 
 class PresenceUpdate extends Parse {

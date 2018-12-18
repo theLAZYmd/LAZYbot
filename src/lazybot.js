@@ -34,7 +34,8 @@ const events = [
 	["guildMemberSpeaking", ["member", "speaking"]],
 	["guildMemberUpdate", ["oldMember", "newMember"]],
 	["guildUnavailable", ["guild"]],
-	["guildUpdate", ["oldGuild", "newGuild"]],
+    ["guildUpdate", ["oldGuild", "newGuild"]],
+    ["interval", ["cmdInfo"], true],
 	["message", ["message"], true],
 	["messageDelete", ["message"]],
 	["messageDeleteBulk", ["messages"]],
@@ -66,7 +67,9 @@ fs.readdir("./src/" + router, (err, _files) => {
             if (!files.find(f => f === event[0])) throw "Couldn't find matching event handler.";
             client.on(event[0], async function () {
                 let Instance = require("./" + router + event[0] + ".js");
-                Instance(client, ...arguments);
+                if (typeof Instance === "function") Instance(client, ...arguments);
+                else if (typeof Instance === "object" && typeof Instance.default === "function") Instance.default(client, ...arguments);
+                else throw "event event[0] does not have a listener function";
             });
         } catch (e) {
             if (e) Logger.error(e);

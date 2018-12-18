@@ -33,12 +33,11 @@
         "debug": false
     },
     "backupdb": [
-        "Sat Dec 15 2018 01:33:48 GMT+00",
-        "Sat Dec 15 2018 00:33:48 GMT+00",
-        "Sat Dec 15 2018 00:33:47 GMT+00"
+        "Tue Dec 18 2018 03:13:45 GMT+00",
+        "Tue Dec 18 2018 02:13:45 GMT+00",
+        "Tue Dec 18 2018 00:13:45 GMT+00"
     ],
     "delays": {
-        "update": 300000,
         "repeat": 1800000
     },
     "urls": {
