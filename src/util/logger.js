@@ -32,7 +32,18 @@ class Logger {
         if (typeof s === "string" || typeof s === "number") return Logger.output(s);
         if (Array.isArray(s)) return Logger.output([Date.getISOtime(Date.now()).slice(0, 24), ...s].join(" | "));
         if (typeof s === "object") return Logger.output([Date.getISOtime(Date.now()).slice(0, 24), ...Object.entries(s).map(([k, v]) => k + ": " + v)].join(" | "));
-        if (typeof s === "function") return console.log(s);
+        if (typeof s === "function") return Logger.output(s.toString());
+        Logger.output(s);
+    }
+
+    static async load(startTime, list, source) {
+        let arr = [
+            Date.getISOtime(Date.now()).slice(0, 24),
+            "loaded"
+        ];
+        if (typeof startTime === "number") arr.push((Date.now() - startTime) + "ms");
+        if (source && Array.isArray(source)) arr.push("FROM " + source[1] + ": " + source[0]);
+        Logger.output(arr.join(" | ") + "\n" + list.map(([s, k]) => ["    " + k, s]).toPairs());
     }
 
     static async output(s) {

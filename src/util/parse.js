@@ -70,7 +70,7 @@ class Parse {
 
 	get Paginator() {
 		if (!this._Paginator) {
-			let PaginatorConstructor = require("../modules/paginator");
+			let PaginatorConstructor = require("../modules/Utility/paginator");
 			this._Paginator = new PaginatorConstructor(this.message);
 		}
 		return this._Paginator;
@@ -78,7 +78,7 @@ class Parse {
 
 	get Embeds() {
 		if (!this._Paginator) {
-			let EmbedsConstructor = require("../modules/embeds");
+			let EmbedsConstructor = require("../modules/Utility/embeds");
 			this._Embeds = new EmbedsConstructor(this.message);
 		}
 		return this._Embeds;
@@ -165,23 +165,29 @@ class Parse {
 
 	get prefix() {
 		if (this._prefix) return this._prefix;
-		let prefixes = this.server ? this.server.prefixes : {
-			"generic": "!",
-			"nadeko": "."
-		};
-		for (let prefix of Object.values(prefixes))
+		for (let prefix of Array.from(this.prefixes.values()))
 			if (this.message.content.startsWith(prefix))
 				return this._prefix = prefix;
 		return "";
-	}
+    }
+    
+    get prefixes() {
+        if (this._prefixes) return this._prefixes;
+        let prefixes = this.server ? this.server.prefixes : {
+            "generic": "!",
+            "nadeko": "."
+        }
+        return this._prefixes = new Map(Object.entries(prefixes));
+    }
 
 	get words() {
-		if (this._words) return this._words;
+        if (this._words) return this._words;
+        if (!this.message || !this.message.content) return [];
 		return this._words = this.message.content.slice(this.prefix.length).match(/[^\s]+/gi) || [];
 	}
 
 	get command() {
-		if (this._command) return this._command;
+        if (this._command) return this._command;
 		return this._command = this.words.length > 0 ? this.words[0] : "";
 	}
 

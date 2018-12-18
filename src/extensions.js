@@ -59,13 +59,33 @@ String.prototype.occurrences = function (subString, allowOverlapping = false) { 
 	return n;
 };
 
+String.prototype.stripQuotes = function() {
+    if (this.startsWith('"') && this.endsWith('"')) return this.slice(1, -1);
+    return this;
+};
+
 //ARRAY PROTOTYPE METHODS
 
+Array.prototype.partition = function (f) { //like Array.prototype.filter but creates an array for elements that fail the test too
+    let res = [], rej = [];  
+    for (let element of this) {
+        if (f(element)) res.push(element);
+        else rej.push(element);
+    }
+    return [res, rej];
+  };
+
+Array.prototype.flat = function (depth) { // this method implemented https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat
+    return this.reduce(function (flat, toFlatten) {
+        return flat.concat((Array.isArray(toFlatten) && (depth - 1)) ? toFlatten.flat(depth - 1) : toFlatten);
+    }, []);
+}
+
 Array.prototype.toPairs = function (bold = false, constant = "") { //returns an array concatenated to a "key: value\n" format
-    return array.map((entry) => {
+    return this.map((entry) => {
         if (Array.isArray(entry)) {
             let [k, v] = entry;
-            return k + ": " + (bold ? v.bold() : v)
+            return k + ": " + (bold && v ? v.toString().bold() : v)
         } else
         if (/string|number/.test(typeof entry)) {
             return constant + (bold ? entry.bold() : entry);
@@ -143,9 +163,10 @@ Array.prototype.inArray = function (string) { //same as Array.prototype.indexOf(
 	return false;
 };
 
-Array.prototype.findIndex = function (f) { //same as Array.prototype.find() but returns an index. Like if .indexOf() took a function
+Array.prototype.findIndex = function (f, startIndex = 0) { //same as Array.prototype.find() but returns an index. Like if .indexOf() took a function
     if (typeof f !== "function") return -1;
-    for (let i = 0; i < this.length; i++) {
+    if (startIndex >= this.length) throw "Invalid start index.";
+    for (let i = startIndex; i < this.length; i++) {
         if (f(this[i])) {
             return i;
         }
@@ -205,7 +226,7 @@ Array.prototype.remove = function (index) { //remove an index or a set of indexe
 
 //OBJECT PROTOTYPE METHODS
 
-Object.prototype._getDescendantProp = function (desc) {
+Object.prototype.getProp = function (desc) {
 	let arr = desc.split('.'), obj = this;
 	while (arr.length) {
 		obj = obj[arr.shift()];
@@ -213,12 +234,26 @@ Object.prototype._getDescendantProp = function (desc) {
 	return obj;
 };
 
-Object.prototype._setDescendantProp = function (desc, value) {
+Object.prototype.setProp = function (desc, value) {
 	let arr = desc.split('.'), obj = this;
 	while (arr.length > 1) {
 		obj = obj[arr.shift()];
 	}
 	return obj[arr[0]] = value;
+};
+
+//FUNCTION PROTOTYPE METHODS (note: mdn says these are 'uneditable'. Oh well.)
+
+Function.prototype.getInputs = function() {
+    let str = this.toString().trim();
+    let arrowRegex = /^\(?([\w\s,]+)\)?\s*\=\>/;
+    let functionRegex = /^(?:function|static|async)?\s*\w+\s?\(([\w\s,]*)\)/;
+    let input;
+    if (arrowRegex.test(str)) input = str.match(arrowRegex)[1];
+    else if (functionRegex.test(str)) input = str.match(functionRegex)[1];
+    if (!input) throw str;
+    let inputs = input.split(",").map(i => i.trim());
+    return inputs;
 };
 
 //NUMBER PROTOTYPE METHODS
