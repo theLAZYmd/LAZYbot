@@ -73,9 +73,9 @@ class FEN extends Parse {
 	get positionfenArray() { //array of 6 items, beginning at 0 ending with 5.
 		let fenArray = this.fenArray.slice(1).clean(); //first exec match is always full match
 		if (fenArray[0].endsWith("/")) fenArray[0] = fenArray[0].slice(0, -1); //removes extra backslash prone to messing shit up
-		if (this.variant === "chess") return fenArray;
 		if (this.variant === "crazyhouse") return fenArray.remove(1); //remove zh group
-		if (this.variant === "threeCheck") return fenArray.remove(6); //remove threecheck group
+        if (this.variant === "threeCheck") return fenArray.remove(6); //remove threecheck group
+        return fenArray;
 	}
 
 	get fen() {
@@ -84,20 +84,27 @@ class FEN extends Parse {
 
 	get positionfen() {
 		return this.positionfenArray.join(" ");
-	}
+    }
+    
+    get colour () {
+        if (this.positionfenArray[1] === "b") return "black";
+        return "white";
+    }
 
 	get flip() {
-		return this.positionfenArray[1] === "b";
+        if (this.variant === "racing-kings") return false;
+        return colour === "black";
 	}
 
 	get variant() {
 		if (this.inhand) return "crazyhouse";
-		if (this.checks) return "threeCheck";
+        if (this.checks) return "threeCheck";
+        if (this.channel && this.channel.name.match(/[a-z]/gi).join("").toLowerCase() === "racingkings") return "racing-kings";
 		return "chess";
 	}
 
 	get inhand() { //a crazyhouse thing
-		if (!this.fenArray[2]) return "";
+		if (!this.fenArray[2]) return undefined;
 		let crazyhouseRegExp = /(?:[pnbrqkPNBRQK]{1,8})\/?/;
 		let fen = this.fenArray[2].match(crazyhouseRegExp);
 		fen[1] = fen[0].replace(/[^A-Z]/g, '');
@@ -114,7 +121,7 @@ class FEN extends Parse {
 	}
 
 	get description() {
-		if (this.variant === "chess") return;
+		if (!/^crazyhouse|threeCheck$/.test(this.variant)) return "";
 		let winhandstring, binhandstring;
 		if (this.variant === "crazyhouse") {
 			let winhand = this.inhand[1].split(""); //converts them to arrays of each character
@@ -166,16 +173,16 @@ class FEN extends Parse {
     }
 
 	get analysisURL() { //encode for chess
-		if (this.variant === "chess") return config.fen.url.analysis.replace("|", encodeURIComponent(this.fen));
+		if (!/^threeCheck|crazyhouse$/.test(this.variant)) return config.fen.url.analysis.replace("|", encodeURIComponent(this.fen));
 		else return config.fen.url[this.variant].replace("|", this.fen.replace(/\s+/g, "_"))
 	} //as is with modified spaces for variants
 
 	get embed() {
 		let embed = new Embed()
-			.setTitle((this.flip ? "Black" : "White") + " to move." + (this.hint ? " " + this.hint : ""))
+			.setTitle((this.colour ? "Black" : "White") + " to move." + (this.hint ? " " + this.hint : ""))
 			.setURL(this.puzzleURL || this.analysisURL)
 			.setImage(this.imageURL)
-		if (this.variant !== "chess") embed.setDescription(this.description);
+		    .setDescription(this.description);
 		return embed;
 	}
 
