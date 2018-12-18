@@ -57,7 +57,9 @@
         "trivia": {
             "min": 10,
             "provisional": 10,
-            "players": {}
+            "players": {
+                "crptone#1398": true
+            }
         },
         "notify": {
             "185412969130229760": 1536336039927,

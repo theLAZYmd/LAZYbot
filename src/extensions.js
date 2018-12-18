@@ -85,7 +85,7 @@ Array.prototype.toPairs = function (bold = false, constant = "") { //returns an 
     return this.map((entry) => {
         if (Array.isArray(entry)) {
             let [k, v] = entry;
-            return k + ": " + (bold ? v.toString().bold() : v)
+            return k + ": " + (bold && v ? v.toString().bold() : v)
         } else
         if (/string|number/.test(typeof entry)) {
             return constant + (bold ? entry.bold() : entry);

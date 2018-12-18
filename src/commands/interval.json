@@ -1,5 +1,5 @@
 {
-    "30000": [{
+    "300000": [{
         "module": "Chess",
         "file": "tracker/tracker",
         "method": "updateCycle"

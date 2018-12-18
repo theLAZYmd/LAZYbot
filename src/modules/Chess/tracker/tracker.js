@@ -267,7 +267,8 @@ class Tracker extends Parse {
 		return DataManager.getData().findd((dbuser) => {
 			if (Object.values(config.sources).filter(source => dbuser[source.key]).length === 0) return false; //sources
             if (dbuser.left) return false;
-            let user = this.client.users.get(dbuser.id);	
+            let user = this.Search.users.byID(dbuser.id);
+            if (!user) return dbuser.left = true;	
 			if (!/online|idle|dnd/.test(user.presence.status)) return false;
 			if (!dbuser.lastupdate) return true;
 			if (dbuser.lastupdate < currentValue && dbuser.lastupdate < Date.now() - config.delays.repeat) {
