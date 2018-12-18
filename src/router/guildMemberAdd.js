@@ -5,4 +5,7 @@ module.exports = async (client, member) => {
     let Constructor = require("../modules/Administration/shadowban.js");
     let Instance = new Constructor({ member })
     Instance.sbusername(member);
+    let dbuser = DBuser.getUser(member);
+    if (dbuser.left) delete dbuser.left;
+    DBuser.setData(dbuser);
 }

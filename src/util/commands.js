@@ -76,7 +76,7 @@ class Commands {
     
     static getAll (time = Date.now()) {
         let map = Array.from(All);
-        Logger.load(time, [[map.length, "All message commands"]], [map.size, "Bot message commands"]);
+        Logger.load(time, [[map.length, "All message commands"]], [map.length, "All message commands"]);
         return Commands._all = map;
     }
 
