@@ -1825,7 +1825,7 @@
             ],
             "description": "Adds, edits, or removes a trophy for a user.",
             "usage": [
-                "trophy add penguingim1 Reached 3000!"
+                "trophy add penguingim1"
             ],
             "module": "Profile",
             "file": "trophy",
