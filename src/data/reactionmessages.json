@@ -2689,6 +2689,123 @@
                 "page": 0,
                 "author": "185412969130229760",
                 "cmdID": "523341545731260416"
+            },
+            "524859288804655114": {
+                "embedgroup": [
+                    {
+                        "title": " Profile for Raven#9079",
+                        "description": "```\nHauptschule```",
+                        "color": 1824998,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "Caleb\nRavenTheSnowman\nPepsiNGaming",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Age: undefined\nSex: \nLocation: **United States**\nRegion: **Americas**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Jun 30 2017**\nThe House: **Dec 13 2017**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`330193848137678848`**\nPosition in Database: **17**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "151,376",
+                                "inline": true
+                            },
+                            {
+                                "name": "House Trophies",
+                                "value": ":trophy: **April Fools 2018 Survivor 'bye'**\n:trophy: **100k messages**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/330193848137678848/8396aa7ac114a87433d33c2a13f10e46.png?size=2048"
+                        },
+                        "footer": {
+                            "text": "1 / 3"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": " Profile for Raven#9079",
+                        "description": "```\nHauptschule```",
+                        "color": 1824998,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[PepsiNGaming](https://lichess.org/@/PepsiNGaming)\nBlitz: **1907**\nBullet: **1866**\nRapid: 1326?\nClassical: **1429**\nCrazyhouse: **1892**\n3-check: **1768**\nAntichess: **2502**\nHorde: **1887**\nAtomic: **2037**\nKing of the Hill: **1716**\nRacing Kings: **1898**",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[getProp](https://lichess.org/@/getProp)\n",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[setProp](https://lichess.org/@/setProp)\n",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:chesscom:430038158244184064> Chess.com",
+                                "value": "[PepsiNGaming](https://www.chess.com/member/PepsiNGaming)\nBullet: **1200**\nBlitz: **1187**\nDaily: **1029**\nRapid: **1175**\nKing of the Hill: **1221**\nCrazyhouse: **1417**\nBughouse: **1511**\nTactics: **779**\nLessons: **1540**",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:chesscom:430038158244184064> Chess.com",
+                                "value": "[getProp](https://www.chess.com/member/getProp)\n",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:chesscom:430038158244184064> Chess.com",
+                                "value": "[setProp](https://www.chess.com/member/setProp)\n",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/330193848137678848/8396aa7ac114a87433d33c2a13f10e46.png?size=2048"
+                        },
+                        "files": [],
+                        "footer": {
+                            "text": "2 / 3"
+                        }
+                    },
+                    {
+                        "title": " Profile for Raven#9079",
+                        "description": "```\nHauptschule```",
+                        "color": 1824998,
+                        "fields": [
+                            {
+                                "name": "<:chesscom:430038158244184064> Chess.com",
+                                "value": "[getProp](https://www.chess.com/member/getProp)\n",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:chesscom:430038158244184064> Chess.com",
+                                "value": "[setProp](https://www.chess.com/member/setProp)\n",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/330193848137678848/8396aa7ac114a87433d33c2a13f10e46.png?size=2048"
+                        },
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "185412969130229760",
+                "cmdID": "524859287122739200"
             }
         },
         "election": {
