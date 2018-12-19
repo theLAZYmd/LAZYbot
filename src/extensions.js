@@ -258,9 +258,22 @@ Function.prototype.getInputs = function() {
 
 //NUMBER PROTOTYPE METHODS
 
-Number.prototype.round = function (places) {
-    (Math.round(this * Math.pow(10, places)) / Math.pow(10, places));
-    return this;
+Number.prototype.radix = function (base) { //converts a number to an array where each element in the array read right to left is the base place value, ex: 9.radix(2) === [1, 0, 0, 1]
+    if (this <= 0) return [0];
+    let sum = this;
+    let value = Math.floor(Math.logBase(base, this));
+    let radix = [];
+    do {
+        let digit = Math.floor(sum / base ** value);
+        radix.push(digit);
+        sum -= digit * base ** value;
+        value--;
+    } while (value >= 0);
+    return radix;
+};
+
+Number.prototype.round = function (places) { //rounds a number to a certain number of places. Give negative value to reduce accuracy. 2259.round(-2) === 2300
+    return (Math.round(this * Math.pow(10, places)) / Math.pow(10, places));
 };
 
 Number.prototype.toSign = function () {
@@ -294,6 +307,10 @@ Date.getMonth = function (ms) {
 };
 
 //MATHS PROTOTYPE METHODS
+
+Math.logBase = function (base, number) {
+    return (Math.log(number) / Math.log(base)).round(12);
+};
 
 Math.randBetween = function (min, max) {
 	return Math.floor(Math.random() * (max - min + 1) + min);
