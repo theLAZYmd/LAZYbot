@@ -111,14 +111,14 @@ class Profile extends Parse {
 	get chessFields() {
 		if (!this._chessFields) {
 			this._chessFields = [];
-			for (let [key, source] of Object.entries(config.sources)) {
-				for (let account in this._dbuser[key]) {
+			for (let [key, source] of Object.entries(config.sources).filter(([k]) => this._dbuser[k])) {
+				for (let account of Object.keys(this._dbuser[key])) {
 					if (account.startsWith("_")) continue;
-					Embed.fielder(this._chessFields,
+					this._chessFields.push([
 						this.Search.emojis.get(key) + " " + source.name,
 						Parse.profile(this._dbuser, source, account) + "\n" + Parse.ratingData(this._dbuser, source, account),
 						true
-					);
+                    ].toField());
 				}
 			}
 		}
@@ -172,7 +172,7 @@ class Profile extends Parse {
 			//check if emoji exists, otherwise just display text
 			["Location", this._dbuser.location],
 			["Region", region]
-		].toPairs("bold");
+		].filter(entry => entry[1]).toPairs("bold");
 	}
 
 	get joined() {
