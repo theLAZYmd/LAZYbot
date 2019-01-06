@@ -92,15 +92,17 @@ class FEN extends Parse {
     }
 
 	get flip() {
+        if (this._flip) return this._flip;
         if (this.variant === "racing-kings") return false;
-        return colour === "black";
+        return this._flip = this.colour === "black";
 	}
 
 	get variant() {
-		if (this.inhand) return "crazyhouse";
-        if (this.checks) return "threeCheck";
-        if (this.channel && this.channel.name.match(/[a-z]/gi).join("").toLowerCase() === "racingkings") return "racing-kings";
-		return "chess";
+        if (this._variant) return this._variant;
+		if (this.inhand) return this._variant = "crazyhouse";
+        if (this.checks) return this._variant = "threeCheck";
+        if (this.channel && this.channel.name.match(/[a-z]/gi).join("").toLowerCase() === "racingkings") return this._variant = "racing-kings";
+		return this._variant = "chess";
 	}
 
 	get inhand() { //a crazyhouse thing
@@ -179,7 +181,7 @@ class FEN extends Parse {
 
 	get embed() {
 		let embed = new Embed()
-			.setTitle((this.colour ? "Black" : "White") + " to move." + (this.hint ? " " + this.hint : ""))
+			.setTitle((this.colour === "black" ? "Black" : "White") + " to move." + (this.hint ? " " + this.hint : ""))
 			.setURL(this.puzzleURL || this.analysisURL)
 			.setImage(this.imageURL)
 		    .setDescription(this.description);

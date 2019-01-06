@@ -48,6 +48,7 @@ class Shadowban extends Parse {
                         .setTitle("⛔️ User Shadowbanned")
                         .addField("Username", user.tag, true)
                         .addField("ID", user.id, true)
+                        .addField("Reason", "By Username.", true)
                     )
                     return;
                 }
@@ -77,6 +78,7 @@ class Shadowban extends Parse {
                         .setTitle("⛔️ User Shadowbanned")
                         .addField("Username", message.author.tag, true)
                         .addField("ID", message.author.id, true)
+                        .addField("Reason", "Admin Shadowbanned.", true)
                     )
                 }
             }
@@ -101,10 +103,12 @@ class Shadowban extends Parse {
                                 this.Output.sender(new Embed()
                                     .setTitle("⛔️ User Shadowbanned")
                                     .addField("Username", message.author.tag, true)
-                                    .addField("ID", message.author.id, true)
+                                    .addField("ID", message.author.id, true)                                    
+                                    .addField("Reason", "By new message.", true)
                                 , this.Search.channels.get(this.server.channels.modmail));
                             }
-                        } else this.Output.sender(new Embed()
+                        };
+                        this.Output.sender(new Embed()
                             .setTitle("Automod filtered message")
                             .addField("Author", this.author, true)
                             .addField("Channel", this.channel, true)
