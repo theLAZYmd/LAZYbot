@@ -12,7 +12,7 @@
                 "count": false,
                 "results": true
             },
-            "trivia": false
+            "trivia": true
         },
         "prefixes": {
             "generic": "!",
@@ -57,9 +57,7 @@
         "trivia": {
             "min": 10,
             "provisional": 10,
-            "players": {
-                "crptone#1398": true
-            }
+            "players": {}
         },
         "notify": {
             "185412969130229760": 1536336039927,
@@ -98,7 +96,8 @@
                 "521392095387451393",
                 "521444374458925078",
                 "521754298711932939",
-                "523175821783990282"
+                "523175821783990282",
+                "480446401201963008"
             ],
             "newMessages": [
                 "/thats[\\w\\s]*jew/i",

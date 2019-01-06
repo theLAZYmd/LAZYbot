@@ -91,6 +91,22 @@
             "523338247267418112": {
                 "tag": "Raven#9079",
                 "lastMail": 1544843961372
+            },
+            "526317643796578304": {
+                "tag": "PawnInTraining#5209",
+                "lastMail": 1545554304839
+            },
+            "529237458596921355": {
+                "tag": "theLAZYmd#2353",
+                "lastMail": 1546250442997
+            },
+            "529345659271249927": {
+                "tag": "Waredude#7719",
+                "lastMail": 1546276240136
+            },
+            "529531497292496926": {
+                "tag": "jaWohl#0352",
+                "lastMail": 1546320547269
             }
         },
         "paginator": {
@@ -2879,6 +2895,273 @@
                 "page": 0,
                 "author": "185412969130229760",
                 "cmdID": "524861565254631425"
+            },
+            "524873736269070356": {
+                "embedgroup": [
+                    {
+                        "title": " Profile for <:bot:455847127365582864> hauptschule#7105",
+                        "description": "```\nProgramFOX for admin```",
+                        "color": 15105570,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "FrostyTheSnowman\nhauptschuleBOT | Ogul1",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Location: **Germany**\nRegion: **Europe**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Jan 03 2016**\nThe House: **Jul 08 2018**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`133249411303211008`**\nPosition in Database: **68**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "23,040",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/133249411303211008/6a1d8fa8fe9f8d651feeb715e8434f25.png?size=2048"
+                        },
+                        "footer": {
+                            "text": "1 / 2"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": " Profile for <:bot:455847127365582864> hauptschule#7105",
+                        "description": "```\nProgramFOX for admin```",
+                        "color": 15105570,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[hauptschuleBOT](https://lichess.org/@/hauptschuleBOT)\nBlitz: 1500?\nBullet: 1500?\nRapid: 1500?\nClassical: 1500?\nAntichess: **2414**",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[Ogul1](https://lichess.org/@/Ogul1)\nBlitz: **1444**\nBullet: **1682**\nRapid: 1533?\nClassical: 1500?\nCrazyhouse: **1583**\n3-check: **1434**\nAntichess: **2412**\nHorde: **1660**\nAtomic: **1657**\nKing of the Hill: 1322?\nRacing Kings: **1766**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/133249411303211008/6a1d8fa8fe9f8d651feeb715e8434f25.png?size=2048"
+                        },
+                        "files": [],
+                        "footer": {
+                            "text": "2 / 2"
+                        }
+                    }
+                ],
+                "period": 30000,
+                "page": 1,
+                "author": "185412969130229760",
+                "cmdID": "524873735170293761"
+            },
+            "525750254134624256": {
+                "embedgroup": [
+                    {
+                        "title": " Profile for ilares#0829",
+                        "description": "",
+                        "color": 15105570,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "ilaaaaaaaaaaaaaaares",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Location: **France**\nRegion: **Europe**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Oct 17 2016**\nThe House: **Nov 14 2018**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`237452159854051329`**\nPosition in Database: **723**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "70",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/237452159854051329/1375fa4a14a0322b2249985214f8e3f5.png?size=2048"
+                        },
+                        "footer": {
+                            "text": "1 / 2"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": " Profile for ilares#0829",
+                        "description": "",
+                        "color": 15105570,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[ilaaaaaaaaaaaaaaares](https://lichess.org/@/ilaaaaaaaaaaaaaaares)\nBlitz: **1839**\nBullet: **1755**\nRapid: 1500?\nClassical: 1500?\nCrazyhouse: **1931**\n3-check: **1755**\nAntichess: **2023**\nHorde: **1803**\nAtomic: **1720**\nRacing Kings: **1961**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/237452159854051329/1375fa4a14a0322b2249985214f8e3f5.png?size=2048"
+                        },
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "373480715276517376",
+                "cmdID": "525750252922208266"
+            },
+            "527869559173021701": {
+                "embedgroup": [
+                    {
+                        "title": "House Guide to Bughouse",
+                        "description": "__**ABOUT**__\n\n**Bughouse** (Bug) chess is a chess variant played on two chessboards by four players in teams of two. The game is usually played at a fast time control; this, together with the passing and dropping of pieces, can make the game look chaotic and random to the casual onlooker; hence the name bughouse, which is slang for mental hospital.\n\nBughouse chess is often called as its abbreviation bug. Other names for this variant are exchange chess, siamese chess, tandem chess, transfer chess, double bughouse, cross chess, swap chess or simply bughouse. It’s also known as wild 24.\n\n__**RULES**__\n\nNormal chess rules apply on bughouse, except that captured pieces on one board are passed on to the teammate on the other board, who then has the option of putting these pieces on his or her board. On any given move, you can either make a normal move, or \"drop\" a piece. You can only drop pieces that you have in hand, from your partner's captures.\n\n__**WHERE?**__\n\nBughouse can be played on..\n\n● [Free Internet Chess Server](http://www.freechess.org/)\n● [bughousetest.com](http://bughousetest.com)\n● [chess.com](http://chess.com)\n\nCompiled by <@333586342275710978>",
+                        "color": 14841132,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/L3HgngE.png"
+                        },
+                        "footer": {
+                            "text": "1 / 4"
+                        }
+                    },
+                    {
+                        "title": "House Guide to Bughouse",
+                        "description": "__**IMPROVE **__\n\nThe guides on the next page will tell you extensively about bughouse strategies, this is only a brief foreword. According to my own experience, the most common novice mistakes are:\n\n• Ignoring the **partner's board**: usually related to deciding whether to trade pieces or not.\n\n• Not utilizing the **uptime**: the clocks are extremely important:  to avoid trades of certain pieces or to wait for certain pieces.\n\n• Not **communicating**: it's very important to communicate with your partner, in some move the queen trade can be mating for you, in other move the trade can be fatal for you.\n\n• Missing **in-between** moves: bishop fork checking the king and attacking a hanging piece is the most common.\n\n• Giving up the **initiative/check**: if the clocks are even and both players are attacking each other, either giving checks or executing 1-move-threats are very useful in order to force your opponent on defensive foot.",
+                        "color": 14841132,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/L3HgngE.png"
+                        },
+                        "footer": {
+                            "text": "2 / 4"
+                        }
+                    },
+                    {
+                        "title": "House Guide to Bughouse",
+                        "description": "__**GUIDES**__\n\nWritten guides by some of the most prolific bughouse players. View the next page to see training videos and advice.\n\n• **Sorsi:** [Multiple blog posts](https://www.chess.com/blog/Sorsi)\n\n• **Minigreat:** [Multiplie blog posts](https://www.chess.com/blog/MiniGreat)\n\n• **420Blaziken_it:** [Bughouse concepts](http://bit.ly/2tempBu) about speed, efficiently, defending, activity, and looking at partner's board.\n\n• **ChickenCrossRoad:** [Bughouse concepts](http://bit.ly/2F8FEly) about speed, communication,  move quality, material, and timing.",
+                        "color": 14841132,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/L3HgngE.png"
+                        },
+                        "footer": {
+                            "text": "3 / 4"
+                        }
+                    },
+                    {
+                        "title": "House Guide to Bughouse",
+                        "description": "**__VIDEOS__**\n\nThe House presents to you the best and most famous streamers of bughouse.\n\n• **JannLee**: [Youtube](<https://www.youtube.com/channel/UCbo8-5AEH7u3lE-yOGeNW1Q>), [Twitch](https://www.twitch.tv/jannleecrazyhouse).\n\n• **Nikolas Theiss**: [Youtube](https://www.youtube.com/channel/UCsjRN9g1AYODJZOPVJKzUmw/), [Twitch](https://www.twitch.tv/nikolastheiss).\n\n• **Thomas Crosky**: [Youtube](https://www.youtube.com/channel/UCvowgcm56sLguWxYp8oqI1w).\n\n• **Helmsknight**: [Youtube](https://www.youtube.com/channel/UCcKXwA_lo3Zpz3_Mc-WVLtw), [Twitch](https://www.twitch.tv/helmsknight).\n\n• **okeizh**: [Twitch](https://www.twitch.tv/okeizh). \n\n• **Addy**: [Twitch](https://www.twitch.tv/drunkenmushy)\n\n• **Chuck Moulton**: [Twitch](https://www.twitch.tv/chuckmoulton)\n\nWant your stream to appear here? Let the mods know.\nWhat to create a bio page for your stream? Type `... embedex` and design yourself a page; alternatively send one of the mods the details you want to be included.",
+                        "color": 14841132,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/L3HgngE.png"
+                        },
+                        "footer": {
+                            "text": "4 / 4"
+                        }
+                    }
+                ],
+                "period": 180000,
+                "page": 0,
+                "author": "319901088557957122",
+                "cmdID": "527869557793226762"
+            },
+            "530156014339883010": {
+                "embedgroup": [
+                    {
+                        "title": " Profile for ijh#0966",
+                        "description": "```\nYour current finger message is:```",
+                        "color": 15844367,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "Lord of  the Bans\nrobinhood2q1c | ijhreturns | ijh",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Location: **Lebanon**\nRegion: **Americas**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Jul 12 2017**\nThe House: **Jun 12 2018**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`334801525400666112`**\nPosition in Database: **310**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "15,849",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/334801525400666112/463a34ce1b2ccdab7120f54c1ed52929.png?size=2048"
+                        },
+                        "footer": {
+                            "text": "1 / 2"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": " Profile for ijh#0966",
+                        "description": "```\nYour current finger message is:```",
+                        "color": 15844367,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[ijh](https://lichess.org/@/ijh)\nBlitz: 1075?\nBullet: 1371?\nRapid: 1122?\nClassical: 1122?\nCrazyhouse: **1550**\n3-check: 1378?\nAntichess: **1918**\nHorde: **1332**\nAtomic: **2249**\nRacing Kings: **1633**",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:chesscom:430038158244184064> Chess.com",
+                                "value": "[robinhood2q1c](https://www.chess.com/member/robinhood2q1c)\n",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:chesscom:430038158244184064> Chess.com",
+                                "value": "[ijhreturns](https://www.chess.com/member/ijhreturns)\nBughouse: **714**",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:chesscom:430038158244184064> Chess.com",
+                                "value": "[ijh](https://www.chess.com/member/ijh)\nBlitz: 1452?\nDaily: 1542?\nRapid: **1116**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/334801525400666112/463a34ce1b2ccdab7120f54c1ed52929.png?size=2048"
+                        },
+                        "files": [],
+                        "footer": {
+                            "text": "2 / 2"
+                        }
+                    }
+                ],
+                "period": 30000,
+                "page": 1,
+                "author": "334801525400666112",
+                "cmdID": "530156013349896202"
             }
         },
         "election": {

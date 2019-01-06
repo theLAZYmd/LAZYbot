@@ -5,7 +5,7 @@ class DBuser {
         this.username = user.username,
         this.messages = {
             "count": 0,
-            "last": user.lastMessage.content,
+            "last": user.lastMessage ? user.lastMessage.content : "",
             "lastSeen": Date.now()
         }
     }

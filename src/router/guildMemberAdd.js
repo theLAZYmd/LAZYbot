@@ -1,4 +1,5 @@
-const Logger = require("../util/logger.js");
+const Logger = require("../util/logger");
+const DBuser = require("../util/dbuser");
 
 module.exports = async (client, member) => {
     Logger.log(["auto", "guildMemberAdd", "join", "[" + member.user.tag + "]"]);
