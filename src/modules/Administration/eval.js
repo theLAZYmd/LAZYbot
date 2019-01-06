@@ -48,10 +48,7 @@ class Eval extends Parse {
         try {
             if (!this.Check.owner(this.author)) throw "That command is bot owner only.\nIf you are not an active developer on the bot, you cannot use this command."; //extra protection, in case permission.js fails
             if (/^```[a-z]+[\s\n]+([\w\W]+)```$/.test(argument)) argument = argument
-                .match(/^```[a-z]+[\s\n]+([\w\W]+)```$/)[1]
-                .replace(/'/g,"\\'")
-                .replace(/"/g,'\\"')
-                .replace(/`/g,'\\`');
+                .match(/^```[a-z]+\s+([\w\W\"]+)```$/)[1]
             else throw "Incorrect formatting! Use a code block!";
             eval(argument);
         } catch (e) {

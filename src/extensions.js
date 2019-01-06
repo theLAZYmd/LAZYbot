@@ -66,6 +66,19 @@ String.prototype.stripQuotes = function() {
 
 //ARRAY PROTOTYPE METHODS
 
+Array.prototype.rotate = function () { //rotates a 2-Dimensional array
+    return Object.keys(this[0]).map(column => this.map(row => row[column]));
+};
+
+Array.prototype.toFrequency = function () { //reduces down an array to its frequencies of elements
+    return this.reduce((acc, curr) => {
+        if (curr === undefined || curr == null) return acc;
+        if (!acc[curr.toString()]) acc[curr.toString()] = 1;
+        else acc[curr.toString()]++;
+        return acc;
+    }, {});
+}
+
 Array.prototype.partition = function (f) { //like Array.prototype.filter but creates an array for elements that fail the test too
     let res = [], rej = [];  
     for (let element of this) {
@@ -125,15 +138,20 @@ Array.prototype.toProperCase = function () { //does String.prototype.toProperCas
 	return this;
 };
 
+
+Array.prototype.swap = function (i, j) { //swaps two elements in an array
+	let tmp = this[i];
+	this[i] = this[j];
+	this[j] = tmp;
+	return this;
+};
+
 Array.prototype.shuffle = function () { //Fisher-Yates shuffle algorithm for javascript
-	let currentIndex = this.length,
-		temporaryValue, randomIndex;
-	while (0 !== currentIndex) { // while there remain elements to shuffle...
-		randomIndex = Math.randBetween(0, currentIndex); // pick a remaining element...
-		currentIndex--;
-		temporaryValue = this[currentIndex]; // and swap it with the current element.
-		this[currentIndex] = this[randomIndex];
-		this[randomIndex] = temporaryValue;
+	let c = this.length;
+	while (0 !== c) { // while there remain elements to shuffle...
+		let r = Math.randBetween(0, c); // pick a remaining element...
+		c--;
+		this.swap(r, c);
 	}
 	return this.clean();
 };
@@ -193,14 +211,8 @@ Array.prototype.indexesOf = function (str) { //same as Array.prototype.indexOf()
         arr.push(currValue);
     }
     return arr;
-}
-
-Array.prototype.swap = function (dbindex1, dbindex2) { //swaps two elements in an array
-	let dummy = this[dbindex1];
-	this[dbindex1] = this[dbindex2];
-	this[dbindex2] = dummy;
-	return this;
 };
+
 
 Array.prototype.clean = function () { //removes null or undefined values from an array
 	for (let i = 0; i < this.length; i++) {
@@ -240,6 +252,18 @@ Object.prototype.setProp = function (desc, value) {
 		obj = obj[arr.shift()];
 	}
 	return obj[arr[0]] = value;
+};
+
+Object.compare = function (obj1, obj2) {
+    for (let [k, v] of Object.entries(obj1)) {
+        if (obj2[k] === undefined || obj2[k] === null) return false;
+        if (obj2[k].toString() !== v.toString()) return false;
+    }
+    for (let [k, v] of Object.entries(obj2)) {
+        if (obj1[k] === undefined || obj1[k] === null) return false;
+        if (obj1[k].toString() !== v.toString()) return false;
+    }
+    return true;
 };
 
 //FUNCTION PROTOTYPE METHODS (note: mdn says these are 'uneditable'. Oh well.)
