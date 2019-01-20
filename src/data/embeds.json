@@ -666,21 +666,40 @@
                 "url": "https://i.imgur.com/Jnbg4fG.png"
             }
         },
-        "trivia": {
-            "title": "House Trivia",
-            "description": "Based on **number of participants** in the trivia game! Bigger rewards, more features for better games.",
-            "fields": [{
-                    "name": "Winnings",
-                    "value": "**1** player: 0 🌸 for 1st\n**2** players: 3 🌸 for 1st, 1 🌸 for 2nd\n**3** players: 4 🌸 for 1st, 2 🌸 for 2nd\n**4** players: 5 🌸 for 1st, 3 🌸 for 2nd, 1 🌸 for 3rd\n**5** players 6 🌸 for 1st, 4 🌸 for 2nd, 2 🌸 for 3rd\n**6 players** 7 🌸 for 1st, 5 🌸 for 2nd, 3 🌸 for 3rd, 1 🌸 for 4th\n... and so on.\n\nPayouts are done automatically.\nPokemon trivia is not rewarded 🌸.",
-                    "inline": false
-                },
-                {
-                    "name": "Rating",
-                    "value": "Trivia games are now rated using a formula and mechanism developed by <@!373480715276517376> and <@340287144448884748> respectively! More info to come...",
-                    "inline": false
-                }
-            ]
-        },
+        "trivia": [
+      {
+        "title": "House Trivia",
+        "description": "Based on **number of participants** in the trivia game! Bigger rewards, more features for better games.",
+        "fields": [
+          {
+            "name": "Winnings",
+            "value": "**1** player: 0 🌸 for 1st\n**2** players: 3 🌸 for 1st, 1 🌸 for 2nd\n**3** players: 4 🌸 for 1st, 2 🌸 for 2nd\n**4** players: 5 🌸 for 1st, 3 🌸 for 2nd, 1 🌸 for 3rd\n**5** players 6 🌸 for 1st, 4 🌸 for 2nd, 2 🌸 for 3rd\n**6 players** 7 🌸 for 1st, 5 🌸 for 2nd, 3 🌸 for 3rd, 1 🌸 for 4th\n... and so on.\n\nPayouts are done automatically.\nPokemon trivia is not rewarded 🌸.",
+            "inline": false
+          }
+        ]
+      },
+      {
+        "title": "Trivia ratings",
+        "description": "Lazybot has a feature that reads the trivia results and calculates a rating based on your performance. The formula for this was developed by <@!373480715276517376> and <@340287144448884748>.",
+        "fields": [
+          {
+            "name": "How do I see the rating?",
+            "value": "The rating of all participating players will be shown after a game of trivia finishes.\nYou can check your own and the rating of other people using the `!triviarating` command.\nThe leaderboard is accessible through the `!lb` command in the respective channel.",
+            "inline": false
+          },
+          {
+            "name": "How are the ratings calculated?",
+            "value": "The rating is based on the score you reach in a game. It takes into account the strength (rating) of your opponents. Your placement does not matter for the rating calculation.\nFor playing a rated game there are at least two players required. Only games of first to ten questions or more count.\nNew players start with a provisional rating of 1500. It is considered provisional (indicated by a questionmark) until you have played ten rated games. During that period your rating will adjust with higher magnitude.",
+            "inline": false
+          },
+          {
+            "name": "I don't want to play rated!",
+            "value": "The bot will ask you if you want to participate in the rated game once you send your first message during an ongoing game.\nIf you decline, your score will not be taken into account for the calculation and not affect any ratings.",
+            "inline": false
+          }
+        ]
+      }
+    ],
         "greet": [{
                 "content": "**Welcome to The House %user.mention%!** Let's get the party started @welcome squad.\n",
                 "description": "**We're the home of chess variants across lichess.org, chess.com, FICS, and anywhere else.**\u200b",
