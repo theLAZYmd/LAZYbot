@@ -3,9 +3,9 @@
         "id": "185412969130229760",
         "username": "theLAZYmd#2353",
         "messages": {
-            "count": 76426,
-            "last": "Yes he's a bot that swears",
-            "lastSeen": 1552503425609
+            "count": 76458,
+            "last": "<:seemsgood:372817382177243136>",
+            "lastSeen": 1552520983922
         },
         "bidamount": 100000000000000000,
         "location": "Toronto",
@@ -544,21 +544,21 @@
         "id": "303609777756438529",
         "username": "Andrew#5850",
         "messages": {
-            "count": 15772,
-            "last": "Play me in anti sometime hipno",
-            "lastSeen": 1552365841069
+            "count": 15778,
+            "last": "You definitely had one",
+            "lastSeen": 1552520523922
         },
         "lichess": {
             "_main": "Link",
             "Link": {
-                "maxRating": "2140",
+                "maxRating": "2131",
                 "blitz": "1336",
                 "bullet": "1441",
                 "rapid": "1395",
                 "classical": "1427",
                 "crazyhouse": "1421",
                 "3-check": "1493",
-                "anti": "2140",
+                "anti": "2131",
                 "horde": "1471",
                 "atomic": "1724",
                 "koth": "1520",
@@ -567,7 +567,7 @@
             "_country": "US",
             "_language": "en"
         },
-        "lastupdate": 1552503449294,
+        "lastupdate": 1552520072233,
         "location": "United States"
     },
     {
@@ -660,9 +660,9 @@
         "id": "330193848137678848",
         "username": "Raven#9079",
         "messages": {
-            "count": 185903,
-            "last": "monkathink",
-            "lastSeen": 1552514580280
+            "count": 185988,
+            "last": "<@425397119315214336> <:dansgame:452060723871219722>",
+            "lastSeen": 1552520839774
         },
         "trophy": [
             "April Fools 2018 Survivor 'bye'",
@@ -705,7 +705,7 @@
             "_country": "US",
             "_language": "en-GB"
         },
-        "lastupdate": 1552516049922,
+        "lastupdate": 1552519789898,
         "finger": "MMichael isn't my favorite mod anymore dansgame",
         "trivia": {
             "rating": 1332,
@@ -843,9 +843,9 @@
         "id": "377227077859934208",
         "username": "Babosos#3628",
         "messages": {
-            "count": 17156,
-            "last": "Right.....",
-            "lastSeen": 1552518634490
+            "count": 17196,
+            "last": "what!",
+            "lastSeen": 1552520899635
         },
         "lichess": {
             "_main": "Babosos",
@@ -857,7 +857,7 @@
                 "classical": "1638?",
                 "crazyhouse": "1351",
                 "3-check": "1472",
-                "anti": "1970",
+                "anti": "2027",
                 "horde": "1918",
                 "atomic": "1640",
                 "koth": "1540",
@@ -868,7 +868,7 @@
         "age": "23",
         "sex": "male",
         "location": "Usa",
-        "lastupdate": 1552508849381
+        "lastupdate": 1552519792351
     },
     {
         "id": "324082212146249730",
@@ -1822,9 +1822,9 @@
         "id": "316064197425496064",
         "username": "Sazed#0001",
         "messages": {
-            "count": 348,
-            "last": "how many to ban your user of choice",
-            "lastSeen": 1552242947576
+            "count": 349,
+            "last": "no thx",
+            "lastSeen": 1552520894517
         }
     },
     {
@@ -2737,7 +2737,7 @@
                 "lessons": "1250?"
             }
         },
-        "lastupdate": 1552499549478,
+        "lastupdate": 1552519945923,
         "location": "Brazil"
     },
     {
@@ -3620,9 +3620,9 @@
         "id": "425397119315214336",
         "username": "Professor Chronatog#2674",
         "messages": {
-            "count": 11735,
-            "last": "Same range",
-            "lastSeen": 1552519096579
+            "count": 11802,
+            "last": "<:GWqlabsMingLUL:398950628056891393>",
+            "lastSeen": 1552520971565
         },
         "lastupdate": 1552501649247,
         "lichess": {
@@ -5513,9 +5513,9 @@
         "id": "334801525400666112",
         "username": "ijh#0966",
         "messages": {
-            "count": 24178,
-            "last": "well, he's 2400 blitz 😛",
-            "lastSeen": 1552518002151
+            "count": 24204,
+            "last": "k",
+            "lastSeen": 1552520927755
         },
         "lichess": {
             "_main": "ijh",
@@ -5552,7 +5552,7 @@
                 "rapid": "1116"
             }
         },
-        "lastupdate": 1552515149878,
+        "lastupdate": 1552520080595,
         "finger": "Your current finger message is:",
         "trivia": {
             "rating": 1370,
@@ -9058,7 +9058,7 @@
             },
             "_country": "US"
         },
-        "lastupdate": 1552442249175,
+        "lastupdate": 1552520765154,
         "chesscom": {
             "_main": "challengerin24hours",
             "challengerin24hours": {
@@ -11663,7 +11663,7 @@
             "_country": "IS",
             "_language": "en-GB"
         },
-        "lastupdate": 1552434150681,
+        "lastupdate": 1552520465264,
         "chesscom": {
             "_main": "cerv0nw0ng",
             "cerv0nw0ng": {
@@ -15297,8 +15297,9 @@
             },
             "_country": "GN"
         },
-        "lastupdate": 1552050107900,
-        "username": "NamasteToEveryone#6539"
+        "lastupdate": 1552519645716,
+        "username": "NamasteToEveryone#6539",
+        "left": true
     },
     {
         "id": "333021987741892610",

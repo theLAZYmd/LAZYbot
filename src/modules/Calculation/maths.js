@@ -45,24 +45,20 @@ class Maths extends Parse {
     }
 
     static negativebinomial(r, p, x, cumulative) {
-        let result = Maths.choose(x - 1, r - 1) * "pow(p, r) * ";
-        pow(1 - p, x - r);
+        let result = Maths.choose(x - 1, r - 1) * Math.pow(p, r) * Math.pow(1 - p, x - r);
         if (cumulative) {
             for (let i = 0; i < x; i++) {
-                result += Maths.choose(x - 1, r - 1) * "pow(p, r) * ";
-                pow(1 - p, x - r);
+                result += Maths.choose(x - 1, r - 1) * Math.pow(p, r) * Math.pow(1 - p, x - r);
             }
         }
         return result;
     }
 
     static binomial(n, p, x, cumulative) {
-        let result = Maths.choose(n, x) * "pow(p, x) * ";
-        pow(1 - p, n - x);
+        let result = Maths.choose(n, x) * Math.pow(p, x) * Math.pow(1 - p, n - x);
         if (cumulative) {
             for (let i = 0; i < x; i++) {
-                result += Maths.choose(n, i) * "pow(p, i) * ";
-                pow(1 - p, n - i);
+                result += Maths.choose(n, i) * Math.pow(p, i) * Math.pow(1 - p, n - i);
             }
         }
         return result;
