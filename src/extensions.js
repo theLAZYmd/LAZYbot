@@ -1,10 +1,15 @@
 /* Built by @theLAZYmd
- * Derived from experience from the experience of what methods might be useful to call straight from a string
+ * Derived from experience from the experience of what methods might be useful to call straight from a native object
+ * Understandably, these will clash with other people's code or future updates to node.js. This will be maintained frequently and 
  * Formatting methods are designed for markdown or for displaying front-end
  * Note that iterating over the properties of these prototypes with for(... in...) will therefore bring up unwanted results
  */
 
 //STRING PROTOTYPE METHODS
+
+String.prototype.vowel = function () {
+    return /^(a|e|i|o|u)/.test(this);
+};
 
 String.prototype.toProperCase = function () { //Sets All Words In The String To Have First Letter Capitalised
 	let words = this.split(/ +/g);
@@ -86,7 +91,7 @@ Array.prototype.partition = function (f) { //like Array.prototype.filter but cre
         else rej.push(element);
     }
     return [res, rej];
-  };
+};
 
 Array.prototype.flat = function (depth) { // this method implemented https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat
     return this.reduce(function (flat, toFlatten) {

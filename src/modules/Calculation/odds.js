@@ -12,7 +12,6 @@ class All extends Parse {
 class Series extends All {
     constructor(message) {
         super(message);
-        this.embed = {};
     }
 
     async input() { //if there's a draw the bettor just gets all the money

@@ -107,7 +107,7 @@ class FEN extends Parse {
 
 	get inhand() { //a crazyhouse thing
 		if (!this.fenArray[2]) return undefined;
-		let crazyhouseRegExp = /(?:[pnbrqkPNBRQK]{1,8})\/?/;
+		let crazyhouseRegExp = /(?:[pnbrqkPNBRQK]{1,16})\/?/;
 		let fen = this.fenArray[2].match(crazyhouseRegExp);
 		fen[1] = fen[0].replace(/[^A-Z]/g, '');
 		fen[2] = fen[0].replace(/[^a-z]/g, '');

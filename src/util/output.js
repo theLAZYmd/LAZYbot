@@ -207,7 +207,7 @@ class Output extends Parse {
 			let author = data.title ? {
 				"name": data.title
 			} : {};
-            let title = data.description ? data.description : `Please choose a${/^(a|e|i|o|u)/.test(data.type) ? "n" : ""} ${data.type}:`;
+            let title = data.description ? data.description : `Please choose a${data.type.vowel() ? "n" : ""} ${data.type}:`;
             for (let i = 0; i < data.options.length; i++) {
                 description += this.Search.emojis.get(emojis[i]) + "**" + data.options[i] + "**\n";
             }

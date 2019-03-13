@@ -1,6 +1,5 @@
 const DBuser = require("./dbuser.js");
 const Parse = require("./parse.js");
-
 class Search extends Parse {    //allows searching with resolvables ex: someone might search '!profile Kyle' but equally '!profile Kyle#428' or !profile 325736595980288010'
 	constructor(message) {
 		super(message);
