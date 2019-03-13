@@ -253,7 +253,7 @@ class Router {
 				}
 				if (kill) throw cmdInfo.method;
 			} catch (e) { //if it fails any of requirements, throw
-				throw Permissions.output(type, argsInfo) ? Permissions.output(type, argsInfo) + "\nUse `" + cmdInfo.prefix + "help` followed by command name to see command info." : ""; //if no Permissions, kill it
+				throw Permissions.output(type, argsInfo) ? Permissions.output(type, argsInfo) + "\nUse `" + argsInfo.server.prefixes.prefix[cmdInfo.prefix] + "help` followed by command name to see command info." : ""; //if no Permissions, kill it
 			}
 		}
 		return true;
