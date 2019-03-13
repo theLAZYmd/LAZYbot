@@ -77,7 +77,8 @@
                 "/go[\\S]+a+m/i",
                 "/jews[\\S]+fuck/i",
                 "/fuck[\\S]+jews/i",
-                "/testNewMessage/"
+                "/testNewMessage/",
+                "/dumb[\\w\\s]*chuck/i"
             ],
             "users": [
                 "521024815608496129",
@@ -97,7 +98,8 @@
                 "521444374458925078",
                 "521754298711932939",
                 "523175821783990282",
-                "480446401201963008"
+                "480446401201963008",
+                "544381541514739712"
             ],
             "newMessages": [
                 "/thats[\\w\\s]*jew/i",
@@ -113,7 +115,8 @@
                 "/bitch[\\s\\w\\n]*nojoke/i",
                 "/real[\\s\\w\\n]*gola+m/i",
                 "/Screen_Shot_2018-12-12_at_8.15.33_PM.png/",
-                "/documentingreality.com\\/forum\\/f10\\//"
+                "/documentingreality.com\\/forum\\/f10\\//",
+                "/\\bnig+er+s*\\b/i"
             ]
         }
     },

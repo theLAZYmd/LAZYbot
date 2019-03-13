@@ -53,9 +53,9 @@ class DBuser {
 
     static byAliases(alias, exactmode) {
         return DataManager.getData().find((dbuser) => {
-            for (let source in config.sources) {
-                if (dbuser[source]) {
-                    for (let account in dbuser[source].filter(a => !a.startsWith("_"))) {
+            for (let source of Object.keys(config.sources)) {
+                if (typeof dbuser[source] === "object") {
+                    for (let account of Object.keys(dbuser[source]).filter(a => !a.startsWith("_"))) {
                         if (!exactmode && account.toLowerCase().startsWith(alias.toLowerCase())) return true;
                         else if (exactmode && account.toLowerCase() === alias.toLowerCase()) return true;
                     }

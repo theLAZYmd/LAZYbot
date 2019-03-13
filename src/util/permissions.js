@@ -34,7 +34,7 @@ class Permissions {
 			else if (channelResolvable.type) return channelResolvable.type === argsInfo.channel.type;
 		}
 		if (!argsInfo.guild.channels.some(channel => channel.name.toLowerCase() === argsInfo.server.channels[channelName].toLowerCase())) channelName = "general";
-		return argsInfo.channel.name.toLowerCase() === argsInfo.server.channels[channelName].toLowerCase();
+		return argsInfo.channel.name.toLowerCase() === (argsInfo.server.channels[channelName] || "").toLowerCase();
 	}
 
 	static state(state, data) {
