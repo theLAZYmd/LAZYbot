@@ -5258,56 +5258,6 @@
                 "page": 0,
                 "author": "185412969130229760",
                 "cmdID": "555534618678525952"
-            },
-            "555537916240199682": {
-                "embedgroup": [
-                    {
-                        "title": "<:lazyslack:481627747781836800> LAZY odds for match John Ryan vs Andy Shamis",
-                        "description": "Showing discrete odds...\n**Note:** these odds are not valid unless it is <@!185412969130229760> who has request them.",
-                        "color": 53380,
-                        "fields": [
-                            {
-                                "name": "How many games will John Ryan win?    ​",
-                                "value": "Exactly 0: -\nExactly 1: -\nExactly 2: -\nExactly 3: -\nExactly 4: -\nExactly 5: -\nExactly 6: **49.73** (+4873)\nExactly 7: **11.02** (+1002)\nExactly 8: **3.72** (+272)\nExactly 9: **2.12** (+112)\nExactly 10: **2.69** (+169)\nThe match: -",
-                                "inline": true
-                            },
-                            {
-                                "name": "How many games will Andy Shamis win?    ​",
-                                "value": "Exactly 0: **2.69** (+169)\nExactly 1: **2.12** (+112)\nExactly 2: **3.72** (+272)\nExactly 3: **11.02** (+1002)\nExactly 4: **49.73** (+4873)\nExactly 5: -\nExactly 6: -\nExactly 7: -\nExactly 8: -\nExactly 9: -\nExactly 10: -\nThe match: **42.53** (+4153)",
-                                "inline": true
-                            }
-                        ],
-                        "footer": {
-                            "text": "1 / 2"
-                        },
-                        "files": []
-                    },
-                    {
-                        "title": "<:lazyslack:481627747781836800> LAZY odds for match John Ryan vs Andy Shamis",
-                        "description": "Showing cumulative odds...\n**Note:** these odds are not valid unless it is <@!185412969130229760> who has request them.",
-                        "fields": [
-                            {
-                                "name": "How many games will John Ryan win?    ​",
-                                "value": "At least 0: -\nAt least 1: -\nAt least 2: -\nAt least 3: -\nAt least 4: -\nAt least 5: -\nAt least 6: -\nAt least 7: -\nAt least 8: -\nAt least 9: **1.19** (-526)\nAt least 10: **2.69** (+169)\nThe match: -",
-                                "inline": true
-                            },
-                            {
-                                "name": "How many games will Andy Shamis win?    ​",
-                                "value": "At least 0: -\nAt least 1: **1.17** (-588)\nAt least 2: **2.61** (+161)\nAt least 3: **8.75** (+775)\nAt least 4: **42.53** (+4153)\nAt least 5: -\nAt least 6: -\nAt least 7: -\nAt least 8: -\nAt least 9: -\nAt least 10: -\nThe match: **42.53** (+4153)",
-                                "inline": true
-                            }
-                        ],
-                        "files": [],
-                        "footer": {
-                            "text": "2 / 2"
-                        },
-                        "color": 53380
-                    }
-                ],
-                "period": 180000,
-                "page": 0,
-                "author": "185412969130229760",
-                "cmdID": "555537844916060183"
             }
         },
         "election": {
