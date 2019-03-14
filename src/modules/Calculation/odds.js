@@ -20,7 +20,8 @@ class Series extends All {
                 "players": []
             };
             data.length = parseInt(await this.Output.response({ //get the number of games played. Game total must add up to this number.
-                "description": "Please input the number of games played in the series.",
+                "description": "Please input the number of games about to be played in the series.",
+                "footer": "max: 20",
                 "filter": m => Number(m.content) < 21,
                 "number": true
             }));
@@ -91,7 +92,12 @@ class Series extends All {
         let type = page === 0 ? "discrete" : "cumulative";
         let embed = new Embed()
             .setTitle(this.Search.emojis.get("lazyslack") + " LAZY odds for match " + data.players[0].name + " vs " + data.players[1].name)
-            .setDescription("Showing " + type + " odds...\n**Note:** these odds are not valid unless it is <@!185412969130229760> who has request them.");
+            .setDescription([
+                "Showing " + type + " odds...",
+                "Reliability: **" + (data.reliability * 4).toFixed(2) + "**",
+                "Accuracy: **" + (data.accuracy * 4).toFixed(2) + "**",
+                "**Note:** these odds are not valid unless it is <@!185412969130229760> who has request them."
+            ].join("\n"));
         for (let player of data.players) {
             let array = [];
             for (let j = 0; j < data.length + 1; j++) {
