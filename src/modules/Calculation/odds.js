@@ -20,7 +20,8 @@ class Series extends All {
                 "players": []
             };
             data.length = parseInt(await this.Output.response({ //get the number of games played. Game total must add up to this number.
-                "description": "Please input the number of games played in the series.",
+                "description": "Please input the number of games about to be played in the series.",
+                "footer": "max: 20",
                 "filter": m => Number(m.content) < 21,
                 "number": true
             }));

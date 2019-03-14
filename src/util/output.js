@@ -272,7 +272,7 @@ class Output extends Parse {
 			data = Object.assign({
 				"author": this.author,
 				"channel": this.channel,
-				"description": "Please type your response below.",
+                "description": "Please type your response below.",
 				"filter": () => {
 					return true
 				},
@@ -280,10 +280,11 @@ class Output extends Parse {
 				"time": 60000
 			}, data);
 			let author = data.title ? Embed.author(data.title) : {};
-			let msg = await this.reactor({
-				author,
-				"description": data.description
-			}, data.editor ? data.editor : data.channel, ["❎"]);
+            let msg = await this.reactor(new Embed()
+                .setAuthor(data.title || "")
+                .setDescription(data.description || "")
+                .setFooter(data.footer || "")
+			, data.editor ? data.editor : data.channel, ["❎"]);
 			let rfilter = (reaction, user) => {
 				if (user.id !== data.author.id) return false;
 				if (reaction.emoji.name !== "❎") return false;
