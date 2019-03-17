@@ -1881,6 +1881,45 @@
         },
         {
             "aliases": [
+                "triviaplaying",
+                "tplay"
+            ],
+            "description": "Shows a list of trivia players who are currently being rated.",
+            "usage": [
+                "triviaplaying"
+            ],
+            "module": "Trivia",
+            "file": "trivia",
+            "method": "show",
+            "arguments": [],
+            "prefix": "generic",
+            "requires": {
+                "channels": "trivia"
+            }
+        },
+        {
+            "aliases": [
+                "triviarate",
+                "trate"
+            ],
+            "description": "Adds a user who had previously excluded themselves from the trivia rating list.",
+            "usage": [
+                "triviarate",
+                "trate obi"
+            ],
+            "module": "Trivia",
+            "file": "trivia",
+            "method": "rate",
+            "arguments": [
+                "argument"
+            ],
+            "prefix": "generic",
+            "requires": {
+                "channels": "trivia"
+            }
+        },
+        {
+            "aliases": [
                 "triviarating",
                 "trat"
             ],

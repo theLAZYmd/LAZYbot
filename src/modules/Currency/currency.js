@@ -4,7 +4,7 @@ const Color = require("../Profile/color.js");
 class Currency extends Parse {
 
   on () {
-    this.message.delete();
+    this.message.delete().catch(() => {});
   }
 
   timely () {

@@ -117,8 +117,8 @@ class Router {
 				}
 				if (cmdInfo.aliases) {
 					if (cmdInfo.prefix !== argsInfo.prefix) return false;
-					if (cmdInfo.aliases.inArray(argsInfo.command)) return true;
-					if (cmdInfo.aliases.inArray(argsInfo.message.content)) return true;
+					if (cmdInfo.aliases.inArray(argsInfo.command.toLowerCase())) return true;
+					if (cmdInfo.aliases.inArray(argsInfo.message.content.toLowerCase())) return true;
 					return false;
 				}
 			})
@@ -155,8 +155,8 @@ class Router {
 				if (argsInfo.prefix) {
 					cmdInfo.prefix = argsInfo.server.prefixes[cmdInfo.prefix];
 					if (cmdInfo.prefix !== argsInfo.prefix) return false;
-					if (cmdInfo.aliases.inArray(argsInfo.command)) return true;
-					if (cmdInfo.aliases.inArray(argsInfo.message.content)) return true;
+					if (cmdInfo.aliases.inArray(argsInfo.command.toLowerCase())) return true;
+					if (cmdInfo.aliases.inArray(argsInfo.message.content.toLowerCase())) return true;
 					return false;
 				} else {
 					if (!cmdInfo.subcommands) return false;

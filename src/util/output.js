@@ -77,7 +77,7 @@ class Output extends Parse {
 				this.log(i === index.length - 1);
 				this.sender(new Embed()
 					.setColor(9359868)
-					.setDescription((string.slice(i * keylength, (i === index.length - 1 ? string.length + 2 : i * keylength + keylength)) + " ".repeat(48) + "\u200b").format())
+					.setDescription((string.slice(i * keylength, (i === index.length - 1 ? string.length + 2 : i * keylength + keylength)) + " ".repeat(48) + "\u200b").format(type))
 					.setFooter((i + 1) + " / " + index)
 				, NewChannel);
 			}

@@ -51,7 +51,7 @@ class Logger {
     }
 
     static async error(e) {
-        console.error(e);
+        console.error(new Error(e));
     }
 }
 

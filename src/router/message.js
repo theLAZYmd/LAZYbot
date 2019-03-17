@@ -14,7 +14,7 @@ class Message {
 	async dm(key) {
         const { aliases, regexes, def  } = Commands.dm;
         let cmdInfo = aliases.get(key.toLowerCase());
-        if (!cmdInfo) cmdInfo = aliases.get(Array.from(aliases.keys()).find(alias => alias.toLowerCase() === this.argsInfo.message.content.toLowerCase()));
+        if (!cmdInfo) cmdInfo = aliases.get(this.argsInfo.message.content.toLowerCase());
         if (!cmdInfo) cmdInfo = regexes.get(Array.from(regexes.keys()).find((string) => {
             let regex = new RegExp(string.toString(), "mg");
             if (regex.test(this.argsInfo.message.content)) return true;
@@ -29,7 +29,7 @@ class Message {
 	async command(key) {
         const { commands, aliases  } = Commands.message;
         let cmdInfo = commands.get(key.toLowerCase());
-        if (!cmdInfo) cmdInfo = aliases.get(this.argsInfo.message.content);
+        if (!cmdInfo) cmdInfo = aliases.get(this.argsInfo.message.content.toLowerCase());
         if (!cmdInfo) return null;
         if (cmdInfo.active === false) return null;
         if (this.argsInfo.prefixes.get(cmdInfo.prefix) !== this.argsInfo.prefix) return null;
@@ -39,9 +39,9 @@ class Message {
 	async bot(embed) {
         if (!embed) return null;
         if (!embed.title) return null;
-        let cmdInfo = Commands.bot.get(title);
+        let cmdInfo = Commands.bot.get(embed.title.toLowerCase());
         if (!cmdInfo) return null;
-        if (!cmdInfo.active) return null;
+        if (cmdInfo.active === false) return null;
         return cmdInfo;
     }
 
@@ -54,8 +54,11 @@ class Message {
 
     static async run(argsInfo, cmdInfo) {
 		try {
-            if (cmdInfo.command) Logger.command(argsInfo, cmdInfo);
-			if (cmdInfo.requires) await Message.requires(argsInfo, cmdInfo);                        //halts it if fails permissions test
+            if (cmdInfo.command) await Logger.command(argsInfo, cmdInfo);
+            if (cmdInfo.requires) {
+                let P = await Message.requires(argsInfo, cmdInfo);
+                if (P !== true) throw P;
+            }                       //halts it if fails permissions test
             if (cmdInfo.arguments) cmdInfo.args = cmdInfo.arguments.map(a => argsInfo[a]);
             await Commands.run(cmdInfo, argsInfo.message);
 		} catch (e) {
@@ -65,17 +68,13 @@ class Message {
 	}
 
 	static async requires(argsInfo, cmdInfo) {
-		for (let [type, value] of Object.entries(cmdInfo.requires)) try {
+        for (let [type, value] of Object.entries(cmdInfo.requires)) try {
             if (!Array.isArray(value)) value = [value]; //if it's not array (i.e. multiple possible satisfactory conditions)
-            let kill = true;
-            for (let passable of value) try {
-                kill = !(await Permissions[type](passable, argsInfo));
-            } catch (e) {
-                Logger.error(e); //THERE SHOULD NOT BE ERRORS HERE, SO IF WE'RE RECEIVING ONE, DEAL WITH IT
+            for (let v of value) {
+                if (!(await Permissions[type](v, argsInfo))) throw cmdInfo.method;
             }
-            if (kill) throw cmdInfo.method;
         } catch (e) { //if it fails any of requirements, throw
-            throw Permissions.output(type, argsInfo) ? Permissions.output(type, argsInfo) + "\nUse `" + cmdInfo.prefix + "help` followed by command name to see command info." : ""; //if no Permissions, kill it
+            return Permissions.output(type, argsInfo) ? Permissions.output(type, argsInfo) + "\nUse `" + cmdInfo.prefix + "help` followed by command name to see command info." : ""; //if no Permissions, kill it
         }
 		return true;
     }
@@ -102,13 +101,13 @@ class Message {
 module.exports = async (client, message) => {
     try {
         if (message.author.id === client.user.id) throw "";
-        if (!/[a-z]/i.test(message.content)) throw "";
         let argsInfo = new Parse(message);
         let Command = new Message(argsInfo);
         if (argsInfo.author.bot) {
             let cmdInfo = await Command.bot(message.embeds[0]);
-            if (cmdInfo) Message.run(argsInfo, cmdInfo);
-        } else
+            if (cmdInfo) return Message.run(argsInfo, cmdInfo);
+        }
+        if (!/[a-z]/i.test(message.content)) throw "";
         if (!argsInfo.message.guild) {
             let cmdInfo = await Command.dm(argsInfo.command);
             if (cmdInfo.guild) {

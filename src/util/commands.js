@@ -98,7 +98,7 @@ class Commands {
 
     static getBot (time = Date.now()) {
         let map = new Map(Array.from(Bot)
-            .map(c => [c.title, Commands.parse(c)])
+            .map(c => [c.title.toLowerCase(), Commands.parse(c)])
         )
         Logger.load(time, [[map.size, "Bot message commands"]], [map.size, "Bot message commands"]);
         return Commands._bot = map;
@@ -113,7 +113,7 @@ class Commands {
             let info = Commands.parse(c);
             if (c.aliases) {
                 for (let alias of c.aliases) {
-                    aliases.set(alias, info);
+                    aliases.set(alias.toLowerCase(), info);
                 }
             }
             if (c.regex) regexes.set(c.regex, info);
@@ -127,18 +127,21 @@ class Commands {
         let i = 0;
         let commands = new Map();
         let aliases = new Map();
-        for (let c of Object.values(Message).flat().filter(c => Array.isArray(c.aliases))) {
+        for (let c of Object.values(Message).flat()) {
+            if (!Array.isArray(c.aliases)) continue;
             let info = Commands.parse(c);
             if (c.subcommands && c.subcommands.length > 0) {
                 info.subcommands = new Map();
-                for (let sc of c.subcommands) for (let a of sc.aliases) {
-                    if (a.split(/\s/g).length < 2) info.subcommands.set(a, Commands.parse(sc, c));
-                    else aliases.set(a, info);
+                for (let sc of c.subcommands) {
+                    for (let a of sc.aliases) {
+                        if (a.split(/\s/g).length < 2) info.subcommands.set(a.toLowerCase(), Commands.parse(sc, c));
+                        else aliases.set(a.toLowerCase(), info);
+                    }
                 }
             }
             for (let alias of c.aliases) {
-                if (alias.split(/\s/g).length < 2) commands.set(alias, info);
-                else aliases.set(alias, info);
+                if (alias.split(/\s/g).length < 2) commands.set(alias.toLowerCase(), info);
+                else aliases.set(alias.toLowerCase(), info);
             }
             i++;
         }
@@ -153,8 +156,8 @@ class Commands {
         for (let c of Object.values(Reaction).flat()) {
             i++;
             let info = Commands.parse(c);
-            if (c.name) name.set(c.name, info);
-            if (c.key) key.set(c.key, info);
+            if (c.name) name.set(c.name.toLowerCase(), info);
+            if (c.key) key.set(c.key.toLowerCase(), info);
         }
         Logger.load(time, [[name.size, "Emoji names"], [key.size, "ID-constructor keys"]], [i, "emoji data files"]);
         return Commands._reaction = {   name, key   }

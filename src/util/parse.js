@@ -136,12 +136,12 @@ class Parse {
 
 	get author() {
 		if (this._author) return this._author;
-		return this.message ? this._author = this.message.author : null;
+		return this._author = this.message ? this.message.author : null;
 	}
 
 	get channel() {
 		if (this._channel) return this._channel;
-		return this.message ? this._channel = this.message.channel : null;
+		return this._channel = this.message ? this.message.channel : null;
 	}
 
 	get user() {
