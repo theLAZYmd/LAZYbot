@@ -79,4 +79,4 @@ fs.readdir("./src/" + router, (err, _files) => {
     }
 })
 
-client.login(process.env.TOKEN ? process.env.TOKEN : require("./token.json").token)
+client.login(require("./token.json").token)
