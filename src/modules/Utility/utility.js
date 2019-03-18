@@ -20,7 +20,7 @@ class Utility extends Parse { //fairly miscelanneous functions
 
     async markdownify() {
         try {
-            let msg = await this.find();
+            let msg = await this.find(this.args);
             if (!msg.content) throw "No embeds found to JSONify!";
             this.Output.data(msg.content, this.channel, "md");
         } catch (e) {
@@ -30,7 +30,7 @@ class Utility extends Parse { //fairly miscelanneous functions
 
     async jsonify() {
         try {
-            let msg = await this.find();
+            let msg = await this.find(this.args);
             if (!msg.embed) throw "No embeds found to JSONify!";
             this.Output.data(msg.embed);
         } catch (e) {
@@ -38,44 +38,46 @@ class Utility extends Parse { //fairly miscelanneous functions
         }
     }
 
-    async fetch(message) {
+    async fetch() {
         try {
-            let msg = await this.find();
-            let embedinput = msg.embed ? msg.embed : {};
-            embedinput.content = "";
+            let msg = await this.find(this.args);
+            let embed = new Embed(msg.embed || {});
+            let denoter = "Fetched Message for " + this.author.tag;
+            let timestamp = "\On " + Date.getISOtime(msg.createdTimestamp || Date.now()) + ", user **" + msg.author.tag + "** said:";
             if (msg.content) {
-                if (msg.content.startsWith("On ") && msg.content.includes("\, user **") && msg.content.includes("** said:")) {
-                    embedinput.content += msg.content;
-                } else {
-                    if (!embedinput.title) embedinput.title = "Fetched Message for " + this.author.tag + "\n";
-                    else embedinput.title = "Fetched Message for " + this.author.tag + "\n";
-                    embedinput.content += msg.createdTimestamp ? "\On " + Date.getISOtime(msg.createdTimestamp) + ", user **" + msg.author.tag + "** said:" : "";
-                    if (!embedinput.description) embedinput.description = msg.content.format();
-                    else embedinput.content += msg.content.format();
-                }
+                if (!/^On [a-zA-Z]{3} [a-zA-Z]{3} [0-9][0-9]? [0-9]{4} [0-9][0-9]:[0-9][0-9]:[0-9][0-9] GMT\+[0-9][0-9], user \*\*[\S \t^@#:`]{2,32}#\d{4}\*\* said:/.test(msg.content)) {
+                    embed.setContent(timestamp).setTitle(denoter).setDescription(msg.content.format());
+                } else embed.setContent(timestamp)
             }
-            this.Output.sender(embedinput);
-            message.delete();
+            else if (embed.title || embed.description || embed.fields && embed.fields.length > 1) {
+                embed.setContent(timestamp);
+            }
+            this.Output.sender(embed);
         } catch (e) {
             if (e) this.Output.onError(e)
         }
     }
 
-    find(args = this.args) { //function needs a channel input
-        return new Promise((resolve, reject) => {
-            let id = args[0],
-                channel = this.channel;
-            if (args.length === 2) {
-                channel = this.Search.channels.get(args[1]);
-                if (!channel) return reject("No such channel!");
-            } //if second argument provided, that's the channel to look in
-            channel.fetchMessage(id)
-                .then(msg => {
-                    if (msg.embeds && msg.embeds[0]) msg.embed = Embed.receiver(msg.embeds[0]);
-                    return resolve(msg);
-                })
-                .catch(e => reject(e)); //if no message found, say so
-        })
+    async find(args) { //function needs a channel input
+        try {
+            let [id, channel] = args;
+            if (channel) {
+                channel = this.Search.channels.get(channel);
+                if (!channel) throw "No such channel!"
+            } else channel = this.channel;
+            let msg = await channel.fetchMessage(id)
+            msg.embed = msg.embeds && msg.embeds[0] ? Embed.receiver(msg.embeds[0]) : null;
+            return msg;
+        } catch (e) {
+            if (!e) return null;
+            if (typeof e === "string") throw e;
+            switch (e.message) {
+                case "Unknown Message":
+                    throw "**Fetch Error:** Couldn't find message, check ID and channel is correct."
+                case "Missing Access":
+                    throw "**Fetch Error:** Bot doesn't have access to channel."
+            }
+        }
     }
 
 }

@@ -10,7 +10,7 @@ class Embed extends RichEmbed {
     setContent(content) {
         content = resolveString(content);
         if (content.length > 2000) throw new RangeError('Message content may not exceed 2000 characters.');
-        this.embed = embed;
+        this.content = content;
         return this;
     }
 

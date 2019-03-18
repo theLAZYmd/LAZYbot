@@ -8,14 +8,14 @@ class Output extends Parse {
 		super(message);
 	}
 
-	async sender(embed, NewChannel) {
+	async sender(embed, channel = this.channel) {
 		try {
-			if (!embed) throw "**this.Output.sender():** Embed object is undefined.";
-			if (!embed.color) embed.color = config.colors.generic;
-			let channel = NewChannel || this.channel;
-			embed = Embed.receiver(embed);
+			if (!embed) throw "this.Output.sender(): Embed object is undefined.";
+            if (!embed.color) embed.color = config.colors.generic;
+            let content = embed.content;
+            embed = Embed.receiver(embed);
 			if (typeof embed._apiTransform === "function") embed = embed._apiTransform();
-			return await channel.send(embed.content, {embed});
+			return await channel.send(content, {embed});
 		} catch (e) {
 			if (e) this.log(e);
 		}
