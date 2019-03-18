@@ -12,7 +12,7 @@
                 "count": false,
                 "results": true
             },
-            "trivia": true
+            "trivia": false
         },
         "prefixes": {
             "generic": "!",
@@ -57,10 +57,7 @@
         "trivia": {
             "min": 10,
             "provisional": 10,
-            "players": {
-                "theLAZYmd#2353": true,
-                "ObiWanBenoni#3488": true
-            }
+            "players": {}
         },
         "notify": {
             "185412969130229760": 1536336039927,
