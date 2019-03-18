@@ -44,27 +44,40 @@ class Utility extends Parse { //fairly miscelanneous functions
             let embed = new Embed(msg.embed || {});
             let denoter = "Fetched Message for " + this.author.tag;
             let timestamp = "\On " + Date.getISOtime(msg.createdTimestamp || Date.now()) + ", user **" + msg.author.tag + "** said:";
-            if (!msg.content) embed.setContent(timestamp).setTitle(denoter).setDescription(msg.content.format());
-            else if (embed.title && !/^On [a-zA-Z]{3} [a-zA-Z]{3} [0-9][0-9]? [0-9]{4} [0-9][0-9]:[0-9][0-9]:[0-9][0-9] GMT\+[0-9][0-9], user \*\*[\S \t^@#:`]{2,32}#\d{4}\*\* said:/.test(msg.content)) {
-                embed.content = timestamp + "\n" + msg.content;
+            if (msg.content) {
+                if (!/^On [a-zA-Z]{3} [a-zA-Z]{3} [0-9][0-9]? [0-9]{4} [0-9][0-9]:[0-9][0-9]:[0-9][0-9] GMT\+[0-9][0-9], user \*\*[\S \t^@#:`]{2,32}#\d{4}\*\* said:/.test(msg.content)) {
+                    embed.setContent(timestamp).setTitle(denoter).setDescription(msg.content.format());
+                } else embed.setContent(timestamp)
+            }
+            else if (embed.title || embed.description || embed.fields && embed.fields.length > 1) {
+                embed.setContent(timestamp);
             }
             this.Output.sender(embed);
-            this.message.delete();
         } catch (e) {
             if (e) this.Output.onError(e)
         }
     }
 
     async find(args) { //function needs a channel input
-        let [id, channel] = args;
-        let id = args[0];
-        if (channel) {
-            channel = this.Search.channels.get(args[1]);
-            if (!channel) throw "No such channel!"
-        } else channel = this.channel;
-        let msg = await channel.fetchMessage(id)
-        msg.embed = msg.embeds && msg.embeds[0] ? Embed.receiver(msg.embeds[0]) : null;
-        return msg;
+        try {
+            let [id, channel] = args;
+            if (channel) {
+                channel = this.Search.channels.get(channel);
+                if (!channel) throw "No such channel!"
+            } else channel = this.channel;
+            let msg = await channel.fetchMessage(id)
+            msg.embed = msg.embeds && msg.embeds[0] ? Embed.receiver(msg.embeds[0]) : null;
+            return msg;
+        } catch (e) {
+            if (!e) return null;
+            if (typeof e === "string") throw e;
+            switch (e.message) {
+                case "Unknown Message":
+                    throw "**Fetch Error:** Couldn't find message, check ID and channel is correct."
+                case "Missing Access":
+                    throw "**Fetch Error:** Bot doesn't have access to channel."
+            }
+        }
     }
 
 }
