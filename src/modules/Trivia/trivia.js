@@ -130,7 +130,7 @@ class Trivia extends Parse {
                 if (data.length === 0) throw "";
                 let totalEstimate = data.reduce((a, [, estimate]) => a + estimate, 0);
                 let totalScore = data.reduce((a, [, , score]) => a + score, 0);
-                if (totalScore < this.server.trivia.min) throw `Only ${this.server.trivia.min}+ point games are rated.\nActive players: " + data.map(([dbuser]) => dbuser).join(", ")`;
+                if (totalScore < this.server.trivia.min) throw `Only ${this.server.trivia.min}+ point games are rated.\nActive players: ` + data.map(([dbuser]) => dbuser).join(", ");
                 if (data.length < 2) throw "Only games with 2+ players are rated.\nActive players: " + data.map(([dbuser]) => dbuser).join(", ");
                 for (let [dbuser, estimate, score] of data) {
                     let shareEstimate = (estimate / totalEstimate) * totalScore;
