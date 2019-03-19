@@ -261,9 +261,9 @@
         "id": "373480715276517376",
         "username": "ObiWanBenoni#3488",
         "messages": {
-            "count": 78383,
-            "last": "depends on the size of the screw",
-            "lastSeen": 1552963927627
+            "count": 78384,
+            "last": "It should embed it automatically",
+            "lastSeen": 1553004399748
         },
         "finger": "Join team obi to get free flowers",
         "lichess": {
@@ -500,9 +500,9 @@
         "id": "365933164725534722",
         "username": "Bouncer#8585",
         "messages": {
-            "count": 372,
-            "last": "A random 🎂 appeared! Pick it up by typing .pick",
-            "lastSeen": 1552952363080
+            "count": 374,
+            "last": "<@!519602977380761621> Better luck next time ^_^\nBet:2 Won: 0🎂",
+            "lastSeen": 1553004442797
         },
         "bidamount": 0
     },
@@ -845,9 +845,9 @@
         "id": "377227077859934208",
         "username": "Babosos#3628",
         "messages": {
-            "count": 17399,
-            "last": "this was the longest moment of my life",
-            "lastSeen": 1552952338617
+            "count": 17403,
+            "last": "RK endgame is hard",
+            "lastSeen": 1553002682425
         },
         "lichess": {
             "_main": "Babosos",
@@ -1091,7 +1091,7 @@
             "_main": "Sonata2",
             "Sonata2": {
                 "maxRating": "2235",
-                "blitz": "2136",
+                "blitz": "2125",
                 "bullet": "2089",
                 "rapid": "2235",
                 "classical": "2158",
@@ -1109,7 +1109,7 @@
         "age": "21",
         "sex": "wolfkin",
         "location": "Netherlands",
-        "lastupdate": 1552931704261,
+        "lastupdate": 1553003467950,
         "trivia": {
             "rating": 1928,
             "games": 13
@@ -1305,9 +1305,9 @@
         "id": "333586342275710978",
         "username": "MMichael#3973",
         "messages": {
-            "count": 33823,
-            "last": "my tip would be: when the pawn reaches a2, be careful not to stalemate them; they don't have many pieces that can move 😃",
-            "lastSeen": 1552953365026
+            "count": 33828,
+            "last": "Oh wait, they let you pick teams invidually, meaning it isn't bound to the future rounds. Then you might be able to choose teams that have a higher multiplier than they deserved, I guess (in other words, odds creator has underestimated them)",
+            "lastSeen": 1553003083485
         },
         "chesscom": {
             "_main": "MMichael",
@@ -2008,9 +2008,9 @@
         "id": "133249411303211008",
         "username": "hauptschule#7105",
         "messages": {
-            "count": 25142,
-            "last": "<:kappa:392195924258193410>",
-            "lastSeen": 1552951859485
+            "count": 25143,
+            "last": "Yes he is the 1700 <:kappa:392195924258193410>",
+            "lastSeen": 1553002696720
         },
         "lastupdate": 1552950727601,
         "finger": "ProgramFOX for admin",
@@ -2577,7 +2577,7 @@
             "lastSeen": 1543536098348
         },
         "chesscomratings": {},
-        "lastupdate": 1552902303418,
+        "lastupdate": 1553002567419,
         "lichess": {
             "_main": "TwitchWainaut",
             "TwitchWainaut": {
@@ -4338,7 +4338,7 @@
         "lichess": {
             "_main": "JaakkoT",
             "JaakkoT": {
-                "maxRating": "2137",
+                "maxRating": "2141",
                 "blitz": "1610",
                 "bullet": "1908",
                 "rapid": "1761",
@@ -4347,14 +4347,14 @@
                 "3-check": "1847",
                 "anti": "1855",
                 "horde": "1480",
-                "atomic": "2137",
+                "atomic": "2141",
                 "koth": "1723",
                 "racing-kings": "1569"
             },
             "_name": "Someone Who Really Sucks",
             "_language": "en-GB"
         },
-        "lastupdate": 1552933504837,
+        "lastupdate": 1553003767455,
         "finger": "perunaperunaperunaperunaperunaperunaperunaperunaperunaperunaperunaperunaperunaperunaperunaperunaperunaperunaperunaperunaperunaperunaperunaperunaperunaperunaperunaperunaperunaperunaperunaperunaperunaperunaperunaperunaperunaperunaperunaperunaperunaperunaperunaperunaperunaperunaperunaperuna"
     },
     {
@@ -5398,7 +5398,7 @@
         "lichess": {
             "_main": "Illion",
             "Illion": {
-                "maxRating": "2225",
+                "maxRating": "2317",
                 "blitz": "1940",
                 "bullet": "1812",
                 "rapid": "1839?",
@@ -5406,14 +5406,14 @@
                 "crazyhouse": "2015",
                 "3-check": "1902",
                 "horde": "1442?",
-                "atomic": "2225",
+                "atomic": "2317",
                 "koth": "1637?",
                 "racing-kings": "1364?"
             },
             "_country": "SG",
             "_language": "fr-FR"
         },
-        "lastupdate": 1552898103317,
+        "lastupdate": 1553002867722,
         "trivia": {
             "rating": 1500,
             "games": 2
@@ -8276,7 +8276,7 @@
             "AfuroZamurai": {
                 "maxRating": "2202",
                 "blitz": "2202",
-                "bullet": "2099",
+                "bullet": "2199",
                 "rapid": "1500?",
                 "classical": "1500?",
                 "crazyhouse": "2155",
@@ -8296,7 +8296,7 @@
                 "crazyhouse": "2150"
             }
         },
-        "lastupdate": 1552661763291,
+        "lastupdate": 1553002270070,
         "chesscom": {
             "AfuroZamurai": {
                 "maxRating": "2557",
@@ -10660,7 +10660,7 @@
             "_country": "DE",
             "_language": "de-DE"
         },
-        "lastupdate": 1552929003779,
+        "lastupdate": 1553003168522,
         "location": "Germany"
     },
     {
@@ -10936,7 +10936,7 @@
             },
             "_language": "en-GB"
         },
-        "lastupdate": 1552934404319,
+        "lastupdate": 1553004668266,
         "chesscom": {
             "_main": "theweaponking",
             "theweaponking": {
@@ -11165,7 +11165,7 @@
                 "bullet": "1755",
                 "rapid": "1500?",
                 "classical": "1500?",
-                "crazyhouse": "1876",
+                "crazyhouse": "1837",
                 "3-check": "1755",
                 "anti": "2023",
                 "horde": "1803",
@@ -11175,7 +11175,7 @@
             "_country": "FR",
             "_language": "en-GB"
         },
-        "lastupdate": 1552935005846,
+        "lastupdate": 1553004967678,
         "location": "France"
     },
     {
@@ -12061,9 +12061,9 @@
         "id": "519602977380761621",
         "username": "Ogul#1233",
         "messages": {
-            "count": 8178,
-            "last": "<:cmonBruh:504335346390007848>",
-            "lastSeen": 1552940810193
+            "count": 8179,
+            "last": "<@267767816847884299> <:cmonBruh:504335346390007848>",
+            "lastSeen": 1553004399655
         },
         "lichess": {
             "Ogul1": {
@@ -15089,7 +15089,7 @@
             "DifferentKing": {
                 "maxRating": "2035",
                 "blitz": "1991",
-                "bullet": "1985",
+                "bullet": "1953",
                 "rapid": "2035",
                 "classical": "1941",
                 "crazyhouse": "1841",
@@ -15099,7 +15099,7 @@
             },
             "_country": "CZ"
         },
-        "lastupdate": 1552934104847
+        "lastupdate": 1553004367464
     },
     {
         "id": "484878582103932928",
@@ -15615,6 +15615,6 @@
             "_country": "NL",
             "_language": "nl-NL"
         },
-        "lastupdate": 1552931856475
+        "lastupdate": 1553004067460
     }
 ]
