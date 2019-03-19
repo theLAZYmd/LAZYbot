@@ -31,6 +31,7 @@ class Parse {
 
 	get server() {
         if (!this.guild) return null;
+        if (this._server) return this._server;
         return this._server = this.getServer();
     }
     
