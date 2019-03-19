@@ -9,8 +9,6 @@ class Trivia extends Parse {
 
 	constructor(message) {
         super(message);
-        let trivia = this.server.trivia || {};
-        this.players = trivia.players || {};
     }
 
     get trivia () {
@@ -19,7 +17,7 @@ class Trivia extends Parse {
     }
 
     set trivia (obj) {
-        let server = this.server;
+        let server = this.getServer();
         server.trivia = obj;
         this.server = server;
     }
