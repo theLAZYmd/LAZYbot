@@ -27,14 +27,10 @@
 	{
 		"module": "Custom Reactions",
 		"file": "customreactions",
-		"method": "text",
-		"arguments": []
-	},
-	{
-		"module": "Custom Reactions",
-		"file": "customreactions",
-		"method": "emoji",
-		"arguments": []
+		"method": "check",
+		"arguments": [
+            "content"
+        ]
 	},
 	{
 		"module": "Utility",

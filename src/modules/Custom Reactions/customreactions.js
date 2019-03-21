@@ -14,7 +14,11 @@ class CustomReactions extends Parse {
             "text": [],
             "emoji": []
         }
-        console.log(CustomReactions.trie[this.guild.id]);
+    }
+
+    get trie () {
+        if (this._trie) return this._trie;
+        return this._trie = CustomReactions.trie[this.guild.id];
     }
 
     static get trie () {
@@ -25,41 +29,46 @@ class CustomReactions extends Parse {
     static getTrie() {
         let obj = {};
         for (let [id, data] of Object.entries(CRFile)) {
-            let map = new Map(data.text
-                .filter(entry => !entry.anyword)
+            let map = data.text
                 .map(entry => [entry.trigger, {
                     "type": "text",
+                    "anyword": entry.anyword,
                     "reaction": entry.reaction
                 }])
                 .concat(data.emoji
-                .filter(entry => !entry.anyword)
                 .map(entry => [entry.trigger, {
                     "type": "emoji",
+                    "anyword": entry.anyword,
                     "reaction": entry.reaction
                 }])
-            ));
-            let trie = new LAZYac(Array.from(map.keys()));
-            obj[id] = { trie, map  };
+            );
+            let [anyword, whole] = map.partition(entry => entry[1].anyword).map(s => new Map(s));
+            let dict = new LAZYac(Array.from(anyword.keys()));
+            obj[id] = { dict, anyword, whole  };
         }
         return obj;
     }
 
-    react(SearchArray, functionOnTrue) { //router
-        for (let i = 0; i < SearchArray.length; i++) {
-            if (this.message.content === SearchArray[i].trigger) {
-                functionOnTrue(SearchArray[i].reaction);
-                break;
-            } else {
-                for (let j = 0; j < this.args.length; j++) {
-                    if (SearchArray[i].anyword && this.args[j] === SearchArray[i].trigger) {
-                        functionOnTrue(SearchArray[i].reaction);
-                        break;
-                    }
-                }
-            }
+    check(string) { //router
+        let w = this.trie.whole.get(string);
+        if (w) this[w.type](w.reaction)
+        let result = this.trie.dict.search(string);
+        for (let r of result) {
+            let a = this.trie.anyword.get(r);
+            if (a) this[a.type](a.reaction);
         }
     }
 
+    async text(content) {
+        this.Output.generic(content);
+    }
+
+    async emoji(emojiname) {
+        let emoji = this.Search.emojis.get(emojiname) ? this.Search.emojis.get(emojiname) : emojiname;
+        this.message.react(emoji)
+            .catch(() => {});
+    }
+    
     update(SearchArray, functionOnFound) { //router
         let foundboolean = false;
         for (let i = 0; i < SearchArray.length; i++) {
@@ -88,18 +97,6 @@ class CustomReactions extends Parse {
             DataManager.setFile(CRFile, "./src/data/customreactions.json");
             resolve(true)
         });
-    }
-
-    text() { //applies to all messages
-        this.react(this.CRData.text, (content) => this.Output.generic(content));
-    }
-
-    emoji() { // applies to all messages
-        this.react(this.CRData.emoji, (emojiname) => {
-            let emoji = this.Search.emojis.get(emojiname) ? this.Search.emojis.get(emojiname) : emojiname;
-            this.message.react(emoji)
-                .catch(() => {});
-        })
     }
 
     add(args, argument) { //acr or aer

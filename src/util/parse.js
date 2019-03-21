@@ -127,7 +127,12 @@ class Parse {
 
 	set guild(value) {
 		this._guild = value;
-	}
+    }
+    
+    get content() {
+        if (this._content) return this._content;
+        return this._content = this.message ? this.message.content : null;
+    }
 
 	get author() {
 		if (this._author) return this._author;

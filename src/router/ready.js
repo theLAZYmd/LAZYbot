@@ -54,7 +54,7 @@ class Ready {
 
     async getCustomReactions() {
         let CR = CustomReactions.getTrie();
-        Logger.load(this.client.readyTimestamp, [[Object.keys(CR).length, "Servers"], [Object.values(CR).map(obj => obj.map).reduce((acc, curr) => acc += curr.size, 0), "Keys"]], "Custom Reactions");
+        Logger.load(this.client.readyTimestamp, [[Object.keys(CR).length, "Servers"], [Object.values(CR).reduce((acc, curr) => acc += curr.anyword.size + curr.whole.size, 0), "Keys"]], "Custom Reactions");
     }
 
 	async getSources() {

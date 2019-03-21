@@ -103,7 +103,6 @@ class Commands {
     }
 
     static getMessage () {
-        let i = 0;
         let commands = new Map();
         let aliases = new Map();
         for (let c of Object.values(Message).flat()) {
@@ -122,13 +121,11 @@ class Commands {
                 if (alias.split(/\s/g).length < 2) commands.set(alias.toLowerCase(), info);
                 else aliases.set(alias.toLowerCase(), info);
             }
-            i++;
         }
         return Commands._message = {    commands, aliases    };
     }
 
     static getDM () {
-        let i = 0;
         let aliases = new Map();
         let regexes = new Map();
         let def;
@@ -146,11 +143,9 @@ class Commands {
     }
 
     static getReaction () {
-        let i = 0;
         let name = new Map();
         let key = new Map();
         for (let c of Object.values(Reaction).flat()) {
-            i++;
             let info = Commands.parse(c);
             if (c.name) name.set(c.name.toLowerCase(), info);
             if (c.key) key.set(c.key.toLowerCase(), info);
