@@ -4,6 +4,7 @@ const Package = require("../../package.json");
 const rp = require('request-promise');
 const Logger = require("../util/logger");
 const Commands = require("../util/commands");
+const Tries = require("../util/tries");
 
 class Ready {
 
@@ -37,6 +38,7 @@ class Ready {
 	}
        
     async getCommands() {
+        Tries.getMessage(this.client.readyTimestamp);
         Commands.getAll(this.client.readyTimestamp);
         Commands.getBot(this.client.readyTimestamp);
         Commands.getDM(this.client.readyTimestamp);
