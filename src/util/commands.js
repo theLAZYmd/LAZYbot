@@ -90,40 +90,19 @@ class Commands {
         return Commands.getInterval();
     }
     
-    static getAll (time = Date.now()) {
+    static getAll () {
         let map = Array.from(All);
-        Logger.load(time, [[map.length, "All message commands"]], [map.length, "All message commands"]);
         return Commands._all = map;
     }
 
-    static getBot (time = Date.now()) {
+    static getBot () {
         let map = new Map(Array.from(Bot)
             .map(c => [c.title.toLowerCase(), Commands.parse(c)])
         )
-        Logger.load(time, [[map.size, "Bot message commands"]], [map.size, "Bot message commands"]);
         return Commands._bot = map;
     }
 
-    static getDM (time = Date.now()) {
-        let i = 0;
-        let aliases = new Map();
-        let regexes = new Map();
-        let def;
-        for (let c of Object.values(DM).flat()) {
-            let info = Commands.parse(c);
-            if (c.aliases) {
-                for (let alias of c.aliases) {
-                    aliases.set(alias.toLowerCase(), info);
-                }
-            }
-            if (c.regex) regexes.set(c.regex, info);
-            if (c.default) def = info;
-        }
-        Logger.load(time, [[aliases.size, "Command keys"], [regexes.size, "Regexes"]], [i, "DM commands"]);
-        return Commands._dm = {    aliases, regexes, def    };
-    }
-
-    static getMessage (time = Date.now()) {
+    static getMessage () {
         let i = 0;
         let commands = new Map();
         let aliases = new Map();
@@ -145,11 +124,28 @@ class Commands {
             }
             i++;
         }
-        Logger.load(time, [[commands.size, "Command keys"], [aliases.size, "Aliases"]], [i, "command files"]);
         return Commands._message = {    commands, aliases    };
     }
 
-    static getReaction (time = Date.now()) {
+    static getDM () {
+        let i = 0;
+        let aliases = new Map();
+        let regexes = new Map();
+        let def;
+        for (let c of Object.values(DM).flat()) {
+            let info = Commands.parse(c);
+            if (c.aliases) {
+                for (let alias of c.aliases) {
+                    aliases.set(alias.toLowerCase(), info);
+                }
+            }
+            if (c.regex) regexes.set(c.regex, info);
+            if (c.default) def = info;
+        }
+        return Commands._dm = {    aliases, regexes, def    };
+    }
+
+    static getReaction () {
         let i = 0;
         let name = new Map();
         let key = new Map();
@@ -159,11 +155,10 @@ class Commands {
             if (c.name) name.set(c.name.toLowerCase(), info);
             if (c.key) key.set(c.key.toLowerCase(), info);
         }
-        Logger.load(time, [[name.size, "Emoji names"], [key.size, "ID-constructor keys"]], [i, "emoji data files"]);
         return Commands._reaction = {   name, key   }
     }
 
-    static getInterval (time = Date.now()) {
+    static getInterval () {
         return Commands._interval = Object.entries(Interval);
     }
 
