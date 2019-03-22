@@ -2,11 +2,8 @@
 	{
 		"module": "Profile",
 		"file": "messagecount",
-		"method": "log",
-		"arguments": [
-			"author",
-			"dbuser"
-		]
+		"method": "count",
+		"arguments": []
     },
     {
         "module": "Administration",

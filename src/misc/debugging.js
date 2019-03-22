@@ -6,7 +6,7 @@ class Debugging {
 
     constructor(client) {
         this.client = client;
-        this.guild = client ? client.guilds.get(config.houseid) : null;
+        this.guild = client ? client.guilds.get(config.ids.house) : null;
         this.commandsReformat();
         //this.subcommandsReformat();
     }

@@ -1,9 +1,9 @@
-const Parse = require("../util/parse.js");
-const Logger = require("../util/logger.js");
-const Permissions = require("../util/permissions.js");
-const Commands = require("../util/commands.js");
-
-const fs = require("fs");
+const Parse = require("../util/parse");
+const Logger = require("../util/logger");
+const Permissions = require("../util/permissions");
+const Commands = require("../util/commands");
+const MessageCount = require("../modules/Profile/messagecount");
+const config = require('../config.json');
 
 class Message {
 
@@ -100,12 +100,13 @@ class Message {
 
 module.exports = async (client, message) => {
     try {
+        //let s = Date.now();
         if (message.author.id === client.user.id) throw "";
         let argsInfo = new Parse(message);
         let Command = new Message(argsInfo);
         if (argsInfo.author.bot) {
             let cmdInfo = await Command.bot(message.embeds[0]);
-            if (cmdInfo) return Message.run(argsInfo, cmdInfo);
+            if (cmdInfo) return await Message.run(argsInfo, cmdInfo);
         }
         if (!/[a-z]/i.test(message.content)) throw "";
         if (!argsInfo.message.guild) {
@@ -114,16 +115,25 @@ module.exports = async (client, message) => {
                 argsInfo.message._guild = await Message.setGuild(argsInfo, cmdInfo.guild); //now passed, just check if it needs a guild
                 if (!argsInfo.message._guild) throw "";
             }
-            return Message.run(argsInfo, cmdInfo);
+            return await Message.run(argsInfo, cmdInfo);
         } else {
             Command.all(argsInfo);
             let cmdInfo = await Command.command(argsInfo.command);
             if (cmdInfo) {
                 cmdInfo.command = true;
-                Message.run(argsInfo, cmdInfo);
-            }
+                await Message.run(argsInfo, cmdInfo);
+            } else new MessageCount(message).log();
         }
+        //let f = Date.now();
+        //beta(argsInfo, s, f);
     } catch (e) {
         if (e && typeof e !== "boolean") Logger.error(e);
     }
+}
+
+function beta(argsInfo, s, f) {
+    argsInfo.Output.sender({
+        "color": config.colors.beta,
+        "description": ((f - s) / 1000).toLocaleString() + " seconds to process command"
+    })
 }

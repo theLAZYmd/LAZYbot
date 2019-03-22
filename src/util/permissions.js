@@ -4,7 +4,7 @@ const config = DataManager.getFile("./src/config.json");
 class Permissions {
 
 	static house(requirement, argsInfo) {
-		if (requirement && argsInfo.guild.id !== config.houseid) return false;
+		if (requirement && argsInfo.guild.id !== config.ids.house) return false;
 		return true;
 	}
 
@@ -84,7 +84,7 @@ class Permissions {
 			case "channel":
 				return "Wrong channel to use this command.";
 			case "args":
-				return argsInfo.command === ".." ? "" : "Inapplicable number of parameters."
+				return "Inapplicable number of parameters.";
 		}
 	}
 
