@@ -2,11 +2,8 @@
 	{
 		"module": "Profile",
 		"file": "messagecount",
-		"method": "log",
-		"arguments": [
-			"author",
-			"dbuser"
-		]
+		"method": "count",
+		"arguments": []
     },
     {
         "module": "Administration",
@@ -27,14 +24,10 @@
 	{
 		"module": "Custom Reactions",
 		"file": "customreactions",
-		"method": "text",
-		"arguments": []
-	},
-	{
-		"module": "Custom Reactions",
-		"file": "customreactions",
-		"method": "emoji",
-		"arguments": []
+		"method": "check",
+		"arguments": [
+            "content"
+        ]
 	},
 	{
 		"module": "Utility",

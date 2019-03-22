@@ -42,7 +42,7 @@ class Logger {
             "loaded"
         ];
         if (typeof startTime === "number") arr.push((Date.now() - startTime) + "ms");
-        if (source && Array.isArray(source)) arr.push("FROM " + source[1] + ": " + source[0]);
+        if (source) arr.push(source);
         Logger.output(arr.join(" | ") + "\n" + list.map(([s, k]) => ["    " + k, s]).toPairs());
     }
 

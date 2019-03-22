@@ -4,6 +4,8 @@ const Package = require("../../package.json");
 const rp = require('request-promise');
 const Logger = require("../util/logger");
 const Commands = require("../util/commands");
+const Tries = require("../util/tries");
+const CustomReactions = require("../modules/Custom Reactions/customreactions");
 
 class Ready {
 
@@ -37,11 +39,22 @@ class Ready {
 	}
        
     async getCommands() {
-        Commands.getAll(this.client.readyTimestamp);
-        Commands.getBot(this.client.readyTimestamp);
-        Commands.getDM(this.client.readyTimestamp);
-        Commands.getMessage(this.client.readyTimestamp);
-        Commands.getReaction(this.client.readyTimestamp);
+        Tries.getMessage(this.client.readyTimestamp);
+        let A = Commands.getAll();
+        Logger.load(this.client.readyTimestamp, [[A.length, "Processes"]], "All");
+        let B = Commands.getBot(this.client.readyTimestamp);
+        Logger.load(this.client.readyTimestamp, [[B.size, "Title Keys"]], "Bot");
+        let C = Commands.getMessage(this.client.readyTimestamp);
+        Logger.load(this.client.readyTimestamp, [[C.commands.size, "Command Keys"], [C.aliases.size, "Aliases"]], "Commands");
+        let D = Commands.getDM(this.client.readyTimestamp);
+        Logger.load(this.client.readyTimestamp, [[D.aliases.size, "Command keys"], [D.regexes.size, "Regexes"]], "DM");
+        let E = Commands.getReaction(this.client.readyTimestamp);
+        Logger.load(this.client.readyTimestamp, [[E.name.size, "Command Keys"], [E.key.size, "ID-constructor keys"]], "Emoji Reactions");
+    }
+
+    async getCustomReactions() {
+        let CR = CustomReactions.getTrie();
+        Logger.load(this.client.readyTimestamp, [[Object.keys(CR).length, "Servers"], [Object.values(CR).reduce((acc, curr) => acc += curr.anyword.size + curr.whole.size, 0), "Keys"]], "Custom Reactions");
     }
 
 	async getSources() {
