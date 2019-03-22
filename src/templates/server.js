@@ -22,7 +22,7 @@ class Server {
             "modmail": "modmail",
             "log": "log",
             "join": "join",
-            "leave": "390260363410800650",
+            "leave": "leave",
             "trivia": "trivia",
             "welcome": "welcome"
         },

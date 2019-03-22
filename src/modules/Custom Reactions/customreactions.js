@@ -71,7 +71,7 @@ class CustomReactions extends Parse {
             let a = this.trie.anyword.get(r);
             this[a.type](a.reaction);
         }
-        Logger.log([this.author.tag, "CustomReactions", "auto", "[" + result.join(", ") + "]"])
+        if (result.length > 0) Logger.log([this.author.tag, "CustomReactions", "auto", "[" + result.join(", ") + "]"])
     }
 
     async text(content) {
