@@ -104,7 +104,6 @@ class Trie {
         let trie = new LAZYac(substrings, {
             "startOnly": false
         });
-        DataManager.setFile(trie, "./src/misc/commands-ac.json");
         Logger.load(time, [[substrings.length, "Command keys"]]);
         return Trie._message = {    trie, substrings, index    };
     }
