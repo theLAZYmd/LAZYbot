@@ -2,7 +2,7 @@ const Parse = require("../../util/parse");
 const Embed = require('../../util/embed');
 const DataManager = require("../../util/datamanager");
 const Logger = require("../../util/logger");
-const LAZYac = require("../../../../LAZYahocorasick/src/main");
+const ac = require('lazy-aho-corasick');
 
 const CRFile = DataManager.getFile("./src/data/customreactions.json");
 
@@ -67,7 +67,7 @@ class CustomReactions extends Parse {
         for (let [id, data] of Object.entries(CRFile)) {
             let map = Object.entries(data.text).concat(Object.entries(data.emoji));
             let [anyword, whole] = map.partition(entry => entry[1].anyword).map(s => new Map(s));
-            let dict = new LAZYac(Array.from(anyword.keys()));
+            let dict = new ac(Array.from(anyword.keys()));
             obj[id] = { dict, anyword, whole  };
         }
         return obj;

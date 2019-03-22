@@ -29,6 +29,7 @@
         "enmap": "^0.3.2",
         "es6": "0.0.7",
         "express": "^4.16.4",
+        "lazy-aho-corasick": "^1.0.0",
         "opusscript": "0.0.6",
         "request": "^2.88.0",
         "request-promise": "^4.2.2",
