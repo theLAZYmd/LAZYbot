@@ -199,9 +199,9 @@ class Parse {
 	get embed() {
 		if (this._embed) return this._embed;
 		return this.message && this.message.embeds ? this.message.embeds[0] : null;
-	}
+    }
 
-	static ratingData(dbuser, source, username) {
+	static aratingData(dbuser, source, username) {
 		try {
 			let account = dbuser[source.key][username];
 			if (!account) throw "No account found for that username!";

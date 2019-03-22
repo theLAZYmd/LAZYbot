@@ -29,7 +29,7 @@ const events = [
 	["guildDelete", ["guild"]],
 	["guildMemberAdd", ["member"], true],
 	["guildMemberAvailable", ["member"]],
-	["guildMemberRemove", ["member"]],
+	["guildMemberRemove", ["member"], true],
 	["guildMembersChunk", ["member", "guild"]],
 	["guildMemberSpeaking", ["member", "speaking"]],
 	["guildMemberUpdate", ["oldMember", "newMember"]],
