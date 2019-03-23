@@ -1,7 +1,6 @@
 {
     "dataFile": "./src/data/db.json",
     "guildFile": "./src/data/server.json",
-    "houseid": "314155682033041408",
     "ids": {
         "bot": "338772451565502474",
         "betabot": "422847086145568769",
@@ -13,11 +12,14 @@
             "372355465939779595"
         ],
         "lichess": "TByddQOgD4aLwk0X",
-        "reddit": "ZL3w4njYxfGIAQ"
+        "reddit": "ZL3w4njYxfGIAQ",
+        "house": "314155682033041408"
     },
     "colors": {
         "generic": 53380,
         "error": 15406156,
+        "data": 9359868,
+        "beta": 7506394,
         "ratings": 9359868,
         "background": {
             "icons": "212225",
@@ -33,9 +35,9 @@
         "debug": false
     },
     "backupdb": [
-        "Tue Mar 19 2019 12:42:04 GMT+00",
-        "Tue Mar 19 2019 12:42:04 GMT+00",
-        "Tue Mar 19 2019 10:42:04 GMT+00"
+        "Sat Mar 23 2019 00:45:42 GMT+00",
+        "Fri Mar 22 2019 23:45:42 GMT+00",
+        "Fri Mar 22 2019 23:45:42 GMT+00"
     ],
     "delays": {
         "repeat": 1800000

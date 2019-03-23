@@ -9,8 +9,6 @@ class Trivia extends Parse {
 
 	constructor(message) {
         super(message);
-        let trivia = this.server.trivia || {};
-        this.players = trivia.players || {};
     }
 
     get trivia () {
@@ -19,7 +17,7 @@ class Trivia extends Parse {
     }
 
     set trivia (obj) {
-        let server = this.server;
+        let server = this.getServer();
         server.trivia = obj;
         this.server = server;
     }
@@ -130,8 +128,8 @@ class Trivia extends Parse {
                 if (data.length === 0) throw "";
                 let totalEstimate = data.reduce((a, [, estimate]) => a + estimate, 0);
                 let totalScore = data.reduce((a, [, , score]) => a + score, 0);
-                if (totalScore < this.server.trivia.min) throw `Only ${this.server.trivia.min}+ point games are rated.\nActive players: ` + data.map(([dbuser]) => dbuser).join(", ");
-                if (data.length < 2) throw "Only games with 2+ players are rated.\nActive players: " + data.map(([dbuser]) => dbuser).join(", ");
+                if (totalScore < this.server.trivia.min) throw `Only ${this.server.trivia.min}+ point games are rated.\nActive players: ` + data.map(([dbuser]) => dbuser.username).join(", ");
+                if (data.length < 2) throw "Only games with 2+ players are rated.\nActive players: " + data.map(([dbuser]) => dbuser.username).join(", ");
                 for (let [dbuser, estimate, score] of data) {
                     let shareEstimate = (estimate / totalEstimate) * totalScore;
                     let RD = Math.max(50 - (dbuser.trivia.games || 0) * 3, 10);
@@ -142,7 +140,7 @@ class Trivia extends Parse {
                     DBuser.setData(dbuser);
                 }
             } catch (e) {
-                if (e) throw e;
+                if (e) this.Output.onError(e);
             }
             await this.Output.sender(new Embed()
                 .setAuthor("Trivia Game Ended.")

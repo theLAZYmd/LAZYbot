@@ -8,7 +8,11 @@ const router = "router/";
 
 require("./extensions.js");
 require('events').EventEmitter.prototype._maxListeners = 100;
-process.on("unhandledRejection", Logger.error);
+process.on("unhandledRejection", (e) => {
+    if (e.message === "Something took too long to do.") client.emit('error', e);
+    console.log(e);
+    Logger.error(e);
+});
 
 const events = [
 	["channelCreate", ["channel"]],
@@ -29,7 +33,7 @@ const events = [
 	["guildDelete", ["guild"]],
 	["guildMemberAdd", ["member"], true],
 	["guildMemberAvailable", ["member"]],
-	["guildMemberRemove", ["member"]],
+	["guildMemberRemove", ["member"], true],
 	["guildMembersChunk", ["member", "guild"]],
 	["guildMemberSpeaking", ["member", "speaking"]],
 	["guildMemberUpdate", ["oldMember", "newMember"]],

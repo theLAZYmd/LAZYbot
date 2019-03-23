@@ -10,7 +10,7 @@ class Survey extends Parse {
   run() {
     let surveydata = DataManager.getFile("./src/data/survey.json");
     let interval = 3600000;
-    let guild = this.client.guilds.get(config.houseid);
+    let guild = this.client.guilds.get(config.ids.house);
     let [online, idle, dnd, total] = [0, 0, 0, 0];
     let lm = {
       "lm1": 0,

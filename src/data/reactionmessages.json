@@ -72,10 +72,6 @@
                 "tag": "Andrew#5850",
                 "lastMail": 1540868708182
             },
-            "508321725981786112": {
-                "tag": "ijh#0966",
-                "lastMail": 1541263743804
-            },
             "514474225818533909": {
                 "tag": "MMichael#3973",
                 "lastMail": 1542730614003
@@ -124,10 +120,6 @@
                 "tag": "Natso#0116",
                 "lastMail": 1551447976036
             },
-            "552212783178055680": {
-                "tag": "Raven#9079",
-                "lastMail": 1551728187198
-            },
             "552536812556517376": {
                 "tag": "Ogul#1233",
                 "lastMail": 1551466678952
@@ -143,6 +135,26 @@
             "553703353817759946": {
                 "tag": "Falcon#6507",
                 "lastMail": 1552083798564
+            },
+            "557703261130457088": {
+                "tag": "PsyMar#2210",
+                "lastMail": 1553037222988
+            },
+            "557744751227437076": {
+                "tag": "Raven#9079",
+                "lastMail": 1553047111293
+            },
+            "558086323349749811": {
+                "tag": "JaakkoT#0116",
+                "lastMail": 1553129592405
+            },
+            "558104754807635981": {
+                "tag": "Uarekomodo#1220",
+                "lastMail": 1553133352896
+            },
+            "558150337635287043": {
+                "tag": "ijh#0966",
+                "lastMail": 1553143810605
             }
         },
         "paginator": {
@@ -5358,6 +5370,180 @@
                 "page": 0,
                 "author": "267767816847884299",
                 "cmdID": "557233831275397123"
+            },
+            "558076994504491009": {
+                "embedgroup": [
+                    {
+                        "title": " Profile for MeneerMandje#9220",
+                        "description": "```\nFully in die D2```",
+                        "color": 14026393,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "RoverOnly\nVariantsOnly\nkleinebeer98",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Location: **Morocco**\nRegion: **Europe**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Mar 20 2017**\nThe House: **Jul 30 2018**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`293465140739964929`**\nPosition in Database: **18**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "27,342",
+                                "inline": true
+                            },
+                            {
+                                "name": "House Trophies",
+                                "value": ":trophy: **Biggest Gambling Loser**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/293465140739964929/23405b84810bdf4eacc096f45ae35d3d.png?size=2048"
+                        },
+                        "footer": {
+                            "text": "1 / 2"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": " Profile for MeneerMandje#9220",
+                        "description": "```\nFully in die D2```",
+                        "color": 14026393,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[VariantsOnly](https://lichess.org/@/VariantsOnly)\nBlitz: **2702**\nBullet: **2713**\nRapid: 1500?\nClassical: 1500?\nCrazyhouse: **2628**\n3-check: **2191**\nAntichess: **1889**\nHorde: **2163**\nAtomic: **2012**\nKing of the Hill: **2204**\nRacing Kings: **2045**",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:chesscom:430038158244184064> Chess.com",
+                                "value": "[kleinebeer98](https://www.chess.com/member/kleinebeer98)\nBullet: **2754**\nBlitz: **2731**\nDaily: **1900**\nRapid: **800**\nKing of the Hill: **2504**\nCrazyhouse: **2216**\nBughouse: **2129**\nTactics: **2719**\nLessons: **1715**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/293465140739964929/23405b84810bdf4eacc096f45ae35d3d.png?size=2048"
+                        },
+                        "files": [],
+                        "footer": {
+                            "text": "2 / 2"
+                        }
+                    }
+                ],
+                "period": 30000,
+                "page": 1,
+                "author": "293465140739964929",
+                "cmdID": "558076993145667584"
+            },
+            "558161083362181130": {
+                "embedgroup": [
+                    {
+                        "title": "House Guide to Racing Kings",
+                        "description": "__**ABOUT**__\n\n**Racing Kings (RK)** is a chess variant. The objective of the game is to move one’s own king to the last rank and do it faster than the opponent.\n\n__**RULES**__ \n\nAll pieces are positioned at the first two ranks and both players see the board from the same perspective. The starting position is [following](<https://i.imgur.com/sdnJ3Jz.png>).\n\nStandard chess rules apply, with the following restrictions:\n\n• It is not allowed to attack the opponent’s king. The concept of check is entirely forbidden.\n• The king is not allowed to move to a square which is attacked by an opponent’s piece (just like in standard chess).\n\nThe game is finished if one player moves their own king to the last rank. However, if white moves his king to the last row, and black moves immediately that their king to the last rank, the game is draw (in order to compensate the fact that white player started the game.)\n\n[Rules page on lichess](<https://lichess.org/variant/racingKings>).\n         \n__**SITES**__\n\n● [Lichess.org](https://lichess.org/)",
+                        "color": 14841132,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/2YAoPMG.png"
+                        },
+                        "footer": {
+                            "text": "1 / 3"
+                        }
+                    },
+                    {
+                        "title": "House Guide to Racing Kings",
+                        "description": "\n__**IMPROVE**__\n\nThis variant isn't studied widely, but some opening theory do exist. Tactics usually involve the fact that giving checks is not allowed, for example pieces may seem to be hanging, but they can't be captured because that would be a check to the enemy king.",
+                        "color": 14841132,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/2YAoPMG.png"
+                        }
+                    },
+                    {
+                        "title": "House Guide to Racing Kings",
+                        "description": "**__VIDEOS__**\n\n**NM Chess-Network:**: [Introduction to Racing Kings](<https://www.youtube.com/watch?v=GBUylnvSRYo>)",
+                        "color": 14841132,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/2YAoPMG.png"
+                        }
+                    }
+                ],
+                "period": 180000,
+                "page": 0,
+                "author": "373480715276517376",
+                "cmdID": "558161082561200139"
+            },
+            "558166947796221954": {
+                "embedgroup": [
+                    {
+                        "description": "Winner wins 50 :cherry_blossom: + VIP role as long as you keep the shield",
+                        "author": {
+                            "name": "Win a lichess shield to obtain the vip role and flowers!",
+                            "icon_url": "https://i.imgur.com/JbhAKpz.png"
+                        },
+                        "fields": [
+                            {
+                                "name": "Prizes for high performers",
+                                "value": "Top 3 win 40 :cherry_blossom:\nTop 10 win 30 🌸\nTop 20 win 20 🌸\nTop 30 win 10 🌸",
+                                "inline": false
+                            },
+                            {
+                                "name": "Date",
+                                "value": "Check out the upcoming Shield tournaments from [the tournament calendar](https://lichess.org/tournament/calendar).",
+                                "inline": false
+                            }
+                        ],
+                        "footer": {
+                            "text": "1 / 1"
+                        },
+                        "color": 53380
+                    }
+                ],
+                "period": 180000,
+                "page": 0,
+                "author": "373480715276517376",
+                "cmdID": "558166946642919456"
+            },
+            "558691026416435220": {
+                "embedgroup": [
+                    {
+                        "description": "Winner wins 50 :cherry_blossom: + VIP role as long as you keep the shield",
+                        "author": {
+                            "name": "Win a lichess shield to obtain the vip role and flowers!",
+                            "icon_url": "https://i.imgur.com/JbhAKpz.png"
+                        },
+                        "fields": [
+                            {
+                                "name": "Prizes for high performers",
+                                "value": "Top 3 win 40 :cherry_blossom:\nTop 10 win 30 🌸\nTop 20 win 20 🌸\nTop 30 win 10 🌸",
+                                "inline": false
+                            },
+                            {
+                                "name": "Date",
+                                "value": "Check out the upcoming Shield tournaments from [the tournament calendar](https://lichess.org/tournament/calendar).",
+                                "inline": false
+                            }
+                        ],
+                        "footer": {
+                            "text": "1 / 1"
+                        },
+                        "color": 53380
+                    }
+                ],
+                "period": "Infinity",
+                "page": 0,
+                "author": "377227077859934208",
+                "cmdID": "558691024906747907",
+                "path": "shield"
             }
         },
         "election": {
