@@ -3,9 +3,9 @@
         "id": "185412969130229760",
         "username": "theLAZYmd#2353",
         "messages": {
-            "count": 78399,
-            "last": "hmm",
-            "lastSeen": 1553304815180
+            "count": 78405,
+            "last": "😦 I want to fight",
+            "lastSeen": 1553310636924
         },
         "bidamount": 100000000000000000,
         "location": "Toronto",
@@ -200,7 +200,7 @@
         "id": "326918898178064396",
         "username": "penguingm1#2487",
         "messages": {
-            "count": 17024,
+            "count": 17025,
             "last": "he's closer to 2350 Uscf",
             "lastSeen": 1553267860419
         },
@@ -251,7 +251,7 @@
             "_country": "AQ",
             "_language": "en-US"
         },
-        "lastupdate": 1553292952841,
+        "lastupdate": 1553311995887,
         "trivia": {
             "rating": 1980,
             "games": 7
@@ -2207,7 +2207,7 @@
                 "lessons": "1446"
             }
         },
-        "lastupdate": 1553286949772
+        "lastupdate": 1553312295595
     },
     {
         "id": "341611207062716418",
@@ -3671,7 +3671,7 @@
         "id": "363519664875372556",
         "username": "chuckmoulton#2381",
         "messages": {
-            "count": 2303,
+            "count": 2304,
             "last": "<@312050689511784449>  Not sure.  I don't think it's so much about the length of time you are a streamer so much as your audience interaction, good stream layout, chess strength, etc.",
             "lastSeen": 1553304391644
         },
@@ -5494,9 +5494,9 @@
         "id": "334801525400666112",
         "username": "ijh#0966",
         "messages": {
-            "count": 24910,
-            "last": "he's strong",
-            "lastSeen": 1553293974785
+            "count": 24911,
+            "last": "<@339587935458557963> go to a dojo on Saturday <:kappa:392195924258193410>",
+            "lastSeen": 1553310514516
         },
         "lichess": {
             "_main": "ijh",
@@ -5527,7 +5527,7 @@
                 "bughouse": "714"
             }
         },
-        "lastupdate": 1553289050168,
+        "lastupdate": 1553310493550,
         "finger": "Your current finger message is:",
         "trivia": {
             "rating": 1370,
@@ -5803,7 +5803,7 @@
         "id": "458318569260974081",
         "username": "hipno#0082",
         "messages": {
-            "count": 3306,
+            "count": 3307,
             "last": "<:lul:416599131532820492>",
             "lastSeen": 1553271923787
         },
@@ -6109,7 +6109,7 @@
             "last": "I dont know, he plays very well, of course. But he only plays 7 RK games, its early",
             "lastSeen": 1545405677428
         },
-        "lastupdate": 1553210448675,
+        "lastupdate": 1553311393629,
         "lichess": {
             "_main": "Javi0111",
             "Javi0111": {
@@ -6138,7 +6138,7 @@
         "messages": {
             "count": 2
         },
-        "lastupdate": 1553215549567,
+        "lastupdate": 1553310793633,
         "chesscom": {
             "_main": "Programmer57",
             "Programmer57": {
@@ -6652,7 +6652,7 @@
             "last": "blitz game # 40... only 11 wins 😂",
             "lastSeen": 1531525825002
         },
-        "lastupdate": 1553294449836,
+        "lastupdate": 1553312595818,
         "chesscom": {
             "_main": "jonasd12321",
             "jonasd12321": {
@@ -6845,7 +6845,7 @@
         "id": "312050689511784449",
         "username": "Uarekomodo#1220",
         "messages": {
-            "count": 199,
+            "count": 200,
             "last": "Does anyone know how long it takes to get a chess.com stream partnership application approved?",
             "lastSeen": 1553301375910
         },
@@ -11059,16 +11059,16 @@
             "_main": "JellyBeanThief",
             "JellyBeanThief": {
                 "maxRating": "1938",
-                "bullet": "1300",
+                "bullet": "1308",
                 "lightning": "1532",
                 "chess": "1431",
                 "rapid": "1374",
-                "bughouse": "1635",
+                "bughouse": "1628",
                 "tactics": "1938",
                 "lessons": "1784"
             }
         },
-        "lastupdate": 1553272849960
+        "lastupdate": 1553311693819
     },
     {
         "id": "296581642728767499",
@@ -13446,16 +13446,16 @@
         "lichess": {
             "_main": "ODMWND",
             "ODMWND": {
-                "maxRating": "2191",
+                "maxRating": "2201",
                 "blitz": "1500?",
                 "bullet": "1500?",
                 "rapid": "1500?",
                 "classical": "1500?",
-                "anti": "2191"
+                "anti": "2201"
             },
             "_name": "Leopold Stotch"
         },
-        "lastupdate": 1553283349416
+        "lastupdate": 1553312893650
     },
     {
         "id": "498734110999576587",
@@ -14390,22 +14390,22 @@
             "lastSeen": 1553126228950
         },
         "username": "best pleb na#5152",
-        "lastupdate": 1553295051669,
+        "lastupdate": 1553313193657,
         "location": "Singapore",
         "lichess": {
             "_main": "lucyismywaifu",
             "lucyismywaifu": {
-                "maxRating": "2106",
+                "maxRating": "2153",
                 "blitz": "2106",
-                "bullet": "2100",
-                "rapid": "2100",
+                "bullet": "2153",
+                "rapid": "2106",
                 "classical": "2105",
                 "crazyhouse": "1807",
-                "3-check": "1657?",
-                "anti": "1432?",
+                "3-check": "1627?",
+                "anti": "1418?",
                 "horde": "1829?",
                 "atomic": "1704",
-                "koth": "1863",
+                "koth": "1874",
                 "racing-kings": "1785?"
             },
             "_country": "SG"
@@ -15234,15 +15234,15 @@
         "lichess": {
             "_main": "Silky_Steve",
             "Silky_Steve": {
-                "maxRating": "1404",
+                "maxRating": "1414",
                 "blitz": "1332",
-                "bullet": "1229",
-                "rapid": "1404",
+                "bullet": "1261",
+                "rapid": "1414",
                 "classical": "1296",
                 "crazyhouse": "1462?"
             }
         },
-        "lastupdate": 1553292649617
+        "lastupdate": 1553311093684
     },
     {
         "id": "552637095714357248",
