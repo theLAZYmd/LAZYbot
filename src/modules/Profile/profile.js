@@ -159,10 +159,7 @@ class Profile extends Parse {
 	}
 
 	get info() {
-        let region = "None set."; //default region sign if none found, measure of number of sources
-        //let region = this.member.roles.find(r => r.name )
-        //if (!region) region = "None set.";
-        let region = this.server.regions.find(r => this.Search.roles.get(r) && this.member.some(role => role.name.toLowerCase() === r.toLowerCase()));
+        let region = this.server.regions.find(r => this.Search.roles.get(r) && this.member.roles.some(role => role.name.toLowerCase() === r.toLowerCase())) || "None set.";
 		return [
 			["Age", this._dbuser.age],
 			["Sex", this._dbuser.sex ? (this.Search.emojis.get(this._dbuser.sex) ? this.Search.emojis.get(this._dbuser.sex) : this._dbuser.sex) : ""],
