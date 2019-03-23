@@ -1,11 +1,10 @@
 # LAZYbot
 
-Discord bot operating in [the House server](http://dscrd.me/housechessvariants), servicing just over 1,100 members [December 2018].
-Has helped LAZY's understanding of basic js.
+Discord bot operating in [the House server](http://dscrd.me/housechessvariants), servicing over 1,300 members [March 2019].
 Written in Node.JS.
-Currently (due to lack of confidence in the bot's database system and concerns over pricing for hosting) not available on multiple servers. If/when the bot is switched over to a (cheaper) linux server, and the database system is revamped, an add-server link will be added.
+Currently not available on multiple servers.
 
-This bot has also spawned off [LAZYmail](https://github.com/theLAZYmd/LAZYmail), a version of the bot with just the below-mentioned ModMail module. This is in use in the official [IBO Discord server](https://discord.gg/IBO) and services over 10,000 members [December 2018]. 
+This bot has also spawned off [LAZYmail](https://github.com/theLAZYmd/LAZYbot/tree/modmail), a version of the bot with just the below-mentioned ModMail module. This is in use in the official [IBO Discord server](https://discord.gg/IBO) and services over 13,800 members [March 2019]. 
 
 ### Hosting
 - **Provider:** Amazon EC2 Instance
