@@ -1,7 +1,7 @@
-const Main = require("./main.js");
-const DataManager = require("../../util/datamanager.js");
-const DBuser = require("../../util/dbuser.js");
-const Embed = require("../../util/embed.js");
+const Main = require("./main");
+const DataManager = require("../../util/datamanager");
+const DBuser = require("../../util/dbuser");
+const Embed = require("../../util/embed");
 const config = require("../../config.json");
 
 class Voters extends Main {

@@ -1,4 +1,4 @@
-const Logger = require("../../../util/logger.js");
+const Logger = require("../../../util/logger");
 
 class Data {
 	constructor(candidates, votes, ties, cycle = 0) {

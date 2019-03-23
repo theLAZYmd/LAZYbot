@@ -1,7 +1,6 @@
-const Main = require("./main.js");
-const DataManager = require("../../util/datamanager.js");
-const Embed = require("../../util/embed.js");
-const Leaderboard = require("../leaderboard.js");
+const Main = require("./main");
+const DataManager = require("../../util/datamanager");
+const Embed = require("../../util/embed");
 
 class Candidates extends Main {
 

@@ -9,7 +9,7 @@
                 "register": true,
                 "candidates": false,
                 "voting": false,
-                "count": false,
+                "count": true,
                 "results": true
             },
             "trivia": false

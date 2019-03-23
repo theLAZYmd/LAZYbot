@@ -1,5 +1,5 @@
-const Parse = require("../../util/parse.js");
-const DataManager = require("../../util/datamanager.js");
+const Parse = require("../../util/parse");
+const DataManager = require("../../util/datamanager");
 
 class Main extends Parse {
 

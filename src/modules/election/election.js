@@ -1,7 +1,7 @@
-const Main = require("./main.js");
-const Config = require("./config.js");
-const DataManager = require("../../util/datamanager.js");
-const Embed = require("../../util/embed.js");
+const Main = require("./main");
+const Config = require("./config");
+const DataManager = require("../../util/datamanager");
+const Embed = require("../../util/embed");
 const config = require("../../config.json");
 
 class Election extends Main {

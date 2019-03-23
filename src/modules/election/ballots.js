@@ -1,7 +1,7 @@
-const Main = require("./main.js");
-const DataManager = require("../../util/datamanager.js");
-const Embed = require("../../util/embed.js");
-const Permissions = require("../../util/permissions.js");
+const Main = require("./main");
+const DataManager = require("../../util/datamanager");
+const Embed = require("../../util/embed");
+const Permissions = require("../../util/permissions");
 
 class Ballots extends Main {
 
