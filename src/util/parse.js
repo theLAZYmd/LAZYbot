@@ -14,11 +14,17 @@ class Parse {
 
 	get server() {
         if (!this.guild) return null;
-		return DataManager.getServer(this.guild.id);
+        if (this._server) return this._server;
+        return this._server = this.getServer();
     }
     
     set server(server) {
         DataManager.setServer(server);
+        this._server = server;
+    }
+
+    getServer() {
+		return DataManager.getServer(this.guild.id);
     }
 
 	get reactionmessages() {
