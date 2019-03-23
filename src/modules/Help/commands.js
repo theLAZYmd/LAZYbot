@@ -12,7 +12,7 @@ class Commands extends Parse {
     async about () { //command to parse the ReadMe file
         const readMe = fs.readFileSync("./README.md").toString().replace(/\r/g, "");
         let title = readMe.match(/^#([\w\s]+)[\n]/i);
-        let footer = readMe.match(/#([\w\s]+)[\n]?$/i);    
+        let footer = readMe.match(/#([\w\s]+)[\n]?$/i) || [];    
         let sections = readMe.replace(footer[0], "").split("###");    
         let description = sections.shift().replace(title[0], "").trim() + "\n\u200b";
         let fields = sections.map((string) => {
