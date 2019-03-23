@@ -110,7 +110,7 @@ class Tracker extends Parse {
 			if (args.length === 0) username = this.author.username;
 			if (args.length === 1) username = args[0];
 			if (args.length === 2) {
-				if (!this.Check.role(this.member, this.server.roles.admin)) throw "Insufficient permissions to perform this command.";
+                if (!this.Permissions.role('admin', this)) throw this.Permissions.output('role');
 				let user = this.Search.users.get(args[0]);
 				if (!user) throw "Invalid user given.";
 				this.user = user;

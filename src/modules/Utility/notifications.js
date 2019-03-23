@@ -9,7 +9,7 @@ class Notifications extends Parse {
 
     async run(argument) {
         try {
-            if (!this.Check.role(this.member, "Bronze") || !argument) return; //temporary permissions, but this command really needs it
+            if (!this.member.roles.some(role => role.name.toLowerCase() === "bronze")) throw this.Permissions.output('role');
             let server = this.server;
             let notify = server.notify || {};
             if (!/https?:\/\/(lichess\.org|chess\.com|bughousetest\.com)(?:\/tournament\/)?[\S\.]*\.*\w+\/?\s?/.test(link)) return;

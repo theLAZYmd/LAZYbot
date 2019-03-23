@@ -217,7 +217,6 @@
             "file": "eval",
             "method": "run",
             "arguments": [
-                "args",
                 "argument"
             ],
             "prefix": "generic",

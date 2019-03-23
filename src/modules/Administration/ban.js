@@ -29,7 +29,7 @@ class Ban extends Parse {
     }
 
     async generate(args) {
-        if (!args[0] || !this.Check.owner(this.member)) throw "Insufficient permissions for this action!"; //extra level of security since these are serious commands
+        if (!args[0] || !await this.Permissions.role('owner', this)) throw this.Permissions.output('role');
         let member = this.Search.members.get(args[0], true);
         if (!member) throw "No member found!";
         this.Output.sender(new Embed()
