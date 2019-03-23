@@ -1,20 +1,4 @@
 {
-    "Currency": [
-        {
-            "name": "gild",
-            "module": "Currency",
-            "file": "currency",
-            "method": "gild"
-        }
-    ],
-    "Election": [
-        {
-            "key": "election",
-            "module": "Election",
-            "file": "votes",
-            "method": "react"
-        }
-    ],
     "ModMail": [
         {
             "name": "📨",
