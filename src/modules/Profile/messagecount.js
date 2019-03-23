@@ -23,7 +23,7 @@ class MessageCount extends Parse {
             let dbuser = this.dbuser;
             dbuser.messages.last = this.message.content.length > 500 ? this.message.content.slice(0, 500).replace("`", "") + "..." : this.message.content.replace(/\`/g, "");
             dbuser.messages.lastSeen = this.message.createdTimestamp;
-            if (dbuser.username !== this.author.tag) dbuser.username = author.tag;
+            if (dbuser.username !== this.author.tag) dbuser.username = this.author.tag;
             DBuser.setData(dbuser);
         } catch (e) {
             if (e) this.Output.onError(e);

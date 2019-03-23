@@ -883,6 +883,34 @@
     "Custom Reactions": [
         {
             "aliases": [
+                "listcustreact",
+                "lcr",
+                "listcustomreaction"
+            ],
+            "description": "List custom reactons for the server.",
+            "usage": [],
+            "module": "Custom Reactions",
+            "file": "customreactions",
+            "method": "list",
+            "arguments": [],
+            "prefix": "generic"
+        },
+        {
+            "aliases": [
+                "listemoreact",
+                "ler",
+                "listemojireaction"
+            ],
+            "description": "List emoji reactons for the server.",
+            "usage": [],
+            "module": "Custom Reactions",
+            "file": "customreactions",
+            "method": "list",
+            "arguments": [],
+            "prefix": "generic"
+        },
+        {
+            "aliases": [
                 "addcustreact",
                 "acr",
                 "addcustomreaction"

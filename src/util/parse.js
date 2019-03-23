@@ -163,7 +163,7 @@ class Parse {
 	get prefix() {
 		if (this._prefix) return this._prefix;
 		for (let prefix of Array.from(this.prefixes.values()))
-			if (this.message.content.startsWith(prefix))
+			if (this.content.startsWith(prefix))
 				return this._prefix = prefix;
 		return "";
     }
@@ -179,8 +179,8 @@ class Parse {
 
 	get words() {
         if (this._words) return this._words;
-        if (!this.message || !this.message.content) return [];
-		return this._words = this.message.content.slice(this.prefix.length).match(/[^\s]+/gi) || [];
+        if (!this.message || !this.content) return [];
+		return this._words = this.content.slice(this.prefix.length).match(/[^\s]+/gi) || [];
 	}
 
 	get command() {

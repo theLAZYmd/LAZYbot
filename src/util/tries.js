@@ -6,7 +6,7 @@ const DM = DataManager.getFile("./src/commands/DM.json");
 const Message = DataManager.getFile("./src/commands/message.json");
 const Reaction = DataManager.getFile("./src/commands/reaction.json");
 const Interval = DataManager.getFile("./src/commands/interval.json");
-const LAZYac = require("../../../LAZYahocorasick/src/main");
+const ac = require('lazy-aho-corasick');
 const fs = require('fs');
 
 class Trie {
@@ -101,10 +101,9 @@ class Trie {
                 }
             }
         }
-        let trie = new LAZYac(substrings, {
+        let trie = new ac(substrings, {
             "startOnly": false
         });
-        DataManager.setFile(trie, "./src/misc/commands-ac.json");
         Logger.load(time, [[substrings.length, "Command keys"]]);
         return Trie._message = {    trie, substrings, index    };
     }
