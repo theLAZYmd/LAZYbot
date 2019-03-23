@@ -23,9 +23,9 @@ class Output extends Tracker {
             true
           )
 				} catch (e) {
-          if (e) throw "Error setting data."
-        }
-      }
+                    if (e) throw "Error setting data."
+                }
+            }
 			if (embed.fields.length > 0) this.Output[this.command === "update" ? "editor" : "sender"](embed, this.msg);
 			if (errors) throw errors;
 		}

@@ -86,11 +86,7 @@ class Tracker extends Parse {
 
 	async updateCycle () {
 		let dbuser = this.LUTDU;
-        Tracker.lastDBuser = dbuser;
-		if (!dbuser) {
-            if (Tracker.lastDBuser) Logger.error("All users are up to date.");
-            return;
-        }
+		if (!dbuser) return Logger.error("All users are up to date.");
         let sources = Object.values(config.sources).filter(source => dbuser[source.key]);
         this.track({dbuser, sources});
     }
@@ -268,12 +264,12 @@ class Tracker extends Parse {
 			if (Object.values(config.sources).filter(source => dbuser[source.key]).length === 0) return false; //sources
             if (dbuser.left) return false;
             let user = this.Search.users.byID(dbuser.id);
-            if (!user) return dbuser.left = true;	
-			if (!/online|idle|dnd/.test(user.presence.status)) return false;
+            if (!user) return false;	
+			if (!/^(?:online|idle|dnd)$/.test(user.presence.status)) return false;
 			if (!dbuser.lastupdate) return true;
 			if (dbuser.lastupdate < currentValue && dbuser.lastupdate < Date.now() - config.delays.repeat) {
 				currentValue = dbuser.lastupdate;
-				return dbuser;
+				return true;
 			}
         });      
 	}
