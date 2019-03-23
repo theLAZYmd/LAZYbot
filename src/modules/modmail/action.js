@@ -1,4 +1,5 @@
 const Main = require("./main.js");
+const Embed = require("../../util/embed");
 
 class Action extends Main {
 
@@ -65,7 +66,7 @@ class Action extends Main {
 				"author": data.mod,
 				"description": "**" + data.mod.tag + "** Please type your response below (replying as " + (data.mod.flair ? "server" : "yourself") + ")"
             }, true);
-            let content = msg.content + " " + msg.attachements.map(([,a]) => "[Attachment](" + a.url + ")").join(" ");
+            let content = msg.content + " " + msg.attachments.map(([,a]) => "[Attachment](" + a.url + ")").join(" ");
 			if (content.length > 1024) throw "Your message must be less than 1024 characters!\nPlease shorten it by **" + (content.length - 1024) + "** characters.";
 			else data.content = content; //DATA.CONTENT SET
 			msg.delete();

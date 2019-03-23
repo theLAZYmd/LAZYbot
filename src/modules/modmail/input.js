@@ -9,7 +9,7 @@ class Input extends Main {
 
 	async incoming() { //new DM received to create new modmail conversation
 		try {
-            let content = this.message.content + " " + this.message.attachements.map(([,a]) => "[Attachment](" + a.url + ")").join(" ");
+            let content = this.message.content + " " + this.message.attachments.map(([,a]) => "[Attachment](" + a.url + ")").join(" ");
 			if (content.length > 1024) throw "Your message must be less than 1024 characters!\nPlease shorten it by **" + (content.length - 1024) + "** characters.";
 			let data = {
 				"mod": false,
@@ -61,7 +61,7 @@ class Input extends Main {
 				"title": "Sending new ModMail to " + data.users.map(user => user.tag).join(", "),
 				"description": "**" + data.mod.tag + "** Please type your message below (sending as " + (data.mod.flair ? "server" : "yourself") + ")"
 			}, true);
-			data.content = msg.content + " " + msg.attachements.map(([,a]) => "[Attachment](" + a.url + ")").join(" ");;
+			data.content = msg.content + " " + msg.attachments.map(([,a]) => "[Attachment](" + a.url + ")").join(" ");;
 			if (data.content.length > 1024) throw "Your message must be less than 1024 characters!\nPlease shorten it by **" + (data.content.length - 1024) + "** characters.";
 			this.log(data);
 			for (let user of data.users) try {

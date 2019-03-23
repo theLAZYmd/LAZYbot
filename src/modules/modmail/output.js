@@ -21,14 +21,14 @@ class Output extends Main {
 	async anew(data = {}) { //called for any new modmail conversation
 		try {
             let member = this.Search.members.byUser(data.user);
-            let field = data.embed ? data.embed.fields.slice(-1) : [];      //for when the modmail has too many fields
+            let field = data.embed ? data.embed.fields.slice(-1) : null;      //for when the modmail has too many fields
             data.embed = new Embed(data.embed)
                 .setTitle("ModMail Conversation for " + data.user.tag)
                 .setDescription("User " + data.user + " has **" + Math.max(0, (member.roles.size - 1)) + "** roles.\n" + [
                     ["Joined Discord", Date.getISOtime(data.user.createdTimestamp).slice(4, 15)],
                     ["Joined " + this.guild.name, Date.getISOtime(member.joinedTimestamp).slice(4, 15)]
                 ].toPairs("bold"))
-                .addField(field.name, field.value, field.inline);
+            if (field) data.embed.addField(field.name, field.value, field.inline);
             this.renew(data);
 		} catch (e) {
 			if (e) this.Output.onError(e);
@@ -60,7 +60,7 @@ class Output extends Main {
 
 	async moderate(data) { //adds a moderator message as a new field. Edits to do so.
 		try {
-			data.embed.addField(data.name, "", false);
+			data.embed.addField(data.name, "\u200b", false);
 			this.editor(data); //and if they had last message, less than half an hour ago, merely append it with new line
 		} catch (e) {
 			if (e) this.Output.onError(e);
@@ -95,7 +95,7 @@ class Output extends Main {
 		try {
 			if (data.embed.fields.length < 26) return await this.Output.editor(data.embed, data.message); //check if the message would be more than 2000 characters
 			data.message.clearReactions(); //clear reactions from the old message
-			this.modmail[message.id].overflow = msg.id; //set the overflow to true
+			this.modmail[message.id].overflow = this.message.id; //set the overflow to true
 			this.setData(this.modmail);
 			return await this.anew(data);
 		} catch (e) {
