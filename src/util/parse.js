@@ -113,7 +113,7 @@ class Parse {
     
     get content() {
         if (this._content) return this._content;
-        return this._content = !this.message ? null : this.message.content
+        return this._content = !this.message || !this.message.content ? null : this.message.content
             .replace("’", "'")
             .replace("…", "...")
             .replace("—", "--")
