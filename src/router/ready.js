@@ -110,11 +110,11 @@ class Ready {
 		Logger.log(`Set bot user presence to ${name} in ${Date.now() - this.client.readyTimestamp}ms.`);
 	}
 
-	async setUsername() {
+	async setUsername() {   //Name in package.json + version number
 		let version = Package.version.match(/[0-9]+.[0-9]+.[0-9]/);
 		if (!version) throw Logger.log("Invalid versioning in package.json, please review.");
 		for (let guild of Array.from(this.client.guilds.values())) {
-			let name = `LAZYbot${this.client.user.id === config.ids.betabot ? "beta" : ""} v.` + version;
+			let name = Package.name.replace('lazy', 'LAZY') + (this.client.user.id === config.ids.betabot ? "beta" : "") + " v." + version;
 			if (guild.me.nickname !== name) {
 				await guild.me.setNickname(name);
 				Logger.log(`Set bot nickname to ${name} in guild ${guild.name} in ${Date.now() - this.client.readyTimestamp}ms.`);
