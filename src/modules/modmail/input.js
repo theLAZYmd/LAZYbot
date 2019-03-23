@@ -1,31 +1,20 @@
-const Main = require("./main.js");
-const Embed = require("../../util/embed.js");
+const Main = require("./main");
+const Embed = require("../../util/embed");
 
 class Input extends Main {
 
 	constructor(message) {
 		super(message);
-	}
-
-	get output() {
-		let Constructor = require("./output.js");
-		return new Constructor(this.message);
-	}
-
-	get action() {
-		let Constructor = require("./action.js");
-		return new Constructor(this.message);
-	}
+    }
 
 	async incoming() { //new DM received to create new modmail conversation
 		try {
-			for (let [, attachment] of this.message.attachments)
-				this.message.content += " [Image Attachment](" + attachment.url + ")"; //if there's any images, append them as a link to the DM image
-			if (this.message.content.length > 1024) throw "Your message must be less than 1024 characters!\nPlease shorten it by **" + (this.message.content.length - 1024) + "** characters.";
+            let content = this.message.content + " " + this.message.attachements.map(([,a]) => "[Attachment](" + a.url + ")").join(" ");
+			if (content.length > 1024) throw "Your message must be less than 1024 characters!\nPlease shorten it by **" + (content.length - 1024) + "** characters.";
 			let data = {
 				"mod": false,
 				"user": this.author,
-				"content": this.message.content,
+				"content": content,
 				"command": "DM"
 			};
 			if (!this.modmail || !this.modmail._timeout) { //if there's no modmail stored for this server
@@ -72,10 +61,7 @@ class Input extends Main {
 				"title": "Sending new ModMail to " + data.users.map(user => user.tag).join(", "),
 				"description": "**" + data.mod.tag + "** Please type your message below (sending as " + (data.mod.flair ? "server" : "yourself") + ")"
 			}, true);
-			if (msg.attachments)
-				for (let [, attachment] of msg.attachments)
-					msg.content += " [Image Attachment](" + attachment.url + ")"; //if there's any images, append them as a link to the DM image
-			data.content = msg.content;
+			data.content = msg.content + " " + msg.attachements.map(([,a]) => "[Attachment](" + a.url + ")").join(" ");;
 			if (data.content.length > 1024) throw "Your message must be less than 1024 characters!\nPlease shorten it by **" + (data.content.length - 1024) + "** characters.";
 			this.log(data);
 			for (let user of data.users) try {

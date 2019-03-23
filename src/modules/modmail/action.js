@@ -27,7 +27,7 @@ class Action extends Main {
 			let data = {
 				"mod": user,
 				"message": reaction.message,
-				"embed": reaction.message.embeds[0],
+				"embed": new Embed(reaction.message.embeds[0])
 			};
 			data.user = this.Search.users.byTag(this.modmail[reaction.message.id].tag);
 			if (!data.user) throw "User **" + user.tag + "** no longer exists!";
@@ -64,12 +64,10 @@ class Action extends Main {
 			let msg = await this.Output.response({
 				"author": data.mod,
 				"description": "**" + data.mod.tag + "** Please type your response below (replying as " + (data.mod.flair ? "server" : "yourself") + ")"
-			}, true);
-			if (msg.attachments)
-				for (let [id, attachment] of msg.attachments)
-					msg.content += " [Image Attachment](" + attachment.url + ")"; //if there's any images, append them as a link to the DM image
-			if (msg.content.length > 1024) throw "Your message must be less than 1024 characters!\nPlease shorten it by **" + (msg.content.length - 1024) + "** characters.";
-			else data.content = msg.content; //DATA.CONTENT SET
+            }, true);
+            let content = msg.content + " " + msg.attachements.map(([,a]) => "[Attachment](" + a.url + ")").join(" ");
+			if (content.length > 1024) throw "Your message must be less than 1024 characters!\nPlease shorten it by **" + (content.length - 1024) + "** characters.";
+			else data.content = content; //DATA.CONTENT SET
 			msg.delete();
 			data.command = "reply";
 			this.output.amend(data);

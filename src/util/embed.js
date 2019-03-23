@@ -14,6 +14,14 @@ class Embed extends RichEmbed {
         return this;
     }
 
+    removeField(index) {
+        if (typeof index !== "number") throw new TypeError('Index must be a number');
+        if (index < 0) index = this.fields.length + index;
+        if (!this.fields[i]) throw new RangeError('Index value must be between 0 and ' + this.fields.length - 1 );
+        this.fields.remove(i);
+        return this;
+    }
+
 	static fielder(fields = [], name = " \u200b", value = " \u200b", inline = false) {
 		fields.push({
 			name,

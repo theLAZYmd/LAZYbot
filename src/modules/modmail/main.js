@@ -8,6 +8,24 @@ class ModMail extends Parse {
 		super(message);
 		this.mchannel = this.server ? this.Search.channels.get(this.server.channels.modmail) : null;
 	}
+    
+    get input() {
+        if (this._input) return this._input;
+		let Constructor = require("./input");
+		return this._input = new Constructor(this.message);
+    }
+
+	get output() {
+        if (this._output) return this._output;
+		let Constructor = require("./output");
+		return this._output = new Constructor(this.message);
+	}
+
+	get action() {
+        if (this._action) return this._action;
+		let Constructor = require("./action");
+		return this._action = new Constructor(this.message);
+	}
 
 	get modmail () {
 		let reactionmessages = this.reactionmessages;
@@ -35,15 +53,8 @@ class ModMail extends Parse {
 			if (data.content) args.unshift(data.content);
 			if (data.mod && data.user) args.unshift(data.user.tag);
 			if (data.mod && data.users) args.unshift(...data.users.map(user => user.tag));
-			if (data.mod && /reply|send/.test(data.command)) args.unshift(data.mod.flair ? "server" : "self");
-			Logger.command({
-				"author": data.mod ? data.mod : data.user,
-				"args": args,
-				"command": data.command
-			}, {
-				"file": "Mod Mail",
-				"prefix": ""
-			})
+            if (data.mod && /reply|send/.test(data.command)) args.unshift(data.mod.flair ? "server" : "self");
+            Logger.log(["Mod Mail", data.mod || data.user, data.command, "[" + args.join(", ") + "]"]);
 		} catch (e) {
 			if (e) this.Output.onError("log " + e);
 		}
