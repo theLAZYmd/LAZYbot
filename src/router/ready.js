@@ -6,6 +6,7 @@ const Logger = require("../util/logger");
 const Commands = require("../util/commands");
 const Tries = require("../util/tries");
 const CustomReactions = require("../modules/Custom Reactions/customreactions");
+const Shadowban = require("../modules/Administration/shadowban");
 
 class Ready {
 
@@ -55,6 +56,11 @@ class Ready {
     async getCustomReactions() {
         let CR = CustomReactions.getTrie();
         Logger.load(this.client.readyTimestamp, [[Object.keys(CR).length, "Servers"], [Object.values(CR).reduce((acc, curr) => acc += curr.anyword.size + curr.whole.size, 0), "Keys"]], "Custom Reactions");
+    }
+
+    async getShadowbanPhrases() {
+        let servers = Object.keys(Shadowban.getTrie());
+        Logger.load(this.client.readyTimestamp, [[servers.length, "Servers"]], "Shadowban Phrases");
     }
 
 	async getSources() {
