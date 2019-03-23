@@ -1,4 +1,4 @@
-#LAZYbot
+# LAZYbot
 
 Discord bot operating in [the House server](http://dscrd.me/housechessvariants), servicing just over 1,100 members [December 2018].
 Has helped LAZY's understanding of basic js.
@@ -7,14 +7,14 @@ Currently (due to lack of confidence in the bot's database system and concerns o
 
 This bot has also spawned off [LAZYmail](https://github.com/theLAZYmd/LAZYmail), a version of the bot with just the below-mentioned ModMail module. This is in use in the official [IBO Discord server](https://discord.gg/IBO) and services over 10,000 members [December 2018]. 
 
-###Hosting
+### Hosting
 - **Provider:** Amazon EC2 Instance
 - **Region:** eu-west-2a
 - **Instance Type:** t2.small
 - **OS:** Windows (for now)
 - **Running Cost:** £0.28 [November 2018]
 
-###Highlights
+### Highlights
 - [Election module](https://github.com/theLAZYmd/LAZYbot/tree/master/src/modules/Election/) - runs a fully-automated election system on Discord with no third-party libs that, in order:
   - Allow choosing of customisable settings, such as date, voting system, scope of election, electorate list, various rules such as whether to find and exclude dupe accounts, where to set a minimum threshold on messages, on sponsors required for nominations, on number of elections able to run for (if holding several at the several time), and who the voters are.
   - Allows a 'sponsoring' system to nominate candidates
@@ -45,7 +45,7 @@ This bot has also spawned off [LAZYmail](https://github.com/theLAZYmd/LAZYmail),
   - Compares that data in the database with that of other users, for comparison in [leaderboards](https://github.com/theLAZYmd/LAZYbot/blob/master/src/modules/Chess/leaderboard.js) through the command `!lb`
   - Allows users to use `!myrank` to display one's ranking compared to all other users for all variants
 
-###Other features (src/modules)
+### Other features (src/modules)
 - Custom reactions system  with either set phrases, embeds, or emojis
 - Help modules with `!commands` and individual messages with `!help`
 - Stores and returns embeds which are editable:
@@ -65,4 +65,4 @@ This bot has also spawned off [LAZYmail](https://github.com/theLAZYmd/LAZYmail),
 - As well as basic utility functions such as get ping, uptime, and quote messages
 - As well as developers utility functions such as convert a Discord Embed to raw JSON, convert Discord text to Markdown, output JSONs, output various strings and errors
 
-#In active development
+# In active development
