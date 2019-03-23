@@ -16,7 +16,29 @@ class Output extends Main {
 		} catch (e) {
 			if (e) this.Output.onError(e);
 		}
-	}
+    }
+    
+    async roleUpdate(oldMember, newMember) {
+        try {
+            let f = Object.entries(this.modmail).find(([i, m]) => {
+				if (i.startsWith("_")) return false;
+				if (m.tag !== newMember.user.tag) return false;
+				if (m.overflow) return false;
+				return true;
+			});
+			if (!f) return;
+			let [id, mailInfo] = f;
+            let modmail = await this.mchannel.fetchMessage(id).catch(() => {});
+            let embed = new Embed(modmail.embeds[0])
+                .setDescription("User " + newMember.user + " has **" + Math.max(0, (newMember.roles.size - 1)) + "** roles.\n" + [
+                    ["Joined Discord", Date.getISOtime(newMember.user.createdTimestamp).slice(4, 15)],
+                    ["Joined " + this.guild.name, Date.getISOtime(newMember.joinedTimestamp).slice(4, 15)]
+                ].toPairs("bold"));
+            this.Output.editor(embed, modmail);
+        } catch (e) {
+            if (e) this.Output.onError(e);
+        }
+    }
 
 	async anew(data = {}) { //called for any new modmail conversation
 		try {
