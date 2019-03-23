@@ -1,5 +1,6 @@
-const Parse = require("../../util/parse.js");
-const DBuser = require("../../util/dbuser.js");
+const Parse = require('../../util/parse');
+const DBuser = require('../../util/dbuser');
+const Embed = require('../../util/embed');
 
 class MessageCount extends Parse {
 
@@ -7,32 +8,41 @@ class MessageCount extends Parse {
         super(message);
     }
 
-    async log(author, dbuser) { //section for message logging
+    async count() { //section for message logging
         try {
-            if (!author || !dbuser) console.log(this);
-            if (!isNaN(dbuser.messages.count)) dbuser.messages.count++;
-            else {
-                dbuser.messages.count = 0;
-                throw "Your message count data has been lost. Please alert a bot owner immediately.";
-            }
-            if (Object.values(this.server.prefixes).includes(this.prefix)) throw "";
-            dbuser.messages.last = this.message.content.length > 500 ? this.message.content.slice(0, 500).replace("`", "") + "..." : this.message.content.replace(/\`/g, "");
-            dbuser.messages.lastSeen = this.message.createdTimestamp;
-            if (dbuser.username !== author.tag) dbuser.username = author.tag;
+            let dbuser = this.dbuser;
+            dbuser.messages.count++;
             DBuser.setData(dbuser);
         } catch (e) {
             if (e) this.Output.onError(e);
         }
     }
 
-    async update(user) {
+    async log() {
         try {
-            let newcount = Number(args.find(a => !isNaN(Number(a))));
-            let testuser = args.find(a => this.Search.users.get(a));
-            if (testuser) user = this.Search.users.get(testuser);
-            if (!newcount) throw "No new MessageCount specified!";
+            let dbuser = this.dbuser;
+            dbuser.messages.last = this.message.content.length > 500 ? this.message.content.slice(0, 500).replace("`", "") + "..." : this.message.content.replace(/\`/g, "");
+            dbuser.messages.lastSeen = this.message.createdTimestamp;
+            if (dbuser.username !== this.author.tag) dbuser.username = author.tag;
+            DBuser.setData(dbuser);
+        } catch (e) {
+            if (e) this.Output.onError(e);
+        }
+    }
+
+    async update(user = this.author) {
+        try {
+            let number;
+            for (let a of args) {
+                if (typeof a === "number") number = a;
+                else {
+                    let _user = this.Search.users.get(a);
+                    if (_user) user = _user;
+                    else throw this.Permissions.output('args');
+                }
+            }
             let dbuser = DBuser.getUser(user);
-            dbuser.messages.count = newcount;
+            dbuser.messages.count = number;
             DBuser.setData(dbuser);
             this.Output.generic(`Message count for **${user.tag}** is now **${dbuser.messages.count.toLocaleString()}** messages.`);
         } catch (e) {
@@ -42,12 +52,13 @@ class MessageCount extends Parse {
 
     async get(args, user) {
         try {
+            if (args.length > 1) throw this.Permissions.output('args');
             if (args.length === 1) { //!messages titsinablender
                 user = this.Search.users.get(args[0]);
-                if (!user) return this.Output.onError(`Couldn't find user!`);
+                if (!user) throw "Couldn't find user!";
             }
             let dbuser = DBuser.getUser(user);
-            this.Output.generic(`**${user.tag}** has sent **${dbuser.messages.count.toLocaleString()}** messages.`)
+            this.Output.generic(`**${user.tag}** has sent **${dbuser.messages.count.toLocaleString()}** messages.`);
         } catch (e) {
             if (e) this.Output.onError(e);
         }

@@ -1,114 +1,104 @@
 {
     "314155682033041408": {
         "_id": "314155682033041408",
-        "text": [
-            {
-                "trigger": "!marco",
-                "reaction": "polo!",
-                "anyword": false
+        "text": {
+            "!marco": {
+                "type": "text",
+                "anyword": false,
+                "reaction": "polo!"
             },
-            {
-                "trigger": "!ready",
-                "reaction": "I am ready!",
-                "anyword": false
+            "!ready": {
+                "type": "text",
+                "anyword": false,
+                "reaction": "I am ready!"
             },
-            {
-                "trigger": "!marco",
-                "reaction": "polo!",
-                "anyword": false
+            "!owner": {
+                "type": "text",
+                "anyword": false,
+                "reaction": "theLAZYmd#2353"
             },
-            {
-                "trigger": "!owner",
-                "reaction": "theLAZYmd#2353",
-                "anyword": false
-            },
-            {
-                "trigger": "!party",
-                "reaction": ":tada:",
-                "anyword": false
+            "!party": {
+                "type": "text",
+                "anyword": false,
+                "reaction": ":tada:"
             }
-        ],
-        "emoji": [
-            {
-                "trigger": "lazy",
-                "reaction": "lazy",
-                "anyword": true
+        },
+        "emoji": {
+            "lazy": {
+                "type": "emoji",
+                "anyword": false,
+                "reaction": "lazy"
             },
-            {
-                "trigger": "cubes",
-                "reaction": "cubes",
-                "anyword": true
+            "cubes": {
+                "type": "emoji",
+                "anyword": true,
+                "reaction": "cubes"
             },
-            {
-                "trigger": "obi",
-                "reaction": "obi",
-                "anyword": true
+            "obi": {
+                "type": "emoji",
+                "anyword": true,
+                "reaction": "obi"
             },
-            {
-                "trigger": "feelsbadman",
-                "reaction": "feelsbadman",
-                "anyword": false
+            "feelsbadman": {
+                "type": "emoji",
+                "anyword": false,
+                "reaction": "feelsbadman"
             },
-            {
-                "trigger": "seemsgood",
-                "reaction": "seemsgood",
-                "anyword": false
+            "seemsgood": {
+                "type": "emoji",
+                "anyword": false,
+                "reaction": "seemsgood"
             },
-            {
-                "trigger": "lul",
-                "reaction": "lul",
-                "anyword": true
+            "lul": {
+                "type": "emoji",
+                "anyword": true,
+                "reaction": "lul"
             },
-            {
-                "trigger": "ban",
-                "reaction": "banhammer",
-                "anyword": true
+            "ban": {
+                "type": "emoji",
+                "anyword": true,
+                "reaction": "banhammer"
             },
-            {
-                "trigger": "fischy",
-                "reaction": "🐟",
-                "anyword": false
+            "fischy": {
+                "type": "emoji",
+                "anyword": false,
+                "reaction": "🐟"
             },
-            {
-                "trigger": "party",
-                "reaction": "🎉",
-                "anyword": true
+            "party": {
+                "type": "emoji",
+                "anyword": true,
+                "reaction": "🎉"
             },
-            {
-                "trigger": "ping",
-                "reaction": "ping",
-                "anyword": false
+            "ping": {
+                "type": "emoji",
+                "anyword": false,
+                "reaction": "ping"
             },
-            {
-                "trigger": "hyperpoggers",
-                "reaction": "hyperpoggers",
-                "anyword": true
+            "hyperpoggers": {
+                "type": "emoji",
+                "anyword": true,
+                "reaction": "hyperpoggers"
             },
-            {
-                "trigger": "confuse??",
-                "reaction": "confuse",
-                "anyword": false
+            "confuse??": {
+                "type": "emoji",
+                "anyword": false,
+                "reaction": "confuse"
             },
-            {
-                "trigger": "hellooo",
-                "reaction": "hello",
-                "anyword": true
+            "hellooo": {
+                "type": "emoji",
+                "anyword": true,
+                "reaction": "hello"
             },
-            {
-                "trigger": "lazycat",
-                "reaction": "lazycat",
-                "anyword": false
+            "lazycat": {
+                "type": "emoji",
+                "anyword": false,
+                "reaction": "lazycat"
             },
-            {
-                "trigger": "shegg",
-                "reaction": "shegg",
-                "anyword": true
-            },
-            {
-                "trigger": "lazy",
-                "reaction": "lazy",
-                "anyword": false
+            "shegg": {
+                "type": "emoji",
+                "anyword": true,
+                "reaction": "shegg"
             }
-        ]
+        }
     }
 }

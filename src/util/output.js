@@ -1,6 +1,6 @@
-const config = require("../config.json");
-const Embed = require("./embed.js");
-const Parse = require("./parse.js");
+const config = require('../config.json');
+const Embed = require('./embed');
+const Parse = require('./parse');
 
 class Output extends Parse {
 
@@ -25,20 +25,21 @@ class Output extends Parse {
 		try {
 			if (!embed) throw "this.Output.editor(): Embed object is undefined.";
 			if (!msg) throw "this.Output.editor(): Couldn't find message to edit.";
-			if (!embed.color) embed.color = config.colors.generic;
+            if (!embed.color) embed.color = config.colors.generic;
+            let content = embed.content;
 			embed = Embed.receiver(embed);
 			if (typeof embed._apiTransform === "function") embed = embed._apiTransform();
-			return await msg.edit(embed.content, {embed});
+			return await msg.edit(content, {embed});
 		} catch (e) {
 			if (e) this.log(e);
 		}
 	}
 
-	async generic(description, NewChannel) {
+	async generic(description, channel) {
 		try {
 			return await this.sender({
 				description
-			}, NewChannel);
+			}, channel);
 		} catch (e) {
 			if (e) this.onError(e);
 		}
@@ -68,7 +69,7 @@ class Output extends Parse {
 		}
 	}
 
-	async data(json, NewChannel, type = "json") {
+	async data(json, channel, type = "json") {
 		try {
 			let string = (typeof json === "object" ? JSON.stringify((typeof json._apiTransform === "function" ? json._apiTransform() : json), null, 2) : json).replace(/`/g, "\\`");
 			let index = Math.ceil(string.length / 2000);
@@ -76,10 +77,10 @@ class Output extends Parse {
 			for (let i = 0; i < index; i++) {
 				this.log(i === index.length - 1);
 				this.sender(new Embed()
-					.setColor(9359868)
+					.setColor(config.colors.data)
 					.setDescription((string.slice(i * keylength, (i === index.length - 1 ? string.length + 2 : i * keylength + keylength)) + " ".repeat(48) + "\u200b").format(type))
 					.setFooter((i + 1) + " / " + index)
-				, NewChannel);
+				, channel);
 			}
 		} catch (e) {
 			if (e) this.onError(e);
@@ -88,7 +89,6 @@ class Output extends Parse {
 
 	async onError(error, channel = this.channel) {
 		try {
-            console.log(error);
 			if (!error) throw "";
 			this.error(error);
 			let description = error;

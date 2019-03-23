@@ -4,7 +4,7 @@ const config = DataManager.getFile("./src/config.json");
 class Permissions {
 
 	static house(requirement, argsInfo) {
-		if (requirement && argsInfo.guild.id !== config.houseid) return false;
+		if (requirement && argsInfo.guild.id !== config.ids.house) return false;
 		return true;
 	}
 
@@ -27,14 +27,18 @@ class Permissions {
 	}
 
 	static channels(channelResolvable, argsInfo) {
-		let channelName;
-		if (typeof channelResolvable === "string") channelName = channelResolvable;
+        let name;
+        let id;
+		if (typeof channelResolvable === "string") name = channelResolvable;
 		else if (typeof channelResolvable === "object") {
-			if (channelResolvable.name) channelName = channelResolvable.name;
+            if (channelResolvable.id) id = channelResolvable.id;
+			if (channelResolvable.name) name = channelResolvable.name;
 			else if (channelResolvable.type) return channelResolvable.type === argsInfo.channel.type;
-		}
-		if (!argsInfo.guild.channels.some(channel => channel.name.toLowerCase() === argsInfo.server.channels[channelName].toLowerCase())) channelName = "general";
-		return argsInfo.channel.name.toLowerCase() === (argsInfo.server.channels[channelName] || "").toLowerCase();
+        }
+        if (argsInfo.channel.id === id) return true;
+		if (!argsInfo.guild.channels.some(channel => channel.name.toLowerCase() === name.toLowerCase())) name = "general";
+        if (argsInfo.channel.name.toLowerCase() === name.toLowerCase()) return true;
+        return false;
 	}
 
 	static state(state, data) {
@@ -84,7 +88,7 @@ class Permissions {
 			case "channel":
 				return "Wrong channel to use this command.";
 			case "args":
-				return argsInfo.command === ".." ? "" : "Inapplicable number of parameters."
+				return "Inapplicable number of parameters.";
 		}
 	}
 

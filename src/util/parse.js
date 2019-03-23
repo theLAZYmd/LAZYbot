@@ -1,30 +1,13 @@
 const config = require("../config.json");
 const DBuser = require("./dbuser.js");
 const DataManager = require("./datamanager.js");
-const Embed = require("./embed.js");
-const Aliases = DataManager.getFile("./src/data/aliases.json");
 const Permissions = require("./permissions.js");
 const Logger = require("./logger.js");
 
 class Parse {
 
-	constructor(message) { //everything extends to here
-		this.message = message;
-		if (typeof this.message === "object") {
-			let guild = this.guild;
-			let server = this.server; //to prevent overuse of this keyword
-			let content = (this.message.content || "").replace("’", "'")
-				.replace("…", "...")
-				.replace("—", "--")
-				.replace("“", "\"")
-				.replace("”", "\"")
-				.replace(/[\u200B-\u200D\uFEFF]/g, ''); /*
-			if (server)
-				for (let [key, alias] of guild ? Aliases._all.concat(Aliases[guild.id] || []) : Aliases.all)
-					if (content.toLowerCase().includes(key.toLowerCase()))
-						content = content.replace(key, alias.replace(/\${([a-z]+)}/gi, value => server.prefixes[value.match(/[a-z]+/i)]));*/
-			this.message.content = content || "";
-		}
+    constructor(message) { //everything extends to here
+        this.message = message;
 	}
 
 	//DATA
@@ -109,15 +92,6 @@ class Parse {
 		return this._client = this.message ? this.message.client : null;
 	}
 
-	get member() {
-		if (this._member) return this._member;
-		return this._member = this.message ? this.message.member : null;
-	}
-
-	set member(value) {
-		this._member = value;
-	}
-
 	get guild() {
 		if (this._guild) return this._guild;
 		if (!this._guild && this.member) this._guild = this.member.guild;
@@ -127,7 +101,20 @@ class Parse {
 
 	set guild(value) {
 		this._guild = value;
-	}
+    }
+
+    //Message properties
+    
+    get content() {
+        if (this._content) return this._content;
+        return this._content = !this.message ? null : this.message.content
+            .replace("’", "'")
+            .replace("…", "...")
+            .replace("—", "--")
+            .replace("“", "\"")
+            .replace("”", "\"")
+            .replace(/[\u200B-\u200D\uFEFF]/g, '');
+    }
 
 	get author() {
 		if (this._author) return this._author;
@@ -139,13 +126,22 @@ class Parse {
 		return this._channel = this.message ? this.message.channel : null;
 	}
 
+	get member() {
+		if (this._member) return this._member;
+		return this._member = this.message ? this.message.member : null;
+	}
+
+	set member(value) {
+		this._member = value;
+	}
+
 	get user() {
 		if (this._user) return this._user;
 		return this._user = this.member ? this.member.user : null;
 	}
 
-	set user(value) {
-		this._user = value;
+	set user(user) {
+		this._user = user;
 	}
 
 	get dbuser() {
@@ -199,7 +195,7 @@ class Parse {
 	get embed() {
 		if (this._embed) return this._embed;
 		return this.message && this.message.embeds ? this.message.embeds[0] : null;
-	}
+    }
 
 	static ratingData(dbuser, source, username) {
 		try {

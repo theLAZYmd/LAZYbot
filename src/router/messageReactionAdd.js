@@ -19,7 +19,7 @@ class messageReactionAdd {
         )
         let data = new Map(Object.entries(reactionMessages) //not happy about this
             .filter(([prop]) => !prop.startsWith("_"))
-            .map(([, data]) => [Object.entries(data).filter(([prop]) => !prop.startsWith("_"))])
+            .map(([, data]) => [Object.keys(data).filter((prop) => !prop.startsWith("_"))])
             .flat(2)
         )
         let cmdInfo = ids.get(messageReaction.message.id);
