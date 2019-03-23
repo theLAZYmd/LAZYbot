@@ -12,24 +12,21 @@ class messageReactionAdd {
 
     static async button (messageReaction, user) {
         const reactionMessages = DataManager.getFile("./src/data/reactionmessages.json")[messageReaction.message.guild.id];
-        let ids = new Map(Object.entries(reactionMessages)
-            .filter(([prop]) => !prop.startsWith("_"))
-            .map(([type, data]) => [Object.keys(data).filter(prop => !prop.startsWith("_")).map(snowflake => [snowflake, key.get(type)])])
-            .flat(2)
-        )
-        let data = new Map(Object.entries(reactionMessages) //not happy about this
-            .filter(([prop]) => !prop.startsWith("_"))
-            .map(([, data]) => [Object.keys(data).filter((prop) => !prop.startsWith("_"))])
-            .flat(2)
-        )
-        let cmdInfo = ids.get(messageReaction.message.id);
-        if (cmdInfo) {
-            let path = "../modules/" + (cmdInfo.module ? cmdInfo.module + "/" : "") + cmdInfo.file.toLowerCase() + ".js";
-            let Constructor = require(path);
-            let Instance = new Constructor(messageReaction.message);
-            if (typeof Instance[cmdInfo.method] !== "function") return Logger.error(path + " | " + cmdInfo.method + "() is not a function.")
-            Instance[cmdInfo.method](messageReaction, user, data.get(messageReaction.message.id));
+        let array = [];
+        for (let [type, data] of Object.entries(reactionMessages)) {
+            if (type.startsWith("_")) continue;
+            array = array.concat(Object.entries(data).map(([k, v]) => [k, [v, type]]));
         }
+        let ids = new Map(array);
+        let val = ids.get(messageReaction.message.id);
+        if (!val) return;
+        let [msgInfo, type] = val;
+        let cmdInfo = key.get(type);
+        let path = "../modules/" + (cmdInfo.module ? cmdInfo.module + "/" : "") + cmdInfo.file.toLowerCase() + ".js";
+        let Constructor = require(path);
+        let Instance = new Constructor(messageReaction.message);
+        if (typeof Instance[cmdInfo.method] !== "function") return Logger.error(path + " | " + cmdInfo.method + "() is not a function.")
+        Instance[cmdInfo.method](messageReaction, user, msgInfo);
     }
 
     static async name (messageReaction, user) {
