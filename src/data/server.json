@@ -12,7 +12,7 @@
                 "count": false,
                 "results": true
             },
-            "trivia": true
+            "trivia": false
         },
         "prefixes": {
             "generic": "!",
@@ -57,11 +57,7 @@
         "trivia": {
             "min": 10,
             "provisional": 10,
-            "players": {
-                "TcubesAK#3940": true,
-                "andy is an edgi boi#3217": true,
-                "theLAZYmd#2353": false
-            }
+            "players": {}
         },
         "notify": {
             "185412969130229760": 1536336039927,
