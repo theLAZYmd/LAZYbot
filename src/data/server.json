@@ -102,21 +102,26 @@
                 "544381541514739712"
             ],
             "newMessages": [
-                "/thats[\\w\\s]*jew/i",
-                "/kill[\\w\\s]*jew/i",
-                "/\\bcunts*\\b/i",
-                "/motherfucker/i",
                 "/(https?://uupload\\.ir[\\S.]+.\\w+/?)\\s?/",
-                "/jew[\\w\\s]*kill/i",
                 "/discordapp.com\\/attachments\\/390260427545903114\\/521360219364917257\\/Screenshot_2018-12-09-10-30-38-1.png/",
-                "/fuck[\\w\\s]*jews*/i",
-                "/islamic[\\s\\w\\n]*state/i",
-                "/nojoke[\\s\\w\\n]*bitch/i",
-                "/bitch[\\s\\w\\n]*nojoke/i",
-                "/real[\\s\\w\\n]*gola+m/i",
                 "/Screen_Shot_2018-12-12_at_8.15.33_PM.png/",
-                "/documentingreality.com\\/forum\\/f10\\//",
-                "/\\bnig+er+s*\\b/i"
+                "/documentingreality.com\\/forum\\/f10\\//"
+            ],
+            "phrases": [
+                "thats jew",
+                "kill jew",
+                "cunt",
+                "motherfucker",
+                "jew kill",
+                "islamic state",
+                "nojoke bitch",
+                "bitch nojoke",
+                "real golam",
+                "real golaam",
+                "real golaaam",
+                "nigger",
+                "niggerr",
+                "niggger"
             ]
         }
     },

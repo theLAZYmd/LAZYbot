@@ -37,7 +37,7 @@ String.prototype.bold = function () { //bolds text for markdown
 
 String.prototype.format = function (type = "") { //adds a codeblock for markdown
 	if (this.length > 0) return "```" + type.replace(/```/g, "\\`\\`\\`") + "\n" + this + "```";
-	return "";
+	return "```\n```";
 };
 
 String.prototype.parseTime = function (units = ["hours", "minutes", "seconds"]) { //checks for time units in a given string
@@ -230,7 +230,7 @@ Array.prototype.clean = function () { //removes null or undefined values from an
 };
 
 Array.prototype.remove = function (index) { //remove an index or a set of indexes from an Array. Same as this.splice(index, 1) but allows for multi-index functionality
-	if (index === 0) return;
+    if (typeof index !== "number") throw new TypeError(index);
 	if (Array.isArray(index)) {
 		for (let i of index.sort((a, b) => b - a)) {
 			this.splice(i, 1);

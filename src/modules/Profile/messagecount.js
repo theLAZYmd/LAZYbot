@@ -21,7 +21,7 @@ class MessageCount extends Parse {
     async log() {
         try {
             let dbuser = this.dbuser;
-            dbuser.messages.last = this.message.content.length > 500 ? this.message.content.slice(0, 500).replace("`", "") + "..." : this.message.content.replace(/\`/g, "");
+            dbuser.messages.last = this.content.length > 500 ? this.content.slice(0, 500).replace("`", "") + "..." : this.content.replace(/\`/g, "");
             dbuser.messages.lastSeen = this.message.createdTimestamp;
             if (dbuser.username !== this.author.tag) dbuser.username = this.author.tag;
             DBuser.setData(dbuser);

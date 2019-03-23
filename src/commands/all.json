@@ -8,18 +8,13 @@
     {
         "module": "Administration",
 		"file": "shadowban",
-		"method": "sbuser",
+		"method": "check",
 		"arguments": [
 			"message"
-		]
-    },
-    {
-        "module": "Administration",
-		"file": "shadowban",
-		"method": "sbnm",
-		"arguments": [
-			"message"
-		]
+		],
+        "requires": {
+            "bot": false
+        }
     },
 	{
 		"module": "Custom Reactions",
