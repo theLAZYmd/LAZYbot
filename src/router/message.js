@@ -74,7 +74,7 @@ class Message {
                 if (!(await Permissions[type](v, argsInfo))) throw cmdInfo.method;
             }
         } catch (e) { //if it fails any of requirements, throw
-            return Permissions.output(type, argsInfo) ? Permissions.output(type, argsInfo) + "\nUse `" + cmdInfo.prefix + "help` followed by command name to see command info." : ""; //if no Permissions, kill it
+            return Permissions.output(type, argsInfo) ? Permissions.output(type, argsInfo) + "\nUse `" + argsInfo.server.prefixes[cmdInfo.prefix] + "help` followed by command name to see command info." : ""; //if no Permissions, kill it
         }
 		return true;
     }

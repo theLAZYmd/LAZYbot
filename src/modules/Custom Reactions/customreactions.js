@@ -87,6 +87,7 @@ class CustomReactions extends Parse {
         } catch (e) {
             if (e) this.error(e);
         }
+        if (result.length > 0) Logger.log([this.author.tag, "CustomReactions", "auto", "[" + result.join(", ") + "]"])
     }
 
     async text(content) {

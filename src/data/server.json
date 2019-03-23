@@ -12,7 +12,7 @@
                 "count": false,
                 "results": true
             },
-            "trivia": false
+            "trivia": true
         },
         "prefixes": {
             "generic": "!",
@@ -27,7 +27,7 @@
             "mod": "test-channel-in-waiting",
             "log": "comment-log",
             "join": "join",
-            "leave": "lounge",
+            "leave": "390260363410800650",
             "trivia": "arena",
             "welcome": "welcome"
         },
@@ -57,7 +57,11 @@
         "trivia": {
             "min": 10,
             "provisional": 10,
-            "players": {}
+            "players": {
+                "TcubesAK#3940": true,
+                "andy is an edgi boi#3217": true,
+                "theLAZYmd#2353": false
+            }
         },
         "notify": {
             "185412969130229760": 1536336039927,

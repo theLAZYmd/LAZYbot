@@ -1,5 +1,6 @@
-const Parse = require("../../util/parse.js");
-const DBuser = require("../../util/dbuser.js");
+const Parse = require('../../util/parse');
+const DBuser = require('../../util/dbuser');
+const Embed = require('../../util/embed');
 
 class MessageCount extends Parse {
 

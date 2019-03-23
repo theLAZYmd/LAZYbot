@@ -1995,7 +1995,7 @@
                 "lastmessage",
                 "last"
             ],
-            "module": "Utility",
+            "module": "Profile",
             "file": "messagecount",
             "method": "last",
             "arguments": [
