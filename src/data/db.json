@@ -3,9 +3,9 @@
         "id": "185412969130229760",
         "username": "theLAZYmd#2353",
         "messages": {
-            "count": 78388,
-            "last": "<@163325840136863744> today is a big day as you can see",
-            "lastSeen": 1553302528238
+            "count": 78399,
+            "last": "hmm",
+            "lastSeen": 1553304815180
         },
         "bidamount": 100000000000000000,
         "location": "Toronto",
@@ -269,9 +269,9 @@
         "lichess": {
             "_main": "andreijl",
             "andreijl": {
-                "maxRating": "1873",
+                "maxRating": "1869",
                 "blitz": "1671",
-                "bullet": "1873",
+                "bullet": "1869",
                 "rapid": "1815",
                 "classical": "1788?",
                 "crazyhouse": "1811",
@@ -316,7 +316,7 @@
             "_name": "JM Obi Wan Benoni"
         },
         "patron": false,
-        "lastupdate": 1553291753945,
+        "lastupdate": 1553307205666,
         "trivia": {
             "rating": 1537,
             "games": 82
@@ -375,9 +375,9 @@
         "id": "340160754936184832",
         "username": "chessguy101#2066",
         "messages": {
-            "count": 52394,
-            "last": "duke finna lose",
-            "lastSeen": 1553296744643
+            "count": 52395,
+            "last": "ok NC needs to not lose and i win all the bets",
+            "lastSeen": 1553306650509
         },
         "finger": "I am good at losing flowers. Please don't gamble with me.",
         "lichess": {
@@ -583,12 +583,12 @@
         "lichess": {
             "_main": "PawnInTraining",
             "PawnInTraining": {
-                "maxRating": "2177",
+                "maxRating": "2204",
                 "blitz": "2027",
                 "bullet": "1940",
                 "rapid": "2112",
                 "classical": "2112?",
-                "crazyhouse": "2177",
+                "crazyhouse": "2204",
                 "anti": "1444?",
                 "horde": "1395?",
                 "koth": "1920?"
@@ -609,7 +609,7 @@
                 "lessons": "1000?"
             }
         },
-        "lastupdate": 1553280051050,
+        "lastupdate": 1553306601670,
         "location": "United States"
     },
     {
@@ -1385,7 +1385,7 @@
                 "lessons": "1789"
             }
         },
-        "lastupdate": 1553286650189,
+        "lastupdate": 1553306301588,
         "trivia": {
             "rating": 1939,
             "games": 10
@@ -1714,9 +1714,9 @@
         "id": "346485544848457728",
         "username": "TheLoneWolf#4001",
         "messages": {
-            "count": 46418,
-            "last": "sure",
-            "lastSeen": 1553304415664
+            "count": 46421,
+            "last": "the movers might move on",
+            "lastSeen": 1553304858171
         },
         "chesscom": {
             "_main": "The-Lone-Wolf",
@@ -4664,9 +4664,9 @@
         "id": "449995873133527040",
         "username": "gsvc#3746",
         "messages": {
-            "count": 4875,
-            "last": "<@339587935458557963> your dog is safely yours, even with those conditions",
-            "lastSeen": 1553303375038
+            "count": 4876,
+            "last": "i have the eagles losing in the final, dont say that",
+            "lastSeen": 1553305008304
         },
         "lastUpdate": 1532733234992,
         "lastupdate": 1553303509562,
@@ -6318,7 +6318,7 @@
             "last": "indeed",
             "lastSeen": 1534568959689
         },
-        "lastupdate": 1553288150373,
+        "lastupdate": 1553307501779,
         "chesscom": {
             "_main": "Juanma206",
             "Juanma206": {
@@ -7308,7 +7308,7 @@
         "lichess": {
             "_main": "Natso",
             "Natso": {
-                "maxRating": "2250",
+                "maxRating": "2299",
                 "blitz": "1859",
                 "bullet": "1500?",
                 "rapid": "2076",
@@ -7317,7 +7317,7 @@
                 "3-check": "1846",
                 "anti": "1852",
                 "horde": "1553?",
-                "atomic": "2250",
+                "atomic": "2299",
                 "koth": "1801",
                 "racing-kings": "1923"
             },
@@ -7325,7 +7325,7 @@
             "_language": "en-GB"
         },
         "lastUpdate": 1533055686786,
-        "lastupdate": 1553284249742,
+        "lastupdate": 1553305702079,
         "location": "#gulag",
         "chesscom": {
             "_main": "kaienshiba",
@@ -8916,7 +8916,7 @@
             "_country": "US",
             "_language": "en-GB"
         },
-        "lastupdate": 1553286049490,
+        "lastupdate": 1553306003272,
         "location": "United States"
     },
     {
@@ -10801,24 +10801,24 @@
         "lichess": {
             "_main": "Veeronica",
             "Veeronica": {
-                "maxRating": "1704",
+                "maxRating": "1659",
                 "blitz": "1344",
-                "bullet": "1553",
+                "bullet": "1493",
                 "rapid": "1447",
                 "classical": "1114",
-                "crazyhouse": "1422",
-                "3-check": "1395?",
+                "crazyhouse": "1552",
+                "3-check": "1340?",
                 "anti": "1341",
                 "horde": "1326?",
-                "atomic": "1704",
+                "atomic": "1659",
                 "koth": "1392?",
-                "racing-kings": "1572"
+                "racing-kings": "1560"
             },
             "_name": "Veronica Hitchlock",
             "_country": "CA",
             "_language": "en-GB"
         },
-        "lastupdate": 1552506788487
+        "lastupdate": 1553305101256
     },
     {
         "id": "284805085484285962",
@@ -12203,7 +12203,7 @@
             },
             "_country": "US"
         },
-        "lastupdate": 1553283949426,
+        "lastupdate": 1553304801282,
         "location": "United States"
     },
     {
@@ -12857,14 +12857,14 @@
                 "maxRating": "1644",
                 "blitz": "1379?",
                 "bullet": "1500?",
-                "rapid": "1467",
+                "rapid": "1468",
                 "classical": "1644"
             },
             "_name": "Savio Machado",
             "_country": "BR",
             "_language": "en-GB"
         },
-        "lastupdate": 1551731839148,
+        "lastupdate": 1553305402122,
         "chesscom": {
             "_main": "saviosena",
             "saviosena": {
@@ -13669,7 +13669,7 @@
             "_country": "NO",
             "_language": "en-GB"
         },
-        "lastupdate": 1553287850243,
+        "lastupdate": 1553306901615,
         "chesscom": {
             "_main": "Sjaart",
             "Sjaart": {
