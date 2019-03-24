@@ -5527,7 +5527,7 @@
                 "bughouse": "714"
             }
         },
-        "lastupdate": 1553310493550,
+        "lastupdate": 1553289050168,
         "finger": "Your current finger message is:",
         "trivia": {
             "rating": 1370,
@@ -11062,16 +11062,16 @@
             "_main": "JellyBeanThief",
             "JellyBeanThief": {
                 "maxRating": "1938",
-                "bullet": "1308",
+                "bullet": "1300",
                 "lightning": "1532",
                 "chess": "1431",
                 "rapid": "1374",
-                "bughouse": "1628",
+                "bughouse": "1635",
                 "tactics": "1938",
                 "lessons": "1784"
             }
         },
-        "lastupdate": 1553311693819
+        "lastupdate": 1553272849960
     },
     {
         "id": "296581642728767499",
@@ -13449,12 +13449,12 @@
         "lichess": {
             "_main": "ODMWND",
             "ODMWND": {
-                "maxRating": "2201",
+                "maxRating": "2191",
                 "blitz": "1500?",
                 "bullet": "1500?",
                 "rapid": "1500?",
                 "classical": "1500?",
-                "anti": "2201"
+                "anti": "2191"
             },
             "_name": "Leopold Stotch"
         },
@@ -14398,14 +14398,14 @@
         "lichess": {
             "_main": "lucyismywaifu",
             "lucyismywaifu": {
-                "maxRating": "2153",
+                "maxRating": "2106",
                 "blitz": "2106",
-                "bullet": "2153",
-                "rapid": "2106",
+                "bullet": "2100",
+                "rapid": "2100",
                 "classical": "2105",
                 "crazyhouse": "1807",
-                "3-check": "1627?",
-                "anti": "1418?",
+                "3-check": "1657?",
+                "anti": "1432?",
                 "horde": "1829?",
                 "atomic": "1719",
                 "koth": "1874",

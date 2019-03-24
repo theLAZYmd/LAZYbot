@@ -1,7 +1,7 @@
-const Main = require("./main.js");
-const Embed = require("../../util/embed.js");
-const DataManager = require("../../util/datamanager.js");
-const Permissions = require("../../util/permissions.js");
+const Main = require("./main");
+const Embed = require("../../util/embed");
+const DataManager = require("../../util/datamanager");
+const Permissions = require("../../util/permissions");
 
 class Votes extends Main {
 
@@ -43,7 +43,7 @@ class Votes extends Main {
 			let election = this.election;
 			let msg = await this.Output.generic("Initialised final vote count for " + Object.keys(election.elections).length + " elections...");
 			if (!election.system) throw "Couldn't find valid electoral system by which to count up votes.";
-			let Count = require("./" + election.system + "/main.js");
+			let Count = require("./" + election.system + "/main");
 			if (!Count || typeof Count.rank !== "function") throw "Couldn't find valid process by which to count up votes.";
 			await this.Output.editor({
 				"description": "Counting up the votes..."
@@ -53,7 +53,7 @@ class Votes extends Main {
 				this.log("Counting #" + channel);
 				let candidates = await this.parseCandidates(data);
 				let votes = await this.parseVotes(data.voters, candidates);
-				let raw = await require("./" + election.system.toLowerCase() + "/main.js").rank(candidates.map(c => candidates.indexOf(c)), votes);
+				let raw = await require("./" + election.system.toLowerCase() + "/main").rank(candidates.map(c => candidates.indexOf(c)), votes);
 				election.elections[channel].results = await this.parseResults(raw, candidates); //need to use 'in' iterator for setters
 				this.log(election.elections[channel].results);
 			}
@@ -107,7 +107,7 @@ class Votes extends Main {
 				.setTitle((this.server.emoji ? this.Search.emojis.get(this.server.emoji) + " " : "") + this.guild.name + " " + election.type.toProperCase() + " Mod Elections")
 				.setDescription("Election results modelled using " + Main.Systems[election.system] + " electoral system.\n" +
 					"'**----------**' denotes a blank vote. No candidate placed underneath a blank vote, regardless of whether they reached the threshold for election may take up their position as elected mod.")
-				.setFooter("A result is revealed when " + election.reveal + "members of a respective electorate react to this message.");
+				.setFooter("A result is revealed when " + election.reveal + " members of a respective electorate react to this message.");
 			let emojis = [], data = {};
 			Object.keys(election.elections).forEach(async (channel) => {
 				embed.addField((election.type === "channel" ? "#" : "") + channel, "\u200b", true);
@@ -126,7 +126,7 @@ class Votes extends Main {
 			this.reactionmessages = reactionmessages;
 
 		} catch (e) {
-			if (e) this.Output.onError(e);
+			if (e) throw new Error(e);
 		}
 	}
 

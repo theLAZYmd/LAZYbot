@@ -36,7 +36,7 @@ const events = [
 	["guildMemberRemove", ["member"], true],
 	["guildMembersChunk", ["member", "guild"]],
 	["guildMemberSpeaking", ["member", "speaking"]],
-	["guildMemberUpdate", ["oldMember", "newMember"]],
+	["guildMemberUpdate", ["oldMember", "newMember"], true],
 	["guildUnavailable", ["guild"]],
     ["guildUpdate", ["oldGuild", "newGuild"]],
     ["interval", ["cmdInfo"], true],

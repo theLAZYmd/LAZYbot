@@ -1,4 +1,4 @@
-const Main = require("./main.js");
+const Main = require("./main");
 
 class Config {
 

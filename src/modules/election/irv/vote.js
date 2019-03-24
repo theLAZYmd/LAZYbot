@@ -1,7 +1,7 @@
-const Parse = require("../../../util/parse.js");
-const DataManager = require("../../../util/datamanager.js");
+const Parse = require("../../../util/parse");
+const DataManager = require("../../../util/datamanager");
 const config = require("../../config.json");
-const Ballot = require("./ballot.js");
+const Ballot = require("./ballot");
 
 //Got to account for all the 'edge cases' a user might possibly be able to do to the ballot
 

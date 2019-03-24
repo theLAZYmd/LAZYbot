@@ -43,25 +43,13 @@ class ASL extends Parse {
 
     async output(dbuser) {
         try {
-            let asl = "",
-                aslarray = [];
-            aslarray.push(
+            let arr = [
                 dbuser.age ? `**${dbuser.age}** years old` : ``,
                 dbuser.sex ? `**${dbuser.sex}**` : ``,
                 dbuser.location ? `from **${dbuser.location}**` : ``
-            );
-            aslarray.clean();
-            for (let i = 0; i < aslarray.length; i++) {
-                if (!aslarray[i]) aslarray.remove(i);
-                asl += aslarray[i] +
-                    (i >= aslarray.length - 1 ? "" :
-                        (i < aslarray.length - 2 ? ", " :
-                            (aslarray.length === 3 ? "," : ``) +
-                            " and ")
-                    ); //punctuation, just go with it
-            }
+            ];
+            let asl = arr.list();
             if (asl) this.Output.generic(`Hello **${this.author.username}**, I see you're ${asl}.`);
-            else throw "No **age**, **sex**, and **location** found, please specify.";
         } catch (e) {
             this.Output.onError(e);
         }

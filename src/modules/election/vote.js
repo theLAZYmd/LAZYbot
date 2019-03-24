@@ -1,7 +1,7 @@
-const Main = require("./main.js");
-const Embed = require("../../util/embed.js");
+const Main = require("./main");
+const Embed = require("../../util/embed");
 const config = require("../../config.json");
-const Ballot = require("./irv/ballot.js");
+const Ballot = require("./irv/ballot");
 
 //Got to account for all the 'edge cases' a user might possibly be able to do to the ballot
 
@@ -108,7 +108,7 @@ module.exports = Vote;
 
 /*async receive() {
 	try {
-		let Constructor = require("./" + this.election.system.toLowerCase() + "./vote.js");
+		let Constructor = require("./" + this.election.system.toLowerCase() + "./vote");
 		let Instance = new Constructor(this.message);
 		Instance.receive();
 	} catch (e) {

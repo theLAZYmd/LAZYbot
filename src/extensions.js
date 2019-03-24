@@ -241,6 +241,15 @@ Array.prototype.remove = function (index) { //remove an index or a set of indexe
 	return this;
 };
 
+Array.prototype.list = function (oxfordcomma = true) {    //turning an array into a string as it ould 
+    let str = "";
+    for (let val of this) {
+        if (val.length === 0) this.remove(val);
+    }
+    if (this.length < 3) return this.join(" and ");
+    return this.slice(0, -1).join(", ") + (oxfordcomma ? "," : "") + " and " + this.slice(-1);
+};
+
 //OBJECT PROTOTYPE METHODS
 
 Object.prototype.getProp = function (desc) {
