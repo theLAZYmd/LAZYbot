@@ -3,10 +3,10 @@ const Discord = require("discord.js");
 const fs = require("fs");
 const client = new Discord.Client();
 
-const Logger = require("./util/logger.js");
+const Logger = require("./util/logger");
 const router = "router/";
 
-require("./extensions.js");
+require("./extensions");
 require('events').EventEmitter.prototype._maxListeners = 100;
 process.on("unhandledRejection", (e) => {
     if (e.message === "Something took too long to do.") client.emit('error', e);
@@ -73,7 +73,7 @@ fs.readdir("./src/" + router, (err, _files) => {
                 let Instance = require("./" + router + event[0] + ".js");
                 if (typeof Instance === "function") Instance(client, ...arguments);
                 else if (typeof Instance === "object" && typeof Instance.default === "function") Instance.default(client, ...arguments);
-                else throw "event event[0] does not have a listener function";
+                else throw "event " + event[0] + " does not have a listener function";
             });
         } catch (e) {
             if (e) Logger.error(e);
