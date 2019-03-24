@@ -5589,6 +5589,36 @@
                 "s-chess": 0,
                 "horde": 0
             }
+        },
+        "election/votes": {
+            "559014851339485184": {
+                "960": 0,
+                "anti": 0,
+                "ultra": 0,
+                "crazyhouse": 0,
+                "3-check": 0,
+                "racing-kings": 0,
+                "atomic": 0,
+                "koth": 0,
+                "4-player": 0,
+                "bughouse": 0,
+                "s-chess": 0,
+                "horde": 0
+            },
+            "559014962325094401": {
+                "960": 0,
+                "anti": 0,
+                "ultra": 0,
+                "crazyhouse": 0,
+                "3-check": 0,
+                "racing-kings": 0,
+                "atomic": 0,
+                "koth": 0,
+                "4-player": 0,
+                "bughouse": 0,
+                "s-chess": 0,
+                "horde": 0
+            }
         }
     }
 }
