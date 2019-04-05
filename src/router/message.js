@@ -1,11 +1,8 @@
-const settings = require("../settings");
 const Logger = require("../util/logger");
-const Permissions = require("../util/permissions");
-const Commands = require("../util/commands");
-const messageCount = require("../modules/Profile/messagecount");
-const config = require('../config.json');
+const settings = require("../settings");
+const commands = require("../commands.json");
 
-class message {
+class Message {
 
     constructor(client, message, splitMsg) {
         this.client = client;
@@ -381,8 +378,9 @@ module.exports = async (client, message) => {
         let splitMsg = message.content.match(msgSplitRegExp);
         let command = splitMsg[0].slice(1);
         if (!/eval|fen/.test(command) && message.channel.name !== settings.botChannelName) return;
+        let M = new Message(client, message, splitMsg);
         for (let f of Object.getOwnPropertyNames(message.prototype)) {
-            if (f.toLowerCase() === command.toLowerCase() && typeof this[f] === "function") return message[f](client, message, splitMsg);
+            if (f.toLowerCase() === command.toLowerCase() && typeof this[f] === "function") return M[f]();
         };
     } catch (e) {
         if (e) Logger.error(e);
