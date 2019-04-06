@@ -213,7 +213,7 @@ class Tracker extends Parse {
 			}
 			data.dbuser.lastupdate = Date.now(); //Mark the update time
 			DBuser.setData(data.dbuser); //set it
-			if (data.successfulupdates.length > 0) Logger.log(["Tracker", "update", "auto", "[" + [data.dbuser.username, ...data.successfulupdates].trim(", ") + "]"]);
+			if (data.successfulupdates.length > 0) Logger.log(["Tracker", "update", "auto", "[" + [data.dbuser.username, ...data.successfulupdates].join(", ") + "]"]);
 			if (this.command) this.output.track(data, this.msg);
 		} catch (e) {
 			if (e) throw e;
@@ -294,48 +294,73 @@ class Tracker extends Parse {
         });      
 	}
 
+    /**
+     * 
+     * @param {Track} data 
+     */
 	static async handle(data) {
 		try {
-			let sourceData = await Tracker.request(data);
-			if (!sourceData) throw "No source data.";
-			let Constructor = require("./" + (data.source.key === "bughousetest" ? "lichess" : data.source.key) + ".js");
-			let parsedData = await new Constructor(sourceData, {
-					"source": data.source,
-					"username": data.username
-				});
-			data = await new Assign(data, parsedData);
+			if (!data.username) throw "Invalid username.";
+			let sourceData = /lichess|bughousetest/.test(data.source.key) ? await Lichess.users.get(data.username) : await Tracker.request(data);
+			if (!sourceData) throw new Error("No source data");
+			let parsedData = /lichess|bughousetest/.test(data.source.key) ? sourceData : await new require('chesscom.js')(sourceData, data);
+            data.dbuser = Tracker.assign(data, parsedData);
+            data.successfulupdates.push(data.source.key);
 			return data;
 		} catch (e) {
 			throw e;
 		}
 	}
 
+    /**
+     * Grabs JSON data from the API for all other (chess.com) sites
+     * @param {Tracker} data 
+     */
 	static async request(data) {
-		try {
-			if (!data.username) throw "Invalid username.";
-            //if (/lichess|bughousetest/.test(data.source.key)) return await Lichess.users.get(data.username);
-			try {
-				return await rp({
-                    "uri": config.sources[data.source.key].url.user.replace("|", data.username),
-                    "json": true,
-                    "timeout": 4000
-                });
-			} catch (e) {
-				if (e) throw "Either request timed out or account doesn't exist. If account exists, please try again in 30 seconds.";
-			}
-		} catch (e) {
-			if (e) throw e;
-		}
+        try {
+            return await rp({
+                "uri": config.sources[data.source.key].url.user.replace("|", data.username),
+                "json": true,
+                "timeout": 4000
+            });
+        } catch (e) {
+            if (e) throw "Either request timed out or account doesn't exist. If account exists, please try again in 30 seconds.";
+        }
+    }    
+
+    /**
+     * Assigns parsed data from a chess website to the properties of the user in the database
+     * @param {Track} data 
+     * @param {LichessUser|ChesscomUser} parsedData 
+     */
+    static assign(data, parsedData) {
+        console.log(parsedData.ratings);
+        let dbuser = data.dbuser;
+        let account = data.dbuser[data.source.key] || {
+            "_main": parsedData.username
+        };
+        account[parsedData.username] = Tracker.parseRatings(parsedData.ratings);
+        if (account._main === data.username) { //if it's the main one
+            for (let prop of ["name", "country", "language", "title", "bio", "language"]) {
+                if (parsedData[prop]) account["_" + prop] = parsedData[prop]; //grab info
+                else if (account["_" + prop]) delete account["_" + prop]; //keeps it in sync - if excess data, delete it
+            }
+        }
+        dbuser[data.source.key] = account;
+        return dbuser;
     }
-    
-    static async requestAll(source, ids) {
-		try {
-            if (source.key !== "lichess") return null;
-            return await Lichess.users.get(ids);
-		} catch (e) {
-			if (e) throw e;
-		}
-	}
+
+    /**
+     * Transforms rating map into an object
+     * @param {RatingStore} ratingObj 
+     */
+    static parseRatings(ratingObj) {
+        return Array.from(ratingObj).reduce((acc, [key, value]) => {
+            if (!value.rating) return acc;
+            acc[key] = value.rating.toString() + (value.prov ? "?" : "");
+            return acc;
+        }, {})
+    }
 
 }
 
