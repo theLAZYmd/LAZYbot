@@ -358,8 +358,11 @@ class Tracker extends Parse {
         return Array.from(ratingObj).reduce((acc, [key, value]) => {
             if (!value.rating) return acc;
             acc[key] = value.rating.toString() + (value.prov ? "?" : "");
+            if (value.rating > acc.maxRating && !value.prov) acc.maxRating = value.rating;
             return acc;
-        }, {})
+        }, {
+            maxRating: 0
+        });
     }
 
 }
