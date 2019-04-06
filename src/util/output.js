@@ -186,18 +186,35 @@ class Output extends Parse {
 			if (e) this.Output.onError(e);
 			throw "";
 		}
-	}
+    }
+    
+    /**
+     * @typedef {object} chooseOptions
+     * @property {object} author - The user allowed to choose an option
+     * @property {object} channel - The channel this message should be posted in
+     * @property {function} filter - The list of options that should be displayed in the choose message
+     * @property {number} time - The time in milliseconds allowed for the user to pick an option in ms. Defaults to 18000 (18 seconds).
+     * @property {string} title - The embed title of the choose message that should be displayed. Can be anything.
+     * @property {string} option - The kind of thing that is chosen. Will be displayed as 'Please choose a [...]'
+     */
 
+    /**
+     * Returns a user-defined option
+     * @param {chooseOptions} data 
+     * @property {object} author - The user allowed to choose an option
+     * @property {object} channel - The channel this message should be posted in
+     * @property {function} filter - The list of options that should be displayed in the choose message
+     * @property {number} time - The time in milliseconds allowed for the user to pick an option in ms. Defaults to 18000 (18 seconds).
+     * @property {string} title - The embed title of the choose message that should be displayed. Can be anything.
+     * @property {string} option - The kind of thing that is chosen. Will be displayed as 'Please choose a [...]'
+     * @returns {number}
+     */
 	async choose(data = {}) {
 		try {
 			data = Object.assign({
 				"author": this.author,
 				"channel": this.channel,
-				"filter": () => {
-					return true
-				},
 				"options": [],
-				"role": "",
 				"time": 18000,
 				"title": "",
 				"type": "option"
@@ -263,7 +280,8 @@ class Output extends Parse {
                 throw e;
             }
 		} catch (e) {
-			if (e) this.onError(e);
+            if (e) this.onError(e);
+            else throw e;
 		}
 	}
 

@@ -724,28 +724,15 @@
             "aliases": [
                 "remove"
             ],
-            "description": "Removes a linked account. Please specify source afterwards.",
+            "description": "Creates a dialogue that allows a user to pick an account linked to their discord account and unlink it.",
             "usage": [
-                "remove lichess",
-                "remove lichess theLAZYmd"
+                "remove"
             ],
             "module": "Chess",
             "file": "tracker/tracker",
-            "method": "run",
-            "arguments": [
-                "command",
-                "args"
-            ],
-            "prefix": "generic",
-            "requires": {
-                "args": {
-                    "length": [
-                        1,
-                        2,
-                        3
-                    ]
-                }
-            }
+            "method": "remove",
+            "arguments": [],
+            "prefix": "generic"
         },
         {
             "aliases": [

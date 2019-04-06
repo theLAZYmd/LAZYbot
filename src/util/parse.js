@@ -161,11 +161,8 @@ class Parse {
 	}
 
 	get prefix() {
-		if (this._prefix) return this._prefix;
-		for (let prefix of Array.from(this.prefixes.values()))
-			if (this.content.startsWith(prefix))
-				return this._prefix = prefix;
-		return "";
+        if (this._prefix) return this._prefix;
+        return this._prefix = Array.from(this.prefixes.values()).find(p => this.content.startsWith(p)) || "";
     }
     
     get prefixes() {
