@@ -2238,6 +2238,18 @@
             "method": "ping",
             "arguments": [],
             "prefix": "generic"
+        },
+        {
+            "aliases": [
+                "gdpr",
+                "dbuser"
+            ],
+            "description": "Returns the data stored on a user",
+            "module": "Utility",
+            "file": "utility",
+            "method": "dbuser",
+            "arguments": [],
+            "prefix": "generic"
         }
     ]
 }

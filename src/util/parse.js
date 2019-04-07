@@ -174,6 +174,14 @@ class Parse {
         return this._prefixes = new Map(Object.entries(prefixes));
     }
 
+    get generic() {
+        return this.prefixes.get('generic');
+    }
+
+    get nadeko() {
+        return this.prefixes.get('nadeko');
+    }
+
 	get words() {
         if (this._words) return this._words;
         if (!this.message || !this.content) return [];

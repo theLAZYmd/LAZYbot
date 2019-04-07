@@ -7,6 +7,7 @@ const Message = DataManager.getFile("./src/commands/message.json");
 const Reaction = DataManager.getFile("./src/commands/reaction.json");
 const Interval = DataManager.getFile("./src/commands/interval.json");
 const fs = require('fs');
+const conifg = require('../config.json');
 
 class Commands {
 
@@ -89,6 +90,11 @@ class Commands {
         if (Commands._interval) return Commands._interval;
         return Commands.getInterval();
     }
+
+    static get accounts () {
+        if (Commands._accounts) return Commands._accounts;
+        return Commands.getAccounts();
+    }
     
     static getAll () {
         let map = Array.from(All);
@@ -155,6 +161,21 @@ class Commands {
 
     static getInterval () {
         return Commands._interval = Object.entries(Interval);
+    }
+
+    static getAccounts() {
+        let accounts = new Map();
+        let tally = DataManager.getData();
+        tally.forEach((dbuser) => {
+            for (let s of Object.keys(config.sources)) {
+                if (!dbuser[s]) continue;
+                for (let account of dbuser[s]) {
+                    if (account.startsWith("_")) continue;
+                    accounts.set(account, dbuser.id);
+                }
+            }
+        })
+        return Commands._accounts = {    accounts    }
     }
 
 }

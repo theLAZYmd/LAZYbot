@@ -73,14 +73,13 @@ class Output extends Parse {
 		try {
 			let string = (typeof json === "object" ? JSON.stringify((typeof json._apiTransform === "function" ? json._apiTransform() : json), null, 2) : json).replace(/`/g, "\\`");
 			let index = Math.ceil(string.length / 2000);
-			let keylength = Math.floor(string.length / index);
+            let keylength = Math.floor(string.length / index);
 			for (let i = 0; i < index; i++) {
-				this.log(i === index.length - 1);
 				this.sender(new Embed()
 					.setColor(config.colors.data)
 					.setDescription((string.slice(i * keylength, (i === index.length - 1 ? string.length + 2 : i * keylength + keylength)) + " ".repeat(48) + "\u200b").format(type))
 					.setFooter((i + 1) + " / " + index)
-				, channel);
+                , channel);
 			}
 		} catch (e) {
 			if (e) this.onError(e);
