@@ -118,7 +118,6 @@
                     ],
                     "description": "Adds a specific user to the shadowban list.",
                     "method": "user",
-                    "arguments": [],
                     "requires": {
                         "args": {
                             "length": 0
@@ -131,7 +130,6 @@
                     ],
                     "description": "Adds a new regex to ban new users upon arrival.",
                     "method": "username",
-                    "arguments": [],
                     "requires": {
                         "args": {
                             "length": 0
@@ -144,7 +142,6 @@
                     ],
                     "description": "Adds a new regex to vet messages from new users.",
                     "method": "newMessage",
-                    "arguments": [],
                     "requires": {
                         "args": {
                             "length": 0
@@ -428,7 +425,6 @@
                     ],
                     "description": "A fixed number of games between two players.",
                     "method": "series",
-                    "arguments": [],
                     "requires": {
                         "args": {
                             "length": 0
@@ -441,7 +437,6 @@
                     ],
                     "description": "A set that ends when one player reaches a certain score (ex: first to 10).",
                     "method": "match",
-                    "arguments": [],
                     "requires": {
                         "args": {
                             "length": 0
@@ -454,7 +449,6 @@
                     ],
                     "description": "A tournament for which there are no fixed 'rounds'.",
                     "method": "arena",
-                    "arguments": [],
                     "requires": {
                         "args": {
                             "length": 0
@@ -649,20 +643,7 @@
             "module": "Chess",
             "file": "tracker/tracker",
             "method": "run",
-            "arguments": [
-                "command",
-                "args"
-            ],
-            "prefix": "generic",
-            "requires": {
-                "args": {
-                    "length": [
-                        0,
-                        1,
-                        2
-                    ]
-                }
-            }
+            "prefix": "generic"
         },
         {
             "aliases": [
@@ -677,20 +658,7 @@
             "module": "Chess",
             "file": "tracker/tracker",
             "method": "run",
-            "arguments": [
-                "command",
-                "args"
-            ],
-            "prefix": "generic",
-            "requires": {
-                "args": {
-                    "length": [
-                        0,
-                        1,
-                        2
-                    ]
-                }
-            }
+            "prefix": "generic"
         },
         {
             "aliases": [
@@ -1132,7 +1100,6 @@
                     ],
                     "description": "Shows the status of an upcoming election on the server. Same as `!election`.",
                     "method": "status",
-                    "arguments": [],
                     "requires": {
                         "args": {
                             "length": 0
@@ -1145,7 +1112,6 @@
                     ],
                     "description": "Readies a server for a new election, using default settings.",
                     "method": "initiate",
-                    "arguments": [],
                     "requires": {
                         "args": {
                             "length": 0
@@ -1158,7 +1124,6 @@
                     ],
                     "description": "Changes the settings for an upcoming election, resetting any previous voting data and registered voters.",
                     "method": "config",
-                    "arguments": [],
                     "requires": {
                         "args": {
                             "length": 0
@@ -1171,7 +1136,6 @@
                     ],
                     "description": "Sets election config data to the default.",
                     "method": "reset",
-                    "arguments": [],
                     "requires": {
                         "args": {
                             "length": 0
@@ -1184,7 +1148,6 @@
                     ],
                     "description": "Resets previous voting data.",
                     "method": "clear",
-                    "arguments": [],
                     "requires": {
                         "args": {
                             "length": 0
@@ -1216,7 +1179,6 @@
                     ],
                     "description": "Registers voters ready for a new election. Resets previous voting data.",
                     "method": "register",
-                    "arguments": [],
                     "requires": {
                         "args": {
                             "length": 0
@@ -1229,7 +1191,6 @@
                     ],
                     "description": "Deletes voting data. Leave blank to run function for all.",
                     "method": "deregister",
-                    "arguments": [],
                     "requires": {
                         "args": {
                             "length": 0
@@ -1242,7 +1203,6 @@
                     ],
                     "description": "Removes a voter from all election records.",
                     "method": "disqualify",
-                    "arguments": [],
                     "requires": {
                         "args": {
                             "length": 0
@@ -1255,7 +1215,6 @@
                     ],
                     "description": "Gets the list of eligble voters for a channel. To be used in #spam only.",
                     "method": "get",
-                    "arguments": [],
                     "requires": {
                         "args": {
                             "length": 0
@@ -1303,7 +1262,6 @@
                     ],
                     "description": "Opens candidate registration. Done automatically when voter lists are registered.",
                     "method": "open",
-                    "arguments": [],
                     "requires": {
                         "args": {
                             "length": 0
@@ -1316,7 +1274,6 @@
                     ],
                     "description": "Closes candidate registration.",
                     "method": "close",
-                    "arguments": [],
                     "requires": {
                         "args": {
                             "length": 0
@@ -1330,7 +1287,6 @@
                     ],
                     "description": "Registers a candidate. Give argument of channel that you wish to run for.",
                     "method": "register",
-                    "arguments": [],
                     "requires": {
                         "args": {
                             "length": 0
@@ -1344,7 +1300,6 @@
                     ],
                     "description": "Readies a new declaration of sponsorship in a given channel. Give single argument of the channel name.",
                     "method": "sponsor",
-                    "arguments": [],
                     "requires": {
                         "args": {
                             "length": 0
@@ -1405,7 +1360,6 @@
                     ],
                     "description": "Sends all ballots, initiates the voting stage of the election.",
                     "method": "all",
-                    "arguments": [],
                     "requires": {
                         "args": {
                             "length": 0
@@ -1418,7 +1372,6 @@
                     ],
                     "description": "Sends one ballot to a specified user.",
                     "method": "one",
-                    "arguments": [],
                     "requires": {
                         "args": {
                             "length": 0
@@ -1431,7 +1384,6 @@
                     ],
                     "description": "Sends mobile ballots to a specified user. `${generic}mobile` in DMs does the same thing.",
                     "method": "mobile",
-                    "arguments": [],
                     "requires": {
                         "args": {
                             "length": 0
@@ -1475,7 +1427,6 @@
                     ],
                     "description": "Closes voting on this server for all elections.",
                     "method": "close",
-                    "arguments": [],
                     "requires": {
                         "args": {
                             "length": 0
@@ -1488,7 +1439,6 @@
                     ],
                     "description": "Reopens voting on a server for all elections.",
                     "method": "open",
-                    "arguments": [],
                     "requires": {
                         "args": {
                             "length": 0
@@ -1501,7 +1451,6 @@
                     ],
                     "description": "Counts up the votes and saves the results, ready to be outputted.",
                     "method": "count",
-                    "arguments": [],
                     "requires": {
                         "args": {
                             "length": 0
@@ -1514,7 +1463,6 @@
                     ],
                     "description": "Forcibly recounts the votes and overwrites the results, ready to be outputted.",
                     "method": "recount",
-                    "arguments": [],
                     "requires": {
                         "args": {
                             "length": 0
@@ -1527,7 +1475,6 @@
                     ],
                     "description": "Outputs the results of an election.",
                     "method": "output",
-                    "arguments": [],
                     "requires": {
                         "args": {
                             "length": 0
@@ -1580,7 +1527,6 @@
                     ],
                     "description": "Generates mock data for an IRV election.",
                     "method": "mock",
-                    "arguments": [],
                     "requires": {
                         "args": {
                             "length": 0
@@ -2021,7 +1967,6 @@
                     ],
                     "description": "Allows Bouncer individually to view the testing channels.",
                     "method": "true",
-                    "arguments": [],
                     "requires": {
                         "args": {
                             "length": 0
@@ -2034,7 +1979,6 @@
                     ],
                     "description": "Blocks Bouncer individually from viewing the testing channels.",
                     "method": "false",
-                    "arguments": [],
                     "requires": {
                         "args": {
                             "length": 0
