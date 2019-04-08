@@ -692,6 +692,20 @@
         },
         {
             "aliases": [
+                "superupdate",                
+                "updateall"
+            ],
+            "description": "Updates all users from Lichess.",
+            "module": "Chess",
+            "file": "tracker",
+            "method": "updateAll",
+            "prefix": "generic",
+            "requires": {
+                "user": "owner"
+            }
+        },
+        {
+            "aliases": [
                 "myrank",
                 "rank"
             ],

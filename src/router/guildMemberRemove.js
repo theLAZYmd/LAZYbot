@@ -23,7 +23,7 @@ class GuildMemberRemove extends Parse {
             .addField('Messages', dbuser.messages.count.toLocaleString(), true)
             .addField('Last Message', dbuser.messages.last.format(), false)
         , channel);
-        message.react(emoji).catch(() => {});
+        if (message) message.react(emoji).catch(() => {});
     }
 
 }

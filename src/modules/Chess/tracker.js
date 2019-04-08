@@ -165,8 +165,8 @@ class Track {
         if (this.dbuser.lastupdate) delete this.dbuser.lastupdate;
         this.dbuser.lastUpdate = Date.now();
         DBuser.setData(this.dbuser);
-        this.log();
         if (this.command) this.output();
+        else this.log();
         return this;
     }
 
@@ -289,25 +289,31 @@ class Tracker extends Parse {
 
     async updateAll() {
         try {
-            let accounts = Commands.accounts;
-            let arr = Array.from(accounts.keys());
+            let accounts = Commands.accounts.accounts;
+            let arr = Array.from(accounts.keys());            
+            let acc = arr.slice(0);
             let arrs = [];
-            while (ids.length > 0) {
-
-                arrs = arrs.concat(arr.splice(0, 48));
+            while (acc.length > 0) {
+                arrs.push(acc.splice(0, 48));
             }
             let DataStore = new Map();
             let msg = await this.Output.generic(`Updating data on ${arr.length} Lichess accounts...`);
+            await this.Output.editor({
+                description: `Updated data on 0 / ${arr.length} Lichess accounts`
+            }, msg);
             for (let i = 0; i < arrs.length; i++) {
                 let ids = arrs[i];
+                console.log(ids);
                 let users = await Lichess.users.get(ids);
+                console.log(users);
                 users.tap(async (id, parsedData) => {
                     let data = DataStore.get(id) || new Track(this, DBuser.byID(id));
                     data.assign(parsedData);
                     DataStore.set(id, dbuser);
-                })
+                });
+                console.log(DataStore);
                 await this.Output.editor({
-                    description: `Updated data on ${Math.max(48 * (i + 1), arr.length)} / ${arr.length}`
+                    description: `Updated data on ${Math.max(48 * (i + 1), arr.length)} / ${arr.length} Lichess accounts`
                 }, msg);
                 await timeout(3000);
             }
@@ -421,7 +427,6 @@ function parseChesscom(chesscomData, data) {
     return {
         get ratings() {
             let vmap = new Map(Object.values(config.variants.chesscom).map(v => [v.api, v.key]))
-            console.log(chesscomData.stats);
             return new Map(chesscomData.stats.map(s => [vmap.get(s.key), {
                 rating: s.stats.rating,
                 prov: s.gameCount >= 10,

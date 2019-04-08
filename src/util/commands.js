@@ -7,7 +7,7 @@ const Message = DataManager.getFile("./src/commands/message.json");
 const Reaction = DataManager.getFile("./src/commands/reaction.json");
 const Interval = DataManager.getFile("./src/commands/interval.json");
 const fs = require('fs');
-const conifg = require('../config.json');
+const config = require('../config.json');
 
 class Commands {
 
@@ -169,8 +169,9 @@ class Commands {
         let tally = DataManager.getData();
         tally.forEach((dbuser) => {
             for (let s of Object.keys(config.sources)) {
+                if (s !== "lichess") continue;  //lichess block
                 if (!dbuser[s]) continue;
-                for (let account of dbuser[s]) {
+                for (let account of Object.keys(dbuser[s])) {
                     if (account.startsWith("_")) continue;
                     accounts.set(account, dbuser.id);
                 }
