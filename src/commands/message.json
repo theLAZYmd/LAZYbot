@@ -636,7 +636,8 @@
             "module": "Chess",
             "file": "tracker",
             "method": "run",
-            "prefix": "generic"
+            "prefix": "generic",
+            "active": false
         },
         {
             "aliases": [
@@ -650,7 +651,8 @@
             "module": "Chess",
             "file": "tracker",
             "method": "run",
-            "prefix": "generic"
+            "prefix": "generic",
+            "active": false
         },
         {
             "aliases": [
@@ -664,7 +666,8 @@
             "module": "Chess",
             "file": "tracker",
             "method": "run",
-            "prefix": "generic"
+            "prefix": "generic",
+            "active": false
         },
         {
             "aliases": [
@@ -688,7 +691,8 @@
             "module": "Chess",
             "file": "tracker",
             "method": "update",
-            "prefix": "generic"
+            "prefix": "generic",
+            "active": false
         },
         {
             "aliases": [
@@ -702,7 +706,8 @@
             "prefix": "generic",
             "requires": {
                 "user": "owner"
-            }
+            },
+            "active": false
         },
         {
             "aliases": [

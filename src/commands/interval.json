@@ -2,7 +2,8 @@
     "300000": [{
         "module": "Chess",
         "file": "tracker",
-        "method": "updateCycle"
+        "method": "updateCycle",
+        "active": false
     }],
     "3600000": [{
         "module": "Administration",
@@ -25,6 +26,7 @@
     "86400000": [{
         "module": "Chess",
         "file": "tracker",
-        "method": "updateAll"
+        "method": "updateAll",
+        "active": false
     }]
 }

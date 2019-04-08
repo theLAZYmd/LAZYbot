@@ -113,6 +113,7 @@ class Commands {
         let commands = new Map();
         let aliases = new Map();
         for (let c of Object.values(Message).flat()) {
+            if (c.active === false) continue;
             if (!Array.isArray(c.aliases)) continue;
             let info = Commands.parse(c);
             if (c.subcommands && c.subcommands.length > 0) {

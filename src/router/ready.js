@@ -127,6 +127,7 @@ class Ready {
             let time = Number(_time);
             setInterval(() => {
                 for (let cmdInfo of cmds) {
+                    if (cmdInfo.active === false) continue;
                     this.client.emit("interval", cmdInfo)
                 }
             }, time)

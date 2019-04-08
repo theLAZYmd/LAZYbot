@@ -3,9 +3,9 @@
         "id": "185412969130229760",
         "username": "theLAZYmd#2353",
         "messages": {
-            "count": 79065,
-            "last": "variants aren't included in this API it seems 🤔",
-            "lastSeen": 1554737902447
+            "count": 79069,
+            "last": "server ban 😦",
+            "lastSeen": 1554738738637
         },
         "bidamount": 100000000000000000,
         "location": "Toronto",
@@ -255,9 +255,9 @@
         "id": "373480715276517376",
         "username": "ObiWanBenoni#3488",
         "messages": {
-            "count": 80320,
-            "last": "damn thibault is in team lazy",
-            "lastSeen": 1554732942622
+            "count": 80321,
+            "last": "that's a rip in the chat",
+            "lastSeen": 1554739026827
         },
         "finger": "Join team obi to get free flowers",
         "lichess": {
@@ -5812,7 +5812,7 @@
         "id": "458318569260974081",
         "username": "HipnoTheGambler#0082",
         "messages": {
-            "count": 5025,
+            "count": 5026,
             "last": "<:pogchamp:450699459853156352>",
             "lastSeen": 1554720144029
         },
@@ -7308,7 +7308,7 @@
         "id": "334447969451638784",
         "username": "hiiii#0116",
         "messages": {
-            "count": 13150,
+            "count": 13151,
             "last": "but then it is on a community level",
             "lastSeen": 1554738431708
         },
@@ -16107,21 +16107,22 @@
             "last": "",
             "lastSeen": 1554337683553
         },
-        "lastupdate": 1554682892750,
         "chesscom": {
             "_main": "sheckleberg",
             "sheckleberg": {
-                "maxRating": "1408",
-                "bullet": "689",
-                "lightning": "1109",
-                "chess": "640?",
-                "rapid": "995",
+                "maxRating": 1310,
+                "undefined": "1141",
+                "lightning": "1109?",
+                "tactics": "1355?",
+                "bullet": "689?",
+                "lessons": "1408?",
+                "rapid": "995?",
+                "chess": "640",
                 "koth": "1310",
-                "crazyhouse": "637",
-                "tactics": "1356",
-                "lessons": "1408"
+                "crazyhouse": "637"
             }
-        }
+        },
+        "lastUpdate": 1554739018464
     },
     {
         "id": "322153549809057795",
