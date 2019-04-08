@@ -89,6 +89,7 @@ class Output extends Parse {
 
 	async onError(error, channel = this.channel) {
 		try {
+            console.log(error);
 			if (!error) throw "";
 			this.error(error);
 			let description = error;

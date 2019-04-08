@@ -1,211 +1,211 @@
 {
-    "314155682033041408": {
-        "_id": "314155682033041408",
-        "states": {
-            "tm": false,
-            "bcp": false,
-            "au": true,
-            "election": {
-                "register": true,
-                "candidates": false,
-                "voting": false,
-                "count": true,
-                "results": true
-            },
-            "trivia": true
-        },
-        "prefixes": {
-            "generic": "!",
-            "nadeko": "."
-        },
-        "emoji": "housediscord",
-        "channels": {
-            "announcements": "announcements",
-            "bot": "spam",
-            "bot2": "devs",
-            "modmail": "mod-mail",
-            "mod": "test-channel-in-waiting",
-            "log": "comment-log",
-            "join": "join",
-            "leave": "390260363410800650",
-            "trivia": "arena",
-            "welcome": "welcome"
-        },
-        "colors": {
-            "generic": 53380,
-            "error": 15406156,
-            "ratings": 9359868
-        },
-        "roles": {
-            "admin": "admin",
-            "dupe": "bank",
-            "mod": "mod",
-            "bot": "Bot-In-Use",
-            "muted": "muted",
-            "unranked": "unranked",
-            "league": "league",
-            "trivia": "arena",
-            "beta": "verified",
-            "livenotifications": "subs"
-        },
-        "regions": [
-            "Americas",
-            "Europe",
-            "Middle East / Africa",
-            "Asia / Australia"
-        ],
-        "trivia": {
-            "min": 10,
-            "provisional": 10,
-            "players": {}
-        },
-        "notify": {
-            "185412969130229760": 1536336039927,
-            "330193848137678848": 1543694654767,
-            "471771674833059882": 1536439043906,
-            "407662597555617802": 1543386494288,
-            "312824560602841089": 1539306542761
-        },
-        "shadowbanned": {
-            "usernames": [
-                "/go[\\w\\s]*die/i",
-                "/fucker/i",
-                "/cunts*/i",
-                "/israel(?:ian)?[\\s\\w]*jews*/i",
-                "/gola+m/i",
-                "/die[\\w\\s]*jew/i",
-                "/go[\\S]+a+m/i",
-                "/jews[\\S]+fuck/i",
-                "/fuck[\\S]+jews/i",
-                "/testNewMessage/",
-                "/dumb[\\w\\s]*chuck/i"
-            ],
-            "users": [
-                "521024815608496129",
-                "521325924499849217",
-                "521326575426207754",
-                "521333579725275137",
-                "521340374401417226",
-                "521341695179227150",
-                "521342295149248531",
-                "521345426897633300",
-                "521357942503505920",
-                "521359894717399050",
-                "521361126928416795",
-                "521363247073460264",
-                "521394073894912028",
-                "521392095387451393",
-                "521444374458925078",
-                "521754298711932939",
-                "523175821783990282",
-                "480446401201963008",
-                "544381541514739712"
-            ],
-            "newMessages": [
-                "/(https?://uupload\\.ir[\\S.]+.\\w+/?)\\s?/",
-                "/discordapp.com\\/attachments\\/390260427545903114\\/521360219364917257\\/Screenshot_2018-12-09-10-30-38-1.png/",
-                "/Screen_Shot_2018-12-12_at_8.15.33_PM.png/",
-                "/documentingreality.com\\/forum\\/f10\\//"
-            ],
-            "phrases": [
-                "thats jew",
-                "kill jew",
-                "cunt",
-                "motherfucker",
-                "jew kill",
-                "islamic state",
-                "nojoke bitch",
-                "bitch nojoke",
-                "real golam",
-                "real golaam",
-                "real golaaam",
-                "nigger",
-                "niggger"
-            ]
-        }
-    },
-    "433936141989969931": {
-        "_id": "433936141989969931",
-        "prefix": {
-            "generic": "!",
-            "nadeko": "."
-        },
-        "states": {
-            "election": {
-                "register": false,
-                "candidates": false,
-                "voting": false,
-                "count": false,
-                "results": false
-            },
-            "trivia": false
-        },
-        "channels": {
-            "announcements": "announcements",
-            "bot": "bot",
-            "bot2": "bot",
-            "modmail": "modmail",
-            "log": "log",
-            "join": "join",
-            "leave": "leave",
-            "trivia": "trivia",
-            "welcome": "welcome"
-        },
-        "colors": {
-            "generic": 53380,
-            "error": 15406156,
-            "ratings": 9359868
-        },
-        "roles": {
-            "admin": "admin",
-            "mod": "mod",
-            "bot": "bot",
-            "muted": "muted",
-            "arena": "arena",
-            "beta": "",
-            "livenotifications": "live"
-        }
-    },
-    "430035841239220224": {
-        "_id": "430035841239220224",
-        "prefix": {
-            "generic": "!",
-            "nadeko": "."
-        },
-        "states": {
-            "election": {
-                "register": false,
-                "candidates": false,
-                "voting": false,
-                "count": false,
-                "results": false
-            },
-            "trivia": false
-        },
-        "channels": {
-            "announcements": "announcements",
-            "bot": "bot",
-            "bot2": "bot",
-            "modmail": "modmail",
-            "log": "log",
-            "join": "join",
-            "leave": "leave",
-            "trivia": "trivia",
-            "welcome": "welcome"
-        },
-        "colors": {
-            "generic": 53380,
-            "error": 15406156,
-            "ratings": 9359868
-        },
-        "roles": {
-            "admin": "admin",
-            "mod": "mod",
-            "bot": "bot",
-            "muted": "muted",
-            "arena": "arena",
-            "beta": "",
-            "livenotifications": "live"
-        }
-    }
+	"314155682033041408": {
+		"_id": "314155682033041408",
+		"states": {
+			"tm": false,
+			"bcp": false,
+			"au": true,
+			"election": {
+				"register": true,
+				"candidates": false,
+				"voting": false,
+				"count": true,
+				"results": true
+			},
+			"trivia": true
+		},
+		"prefixes": {
+			"generic": "!",
+			"nadeko": "."
+		},
+		"emoji": "housediscord",
+		"channels": {
+			"announcements": "announcements",
+			"bot": "spam",
+			"bot2": "devs",
+			"modmail": "mod-mail",
+			"mod": "test-channel-in-waiting",
+			"log": "comment-log",
+			"join": "join",
+			"leave": "390260363410800650",
+			"trivia": "arena",
+			"welcome": "welcome"
+		},
+		"colors": {
+			"generic": 53380,
+			"error": 15406156,
+			"ratings": 9359868
+		},
+		"roles": {
+			"admin": "admin",
+			"dupe": "bank",
+			"mod": "mod",
+			"bot": "Bot-In-Use",
+			"muted": "muted",
+			"unranked": "unranked",
+			"league": "league",
+			"trivia": "arena",
+			"beta": "verified",
+			"livenotifications": "subs"
+		},
+		"regions": [
+			"Americas",
+			"Europe",
+			"Middle East / Africa",
+			"Asia / Australia"
+		],
+		"trivia": {
+			"min": 10,
+			"provisional": 10,
+			"players": {}
+		},
+		"notify": {
+			"185412969130229760": 1536336039927,
+			"330193848137678848": 1543694654767,
+			"471771674833059882": 1536439043906,
+			"407662597555617802": 1543386494288,
+			"312824560602841089": 1539306542761
+		},
+		"shadowbanned": {
+			"usernames": [
+				"/go[\\w\\s]*die/i",
+				"/fucker/i",
+				"/cunts*/i",
+				"/israel(?:ian)?[\\s\\w]*jews*/i",
+				"/gola+m/i",
+				"/die[\\w\\s]*jew/i",
+				"/go[\\S]+a+m/i",
+				"/jews[\\S]+fuck/i",
+				"/fuck[\\S]+jews/i",
+				"/testNewMessage/",
+				"/dumb[\\w\\s]*chuck/i"
+			],
+			"users": [
+				"521024815608496129",
+				"521325924499849217",
+				"521326575426207754",
+				"521333579725275137",
+				"521340374401417226",
+				"521341695179227150",
+				"521342295149248531",
+				"521345426897633300",
+				"521357942503505920",
+				"521359894717399050",
+				"521361126928416795",
+				"521363247073460264",
+				"521394073894912028",
+				"521392095387451393",
+				"521444374458925078",
+				"521754298711932939",
+				"523175821783990282",
+				"480446401201963008",
+				"544381541514739712"
+			],
+			"newMessages": [
+				"/(https?://uupload\\.ir[\\S.]+.\\w+/?)\\s?/",
+				"/discordapp.com\\/attachments\\/390260427545903114\\/521360219364917257\\/Screenshot_2018-12-09-10-30-38-1.png/",
+				"/Screen_Shot_2018-12-12_at_8.15.33_PM.png/",
+				"/documentingreality.com\\/forum\\/f10\\//"
+			],
+			"phrases": [
+				"thats jew",
+				"kill jew",
+				"cunt",
+				"motherfucker",
+				"jew kill",
+				"islamic state",
+				"nojoke bitch",
+				"bitch nojoke",
+				"real golam",
+				"real golaam",
+				"real golaaam",
+				"nigger",
+				"niggger"
+			]
+		}
+	},
+	"433936141989969931": {
+		"_id": "433936141989969931",
+		"prefix": {
+			"generic": "!",
+			"nadeko": "."
+		},
+		"states": {
+			"election": {
+				"register": false,
+				"candidates": false,
+				"voting": false,
+				"count": false,
+				"results": false
+			},
+			"trivia": false
+		},
+		"channels": {
+			"announcements": "announcements",
+			"bot": "bot",
+			"bot2": "bot",
+			"modmail": "modmail",
+			"log": "log",
+			"join": "join",
+			"leave": "leave",
+			"trivia": "trivia",
+			"welcome": "welcome"
+		},
+		"colors": {
+			"generic": 53380,
+			"error": 15406156,
+			"ratings": 9359868
+		},
+		"roles": {
+			"admin": "admin",
+			"mod": "mod",
+			"bot": "bot",
+			"muted": "muted",
+			"arena": "arena",
+			"beta": "",
+			"livenotifications": "live"
+		}
+	},
+	"430035841239220224": {
+		"_id": "430035841239220224",
+		"prefix": {
+			"generic": "!",
+			"nadeko": "."
+		},
+		"states": {
+			"election": {
+				"register": false,
+				"candidates": false,
+				"voting": false,
+				"count": false,
+				"results": false
+			},
+			"trivia": false
+		},
+		"channels": {
+			"announcements": "announcements",
+			"bot": "bot",
+			"bot2": "bot",
+			"modmail": "modmail",
+			"log": "log",
+			"join": "join",
+			"leave": "leave",
+			"trivia": "trivia",
+			"welcome": "welcome"
+		},
+		"colors": {
+			"generic": 53380,
+			"error": 15406156,
+			"ratings": 9359868
+		},
+		"roles": {
+			"admin": "admin",
+			"mod": "mod",
+			"bot": "bot",
+			"muted": "muted",
+			"arena": "arena",
+			"beta": "",
+			"livenotifications": "live"
+		}
+	}
 }
