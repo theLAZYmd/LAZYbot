@@ -12,6 +12,7 @@ const conifg = require('../config.json');
 class Commands {
 
     static async run (cmdInfo, message) {
+        if (!cmdInfo.args) cmdInfo.args = [];
         let directory = "modules/" + cmdInfo.module + "/" + cmdInfo.file.toLowerCase();
         let path = "modules/" + cmdInfo.module + "/" + cmdInfo.file.toLowerCase();
         let extensions = [".js", ".ts", ".mjs"]

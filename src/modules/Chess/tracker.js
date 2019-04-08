@@ -186,7 +186,7 @@ class Track {
                     if (!account.startsWith("_")) {
                         if (this.successes.every(([s, a]) => s !== source.key && a !== account)) errors.push(`${this.argsInfo.Search.emojis.get(source.key)} Couldn't ${this._command === "update" ? "update" : "link to"} '${account}' on ${source.name}`, this.errors[source.key] ? this.errors[source.key][1] : undefined);
                         else embed.addField(
-                            `${this.argsInfo.Search.emojis.get(source.key)} ${this.command === "update" ? "Updated" : `Linked ${this.dbuser.username} to`} '${account}'`,
+                            `${this.argsInfo.Search.emojis.get(source.key)} ${this._command === "update" ? "Updated" : `Linked ${this.dbuser.username} to`} '${account}'`,
                             Parse.profile(this.dbuser, source, account) + "\nCurrent highest rating is **" + this.dbuser[source.key][account].maxRating + "**" + whitespace + "\n" + Parse.ratingData(this.dbuser, source, account),
                             true
                         )
@@ -351,7 +351,8 @@ class Tracker extends Parse {
 
     /**
      * Transforms rating map into an object
-     * @param {RatingStore} ratingObj 
+     * @param {RatingStore} ratingObj
+     * @private
      */
     static parseRatings(ratingObj) {
         return Array.from(ratingObj).reduce((acc, [key, value]) => {
@@ -417,33 +418,19 @@ function timeout(ms) {
 }
 
 function parseChesscom(chesscomData, data) {
-    let obj = {
-        stats: chesscomData.stats,
-        data: data,
-        get allProvisional() {
-            return this.maxRating === 0;
-        },
+    return {
         get ratings() {
-            let ratings = {
-                "maxRating": 0
-            };
-            for (let key in config.variants.chesscom) { //ex: "crazyhouse"
-                let variant = config.variants.chesscom[key]; //ex: {"name": "Crazyhouse", "api": "crazyhouse", "key": "crazyhouse"}
-                for (let s of chesscomData.stats) {
-                    if (s.key === variant.api) {
-                        ratings[key] = s.stats.rating.toString();
-                        if (s.gameCount < 10) ratings[key] += "?";
-                        else if (Number(ratings[key]) > ratings.maxRating) ratings.maxRating = ratings[key]; //and if it's the biggest so far, set it.
-                    }
-                }
-            }
-            return ratings;
+            let vmap = new Map(Object.values(config.variants.chesscom).map(v => [v.api, v.key]))
+            console.log(chesscomData.stats);
+            return new Map(chesscomData.stats.map(s => [vmap.get(s.key), {
+                rating: s.stats.rating,
+                prov: s.gameCount >= 10,
+                rd: null,
+                games: s.gameCount
+            }]));
         },
         get username() {
             return data.username;
         }
-
     }
-    if (obj.allProvisional) throw "All ratings are provisional.";
-    return obj;
 }
