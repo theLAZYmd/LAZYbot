@@ -165,8 +165,8 @@ class Track {
         if (this.dbuser.lastupdate) delete this.dbuser.lastupdate;
         this.dbuser.lastUpdate = Date.now();
         DBuser.setData(this.dbuser);
-        if (this.command) this.output();
-        else this.log();
+        if (/^(?:lichess|chess\.?com|update)$/.test(this._command)) this.output();
+        else if (!this.command) this.log();
         return this;
     }
 
@@ -287,37 +287,44 @@ class Tracker extends Parse {
         this.update(dbuser);
     }
 
+    /**
+     * Updates every single member of the database from lichess
+     * @public
+     */
     async updateAll() {
         try {
-            let accounts = Commands.accounts.accounts;
-            let arr = Array.from(accounts.keys());            
-            let acc = arr.slice(0);
-            let arrs = [];
-            while (acc.length > 0) {
-                arrs.push(acc.splice(0, 48));
-            }
+            const lichess = Object.values(config.sources).find(s => s.key === "lichess");
+            const accounts = Commands.accounts.accounts;
+            const ids = Array.from(accounts.keys());
+            let embed = new Embed()
+                .setTitle(`${this.Search.emojis.get('lichess')} Beginning updates for all users`)
+                .setFooter(`Updated data on 0 / ${ids.length} Lichess accounts`);
+            let userObj = {};
             let DataStore = new Map();
-            let msg = await this.Output.generic(`Updating data on ${arr.length} Lichess accounts...`);
-            await this.Output.editor({
-                description: `Updated data on 0 / ${arr.length} Lichess accounts`
-            }, msg);
-            for (let i = 0; i < arrs.length; i++) {
-                let ids = arrs[i];
-                console.log(ids);
-                let users = await Lichess.users.get(ids);
-                console.log(users);
-                users.tap(async (id, parsedData) => {
-                    let data = DataStore.get(id) || new Track(this, DBuser.byID(id));
-                    data.assign(parsedData);
-                    DataStore.set(id, dbuser);
-                });
-                console.log(DataStore);
-                await this.Output.editor({
-                    description: `Updated data on ${Math.max(48 * (i + 1), arr.length)} / ${arr.length} Lichess accounts`
-                }, msg);
-                await timeout(3000);
-            }
-            DataStore.forEach(data => data.setData());
+            let msg = this.command ? await this.Output.sender(embed) : undefined;
+            let users = await Lichess.users.get(ids);
+            users.tap((parsedData, username) => {
+                let id = accounts.get(parsedData.username);
+                let dbuser = DBuser.byID(id);
+                if (!dbuser) {
+                    dbuser.left = true;
+                    DBuser.setData(dbuser);
+                    return console.log([username, id, dbuser]);
+                }
+                let data = DataStore.get(id) || new Track(this, dbuser);
+                data.setSource(lichess).setUsername(username).assign(parsedData).setSuccess();
+                DataStore.set(id, data);
+                if (!userObj[dbuser.username]) userObj[dbuser.username] = [];
+                userObj[dbuser.username].push(parsedData.username);
+            });
+            let description = Object.entries(userObj).reduce((acc, [id, usernames]) => acc += `${id}: **${usernames.join("**, **")}**\n`, "");
+            if (msg) await this.Output.editor(embed.setFooter(`Updated data on ${ids.length} / ${ids.length} Lichess accounts`), msg);
+            await DataStore.forEach(data => data.setData());
+            if (msg) await this.Output.editor(embed
+                .setTitle(`${this.Search.emojis.get('lichess')} All updates successfully completed`)
+                .setDescription(description.slice(0, 2048))
+            , msg);
+            Logger.output(userObj);
         } catch (e) {
             if (e) this.Output.onError(e);
         }
@@ -329,7 +336,11 @@ class Tracker extends Parse {
             if (Object.values(config.sources).filter(source => dbuser[source.key]).length === 0) return false; //sources
             if (dbuser.left) return false;
             let user = this.Search.users.byID(dbuser.id);
-            if (!user) return dbuser.left = true;
+            if (!user) {                
+                dbuser.left = true;
+                DBuser.setData(dbuser);
+                return false;
+            }
             if (!/online|idle|dnd/.test(user.presence.status)) return false;
             if (!dbuser.lastUpdate) return true;
             if (dbuser.lastUpdate < currentValue && dbuser.lastUpdate < Date.now() - config.delays.repeat) {

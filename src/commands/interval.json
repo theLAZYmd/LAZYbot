@@ -21,5 +21,10 @@
         "file": "backup",
         "method": "backup",
         "args": ["3"]
+    }],
+    "86400000": [{
+        "module": "Chess",
+        "file": "tracker",
+        "method": "updateAll"
     }]
 }
