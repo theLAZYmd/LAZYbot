@@ -2,7 +2,8 @@
     "300000": [{
         "module": "Chess",
         "file": "tracker/tracker",
-        "method": "updateCycle"
+        "method": "updateCycle",
+        "disable": true
     }],
     "3600000": [{
         "module": "Administration",
