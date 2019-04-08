@@ -634,7 +634,7 @@
                 "lichess littleplotkin"
             ],
             "module": "Chess",
-            "file": "tracker/tracker",
+            "file": "tracker",
             "method": "run",
             "prefix": "generic"
         },
@@ -648,7 +648,7 @@
                 "chesscom schoolmeester"
             ],
             "module": "Chess",
-            "file": "tracker/tracker",
+            "file": "tracker",
             "method": "run",
             "prefix": "generic"
         },
@@ -662,7 +662,7 @@
                 "bughousetest thepinky"
             ],
             "module": "Chess",
-            "file": "tracker/tracker",
+            "file": "tracker",
             "method": "run",
             "prefix": "generic"
         },
@@ -673,7 +673,7 @@
             "description": "Creates a dialogue that allows a user to pick an account linked to their discord account and unlink it.",
             "usage": [],
             "module": "Chess",
-            "file": "tracker/tracker",
+            "file": "tracker",
             "method": "remove",
             "prefix": "generic"
         },
@@ -686,7 +686,7 @@
                 "update theLAZYmd"
             ],
             "module": "Chess",
-            "file": "tracker/tracker",
+            "file": "tracker",
             "method": "update",
             "prefix": "generic"
         },

@@ -1,26 +1,29 @@
-const Parse = require('../../../util/parse');
-const Embed = require('../../../util/embed');
-const rp = require('request-promise');
-const DataManager = require('../../../util/datamanager');
-const DBuser = require('../../../util/dbuser');
-const Logger = require('../../../util/logger');
-const Commands = require('../../../util/commands');
-const config = DataManager.getFile('./src/config.json');
-
 const client = require('lichess');
 const Lichess = new client();
+const rp = require('request-promise');
+
+const Parse = require('../../util/parse');
+const Embed = require('../../util/embed');
+const DataManager = require('../../util/datamanager');
+const DBuser = require('../../util/dbuser');
+const Logger = require('../../util/logger');
+const Commands = require('../../util/commands');
+const config = DataManager.getFile('./src/config.json');
 
 /**
  * @typedef {object} TrackInput
+ * @property {Parse} argsInfo
  * @property {DBuser} dbuser
- * @property {Object[]} sources
- * @property {string} username
+ * @property {string[][]} successes
+ * @property {Error[]} errors
  */
 class Track {
 
     constructor(argsInfo, dbuser) {
         this.successes = [];
-        this.errors = { error: []   };
+        this.errors = {
+            error: []
+        };
         this.argsInfo = argsInfo;
         this.dbuser = dbuser;
     }
@@ -34,7 +37,7 @@ class Track {
         this._command = this.argsInfo.command
         return Boolean(this._command);
     }
-    
+
     /**
      * Returns the list of sources for which the DBuser can validly be updated
      * @name Track#sources
@@ -65,7 +68,7 @@ class Track {
         if (!username) {
             this.username = null;
             return this;
-        }			
+        }
         if (!username.match(/[a-z0-9][\w-]*[a-z0-9]/i)) throw new Error("Invalid syntax for a username.");
         for (let s of this.sources) {
             for (let u in this.dbuser[s.key]) {
@@ -87,12 +90,19 @@ class Track {
         this.message = message;
     }
 
+    /**
+     * Logs a new error to be outputted at the end of a Track Instance on data set
+     * @param {Error} e 
+     */
     setError(e) {
         if (this.source) this.errors[this.source.key] = [this.username, e];
         else this.errors.error.push(e);
         return this;
     }
 
+    /**
+     * Confirms that a data update was successful
+     */
     setSuccess() {
         this.successes.push([this.source.key, this.username]);
         return this;
@@ -107,7 +117,7 @@ class Track {
             description: `Updating user ${this.dbuser.username}... on **${this.source.name}**`
         }, this.message);
     }
-    
+
     /**
      * Logs the list of accounts that have been updated to the console
      * @private
@@ -119,26 +129,23 @@ class Track {
 
     async getData() {
         let parsedData;
-        if (/lichess|bughousetest/.test(this.source.key)) {
-            parsedData = await Lichess.users.get(this.username);
-        } else {
-            let Constructor = require('./chesscom');
-            let sourceData = await Tracker.request(this);
-            parsedData = new Constructor(sourceData, this);
-        }
+        if (/lichess|bughousetest/.test(this.source.key)) parsedData = await Lichess.users.get(this.username);
+        else parsedData = parseChesscom(await Tracker.request(this), this);
         if (!parsedData) throw "No response received";
         this.assign(parsedData);
         this.setSuccess();
         return this;
     }
-    
+
     /**
      * Assigns parsed data from a chess website to the properties of the user in the database. Follows on from getting data
      * @param {LichessUser|ChesscomUser} parsedData
      * @private
      */
     assign(parsedData) {
-        let account = this.dbuser[this.source.key] || {    _main: parsedData.username      };
+        let account = this.dbuser[this.source.key] || {
+            _main: parsedData.username
+        };
         account[parsedData.username] = Tracker.parseRatings(parsedData.ratings);
         if (account._main === parsedData.username) { //if it's the main one
             for (let prop of ["name", "country", "language", "title", "bio", "language"]) {
@@ -149,7 +156,7 @@ class Track {
         this.dbuser[this.source.key] = account;
         return this;
     }
-    
+
     /**
      * Sets the modified data for a DBuser to the database
      * @private
@@ -158,11 +165,11 @@ class Track {
         if (this.dbuser.lastupdate) delete this.dbuser.lastupdate;
         this.dbuser.lastUpdate = Date.now();
         DBuser.setData(this.dbuser);
-        this.log();        
+        this.log();
         if (this.command) this.output();
         return this;
     }
-    
+
     /**
      * Outputs the result of a new link or update
      * @private
@@ -173,23 +180,24 @@ class Track {
             let errors = this.errors.error;
             let embed = new Embed().setColor(this.argsInfo.server.colors.ratings);
             let sources = this._command === "update" ? this.sources : [this.source];
-            for (let source of sources) {                
+            for (let source of sources) {
                 let accounts = this._command === "update" ? Object.keys(this.dbuser[source.key]) : [this.username];
-                for (let account of accounts) if (!account.startsWith("_")) {
-                    if (this.successes.every(([s, a]) => s !== source.key && a !== account)) errors.push(`${this.argsInfo.Search.emojis.get(source.key)} Couldn't ${this._command === "update" ? "update" : "link to"} '${account}' on ${source.name}`, this.errors[source.key] ? this.errors[source.key][1] : undefined);
-                    else embed.addField(
-                        `${this.argsInfo.Search.emojis.get(source.key)} ${this.command === "update" ? "Updated" : `Linked ${this.dbuser.username} to`} '${account}'`,
-                        Parse.profile(this.dbuser, source, account) + "\nCurrent highest rating is **" + this.dbuser[source.key][account].maxRating + "**" + whitespace + "\n" + Parse.ratingData(this.dbuser, source, account),
-                        true
-                    )
-                }
+                for (let account of accounts)
+                    if (!account.startsWith("_")) {
+                        if (this.successes.every(([s, a]) => s !== source.key && a !== account)) errors.push(`${this.argsInfo.Search.emojis.get(source.key)} Couldn't ${this._command === "update" ? "update" : "link to"} '${account}' on ${source.name}`, this.errors[source.key] ? this.errors[source.key][1] : undefined);
+                        else embed.addField(
+                            `${this.argsInfo.Search.emojis.get(source.key)} ${this.command === "update" ? "Updated" : `Linked ${this.dbuser.username} to`} '${account}'`,
+                            Parse.profile(this.dbuser, source, account) + "\nCurrent highest rating is **" + this.dbuser[source.key][account].maxRating + "**" + whitespace + "\n" + Parse.ratingData(this.dbuser, source, account),
+                            true
+                        )
+                    }
             }
-            console.log(embed);
             if (embed.fields.length) await this.argsInfo.Output[this._command === "update" ? "editor" : "sender"](embed, this.message);
-            if (errors.length) for (let e of errors) this.argsInfo.Output.onError(e);
+            if (errors.length)
+                for (let e of errors) this.argsInfo.Output.onError(e);
         } catch (e) {
             if (e) this.argsInfo.Output.onError(e);
-        }        
+        }
         return this;
     }
 
@@ -197,18 +205,18 @@ class Track {
 
 class Tracker extends Parse {
 
-	constructor(message, guildID) {
-		super(message);
-		if (guildID) this.message.guild = this.Search.guilds.byID(guildID);
-	}
+    constructor(message, guildID) {
+        super(message);
+        if (guildID) this.message.guild = this.Search.guilds.byID(guildID);
+    }
 
     /**
      * Links a user's Discord account to an account on a specific API website, so-far support for Lichess.org and Chess.com
      * Called from {generic}lichess and {generic}chess.com commands
      * @param {string} command 
      */
-	async run(command = this.command, dbuser = this.dbuser, username = "") {
-		try {
+    async run(command = this.command, dbuser = this.dbuser, username = "") {
+        try {
             switch (this.args.length) {
                 case (0):
                     username = this.author.username;
@@ -228,9 +236,9 @@ class Tracker extends Parse {
             let data = new Track(this, dbuser);
             await data.setSource(source).setUsername(username).getData();
             data.setData();
-		} catch (e) {
-			if (e) this.Output.onError(e);
-		}
+        } catch (e) {
+            if (e) this.Output.onError(e);
+        }
     }
 
     /**
@@ -245,46 +253,47 @@ class Tracker extends Parse {
                 if (!user) throw new Error("Couldn't find user **" + this.argument + "** in this server");
                 dbuser = DBuser.getUser(user);
             }
-            if (this.user && dbuser.username !== this.user.tag) dbuser.username = user.tag;            
+            if (this.user && dbuser.username !== this.user.tag) dbuser.username = user.tag;
             let data = new Track(this, dbuser);
             try {
                 if (data.sources.length === 0) throw `No linked accounts found.\nPlease link an account to your profile through \`${this.generic}lichess\`, \`${this.generic}chess.com\`, or \`${this.generic}bughousetest\`.`;
                 if (this.command) data.setMessage(await this.Output.generic("Updating user " + dbuser.username + "..."));
                 for (let source of data.sources) {
                     data.setSource(source);
-                    for (let account of Object.keys(data.dbuser[source.key])) if (!account.startsWith("_")) {
-                        if (data.command) await data.edit();
-                        await data.setUsername(account).getData();
-                        data.setUsername();
-                    }
+                    for (let account of Object.keys(data.dbuser[source.key]))
+                        if (!account.startsWith("_")) {
+                            if (data.command) await data.edit();
+                            await data.setUsername(account).getData();
+                            data.setUsername();
+                        }
                 }
             } catch (e) {
                 if (e) data.setError(e);
             }
             data.setData();
-		} catch (e) {
-			if (e && this.command) this.Output.onError(e);
-		}
+        } catch (e) {
+            if (e && this.command) this.Output.onError(e);
+        }
     }
-    
+
     /**
      * Grabs the least up to date user in the database and runs them through the update process, without outputting a result
      * @private
      */
-	async updateCycle () {
-		let dbuser = this.nextUpdate();
+    async updateCycle() {
+        let dbuser = this.nextUpdate();
         Tracker.lastDBuser = dbuser;
-		if (!dbuser) return this.error("All users are up to date.");
+        if (!dbuser) return this.error("All users are up to date.");
         this.update(dbuser);
     }
-    
+
     async updateAll() {
         try {
             let accounts = Commands.accounts;
             let arr = Array.from(accounts.keys());
             let arrs = [];
             while (ids.length > 0) {
-                
+
                 arrs = arrs.concat(arr.splice(0, 48));
             }
             let DataStore = new Map();
@@ -295,9 +304,11 @@ class Tracker extends Parse {
                 users.tap(async (id, parsedData) => {
                     let data = DataStore.get(id) || new Track(this, DBuser.byID(id));
                     data.assign(parsedData);
-                    DataStore.set(id, dbuser);  
+                    DataStore.set(id, dbuser);
                 })
-                await this.Output.editor({  description: `Updated data on ${Math.max(48 * (i + 1), arr.length)} / ${arr.length}`}, msg);
+                await this.Output.editor({
+                    description: `Updated data on ${Math.max(48 * (i + 1), arr.length)} / ${arr.length}`
+                }, msg);
                 await timeout(3000);
             }
             DataStore.forEach(data => data.setData());
@@ -306,27 +317,27 @@ class Tracker extends Parse {
         }
     }
 
-	nextUpdate() { //Least Up-to-Date User
+    nextUpdate() { //Least Up-to-Date User
         let currentValue = Infinity;
-		return DataManager.getData().findd((dbuser) => {
-			if (Object.values(config.sources).filter(source => dbuser[source.key]).length === 0) return false; //sources
+        return DataManager.getData().findd((dbuser) => {
+            if (Object.values(config.sources).filter(source => dbuser[source.key]).length === 0) return false; //sources
             if (dbuser.left) return false;
             let user = this.Search.users.byID(dbuser.id);
-            if (!user) return dbuser.left = true;	
-			if (!/online|idle|dnd/.test(user.presence.status)) return false;
-			if (!dbuser.lastUpdate) return true;
-			if (dbuser.lastUpdate < currentValue && dbuser.lastUpdate < Date.now() - config.delays.repeat) {
-				currentValue = dbuser.lastUpdate;
-				return dbuser;
-			}
-        });      
-	}
+            if (!user) return dbuser.left = true;
+            if (!/online|idle|dnd/.test(user.presence.status)) return false;
+            if (!dbuser.lastUpdate) return true;
+            if (dbuser.lastUpdate < currentValue && dbuser.lastUpdate < Date.now() - config.delays.repeat) {
+                currentValue = dbuser.lastUpdate;
+                return dbuser;
+            }
+        });
+    }
 
     /**
      * Grabs JSON data from the API for all other (chess.com) sites
      * @param {Tracker} data 
      */
-	static async request(data) {
+    static async request(data) {
         try {
             return await rp({
                 "uri": config.sources.chesscom.url.user.replace("|", data.username),
@@ -368,10 +379,12 @@ class Tracker extends Parse {
             }
             let dbuser = DBuser.getUser(user);
             let accounts = [];
-            for (let s of Object.keys(config.sources)) if (dbuser[s]) for (let a of Object.keys(dbuser[s])) {
-                if (a.startsWith("_")) continue;
-                accounts.push([s, a]);
-            }
+            for (let s of Object.keys(config.sources))
+                if (dbuser[s])
+                    for (let a of Object.keys(dbuser[s])) {
+                        if (a.startsWith("_")) continue;
+                        accounts.push([s, a]);
+                    }
             let options = accounts.map(([source, username]) => this.Search.emojis.get(source) + " " + username);
             let val = await this.Output.choose({
                 option: 'account to remove',
@@ -379,9 +392,11 @@ class Tracker extends Parse {
             });
             let [source, account] = accounts[val];
             delete dbuser[source][account];
-            if (dbuser[source]._main === account) for (let prop of dbuser[source]) if (prop.startsWith("_")) {
-                delete dbuser[source][prop];
-            }
+            if (dbuser[source]._main === account)
+                for (let prop of dbuser[source])
+                    if (prop.startsWith("_")) {
+                        delete dbuser[source][prop];
+                    }
             DBuser.setData(dbuser);
             this.Output.sender(new Embed()
                 .setTitle(`Stopped tracking via ${this.prefix}remove command`)
@@ -399,4 +414,36 @@ module.exports = Tracker;
 
 function timeout(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function parseChesscom(chesscomData, data) {
+    let obj = {
+        stats: chesscomData.stats,
+        data: data,
+        get allProvisional() {
+            return this.maxRating === 0;
+        },
+        get ratings() {
+            let ratings = {
+                "maxRating": 0
+            };
+            for (let key in config.variants.chesscom) { //ex: "crazyhouse"
+                let variant = config.variants.chesscom[key]; //ex: {"name": "Crazyhouse", "api": "crazyhouse", "key": "crazyhouse"}
+                for (let s of chesscomData.stats) {
+                    if (s.key === variant.api) {
+                        ratings[key] = s.stats.rating.toString();
+                        if (s.gameCount < 10) ratings[key] += "?";
+                        else if (Number(ratings[key]) > ratings.maxRating) ratings.maxRating = ratings[key]; //and if it's the biggest so far, set it.
+                    }
+                }
+            }
+            return ratings;
+        },
+        get username() {
+            return data.username;
+        }
+
+    }
+    if (obj.allProvisional) throw "All ratings are provisional.";
+    return obj;
 }

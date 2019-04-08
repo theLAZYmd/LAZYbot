@@ -1,7 +1,7 @@
 {
     "300000": [{
         "module": "Chess",
-        "file": "tracker/tracker",
+        "file": "tracker",
         "method": "updateCycle"
     }],
     "3600000": [{
