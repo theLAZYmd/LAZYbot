@@ -12,6 +12,7 @@ class Output extends Parse {
 		try {
 			if (!embed) throw "this.Output.sender(): Embed object is undefined.";
             if (!embed.color) embed.color = config.colors.generic;
+            if (channel.channel || channel.constructor.name === "Message") channel = channel.channel;
             let content = embed.content;
             embed = Embed.receiver(embed);
 			if (typeof embed._apiTransform === "function") embed = embed._apiTransform();

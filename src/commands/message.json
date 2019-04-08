@@ -173,7 +173,6 @@
             "module": "Administration",
             "file": "shadowban",
             "method": "list",
-            "arguments": [],
             "prefix": "generic",
             "requires": {
                 "role": [
@@ -530,7 +529,6 @@
             "module": "Chess",
             "file": "puzzle",
             "method": "view",
-            "arguments": [],
             "prefix": "generic"
         },
         {
@@ -545,7 +543,6 @@
             "module": "Chess",
             "file": "puzzle",
             "method": "view",
-            "arguments": [],
             "prefix": "generic"
         },
         {
@@ -559,7 +556,6 @@
             "module": "Chess",
             "file": "puzzle",
             "method": "daily",
-            "arguments": [],
             "prefix": "generic"
         },
         {
@@ -573,7 +569,6 @@
             "module": "Chess",
             "file": "puzzle",
             "method": "variant",
-            "arguments": [],
             "prefix": "generic"
         },
         {
@@ -628,7 +623,6 @@
             "module": "Chess",
             "file": "fen",
             "method": "run",
-            "arguments": [],
             "prefix": "generic"
         },
         {
@@ -637,7 +631,6 @@
             ],
             "description": "Links your Discord user profile to a lichess account.",
             "usage": [
-                "lichess",
                 "lichess littleplotkin"
             ],
             "module": "Chess",
@@ -652,7 +645,6 @@
             ],
             "description": "Links your Discord user profile to a Chess.com account.",
             "usage": [
-                "chesscom",
                 "chesscom schoolmeester"
             ],
             "module": "Chess",
@@ -667,39 +659,22 @@
             ],
             "description": "Links your Discord user profile to a bughousetest.com account.",
             "usage": [
-                "bughousetest",
                 "bughousetest thepinky"
             ],
             "module": "Chess",
             "file": "tracker/tracker",
             "method": "run",
-            "arguments": [
-                "command",
-                "args"
-            ],
-            "prefix": "generic",
-            "requires": {
-                "args": {
-                    "length": [
-                        0,
-                        1,
-                        2
-                    ]
-                }
-            }
+            "prefix": "generic"
         },
         {
             "aliases": [
                 "remove"
             ],
             "description": "Creates a dialogue that allows a user to pick an account linked to their discord account and unlink it.",
-            "usage": [
-                "remove"
-            ],
+            "usage": [],
             "module": "Chess",
             "file": "tracker/tracker",
             "method": "remove",
-            "arguments": [],
             "prefix": "generic"
         },
         {
@@ -708,15 +683,11 @@
             ],
             "description": "Updates a user on all their accounts.",
             "usage": [
-                "update",
                 "update theLAZYmd"
             ],
             "module": "Chess",
             "file": "tracker/tracker",
             "method": "update",
-            "arguments": [
-                "argument"
-            ],
             "prefix": "generic"
         },
         {
@@ -802,7 +773,6 @@
             "module": "Currency",
             "file": "currency",
             "method": "timely",
-            "arguments": [],
             "prefix": "nadeko",
             "requires": {
                 "house": true,
@@ -846,7 +816,6 @@
             "module": "Custom Reactions",
             "file": "customreactions",
             "method": "list",
-            "arguments": [],
             "prefix": "generic"
         },
         {
@@ -860,7 +829,6 @@
             "module": "Custom Reactions",
             "file": "customreactions",
             "method": "list",
-            "arguments": [],
             "prefix": "generic"
         },
         {
@@ -927,7 +895,6 @@
             "module": "Custom Reactions",
             "file": "customreactions",
             "method": "toggle",
-            "arguments": [],
             "prefix": "generic",
             "requires": {
                 "role": [
@@ -949,7 +916,6 @@
             "module": "Custom Reactions",
             "file": "customreactions",
             "method": "delete",
-            "arguments": [],
             "prefix": "generic",
             "requires": {
                 "role": [
@@ -1021,7 +987,6 @@
             "module": "Custom Reactions",
             "file": "customreactions",
             "method": "toggle",
-            "arguments": [],
             "prefix": "generic",
             "requires": {
                 "role": [
@@ -1043,7 +1008,6 @@
             "module": "Custom Reactions",
             "file": "customreactions",
             "method": "delete",
-            "arguments": [],
             "prefix": "generic",
             "requires": {
                 "role": [
@@ -1511,7 +1475,6 @@
             "module": "Election",
             "file": "election",
             "method": "postResults",
-            "arguments": [],
             "prefix": "generic"
         },
         {
@@ -1541,7 +1504,6 @@
             "module": "Election",
             "file": "electorals/irv",
             "method": "run",
-            "arguments": [],
             "prefix": "generic",
             "requires": {
                 "args": {
@@ -1587,7 +1549,6 @@
             "module": "Help",
             "file": "commands",
             "method": "about",
-            "arguments": [],
             "prefix": "generic",
             "requires": {
                 "args": {
@@ -1608,7 +1569,6 @@
             "module": "Help",
             "file": "commands",
             "method": "list",
-            "arguments": [],
             "prefix": "generic",
             "requires": {
                 "args": {
@@ -1833,7 +1793,6 @@
             "module": "Trivia",
             "file": "trivia",
             "method": "end",
-            "arguments": [],
             "prefix": "nadeko",
             "requires": {
                 "response": "bot"
@@ -1851,7 +1810,6 @@
             "module": "Trivia",
             "file": "trivia",
             "method": "show",
-            "arguments": [],
             "prefix": "generic",
             "requires": {
                 "channels": "trivia"
@@ -1947,7 +1905,6 @@
             "module": "Utility",
             "file": "utility",
             "method": "uptime",
-            "arguments": [],
             "prefix": "generic",
             "requires": {
                 "args": {
@@ -2013,13 +1970,10 @@
                 "bcp"
             ],
             "description": "Switches whether Nadeko or Bouncer has 'Bot-in-Use' role (full permission for server). To be used when Bouncer is offline, triggers automaticalyl.",
-            "usage": [
-                "bcp"
-            ],
+            "usage": [],
             "module": "Utility",
             "file": "states",
             "method": "bcp",
-            "arguments": [],
             "prefix": "nadeko",
             "requires": {
                 "house": true
@@ -2099,7 +2053,6 @@
             "module": "Utility",
             "file": "embeds",
             "method": "list",
-            "arguments": [],
             "prefix": "generic",
             "requires": {
                 "args": {
@@ -2121,7 +2074,6 @@
             "module": "Utility",
             "file": "utility",
             "method": "markdownify",
-            "arguments": [],
             "prefix": "generic",
             "requires": {
                 "args": {
@@ -2144,7 +2096,6 @@
             "module": "Utility",
             "file": "utility",
             "method": "jsonify",
-            "arguments": [],
             "prefix": "generic",
             "requires": {
                 "args": {
@@ -2160,13 +2111,10 @@
                 "members"
             ],
             "description": "Returns the number of members in the database.",
-            "usage": [
-                "members"
-            ],
+            "usage": [],
             "module": "Utility",
             "file": "utility",
             "method": "members",
-            "arguments": [],
             "prefix": "generic"
         },
         {
@@ -2174,13 +2122,10 @@
                 "ping"
             ],
             "description": "Returns the bot's ping in milliseconds.\n**Note:** this is not your ping! This is the time taken for a client-emitted event to reach the bot, not how long it takes you to send a message.",
-            "usage": [
-                "ping"
-            ],
+            "usage": [],
             "module": "Utility",
             "file": "utility",
             "method": "ping",
-            "arguments": [],
             "prefix": "generic"
         },
         {
@@ -2192,7 +2137,6 @@
             "module": "Utility",
             "file": "utility",
             "method": "dbuser",
-            "arguments": [],
             "prefix": "generic"
         }
     ]

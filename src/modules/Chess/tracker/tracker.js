@@ -20,7 +20,7 @@ class Track {
 
     constructor(argsInfo, dbuser) {
         this.successes = [];
-        this.errors = [];
+        this.errors = { error: []   };
         this.argsInfo = argsInfo;
         this.dbuser = dbuser;
     }
@@ -60,8 +60,12 @@ class Track {
      * @name Track#username
      * @param {string} username 
      */
-    setUsername(username) {
-        username = username.replace(/[^\w-]+/g, "");			
+    setUsername(username = "") {
+        username = username.replace(/[^\w-]+/g, "");
+        if (!username) {
+            this.username = null;
+            return this;
+        }			
         if (!username.match(/[a-z0-9][\w-]*[a-z0-9]/i)) throw new Error("Invalid syntax for a username.");
         for (let s of this.sources) {
             for (let u in this.dbuser[s.key]) {
@@ -84,7 +88,8 @@ class Track {
     }
 
     setError(e) {
-        this.errors.push([this.source.key, this.username, e]);
+        if (this.source) this.errors[this.source.key] = [this.username, e];
+        else this.errors.error.push(e);
         return this;
     }
 
@@ -98,7 +103,7 @@ class Track {
      * @private
      */
     async edit() {
-        if (this.command) this.argsInfo.Output.editor({
+        if (this.command) await this.argsInfo.Output.editor({
             description: `Updating user ${this.dbuser.username}... on **${this.source.name}**`
         }, this.message);
     }
@@ -113,7 +118,14 @@ class Track {
     }
 
     async getData() {
-        let parsedData = /lichess|bughousetest/.test(this.source.key) ? await Lichess.users.get(this.username) : await (new require('chesscom.js'))(await Tracker.request(this), this);
+        let parsedData;
+        if (/lichess|bughousetest/.test(this.source.key)) {
+            parsedData = await Lichess.users.get(this.username);
+        } else {
+            let Constructor = require('./chesscom');
+            let sourceData = await Tracker.request(this);
+            parsedData = new Constructor(sourceData, this);
+        }
         if (!parsedData) throw "No response received";
         this.assign(parsedData);
         this.setSuccess();
@@ -158,13 +170,13 @@ class Track {
     async output() {
         try {
             const whitespace = "      \u200B";
-            let errors = [];
+            let errors = this.errors.error;
             let embed = new Embed().setColor(this.argsInfo.server.colors.ratings);
             let sources = this._command === "update" ? this.sources : [this.source];
             for (let source of sources) {                
                 let accounts = this._command === "update" ? Object.keys(this.dbuser[source.key]) : [this.username];
                 for (let account of accounts) if (!account.startsWith("_")) {
-                    if (this.successes.every(([s, a]) => s !== source.key && a !== account)) errors.push(`${this.argsInfo.Search.emojis.get(source.key)} Couldn't ${this._command === "update" ? "update" : "link to"} '${account}' on ${source.name}${this.errors.find(([s, a]) => s === source.key && a === account) ? `: ${this.errors[source.key]}` : "."}`);
+                    if (this.successes.every(([s, a]) => s !== source.key && a !== account)) errors.push(`${this.argsInfo.Search.emojis.get(source.key)} Couldn't ${this._command === "update" ? "update" : "link to"} '${account}' on ${source.name}`, this.errors[source.key] ? this.errors[source.key][1] : undefined);
                     else embed.addField(
                         `${this.argsInfo.Search.emojis.get(source.key)} ${this.command === "update" ? "Updated" : `Linked ${this.dbuser.username} to`} '${account}'`,
                         Parse.profile(this.dbuser, source, account) + "\nCurrent highest rating is **" + this.dbuser[source.key][account].maxRating + "**" + whitespace + "\n" + Parse.ratingData(this.dbuser, source, account),
@@ -172,8 +184,9 @@ class Track {
                     )
                 }
             }
-            if (embed.fields.length > 0) this.argsInfo.Output[this.command === "update" ? "editor" : "sender"](embed, this.msg);
-            if (errors.length) throw errors.join("\n");
+            console.log(embed);
+            if (embed.fields.length) await this.argsInfo.Output[this._command === "update" ? "editor" : "sender"](embed, this.message);
+            if (errors.length) for (let e of errors) this.argsInfo.Output.onError(e);
         } catch (e) {
             if (e) this.argsInfo.Output.onError(e);
         }        
@@ -224,7 +237,7 @@ class Tracker extends Parse {
      * 
      * @param {*} user 
      */
-    async update(dbuser = this.dbuser) {
+    async update(dbuser = this.dbuser, user = this.user) {
         try {
             if (this.argument) {
                 if (!this.Permissions.role('admin', this)) throw this.Permissions.output('role');
@@ -236,15 +249,19 @@ class Tracker extends Parse {
             let data = new Track(this, dbuser);
             try {
                 if (data.sources.length === 0) throw `No linked accounts found.\nPlease link an account to your profile through \`${this.generic}lichess\`, \`${this.generic}chess.com\`, or \`${this.generic}bughousetest\`.`;
-                if (this.command) data.msg = await this.Output.generic("Updating user " + dbuser.username + "...");
-                for (let source of data.sources) for (let account of Object.keys(data.dbuser[data.source.key])) if (!account.startsWith("_")) {
-                    if (data.command) data.edit();
-                    await data.setSource(source).setUsername(account).getData();
-                    data.setUsername();
+                if (this.command) data.setMessage(await this.Output.generic("Updating user " + dbuser.username + "..."));
+                for (let source of data.sources) {
+                    data.setSource(source);
+                    for (let account of Object.keys(data.dbuser[source.key])) if (!account.startsWith("_")) {
+                        if (data.command) await data.edit();
+                        await data.setUsername(account).getData();
+                        data.setUsername();
+                    }
                 }
             } catch (e) {
                 if (e) data.setError(e);
             }
+            data.setData();
 		} catch (e) {
 			if (e && this.command) this.Output.onError(e);
 		}
@@ -312,7 +329,7 @@ class Tracker extends Parse {
 	static async request(data) {
         try {
             return await rp({
-                "uri": config.sources[data.source.key].url.user.replace("|", data.username),
+                "uri": config.sources.chesscom.url.user.replace("|", data.username),
                 "json": true,
                 "timeout": 4000
             });
