@@ -309,7 +309,7 @@ class Tracker extends Parse {
                 if (!dbuser) {
                     dbuser.left = true;
                     DBuser.setData(dbuser);
-                    return console.log([username, id, dbuser]);
+                    return this.error([username, id, dbuser]);
                 }
                 let data = DataStore.get(id) || new Track(this, dbuser);
                 data.setSource(lichess).setUsername(username).assign(parsedData).setSuccess();

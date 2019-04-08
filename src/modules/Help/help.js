@@ -2,6 +2,7 @@ const Parse = require("../../util/parse");
 const Embed = require("../../util/embed");
 const DataManager = require("../../util/datamanager");
 const Commands = require("../../util/commands");
+const { commands, aliases  } = Commands.message;
 const Message = DataManager.getFile("./src/commands/message.json");
 const Package = DataManager.getFile("./package.json");
 
@@ -12,27 +13,28 @@ class Help extends Parse {
 
 	async run(args) {
 		try {
-			if (!args[0]) return this.Output.sender(new Embed()
-				.setTitle(Package.name + " v" + Package.version + " by theLAZYmd#2353")
-				.addField("Help on using Discord", "Type `... discord`", false)
-				.addField("View all commands", `Type \`${this.server ? this.server.prefixes.generic : "!"}commands\``, false)
-				.addField("Get help on an individual command", `Type \`${this.server ? this.server.prefixes.generic : "!"}help commandName\` for any given command`, false)
-				.addField("View the bot's GitHub repo", "[theLAZYmd/LAZYbot](http://bit.ly/LAZYbot)", false)
-			);
-            if (args.length > 1 && !this.guild) throw "Cannot use this command outside of a guild.";
-            this.cmdInfo = Object.values(Message).flat().filter(c => Array.isArray(c.aliases)).find((c) => {
-                for (let alias of c.aliases) {
-                    if (alias.toLowerCase() === args[0].toLowerCase()) return true;
-                    if (this.server.prefixes[c.prefix] + alias.toLowerCase() === args[0].toLowerCase()) return true;
-                }
-                return false;
-            })
-			if (!this.cmdInfo) throw "Couldn't find that command. Please verify that that command exists.\nNote: some commands get removed for stability issues.";
-			let embed = ["title", "color", "thumbnail", "description", "fields", "footer"].reduce((embed, property) => {
-                embed[property] = this[property];
-                return embed;
-            }, {})
-			this.Output.sender(embed);
+            switch (args.length) {
+                case (0):
+                    return this.Output.sender(new Embed()
+                        .setTitle(Package.name + " v" + Package.version + " by theLAZYmd#2353")
+                        .addField("Help on using Discord", "Type `... discord`", false)
+                        .addField("View all commands", `Type \`${this.server ? this.server.prefixes.generic : "!"}commands\``, false)
+                        .addField("Get help on an individual command", `Type \`${this.server ? this.server.prefixes.generic : "!"}help commandName\` for any given command`, false)
+                        .addField("View the bot's GitHub repo", "[theLAZYmd/LAZYbot](http://bit.ly/LAZYbot)", false)
+                    );
+                case (1): 
+                    if (!this.guild) throw "Cannot use this command outside of a server.";
+                    this.cmdInfo = commands.get(args[0]);
+                    if (!this.cmdInfo) throw "Couldn't find that command. Please verify that that command exists.";
+                    if (this.cmdInfo.active === false) throw 'This command is no longer active. Commands get removed for maintenance/safety reasons periodically.\nPlease DM <@!338772451565502474> for more information.';
+                    let embed = ["title", "color", "thumbnail", "description", "fields", "footer"].reduce((embed, property) => {
+                        embed[property] = this[property];
+                        return embed;
+                    }, {})
+                    this.Output.sender(embed);
+                default:
+                    if (!this.guild) throw new Error("Cannot use this command outside of a server.");                    
+            }
 		} catch (e) {
 			if (e) this.Output.onError(e);
 		}

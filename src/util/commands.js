@@ -52,36 +52,56 @@ class Commands {
                 this.file = c.file || base.file;
                 this.method = c.method;
                 this.description = c.description;
+                this.active = c.active !== false ? true : false;
                 if (c.arguments) this.arguments = c.arguments;
                 if (c.requires) this.requires = c.requires;
-                if (c.active) this.active = c.active;
                 if (c.guild) this.guild = c.guild;
             }
 
         }
         return new cmdInfo(...arguments);
     }
-
+    
+    /**
+     * The map of all functions which are called for every message event
+     * @type {Map} 
+     */
     static get all () {
         if (Commands._all) return Commands._all;
         return Commands.getAll();
     }
-
+    
+    /**
+     * The map of all bot commmands triggered by their title, mapped to their info
+     * @type {Map} 
+     */
     static get bot () {
         if (Commands._bot) return Commands._bot;
         return Commands.getBot();
     }
     
+    /**
+     * The map of all DM commmands triggered by messages, mapped to their info
+     * @type {Map} 
+     */    
     static get dm () {
         if (Commands._dm) return Commands._dm;
         return Commands.getDM();
     }
     
+    /**
+     * The map of all commands triggered by messages for a server, mapped to their info
+     * @type {Map} 
+     */
     static get message () {
         if (Commands._message) return Commands._message;
         return Commands.getMessage();
     }
-    
+     
+    /**
+     * The map of all functions which are called for every reaction event, keyed by reaction emoji name
+     * @type {Map} 
+     */   
     static get reaction () {
         if (Commands._reaction) return Commands._reaction;
         return Commands.getReaction();
@@ -113,7 +133,6 @@ class Commands {
         let commands = new Map();
         let aliases = new Map();
         for (let c of Object.values(Message).flat()) {
-            if (c.active === false) continue;
             if (!Array.isArray(c.aliases)) continue;
             let info = Commands.parse(c);
             if (c.subcommands && c.subcommands.length > 0) {

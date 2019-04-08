@@ -31,7 +31,8 @@ class Message {
         let cmdInfo = commands.get(key.toLowerCase());
         if (!cmdInfo) cmdInfo = aliases.get(this.argsInfo.message.content.toLowerCase());
         if (!cmdInfo) return null;
-        if (cmdInfo.active === false) return null;
+        console.log(cmdInfo);
+        if (!cmdInfo.active) throw 'This command is no longer active. Commands get removed for maintenance/safety reasons periodically.\nPlease DM <@!338772451565502474> for more information.';
         if (this.argsInfo.prefixes.get(cmdInfo.prefix) !== this.argsInfo.prefix) return null;
         return cmdInfo;
 	}
@@ -100,34 +101,35 @@ class Message {
 
 module.exports = async (client, message) => {
     try {
-        //let s = Date.now();
         if (message.author.id === client.user.id) throw "";
         let argsInfo = new Parse(message);
-        let Command = new Message(argsInfo);
-        if (argsInfo.author.bot) {
-            let cmdInfo = await Command.bot(message.embeds[0]);
-            if (cmdInfo) return await Message.run(argsInfo, cmdInfo);
-        }
-        if (!/[a-z]/i.test(message.content)) throw "";
-        if (!argsInfo.message.guild) {
-            let cmdInfo = await Command.dm(argsInfo.command);
-            if (cmdInfo.guild) {
-                argsInfo.message._guild = await Message.setGuild(argsInfo, cmdInfo.guild); //now passed, just check if it needs a guild
-                if (!argsInfo.message._guild) throw "";
+        try {
+            let Command = new Message(argsInfo);
+            if (argsInfo.author.bot) {
+                let cmdInfo = await Command.bot(message.embeds[0]);
+                if (cmdInfo) return await Message.run(argsInfo, cmdInfo);
             }
-            return await Message.run(argsInfo, cmdInfo);
-        } else {
-            Command.all(argsInfo);
-            let cmdInfo = await Command.command(argsInfo.command);
-            if (cmdInfo) {
-                cmdInfo.command = true;
-                await Message.run(argsInfo, cmdInfo);
-            } else new MessageCount(message).log();
+            if (!/[a-z]/i.test(message.content)) throw "";
+            if (!argsInfo.message.guild) {
+                let cmdInfo = await Command.dm(argsInfo.command);
+                if (cmdInfo.guild) {
+                    argsInfo.message._guild = await Message.setGuild(argsInfo, cmdInfo.guild); //now passed, just check if it needs a guild
+                    if (!argsInfo.message._guild) throw "";
+                }
+                return await Message.run(argsInfo, cmdInfo);
+            } else {
+                Command.all(argsInfo);
+                let cmdInfo = await Command.command(argsInfo.command);
+                if (cmdInfo) {
+                    cmdInfo.command = true;
+                    await Message.run(argsInfo, cmdInfo);
+                } else new MessageCount(message).log();
+            }
+        } catch (e) {
+            if (e && typeof e !== "boolean") argsInfo.Output.onError(e);
         }
-        //let f = Date.now();
-        //beta(argsInfo, s, f);
     } catch (e) {
-        if (e && typeof e !== "boolean") Logger.error(e);
+        if (e) Logger.error(e);
     }
 }
 
