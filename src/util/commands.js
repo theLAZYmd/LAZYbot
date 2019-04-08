@@ -53,6 +53,7 @@ class Commands {
                 this.method = c.method;
                 this.description = c.description;
                 this.active = c.active !== false ? true : false;
+                this.aliases = c.aliases;
                 if (c.arguments) this.arguments = c.arguments;
                 if (c.requires) this.requires = c.requires;
                 if (c.guild) this.guild = c.guild;

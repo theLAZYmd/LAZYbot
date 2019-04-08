@@ -282,7 +282,6 @@ class Tracker extends Parse {
      */
     async updateCycle() {
         let dbuser = this.nextUpdate();
-        Tracker.lastDBuser = dbuser;
         if (!dbuser) return this.error("All users are up to date.");
         this.update(dbuser);
     }

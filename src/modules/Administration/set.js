@@ -1,6 +1,6 @@
 const Parse = require("../../util/parse.js");
 const DataManager = require("../../util/datamanager.js");
-const packagestuff = DataManager.getFile("./package.json");
+const Package = DataManager.getFile("./package.json");
 const config = DataManager.getFile("./src/config.json");
 
 class Set extends Parse {
@@ -33,7 +33,7 @@ class Set extends Parse {
     }
 
     upversion(argument) {
-        let version = packagestuff.version.split(".", 3);
+        let version = Package.version.split(".", 3);
         if (!argument) version[2] = (Number(version[2]) + 1).toString();
         else if (argument.toLowerCase().includes("big")) version = [version[0], (Number(version[1]) + 1).toString(), "0"];
         else if (argument.toLowerCase().includes("huge")) version = [(Number(version[0]) + 1).toString(), "0", "0"];
@@ -41,7 +41,7 @@ class Set extends Parse {
     }
 
     downversion(argument) {
-        let version = packagestuff.version.split(".", 3);
+        let version = Package.version.split(".", 3);
         if (!argument) version[2] = (Number(version[2]) - 1).toString();
         else if (argument.toLowerCase().includes("big")) version[1] = (Number(version[1]) - 1).toString();
         else if (argument.toLowerCase().includes("huge")) version[0] = (Number(version[0]) - 1).toString();
@@ -50,11 +50,11 @@ class Set extends Parse {
 
     version(version) {
         version = version.match(/[0-9]+.[0-9]+.[0-9]/);
-        if (!version) return this.Output.generic("You are using LAZYbot version v." + packagestuff.version);
-        packagestuff.version = version[0];
-        DataManager.setFile(packagestuff, "./package.json");
-        this.guild.me.setNickname(`LAZYbot${this.client.user.id === config.ids.betabot ? "beta" : ""} v.` + version);
-        this.Output.generic(`${packagestuff.name} version has been ${this.command === "upversion" ? "upped" : "modified"} to **v.${version}**!`);
+        if (!version) return this.Output.generic(`You are using ${Package.name.replace('lazy', 'LAZY')} version v.${Package.version}`);
+        Package.version = version[0];
+        DataManager.setFile(Package, "./package.json");
+        this.guild.me.setNickname(`${Package.name.replace('lazy', 'LAZY')}${this.client.user.id === config.ids.betabot ? "beta" : ""} v.` + version);
+        this.Output.generic(`${Package.name.replace('lazy', 'LAZY')} version has been ${this.command === "upversion" ? "upped" : "modified"} to **v.${version}**!`);
     }
 
 

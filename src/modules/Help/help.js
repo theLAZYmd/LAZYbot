@@ -5,6 +5,7 @@ const Commands = require("../../util/commands");
 const { commands, aliases  } = Commands.message;
 const Message = DataManager.getFile("./src/commands/message.json");
 const Package = DataManager.getFile("./package.json");
+const config = require('../../config.json');
 
 class Help extends Parse {
 	constructor(message) {
@@ -13,18 +14,20 @@ class Help extends Parse {
 
 	async run(args) {
 		try {
+            let prefix = this.server ? this.server.prefixes.generic : "!";
             switch (args.length) {
                 case (0):
+                    let name = `${Package.name.replace('lazy', 'LAZY')}${this.client.user.id === config.ids.betabot ? "beta" : ""} v.${Package.version}`;
                     return this.Output.sender(new Embed()
-                        .setTitle(Package.name + " v" + Package.version + " by theLAZYmd#2353")
+                        .setTitle(name + " by " + Package.author)
                         .addField("Help on using Discord", "Type `... discord`", false)
-                        .addField("View all commands", `Type \`${this.server ? this.server.prefixes.generic : "!"}commands\``, false)
-                        .addField("Get help on an individual command", `Type \`${this.server ? this.server.prefixes.generic : "!"}help commandName\` for any given command`, false)
+                        .addField("View all commands", `Type \`${prefix}commands\``, false)
+                        .addField("Get help on an individual command", `Type \`${prefix}help commandName\` for any given command`, false)
                         .addField("View the bot's GitHub repo", "[theLAZYmd/LAZYbot](http://bit.ly/LAZYbot)", false)
                     );
                 case (1): 
                     if (!this.guild) throw "Cannot use this command outside of a server.";
-                    this.cmdInfo = commands.get(args[0]);
+                    this.cmdInfo = commands.get(args[0].slice(prefix.length));
                     if (!this.cmdInfo) throw "Couldn't find that command. Please verify that that command exists.";
                     if (this.cmdInfo.active === false) throw 'This command is no longer active. Commands get removed for maintenance/safety reasons periodically.\nPlease DM <@!338772451565502474> for more information.';
                     let embed = ["title", "color", "thumbnail", "description", "fields", "footer"].reduce((embed, property) => {
@@ -53,12 +56,6 @@ class Help extends Parse {
 			.replace(/\${([a-z]+)}/gi, value => this.server.prefixes[value.match(/[a-z]+/i)])
 		//.replace(/\${generic}/gi, this.server.prefixes.generic)
 		//.replace(/\${nadeko}/gi, this.server.prefixes.nadeko);
-	}
-
-	get prefix() {
-		if (this._prefix) return this._prefix;
-		this._prefix = this.server.prefixes[this.cmdInfo.prefix];
-		return this._prefix;
 	}
 
 	get fields() {
