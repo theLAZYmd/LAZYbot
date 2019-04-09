@@ -289,9 +289,9 @@ class Tracker extends Parse {
 	 * Updates every single member of the database from lichess
 	 * @public
 	 */
-	async updateAll(f = false) {
+	async updateAll() {
 		try {
-			if (!/^(?:-f|--force)$/.test(this.argument) && config.updateAll && Date.now() - config.updateAll < 3600000) throw 'Updated all Lichess data within the last hour. Use `-f | --force` flag to force update';
+			if (!/^(?:-f|--force)$/.test(this.argument) && config.lastUpdate && Date.now() - config.lastUpdate < 3600000) throw 'Already updated all Lichess data within the last hour. Use `-f | --force` flag to update all anyway';
 			const lichess = Object.values(config.sources).find(s => s.key === 'lichess');
 			const accounts = Commands.accounts.accounts;
 			const ids = Array.from(accounts.keys());
