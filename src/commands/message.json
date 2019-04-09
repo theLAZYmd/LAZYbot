@@ -636,8 +636,7 @@
             "module": "Chess",
             "file": "tracker",
             "method": "run",
-            "prefix": "generic",
-            "active": false
+            "prefix": "generic"
         },
         {
             "aliases": [
@@ -651,8 +650,7 @@
             "module": "Chess",
             "file": "tracker",
             "method": "run",
-            "prefix": "generic",
-            "active": false
+            "prefix": "generic"
         },
         {
             "aliases": [
@@ -666,8 +664,7 @@
             "module": "Chess",
             "file": "tracker",
             "method": "run",
-            "prefix": "generic",
-            "active": false
+            "prefix": "generic"
         },
         {
             "aliases": [
@@ -691,8 +688,7 @@
             "module": "Chess",
             "file": "tracker",
             "method": "update",
-            "prefix": "generic",
-            "active": false
+            "prefix": "generic"
         },
         {
             "aliases": [
@@ -706,8 +702,7 @@
             "prefix": "generic",
             "requires": {
                 "user": "owner"
-            },
-            "active": false
+            }
         },
         {
             "aliases": [
@@ -1800,7 +1795,6 @@
                 "tq"
             ],
             "description": "Ends a trivia game on Bouncer.",
-            "active": false,
             "usage": [
                 "tq"
             ],

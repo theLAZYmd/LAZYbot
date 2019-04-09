@@ -166,7 +166,6 @@ class Track {
         this.dbuser.lastUpdate = Date.now();
         DBuser.setData(this.dbuser);
         if (/^(?:lichess|chess\.?com|update)$/.test(this._command)) this.output();
-        else if (!this.command) this.log();
         return this;
     }
 
@@ -235,15 +234,15 @@ class Tracker extends Parse {
             if (dbuser[source.key] && dbuser[source.key][username]) throw "Already linked account.";
             let data = new Track(this, dbuser);
             await data.setSource(source).setUsername(username).getData();
-            data.setData();
+            data.setData().log();
         } catch (e) {
             if (e) this.Output.onError(e);
         }
     }
 
     /**
-     * 
-     * @param {*} user 
+     * Updates a single user on all their linked accounts
+     * @param {User} user 
      */
     async update(dbuser = this.dbuser, user = this.user) {
         try {
@@ -270,7 +269,7 @@ class Tracker extends Parse {
             } catch (e) {
                 if (e) data.setError(e);
             }
-            data.setData();
+            data.setData().log();
         } catch (e) {
             if (e && this.command) this.Output.onError(e);
         }

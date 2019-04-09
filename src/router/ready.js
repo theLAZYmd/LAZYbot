@@ -125,6 +125,11 @@ class Ready {
     async intervals() {
         for (let [_time, cmds] of Commands.interval) {
             let time = Number(_time);
+            for (let cmdInfo of cmds) {
+                if (cmdInfo.active === false) continue;
+                if (cmdInfo.once !== true) continue;
+                this.client.emit("interval", cmdInfo)
+            }
             setInterval(() => {
                 for (let cmdInfo of cmds) {
                     if (cmdInfo.active === false) continue;
