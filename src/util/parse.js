@@ -1,4 +1,5 @@
 const config = require('../config.json');
+const settings = require('../settings');
 const DBuser = require('./dbuser.js');
 const DataManager = require('./datamanager.js');
 const Permissions = require('./permissions.js');

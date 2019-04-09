@@ -1,4 +1,4 @@
-const TrackerConstructor = require('../modules/Tracker/main');
+const TrackerConstructor = require('../modules/Chess/tracker');
 const config = require('../config.json');
 const Package = require('../../package.json');
 

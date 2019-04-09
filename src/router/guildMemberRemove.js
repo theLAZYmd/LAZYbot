@@ -1,5 +1,5 @@
 const Logger = require('../util/logger');
-const TrackerConstructor = require('../modules/Tracker/main');
+const TrackerConstructor = require('../modules/Chess/tracker');
 const DBuser = require('../util/dbuser');
 const DataManager = require('../util/datamanager');
 const Parse = require('../util/parse');
