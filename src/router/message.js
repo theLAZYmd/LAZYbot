@@ -2,7 +2,6 @@ const Parse = require('../util/parse');
 const Embed = require('../util/embed');
 const Logger = require('../util/logger');
 const settings = require('../settings');
-const commands = require('../commands.json');
 
 class Message extends Parse {
 
@@ -34,26 +33,8 @@ class Message extends Parse {
 	async fen() {
 		try {
 			if (this.args.length === 0) throw 'Wrong amount of parameters.';
-			const FEN = require('../modules/')
-			let fen = this.splitMsg.slice(1).join(' ');
-			let toMove = '';
-			let flip = 0;
-			if (fen.indexOf(' b ') !== -1) {
-				toMove = 'Black to move.';
-				flip = 1;
-			} else {
-				toMove = 'White to move.';
-			}
-			let imageUrl = FEN_API_URL +
-				'?fen=' + encodeURIComponent(fen) +
-				'&board=' + settings.fenBoard +
-				'&piece=' + settings.fenBoardPieces +
-				'&coordinates=' + settings.fenBoardCoords +
-				'&size=' + settings.fenBoardSize +
-				'&flip=' + flip +
-				'&ext=.png'; //make discord recognise an image
-			let lichessUrl = LICHESS_ANALYSIS_FEN_URL + encodeURIComponent(fen);
-			this.Output.sender(getFenEmbed(imageUrl, toMove, lichessUrl));
+			const FEN = require('../modules/Chess/fen');
+			return FEN.run();
 		} catch (e) {
 			if (e) this.Output.onError(e);
 		}
@@ -367,7 +348,7 @@ module.exports = async (client, message) => {
 		let method = Object.getOwnPropertyNames(Message.prototype).find(f.toLowerCase() === Instance.command.toLowerCase() && typeof this[f] === 'function');
 		if (!method) return;
 		Instance[method]();			
-		if (this.botChannel) msg.delete(settings.deleteDelay);
+		if (this.botChannel) this.message.delete(settings.deleteDelay);
 	} catch (e) {
 		if (e) Logger.error(e);
 	}
