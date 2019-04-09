@@ -243,15 +243,7 @@ class Router {
 		for (let [type, value] of Object.entries(cmdInfo.requires)) { //[channel: "spam"]
 			try {
 				if (!Array.isArray(value)) value = [value]; //if it's not array (i.e. multiple possible satisfactory conditions)
-				let kill = true;
-				for (let passable of value) {
-					try {
-						kill = !(await Permissions[type](passable, argsInfo));
-					} catch (e) {
-						Logger.error(e); //THERE SHOULD NOT BE ERRORS HERE, SO IF WE'RE RECEIVING ONE, DEAL WITH IT
-					}
-				}
-				if (kill) throw cmdInfo.method;
+				if (!value.every(passable => await Permissions[type](passable, argsInfo))) throw cmdInfo.method;
 			} catch (e) { //if it fails any of requirements, throw
 				throw Permissions.output(type, argsInfo) ? Permissions.output(type, argsInfo) + "\nUse `" + argsInfo.server.prefixes.prefix[cmdInfo.prefix] + "help` followed by command name to see command info." : ""; //if no Permissions, kill it
 			}

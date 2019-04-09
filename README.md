@@ -1,4 +1,4 @@
-# LAZYbot
+#LAZYbot
 
 Discord bot operating in [the House server](http://dscrd.me/housechessvariants), servicing over 1,300 members [March 2019].
 Written in Node.JS.

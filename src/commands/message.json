@@ -1568,12 +1568,7 @@
             "module": "Help",
             "file": "commands",
             "method": "about",
-            "prefix": "generic",
-            "requires": {
-                "args": {
-                    "length": 0
-                }
-            }
+            "prefix": "generic"
         },
         {
             "aliases": [

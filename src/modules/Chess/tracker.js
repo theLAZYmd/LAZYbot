@@ -282,7 +282,6 @@ class Tracker extends Parse {
      */
     async updateCycle() {
         let dbuser = this.nextUpdate();
-        Tracker.lastDBuser = dbuser;
         if (!dbuser) return this.error("All users are up to date.");
         this.update(dbuser);
     }
@@ -309,7 +308,7 @@ class Tracker extends Parse {
                 if (!dbuser) {
                     dbuser.left = true;
                     DBuser.setData(dbuser);
-                    return console.log([username, id, dbuser]);
+                    return this.error([username, id, dbuser]);
                 }
                 let data = DataStore.get(id) || new Track(this, dbuser);
                 data.setSource(lichess).setUsername(username).assign(parsedData).setSuccess();
