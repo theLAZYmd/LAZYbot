@@ -29,14 +29,14 @@ class Output extends Main {
 			if (!f) return;
 			let [id, mailInfo] = f;
             let modmail = await this.mchannel.fetchMessage(id).catch(() => {});
-            let embed = new Embed(modmail.embeds[0])
+            let embed = new Embed(this.modmail.embeds[0])
                 .setDescription("User " + newMember.user + " has **" + Math.max(0, (newMember.roles.size - 1)) + "** roles.\n" + [
                     ["Joined Discord", Date.getISOtime(newMember.user.createdTimestamp).slice(4, 15)],
                     ["Joined " + this.guild.name, Date.getISOtime(newMember.joinedTimestamp).slice(4, 15)]
                 ].toPairs("bold"));
             this.Output.editor(embed, modmail);
         } catch (e) {
-            if (e) this.Output.onError(e);
+            if (e) this.Output.onError(e, this.mchannel);
         }
     }
 
