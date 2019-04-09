@@ -1,5 +1,5 @@
 # DeepBlueBot
-Chess Ratings Tracker bot, basic javascript written by EikaMikiku. Modified by LAZY.
+Chess Ratings Tracker bot, basic javascript written by LAZY, inheriting an old EikaMikiku project.
 
 This bot is active in the [Discord Chess Lounge](https://discord.gg/5Eg47sR), under instructions from IsaVulpes#5970 and maintained by theLAZYmd#2353.
 
