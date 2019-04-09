@@ -243,13 +243,21 @@
                 "ping"
             ],
             "description": "Returns the bot's ping in milliseconds.\n**Note:** this is not your ping! This is the time taken for a client-emitted event to reach the bot, not how long it takes you to send a message.",
-            "usage": [
-                "ping"
-            ],
+            "usage": [],
             "module": "Utility",
             "file": "utility",
             "method": "ping",
-            "arguments": [],
+            "prefix": "generic"
+        },
+        {
+            "aliases": [
+                "gdpr",
+                "dbuser"
+            ],
+            "description": "Returns the data stored on a user",
+            "module": "Utility",
+            "file": "utility",
+            "method": "dbuser",
             "prefix": "generic"
         }
     ]

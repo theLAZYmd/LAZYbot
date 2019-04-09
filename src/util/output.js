@@ -12,6 +12,7 @@ class Output extends Parse {
 		try {
 			if (!embed) throw "this.Output.sender(): Embed object is undefined.";
             if (!embed.color) embed.color = config.colors.generic;
+            if (channel.channel || channel.constructor.name === "Message") channel = channel.channel;
             let content = embed.content;
             embed = Embed.receiver(embed);
 			if (typeof embed._apiTransform === "function") embed = embed._apiTransform();
@@ -73,14 +74,13 @@ class Output extends Parse {
 		try {
 			let string = (typeof json === "object" ? JSON.stringify((typeof json._apiTransform === "function" ? json._apiTransform() : json), null, 2) : json).replace(/`/g, "\\`");
 			let index = Math.ceil(string.length / 2000);
-			let keylength = Math.floor(string.length / index);
+            let keylength = Math.floor(string.length / index);
 			for (let i = 0; i < index; i++) {
-				this.log(i === index.length - 1);
 				this.sender(new Embed()
 					.setColor(config.colors.data)
 					.setDescription((string.slice(i * keylength, (i === index.length - 1 ? string.length + 2 : i * keylength + keylength)) + " ".repeat(48) + "\u200b").format(type))
 					.setFooter((i + 1) + " / " + index)
-				, channel);
+                , channel);
 			}
 		} catch (e) {
 			if (e) this.onError(e);
@@ -89,6 +89,7 @@ class Output extends Parse {
 
 	async onError(error, channel = this.channel) {
 		try {
+            console.log(error);
 			if (!error) throw "";
 			this.error(error);
 			let description = error;
@@ -186,18 +187,35 @@ class Output extends Parse {
 			if (e) this.Output.onError(e);
 			throw "";
 		}
-	}
+    }
+    
+    /**
+     * @typedef {object} chooseOptions
+     * @property {object} author - The user allowed to choose an option
+     * @property {object} channel - The channel this message should be posted in
+     * @property {function} filter - The list of options that should be displayed in the choose message
+     * @property {number} time - The time in milliseconds allowed for the user to pick an option in ms. Defaults to 18000 (18 seconds).
+     * @property {string} title - The embed title of the choose message that should be displayed. Can be anything.
+     * @property {string} option - The kind of thing that is chosen. Will be displayed as 'Please choose a [...]'
+     */
 
+    /**
+     * Returns a user-defined option
+     * @param {chooseOptions} data 
+     * @property {object} author - The user allowed to choose an option
+     * @property {object} channel - The channel this message should be posted in
+     * @property {function} filter - The list of options that should be displayed in the choose message
+     * @property {number} time - The time in milliseconds allowed for the user to pick an option in ms. Defaults to 18000 (18 seconds).
+     * @property {string} title - The embed title of the choose message that should be displayed. Can be anything.
+     * @property {string} option - The kind of thing that is chosen. Will be displayed as 'Please choose a [...]'
+     * @returns {number}
+     */
 	async choose(data = {}) {
 		try {
 			data = Object.assign({
 				"author": this.author,
 				"channel": this.channel,
-				"filter": () => {
-					return true
-				},
 				"options": [],
-				"role": "",
 				"time": 18000,
 				"title": "",
 				"type": "option"
@@ -263,7 +281,8 @@ class Output extends Parse {
                 throw e;
             }
 		} catch (e) {
-			if (e) this.onError(e);
+            if (e) this.onError(e);
+            else throw e;
 		}
 	}
 

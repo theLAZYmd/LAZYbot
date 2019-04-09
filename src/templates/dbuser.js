@@ -1,3 +1,16 @@
+/**
+ * @typedef {Object} messageObject
+ * @property {number} count
+ * @property {string} last
+ * @property {number} lastSeen
+ */
+
+/**
+ * @typedef {Object} DBuser
+ * @property {string} id
+ * @property {string} username
+ * @property {messageObject} messages
+ */
 class DBuser {
 
     constructor(user) {

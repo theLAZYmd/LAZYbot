@@ -12,12 +12,20 @@ class DBuser {
         return true;
     }
 
+    /**
+     * 
+     * @param {DBuserResolvable} searchstring - looks through the database and searches for a match based on Aliases, Username, ID, or index
+     * @param {Boolean} exactmode 
+     */
     static get(searchstring, exactmode) {
-        let dbuser = "";
-        if (!dbuser) dbuser = DBuser.byAliases(searchstring, exactmode);
-        if (!dbuser) dbuser = DBuser.byUsername(searchstring);
-        if (!dbuser) dbuser = DBuser.byID(searchstring);
-        if (!dbuser) dbuser = DBuser.byIndex(searchstring);
+        let dbuser = null;
+        if (typeof searchstring === "string") {
+            if (!dbuser) dbuser = DBuser.byAliases(searchstring, exactmode);
+            if (!dbuser) dbuser = DBuser.byUsername(searchstring);
+            if (!dbuser) dbuser = DBuser.byID(searchstring);
+        } else if (typeof searchstring === "number") {
+            if (!dbuser) dbuser = DBuser.byIndex(searchstring);
+        }
         return dbuser;
     }
 
@@ -36,17 +44,19 @@ class DBuser {
         return DataManager.getData()
             .map(dbuser => dbuser.id)
             .indexOf(dbuser.id);
-    }
+    }    
 
-    static byUsername(username) {
-        return DataManager.getData().find(dbuser => username === dbuser.username);
-    }
-
-    static byID(id) {
-        return DataManager.getData().find(dbuser => id === dbuser.id);
-    }
+	static byID(snowflake) {
+		let id = snowflake.match(/[0-9]{18}/);
+		return id ? DataManager.getData().find(user => id[0] === user.id) : null;
+	}
+    static byUsername(string) {
+		let tag = string.match(/[\S \t^@#:`]{2,32}#\d{4}/);
+		return tag ? DataManager.getData().find(user => tag[0].toLowerCase() === user.tag.toLowerCase()) : null;
+	}
 
     static byIndex(index) {
+        if (index < 0) return null;
         let tally = DataManager.getData();
         return typeof index === "number" && tally[index] ? tally[index] : null;
     }

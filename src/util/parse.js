@@ -6,26 +6,26 @@ const Logger = require("./logger.js");
 
 class Parse {
 
-    constructor(message) { //everything extends to here
-        this.message = message;
+	constructor(message) { //everything extends to here
+		this.message = message;
 	}
 
 	//DATA
 
 	get server() {
-        if (!this.guild) return null;
-        if (this._server) return this._server;
-        return this._server = this.getServer();
-    }
-    
-    set server(server) {
-        DataManager.setServer(server);
-        this._server = server;
-    }
+		if (!this.guild) return null;
+		if (this._server) return this._server;
+		return this._server = this.getServer();
+	}
+	
+	set server(server) {
+		DataManager.setServer(server);
+		this._server = server;
+	}
 
-    getServer() {
+	getServer() {
 		return DataManager.getServer(this.guild.id);
-    }
+	}
 
 	get reactionmessages() {
 		if (!this._reactionmessages) if (this.guild) this._reactionmessages = DataManager.getServer(this.guild.id, "./src/data/reactionmessages.json");
@@ -79,17 +79,17 @@ class Parse {
 			return this._Check = new CheckConstructor(this.message);
 		}
 		return this._Check;
-    }
+	}
 
-    get error() {
-        if (!this._log) return this._log = Logger.error;
-        return this._log;
-    }
-    
-    get log() {
-        if (!this._log) return this._log = Logger.log;
-        return this._log;
-    }
+	get error() {
+		if (!this._log) return this._log = Logger.error;
+		return this._log;
+	}
+	
+	get log() {
+		if (!this._log) return this._log = Logger.log;
+		return this._log;
+	}
 
 	//argsInfo
 
@@ -107,20 +107,20 @@ class Parse {
 
 	set guild(value) {
 		this._guild = value;
-    }
+	}
 
-    //Message properties
-    
-    get content() {
-        if (this._content) return this._content;
-        return this._content = !this.message || !this.message.content ? null : this.message.content
-            .replace("’", "'")
-            .replace("…", "...")
-            .replace("—", "--")
-            .replace("“", "\"")
-            .replace("”", "\"")
-            .replace(/[\u200B-\u200D\uFEFF]/g, '');
-    }
+	//Message properties
+	
+	get content() {
+		if (this._content) return this._content;
+		return this._content = !this.message || !this.message.content ? null : this.message.content
+			.replace("’", "'")
+			.replace("…", "...")
+			.replace("—", "--")
+			.replace("“", "\"")
+			.replace("”", "\"")
+			.replace(/[\u200B-\u200D\uFEFF]/g, '');
+	}
 
 	get author() {
 		if (this._author) return this._author;
@@ -162,29 +162,34 @@ class Parse {
 
 	get prefix() {
 		if (this._prefix) return this._prefix;
-		for (let prefix of Array.from(this.prefixes.values()))
-			if (this.content.startsWith(prefix))
-				return this._prefix = prefix;
-		return "";
-    }
-    
-    get prefixes() {
-        if (this._prefixes) return this._prefixes;
-        let prefixes = this.server ? this.server.prefixes : {
-            "generic": "!",
-            "nadeko": "."
-        }
-        return this._prefixes = new Map(Object.entries(prefixes));
-    }
+		return this._prefix = Array.from(this.prefixes.values()).find(p => this.content.startsWith(p)) || "";
+	}
+	
+	get prefixes() {
+		if (this._prefixes) return this._prefixes;
+		let prefixes = this.server ? this.server.prefixes : {
+			"generic": "!",
+			"nadeko": "."
+		}
+		return this._prefixes = new Map(Object.entries(prefixes));
+	}
+
+	get generic() {
+		return this.prefixes.get('generic');
+	}
+
+	get nadeko() {
+		return this.prefixes.get('nadeko');
+	}
 
 	get words() {
-        if (this._words) return this._words;
-        if (!this.message || !this.content) return [];
+		if (this._words) return this._words;
+		if (!this.message || !this.content) return [];
 		return this._words = this.content.slice(this.prefix.length).match(/[^\s]+/gi) || [];
 	}
 
 	get command() {
-        if (this._command) return this._command;
+		if (this._command) return this._command;
 		return this._command = this.words.length > 0 ? this.words[0] : "";
 	}
 
@@ -201,7 +206,7 @@ class Parse {
 	get embed() {
 		if (this._embed) return this._embed;
 		return this.message && this.message.embeds ? this.message.embeds[0] : null;
-    }
+	}
 
 	static ratingData(dbuser, source, username) {
 		try {

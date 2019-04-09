@@ -114,7 +114,7 @@ class Ready {
 		let version = Package.version.match(/[0-9]+.[0-9]+.[0-9]/);
 		if (!version) throw Logger.log("Invalid versioning in package.json, please review.");
 		for (let guild of Array.from(this.client.guilds.values())) {
-			let name = Package.name.replace('lazy', 'LAZY') + (this.client.user.id === config.ids.betabot ? "beta" : "") + " v." + version;
+			let name = `${Package.name.replace('lazy', 'LAZY')}${this.client.user.id === config.ids.betabot ? "beta" : ""} v.${version}`;
 			if (guild.me.nickname !== name) {
 				await guild.me.setNickname(name);
 				Logger.log(`Set bot nickname to ${name} in guild ${guild.name} in ${Date.now() - this.client.readyTimestamp}ms.`);
@@ -125,8 +125,14 @@ class Ready {
     async intervals() {
         for (let [_time, cmds] of Commands.interval) {
             let time = Number(_time);
+            for (let cmdInfo of cmds) {
+                if (cmdInfo.active === false) continue;
+                if (cmdInfo.once !== true) continue;
+                this.client.emit("interval", cmdInfo)
+            }
             setInterval(() => {
                 for (let cmdInfo of cmds) {
+                    if (cmdInfo.active === false) continue;
                     this.client.emit("interval", cmdInfo)
                 }
             }, time)

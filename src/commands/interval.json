@@ -1,8 +1,9 @@
 {
     "300000": [{
         "module": "Chess",
-        "file": "tracker/tracker",
-        "method": "updateCycle"
+        "file": "tracker",
+        "method": "updateCycle",
+        "once": true
     }],
     "3600000": [{
         "module": "Administration",
@@ -21,5 +22,11 @@
         "file": "backup",
         "method": "backup",
         "args": ["3"]
+    }],
+    "86400000": [{
+        "module": "Chess",
+        "file": "tracker",
+        "method": "updateAll",
+        "once": true
     }]
 }
