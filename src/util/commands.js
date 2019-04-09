@@ -1,6 +1,7 @@
 const DataManager = require('./datamanager');
 const Logger = require('./logger');
 const Message = DataManager.getFile('./src/commands/message.json');
+const Reaction = DataManager.getFile('./src/commands/reaction.json');
 const Interval = DataManager.getFile('./src/commands/interval.json');
 const fs = require('fs');
 const config = require('../config.json');

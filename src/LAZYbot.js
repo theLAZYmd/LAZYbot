@@ -84,4 +84,4 @@ fs.readdir('./src/' + router, (err, _files) => {
 	}
 });
 
-client.login(settings.token);
+client.login(require('./token').token);

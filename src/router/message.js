@@ -2,12 +2,14 @@ const Parse = require('../util/parse');
 const Embed = require('../util/embed');
 const Logger = require('../util/logger');
 const settings = require('../settings');
+const Package = require('../../package.json');
+const config = require('../config.json');
 
 class Message extends Parse {
 
-	constructor(message, splitMsg) {
+	constructor(message) {
 		super(message);
-		this.splitMsg = splitMsg;
+		this.splitMsg = this.words;
 	}
 
 	/*
@@ -33,7 +35,8 @@ class Message extends Parse {
 		try {
 			if (this.args.length === 0) throw 'Wrong amount of parameters.';
 			const FEN = require('../modules/Chess/fen');
-			return FEN.run();
+			let Instance = new FEN(this.message);
+			return Instance.run();
 		} catch (e) {
 			if (e) this.Output.onError(e);
 		}
@@ -43,40 +46,47 @@ class Message extends Parse {
 	 * Displays an embed with a help message
 	 */
 	async dbhelp() {
-		if (this.args.length !== 1) throw 'Wrong amount of parameters';
-		let prefix = this.prefix;
-		return new Embed()
-			.setColor(settings.embedColor)
-			.addField(`${prefix}Lichess [Lichess Username]`,
-				'Links you to a specific username on Lichess.', false)
-			.addField(`${prefix}Chesscom [Chess.com Username]`,
-				'Links you to a specific username on Chess.com.', false)
-			.addField(`${prefix}Remove`,
-				'Removes you from the rating tracker.', false)
-			.addField(`${prefix}Update`,
-				'Queue prioritised update of your ratings.', false)
-			.addField(`[${prefix}List | ${prefix}Active] [page]`,
-				'Show current leaderboard. Page is optional.', false)
-			.addField(`[${prefix}List | ${prefix}Active] [bullet | blitz | rapid | classical]`,
-				'Show current leaderboard. Time control is optional.', false)
-			.addField(`[${prefix}List | ${prefix}Active] [bullet | blitz | rapid | classical] [page]`,
-				'Show current leaderboard. Time control is optional. Page is optional.', false)
-			.addField(`${prefix}MyRank`,
-				'Displays your current rank.', false)
-			.addField(`${prefix}Arena`,
-				'Toggles arena role.', false)
-			.addField(`${prefix}League`,
-				'Toggles league role.', false)
-			.addField(`${prefix}Study`,
-				'Toggles study role.', false)
-			.addField(`${prefix}Fen [FEN]`,
-				'Will show the board.', false)
-			.addField(`${prefix}Lichess [Lichess username] [@Discord User Mention]`,
-				'Links discord user to a specific username on Lichess.', false)
-			.addField(`${prefix}Chesscom [Chess.com username] [@Discord User Mention]`,
-				'Links discord user to a specific username on Chess.com.', false)
-			.addField(`${prefix}Remove [Chesscom | Lichess] [Chess.com or Lichess Username]`,
-				'Removes a username on respective platform from the rating tracker.', false);
+		try {
+			if (this.args.length !== 0) throw 'Wrong amount of parameters';
+			let prefix = this.prefix;
+			let name = `${Package.name.replace('lazy', 'LAZY')}${this.client.user.id === config.ids.betabot ? "beta" : ""} v.${Package.version}`;
+			return this.Output.sender(new Embed()
+				.setTitle(`${name} by ${Package.author}`)
+				.setColor(settings.embedColor)
+				.addField(`${prefix}Lichess [Lichess Username]`,
+					'Links you to a specific username on Lichess.', false)
+				.addField(`${prefix}Chesscom [Chess.com Username]`,
+					'Links you to a specific username on Chess.com.', false)
+				.addField(`${prefix}Remove`,
+					'Removes you from the rating tracker.', false)
+				.addField(`${prefix}Update`,
+					'Queue prioritised update of your ratings.', false)
+				.addField(`[${prefix}List | ${prefix}Active] [page]`,
+					'Show current leaderboard. Page is optional.', false)
+				.addField(`[${prefix}List | ${prefix}Active] [bullet | blitz | rapid | classical]`,
+					'Show current leaderboard. Time control is optional.', false)
+				.addField(`[${prefix}List | ${prefix}Active] [bullet | blitz | rapid | classical] [page]`,
+					'Show current leaderboard. Time control is optional. Page is optional.', false)
+				.addField(`${prefix}MyRank`,
+					'Displays your current rank.', false)
+				.addField(`${prefix}Arena`,
+					'Toggles arena role.', false)
+				.addField(`${prefix}League`,
+					'Toggles league role.', false)
+				.addField(`${prefix}Study`,
+					'Toggles study role.', false)
+				.addField(`${prefix}Fen [FEN]`,
+					'Will show the board.', false)
+				.addField(`${prefix}Lichess [Lichess username] [@Discord User Mention]`,
+					'Links discord user to a specific username on Lichess.', false)
+				.addField(`${prefix}Chesscom [Chess.com username] [@Discord User Mention]`,
+					'Links discord user to a specific username on Chess.com.', false)
+				.addField(`${prefix}Remove [Chesscom | Lichess] [Chess.com or Lichess Username]`,
+					'Removes a username on respective platform from the rating tracker.', false)
+			)
+		} catch (e) {
+			if (e) this.Output.onError(e);
+		}
 	}
 
 	/**
@@ -91,12 +101,13 @@ class Message extends Parse {
 			if (memberRole) {
 				//Remove the role
 				this.member.removeRole(memberRole);
-				this.channel.send('Arena role removed.');
+				this.Output.generic('Arena role removed.');
 			} else {
 				//Add the role
-				let role = this.guild.roles.find(item => item.name === settings.arenaRoleName);
+				let role = this.guild.roles.find(item => item.name === roleName);
+				if (!role) throw ('Couldn\'t find role: **' + roleName + "**");
 				this.member.addRole(role);
-				this.channel.send('Arena role added.');
+				this.Output.generic('Arena role added.');
 			}
 		} catch (e) {
 			if (e) this.Output.onError(e);
@@ -342,13 +353,13 @@ class Message extends Parse {
 module.exports = async (client, message) => {
 	try {
 		if (message.author.bot) throw '';
-		let Instance = new Message(message, this.words);
-		if (!this.prefix) return;
-		let method = Object.getOwnPropertyNames(Message.prototype).find(f.toLowerCase() === Instance.command.toLowerCase() && typeof this[f] === 'function');
+		let argsInfo = new Message(message);
+		if (!argsInfo.prefix) return;
+		let method = Object.getOwnPropertyNames(Message.prototype).find(f => f.toLowerCase() === argsInfo.command.toLowerCase() && typeof argsInfo[f] === 'function');
 		if (!method) return;
-		Logger.log(`Command: ${this.message}`);
-		Instance[method]();			
-		if (this.botChannel) this.message.delete(settings.deleteDelay);
+		Logger.log(`Command: ${argsInfo.message}`);
+		argsInfo[method]();			
+		if (argsInfo.botChannel) argsInfo.message.delete(settings.deleteDelay);
 	} catch (e) {
 		if (e) Logger.error(e);
 	}

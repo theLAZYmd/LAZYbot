@@ -142,6 +142,8 @@ class Ready {
 
 module.exports = async (client) => {
 	try {
+		let ready = new Ready(client);
+		ready.setUsername()
 		let tracker = new TrackerConstructor(client);
 		console.log('The bot started!');
 		//tracker.updateCycle();
