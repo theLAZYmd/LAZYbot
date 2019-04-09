@@ -3,7 +3,7 @@ const Discord = require("discord");
 const fs = require("fs");
 const client = new Discord.Client();
 
-const Logger = require("./util/logger.js");
+const Logger = require("./util/logger");
 const router = "router/";
 const settings = require("./settings");
 
@@ -74,7 +74,7 @@ fs.readdir("./src/" + router, (err, _files) => {
                 let Instance = require("./" + router + event[0] + ".js");
                 if (typeof Instance === "function") Instance(client, ...arguments);
                 else if (typeof Instance === "object" && typeof Instance.default === "function") Instance.default(client, ...arguments);
-                else throw "event event[0] does not have a listener function";
+                else throw "event " +  event[0] + " does not have a listener function";
             });
         } catch (e) {
             if (e) Logger.error(e);

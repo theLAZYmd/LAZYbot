@@ -1,0 +1,1094 @@
+{
+	"guides": {
+		"zh": [{
+				"title": "House Guide to Crazyhouse",
+				"description": "\n__**ABOUT**__\n\n#zh\n\n**Crazyhouse** (ZH) is a chess variant in which an opponent's captured pieces can be dropped back on the board instead of moving a piece. Crazyhouse is a variant similar to bughouse chess, but with only two players.\n\nOther names for this variant are drop chess, mad chess, reinforcement chess, turnabout chess and schizo-chess. It’s also known as wild 23. \n\n__**RULES**__\n\nAll the rules and conventions of standard chess apply, with the addition of drops, as explained below.\n\n • A captured piece reverses colour and goes to the capturing player's pocket. At any time, instead of making a move with a piece on the board, a player can drop a piece from their pocket onto an empty square on the board.\n• Drops resulting in immediate checkmate are permitted.\n• Pawns may not be dropped on the players' 1st or 8th ranks.\n• Promoted but captured pawns are dropped as pawns.\n\nRules-page on lichess with video: https://lichess.org/variant/crazyhouse\n\n__**WHERE?**__\n\n● [lichess.org](https://lichess.org)\n● [chess.com](https://chess.com)\n● [Free Internet Chess Server](http://www.freechess.org/)\n● [Internet Chess Club](https://www.chessclub.com/)",
+				"color": 14841132,
+				"thumbnail": {
+					"url": "https://i.imgur.com/pMkkATk.png"
+				}
+			},
+			{
+				"title": "House Guide to Crazyhouse",
+				"description": "**__IMPROVE__**\n\nCrazyhouse is a fast-paced game that needs strong tactics and a good awareness of positional weaknesses. Unlike regular chess, draws are rare because new pieces keep being reintroduced to the board. Check out [crosky’s crazyhouse overview](http://bit.ly/2FfYYMX).\n\n• As GM Yasser Seirawan would say, **king safety** comes first and foremost. Ensure that your king's position is safe from attack; this does not necessarily imply castling – dropping pieces around your king can effectively guard it from serious threats.\n\n• **Develop** your pieces in the opening and **control key squares**, especially around your king.\n\n• Beware of **holes** in your position. A hole provides an opening for an opponent's piece which can lead to a strong attack. If pieces do enter, chase them away and secure your position. As helmsknight would say, “get out of my house!” Similarly, seek to exploit any holes your opponent leaves in their position.\n\n• Beware of **piece sacs** on [f2/f7](https://youtu.be/kZPSNF8XHQI) or [g2/g7](https://youtu.be/6Gh2n9kWdb8), especially if the opponent has many pieces in hand.\n\n• Often the best defence is **attack**, as any mating sequence threatened must be dealt; the majority of crazyhouse moves have an **attacking purpose**. As Vempele says, the best defence against @h3 might be @h6. Launch counter-attacks that are faster and cannot be ignored.\n\n• **Initiative** is more important than material. If a player has initiative they can drop their pieces in hand with check and threats and dominate the board. It’s important to utilise positional dominance because if the initiative runs out, the opponent can take back initiative with pieces in hand and reassert control.",
+				"color": 14841132,
+				"thumbnail": {
+					"url": "https://i.imgur.com/pMkkATk.png"
+				}
+			},
+			{
+				"title": "House Guide to Crazyhouse",
+				"description": "**__MATERIAL__**\n\n• **Pawns** are more valuable than in regular chess, because they can be dropped anywhere on the board including the seventh rank. A minor pieces can be happily traded for 2 pawns in most situations. Unlike chess, **Doubled Pawns** are less of a weakness because pawn structures can be fixed with pawns in hand, and a doubled pawn can even be a strength because it controls squares of both colours. \n\n• **Knights** are wonderful attackers because their threats can’t be blocked [...].\n\n• **Bishops** are strong defenders as they cover diagonals going backwards as well as forwards. A Bishop on g2, for instance, is able to take on h3 and still cover g2. They can also be good attackers because they control channels of a single colour. Pawns and Bishops are known as **\"diags”** because they can penetrate an opponent position along diagonals of a single colour. If all your pawns are on light squares for example, you must take care to defend dark square weaknesses. For more on the importance of colour complexes, check out [mastertan’s visual guide](http://bit.ly/2FQmVZn).\n\n• **Rooks** are useful to defend and attack open files. Dropping a rook on the back rank with check is a good way to force an opponent to “waste” a piece; combined with a pawn drop on the 7th exploiting the pin, this combination can have lethal effect. Rooks are often sacked on the backrank promoting a pawn to remove defenders. [Example](https://lichess.org/yUwqzUBO/black#27).\n\n• **Queens** are worth less in crazyhouse than in normal chess, because they can be hit with a tempo by minors, especially when dropped. Crazyhouse favors numeracy in pieces; a Bishop and Knight in hand have more versatility than a Queen. In general, Queens are worth about 2 minors.",
+				"color": 14841132,
+				"thumbnail": {
+					"url": "https://i.imgur.com/pMkkATk.png"
+				}
+			},
+			{
+				"title": "House Guide to Crazyhouse",
+				"description": "**__STRATEGY__**\n\n• Crazyhouse is still chess, so **common chess tactics** still apply: try not to hang pieces or block in your own pieces; trap opponent pieces and use forks, pins and discovered checks. Because pieces can land anywhere on the board, one must be even more alert.\n\n• **Defending**. Under heavy attack, it is important to evaluate your position. You usually have three options: **First**, you could take your opponent’s attackers, try to stay safe and hope the attack exhausts itself and they run out of material. You might try to limit the flow of exchanges to give time to get the king safe and not give pieces that the opponent needs to mate you. **Second**, if a sacrifice is too dangerous to take, you could focus on defending, dropping pieces near your king to cover important squares. One could also make luft, giving the king a flight path, or a safe square it can fall back or run up to. **The third option** is to ignore the threat and start an attack of your own: if you are the one getting to the opponent’s king first, go for it! Going all in can also be a last resort hoping your opponent makes a mistake.\n\n• **Attacking**. To keep initiative, it is common for mating sequences to comprise purely of checks: [drawing the king out and/or cornering it](https://goo.gl/QLp4DY), [picking up pieces needed for mate](https://goo.gl/uNPKqG), [cutting off escape squares](https://goo.gl/2okT35), [luring the king to a mating square](https://goo.gl/Dd4BvF), [deflecting defending pieces](https://goo.gl/hX6Q85), and [opening up a file, diagonal or key square](https://goo.gl/AqLN86).\n\n• It is important to be familiar with [common mating patterns](https://goo.gl/7ejioW).",
+				"color": 14841132,
+				"thumbnail": {
+					"url": "https://i.imgur.com/pMkkATk.png"
+				}
+			},
+			{
+				"title": "House Guide to Crazyhouse",
+				"description": "**__VIDEOS__**\n\nStreaming chess has become more popular in the past few years and crazyhouse has shared the fruits of this growing trend. The House presents to you the best and most famous streamers of crazyhouse.\n\n• **JannLee**: [YouTube](<https://www.youtube.com/channel/UCbo8-5AEH7u3lE-yOGeNW1Q>), [Twitch](<https://www.twitch.tv/jannleecrazyhouse>).\n• **Nikolas Theiss**: [YouTube](<https://www.youtube.com/channel/UCsjRN9g1AYODJZOPVJKzUmw/>).\n• **Thomas Crosky**: [YouTube](<https://www.youtube.com/channel/UCvowgcm56sLguWxYp8oqI1w>).\n• **Helmsknight**: [YouTube](<https://www.youtube.com/channel/UCcKXwA_lo3Zpz3_Mc-WVLtw>), [Twitch](<https://www.twitch.tv/helmsknight>).\n• **Okei**: [Twitch](<https://www.twitch.tv/okeizh>).\n• **Mugwort**: [YouTube](https://www.youtube.com/channel/UCNMhNQybeLGJHWJv5qT1liQ), [Twitch](https://www.twitch.tv/mugwortcrazyhouse).\n  \nWant your stream to appear here? Let the mods know.\nWhat to create a bio page for your stream? Type `... embedex` and design yourself a page; alternatively send one of the mods the details you want to be included.",
+				"color": 14841132,
+				"thumbnail": {
+					"url": "https://i.imgur.com/pMkkATk.png"
+				}
+			}
+		],
+		"bug": [{
+				"title": "House Guide to Bughouse",
+				"description": "__**ABOUT**__\n\n**Bughouse** (Bug) chess is a chess variant played on two chessboards by four players in teams of two. The game is usually played at a fast time control; this, together with the passing and dropping of pieces, can make the game look chaotic and random to the casual onlooker; hence the name bughouse, which is slang for mental hospital.\n\nBughouse chess is often called as its abbreviation bug. Other names for this variant are exchange chess, siamese chess, tandem chess, transfer chess, double bughouse, cross chess, swap chess or simply bughouse. It’s also known as wild 24.\n\n__**RULES**__\n\nNormal chess rules apply on bughouse, except that captured pieces on one board are passed on to the teammate on the other board, who then has the option of putting these pieces on his or her board. On any given move, you can either make a normal move, or \"drop\" a piece. You can only drop pieces that you have in hand, from your partner's captures.\n\n__**WHERE?**__\n\nBughouse can be played on..\n\n● [Free Internet Chess Server](http://www.freechess.org/)\n● [bughousetest.com](http://bughousetest.com)\n● [chess.com](http://chess.com)\n\nCompiled by <@333586342275710978>",
+				"color": 14841132,
+				"thumbnail": {
+					"url": "https://i.imgur.com/L3HgngE.png"
+				}
+			},
+			{
+				"title": "House Guide to Bughouse",
+				"description": "__**IMPROVE **__\n\nThe guides on the next page will tell you extensively about bughouse strategies, this is only a brief foreword. According to my own experience, the most common novice mistakes are:\n\n• Ignoring the **partner's board**: usually related to deciding whether to trade pieces or not.\n\n• Not utilizing the **uptime**: the clocks are extremely important:  to avoid trades of certain pieces or to wait for certain pieces.\n\n• Not **communicating**: it's very important to communicate with your partner, in some move the queen trade can be mating for you, in other move the trade can be fatal for you.\n\n• Missing **in-between** moves: bishop fork checking the king and attacking a hanging piece is the most common.\n\n• Giving up the **initiative/check**: if the clocks are even and both players are attacking each other, either giving checks or executing 1-move-threats are very useful in order to force your opponent on defensive foot.",
+				"color": 14841132,
+				"thumbnail": {
+					"url": "https://i.imgur.com/L3HgngE.png"
+				}
+			},
+			{
+				"title": "House Guide to Bughouse",
+				"description": "__**GUIDES**__\n\nWritten guides by some of the most prolific bughouse players. View the next page to see training videos and advice.\n\n• **Sorsi:** [Multiple blog posts](https://www.chess.com/blog/Sorsi)\n\n• **Minigreat:** [Multiplie blog posts](https://www.chess.com/blog/MiniGreat)\n\n• **420Blaziken_it:** [Bughouse concepts](http://bit.ly/2tempBu) about speed, efficiently, defending, activity, and looking at partner's board.\n\n• **ChickenCrossRoad:** [Bughouse concepts](http://bit.ly/2F8FEly) about speed, communication,  move quality, material, and timing.",
+				"color": 14841132,
+				"thumbnail": {
+					"url": "https://i.imgur.com/L3HgngE.png"
+				}
+			},
+			{
+				"title": "House Guide to Bughouse",
+				"description": "**__VIDEOS__**\n\nThe House presents to you the best and most famous streamers of bughouse.\n\n• **JannLee**: [Youtube](<https://www.youtube.com/channel/UCbo8-5AEH7u3lE-yOGeNW1Q>), [Twitch](https://www.twitch.tv/jannleecrazyhouse).\n\n• **Nikolas Theiss**: [Youtube](https://www.youtube.com/channel/UCsjRN9g1AYODJZOPVJKzUmw/), [Twitch](https://www.twitch.tv/nikolastheiss).\n\n• **Thomas Crosky**: [Youtube](https://www.youtube.com/channel/UCvowgcm56sLguWxYp8oqI1w).\n\n• **Helmsknight**: [Youtube](https://www.youtube.com/channel/UCcKXwA_lo3Zpz3_Mc-WVLtw), [Twitch](https://www.twitch.tv/helmsknight).\n\n• **okeizh**: [Twitch](https://www.twitch.tv/okeizh). \n\n• **Addy**: [Twitch](https://www.twitch.tv/drunkenmushy)\n\n• **Chuck Moulton**: [Twitch](https://www.twitch.tv/chuckmoulton)\n\nWant your stream to appear here? Let the mods know.\nWhat to create a bio page for your stream? Type `... embedex` and design yourself a page; alternatively send one of the mods the details you want to be included.",
+				"color": 14841132,
+				"thumbnail": {
+					"url": "https://i.imgur.com/L3HgngE.png"
+				}
+			}
+		],
+		"threecheck": [{
+				"title": "House Guide to Three-Check",
+				"description": "__**ABOUT**__\n\n**Three-check** (3+) chess is a chess variant in which the winner is the first player to check their opponent three times. It’s also known as wild 25. \n\n__**RULES**__\n\nAll the normal chess rules apply, but one extra rule applies in addition:\n\n• If you make a legal move that puts your opponent's king into third check for the third time in the game, you win.\n\nA few clarifications to that rule exist as follows:\n\n• The winning move has to be legal, i.e. you cannot give the third check while in check.\n• Checkmating your opponent is still a legal way to win.\n• A double check counts a single check towards the running total.\n\n[Rules page on lichess.org](https://lichess.org/variant/threeCheck)\n\n__**WHERE?**__\n\n• [lichess.org](https://lichess.org)\n• [chess.com](https://chess.com)\n• [Free Internet Chess Server](http://www.freechess.org/)\n• [Internet Chess Club](https://www.chessclub.com/)\n\nCompiled by <@333586342275710978>",
+				"color": 14841132,
+				"thumbnail": {
+					"url": "https://i.imgur.com/cyt4jyT.png"
+				}
+			},
+			{
+				"title": "House Guide to Three-Check",
+				"description": "__**IMPROVE**__\n\nJust as in chess, sacrifices are common and the opening can be filled with traps. Checking an opponent twice can create an advantage and can be equivalent to captured material in the evaluation of a position.\n\nThe theory has developed dramatically during the last year. Opening explorer on lichess will guide you regarding the theory, but remember that instead of memorizing the moves, you should figure out the meaning of each move.\n\n[Three-check guide](https://www.chess.com/article/view/the-3-check-traps-you-need-to-know).",
+				"color": 14841132,
+				"thumbnail": {
+					"url": "https://i.imgur.com/cyt4jyT.png"
+				}
+			},
+			{
+				"title": "House Guide to Three-Check",
+				"description": "__**STUDIES**__\n\n**blastoise11:** [Opening mistakes](https://lichess.org/study/p7fL3SP0)\n**Musicknight123:** [Game Analysis](https://lichess.org/study/ifFIOVSQ)",
+				"color": 14841132,
+				"thumbnail": {
+					"url": "https://i.imgur.com/cyt4jyT.png"
+				}
+			},
+			{
+				"title": "House Guide to Three-Check",
+				"description": "__**VIDEOS**__\n\n**FischyVishy:** [YouTube](http://bit.ly/2oK69mk)\n**The Lone Wolf :** [YouTube](http://bit.ly/2FNrZgZ)",
+				"color": 14841132,
+				"thumbnail": {
+					"url": "https://i.imgur.com/cyt4jyT.png"
+				}
+			}
+		],
+		"anti": [{
+				"title": "House Guide to Antichess",
+				"description": "__**ABOUT**__\n\n**Antichess** (anti) is a variant in which the aim  is to get rid of your own pieces. The game is also known as Losing chess, the Losing Game, Giveaway Chess, Suicide Chess, Killer Chess, Must-Kill, Take-All Chess, Capture Chess, Losums, or Take-Me. The game has recently been solved: there is a tree (called the Watkins tree) which proves a forced win for white from 1. e3. On the other other hand, many starting moves can lead to a forced loss for white which have been known throughout the history of the game, those include 1.e4, 1.d3 and 1.d4.\n\n__**RULES**__\n\nThe rules follow most standard chess rules but demand in addition that **a capture is forced if it can be played**, if more then one capture is possible, then a player is permitted to choose which one to make. In mainstream anti the king is considered a normal piece and promotion to king is allowed and often useful. Victory is achieved by losing all the pieces or getting stalemated in standard rules. When playing on FICS, victory is awarded to the player with the smaller number of pieces on the board in the case of stalemate, and an equal number of pieces is considered to be a draw.\n\n__**WHERE?**__\n\nAntichess can be played on:\n\n• [Free Internet Chess Server](http://www.freechess.org/)\n• [lichess.org](https://lichess.org/)\n\nCompiled by <@346485544848457728>",
+				"color": 14841132,
+				"thumbnail": {
+					"url": "https://i.imgur.com/OS9cSlp.png"
+				}
+			},
+			{
+				"title": "House Guide to Antichess",
+				"description": "**__PIECES__**\n\nDetails on each piece are given. Rough valuations are shown next to each piece name.\n\n**KING** 0\n+ The most important piece. You can waste moves to avoid zugzwang and solidate key areas.\n- Too slow for other tasks.\n\n**Queen** -1\n+ Useful for middle-game tactics such as \"Queen races\", attacking opponents king and attacking weak squares.\n- Dangerous in the endgame.\n\n**Rook** -3\n+ Quick endgame piece.\n- Can easily turn into a \"loose cannon\".\n\n**Bishop** -6\n+ Good for early game tactics and drawing endgames due to opposite-colored bishops.\n- Can easily turn into a \"loose cannon\".\n\n**Knight** -5\n+ Good for destroying pawn formations and forking weak squares.\n- Immobile and bad in the endgame. Lose them before the endgame!\n\n**Pawns** -1\n+ Useful for restricting opponent's pieces and breaking pawn formations.\n- Slow, immobile. Dangerous when it comes to forced promotions.",
+				"color": 14841132,
+				"thumbnail": {
+					"url": "https://i.imgur.com/OS9cSlp.png"
+				}
+			},
+			{
+				"title": "House Guide to Antichess",
+				"description": "__**BASIC MISTAKES **__\n\nAntichess is a very theoretical variant and there is lot of theory in it, especially cause of lines being often forced. Opening blunders are common between beginners, so safe openings such as **1. e3** are recommended. Losing openings for White include **1.a3, 1.b4, 1.c3, 1.d3, 1.d4, 1.e4, 1.f3, 1.f4, 1.h3, 1.h4, 1.Nc3** and **1.Nf3** but many of these are not trivial. Apart from 1. e3, other playable openings are **1.c4, 1.Nh3, 1.g3** (other openings are dubious). The most common novice mistakes are:\n\n• Trying to **give away all pieces immediately** is therefore a mistake. One should carefully consider piece position; having more pieces that the opponent gives the ability to 'control' you, then give away all the pieces in one initiative.\n\n• **Not developing.** Anti isn't really about giving away pieces in the beginning; one must develop pieces and make it harder for your opponent to move. That's a good strategy some of the really good players like to use, unless you have a forced win.\n\n• Giving away **important** pieces: it is important to know which pieces to keep and which to give. Bishops are often dangerous, so it is recommended for beginners to get rid of bishops as soon as possible. On the other hand, the king is a precious ally when an opponent tries to zugzwang, giving it away early is often a mistake. It's better to keep pieces instead of pawns, because pawns have a very limited range of moves and can be easily predicted or forced into zugzwang.\n\n• Being overly **passive**: simply trying to avoid exposing yourself to taking pieces lets an opponent 'control' you, then forcing you into zugzwang to take pieces. Carefully consider when one should trade and one should not.",
+				"color": 14841132,
+				"thumbnail": {
+					"url": "https://i.imgur.com/OS9cSlp.png"
+				}
+			},
+			{
+				"title": "House Guide to Antichess",
+				"description": "__**FURTHER IMPROVE **__\n\nTips on how to advance your play:\n\n• **Utilise choices**. Sometimes, it is advantageous to use one piece to take a piece in the opponent's position while your opponent is taking pieces; this can be referred to as a [queen race](https://lichess.org/0vDXr9aX). Be careful about attempting this with other pieces after: [In this game](https://lichess.org/study/SqCNKpVW), Black is out of bishop moves and must take White's queen, resulting in a loss. [Another example](https://lichess.org/study/2EjMqvsp).\n\n• Be aware of so called quiet moves that can force your opponent **to take an unprotected piece**. [In this game](https://lichess.org/4FF1DBvW#4) an excellent example of such a move is 3. Bg2: preparing to take on b7, which will force Bxb7 and later Bxh1.\n\n• Do **not** be too eager to **push the h- and a-pawns** as this exposes the rooks in mid-game. Rooks can be easily controlled and this can lead to a disastrous position if your opponent forces your rook into their position and is able to give away lots of material for nothing. On the other hand, if the opponent doesn't have a **b/g-pawn** pushing the a/h-pawn is often [a good move](https://lichess.org/study/e7IRQR1f).",
+				"color": 14841132,
+				"thumbnail": {
+					"url": "https://i.imgur.com/OS9cSlp.png"
+				}
+			},
+			{
+				"title": "House Guide to Antichess",
+				"description": "**__GUIDES__**\n\nSome useful antichess links:\n\n• **Solved Tree**: [Mark Watkins](http://magma.maths.usyd.edu.au/~watkins/LOSING_CHESS/).\n\n• **Finlip**: [YouTube](http://bit.ly/2Hj7Tuo), [Twitch](https://www.twitch.tv/anuppokhrel).\n\n• **FKA_SooP**: [Introduction To Zugzwang](https://lichess.org/study/ad6RvpQb).\n\n• **hauptschule**: [Facing 1. e3 as black](https://lichess.org/study/C2tvnF26).\n\n• **John Beasley**: [Endgame tables: what ending pieces are winning?](http://bit.ly/2FpVkBa).\n\n• **Frestho**: [Antichess tactics](https://lichess.org/study/WLrT4U2E)\n  \nWant your stream to appear here? Let the mods know.\nWhat to create a bio page for your stream? Type `... embedex` and design yourself a page; alternatively send one of the mods the details you want to be included.",
+				"color": 14841132,
+				"thumbnail": {
+					"url": "https://i.imgur.com/OS9cSlp.png"
+				}
+			}
+		],
+		"horde": [{
+				"title": "House Guide to Horde",
+				"description": "__**ABOUT**__\n\n**Horde chess** is a chess variant where the white side starts with 36 pawns (*The Pawns*) and the black side (*The Pieces*) needs to destroy the Horde to win. \n\n__**RULES**__\n\n[Starting position](<https://i.imgur.com/Hurb8aW.png>)\n\nThe normal chess rules are valid; for example\n\n• all pawns can be promoted on the final rank\n• stalemate occurs, if either side run out of moves\n\nThe only exception is…\n\n• that white's pawns on the first and second ranks may advance one or two steps, given that the path in the file is free. Unlike in regular chess, this does not have to be the pawn's first move.\n• if a pawn advances two squares from the first to the third rank, black can not capture it with the enpassant rule\n\n[Rules page on lichess](https://lichess.org/variant/horde).\n\n__**WHERE?**__ \n\n● [Lichess.org](https://lichess.org/)",
+				"color": 14841132,
+				"thumbnail": {
+					"url": "https://i.imgur.com/BB71aOa.png"
+				}
+			},
+			{
+				"title": "House Guide to Horde",
+				"description": "__**IMPROVE**__ \n\n**THE PAWNS**\nWhite should keep their pawns **together** and promote.\n\nThe goal for white is to checkmate. This is most easily achieved after promotion (by which time black will probably resign after all of their sacrifices). White’s weakest files are **A- and H-files** since they are only defended once. White must guard these files and the backrank. White must remember that the power is in the horde, and therefore must not spreadout his pawns in an easily permeable, checker like structure. **Accept or reject** sacrifices as the position calls for. White must also keep in mind that should black get to the back of the horde, it's not always the end of the game. It takes valuable time for black to capture all of the pawns rank by rank -- time white could be using to promote pawns.\n\n**THE PIECES** \nBlack should target the rook files and get to the back ranks.\n\nWinning with black is most easily achieved by getting to the back of the horde. The weakest files are A- and H-files, and therefore black should seek to **pressure** those files.",
+				"color": 14841132,
+				"thumbnail": {
+					"url": "https://i.imgur.com/BB71aOa.png"
+				}
+			},
+			{
+				"title": "House Guide to Horde",
+				"description": "**__STUDIES__**\n\n**Stubenfisch:** [Opening ideas for beginners](https://lichess.org/study/fKHAjYni)\n**FM svenos:** [My opening repertoire](https://lichess.org/study/yXTpOSfM)",
+				"color": 14841132,
+				"thumbnail": {
+					"url": "https://i.imgur.com/BB71aOa.png"
+				}
+			},
+			{
+				"title": "House Guide to Horde",
+				"description": "**__VIDEOS__**\n\n● **Stubenfisch**\nTwitch: <https://www.twitch.tv/stubenfisch>",
+				"color": 14841132,
+				"thumbnail": {
+					"url": "https://i.imgur.com/BB71aOa.png"
+				}
+			}
+		],
+		"atomic": [{
+				"title": "House Guide to Atomic",
+				"description": "__**ABOUT**__ \n\n**Atomic chess** is a chess variant in which one has to nuke their opponent’s king in order to win the game.\n\nIt’s known as wild 27 or bomb chess.\n\n__**RULES**__\n\nThe normal chess rules are valid, with the following extensions.\n\nWhenever a piece is captured, an explosion occurs on the regarding field. The explosion destroys..\n• the capturing piece\n• the captured piece\n• all pieces on the immediate horizontal, vertical and diagonal neighbour fields, except pawns. There is no chain reaction.\n\nThere are few more extra conditions compared to orthodox chess, those are:\n• A game is won by checkmate or causing explosion of the opponent’s king by an indirect hit.\n• Moves causing own king's explosion are not allowed. Any move that results in blowing up the opposite King will claim an immediate victory, overriding all checks.\n• The kings can be connected by moving one into the adjacent squares of the other sided king. When the kings are connected, checks do not apply.\n\nRules-page on lichess: https://lichess.org/variant/atomic\n\n__**WHERE?**__ \n\n● [Lichess.org](https://lichess.org/)\n● [Free Internet Chess Server](http://www.freechess.org/)\n● [Internet Chess Club](https://www.chessclub.com/)",
+				"color": 14841132,
+				"thumbnail": {
+					"url": "https://i.imgur.com/mjbalyw.png"
+				}
+			},
+			{
+				"title": "House Guide to Atomic",
+				"description": "__**IMPROVE**__\n\nThe knights, rooks, queens, bishops and pawns also develop their respective tactics in Atomic chess. Material sacrifices are more common in atomic chess than in chess. In the opening and middle-game it is common to offer a piece in order to seize an initiative enabled by the newly opened spaces captures create.",
+				"color": 14841132,
+				"thumbnail": {
+					"url": "https://i.imgur.com/mjbalyw.png"
+				}
+			},
+			{
+				"title": "House Guide to Atomic",
+				"description": "**__STUDIES__**\n\n**ProgramFOX:** [Opening and midgame tactics](<https://lichess.org/study/mxYOPgI3>)\n**ProgramFOX:** [Endgame positions](<https://lichess.org/study/JYSYPQrN>)\n\n**tipau:** [Endgames level 1 ](<https://lichess.org/study/ikJM4K3L>)\n**tipau:** [Endgames level 2](<https://lichess.org/study/tCqrXrbG>)\n**tipau:** [Endgames level 3](<https://lichess.org/study/WOWizkm4>)\n\n**Ngb & co:** [Detailed opening analysis](<https://lichess.org/study/nP8wnNGJ>)\n\n**Illion:** [Multiple blog posts](<https://lichess.org/team/illions-atomic-blog>)",
+				"color": 14841132,
+				"thumbnail": {
+					"url": "https://i.imgur.com/mjbalyw.png"
+				}
+			},
+			{
+				"title": "House Guide to Atomic",
+				"description": "**__VIDEOS__**\n\n• **ProgramFOX:** [YouTube](<https://www.youtube.com/channel/UCmx82Kgy9ALzAcmti0LwkJw>), [Twitch](<https://www.twitch.tv/programFOX>).\n\n• **Tipau**: [YouTube](<https://www.youtube.com/user/tipau>), [Twitch](<https://www.twitch.tv/tipau_lichess>).\n\n• **Onubense:** [Twitch](<https://www.twitch.tv/gmonubense>).\n\n• **ijh:** [Twitch](<https://www.twitch.tv/ijhchess>).",
+				"color": 14841132,
+				"thumbnail": {
+					"url": "https://i.imgur.com/mjbalyw.png"
+				}
+			}
+		],
+		"schess": [{
+				"title": "House Guide to Seirawan Chess",
+				"description": "__**ABOUT**__\n\n**Seirawan Chess (s-chess)** is a chess variant, which was invented by GM Yasser Seirawan and Bruce Harper 2007. It is played on the standard 8x8 board and uses two new pieces, **the hawk** (which moves like knight and bishop) and **the elephant** (which moves like knight and rook).\n\nSeirawan chess is also known as Sharper chess (a combination of the names Seirawan and Harper). The idea of two extra pieces were adopted from the World Champons Jose Raoul Capablanca who in 1920s proposed **Capablanca chess**, adding two new pieces on a 10x10 board.\n\n__**RULES**__ \n\nThe rules are the same as in orthodox chess except that two pieces, the Elephant and the Hawk are placed in the reserve. Whenever a piece leaves its initial square, one of the extra pieces can be immediately be introduced to the vacant square. That means a player has eight opportunities to bring the Hawk and Elephant into play. If a player fails to do so, the unplaced piece remains out of play.\n\nWhen a player castles, the Hawk or the Elephant may be placed on either e1(8) or h1(8)/a1(8), but not on both.\n\n__**SITES**__\n\n• [Schess.org](https://schess.org/#/)",
+				"color": 14841132,
+				"thumbnail": {
+					"url": "https://i.imgur.com/nVeKhtG.png"
+				}
+			},
+			{
+				"description": "__**IMPROVE**__ \n\nThe extra pieces give players more firepower, hence they make the game more tactical and deadly attacks occur more often than in orthodox chess.",
+				"color": 14841132,
+				"thumbnail": {
+					"url": "https://i.imgur.com/nVeKhtG.png"
+				}
+			},
+			{
+				"description": "**__VIDEOS__**\n\n**GMs Seirawan**, **Van Kampen** and **Hansen:** [Seirawan Chess Introduction](<https://www.youtube.com/watch?v=tSXZbbeR-kU>)\n\n**IM Shahade** vs. **GM Seirawan:** [S-Chess match](<https://www.youtube.com/watch?v=97Jfv1U997M>)",
+				"color": 14841132,
+				"thumbnail": {
+					"url": "https://i.imgur.com/nVeKhtG.png"
+				}
+			}
+		],
+		"960": [{
+				"title": "House Guide to Chess960",
+				"description": "__**ABOUT**__\n\n**Chess960 (960)** is a chess variant, which uses the same board and pieces as orthodox chess, but the starting position of the pieces is randomized. However, the pieces on the both sides will be placed symmetrical. The random starting position is to hinder players from memorizing the opening lines and it forces them to rely more on their talent and creativity. \n\nOther names for this variant are Fischer Random Chess and **Fischerandom**, both named after Bobby Fischer, who invented the variant. It's also known as it’s also known as wild 22.\n\n__**RULES**__ \n\nThe rules are the same as in orthodox chess. However, the castling may seem different because the king and the rooks might have a different starting square than in standard chess.\n\n[Rules page on lichess](<https://lichess.org/variant/chess960>).\n		 \n__**SITES**__\n\n● [lichess.org](https://lichess.org)\n● [chess.com](https://chess.com)\n● [Free Internet Chess Server](http://www.freechess.org/)\n● [Internet Chess Club](https://www.chessclub.com/)",
+				"color": 14841132,
+				"thumbnail": {
+					"url": "https://i.imgur.com/YMgh4dH.png"
+				}
+			},
+			{
+				"title": "House Guide to Chess960",
+				"description": "__**IMPROVE**__\n\nNow that you know the rules, you may wonder how to get better at Fischerandom. Since there are no opening theory, I would recommend to focus on these four points:\n\n• Follow the normal opening **principles**: control center, develop your pieces and get your king in safety.\n• Know your middlegame plans: identify **the weaknesses** in your and your opponent's camp, ask yourself how you can get rid of them and how you can exploit them.\n• Be sharp with the **tactics**: It's been said that chess is 99% about tactics, you can work on your tactics in chesstempo or lichess. The tactical success requires an understanding of strategy.\n• Master **the endgame**: Most of your 960 games will reach the endgame stage, be prepared to grind the victory in rook or other kind of endgames.\n\n[How To Get Better At Chess article](<https://www.chess.com/article/view/how-to-get-better-at-chess>).",
+				"color": 14841132,
+				"thumbnail": {
+					"url": "https://i.imgur.com/YMgh4dH.png"
+				}
+			},
+			{
+				"title": "House Guide to Chess960",
+				"description": "**__VIDEOS__**\n\n**IM John Batholomew:** [Chess960 introduction video](<https://www.youtube.com/watch?v=fUypgJQy7O8>)\n**NM Chess-Network:** [10 ways to improve your chess](<https://www.youtube.com/watch?v=m--LuusPfwA>)",
+				"color": 14841132,
+				"thumbnail": {
+					"url": "https://i.imgur.com/YMgh4dH.png"
+				}
+			}
+		],
+		"koth": [{
+				"title": "House Guide to King Of The Hill",
+				"description": "__**ABOUT**__\n\n**King of the Hill (KOTH)** is a chess variant, in which you win by checkmating your opponent or by bringing your king to the centre of the board.\n\n__**RULES**__ \n\nThe rules are the same as in orthodox chess with the addition of one simple rule:\n• Move your king to one of the centre squares (d4, d5, e4 or e5) and you win.\n\nThe winning move must be legal, i.e. the king can’t move into check. Checkmating your opponent is also a legit way to win.\n\n__**SITES**__\n\n● [lichess.org](https://lichess.org)\n● [chess.com](https://chess.com)",
+				"color": 14841132,
+				"thumbnail": {
+					"url": "https://i.imgur.com/7raWC9F.png"
+				}
+			},
+			{
+				"title": "House Guide to King Of The Hill",
+				"description": "__**IMPROVE**__\n\nThe additional rule tends to decoy novice players into running their king to the centre at the beginning of the game. This can be a fatal mistake as it may result in loss in development, material loss or checkmate on the running king.",
+				"color": 14841132,
+				"thumbnail": {
+					"url": "https://i.imgur.com/7raWC9F.png"
+				}
+			},
+			{
+				"title": "House Guide to King Of The Hill",
+				"description": "**__VIDEOS__**\n\n**NM Chess-Network:** [KOTH games](<https://www.youtube.com/watch?v=kneXmnH_zGM>).",
+				"color": 14841132,
+				"thumbnail": {
+					"url": "https://i.imgur.com/7raWC9F.png"
+				}
+			}
+		],
+		"racingkings": [{
+				"title": "House Guide to Racing Kings",
+				"description": "__**ABOUT**__\n\n**Racing Kings (RK)** is a chess variant. The objective of the game is to move one’s own king to the last rank and do it faster than the opponent.\n\n__**RULES**__ \n\nAll pieces are positioned at the first two ranks and both players see the board from the same perspective. The starting position is [following](<https://i.imgur.com/sdnJ3Jz.png>).\n\nStandard chess rules apply, with the following restrictions:\n\n• It is not allowed to attack the opponent’s king. The concept of check is entirely forbidden.\n• The king is not allowed to move to a square which is attacked by an opponent’s piece (just like in standard chess).\n\nThe game is finished if one player moves their own king to the last rank. However, if white moves his king to the last row, and black moves immediately that their king to the last rank, the game is draw (in order to compensate the fact that white player started the game.)\n\n[Rules page on lichess](<https://lichess.org/variant/racingKings>).\n		 \n__**SITES**__\n\n● [Lichess.org](https://lichess.org/)",
+				"color": 14841132,
+				"thumbnail": {
+					"url": "https://i.imgur.com/2YAoPMG.png"
+				}
+			},
+			{
+				"title": "House Guide to Racing Kings",
+				"description": "\n__**IMPROVE**__\n\nThis variant isn't studied widely, but some opening theory do exist. Tactics usually involve the fact that giving checks is not allowed, for example pieces may seem to be hanging, but they can't be captured because that would be a check to the enemy king.",
+				"color": 14841132,
+				"thumbnail": {
+					"url": "https://i.imgur.com/2YAoPMG.png"
+				}
+			},
+			{
+				"title": "House Guide to Racing Kings",
+				"description": "**__VIDEOS__**\n\n**NM Chess-Network:**: [Introduction to Racing Kings](<https://www.youtube.com/watch?v=GBUylnvSRYo>)",
+				"color": 14841132,
+				"thumbnail": {
+					"url": "https://i.imgur.com/2YAoPMG.png"
+				}
+			}
+		]
+	},
+	"utility": {
+		"discord": {
+			"title": "What is Discord and how does it work?",
+			"description": "**Discord**\nDiscord is a program which you can use on the web or download an app from, you can chat and voice chat in there, it has become more and more popular among gamers.\n\n**Channels**\nThere exist different channels which are used to keep the conversations on a specific topic, for instance there are different ones for each variant here. \n\n**Roles and bots**\nPeople can acquire roles which give them permissions to see certain channels, that is so you don't have to see the variant channels you are not interested in. There are also non-human members, known as bots, who react only to certain commands.",
+			"color": 53380,
+			"author": {
+				"name": "House Guide to Discord"
+			},
+			"thumbnail": {
+				"url": "https://i.imgur.com/YWF70U4.png"
+			},
+			"fields": []
+		},
+		"shield": {
+			"description": "Winner wins 50 :cherry_blossom: + VIP role as long as you keep the shield",
+			"author": {
+				"name": "Win a lichess shield to obtain the vip role and flowers!",
+				"icon_url": "https://i.imgur.com/JbhAKpz.png"
+			},
+			"fields": [{
+					"name": "Prizes for high performers",
+					"value": "Top 3 win 40 :cherry_blossom:\nTop 10 win 30 🌸\nTop 20 win 20 🌸\nTop 30 win 10 🌸",
+					"inline": false
+				},
+				{
+					"name": "Date",
+					"value": "Check out the upcoming Shield tournaments from [the tournament calendar](https://lichess.org/tournament/calendar).",
+					"inline": false
+				}
+			]
+		},
+		"mods": {
+			"description": "**General**\nThe channel moderators are elected moderators chosen by people in that channel. Each variant channel (crazyhouse, 3-check, atomic etc) has two (2) channel mods. They are the representatives of their variant community. \n\n**Assignment**\nIn each channel, two channel mods will:\n• Maintain the channel and make it as good-a-place as possible.\n• Invite and build up the channel community for that variant.\n• Organise events for the channel/community (tournaments, new ideas, vs, giveaways).\n• Manage (delete, pin) messages.\n• Change channel name and description. \n• Control channel specific bot functions (new 'nowplaying' feature, live stream notifications)",
+			"color": 53380,
+			"author": {
+				"name": "Channel moderators",
+				"icon_url": "https://vignette.wikia.nocookie.net/clubpenguin/images/9/9b/Moderator_Badge_new.png/revision/latest?cb=20140206150417"
+			},
+			"thumbnail": {
+				"url": "https://i.imgur.com/VId4nJT.png"
+			},
+			"fields": []
+		},
+		"elections": {
+			"description": "**General**\nThe members of a variant channel elect two (2) channel moderators for that channel, meaning there will be independent elections for each channel. Elections are held every 4 weeks on Sundays. The voting will be open for 24(+) hours. It will happen through secret ballot. A form of [Proportional representation system](https://en.wikipedia.org/wiki/Instant-runoff_voting) is used.",
+			"color": 53380,
+			"author": {
+				"name": "The House Elections",
+				"icon_url": "https://i.imgur.com/MOBqJA6.png"
+			},
+			"thumbnail": {
+				"url": "https://i.imgur.com/VId4nJT.png"
+			},
+			"fields": [{
+					"name": "I want to run, what to do?",
+					"value": "• You need at least two sponsors to get on the ballot. Sponsoring is like pledging to vote, so you can only sponsor 1 person.\n• You must declare your intention to run by Friday of election week.",
+					"inline": false
+				},
+				{
+					"name": "Electoral guidelines",
+					"value": "• You can campaign.\n• You can run for a maximum of two channels (and win both or one or none).\nVoters and Candidates must have 50 messages (server-wide) and that channel’s role before the announcement date.",
+					"inline": false
+				}
+			]
+		},
+		"dbpositions": {
+			"title": "House Database Positions",
+			"description": "Greetings! You may have noticed on your profile there's a little database number. That corresponds to your index in the bot's database. Being higher up in the db means:\n\n• **Commands are slightly more likely to work for you.**\n\nIn addition to the other advantages:\n\n**• Can be seen on the `.dblb`.\n• Cool medal on your profile `!profile`.\n• Better number.\n• 'Higher' than everyone else.**\n\nBasically, people with higher-up numbers are just *better*. How do you change your position?\n",
+			"color": 16738560,
+			"fields": [{
+					"name": "1. Bid an Amount and Win",
+					"value": "You can bid for a position using:\n\n`.give [bid amount] <@!185412969130229760> Database Position [desired position]`\n\nFor example:\n\n`.give 100 <@!185412969130229760> Database Position 1`\n\nThe amount you give is saved as your 'bid amount.' Using the command challenges another member for their position in the database. If your total bid amount is greater than their bid amount in reserver (consolidated) your challenge will be successful and you will take their position.\n",
+					"inline": true
+				},
+				{
+					"name": "2. Bid an Amount and Attack",
+					"value": "You can also underbid. If your total bid is lower than their consolidated bidamount, your bid will be used to cancel out their sum and that's it.\n"
+				},
+				{
+					"name": "3. Consolidate",
+					"value": "You should therefore secure your position by consolidating your position. Do that by:\n\n`.give 100 <@!185412969130229760> Database Consolidate`\n\nCheck anyone's consolidated amounts by `!bidamount [user]`, `!position [user]`, and `.dblb`."
+				}
+			]
+		},
+		"typeadd": {
+			"title": "Conditions for an accepted Type Entry",
+			"description": "**Example**:\n`.typeadd And is he likely to be brave who has no spirit, whether horse or dog or any other animal? Have you never observed how invincible and unconquerable is spirit and how the presence of it makes the soul of any creature to be absolutely fearless and indomitable? Then we have found the desired natures. -The Republic`",
+			"color": 53380,
+			"footer": {
+				"text": "Plz come up with interesting stuff!"
+			},
+			"fields": [{
+					"name": "Body Text",
+					"value": "• Must be between 265 and 529 characters long.\n• Cannot contain not latin alphabet characters.\n• Cannot contain line breaks or tabs.",
+					"inline": false
+				},
+				{
+					"name": "Source",
+					"value": "•Must be included!\n• Comes after the Body Text.\n• Is introduced by a \"-\"\n• Should contain author or source book/movie/media.",
+					"inline": false
+				},
+				{
+					"name": "What happens next",
+					"value": "• Entry is submitted to mods.\n• We approve it by pressing a button and immediately grant you flowers.\n• Anything that passes those conditions that is not inappropriate will be accepted.",
+					"inline": false
+				}
+			]
+		},
+		"join": {
+			"content": "**Welcome to The House %user.mention%!** Let's get the party started <@&420314782114250761>.\n",
+			"description": "**We're the home of chess variants across lichess.org, chess.com, FICS, and anywhere else.**\n",
+			"color": 9359868,
+			"footer": {
+				"text": "Have fun!"
+			},
+			"thumbnail": {
+				"url": "https://i.imgur.com/YWF70U4.png"
+			},
+			"fields": [{
+					"name": "View our channels",
+					"value": "You won't be able to see most of our channels until you're a **Member.**\nFirstly, familiarise yourself with the rules in <#390259315816005644>.\nThen, head to <#404374157045006346> and assign yourself permissions to see the chat channels and your favourite variant channels.\n",
+					"inline": false
+				},
+				{
+					"name": "How the hell do I use Discord?",
+					"value": "First time? type `... discord` for our guide on navigating this place.\n",
+					"inline": false
+				},
+				{
+					"name": "Link your accounts",
+					"value": "Type `!lichess` followed by your account name.\nType `!chess.com` followed by your account name.\n",
+					"inline": false
+				},
+				{
+					"name": "Crazyhouse World Championships",
+					"value": "Type `.iam CWC` to see the CWC channels on the left.\n",
+					"inline": false
+				},
+				{
+					"name": "Developers",
+					"value": "If you're a dev, type `@mods I'm a dev` and you'll be added to <#408363007635226625>.",
+					"inline": false
+				}
+			]
+		},
+		"tournament": {
+			"title": "House Server Tournament Rewards",
+			"description": "Create a tournament on lichess.org in any variant or time control of chess! Include the words House Discord Server in the title as well as the variant name and the link https://discord.gg/RhWgzcC in the chatbox at the beginning and end of the tournament to get reward.\n\nReward is based on tournament participation. We estimate participation by a function of number of games `[n]` and time control of the tournament `[t]` and increment `[i]` both in minutes. This data is available once the tournament finishes.\n\nTournament hosters must play for at least half the time. The aim of this initiative is to encourage people to play and learn variants! So please make sure you participate and enjoy the tournaments.",
+			"color": 9359868,
+			"thumbnail": {
+				"url": "https://i.imgur.com/E8S8QXE.png"
+			},
+			"fields": [{
+					"name": "Bonuses",
+					"value": "2x 🌸 for any Atomic arena, and 1.25x for any other variant with a sparsely populated channel. An additional 20 🌸 per person who joins and adds roles.",
+					"inline": false
+				},
+				{
+					"name": "The formula is as follows (copy and paste):",
+					"value": "`.tf games time increment`\n\nA tournament with 120 games played of 3+2 time control would be\n`.tf 120 3 2` ",
+					"inline": false
+				}
+			]
+		},
+		"flowers": [{
+				"title": "What are flowers?",
+				"description": "Flowers are the artificial currency we use on this Discord server. We use them for fun purposes, like betting on tournaments and challenging each other to achieve things.\n\nObviously it doesn't mean anything, but it's fun, and those who have lots are the best.",
+				"thumbnail": {
+					"url": "https://i.imgur.com/Jnbg4fG.png"
+				}
+			},
+			{
+				"title": "How can I earn flowers?",
+				"thumbnail": {
+					"url": "https://i.imgur.com/Jnbg4fG.png"
+				},
+				"fields": [{
+						"name": "Invite people to the server",
+						"value": "Inviting someone to the server nets 20 🌸! This is often best done through DMs on lichess or posting in tournament or game chats. Invite your opponents after long match series! The larger the community we build here the better this place becomes. Bonus 🌸 for inviting through tournaments.",
+						"inline": false
+					},
+					{
+						"name": "Create a House tournament",
+						"value": "Hugely popular - create a tournament on lichess and we'll sponsor you 🌸! Type `... tournament` for details.",
+						"inline": false
+					},
+					{
+						"name": "Do something impressive",
+						"value": "Get a a FIDE title; win a big Lichess shield or tournament; beat out some folk in a Titled Tuesday arena... let us know and we might dish out 🌸 for anything that sounds vaguely impressive.",
+						"inline": false
+					},
+					{
+						"name": "Complete a challenge",
+						"value": "Listed in <#406161920308150272>. Ask someone to give you a challenge like reaching a high rating or high position in a tournament. The server might offer extremely high payouts on certain events.",
+						"inline": false
+					},
+					{
+						"name": "Leave us a great quote",
+						"value": "We're looking for quotes to add to our typecontest game. Have a look at the criteria in `... typeadd` then leave us a quote. If we approve it you'll earn 🌸.",
+						"inline": false
+					}
+				]
+			},
+			{
+				"title": "How can I get free flowers?",
+				"thumbnail": {
+					"url": "https://i.imgur.com/Jnbg4fG.png"
+				},
+				"fields": [{
+						"name": "React with 🌸 when there's an event",
+						"value": "Every now and then, <@!185412969130229760> will create an event that gives out free flowers in <#390264166843154433>. Simply react with 🌸 to the message to get them, so check <#390264166843154433> frequently!",
+						"inline": false
+					},
+					{
+						"name": "Pick 🌸 when they appear in a text channel",
+						"value": "Everyone message has a 2% of generating 🌸. Type `.pick` as they appear, alternatively people might type `.plant` to drop them for you.",
+						"inline": false
+					},
+					{
+						"name": "Collect `.timely` periodically",
+						"value": "You may collect 2 🌸 every 2 hours from <#390273555084083210> using the command `.timely`",
+						"inline": false
+					},
+					{
+						"name": "Win Trivia games",
+						"value": "The House's speciality game - trivia contests between its highly competetive members! Play at any time in <#390289422802747403> by typing `.t`, the first to 10 wins. Bigger and better games win more 🌸! `... tr` to see the rewards.",
+						"inline": false
+					}
+				]
+			},
+			{
+				"title": "How can I get even more flowers?",
+				"description": "You need to risk 🌸 to get 🌸. Here's some of the ways you can do that:",
+				"thumbnail": {
+					"url": "https://i.imgur.com/Jnbg4fG.png"
+				},
+				"fields": [{
+						"name": "Betting",
+						"value": "The hallmark of this server - you can place bets on your friends and favourites playing matches and tournaments. Odds are offered by our @licensed bookies, become one simply by asking! Bookies will give odds on certain outcomes of those tournaments and matches, you can choose one to invest in, with the hope of a high return. See `...howtobet` for more information.",
+						"inline": false
+					},
+					{
+						"name": "Gambling",
+						"value": "For the truly adventurous - gamble away your savings in our bot's in-built casino. Head to <#390259390709497857> and type `.commands gambling` to see what you can play. The list of commands is also written up in the **GAMBLING** section of <#390259315816005644>.",
+						"inline": false
+					}
+				]
+			},
+			{
+				"title": "How can I spend my flowers?",
+				"description": "Have you acquired a handy amount of flowers?\nHere’s few ways how you can spend them.",
+				"color": 53380,
+				"thumbnail": {
+					"url": "https://i.imgur.com/YWF70U4.png"
+				},
+				"fields": [{
+						"name": "Buying roles in the shop",
+						"value": "You can certain roles from the shop. They will give you a special color flair and make you superior to other members on the right sidebar. If your level is high enough, you’re eligible for discount. See `… shop`.",
+						"inline": false
+					},
+					{
+						"name": "Offering challenges to other users",
+						"value": "You can give a challenge, like reaching a high rating or high position in a tournament, to someone in order to encourage them to get better. Challenges are recorded in <#406161920308150272>.",
+						"inline": false
+					},
+					{
+						"name": "Claiming waifus and gifts",
+						"value": "You can claim waifu(s) and give them gifts. See `.gift` and `.waifus`.",
+						"inline": false
+					},
+					{
+						"name": "Trying to get more flowers",
+						"value": "You spend flowers by betting on odds offered by licensed bookies, or by gambling in <#390259390709497857>. See `… flowers`.",
+						"inline": false
+					}
+				]
+			}
+		],
+		"manageembeds": {
+			"title": "LAZY guide on how to use embeds (if you need to keep editing/if you're doing complicated stuff)",
+			"color": 14841132,
+			"footer": {
+				"text": "~By the goodwill of <@!185412969130229760> who struggled hard with embeds to come up with a method. DM him if you need help."
+			},
+			"thumbnail": {
+				"url": "https://i.imgur.com/Qto6Ts6.png"
+			},
+			"image": {
+				"url": "https://i.imgur.com/JqJ4HrV.png"
+			},
+			"fields": [{
+					"name": "Left Side",
+					"value": "Create an 'embed channel'. Here, have the bot post your embeds you've created through `... embedex` using the `.say` command.",
+					"inline": true
+				},
+				{
+					"name": "Right Side",
+					"value": "Create a 'markdown channel'. Here, post each markdown in codeblock form, and type `.edit [comment id]` before it, where the comment id corresponds to the embed in the embed channel.",
+					"inline": true
+				},
+				{
+					"name": "Making Edits",
+					"value": "Now it's super-easy: change things in the markdown, then simply highlight and copy over the markdown *including* the `.edit [comment id]` text over the a new comment in the embed channel. No more worries about resizing, or going over the character limit. Everything is as you see it.",
+					"inline": false
+				},
+				{
+					"name": "Publishing your Embeds",
+					"value": "Ok when you're done, just copy your final codeblock from your markdown page, and stick `.acr triggerword {embed business]` or `.. triggerword {embed business]` You'll have a perfect thing, and you'll never need to use `.qdel` ever again!",
+					"inline": false
+				}
+			]
+		},
+		"bughousetest": {
+			"title": "**Bughousetest.com - bughouse on lichess interface!**",
+			"url": "http://bughousetest.com/",
+			"description": "**General**\nBughousetest.com is a fork of lichess made by <@335877728945569792>. He forked lichess and implemented bughouse in it. It is **not** affiliated with lichess, therefore you have to **register** before playing. It is not recommended to use the same password.\n\n**Features**\n• Double-click or shift-click on pieces in hand to request piece.\n• Double-click or shift-click on pieces in opponent's hand to forbid.\n• Suggest a move to your partner by making a move on their board.\n• Use go/sit buttons to send the respective messages to partner.\n• __Partnering__: click the partner button on any player's profile.\n• Diagram: https://i.imgur.com/Etowg4U.png.\n\n**Weekly Bughouse Tournament**\n• A weekly tournament is played __Sundays at 3 p.m. EST / 8 p.m. UTC.__\n• <@&390258769067638784> role will be pinged when the tournament is about to start. Enable Discord notifications if you want to be notified.\n\n**Feedback**\nHave any bug reports, feature requests or suggestions? Please let us know in <#391347094574727168>. Suggested features are voted upon in <#391347045023350784>.",
+			"color": 53380,
+			"thumbnail": {
+				"url": "https://cdn.discordapp.com/emojis/404307994617053194.png?v=1"
+			}
+		},
+		"cvt": {
+			"title": "Chessvariants.training - The promised land of chess variant puzzles.",
+			"url": "https://chessvariants.training",
+			"description": "**Puzzles**\nFor years the chess community has been asking leading sites to add variant compatability to their tactics platforms, which never came to fruition, until now. Being the first of its kind, [chessvariants.training](https://chessvariants.training/) was created and is run by <@163325840136863744>. You can solve antichess, atomic, crazyhouse, king of the hill, three-check, horde, and racing kings puzzles, respectively.\n\n**Variant960**\nIn addition to its tactics trainer, the site also offers Variant960 games, which can be played [here](https://chessvariants.training/Variant960).",
+			"color": 53380,
+			"thumbnail": {
+				"url": "https://chessvariants.training/images/icon.png"
+			}
+		},
+		"shop": {
+			"title": "Official House Shop Roles",
+			"description": "Congrats on accumulating a whole bunch of flowers. Here are the roles you can buy; they will give you a special colour flair and make you superior to other members on the right sidebar! The colors look really nice.\n\nCheck savings by `.$`. Check level by `.xp`\n\n__Bronze__: 200 🌸; **if level 5**, 90 🌸\n__Silver__: 360 🌸; **if level 10**, 180 🌸 \n__Gold__: 680 🌸; **if level 20**, 370 🌸 \n__Diamond__: 1320 🌸; **if level 30**, 760 🌸 \n\nAre you just that special that you want your own colour? Well then buy:\n\n__ChooseColor__: 500 🌸 \n\nChange your colour to whatever you want using the `!color` command.\n Does not affect your right sidebar standings; it's for ye vain ones.",
+			"footer": {
+				"text": "Role rewards must be bought in order."
+			}
+		},
+		"ticket": {
+			"title": "Claim your flowers",
+			"description": "Type `.ticket add [flowers] [reason]` to claim your 🌸.\n• If you claim 🌸 for a tournament please add the link to the tournament\n• If you claim for a match add timecontrol, number of games and the link of the first game\n• If you claim for inviting a user plug in his name as a reason",
+			"footer": {
+				"text": "Use `... tournament` if you need to calculate the amount first."
+			},
+			"fields": [{
+				"name": "Example",
+				"value": "`.ticket add 31 for this tournament https://lichess.org/tournament/4ihC4TfT`",
+				"inline": true
+			}],
+			"thumbnail": {
+				"url": "https://i.imgur.com/Jnbg4fG.png"
+			}
+		},
+		"trivia": {
+			"title": "House Trivia",
+			"description": "Based on **number of participants** in the trivia game! Bigger rewards, more features for better games.",
+			"fields": [{
+					"name": "Winnings",
+					"value": "**1** player: 0 🌸 for 1st\n**2** players: 3 🌸 for 1st, 1 🌸 for 2nd\n**3** players: 4 🌸 for 1st, 2 🌸 for 2nd\n**4** players: 5 🌸 for 1st, 3 🌸 for 2nd, 1 🌸 for 3rd\n**5** players 6 🌸 for 1st, 4 🌸 for 2nd, 2 🌸 for 3rd\n**6 players** 7 🌸 for 1st, 5 🌸 for 2nd, 3 🌸 for 3rd, 1 🌸 for 4th\n... and so on.\n\nPayouts are done automatically.\nPokemon trivia is not rewarded 🌸.",
+					"inline": false
+				},
+				{
+					"name": "Rating",
+					"value": "Trivia games are now rated using a formula and mechanism developed by <@!373480715276517376> and <@340287144448884748> respectively! More info to come...",
+					"inline": false
+				}
+			]
+		},
+		"greet": [{
+				"content": "**Welcome to The House %user.mention%!** Let's get the party started @welcome squad.\n",
+				"description": "**We're the home of chess variants across lichess.org, chess.com, FICS, and anywhere else.**\u200b",
+				"color": 9359868,
+				"footer": {
+					"text": "Have fun!"
+				},
+				"thumbnail": {
+					"url": "https://i.imgur.com/YWF70U4.png"
+				},
+				"fields": [{
+						"name": "View our channels",
+						"value": "You won't be able to see most of our channels until you're a **Member.**\nFirstly, familiarise yourself with the rules in #welcome.\nThen, head to #role-assignment and assign yourself permissions to see the chat channels and your favourite variant channels.\n\u200b",
+						"inline": false
+					},
+					{
+						"name": "How the hell do I use Discord?",
+						"value": "First time? type `... discord` for our guide on navigating this place.\n\u200b",
+						"inline": false
+					},
+					{
+						"name": "Link your accounts",
+						"value": "Type `!lichess` followed by your account name.\nType `!chess.com` followed by your account name.\n\u200b",
+						"inline": false
+					},
+					{
+						"name": "Crazyhouse World Championships",
+						"value": "Type `.iam CWC` to see the CWC channels on the left.\n\u200b",
+						"inline": false
+					},
+					{
+						"name": "Developers",
+						"value": "If you're a dev, type `@mods I'm a dev` and you'll be added to #devs.",
+						"inline": false
+					}
+				]
+			},
+			{
+				"content": "**Welcome to The House %user.mention%!** Let's get the party started @welcome squad.",
+				"description": "**Bienvenue à \"Chez Nous\"!** C'est une plateforme géniale pour discuter les variantes d'échecs de lichess.org, chess.com, FICS, et n'importe où.\n\nVous ne pouvez pas voir et utiliser la majorité de salons de chat avant s'inscrire comme un Membre. Pour faire ça, après avoir lu les règles dans #welcome, allez à #role-assignment et lisez les instructions. Réagissez avec les emojis appropriés pour gagner l'accès aux salons.\n\nSi vous êtes en général plus confortables en parlant français, écrivez `.atl fr>en` pour faire traduire au bot automatiquement vos phrases.",
+				"color": 12956504,
+				"thumbnail": {
+					"url": "https://i.imgur.com/E8S8QXE.png"
+				}
+			},
+			{
+				"content": "**Welcome to The House %user.mention%!** Let's get the party started @welcome squad.",
+				"description": "**Willkommen in \"The House\"!** Wir sind dein Zuhause für Schachvarianten auf lichess.org, chess.com , FICS und an allen anderen Orten.\n\nDie meisten Kanäle werden für dich unsichtbar sein, solange du noch kein **Mitglied**bist. Wenn du die Regeln in #welcome durchgelesen hast, gehe bitte zu #role-assignment und weise dir die Berechtigungen zu, sodass du die Chat- und Varianten-Kanäle sehen kannst.\n\nFalls du nicht so gut mit English klarkommst, schreibe `.atl de>en`, um deine Nachrichten automatisch übersetzen zu lassen.",
+				"color": 12956504,
+				"thumbnail": {
+					"url": "https://i.imgur.com/E8S8QXE.png"
+				}
+			},
+			{
+				"content": "**Welcome to The House %user.mention%!** Let's get the party started @welcome squad.",
+				"description": "**Bienvenidos a \"Nuestra Casa\"!** Aquí podrás discutir los variantes de ajedrez de lichess.org, chess.com, FICS y otros sitios.\n\nLa mayoría de los canales aquí solo se pueden ver si eres un **Miembro.** Cuando te has familiarizado con las reglas en #welcome, por favor, ven a #role-assignment para asignarte unas roles y ver los canales de chat y los canales de tus variantes favoritos.\n\nSi prefirirías hablar español, escriba `.atl es>en` para que el bot traduzca automáticamenta lo que escribes.",
+				"color": 12956504,
+				"thumbnail": {
+					"url": "https://i.imgur.com/E8S8QXE.png"
+				}
+			},
+			{
+				"content": "**Welcome to The House %user.mention%!** Let's get the party started @welcome squad.",
+				"description": "**Benvenuto in \"The House!\"** Questa è la casa di tutte le varianti degli scacchi presenti su lichess.org, chess.com, FICS e in qualsiasi altro luogo.\n\nNon potrai vedere o usare molti dei nostri canali finchè non sarai un Membro degli stessi. Dopo aver  preso visione delle regole in #welcome, entra in #role-assignment e conferisciti i permessi per vedere le chat e i canali delle tue varianti preferite.\n\nSe in generale vi trovate più a vostro agio nel parlare Italiano, digitate `.atl it>en` così che il bot traduca automaticamente le vostre frasi.",
+				"color": 12956504,
+				"thumbnail": {
+					"url": "https://i.imgur.com/E8S8QXE.png"
+				}
+			}
+		],
+		"guides": {
+			"title": "How to edit an Official™ House Discord Guide",
+			"description": "Head to [this url](https://github.com/theLAZYmd/LAZYbot/edit/master/src/data/embeds.json) which is the bot's **GitHub Repo**.\nScroll down to the section of the data relevant to you. You can do that by viewing the `\"title`\" of each embed and making the correlation to the title you're looking for, or `Ctrl+F`-ing a suitable word or phrase that will help you identify it.",
+			"fields": [{
+					"name": "1. Edit the JSON for that embed.",
+					"value": "If it's a minor correction, this shouldn't be an issue, just add it in the change required. If you're doing something more complicated, or you don't understyand what's going on here, have a look at [this article](https://www.red-gate.com/simple-talk/sql/oracle/json-for-absolute-beginners-part-1-introduction/) or ask someone in #devs for help.\nSwitch to the `soft-wrap` mode in the top right of the editing box if that makes things easier.",
+					"inline": false
+				},
+				{
+					"name": "2. Submit the Pull Request.",
+					"value": "Scroll down to the bottom.\nWrite a one-line description for what you've done to the file in the 'Update embeds.json' field, then write a more detailed description below if necessary.\nPress `Propose file change`! When the next page loads up, click `Create Pull Request` whenever it appears. \nWe'll review what you've done and correct it if necessary before approving! As soon as your changes are approved their live on the bot!",
+					"inline": false
+				}
+			]
+		},
+		"events": [{
+				"title": "HOUSE EVENT - TRIVIA CHAMPIONSHIP",
+				"description": "Yeah, you read that right. We're going to do a tournament of your favourite server game, and crown one of you the **TRIVIA CHAMPION** of the {year/month/week/season/depends on how I'm feeling}.\n\nHere's how it works:",
+				"color": 53380,
+				"footer": {
+					"text": "Best of luck!"
+				},
+				"fields": [{
+						"name": "QUALIFIERS",
+						"value": "Monday to Thursday. 9pm UTC **EVERY DAY** qualifiers. Rules are simple: at 8.30pm UTC exactly, trivia will be disabled, then at 9pm, lazy will type `.trivia 20`. A 20-question game of trivia will be played. **Win one of those qualifiers**... to qualify.",
+						"inline": true
+					},
+					{
+						"name": "SEMIFINALS",
+						"value": "Friday. 9PM UTC. Semi-Finals. The 4 semifinalists are seeded, and #1 seed plays #4 and #2 plays #3. Winner goes through to Finals. 10-question trivia, best of 5.",
+						"inline": true
+					},
+					{
+						"name": "3RD AND 4TH PLAYOFF",
+						"value": "Saturday. 9PM UTC. The two losers from the semifinals play a series of 5. 10-question trivia. Winner gets 3rd place and is awarded 20 :cherry_blossom:, loser get's 4th and is awarded 10 :cherry_blossom:.",
+						"inline": true
+					},
+					{
+						"name": "FINALS",
+						"value": "Sunday. 7PM UTC. Series of 5, 10-question trivia. Loser wins 2nd place and 30 :cherry_blossom:. Winner gets title of **HOUSE TRIVIA CHAMPION** (new role) and 50 :cherry_blossom:.",
+						"inline": true
+					}
+				]
+			},
+			{
+				"title": "HOUSE EVENT - SHIELDS",
+				"description": "\nAlright, same deal as last time, good luck in those Shield Arenas.\n​\n",
+				"color": 53380,
+				"footer": {
+					"text": "Best of luck!"
+				},
+				"fields": [{
+						"name": "SHIELDS",
+						"value": "Win a lichess shield! Head [here](https://lichess.org/tournament/calendar) to see the dates of the shield. Win 1 to be awarded VIP role + 50 :cherry_blossom:. Payouts for high performers too.",
+						"inline": true
+					},
+					{
+						"name": "Rankings ",
+						"value": "Top 30 win 10 :cherry_blossom:\nTop 20 win 20 :cherry_blossom:\nTop 10 win 30 :cherry_blossom:\nTop 3 win 40 :cherry_blossom:",
+						"inline": true
+					}
+				]
+			}
+		],
+		"cwc": [{
+				"image": "https://i.imgur.com/ZSI6HEj.png"
+			},
+			{
+				"author": {
+					"name": "CRAZYHOUSE WORLD CHAMPIONSHIP 2018"
+				},
+				"thumbnail": {
+					"url": "https://i.imgur.com/pMkkATk.png"
+				},
+				"title": "FOREWORD",
+				"description": "Over a year has passed since lichess’s Crazyhouse World Championship (CWC) was created. Last time we had a qualification round with 64 players, then three knockout rounds (R64, R32 and R16), after which the eight Candidates remained. Those final eight players played a Candidates Tournament which led to the finals between **TwelveTeen** and **JannLee**. During three weeks, they played 60 thrilling games. After the dust settled, the final score was 31,5-28,5 in favor of **JannLee**, making him the first Crazyhouse World Champion. \n\nToday, it’s time to continue this story. Champions are not born; they are made in the quiet hours when nobody is watching. Sign-ups for the 2nd edition of the CWC start on February 1. Do you have what it takes to be the next champion?"
+			},
+			{
+				"author": {
+					"name": "CRAZYHOUSE WORLD CHAMPIONSHIP 2018"
+				},
+				"thumbnail": {
+					"url": "https://i.imgur.com/pMkkATk.png"
+				},
+				"title": "INFORMATION",
+				"fields": [{
+						"name": "Time Control",
+						"value": "3 + 2 for the whole event",
+						"inline": false
+					},
+					{
+						"name": "Format",
+						"value": "The championship will start out as a knockout, but when 8 players are left, they will play a round-robin Candidates tournament! The first place finisher of that tournament will play a WC match against the incumbent WC (1st CWC WC, JannLee).",
+						"inline": false
+					},
+					{
+						"name": "Prize Pool",
+						"value": "$1000\n**Update:** upped by an additional $1100 from the generous fundraising of <@364388430412513281> through his Twitch donators to payout to the candidates.",
+						"inline": false
+					},
+					{
+						"name": "Prize Fund Distribution",
+						"value": "$300 WC, $200 challenger, $50 for 8 candidates, 100$ Prediction tournament ($50 #1, $30 #2, $20 #3)\n<@364388430412513281> fundraising is distributed with $100 to each candidate.",
+						"inline": false
+					},
+					{
+						"name": "Start Date",
+						"value": "Feb 15 2018",
+						"inline": true
+					},
+					{
+						"name": "Sign-Ups",
+						"value": "Feb 1 2018 - Feb 14 2018",
+						"inline": true
+					},
+					{
+						"name": "Information and Rules",
+						"value": "https://sites.google.com/site/2ndcrazyhouseworldchampionship/",
+						"inline": false
+					},
+					{
+						"name": "History",
+						"value": "<https://sites.google.com/site/crazyhouseworldchampionship/home>\n<https://lichess.org/forum/team-crazyhouse-world-championship/time-control>\n<https://lichess.org/forum/team-crazyhouse-world-championship/time-control-voting>",
+						"inline": false
+					}
+				]
+			}
+		],
+		"cwc-rules": [{
+				"image": {
+					"url": "https://i.imgur.com/v5fg6wH.png"
+				}
+			}, {
+				"title": "Entrant Eligibility",
+				"description": "Entrants who meet the following criteria will be accepted automatically:\n\n**1.** Have an established crazyhouse rating on lichess.\n\n**2.** Have played at least 50 rated crazyhouse games on lichess.\n\n**3.** Have had an account on lichess for over 1 month at the time of entry.\n\n**4.** Be participating only using their main account (no dupe accounts).\n\n**5.** Have messaged the TD (FischyVishy) with intent to join **within** the entry period.\n\n**6.** Have joined the Crazyhouse World Championship group.\n\nPoints 1, 2 and 3 above are aimed primarily at preventing duplicate accounts from entering. Entries not meeting these criteria may still be accepted and seeded at the TD's discretion.\n\nExceptions are most likely to be made for players known within the crazyhouse community who clearly are not using duplicate accounts.\n\nAny player attempting to use multiple accounts or computer assistance will be kicked out and if necessary reported to lichess moderators.",
+				"thumbnail": "https://i.imgur.com/AaQkW8G.png"
+			},
+			{
+				"title": "Knockout Tournament Rules I",
+				"description": "You will be paired with a player for a round. There will be a week for you to play your round in, with a week in between rounds as breaks / negotiation periods. Please note the following stipulations:\n\n**1.** It is preferable if the games are rated. If **both** players agree then some or all games can be unrated.\n\n**2.** Results **and** games of each match should be messaged to the TD upon completion.\n\n**3.** All matches will consist of an equal number of White games per player.\n\n**4.** Each match will consist of ten (10) games of 3 + 2.\n\n**5.** If the score is 5-5 after 10 games then the tie-break will consist of games of 3 + 2, until one player is ahead after an even number of games.\n\n**6.** Either player can stop the match if someone reaches 5.5 points in the first 10 games, as long as the player stopping the match has not played more rated White games than their opponent.\n\n**7.** Each player is entitled to a short break of approximately 10 minutes after every 2 games (these breaks can be accumulated).\n\n**8.** The tournament main draw will have 128 players. If the number of entrants is not equal to 128 players, a qualification tournament will be held. The x number of top-finishers from said tournament will get a spot in the knockouts.",
+				"color": 53380,
+				"thumbnail": "https://i.imgur.com/0koqrUA.png"
+			},
+			{
+				"title": "Knockout Tournament Rules II",
+				"description": "**9.** Assuming there are 128 players, after the first round there will be 64 players left and so on until there are 8 players left.\n\n**10.** The initial pairing will have the top seed vs. bottom seed, the second seed vs. second from bottom, etc. For example, in an eight player event: (1) vs. (8), (2) vs. (7), (3) vs. (6), (4) vs. (5). The winner of (1) vs. (8) will then play the winner of (4) vs. (5) and the winner of (2) vs. (7) will play the winner of (3) vs. (6). The winner of those matches would then contest the \"final\" (before the Candidates).\n\n**11.** The seeding will be based on the average between a player’s current rating and highest rating at the time their entry is received & logged.\n\n**12.** If somebody is unable to complete a series, or has to withdraw, their opponent is considered the victor. Only emergencies can exempt players from having this rule applied to them. Byes may be issued in the case of an odd number of players.\n\n**13.** If someone knows they will not be able to play a certain week when a round is scheduled, they must notify the TD before they play their prior match. At the TD's discretion their match may be moved to the following week. This will only occur a maximum of one time per player.\n\n**14.** After each match, players will typically have at least a week's rest until the next match. A possible exception is when a player has notified the TD of their unavailability (point 13).\n\n**15.** Once the knockout tournament cuts down the number of players to 8, a candidates tournament will take place.",
+				"color": 53380,
+				"thumbnail": "https://i.imgur.com/0koqrUA.png"
+			},
+			{
+				"title": "Candidates Tournament Rules",
+				"description": "The candidates tournament will be a round robin event. Each player will play each of the other seven players in a 3 + 2 match similar to those matches of the knockout tournament stage. Thus, each player will play 90 games in the Candidates. The playing period of these matches will extend for two weeks. The winner of the candidates tournament will challenge the world champion ([JannLee](https://lichess.org/@/JannLee)) for a shot at the crazyhouse title.\n\n**1.** It is preferable if the games are rated. If **both** players agree then some or all games can be unrated.\n\n**2.** Results **and** games of each match should be messaged to the TD upon completion.\n\n**3.** All matches will consist of an equal number of White games per player.\n\n**4.** Each match will consist of ten (10) games of 3 + 2.\n\n**5.** Do note that there are no tie breaks and the matches cannot be stopped if a player reaches 5.5. Only in case of a tie after all 90 games will tiebreak rules apply (the tiebreaks are the same as those of the knockout tournament stage).\n\n**6.** Each player is entitled to a short break of 10 minutes after every 2 games (these breaks can be accumulated).\n\n**7.** If somebody is unable to complete a series, or has to withdraw, their opponent is considered the victor. Only emergencies can exempt players from having this rule applied to them.\n\n**8.** One candidates spot is reserved for last year's challenger to the crown ([TwelveTeen](https://lichess.org/@/TwelveTeen)) and another is reserved for a wild card ([opperwezen](https://lichess.org/@/opperwezen), third place in last year's Candidates). There will be 8 participants from the knockout event, so the number of Candidates tournament participants is 10 players.",
+				"color": 53380,
+				"thumbnail": "https://i.imgur.com/R6LA5bC.png"
+			},
+			{
+				"title": "Match Negotiations",
+				"description": "**1.** Players may begin negotiating a playing start time as soon as their next pairing is known.\n\n**2.** Each player is responsible to offer at least three separate times for the match, during the rest week, unless an offer has been accepted before that number is reached.\n\n**3.** The three offered times should be no closer than three hours to each other and no more than two on a single date.\n\n**4.** If three offers are not made in time, the player at fault must accept a time chosen by the opponent.\n\n**5.** If both players fail to make three offers by the deadline, a match arbiter will assign a time.\n\n**6.** A player should respond to an offer by accepting or making a different offer, preferably within 24 hours.\n\n**7.** If a player is excessively or repeatedly late for scheduled matches, they may be forfeited.\n\n**8.** If both players make three offers but no agreement is made before the playing week begins, a match arbiter will determine if fault lies with a particular player.\n\n**9.** If a player is at fault, their opponent will decide the match time; if no player is at fault, the match arbiter will assign a match time.",
+				"color": 53380,
+				"thumbnail": "https://i.imgur.com/7Btk5jL.png"
+			},
+			{
+				"title": "World Championship Rules",
+				"description": "The world championship will be played in a three-week period. In each week, two 10-game 3 + 2 matches will take place. The first player to reach 30.5 / 60 will be declared the winner. Please note the following stipulations:\n\n**1.** It is preferable if the games are rated. If **both** players agree then some or all games can be unrated.\n\n**2.** Results **and** games of each match should be messaged to the TD upon completion.\n\n**3.** All matches will consist of an equal number of White games per player.\n\n**4.** Each match will consist of ten (10) games of 3 + 2.\n\n**5.** Each player is entitled to a short break after every 2 games of approximately 10 minutes (these breaks can be accumulated).\n\n**6.** If somebody is unable to complete a series, or has to withdraw, their opponent is considered the victor. Only emergencies can exempt players from having this rule applied to them.\n\n**7.** Note that the final of the Crazyhouse World Championship will be played during three consecutive weeks – there will be no rest weeks.",
+				"color": 53380,
+				"thumbnail": "https://i.imgur.com/JbhAKpz.png"
+			},
+			{
+				"title": "Reporting Cheaters",
+				"description": "**1.** Accusations of cheating must be made privately to a member of the anti-cheating panel.\n\n**2.** The accusation must make reference to at least one specific game.\n\n**3.** If an accusation is made publicly and does not lead to a guilty verdict, the accuser will be forfeited & banned from future events.\n\n**4.** The anti-cheating panel will consist of five members.\n\n**5.** The anti-cheating panel must all believe a player to be guilty 5-0 for a player to be forfeited. 100% proof is not required.\n\n**6.** If a member of the panel is either the accuser or accused, their place on the panel will be taken by a substitute.",
+				"color": 53380,
+				"thumbnail": "https://i.imgur.com/bzTbisk.png"
+			}
+		],
+		"cwc-players": [{
+				"image": {
+					"url": "https://i.imgur.com/4zY6Neg.png"
+				}
+			},
+			{
+				"description": "```css\n| #   Name				 Rtng |	   \u200b\n|							   |\n| 1   gnejs				2878 |\n| 2   allyouneedisluft	 2870 |\n| 3   mastertan ∗		  2837 |\n| 4   xuanet ∗			 2748 |\n| 5   blitzbullet		  2739 |\n| 6   FeegLood			 2717 |\n| 7   littleplotkin ∗	  2683 |\n| 8   penguingim1 ∗		2680 |\n| 9   Vempele ∗			2668 |\n| 10  B0N0B0			   2658 |\n| 11  Mugwort ∗			2656 |\n| 12  garnek123 ∗		  2628 |\n| 13  gsvc ∗			   2625 |\n| 14  JohnStuckey		  2615 |\n| 15  SpinalTap			2612 |\n| 16  helmsknight ∗		2605 |\n| 17  sexy_and_i_know_it ∗ 2601 |\n| 18  HighContrast ∗	   2594 |\n| 19  atamek ∗			 2583 |\n| 20  apterigo			 2564 |\n| 21  profz				2563 |\n| 22  Kleerkast ∗		  2562 |\n| 23  retardedplatypus123∗ 2561 |\n| 24  pknm				 2546 |\n| 25  CheeseMuffin		 2542 |\n| 26  TaylorEternity	   2534 |\n| 27  crosky ∗			 2524 |\n| 28  Fumitoks ∗		   2523 |\n| 29  chewythechewer	   2518 |\n| 30  terra87			  2515 |\n| 31  Gabix94			  2513 |\n| 32  larso ∗			  2504 |\n| 33  mathace ∗			2494 |\n| 34  exMOHAX ∗			2483 |\n| 35  ArtOfDeception ∗	 2469 |\n| 36  matser			   2460 |\n| 37  Kielileike ∗		 2447 |\n| 38  ciw				  2443 |\n| 39  MrSok				2429 |\n| 40  amaidel			  2418 |\n\n∗ Participant is a member of The House\n```",
+				"color": 53380
+			},
+			{
+				"description": "```css\n| #   Name				 Rtng |	   \u200b\n| 41  burpcow ∗			2415 |\n| 42  Chucklemagne ∗	   2410 |\n| 43  emrty ∗			  2403 |\n| 44  gekkokamen		   2395 |\n| 45  KingSwitcher		 2382 |\n| 46  MagicAndy			2382 |\n| 47  esken ∗			  2379 |\n| 48  I0euros			  2374 |\n| 49  arjelol			  2373 |\n| 50  TcubesAK ∗		   2366 |\n| 51  Arka50			   2354 |\n| 52  vsshk ∗			  2346 |\n| 53  onubense			 2337 |\n| 54  VariantsOnly ∗	   2329 |\n| 55  samuelhaupt3		 2326 |\n| 56  anduchess			2314 |\n| 57  recastrov			2308 |\n| 58  KyleLegion ∗		 2307 |\n| 59  Orlando_Gloom		2304 |\n| 60  theLAZYmd ∗		  2302 |\n| 61  JakeF				2296 |\n| 62  BughouseMASTER	   2285 |\n| 63  Antic ∗			  2284 |\n| 64  wannabe2700		  2280 |\n| 65  unjournakamura ∗	 2280 |\n| 66  MrBadbeat			2279 |\n| 67  off_white			2278 |\n| 68  Melee				2271 |\n| 69  Mollus			   2267 |\n| 70  Phuzer			   2266 |\n| 71  PawnInTraining ∗	 2260 |\n| 72  bennyk			   2259 |\n| 73  Alexnader123		 2249 |\n| 74  cross_online ∗	   2248 |\n| 75  Nekipelov			2244 |\n| 76  AusHoin			  2243 |\n| 77  CrazyHome ∗		  2232 |\n| 78  dampooo			  2230 |\n| 79  V2chess ∗			2227 |\n| 80  Cocaino74 ∗		  2225 |\n\n∗ Participant is a member of The House\n```",
+				"color": 53380
+			},
+			{
+				"description": "```css\n| #   Name				 Rtng |	   \u200b\n| 81  Karagialis		   2218 |\n| 82  Bofrostmann		  2215 |\n| 83  kathiyitis		   2213 |\n| 84  bferl				2208 |\n| 85  IgorBugMate ∗		2202 |\n| 86  ubdip				2192 |\n| 87  broskall6			2191 |\n| 88  isaacly ∗			2179 |\n| 89  Flourish ∗		   2178 |\n| 90  anandthelegend	   2171 |\n| 91  Yery				 2168 |\n| 92  TheBayArea		   2162 |\n| 93  LegionDestroyer ∗	2149 |\n| 94  the-lone-wolf ∗	  2148 |\n| 95  jbegis ∗			 2145 |\n| 96  TrumPower			2140 |\n| 97  googa				2138 |\n| 98  RequiemZH ∗		  2137 |\n| 99  Ominous ∗			2122 |\n| 100 samoyd ∗			 2118 |\n| 101 blunderman1 ∗		2117 |\n| 102 chesssky2 ∗		  2116 |\n| 103 syncopation ∗		2116 |\n| 104 amaan1			   2109 |\n| 105 Schachmalanders	  2109 |\n| 106 medeved9112		  2104 |\n| 107 lovlas ∗			 2097 |\n| 108 Toadofsky ∗		  2085 |\n| 109 Simba7 ∗			 2093 |\n| 110 Velpeau			  2086 |\n| 111 blindlyzerking	   2056 |\n| 112 Sonata2 ∗			2051 |\n| 113 RussianDragun		2041 |\n| 114 rohangupta4398	   2037 |\n| 115 Andrey_2888 ∗		2018 |\n| 116 ilaaaaaaaaaaaaaaares 1996 |\n| 117 okei ∗			   1993 |\n| 118 Superclass		   1987 |\n| 119 Vycm				 1969 |\n| 120 szura				1968 |\n\n∗ Participant is a member of The House\n```",
+				"color": 53380
+			},
+			{
+				"description": "```css\n| #   Name				 Rtng |	   \u200b\n| 121 ProgramFOX ∗		 1958 |\n| 122 DeepInTheHole ∗	  1944 |\n| 123 Deadban ∗			1942 |\n| 124 kordet26			 1940 |\n| 125 Shalter			  1933 |\n| 126 just2play			1930 |\n| 127 yellowdragoon		1926 |\n| 128 Conquerrist		  1910 |\n| 129 ilovepie			 1910 |\n| 130 bermudas			 1899 |\n| 131 Viktor_le_Terrible   1875 |\n| 132 andreijl ∗		   1863 |\n| 133 staskamaev		   1862 |\n| 134 vagician			 1854 |\n| 135 MeetYourDemise	   1831 |\n| 136 eashwar			  1831 |\n| 137 viiiiiid			 1813 |\n| 138 Snotaap			  1781 |\n| 139 liamchez			 1777 |\n| 140 Mis_Drndac		   1765 |\n| 141 aljopeljhan		  1748 |\n| 142 BigChicken		   1745 |\n| 143 azuaga_casual		1735 |\n| 144 andreask27		   1713 |\n| 145 chesscoachIM		 1697 |\n| 146 adityapande9		 1685 |\n| 147 marinavalenciamorena 1646 |\n| 148 Overliner			1642 |\n| 149 DraculeTheDarkOne	1641 |\n| 150 verdy ∗			  1610 |\n| 151 acgusta2			 1581 |\n| 152 Big_McLargeHuge	  1567 |\n| 153 jg2017			   1560 |\n| 154 surajaswath		  1545 |\n| 155 Marafonez			1540 |\n| 156 J--p				 1510 |\n| 157 the_loving_boy	   1448 |\n| 158 RisingChessStarMWOW  1422 |\n| 159 Kronsteen33		  1403 |\n\n∗ Participant is a member of The House\n```",
+				"color": 53380
+			}
+		],
+		"awc": [{
+				"image": {
+					"url": "https://i.imgur.com/ggd3jTR.png"
+				}
+			}, {
+				"title": "ATOMIC WORLD CHAMPIONSHIP 2018",
+				"description": "Welcome to the 3rd iteration of the Atomic World Championship (played on lichess.org). Will Arka50 be able to defend his crown or will someone else take it? Follow the championship [here](https://sites.google.com/site/atomicchesswc/home).",
+				"color": 53380,
+				"fields": [{
+						"name": "2017",
+						"value": "Champion: Arka50 \nRunner-up: onubense",
+						"inline": true
+					},
+					{
+						"name": "2016",
+						"value": "Champion: tipau \nRunner-up: onubense",
+						"inline": false
+					}
+				]
+			},
+			{
+				"title": "INFORMATION",
+				"color": 53380,
+				"fields": [{
+						"name": "Time Control",
+						"value": "3 + 2 for all matches ",
+						"inline": true
+					},
+					{
+						"name": "Format",
+						"value": "The tournament is a double elimination knockout. Each match will be a best of 10, i.e. first to score 5.5.",
+						"inline": true
+					},
+					{
+						"name": "Sign-Ups",
+						"value": "Aug 27 2018 - Sep 22 2018",
+						"inline": true
+					},
+					{
+						"name": "Start Date",
+						"value": "Sep 25 2018",
+						"inline": true
+					},
+					{
+						"name": "Information and Rules",
+						"value": "https://sites.google.com/site/atomicchesswc/2018-awc/",
+						"inline": true
+					},
+					{
+						"name": "Links",
+						"value": "https://challonge.com/atomicwc2018 \nhttps://lichess.org/forum/team-atomic-wc",
+						"inline": false
+					},
+					{
+						"name": "",
+						"value": "",
+						"inline": true
+					}
+				]
+			}
+		],
+		"awc-rules": [{
+				"image": {
+					"url": "https://i.imgur.com/nvAw2gJ.png"
+				}
+			}, {
+				"title": "Entrant Eligibility",
+				"description": "Entrants who meet the below criteria are eligible to take part:\n\n**1.** Have an established atomic rating on lichess;\n\n**2.** Have played at least 250 rated atomic games on lichess;\n\n**3.** Have had an active playing account on lichess throughout 2018;\n\n**4.** Be participating ONLY using their main account;\n\n**5.** Have messaged the TD (tipau) with an interest in participating;\n\n**6.** Have joined the Atomic World Championship group\n\nPoints 1-3 are aimed primarily at preventing duplicate accounts from entering. Entries not meeting these criteria may still be accepted at the TD's/Entry Approval Panel's discretion. \n\nExceptions are most likely to be made for players known within the atomic community.\n\nAny player attempting to use multiple accounts or computer assistance will be kicked out and if necessary reported to lichess moderators.",
+				"thumbnail": "https://i.imgur.com/AaQkW8G.png"
+			},
+			{
+				"title": "Knockout Tournament Rules I",
+				"description": "The tournament will be a double elimination knockout. You will be paired with a player for a round. There will be one week for you to arrange a time and complete the games. Please note the following stipulations:\n\n**1.** All games are by default unrated. If **both** players agree then some or all games can be rated.\n\n**2.** Results **and** games of each match should be communicated to the TD upon completion.\n\n**3.** Each match will consist of ten (10) games of 3 2.\n\n**4.** Either player can stop the match if someone reaches 5.5 points in the first 10 games, as long as the player stopping the match has not played more rated White games than their opponent.\n\n**5.** If the score is 5-5 after 10 games then two pairs of tiebreak games of 3 2 will be played, with the match stopping if one player is ahead after an even number of games.\n\n**6.** If the score reaches 7-7 without a winner then an armageddon match will be played. Black will have 3 minutes and draw odds. Each player will message the TD a time offer for White, with the lowest offer playing White. If the offers are identical the higher seed will play White. There will be no increment.\n\n**7.** A player can request a maximum of 2 breaks between games, of approximately 10 minutes, during a match.",
+				"color": 53380,
+				"thumbnail": "https://i.imgur.com/0koqrUA.png"
+			},
+			{
+				"title": "Knockout Tournament Rules II",
+				"description": "**8.** The tournament main draw will have either 16, 32 or 64 players.\n\n**9.** If a player loses a match they will enter the losers bracket. If they lose a second match they will be eliminated from the tournament.\n\n**10.** Assuming there are 64 players, after the first round there will be 32 players in the winners bracket and 32 in the losers bracket. After the second match there will be 16 players in the winners bracket and 32 in the losers bracket, and so on.\n\n**11.** The tournament ends when there is only 1 player remaining who hasn't been defeated in two matches.\n\n**12.** The initial pairing will have the top seed vs bottom seed, the second seed vs second from bottom etc. For example in an eight player event: (1) v (8), (2) v (7), (3) v (6), (4) v (5). The winner of (1) v (8) will then play the winner of (4) v (5) and the winner of (2) v (7) will play the winner of (3) v (6).\n\n**13.** The seeding will be based on the average between a players current rating and their rating at the time the tournament is opened for entries (1st September).\n\n**14.** If somebody is unable to complete a series, or has to withdraw, then their opponent is considered the victor. Byes may be issued in the case of an odd number of players.\n\n**15.** If someone knows they will not be able to play a certain week when a round is scheduled they must notify the TD **before** they play their **prior** match. At the TD's discretion their match may be moved to the following week. This will only occur a maximum of 1 time per player.",
+				"color": 53380,
+				"thumbnail": "https://i.imgur.com/0koqrUA.png"
+			},
+			{
+				"title": "Match Negotiations",
+				"description": "**1.** Players may begin negotiating a playing start time as soon as their next pairing is known.\n\n**2.** Each player is responsible to offer at least 3 separate times for the match, by Wednesday at the latest, unless an offer has been accepted before that number is reached.\n\n**3.** The 3 offered times should be no closer than 3 hours to each other and no more than 2 on a single date.\n\n**4.** If 3 offers are not made in time the player at fault must accept a time chosen by the opponent.\n\n**5.** If both players fail to make 3 offers by the deadline then a match arbiter will assign a time.\n\n**6.** A player should respond to an offer by accepting or making a different offer, preferably within 24 hours.\n\n**7.** If a player is excessively or repeatedly late for scheduled matches they may be forfeited.\n\n**8.** If both players make 3 offers but no agreement is made before the weekend then a match arbiter will determine if fault lies with a particular player.\n\n**9.** If a player is at fault then their opponent will decide the match time, if no player is at fault the match arbiter will assign a match time.",
+				"color": 53380,
+				"thumbnail": "https://i.imgur.com/R6LA5bC.png"
+			},
+			{
+				"title": "Reporting Cheaters",
+				"description": "**1.** Accusations of cheating must be made privately to a member of the anti-cheat panel.\n\n**2.** The accusation must make reference to at least one specific game.\n\n**3.**  If an accusation is made publicly and does not lead to a guilty verdict the accuser will be forfeited & banned from future events.\n\n**4.** The anti-cheat panel must all believe a player to be guilty for a player to be forfeited. 100% proof is not required.\n\n**5.** If a member of the panel is either the accuser or accused their place on the panel will be taken by another.",
+				"color": 53380,
+				"thumbnail": "https://i.imgur.com/JbhAKpz.png"
+			},
+			{
+				"title": " Team/Contacts ",
+				"description": "Tournament officials consist from the following teams.\n\n**Tournament Director (TD)**\ntipau:  https://en.lichess.org/@/tipau\n\n**Anti-Cheat Panel**\nProgramFox: https://lichess.org/@/Programfox\ntipau:  https://en.lichess.org/@/tipau\n\n**Entry Approvals Panel**\nProgramFox: https://lichess.org/@/Programfox\ntipau:  https://en.lichess.org/@/tipau\n\n**Match Arbiters**\ntipau:  https://en.lichess.org/@/tipau",
+				"color": 53380,
+				"thumbnail": "https://i.imgur.com/7Btk5jL.png"
+			}
+		],
+		"games": [{
+				"title": "Welcome to grindroll. Here are the rules.",
+				"description": "• Start with `.give x @grindonmygrande`\n• Roll 2 dice using `.roll 2`  \n  \n• If you roll a **2,3,4,9,10,11,12** you win!\n• Payout **2x** for **3,4,9,10,11**\n• Payout **3x** for **2,12**\n  \nWait for @Grindonmygrande#6203 to be online.",
+				"thumbnail": {
+					"url": "https://i.imgur.com/R9sk7iZ.png"
+				}
+			},
+			{
+				"title": "Rules of Music Flip & Roll",
+				"description": "1. Start by typing`.give x @Musickn`\n2. Flip 30 using `.roll 30`.\n3. If your average is lower than **2.85 or higher** than an average of **4.05**, then you get to flip a coin. Call **heads** or **tails**. If you win the coin flip, then you get **3x** what you bet!\n4. If your average is lower than **3.45**, then you get to flip a coin. Call **heads** or **tails**. If you win the coin flip you, then get **2x** what you bet!\n5. If your average is lower than **3.55**, then you get to flip a coin. Call **heads** or **tails**. If you win the coin flip, then you get **1.5x** what you bet!\n\nFlip by using `.flip`.\nHave fun!",
+				"thumbnail": {
+					"url": "https://i.imgur.com/w1Ne9aK.jpg"
+				}
+			},
+			{
+				"title": "Welcome to LAZYflip. Here are the rules to the game.",
+				"description": "• Start with `.give x <@!185412969130229760> n`, where n is the length of the game 'first to what'\n• Continuously flip a coin using `.flip`\n\n• If you get **2 heads in a row** you get a point!\n• If you get a Heads followed by a Tails, LAZY gets a point.\n\n• The first to **3** points wins.\n• If you win, you get **2x** payout!\n• You cannot use the same coin two different points.  \n  \nIf you wish you can set the game to be longer, please specify the 'first to' parameter in the original message. Minimum length 3.",
+				"footer": {
+					"text": "Good luck!"
+				},
+				"thumbnail": {
+					"url": "https://i.imgur.com/Qto6Ts6.png"
+				}
+			}
+		],
+		"bet": [{
+				"title": "How to Bet",
+				"description": "To place your bet you need to give the bet amount `.give [x] @[bookie] [outcome]` to the bookie that is offering odds.\nReplace [x] with the bet amount and [bookie] with the username of the bookmaker.\nAlso don't forget to tell which outcome you want by replacing [outcome].\n\n**How to get odds**\nBookies offer odds for various occasions.\nAlways check the #betting channel where new odds will be released.\nMake sure to place your bet before the odds expire (if an expiration time is given).\n<@!185412969130229760>#2353  offers odds for trivia matches between players on this server.\n<@!373480715276517376>#3488  offers bets on lichess tournaments.\n@Grindonmygrande#6203 offers odds on sports like NFL/NBA.\n@sibirica  offers odds occasionally as well.\nOffering bets is only allowed for @licenced bookie .\n\n**What do the odds numbers mean?**\nThe odds work like a multiplicator. If you win your bet you earn the bet amount multiplied by the number.\nExample:\nBet Amount 10 :cherry_blossom:, Odds: 2.0\nIf you win your bet you get 2*10=20 :cherry_blossom:.\nIf you lose you won't get any flowers back.\n\n**How can I see that my bet was accepted?**\nOnce your bet appears in the #bet-log channel it was officialy accepted.\n\n**How can I claim refund?**\nBetting is at your own risk so in general there are no refunds.\nIf you bet on a player that is caught cheating or stops playing in the tournament suddenly it remains your problem.",
+				"color": 53380
+			},
+			{
+				"title": "Get your match hosted by ObiBets",
+				"description": "**How to get odds**\n\nTell me:\n• Your usernames (on lichess etc.)\n• Variant\n• Type of match (see below)\n• Number of games\n• Timecontrol\n• Date and time of your match\n\nAnd pay the 5 🌸 fee for creating odds.\nI will create odds then and announce the match.\n\n**Requirements**\n\n• Stable ratings\n• The rating difference between both participants should be lower than 150 pts.\n\n**Match Conditions**\n\n*Match with a total number of games (preferred)*\nThe match finishes after you reached the specified number of decisive games.\nBetting on a tie is possible if you use an even number of games. If you want to have a decisive match result use an odd number.\nDraws do not count to the match score.\n\n**Further rules**\n\n*Match reward*\nThe server sponsors matches as well. The reward is not depending on the outcome of the match.\nType `...matchreward` for more details.\n\n*Betting*\nParticipants of the match are only allowed to bet on themselves winning. They can't bet on a tie or exact outcomes.",
+				"color": 10447815,
+				"author": {
+					"name": "ObiBets"
+				},
+				"thumbnail": {
+					"url": "https://cdn.discordapp.com/emojis/408690409313665034.png?v=1"
+				},
+				"fields": []
+			}
+		]
+	}
+}

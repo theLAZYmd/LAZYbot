@@ -1,0 +1,32 @@
+{
+    "300000": [{
+        "module": "Chess",
+        "file": "tracker",
+        "method": "updateCycle",
+        "once": true
+    }],
+    "3600000": [{
+        "module": "Administration",
+        "file": "backup",
+        "method": "backup",
+        "args": ["1"]
+    }],
+    "7200000": [{
+        "module": "Administration",
+        "file": "backup",
+        "method": "backup",
+        "args": ["2"]
+    }],
+    "14400000": [{
+        "module": "Administration",
+        "file": "backup",
+        "method": "backup",
+        "args": ["3"]
+    }],
+    "86400000": [{
+        "module": "Chess",
+        "file": "tracker",
+        "method": "updateAll",
+        "once": true
+    }]
+}

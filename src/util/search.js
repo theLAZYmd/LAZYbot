@@ -60,6 +60,11 @@ class User extends Search {
 		super(message);
 	}
 
+    /**
+     * @typedef {string} UserResolvable
+     * @param {UserResolvable} searchstring 
+     * @param {boolean} exactmode 
+     */
 	get(searchstring, exactmode) {
 		let user;
 		if (typeof searchstring !== "string") return null;

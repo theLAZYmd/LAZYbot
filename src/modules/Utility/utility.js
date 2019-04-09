@@ -1,6 +1,7 @@
 const Parse = require("../../util/parse");
 const Embed = require("../../util/embed");
-const DataManager = require("../../util/datamanager")
+const DataManager = require("../../util/datamanager");
+const DBuser = require('../../util/dbuser');
 
 class Utility extends Parse { //fairly miscelanneous functions
 
@@ -77,6 +78,25 @@ class Utility extends Parse { //fairly miscelanneous functions
                 case "Missing Access":
                     throw "**Fetch Error:** Bot doesn't have access to channel."
             }
+        }
+    }
+
+    /**
+     * Outputs the information collected on a given user 
+     * @param {UserResolvable} argument 
+     * @param {*} user 
+     */
+    async dbuser(argument = this.argument, user = this.user) {
+        try {
+            if (argument) {
+                if (!this.Permissions.role('admin', this)) throw this.Permissions.output('role');
+                user = this.Search.users.get(argument);
+                if (!user) throw new Error("Couldn't find user **" + argument + "** in this server");
+            }
+            let dbuser = DBuser.getUser(user);
+            this.Output.data(dbuser, this.channel, 'json');
+        } catch (e) {
+            if (e) this.Output.onError(e);
         }
     }
 

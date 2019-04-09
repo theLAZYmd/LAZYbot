@@ -15,14 +15,16 @@ class Eval extends Parse {
 
     async call(argument) {
         try {
-            if (!this.Check.owner(this.author)) throw "That command is bot owner only.\nIf you are not an active developer on the bot, you cannot use this command."; //extra protection, in case 
-            if (!/^([\w]+).([\w]+)\(([\w\s\,]*)\)/i.test(argument)) throw "Incorrect formatting to call a function.";
-            let [, Constructor, method, a] = argument.match(/^([\w]+).([\w]+)\(([\w\s\,]*)\)/i);
+            if (!await this.Permissions.user('owner', this)) throw this.Permissions.output('user');
+            if (!/^([\w]+)\/([\w]+).([\w]+)\(([\w\s\*\.\,]*)\)/i.test(argument)) throw "Incorrect formatting to call a function.";
+            let [, Module, Constructor, method, a] = argument.match(/^([\w]+)\/([\w]+).([\w]+)\(([\w\s\,]*)\)/i);
             let argsInfo = this;
-            fs.readdir("./src/modules/", async function (err, files) {
-                try {
+            fs.readdir("./src/modules/", async function (err, _files) {
+                let M = _files.find(f => f.toLowerCase() === Module.toLowerCase());
+                if (!M) throw "No such module **" + Module + "**";
+                fs.readdir(`./src/modules/${M}/`, async function (err, files) {
                     for (let f of files.filter(f => (new RegExp(Constructor.toLowerCase()).test(f.toLowerCase())))) try {
-                        let Instance = require("./" + f);
+                        let Instance = require(`../${M}/${f}`);
                         let I = new Instance(argsInfo.message);
                         if (typeof I[method] !== "function") throw "Couldn't find method " + method + " on " + Constructor + ".";
                         let data = await I[method](eval(a));
@@ -34,10 +36,7 @@ class Eval extends Parse {
                         if (e) argsInfo.Output.onError(e);
                         return;
                     };
-                    throw "Couldn't find matching module for " + Constructor + ".";
-                } catch (e) {
-                    if (e) argsInfo.Output.onError(e);
-                }
+                })
             })
         } catch (e) {
             if (e) this.Output.onError(e);

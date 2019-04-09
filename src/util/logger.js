@@ -28,14 +28,17 @@ class Logger {
         }
     }
 
+    /**
+     * Asynchronously logs a value
+     * @param {*} value
+     */
     static async log() {
         let str = "";
         for (let r of arguments) str += ((s) => {
-            if (typeof s === "string" || typeof s === "number") return s;
+            if (/string|number|boolean/.test(typeof s)) return s;
             if (Array.isArray(s)) return [Date.getISOtime(Date.now()).slice(0, 24), ...s].join(" | ");
             if (typeof s === "object") return [Date.getISOtime(Date.now()).slice(0, 24), ...Object.entries(s).map(([k, v]) => k + ": " + v)].join(" | ");
             if (typeof s === "function") return s.toString();
-            s
         })(r) + " ";
         Logger.output(str);
     }

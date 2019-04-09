@@ -12,6 +12,7 @@ class Message {
         Logger.log(`Command: ${this.message}`);
     }
 
+<<<<<<< HEAD
     /*
      * Eval Command
      * Allows the evaluation of JavaScript code client side
@@ -27,6 +28,40 @@ class Message {
         } catch (e) {
             if (e) this.Output.onError(e);
         }
+=======
+	async dm(key) {
+        const { aliases, regexes, def  } = Commands.dm;
+        let cmdInfo = aliases.get(key.toLowerCase());
+        if (!cmdInfo) cmdInfo = aliases.get(this.argsInfo.message.content.toLowerCase());
+        if (!cmdInfo) cmdInfo = regexes.get(Array.from(regexes.keys()).find((string) => {
+            let regex = new RegExp(string.toString(), "mg");
+            if (regex.test(this.argsInfo.message.content)) return true;
+            return false;
+        }));
+        if (!cmdInfo) return def;
+        if (cmdInfo.active === false) return def;
+        if (cmdInfo.prefix !== this.argsInfo.prefix) return def;
+        return cmdInfo;
+	}
+    
+	async command(key) {
+        const { commands, aliases  } = Commands.message;
+        let cmdInfo = commands.get(key.toLowerCase());
+        if (!cmdInfo) cmdInfo = aliases.get(this.argsInfo.message.content.toLowerCase());
+        if (!cmdInfo) return null;
+        if (!cmdInfo.active) throw 'This command is no longer active. Commands get removed for maintenance/safety reasons periodically.\nPlease DM <@!338772451565502474> for more information.';
+        if (this.argsInfo.prefixes.get(cmdInfo.prefix) !== this.argsInfo.prefix) return null;
+        return cmdInfo;
+	}
+
+	async bot(embed) {
+        if (!embed) return null;
+        if (!embed.title) return null;
+        let cmdInfo = Commands.bot.get(embed.title.toLowerCase());
+        if (!cmdInfo) return null;
+        if (cmdInfo.active === false) return null;
+        return cmdInfo;
+>>>>>>> 1.8.0
     }
 
     /*
@@ -67,6 +102,7 @@ class Message {
                 })
                 .catch((e) => console.log(JSON.stringify(e)));
         }
+<<<<<<< HEAD
     }
 
     /*
@@ -100,6 +136,30 @@ class Message {
                         if (msg.channel.id === getBotChannel(msg.guild).id) msg.delete(settings.deleteDelay);
                     })
                     .catch((e) => console.log(JSON.stringify(e)));
+=======
+	}
+
+    static async run(argsInfo, cmdInfo) {
+		try {
+            if (cmdInfo.command) await Logger.command(argsInfo, cmdInfo);
+            if (cmdInfo.requires) {
+                let P = await Message.requires(argsInfo, cmdInfo);
+                if (P !== true) throw P; //halts it if fails permissions test
+            }
+            cmdInfo.args = (cmdInfo.arguments || []).map(a => argsInfo[a]);
+            await Commands.run(cmdInfo, argsInfo.message);
+		} catch (e) {
+			if (e) cmdInfo.command ? argsInfo.Output.onError(e) : Logger.error(e);
+			return null;
+		}
+	}
+
+	static async requires(argsInfo, cmdInfo) {
+        for (let [type, value] of Object.entries(cmdInfo.requires)) try {
+            if (!Array.isArray(value)) value = [value]; //if it's not array (i.e. multiple possible satisfactory conditions)
+            for (let v of value) {
+                if (!(await Permissions[type](v, argsInfo))) throw cmdInfo.method;
+>>>>>>> 1.8.0
             }
         } else {
             this.message.channel.send("Wrong amount of parameters.")
@@ -124,6 +184,7 @@ class Message {
         this.message.delete();
     }
 
+<<<<<<< HEAD
     //ADD LICHESS
     lichess() {
         if (this.splitMsg.length === 2) {
@@ -190,6 +251,39 @@ class Message {
                 .catch((e) => console.log(JSON.stringify(e)));
         }
         this.message.delete();
+=======
+module.exports = async (client, message) => {
+    try {
+        if (message.author.id === client.user.id) throw "";
+        let argsInfo = new Parse(message);
+        try {
+            let Command = new Message(argsInfo);
+            if (argsInfo.author.bot) {
+                let cmdInfo = await Command.bot(message.embeds[0]);
+                if (cmdInfo) return await Message.run(argsInfo, cmdInfo);
+            }
+            if (!/[a-z]/i.test(message.content)) throw "";
+            if (!argsInfo.message.guild) {
+                let cmdInfo = await Command.dm(argsInfo.command);
+                if (cmdInfo.guild) {
+                    argsInfo.message._guild = await Message.setGuild(argsInfo, cmdInfo.guild); //now passed, just check if it needs a guild
+                    if (!argsInfo.message._guild) throw "";
+                }
+                return await Message.run(argsInfo, cmdInfo);
+            } else {
+                Command.all(argsInfo);
+                let cmdInfo = await Command.command(argsInfo.command);
+                if (cmdInfo) {
+                    cmdInfo.command = true;
+                    await Message.run(argsInfo, cmdInfo);
+                } else new MessageCount(message).log();
+            }
+        } catch (e) {
+            if (e && typeof e !== "boolean") argsInfo.Output.onError(e);
+        }
+    } catch (e) {
+        if (e) Logger.error(e);
+>>>>>>> 1.8.0
     }
 
     active() {
