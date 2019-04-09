@@ -29,6 +29,7 @@
         "discord.js": "^11.4.2",
         "enmap": "^0.3.2",
         "es6": "0.0.7",
+        "eslint": "^5.16.0",
         "express": "^4.16.4",
         "lazy-aho-corasick": "^1.0.0",
         "opusscript": "0.0.6",
