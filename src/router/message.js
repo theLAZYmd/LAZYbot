@@ -8,7 +8,6 @@ class Message extends Parse {
 	constructor(message, splitMsg) {
 		super(message);
 		this.splitMsg = splitMsg;
-		Logger.log(`Command: ${this.message}`);
 	}
 
 	/*
@@ -347,6 +346,7 @@ module.exports = async (client, message) => {
 		if (!this.prefix) return;
 		let method = Object.getOwnPropertyNames(Message.prototype).find(f.toLowerCase() === Instance.command.toLowerCase() && typeof this[f] === 'function');
 		if (!method) return;
+		Logger.log(`Command: ${this.message}`);
 		Instance[method]();			
 		if (this.botChannel) this.message.delete(settings.deleteDelay);
 	} catch (e) {

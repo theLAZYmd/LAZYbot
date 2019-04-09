@@ -20,7 +20,9 @@
         "linebreak-style": [
             "error",
             "windows"
-        ],
+		],
+		"no-console": "off",
+		"no-unused-vars": "off",
         "quotes": [
             "error",
             "single"

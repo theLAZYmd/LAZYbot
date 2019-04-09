@@ -5,8 +5,6 @@ const Package = require('../../package.json');
 const rp = require('request-promise');
 const Logger = require('../util/logger');
 const Commands = require('../util/commands');
-const Tries = require('../util/tries');
-const CustomReactions = require('../modules/Custom Reactions/customreactions');
 const Shadowban = require('../modules/Administration/shadowban');
 
 class Ready {
@@ -146,7 +144,7 @@ module.exports = async (client) => {
 	try {
 		let tracker = new TrackerConstructor(client);
 		console.log('The bot started!');
-		tracker.initUpdateCycle();
+		//tracker.updateCycle();
 	} catch (e) {
 		if (e) Logger.error(e);
 	}
