@@ -33,7 +33,8 @@
     "avatar": "https://i.imgur.com/Yl4Xoku.jpg",
     "states": {
         "debug": false
-    },
+	},
+	"lastUpdate": null,
     "backupdb": [
         "Tue Apr 09 2019 16:02:35 GMT+01",
         "Tue Apr 09 2019 15:52:31 GMT+01",
