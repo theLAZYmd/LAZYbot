@@ -15,8 +15,7 @@
 			"trivia": true
 		},
 		"prefixes": {
-			"generic": "!",
-			"nadeko": "."
+			"generic": "!"
 		},
 		"emoji": "housediscord",
 		"channels": {
