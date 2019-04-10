@@ -327,7 +327,7 @@ class Tracker extends Parse {
 			config.lastUpdate = Date.now();
 			DataManager.setFile(config, './src/config.json');
 		} catch (e) {
-			if (e) this.Output.onError(e);
+			if (e) this.command ? this.Output.onError(e) : Logger.error(e);
 		}
 	}
 
@@ -411,11 +411,13 @@ class Tracker extends Parse {
 			});
 			let [source, account] = accounts[val];
 			delete dbuser[source][account];
-			if (dbuser[source]._main === account)
-				for (let prop of dbuser[source])
+			if (dbuser[source]._main === account) {
+				for (let prop of Object.keys(dbuser[source])) {
 					if (prop.startsWith('_')) {
 						delete dbuser[source][prop];
 					}
+				}
+			}
 			DBuser.setData(dbuser);
 			this.Output.sender(new Embed()
 				.setTitle(`Stopped tracking via ${this.prefix}remove command`)
