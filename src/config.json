@@ -76,20 +76,20 @@
     },
     "variants": {
         "lichess": {
-            "960": {
-                "name": "960",
-                "api": "960",
-                "key": "960"
+			"ultra": {
+				"name": "Ultrabullet",
+				"api": "ultraBullet",
+				"key": "ultra"
+			},
+            "bullet": {
+                "name": "Bullet",
+                "api": "bullet",
+                "key": "bullet"
             },
             "blitz": {
                 "name": "Blitz",
                 "api": "blitz",
                 "key": "blitz"
-            },
-            "bullet": {
-                "name": "Bullet",
-                "api": "bullet",
-                "key": "bullet"
             },
             "rapid": {
                 "name": "Rapid",
@@ -100,11 +100,26 @@
                 "name": "Classical",
                 "api": "classical",
                 "key": "classical"
-            },
+			},
+			"correspondence": {
+				"name": "Correspondence",
+				"api": "correspondence",
+				"key": "correspondence"
+			},
             "crazyhouse": {
                 "name": "Crazyhouse",
                 "api": "crazyhouse",
                 "key": "crazyhouse"
+            },
+            "960": {
+                "name": "960",
+                "api": "960",
+                "key": "960"
+            },
+            "koth": {
+                "name": "King of the Hill",
+                "api": "kingOfTheHill",
+                "key": "koth"
             },
             "3-check": {
                 "name": "3-check",
@@ -116,26 +131,26 @@
                 "api": "antichess",
                 "key": "anti"
             },
-            "horde": {
-                "name": "Horde",
-                "api": "horde",
-                "key": "horde"
-            },
             "atomic": {
                 "name": "Atomic",
                 "api": "atomic",
                 "key": "atomic"
             },
-            "koth": {
-                "name": "King of the Hill",
-                "api": "kingOfTheHill",
-                "key": "koth"
+            "horde": {
+                "name": "Horde",
+                "api": "horde",
+                "key": "horde"
             },
             "racing-kings": {
                 "name": "Racing Kings",
                 "api": "racingKings",
                 "key": "racing-kings"
-            }
+			},
+			"training": {
+				"name": "Training",
+				"api": "puzzle",
+				"key": "training"
+			}
         },
         "chesscom": {
             "960": {

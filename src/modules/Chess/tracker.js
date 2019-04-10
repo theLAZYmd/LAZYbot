@@ -411,7 +411,7 @@ class Tracker extends Parse {
 			});
 			let [source, account] = accounts[val];
 			delete dbuser[source][account];
-			if (dbuser[source]._main === account)
+			if (dbuser[source]._main === account) {
 				for (let prop of Object.keys(dbuser[source])) {
 					if (prop.startsWith('_')) {
 						delete dbuser[source][prop];
