@@ -144,7 +144,7 @@ class Profile extends Parse {
 				[(this.dbuser.modverified ? " " + this.Search.emojis.get(this.dbuser.modverified[0]) : "") + "Info", this.info, true],
 				["Joined Date", this.joined, this.info ? true : false],
 				["Index", this.ids, this.dbuser.messages ? true : false],
-				["Messages Sent", this.dbuser.messages.count.toLocaleString(), true],
+				["Messages Sent", this.dbuser.messages ? this.dbuser.messages.count.toLocaleString() : undefined, true],
 				["Last Message", this.lastMessage, false],
 				//["Roles", this.roles],
 				["House Trophies", this.award, true]
