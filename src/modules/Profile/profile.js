@@ -124,11 +124,10 @@ class Profile extends Parse {
 	 * @type {RichEmbed#field[]}
 	 */
 	get fields() {
-		if (this._string) return this._string;
 		if (this.page === 0) return this._string = this.ProfileFields;
 		let minField = 4 * (this.page - 1);
 		let maxField = Math.max(this.chessFields.length, 4); //solved issue of making array longer than it was
-		return this._string = this.chessFields.slice(minField, maxField); //if page === 1, 1, 2, 3, 4; if page = 2, 5, 6, 7, 8
+		return this.chessFields.slice(minField, maxField); //if page === 1, 1, 2, 3, 4; if page = 2, 5, 6, 7, 8
 	}
 
 	/**
@@ -164,7 +163,7 @@ class Profile extends Parse {
 	 * @private
 	 */
 	get chessFields() {
-		if (!this._chessFields) return this._chessFields;
+		if (this._chessFields) return this._chessFields;
 		this._chessFields = [];
 		for (let [key, source] of Object.entries(config.sources)) {
 			if (!this.dbuser[key]) continue;
@@ -190,7 +189,7 @@ class Profile extends Parse {
 		if (this.member.nickname) names.push(this.member.nickname);
         for (let source of Object.keys(config.sources)) {
 			if (!this.dbuser[source]) continue;
-			for (let account of this.dbuser[source]) {
+			for (let account of Object.keys(this.dbuser[source])) {
 				if (account.startsWith('_')) continue;
 				if (names.inArray(account)) continue;
 				names.push(account);

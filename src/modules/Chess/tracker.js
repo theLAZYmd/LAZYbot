@@ -327,7 +327,7 @@ class Tracker extends Parse {
 			config.lastUpdate = Date.now();
 			DataManager.setFile(config, './src/config.json');
 		} catch (e) {
-			if (e) this.Output.onError(e);
+			if (e) this.command ? this.Output.onError(e) : Logger.error(e);
 		}
 	}
 
