@@ -13,7 +13,7 @@ module.exports = {
     //don't update someone again if they were updated this long ago
     "minimumUpdate": 1800000,
     //location and name of the data file
-    "dataFile": __dirname + "\\data.dat",
+    "dataFile": __dirname + "\\data\\data.dat",
     //Rating categories. In discord, first one should end with "-", last ends with "++", rest end with "+"
     "ratings": [1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900, 2000, 2100, 2200, 2300, 2400, 2500], //First is below, rest are above
     //Channel name where bot will say stuff

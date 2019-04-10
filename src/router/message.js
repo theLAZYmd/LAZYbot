@@ -16,13 +16,25 @@ class Message extends Parse {
 	 * Eval Command
 	 * Allows the evaluation of JavaScript code client side
 	 */
-	async eval(argument = this.argument) {
+	async eval() {
 		try {
-			if (!settings.owners.includes(this.author.id)) throw 'That command is bot owner only.\nIf you are not an active developer on the bot, you cannot use this command.'; //extra protection, in case permission.js fails
-			if (/^```[a-z]+[\s\n]+([\w\W]+)```$/.test(argument)) argument = argument
-				.match(/^```[a-z]+\s+([\w\W"]+)```$/)[1];
-			else throw 'Incorrect formatting! Use a code block!';
-			eval(argument);
+			const Constructor = require('../modules/Administration/eval');
+			let Instance = new Constructor(this.message);
+			return Instance.run();
+		} catch (e) {
+			if (e) this.Output.onError(e);
+		}
+	}
+
+	/**
+	 * Profile Command
+	 * Allows the evaluation of JavaScript code client side
+	 */
+	async profile() {
+		try {
+			const Constructor = require('../modules/Profile/profile');
+			let Instance = new Constructor(this.message);
+			return Instance.get();
 		} catch (e) {
 			if (e) this.Output.onError(e);
 		}
@@ -33,9 +45,8 @@ class Message extends Parse {
 	 */
 	async fen() {
 		try {
-			if (this.args.length === 0) throw 'Wrong amount of parameters.';
-			const FEN = require('../modules/Chess/fen');
-			let Instance = new FEN(this.message);
+			const Constructor = require('../modules/Chess/fen');
+			let Instance = new Constructor(this.message);
 			return Instance.run();
 		} catch (e) {
 			if (e) this.Output.onError(e);
@@ -127,8 +138,6 @@ class Message extends Parse {
 	async arena() {
 		this.toggleRole('arena');
 	}
-
-	
 	/**
 	 * Toggles study role
 	 */

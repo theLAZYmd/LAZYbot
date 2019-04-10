@@ -19,6 +19,7 @@ class Output extends Parse {
 			if (typeof embed._apiTransform === 'function') embed = embed._apiTransform();
 			let msg = await channel.send(content, {embed});
 			if (this.botChannel) msg.delete(settings.deleteDelay);
+			return msg;
 		} catch (e) {
 			if (e) this.log(e);
 		}
