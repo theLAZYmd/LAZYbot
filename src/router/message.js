@@ -12,7 +12,7 @@ class Message extends Parse {
 		this.splitMsg = this.words;
 	}
 
-	/*
+	/**
 	 * Eval Command
 	 * Allows the evaluation of JavaScript code client side
 	 */
@@ -28,7 +28,7 @@ class Message extends Parse {
 		}
 	}
 
-	/*
+	/**
 	 * Outputs a position and link to Lichess study based on an FEN
 	 */
 	async fen() {
@@ -42,7 +42,7 @@ class Message extends Parse {
 		}
 	}
 
-	/*
+	/**
 	 * Displays an embed with a help message
 	 */
 	async dbhelp() {
