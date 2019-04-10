@@ -42,10 +42,10 @@ class Leaderboard extends Parse {
 				}
 				if (data.variant.key !== 'all' && (!dbuser[data.source.key][username][data.variant.key] || dbuser[data.source.key][username][data.variant.key].endsWith('?'))) continue;
 				data.leaderboard.push({
-					'tag': dbuser.username,
-					'username': username,
+					tag: dbuser.username,
+					username: username,
 					id: dbuser.id,
-					'rating': data.variant.key === 'all' ? dbuser[data.source.key][username] : dbuser[data.source.key][username][data.variant.key]
+					rating: data.variant.key === 'all' ? dbuser[data.source.key][username] : dbuser[data.source.key][username][data.variant.key]
 				});
 			}
 			if (data.leaderboard.length !== 0 && data.variant.key !== 'all') data.leaderboard.sort((a, b) => parseInt(b.rating) - parseInt(a.rating));
@@ -65,8 +65,8 @@ class Leaderboard extends Parse {
 				data.leaderboard.push({
 					tag: dbuser.username,
 					username: dbuser.username,
-					'id': dbuser.id,
-					'rating': dbuser.trivia.rating
+					id: dbuser.id,
+					rating: dbuser.trivia.rating
 				});
 			}
 			if (data.leaderboard.length !== 0 && data.variant.key !== 'all') data.leaderboard.sort((a, b) => parseInt(b.rating) - parseInt(a.rating));

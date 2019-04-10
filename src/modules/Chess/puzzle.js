@@ -24,7 +24,8 @@ class Puzzle extends Parse {
 
 	async daily() {
 		try {
-			let body = (await rp.get(config.sources.lichess.url.puzzle.replace('|', 'daily'))).toString();
+			let url = 'https://lichess.org/training'; //config.sources.lichess.url.puzzle.replace('|', 'daily');
+			let body = (await rp.get(url)).toString();
 			let id = body.match(/content="Chess tactic #([0-9]+) - (?:White|Black) to play"/);
 			let initialPly = body.match(/"initialPly":([0-9]+),/);
 			if (!id || !initialPly) throw '';
@@ -32,6 +33,7 @@ class Puzzle extends Parse {
 			initialPly = initialPly[1];
 			let argument = body.match(new RegExp(`"ply":${initialPly},"fen":"(${FEN.regexVerifier})"`));
 			if (!argument) throw '';
+			argument = argument[1];
 			let fen = new FEN(this.message, argument + ' ' + config.sources.lichess.url.puzzle.replace('|', id));
 			fen.run();
 		} catch (e) {

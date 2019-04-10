@@ -27,6 +27,7 @@
 		"no-console": "off",
 		"no-sparse-arrays": "off",
 		"no-unused-vars": "warn",
+		"no-useless-escape": "warn",
 		"quote-props": [
 			"error",
 			"as-needed"
