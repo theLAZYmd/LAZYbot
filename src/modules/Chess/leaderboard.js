@@ -1,9 +1,9 @@
-const config = require("../../config.json");
-const DataManager = require("../../util/datamanager.js");
-const Parse = require("../../util/parse.js");
-const Embed = require("../../util/embed.js");
-const Permissions = require("../../util/permissions.js");
-const Logger = require("../../util/logger.js");
+const config = require('../../config.json');
+const DataManager = require('../../util/datamanager.js');
+const Parse = require('../../util/parse.js');
+const Embed = require('../../util/embed.js');
+const Permissions = require('../../util/permissions.js');
+const Logger = require('../../util/logger.js');
 
 class Leaderboard extends Parse {
 
@@ -13,14 +13,14 @@ class Leaderboard extends Parse {
 
 	async variant(channel, args) {
 		try {
-			let data = await require("../../util/variant.js")(this.message.content, channel, args, this); //variant, source, active
-			data = data.variant.key === "trivia" ? await Leaderboard.generateTrivia(data) : await Leaderboard.generate(data); //leaderboard
-			if (!data.leaderboard || data.leaderboard.length === 0) throw "Couldn't fetch players for **" + data.variant.name + "**.";
+			let data = await require('../../util/variant.js')(this.message.content, channel, args, this); //variant, source, active
+			data = data.variant.key === 'trivia' ? await Leaderboard.generateTrivia(data) : await Leaderboard.generate(data); //leaderboard
+			if (!data.leaderboard || data.leaderboard.length === 0) throw 'Couldn\'t fetch players for **' + data.variant.name + '**.';
 			let embedgroup = [];
 			data.emoji = this.Search.emojis.get(data.variant.key);
 			for (let i = 0; i < Math.ceil(data.leaderboard.length / 10); i++) {
-                embedgroup.push(await Leaderboard.build(data, i));
-            }
+				embedgroup.push(await Leaderboard.build(data, i));
+			}
 			this.Paginator.sender(embedgroup, 30000);
 		} catch (e) {
 			if (e) this.Output.onError(e);
@@ -37,18 +37,18 @@ class Leaderboard extends Parse {
 				if (!dbuser[data.source.key] || dbuser[data.source.key]._cheating) continue; //skip ppl not tracked on that source and cheaters
 				let username = dbuser[data.source.key]._main;
 				if (!username || !dbuser[data.source.key][username]) {
-					Logger.error("No main registered for " + dbuser.username + ".");
+					Logger.error('No main registered for ' + dbuser.username + '.');
 					continue; //trust that it will be fixed in updates
 				}
-				if (data.variant.key !== "all" && (!dbuser[data.source.key][username][data.variant.key] || dbuser[data.source.key][username][data.variant.key].endsWith("?"))) continue;
+				if (data.variant.key !== 'all' && (!dbuser[data.source.key][username][data.variant.key] || dbuser[data.source.key][username][data.variant.key].endsWith('?'))) continue;
 				data.leaderboard.push({
-					"tag": dbuser.username,
-					"username": username,
-					"id": dbuser.id,
-					"rating": data.variant.key === "all" ? dbuser[data.source.key][username] : dbuser[data.source.key][username][data.variant.key]
+					'tag': dbuser.username,
+					'username': username,
+					id: dbuser.id,
+					'rating': data.variant.key === 'all' ? dbuser[data.source.key][username] : dbuser[data.source.key][username][data.variant.key]
 				});
 			}
-			if (data.leaderboard.length !== 0 && data.variant.key !== "all") data.leaderboard.sort((a, b) => parseInt(b.rating) - parseInt(a.rating));
+			if (data.leaderboard.length !== 0 && data.variant.key !== 'all') data.leaderboard.sort((a, b) => parseInt(b.rating) - parseInt(a.rating));
 			return data;
 		} catch (e) {
 			if (e) throw e;
@@ -63,13 +63,13 @@ class Leaderboard extends Parse {
 				if (data.active && Date.now() - dbuser.messages.lastSeen > 604800000) continue; //skip inactives
 				if (!dbuser.trivia || dbuser.trivia.games < data.argsInfo.server.trivia.provisional) continue;
 				data.leaderboard.push({
-					"tag": dbuser.username,
-					"username": dbuser.username,
-					"id": dbuser.id,
-					"rating": dbuser.trivia.rating
+					tag: dbuser.username,
+					username: dbuser.username,
+					'id': dbuser.id,
+					'rating': dbuser.trivia.rating
 				});
 			}
-			if (data.leaderboard.length !== 0 && data.variant.key !== "all") data.leaderboard.sort((a, b) => parseInt(b.rating) - parseInt(a.rating));
+			if (data.leaderboard.length !== 0 && data.variant.key !== 'all') data.leaderboard.sort((a, b) => parseInt(b.rating) - parseInt(a.rating));
 			delete data.source;
 			return data;
 		} catch (e) {
@@ -84,14 +84,14 @@ class Leaderboard extends Parse {
 				let entry = data.leaderboard[i + 10 * page];
 				if (!entry) continue;
 				if (data.source) {
-					let urllink = data.source.url.profile.replace("|", entry.username); //lichess.org/@/V2chess
-					array[i] = ["[" + entry.tag + "](" + urllink + ") " + entry.rating];
+					let urllink = data.source.url.profile.replace('|', entry.username); //lichess.org/@/V2chess
+					array[i] = ['[' + entry.tag + '](' + urllink + ') ' + entry.rating];
 				} else {
-					array[i] = [entry.tag + " " + entry.rating]
+					array[i] = [entry.tag + ' ' + entry.rating];
 				}
 			}
-            let lbembed = array.toLeaderboard(page, 10, false); //Case 2 Leaderboard:
-			lbembed.title = `${data.emoji} House leaderboard${data.source ? " on " + data.source.name : ""} for${data.active ? "active " : " "}${data.variant.name} players`;
+			let lbembed = array.toLeaderboard(page, 10, false); //Case 2 Leaderboard:
+			lbembed.title = `${data.emoji} House leaderboard${data.source ? ' on ' + data.source.name : ''} for${data.active ? 'active ' : ' '}${data.variant.name} players`;
 			return lbembed;
 		} catch (e) {
 			if (e) throw e;

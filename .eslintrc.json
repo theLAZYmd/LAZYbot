@@ -15,15 +15,20 @@
     "rules": {
         "indent": [
             "error",
-            "tab"
+			"tab",
+			{
+				"SwitchCase": 1
+			}
         ],
         "linebreak-style": [
             "error",
             "windows"
 		],
 		"no-console": "off",
+		"no-sparse-arrays": "off",
 		"no-unused-vars": "warn",
 		"quote-props": [
+			"error",
 			"as-needed"
 		],
         "quotes": [
