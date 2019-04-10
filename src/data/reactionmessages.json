@@ -7286,6 +7286,73 @@
                 "page": 0,
                 "author": "185412969130229760",
                 "cmdID": "565586454680698880"
+            },
+            "565642094043988019": {
+                "embedgroup": [
+                    {
+                        "title": "<:housediscord:485510528769196068> House Discord Rules",
+                        "fields": [
+                            {
+                                "name": "Rule 1: Be civil",
+                                "value": "Be polite, courteous and respectful of others.\n​",
+                                "inline": false
+                            },
+                            {
+                                "name": "Rule 2: Don't be uncivil",
+                                "value": "Instances of uncivil behaviour include but are not limited to:\n- Repeated trolling\n- Belittling\n- Inciting hostility\n- Personal attacks\n- Harrassment (in server or through DMs)\n- Repeated user pinging\nand will not be tolerated.\n​",
+                                "inline": false
+                            },
+                            {
+                                "name": "Rule 3: Content control",
+                                "value": "The following content is not permitted:\n- graphic NSFW\n- information that could be used to dox another member, maintaining the presumption that they wish to stay anonymous unless explicitly stated otherwise\n- racism\n- sexism\n- homophobia\n- videos or images of gore and death\n- symbols of radical ideologies\n- links or instructions to content that could detrimentally harm an individual's computer or own person (computer viruses and the like)\n​",
+                                "inline": false
+                            },
+                            {
+                                "name": "Rule 4: Chess server bans",
+                                "value": "Anyone receiving a ban from a live chess is required to keep discussion of the ban to a minimum. Banned members from the following sites should be redirected to:\n- [Lichess Ban Appeal](https://lichess.org/contact#help-root)\n- [Chess.com support](https://support.chess.com/customer/portal/emails/new)\n​",
+                                "inline": false
+                            },
+                            {
+                                "name": "Rule 5: Incitement",
+                                "value": "Encouraging any of the actions outlined in rules 2, 3, or 4 is not permitted.\n​",
+                                "inline": false
+                            },
+                            {
+                                "name": "Rule 6: Be on-topic",
+                                "value": "Keep chat in each channel to its respective discussion guidelines as much as possible.\n​",
+                                "inline": false
+                            },
+                            {
+                                "name": "Rule 7: Don't spam",
+                                "value": "Exceptions are permitted in <#390273555084083210>, <#390259390709497857>. The ability of user discussion should never be impeded in any way.\n​",
+                                "inline": false
+                            },
+                            {
+                                "name": "Rule 8: Follow the Discord Community guidelines",
+                                "value": "[Available here](https://discordapp.com/guidelines)\n​",
+                                "inline": false
+                            },
+                            {
+                                "name": "Rule 9: No excessive advertising",
+                                "value": "Advertising of other servers or similar projects without asking an admin first, especially for non-established users, is highly frowned upon.\n​",
+                                "inline": false
+                            },
+                            {
+                                "name": "Rule 10: Respect moderator decisions",
+                                "value": "All the admins you see on this server contribute their time and effort for free, without asking for anything back. Be respectful to them. Any warning or decision enacted by them or through a bot should be engaged with in a polite and civil fashion.",
+                                "inline": false
+                            }
+                        ],
+                        "footer": {
+                            "text": "1 / 1"
+                        },
+                        "color": 53380
+                    }
+                ],
+                "period": 180000,
+                "page": 0,
+                "author": "185412969130229760",
+                "cmdID": "565642092202950657"
             }
         },
         "election": {
