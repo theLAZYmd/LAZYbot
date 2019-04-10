@@ -31,7 +31,7 @@ class Puzzle extends Parse {
 			if (!id || !initialPly) throw '';
 			id = id[1];
 			initialPly = initialPly[1];
-			let argument = body.match(new RegExp(`"ply":${initialPly},"fen":"(${FEN.regexVerifier})"`));
+			let argument = body.match(new RegExp(`"ply":${initialPly},"fen":"(${FEN.regexString})"`));
 			if (!argument) throw '';
 			argument = argument[1];
 			let fen = new FEN(this.message, argument + ' ' + config.sources.lichess.url.puzzle.replace('|', id));

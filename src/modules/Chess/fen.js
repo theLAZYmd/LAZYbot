@@ -1,26 +1,10 @@
-const Parse = require('../../util/parse.js');
-const Embed = require('../../util/embed.js');
+const Parse = require('../../util/parse');
+const Embed = require('../../util/embed');
 const config = require('../../config.json');
 const rp = require('request-promise');
+const qs = require('querystring');
 
 class FEN extends Parse {
-
-	static get regexVerifier () {
-		return '(?:(?:(?:[pnbrqkPNBRQK1-8]{1,8})\\/?){8})' + //Piece Placement: any of those characters, allow 1 to 8 of each, folloed by a slash, all that repeated 8 times. Standard chess FEN produced. Slash is optional (0 or 1). 
-            '(?:(?:[pnbrqkPNBRQK]{1,16})\\/?)?' + //Second group: crazyhouse additional inhand pieces, if they exist.
-            '\\s+' + //white space
-            '(?:b|w)' + //Side to Move
-            '\\s+' + //white space
-            '(?:-|K?Q?k?q?)' + //Castling Rights. Matches 0 or 1 of each, so optional.
-            '\\s+' + //white space
-            '(?:-|[a-h][3-6])' + //En Passant Possible Target Squares
-            '\\s+' + //white space
-            '(?:\\d+)' + //Half-Move Clock since last capture or pawn advance for 50 move rule
-            '\\s+' + //white space
-            '(?:\\d+)' + //Fullmove number
-            '\\s*' + //white space, may or may not exist
-            '(?:\\+[0-3]\\+[0-3])?'; //three-check extra group, may or may not exist
-	}
 
 	static get regexString () {
 		return '((?:(?:[pnbrqkPNBRQK1-8]{1,8})\\/?){8})' + //Piece Placement: any of those characters, allow 1 to 8 of each, folloed by a slash, all that repeated 8 times. Standard chess FEN produced. Slash is optional (0 or 1). 
@@ -152,15 +136,15 @@ class FEN extends Parse {
 	}
 
 	get imageURL() {
-		return config.fen.url.board.replace('|',
-			'?fen=' + encodeURIComponent(this.positionfen) +
-			'&board=' + config.fen.board +
-			'&piece=' + config.fen.pieces +
-			'&coordinates=' + config.fen.coords +
-			'&size=' + config.fen.size +
-			'&flip=' + (this.flip ? 1 : 0) +
-			'&ext=.png'
-		);
+		return config.fen.url.board.replace('|', '?' + qs.stringify({
+			fen: encodeURIComponent(this.positionfen),
+			board: config.fen.board,
+			piece: config.fen.pieces,
+			coordinates: config.fen.coords,
+			size: config.fen.size, 
+			flip: this.flip ? 1 : 0,
+			ext: '.png'
+		}));
 	}
     
 	get puzzleURL() {
@@ -184,7 +168,7 @@ class FEN extends Parse {
 			.setTitle((this.colour === 'black' ? 'Black' : 'White') + ' to move.' + (this.hint ? ' ' + this.hint : ''))
 			.setURL(this.puzzleURL || this.analysisURL)
 			.setImage(this.imageURL)
-		    .setDescription(this.description);
+			.setDescription(this.description);
 		return embed;
 	}
 
