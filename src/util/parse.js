@@ -167,7 +167,7 @@ class Parse {
 	
 	get prefixes() {
 		if (this._prefixes) return this._prefixes;
-		let prefixes = this.server ? this.server.prefixes : {
+		let prefixes = this.server && this.server.prefixes ? this.server.prefixes : {
 			"generic": "!",
 			"nadeko": "."
 		}
