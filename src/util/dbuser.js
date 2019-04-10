@@ -9,13 +9,21 @@ class DBuser {
 
 	get tally() {
 		if (this._tally) return this._tally;
-		return this._tally = DataManager.getData();
+		return this._tally = Object.entries(DataManager.getData()).map(([id, dbuser]) => Object.assign(dbuser, {id}));
+	}
+
+	set tally(tally) {
+		let data = tally.reduce((acc, [k, v]) => {
+			acc[k] = v;
+			return acc;
+		}, {});
+		DataManager.setData(data);
 	}
 
     setData(dbuser) {
         let tally = this.tally;
-        tally[this.getIndex(dbuser)] = dbuser;
-		DataManager.setData(tally);
+		tally[this.getIndex(dbuser)] = dbuser;
+		this.tally = tally;
 		this._data = tally;
         return true;
     }

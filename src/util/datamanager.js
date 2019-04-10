@@ -1,5 +1,6 @@
 const fs = require("fs");
 const config = require("../config.json");
+const settings = require('../settings');
 const Logger = require("./logger.js");
 const Server = require("../templates/server.js");
 
@@ -14,11 +15,11 @@ class DataManager {
     }
 
     static getData() { //get tally
-        return DataManager.getFile(config.dataFile);
+        return DataManager.getFile(settings.dataFile);
     }
 
     static setData(data) { //get tally
-        return DataManager.setFile(data, config.dataFile);
+        return DataManager.setFile(data, settings.dataFile);
     }
 
     static getServer(_id, newfilepath) { //get server by:
