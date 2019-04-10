@@ -291,6 +291,7 @@ class Tracker extends Parse {
 	 */
 	async updateAll() {
 		try {
+			if (!/^(?:-f|--force)$/.test(this.argument) && config.lastUpdate && Date.now() - config.lastUpdate < 3600000) throw 'Already updated all Lichess data within the last hour. Use `-f | --force` flag to update all anyway';
 			const lichess = Object.values(config.sources).find(s => s.key === 'lichess');
 			const accounts = Commands.accounts.accounts;
 			const ids = Array.from(accounts.keys());
@@ -323,6 +324,8 @@ class Tracker extends Parse {
 				.setDescription(description.slice(0, 2048))
 			, msg);
 			Logger.output(userObj);
+			config.lastUpdate = Date.now();
+			DataManager.setFile(config, './src/config.json');
 		} catch (e) {
 			if (e) this.Output.onError(e);
 		}

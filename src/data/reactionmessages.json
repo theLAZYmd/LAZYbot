@@ -7177,6 +7177,79 @@
                 "author": "185412969130229760",
                 "cmdID": "564923380835549188",
                 "path": "rules"
+            },
+            "565192074576658432": {
+                "embedgroup": [
+                    {
+                        "title": " Profile for theLAZYmd#2353",
+                        "description": "```\nIt's finally spring vac!```",
+                        "color": 53380,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "theLAZYbot",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Age: **19**\nSex: **<:male:430870358133047306>**\nLocation: **Toronto**\nRegion: **None set.**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **May 26 2016**\nThe House: **May 16 2017**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`185412969130229760`**\nPosition in Database: 0",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "79,167",
+                                "inline": true
+                            },
+                            {
+                                "name": "House Trophies",
+                                "value": ":trophy: **champion du mondeeeeeeee**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/185412969130229760/5f740f5cffe2614dc65ccd28702d150d.png?size=2048"
+                        },
+                        "footer": {
+                            "text": "1 / 2"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": " Profile for theLAZYmd#2353",
+                        "description": "```\nIt's finally spring vac!```",
+                        "color": 0,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[TheLAZYmd](https://lichess.org/@/TheLAZYmd)\nBlitz: **1958**\nBullet: **1957**\nRapid: **1985**\nClassical: 1500?\nCrazyhouse: **2159**\nAtomic: 1563?",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:chesscom:430038158244184064> Chess.com",
+                                "value": "[theLAZYbot](https://www.chess.com/member/theLAZYbot)\nBullet: 1817?\nCrazyhouse: **2104**\nBughouse: **1935**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/185412969130229760/5f740f5cffe2614dc65ccd28702d150d.png?size=2048"
+                        },
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "185412969130229760",
+                "cmdID": "565192072743878667"
             }
         },
         "election": {

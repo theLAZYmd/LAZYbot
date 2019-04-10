@@ -5,10 +5,18 @@ const config = require("../config.json");
 
 class DBuser {
 
-    static async setData(dbuser) {
-        let tally = DataManager.getData();
-        tally[DBuser.getIndex(dbuser)] = dbuser;
-        DataManager.setData(tally);
+	constructor() {}
+
+	get tally() {
+		if (this._tally) return this._tally;
+		return this._tally = DataManager.getData();
+	}
+
+    setData(dbuser) {
+        let tally = this.tally;
+        tally[this.getIndex(dbuser)] = dbuser;
+		DataManager.setData(tally);
+		this._data = tally;
         return true;
     }
 
@@ -17,52 +25,49 @@ class DBuser {
      * @param {DBuserResolvable} searchstring - looks through the database and searches for a match based on Aliases, Username, ID, or index
      * @param {Boolean} exactmode 
      */
-    static get(searchstring, exactmode) {
+    get(searchstring, exactmode) {
         let dbuser = null;
         if (typeof searchstring === "string") {
-            if (!dbuser) dbuser = DBuser.byAliases(searchstring, exactmode);
-            if (!dbuser) dbuser = DBuser.byUsername(searchstring);
-            if (!dbuser) dbuser = DBuser.byID(searchstring);
+            if (!dbuser) dbuser = this.byAliases(searchstring, exactmode);
+            if (!dbuser) dbuser = this.byUsername(searchstring);
+            if (!dbuser) dbuser = this.byID(searchstring);
         } else if (typeof searchstring === "number") {
-            if (!dbuser) dbuser = DBuser.byIndex(searchstring);
+            if (!dbuser) dbuser = this.byIndex(searchstring);
         }
         return dbuser;
     }
 
-    static getUser(user) {
-        let tally = DataManager.getData();
-        let dbuser = tally.find(dbuser => dbuser.id === user.id);
+    getUser(user) {
+		let dbuser = this.byID(user.id);
         if (dbuser) return dbuser;
         dbuser = new User(user);
+        let tally = this.tally;
         tally.push(dbuser);
         DataManager.setData(tally);
         Logger.log("User " + dbuser.username + " has been logged in the database!");
         return dbuser;
     }
 
-    static getIndex(dbuser) {
-        return DataManager.getData()
-            .map(dbuser => dbuser.id)
-            .indexOf(dbuser.id);
+    getIndex(dbuser) {
+        return this.tally.map(dbuser => dbuser.id).indexOf(dbuser.id);
     }    
 
-	static byID(snowflake) {
+	byID(snowflake) {
 		let id = snowflake.match(/[0-9]{18}/);
-		return id ? DataManager.getData().find(user => id[0] === user.id) : null;
+		return id ? this.tally.find(user => id[0] === user.id) : null;
 	}
-    static byUsername(string) {
+    byUsername(string) {
 		let tag = string.match(/[\S \t^@#:`]{2,32}#\d{4}/);
-		return tag ? DataManager.getData().find(user => tag[0].toLowerCase() === user.tag.toLowerCase()) : null;
+		return tag ? this.tally.find(user => tag[0].toLowerCase() === user.tag.toLowerCase()) : null;
 	}
 
-    static byIndex(index) {
+    byIndex(index) {
         if (index < 0) return null;
-        let tally = DataManager.getData();
-        return typeof index === "number" && tally[index] ? tally[index] : null;
+        return typeof index === "number" && this.tally[index] ? this.tally[index] : null;
     }
 
-    static byAliases(alias, exactmode) {
-        return DataManager.getData().find((dbuser) => {
+    byAliases(alias, exactmode) {
+        return this.tally.find((dbuser) => {
             for (let source of Object.keys(config.sources)) {
                 if (typeof dbuser[source] === "object") {
                     for (let account of Object.keys(dbuser[source]).filter(a => !a.startsWith("_"))) {
@@ -77,4 +82,4 @@ class DBuser {
 
 }
 
-module.exports = DBuser;
+module.exports = new DBuser();
