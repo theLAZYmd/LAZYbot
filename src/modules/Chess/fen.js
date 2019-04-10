@@ -137,7 +137,7 @@ class FEN extends Parse {
 
 	get imageURL() {
 		return config.fen.url.board.replace('|', '?' + qs.stringify({
-			fen: encodeURIComponent(this.positionfen),
+			fen: this.positionfen,
 			board: config.fen.board,
 			piece: config.fen.pieces,
 			coordinates: config.fen.coords,

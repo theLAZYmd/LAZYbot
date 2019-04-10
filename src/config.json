@@ -81,6 +81,10 @@
             "chesscom": "livechess960",
             "key": "960"
         },
+        "chess": {
+            "name": "chess",
+            "key": "chess"
+        },
         "ultra": {
             "name": "Ultrabullet",
             "lichess": "ultraBullet",

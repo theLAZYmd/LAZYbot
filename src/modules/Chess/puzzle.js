@@ -1,8 +1,11 @@
+const client = require('lichess');
+const Lichess = new client();
+const rp = require('request-promise');
+
 const Parse = require('../../util/parse');
 const Embed = require('../../util/embed');
 const DataManager = require('../../util/datamanager');
 const config = require('../../config.json');
-const rp = require('request-promise');
 const FEN = require('./fen');
 
 class P {
@@ -24,26 +27,30 @@ class Puzzle extends Parse {
 
 	async daily() {
 		try {
-			let url = 'https://lichess.org/training'; //config.sources.lichess.url.puzzle.replace('|', 'daily');
-			let body = (await rp.get(url)).toString();
-			let id = body.match(/content="Chess tactic #([0-9]+) - (?:White|Black) to play"/);
-			let initialPly = body.match(/"initialPly":([0-9]+),/);
-			if (!id || !initialPly) throw '';
-			id = id[1];
-			initialPly = initialPly[1];
-			let argument = body.match(new RegExp(`"ply":${initialPly},"fen":"(${FEN.regexString})"`));
-			if (!argument) throw '';
-			argument = argument[1];
-			let fen = new FEN(this.message, argument + ' ' + config.sources.lichess.url.puzzle.replace('|', id));
-			fen.run();
+			let {fen} = await Lichess.puzzles.daily();
+			let url = config.sources.lichess.url.puzzle.replace('|', 'daily');
+			let fenConstructor = new FEN(this.message, `${fen} ${url}`);
+			fenConstructor.run();
 		} catch (e) {
-			throw 'Couldn\'t get Daily puzzle';
+			if (e) this.Output.onError(e);
+		}
+	}
+
+	async random() {
+		try {
+			let {fen, id} = await Lichess.puzzles.get();
+			let url = config.sources.lichess.url.puzzle.replace('|', id);
+			let fenConstructor = new FEN(this.message, `${fen} ${url}`);
+			fenConstructor.run();
+		} catch (e) {
+			if (e) this.Output.onError(e);
 		}
 	}
 
 	async variant() {
 		try {
 			let {   variant   } = await require('../../util/variant')(this.message.content, this.channel, this.args, this);
+			if (/^(?:chess|puzzles)$/.test(variant.key)) return this.random();
 			if (!config.variants[variant.key].cvt) throw 'Invalid variant with which to summon a puzzle from [CVT](https://chessvariants.training)';
 			let body = JSON.parse((await rp(config.sources.cvt.url.api.replace('|', config.variants[variant.key].cvt))).toString());
 			if (!body.success) throw JSON.stringify(body, null, 4);
