@@ -321,8 +321,7 @@ class Tracker extends Parse {
 			await DataStore.forEach(data => data.setData());
 			if (msg) await this.Output.editor(embed
 				.setTitle(`${this.Search.emojis.get('lichess')} All updates successfully completed`)
-				.setDescription(description.slice(0, 2048))
-			, msg);
+				.setDescription(description.slice(0, 2048)), msg);
 			Logger.output(userObj);
 			config.lastUpdate = Date.now();
 			DataManager.setFile(config, './src/config.json');
@@ -337,7 +336,7 @@ class Tracker extends Parse {
 			if (Object.values(config.sources).filter(source => dbuser[source.key]).length === 0) return false; //sources
 			if (dbuser.left) return false;
 			let user = this.Search.users.byID(dbuser.id);
-			if (!user) {                
+			if (!user) {
 				dbuser.left = true;
 				DBuser.setData(dbuser);
 				return false;
@@ -436,13 +435,20 @@ module.exports = Tracker;
 function parseChesscom(chesscomData, data) {
 	return {
 		get ratings() {
-			let vmap = new Map(Object.values(config.variants.chesscom).map(v => [v.api, v.key]));
-			return new Map(chesscomData.stats.map(s => [vmap.get(s.key), {
-				rating: s.stats.rating,
-				prov: s.gameCount >= 10,
-				rd: null,
-				games: s.gameCount
-			}]));
+			let vmap = new Map(
+				Object.values(config.variants)
+					.filter(v => v.chesscom)
+					.map(v => [v.chesscom, v.key])
+			);
+			return new Map(
+				chesscomData.stats
+					.map(s => [vmap.get(s.key), {
+						rating: s.stats.rating,
+						prov: s.gameCount >= 10,
+						rd: null,
+						games: s.gameCount
+					}])
+			);
 		},
 		get username() {
 			return data.username;

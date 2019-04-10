@@ -1,8 +1,8 @@
-const config = require("../config.json");
-const DBuser = require("./dbuser.js");
-const DataManager = require("./datamanager.js");
-const Permissions = require("./permissions.js");
-const Logger = require("./logger.js");
+const config = require('../config.json');
+const DBuser = require('./dbuser.js');
+const DataManager = require('./datamanager.js');
+const Permissions = require('./permissions.js');
+const Logger = require('./logger.js');
 
 class Parse {
 
@@ -28,12 +28,12 @@ class Parse {
 	}
 
 	get reactionmessages() {
-		if (!this._reactionmessages) if (this.guild) this._reactionmessages = DataManager.getServer(this.guild.id, "./src/data/reactionmessages.json");
+		if (!this._reactionmessages) if (this.guild) this._reactionmessages = DataManager.getServer(this.guild.id, './src/data/reactionmessages.json');
 		return this._reactionmessages || {};
 	}
 
 	set reactionmessages(reactionmessages) {
-		DataManager.setServer(reactionmessages, "./src/data/reactionmessages.json");
+		DataManager.setServer(reactionmessages, './src/data/reactionmessages.json');
 		this._reactionmessages = reactionmessages;
 	}
 
@@ -41,7 +41,7 @@ class Parse {
 
 	get Output() {
 		if (!this._Output) {
-			let OutputConstructor = require("./output.js");
+			let OutputConstructor = require('./output.js');
 			this._Output = new OutputConstructor(this.message);
 		}
 		return this._Output;
@@ -54,7 +54,7 @@ class Parse {
 
 	get Paginator() {
 		if (!this._Paginator) {
-			let PaginatorConstructor = require("../modules/Utility/paginator");
+			let PaginatorConstructor = require('../modules/Utility/paginator');
 			this._Paginator = new PaginatorConstructor(this.message);
 		}
 		return this._Paginator;
@@ -62,20 +62,20 @@ class Parse {
 
 	get Embeds() {
 		if (!this._Paginator) {
-			let EmbedsConstructor = require("../modules/Utility/embeds");
+			let EmbedsConstructor = require('../modules/Utility/embeds');
 			this._Embeds = new EmbedsConstructor(this.message);
 		}
 		return this._Embeds;
 	}
 
 	get Search() {
-		let SearchConstructor = require("./search.js");
+		let SearchConstructor = require('./search.js');
 		return new SearchConstructor(this.message);
 	}
 
 	get Check() {
 		if (!this._Check) {
-			let CheckConstructor = require("./check.js");
+			let CheckConstructor = require('./check.js');
 			return this._Check = new CheckConstructor(this.message);
 		}
 		return this._Check;
@@ -114,11 +114,11 @@ class Parse {
 	get content() {
 		if (this._content) return this._content;
 		return this._content = !this.message || !this.message.content ? null : this.message.content
-			.replace("’", "'")
-			.replace("…", "...")
-			.replace("—", "--")
-			.replace("“", "\"")
-			.replace("”", "\"")
+			.replace('’', '\'')
+			.replace('…', '...')
+			.replace('—', '--')
+			.replace('“', '"')
+			.replace('”', '"')
 			.replace(/[\u200B-\u200D\uFEFF]/g, '');
 	}
 
@@ -162,15 +162,15 @@ class Parse {
 
 	get prefix() {
 		if (this._prefix) return this._prefix;
-		return this._prefix = Array.from(this.prefixes.values()).find(p => this.content.startsWith(p)) || "";
+		return this._prefix = Array.from(this.prefixes.values()).find(p => this.content.startsWith(p)) || '';
 	}
 	
 	get prefixes() {
 		if (this._prefixes) return this._prefixes;
 		let prefixes = this.server ? this.server.prefixes : {
-			"generic": "!",
-			"nadeko": "."
-		}
+			generic: '!',
+			nadeko: '.'
+		};
 		return this._prefixes = new Map(Object.entries(prefixes));
 	}
 
@@ -190,7 +190,7 @@ class Parse {
 
 	get command() {
 		if (this._command) return this._command;
-		return this._command = this.words.length > 0 ? this.words[0] : "";
+		return this._command = this.words.length > 0 ? this.words[0] : '';
 	}
 
 	get args() {
@@ -200,7 +200,7 @@ class Parse {
 
 	get argument() {
 		if (this._argument) return this._argument;
-		return this._argument = this.args.join(" ") || "";
+		return this._argument = this.args.join(' ') || '';
 	}
 
 	get embed() {
@@ -211,18 +211,18 @@ class Parse {
 	static ratingData(dbuser, source, username) {
 		try {
 			let account = dbuser[source.key][username];
-			if (!account) throw "No account found for that username!";
-			let rating = [];
-			for (let [key, variant] of Object.entries(config.variants[source.key]))
-				if (account[key]) rating.push([variant.name, (account[key].endsWith("?") ? "" : "**") + account[key] + (account[key].endsWith("?") ? "" : "**")]);
-			return rating.toPairs();
+			if (!account) throw 'No account found for that username!';
+			return Object.entries(config.variants)
+				.filter(([k, v]) => v[source.k] && account[k])
+				.map(([k, v]) => [v.name, account[k].endsWith('?') ? account[k] : account[k].bold()])
+				.toPairs();
 		} catch (e) {
 			if (e) throw e;
 		}
 	}
 
 	static profile(dbuser, source, username) {
-		return `[${username}](${(config.sources[source.key].url.profile.replace("|", username))})`;
+		return `[${username}](${(config.sources[source.key].url.profile.replace('|', username))})`;
 	}
 
 }
