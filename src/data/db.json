@@ -3,7 +3,7 @@
         "id": "185412969130229760",
         "username": "theLAZYmd#2353",
         "messages": {
-            "count": 79709,
+            "count": 79717,
             "last": "on the lb",
             "lastSeen": 1555019614668
         },
@@ -28,7 +28,7 @@
                 "bughouse": "1951"
             }
         },
-        "lastUpdate": 1555018223355,
+        "lastUpdate": 1555021359259,
         "age": "19",
         "finger": "It's finally spring vac!",
         "lichess": {
@@ -93,7 +93,6 @@
             "maxRating": 0
         },
         "lastupdate": 1532184437531,
-        "left": true,
         "trivia": {
             "rating": 1507,
             "games": 9
@@ -590,8 +589,7 @@
                 "bughouse": "2202",
                 "tactics": "1244?"
             }
-        },
-        "left": true
+        }
     },
     {
         "id": "303609777756438529",
@@ -1608,8 +1606,7 @@
         },
         "trophy": [
             "Crazyhouse World Champion"
-        ],
-        "left": true
+        ]
     },
     {
         "id": "123574379601723392",
@@ -1654,8 +1651,7 @@
                 "lessons": "1285"
             }
         },
-        "lastupdate": 1532127307276,
-        "left": true
+        "lastupdate": 1532127307276
     },
     {
         "id": "372355465939779595",
@@ -1985,8 +1981,7 @@
             "_country": "RU",
             "_language": "en-US"
         },
-        "lastUpdate": 1533091104658,
-        "left": true
+        "lastUpdate": 1533091104658
     },
     {
         "id": "316064197425496064",
@@ -2028,8 +2023,7 @@
                 "rapid": "2035?",
                 "classical": "1500?"
             }
-        },
-        "left": true
+        }
     },
     {
         "id": "291630149655330817",
@@ -2165,8 +2159,7 @@
                 "crazyhouse": "1948",
                 "atomic": "1281?"
             }
-        },
-        "left": true
+        }
     },
     {
         "id": "302598408773042188",
@@ -2226,8 +2219,7 @@
             }
         },
         "lastUpdate": 1533638105792,
-        "location": "Germany",
-        "left": true
+        "location": "Germany"
     },
     {
         "id": "273152076421529601",
@@ -2300,7 +2292,6 @@
             "April Fools 2018 Survivor 'whats the problem' + 2"
         ],
         "lastupdate": 1532182516393,
-        "left": true,
         "trivia": {
             "rating": 1048,
             "games": 9
@@ -2557,7 +2548,6 @@
                 "lessons": "1000?"
             }
         },
-        "left": true,
         "lichess": {
             "_main": "BurakYarol",
             "BurakYarol": {
@@ -2674,8 +2664,7 @@
                 "tactics": "793",
                 "lessons": "864"
             }
-        },
-        "left": true
+        }
     },
     {
         "id": "240786679873404938",
@@ -2989,8 +2978,7 @@
                 "racingkings": "2300"
             }
         },
-        "lastupdate": 1532045141550,
-        "left": true
+        "lastupdate": 1532045141550
     },
     {
         "id": "85064597119197184",
@@ -3020,7 +3008,6 @@
             "_language": "en-GB"
         },
         "lastupdate": 1545063345655,
-        "left": true,
         "location": "United States"
     },
     {
@@ -3115,8 +3102,7 @@
                 "koth": "1603?",
                 "racingkings": "1469?"
             }
-        },
-        "left": true
+        }
     },
     {
         "id": "424996897451933716",
@@ -3608,8 +3594,7 @@
                 "koth": "1583?",
                 "racingkings": "1458"
             }
-        },
-        "left": true
+        }
     },
     {
         "id": "425376766085824512",
@@ -3679,7 +3664,6 @@
         "age": "420",
         "sex": "neutral",
         "location": "Mlg",
-        "left": true,
         "trivia": {
             "rating": 1381,
             "games": 2
@@ -3861,8 +3845,7 @@
                 "koth": "1517?"
             }
         },
-        "lastupdate": 1532183101696,
-        "left": true
+        "lastupdate": 1532183101696
     },
     {
         "id": "425397119315214336",
@@ -4175,8 +4158,7 @@
             "_name": "Townes Paycheck",
             "_language": "en-GB"
         },
-        "lastupdate": 1549924678965,
-        "left": true
+        "lastupdate": 1549924678965
     },
     {
         "id": "441509219393470480",
@@ -4564,8 +4546,7 @@
             "_name": "Waleed Afzal",
             "_country": "US"
         },
-        "lastupdate": 1535754925199,
-        "left": true
+        "lastupdate": 1535754925199
     },
     {
         "id": "230299460624842752",
@@ -4747,8 +4728,7 @@
             "_country": "IT",
             "_language": "it-IT"
         },
-        "lastupdate": 1538549284249,
-        "left": true
+        "lastupdate": 1538549284249
     },
     {
         "id": "446584319683723274",
@@ -4841,7 +4821,6 @@
             "_title": "GM"
         },
         "location": "United States",
-        "left": true,
         "finger": "i love antichess queen races"
     },
     {
@@ -4957,8 +4936,7 @@
                 "lessons": "1452"
             }
         },
-        "lastupdate": 1550792678674,
-        "left": true
+        "lastupdate": 1550792678674
     },
     {
         "id": "233076793102303232",
@@ -5047,8 +5025,7 @@
                 "anti": "2341",
                 "atomic": "1479?"
             }
-        },
-        "left": true
+        }
     },
     {
         "id": "379095817149087774",
@@ -5235,8 +5212,7 @@
                 "tactics": "2083",
                 "lessons": "1996"
             }
-        },
-        "left": true
+        }
     },
     {
         "id": "312485288150827010",
@@ -5270,8 +5246,7 @@
         "trivia": {
             "rating": 1225,
             "games": 2
-        },
-        "left": true
+        }
     },
     {
         "id": "207198631076429825",
@@ -5296,8 +5271,7 @@
                 "racingkings": "1687"
             }
         },
-        "lastupdate": 1531693412088,
-        "left": true
+        "lastupdate": 1531693412088
     },
     {
         "id": "96637603494768640",
@@ -5332,8 +5306,7 @@
                 "tactics": "1532",
                 "lessons": "1677"
             }
-        },
-        "left": true
+        }
     },
     {
         "id": "365127999047335936",
@@ -5367,8 +5340,7 @@
         "lastupdate": 1538429314177,
         "age": "18",
         "sex": "male",
-        "location": "Indiana",
-        "left": true
+        "location": "Indiana"
     },
     {
         "id": "305146573804011520",
@@ -5490,8 +5462,7 @@
                 "classical": "1500?",
                 "crazyhouse": "2142"
             }
-        },
-        "left": true
+        }
     },
     {
         "id": "185970710110273536",
@@ -5571,8 +5542,7 @@
                 "tactics": "2174",
                 "lessons": "1704"
             }
-        },
-        "left": true
+        }
     },
     {
         "id": "213133309146824705",
@@ -6876,8 +6846,7 @@
                 "koth": "1615",
                 "racingkings": "1514"
             }
-        },
-        "left": true
+        }
     },
     {
         "id": "442445734554501120",
@@ -7052,8 +7021,7 @@
                 "rapid": "1908?",
                 "classical": "1500?"
             }
-        },
-        "left": true
+        }
     },
     {
         "id": "161935294818418688",
@@ -7110,8 +7078,7 @@
                 "rapid": "2124",
                 "classical": "1661?"
             }
-        },
-        "left": true
+        }
     },
     {
         "id": "371546815063130114",
@@ -7477,8 +7444,7 @@
                 "atomic": "2236"
             }
         },
-        "lastUpdate": 1532807478521,
-        "left": true
+        "lastUpdate": 1532807478521
     },
     {
         "id": "409741984039960577",
@@ -7681,7 +7647,6 @@
                 "lessons": "1662"
             }
         },
-        "left": true,
         "trivia": {
             "rating": 1500,
             "games": 1
@@ -7899,8 +7864,7 @@
         },
         "lastUpdate": 1532812011296,
         "lastupdate": 1545063257345,
-        "location": "France",
-        "left": true
+        "location": "France"
     },
     {
         "id": "450315296998293534",
@@ -7930,8 +7894,7 @@
             "_country": "FR"
         },
         "lastupdate": 1546793598208,
-        "location": "France",
-        "left": true
+        "location": "France"
     },
     {
         "id": "443670630823624706",
@@ -7986,8 +7949,7 @@
             },
             "_country": "US"
         },
-        "lastUpdate": 1533325208713,
-        "left": true
+        "lastUpdate": 1533325208713
     },
     {
         "id": "343502432606748693",
@@ -8162,8 +8124,7 @@
             "_name": "The Chess Guy 2.0!!!",
             "_country": "US",
             "_language": "en-US"
-        },
-        "left": true
+        }
     },
     {
         "id": "230382599867072512",
@@ -8191,8 +8152,7 @@
             }
         },
         "lastUpdate": 1533802568840,
-        "lastupdate": 1535619382717,
-        "left": true
+        "lastupdate": 1535619382717
     },
     {
         "id": "330950050421145601",
@@ -8260,8 +8220,7 @@
                 "lessons": "2011"
             }
         },
-        "lastupdate": 1537005958176,
-        "left": true
+        "lastupdate": 1537005958176
     },
     {
         "id": "183569849300025344",
@@ -8391,8 +8350,7 @@
             "_name": "Ninja Masterof Atomic",
             "_country": "RO"
         },
-        "lastUpdate": 1534435079127,
-        "left": true
+        "lastUpdate": 1534435079127
     },
     {
         "id": "479670152221163531",
@@ -8641,8 +8599,7 @@
             "_language": "de-DE"
         },
         "lastUpdate": 1534977751061,
-        "lastupdate": 1535236836027,
-        "left": true
+        "lastupdate": 1535236836027
     },
     {
         "id": "482273256414380032",
@@ -8958,8 +8915,7 @@
             "_language": "en",
             "_name": "Mary Torrence",
             "_country": "US"
-        },
-        "left": true
+        }
     },
     {
         "id": "353876665400819712",
@@ -9031,8 +8987,7 @@
             "count": 1,
             "last": "ma",
             "lastSeen": 1536057829627
-        },
-        "left": true
+        }
     },
     {
         "id": "396590956981518337",
@@ -9062,8 +9017,7 @@
                 "classical": "1500?"
             }
         },
-        "lastupdate": 1535912268928,
-        "left": true
+        "lastupdate": 1535912268928
     },
     {
         "id": "136243371223154689",
@@ -9138,8 +9092,7 @@
                 "racing-kings": "1321?"
             }
         },
-        "lastupdate": 1540644866624,
-        "left": true
+        "lastupdate": 1540644866624
     },
     {
         "id": "211272873971679233",
@@ -9232,8 +9185,7 @@
                 "racing-kings": "1366?"
             }
         },
-        "lastupdate": 1544876013395,
-        "left": true
+        "lastupdate": 1544876013395
     },
     {
         "id": "207583553976795137",
@@ -9550,8 +9502,7 @@
             },
             "_language": "en-GB"
         },
-        "lastupdate": 1549924078954,
-        "left": true
+        "lastupdate": 1549924078954
     },
     {
         "id": "297444963841605632",
@@ -9571,8 +9522,7 @@
                 "classical": "1298?"
             }
         },
-        "lastupdate": 1539552391697,
-        "left": true
+        "lastupdate": 1539552391697
     },
     {
         "id": "315964293336268801",
@@ -9675,8 +9625,7 @@
                 "racing-kings": "1397?"
             }
         },
-        "lastupdate": 1549923780356,
-        "left": true
+        "lastupdate": 1549923780356
     },
     {
         "id": "490461186735865857",
@@ -9694,8 +9643,7 @@
             "count": 17,
             "last": "Thanks for holding my hand",
             "lastSeen": 1537051208442
-        },
-        "left": true
+        }
     },
     {
         "id": "384143296005668875",
@@ -9743,8 +9691,7 @@
             "_country": "NG",
             "_language": "en-GB"
         },
-        "lastupdate": 1537708364906,
-        "left": true
+        "lastupdate": 1537708364906
     },
     {
         "id": "393091254184968203",
@@ -9843,8 +9790,7 @@
         "lastupdate": 1539941417210,
         "age": "22",
         "sex": "male",
-        "location": "India",
-        "left": true
+        "location": "India"
     },
     {
         "id": "453707270426066945",
@@ -11099,8 +11045,7 @@
                 "classical": "1500?"
             }
         },
-        "lastupdate": 1541236497233,
-        "left": true
+        "lastupdate": 1541236497233
     },
     {
         "id": "497528297920659457",
@@ -11132,8 +11077,7 @@
             "_country": "PL",
             "_language": "en-GB"
         },
-        "lastupdate": 1538744476706,
-        "left": true
+        "lastupdate": 1538744476706
     },
     {
         "id": "340233549007290368",
@@ -11200,8 +11144,7 @@
                 "tactics": "1468",
                 "lessons": "2237"
             }
-        },
-        "left": true
+        }
     },
     {
         "id": "188011104608190465",
@@ -11254,8 +11197,7 @@
                 "lessons": "2217"
             }
         },
-        "lastupdate": 1539462706362,
-        "left": true
+        "lastupdate": 1539462706362
     },
     {
         "id": "280106717960994817",
@@ -11307,8 +11249,7 @@
                 "tactics": "438",
                 "lessons": "1006?"
             }
-        },
-        "left": true
+        }
     },
     {
         "id": "243507029660925953",
@@ -11342,8 +11283,7 @@
                 "chess": "1202?",
                 "tactics": "428"
             }
-        },
-        "left": true
+        }
     },
     {
         "id": "204240564755890176",
@@ -11409,8 +11349,7 @@
                 "classical": "1522"
             }
         },
-        "lastupdate": 1539718640296,
-        "left": true
+        "lastupdate": 1539718640296
     },
     {
         "id": "160884257923792898",
@@ -11548,8 +11487,7 @@
                 "classical": "1700"
             }
         },
-        "lastupdate": 1540178481436,
-        "left": true
+        "lastupdate": 1540178481436
     },
     {
         "id": "324703913976528897",
@@ -12290,7 +12228,7 @@
             "_country": "AQ",
             "_bio": "bad player"
         },
-        "lastUpdate": 1555018222355
+        "lastUpdate": 1555021298699
     },
     {
         "id": "517149025355431967",
@@ -12363,8 +12301,7 @@
             },
             "_country": "CA"
         },
-        "lastupdate": 1543369917227,
-        "left": true
+        "lastupdate": 1543369917227
     },
     {
         "id": "317398665436332035",
@@ -12599,8 +12536,7 @@
             "count": 155,
             "last": "<:saluteppepo:524930222303346718>",
             "lastSeen": 1546189087382
-        },
-        "left": true
+        }
     },
     {
         "id": "339268035514728448",
@@ -12667,8 +12603,7 @@
             "_name": "god of gods"
         },
         "lastupdate": 1549923178923,
-        "location": "Canada",
-        "left": true
+        "location": "Canada"
     },
     {
         "id": "261012490245242892",
@@ -12821,8 +12756,7 @@
                 "tactics": "654",
                 "lessons": "1375"
             }
-        },
-        "left": true
+        }
     },
     {
         "id": "451735931574026260",
@@ -12844,8 +12778,7 @@
                 "atomic": "1305"
             }
         },
-        "lastupdate": 1543970985694,
-        "left": true
+        "lastupdate": 1543970985694
     },
     {
         "id": "479630382409449479",
@@ -12974,8 +12907,7 @@
             "_name": "Holden"
         },
         "lastupdate": 1549922878982,
-        "location": "United States",
-        "left": true
+        "location": "United States"
     },
     {
         "id": "520620337059201024",
@@ -13774,8 +13706,7 @@
             },
             "_language": "en-GB"
         },
-        "lastupdate": 1546792997370,
-        "left": true
+        "lastupdate": 1546792997370
     },
     {
         "id": "515524778530963473",
@@ -13855,8 +13786,7 @@
                 "racing-kings": "1695"
             }
         },
-        "lastupdate": 1545229979180,
-        "left": true
+        "lastupdate": 1545229979180
     },
     {
         "id": "412034109595189258",
@@ -14164,8 +14094,7 @@
             "_country": "IN"
         },
         "lastupdate": 1549922580929,
-        "location": "India",
-        "left": true
+        "location": "India"
     },
     {
         "id": "187987014518439947",
@@ -14426,8 +14355,7 @@
             "last": "Alright bye guys! My other acc Italian Roasted Vanilla will be on this server",
             "lastSeen": 1554690341258
         },
-        "lastupdate": 1548876231964,
-        "left": true
+        "lastupdate": 1548876231964
     },
     {
         "id": "150582980987846656",
@@ -14560,8 +14488,7 @@
             }
         },
         "lastupdate": 1552845754091,
-        "username": "FancyKnightManeuvers#9019",
-        "left": true
+        "username": "FancyKnightManeuvers#9019"
     },
     {
         "id": "509108390040043543",
@@ -14641,8 +14568,7 @@
             "_country": "IN",
             "_language": "en-GB"
         },
-        "lastupdate": 1549922279002,
-        "left": true
+        "lastupdate": 1549922279002
     },
     {
         "id": "522192725785706506",
@@ -14829,8 +14755,7 @@
             },
             "_country": "GB"
         },
-        "location": "United Kingdom",
-        "left": true
+        "location": "United Kingdom"
     },
     {
         "id": "345635443636699139",
@@ -15149,8 +15074,7 @@
             "_country": "DE",
             "_language": "en-GB"
         },
-        "lastupdate": 1549921678946,
-        "left": true
+        "lastupdate": 1549921678946
     },
     {
         "id": "168843669871263745",
@@ -16046,8 +15970,7 @@
                 "classical": "1097?"
             }
         },
-        "username": "Mr. Thick#6270",
-        "left": true
+        "username": "Mr. Thick#6270"
     },
     {
         "id": "452278777398034452",
@@ -16156,8 +16079,7 @@
             "_country": "GN"
         },
         "lastupdate": 1552519645716,
-        "username": "NamasteToEveryone#6539",
-        "left": true
+        "username": "NamasteToEveryone#6539"
     },
     {
         "id": "333021987741892610",
@@ -16404,8 +16326,7 @@
             },
             "_country": "GB"
         },
-        "lastupdate": 1552845453957,
-        "left": true
+        "lastupdate": 1552845453957
     },
     {
         "id": "367163580400795649",
@@ -16422,8 +16343,7 @@
             "last": "",
             "lastSeen": 1552848939115
         },
-        "lastupdate": 1552848998347,
-        "left": true
+        "lastupdate": 1552848998347
     },
     {
         "id": "526089624829820960",
@@ -16485,8 +16405,7 @@
             "count": 1,
             "last": "Ok",
             "lastSeen": 1553008604123
-        },
-        "left": true
+        }
     },
     {
         "id": "480836339407781899",
@@ -16627,8 +16546,7 @@
             "count": 0,
             "last": "",
             "lastSeen": 1553376025323
-        },
-        "left": true
+        }
     },
     {
         "id": "135193881284182016",
@@ -16659,8 +16577,7 @@
             "count": 0,
             "last": "",
             "lastSeen": 1553476357689
-        },
-        "left": true
+        }
     },
     {
         "id": "556790314728161308",
@@ -16669,8 +16586,7 @@
             "count": 0,
             "last": "",
             "lastSeen": 1553579589773
-        },
-        "left": true
+        }
     },
     {
         "id": "161060630726574080",
@@ -16688,8 +16604,7 @@
             "count": 0,
             "last": "",
             "lastSeen": 1553626077261
-        },
-        "left": true
+        }
     },
     {
         "id": "338952992260751371",
@@ -16769,8 +16684,7 @@
             "_country": "US",
             "_language": "en-GB"
         },
-        "lastUpdate": 1555008294393,
-        "left": true
+        "lastUpdate": 1555008294393
     },
     {
         "id": "477478425603604480",
@@ -16788,8 +16702,7 @@
             "count": 1,
             "last": "I'm actually completely new, I have no knowledge of anything",
             "lastSeen": 1553974180611
-        },
-        "left": true
+        }
     },
     {
         "id": "332654587175632906",
@@ -16816,8 +16729,7 @@
             "count": 0,
             "last": "",
             "lastSeen": 1554067454004
-        },
-        "left": true
+        }
     },
     {
         "id": "345006838770565122",
@@ -16835,8 +16747,7 @@
             "count": 15,
             "last": "https://discord.gg/sDY6yF",
             "lastSeen": 1554073689261
-        },
-        "left": true
+        }
     },
     {
         "id": "306509085707206656",
@@ -16845,8 +16756,7 @@
             "count": 0,
             "last": "",
             "lastSeen": 1554075416971
-        },
-        "left": true
+        }
     },
     {
         "id": "415597644631506944",
@@ -16873,8 +16783,7 @@
             "count": 0,
             "last": "",
             "lastSeen": 1554211656695
-        },
-        "left": true
+        }
     },
     {
         "id": "481218779716517888",
@@ -16883,8 +16792,7 @@
             "count": 0,
             "last": "",
             "lastSeen": 1554222666400
-        },
-        "left": true
+        }
     },
     {
         "id": "562683584268206252",
@@ -16967,8 +16875,7 @@
             "count": 0,
             "last": "",
             "lastSeen": 1554362718333
-        },
-        "left": true
+        }
     },
     {
         "id": "497050715211169793",
@@ -16986,8 +16893,7 @@
             "count": 0,
             "last": "",
             "lastSeen": 1554470293999
-        },
-        "left": true
+        }
     },
     {
         "id": "156579052935839744",
@@ -17016,8 +16922,7 @@
             "last": "",
             "lastSeen": 1554583619694
         },
-        "lastupdate": 1554583694629,
-        "left": true
+        "lastupdate": 1554583694629
     },
     {
         "id": "218553319218479106",
@@ -17036,8 +16941,7 @@
             "last": "lichess API is down i think",
             "lastSeen": 1554644877407
         },
-        "lastupdate": 1554644790444,
-        "left": true
+        "lastupdate": 1554644790444
     },
     {
         "id": "362278194851872770",
@@ -17116,8 +17020,7 @@
             "count": 0,
             "last": "",
             "lastSeen": 1554711215933
-        },
-        "left": true
+        }
     },
     {
         "id": "564811199699484682",
@@ -17227,8 +17130,7 @@
             "count": 0,
             "last": "",
             "lastSeen": 1554770894845
-        },
-        "left": true
+        }
     },
     {
         "id": "474728861146546176",
@@ -17246,8 +17148,7 @@
             "count": 0,
             "last": "",
             "lastSeen": 1554846806479
-        },
-        "left": true
+        }
     },
     {
         "id": "291623143720747008",
@@ -17268,8 +17169,7 @@
                 "rapid": "1500?"
             }
         },
-        "lastUpdate": 1554903847082,
-        "left": true
+        "lastUpdate": 1554903847082
     },
     {
         "id": "411603075657236491",
@@ -17278,8 +17178,7 @@
             "count": 0,
             "last": "",
             "lastSeen": 1554911704896
-        },
-        "left": true
+        }
     },
     {
         "id": "544296564798128148",
@@ -17341,8 +17240,7 @@
             "_language": "en-GB",
             "_bio": "From the U.S. but currently living in Belgium\r\n\r\nhttps://media.giphy.com/media/3ohs7QsY3ULn135SFi/giphy.gif\r\nhttps://i.imgur.com/7dUC3lV.png\r\n\r\n\r\n\r\n I've been Atomic Top Ten: February 17 2018\r\n\r\n\r\n "
         },
-        "lastUpdate": 1555016616382,
-        "left": true
+        "lastUpdate": 1555016616382
     },
     {
         "id": "565136230707101696",
@@ -17350,7 +17248,6 @@
             "count": 0,
             "last": "",
             "lastSeen": 1555012626397
-        },
-        "left": true
+        }
     }
 ]
