@@ -67,7 +67,7 @@ class Embeds extends Parse {
 		if (this._embeds) return this._embeds;
 		try {
 			if (this.client.user.id === config.ids.betabot) throw '';
-			return body = await rp.get({
+			return await rp.get({
 				uri: config.urls.embeds,
 				json: true
 			});
