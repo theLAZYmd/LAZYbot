@@ -258,12 +258,12 @@ class Tracker extends Parse {
 				if (this.command) data.setMessage(await this.Output.generic('Updating user ' + dbuser.username + '...'));
 				for (let source of data.sources) {
 					data.setSource(source);
-					for (let account of Object.keys(data.dbuser[source.key]))
-						if (!account.startsWith('_')) {
-							if (data.command) await data.edit();
-							await data.setUsername(account).getData();
-							data.setUsername();
-						}
+					if (data.command) await data.edit();
+					for (let account of Object.keys(data.dbuser[source.key])) {
+						if (account.startsWith('_')) continue;
+						await data.setUsername(account).getData();
+						data.setUsername();
+					}
 				}
 			} catch (e) {
 				if (e) data.setError(e);
