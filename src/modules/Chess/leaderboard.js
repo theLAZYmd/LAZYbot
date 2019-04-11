@@ -80,17 +80,15 @@ class Leaderboard extends Parse {
 
 	static async build(data, page = 0) {
 		try {
-			let array = [];
-			for (let i = 0; i < 10; i++) {
-				let entry = data.leaderboard[i + 10 * page];
-				if (!entry) continue;
+			let array = data.leaderboard.slice(10 * page, 10 * (page + 1)).map((entry) => {
 				if (data.source) {
 					let urllink = data.source.url.profile.replace('|', entry.username); //lichess.org/@/V2chess
-					array[i] = ['[' + entry.tag + '](' + urllink + ') ' + entry.rating];
+					return ['[' + entry.tag + '](' + urllink + ') ' + entry.rating];
 				} else {
-					array[i] = [entry.tag + ' ' + entry.rating];
+					return [entry.tag + ' ' + entry.rating];
 				}
-			}
+			});
+			console.log(array);
 			let lbembed = array.toLeaderboard(page, 10, false); //Case 2 Leaderboard:
 			lbembed.title = `${data.emoji} House leaderboard${data.source ? ' on ' + data.source.name : ''} for${data.active ? 'active ' : ' '}${data.variant.name} players`;
 			return lbembed;
