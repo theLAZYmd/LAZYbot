@@ -21,7 +21,7 @@ class Profile extends Parse {
 			}
 			this.user = this.member.user;
 			Object.defineProperty(this, 'dbuser', {
-				value: Object.assign({}, this.dbuser)
+				value: this.dbuser
 			});
 			Object.defineProperty(this, 'dbindex', {
 				value: this.dbuser.getIndex()

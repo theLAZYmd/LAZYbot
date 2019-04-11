@@ -45,7 +45,7 @@ class Trivia extends Parse {
 				.reverse()
 				.join('\n') || ''
 			)
-		)
+		);
 		return this;
 	}
 
@@ -160,7 +160,7 @@ class Trivia extends Parse {
 		try {
 			const lines = embed.description.split('\n');
 			let scored = lines
-				.map(line => line.match(/\*\*([\S\h\t^@#:`]{2,32}#\d{4})\*\* has( \d{1,3}) points/).slice(1))
+				.map(line => line.match(/\*\*([\S \t^@#:`]{2,32}#\d{4})\*\* has( \d{1,3}) points/).slice(1))
 				.map(arr => this.nameToTriviaData(...arr));
 			let players = this.players;
 			scored = scored.filter((d) => {
