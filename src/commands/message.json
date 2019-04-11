@@ -1619,9 +1619,6 @@
             "module": "Profile",
             "file": "profile",
             "method": "get",
-            "arguments": [
-                "args"
-            ],
             "prefix": "generic"
         },
         {

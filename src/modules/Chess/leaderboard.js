@@ -18,6 +18,7 @@ class Leaderboard extends Parse {
 			if (!data.leaderboard || data.leaderboard.length === 0) throw 'Couldn\'t fetch players for **' + data.variant.name + '**.';
 			let embedgroup = [];
 			data.emoji = this.Search.emojis.get(data.variant.key);
+			console.log(data.leaderboard.length);
 			for (let i = 0; i < Math.ceil(data.leaderboard.length / 10); i++) {
 				embedgroup.push(await Leaderboard.build(data, i));
 			}
