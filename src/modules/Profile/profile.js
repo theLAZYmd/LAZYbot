@@ -205,10 +205,10 @@ class Profile extends Parse {
 	 */
 	get info() {
 		let region = this.server.regions.find(r => this.Search.roles.get(r) && this.member.roles.some(role => role.name.toLowerCase() === r.toLowerCase())) || 'None set.';
-		let emoji = this.Search.emojis.get(this.dbuser.sex);
+		let emoji = this.Search.emojis.get(this.dbuser.sex || '');
 		return [
 			['Age', this.dbuser.age],
-			['Sex', this.dbuser.sex ? (emoji ? emoji : this.dbuser.sex) : ''],
+			['Sex', emoji ? emoji : this.dbuser.sex],
 			//check if emoji exists, otherwise just display text
 			['Location', this.dbuser.location],
 			['Region', region]
