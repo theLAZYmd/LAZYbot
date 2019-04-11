@@ -276,12 +276,16 @@ class DBusers extends Search {
 	getUser(user) {
 		let dbuser = this.byID(user.id);
 		if (dbuser) return dbuser;
-		dbuser = new DBuser().fromUser(user);
-		let tally = this.tally;
-		tally.push(dbuser);
-		DataManager.setData(tally);
-		Logger.log(`User ${dbuser.username} has been logged in the database!`);
-		return dbuser;
+		else new DBuser().joined(user);
+	}
+
+	/**
+	 * Converts a dbuser object into a dbuser instance
+	 * @param {Object} dbuser
+	 * @type {DBuser}
+	 */
+	getDBuser(dbuser) {
+		return dbuser ? new DBuser(dbuser) : null;
 	}
 
 	/**
@@ -428,11 +432,15 @@ class DBuser {
 
 	/**
 	 * Deletes a 'left' property on the DBuser if there was one
+	 * @param {User} user
 	 * @returns {DBuser}
 	 */
-	joined() {
-		if (this.left) delete this.left;
-		this.setData();
+	joined(user) {		
+		let dbuser = this.fromUser(user);
+		let tally = DataManager.getData();
+		tally.push(this);
+		DataManager.setData(tally);
+		Logger.log(`User ${dbuser.username} has been logged in the database!`);
 		return this;
 	}
 
@@ -441,9 +449,11 @@ class DBuser {
 	 * @returns {DBuser}
 	 */
 	left() {
-		this.left = true;
-		this.setData();
-		return this;
+		let tally = DataManager.getData();
+		let index = this.getIndex();
+		tally.splice(index);
+		DataManager.setData(tally);
+		return null;
 	}
     
 }
