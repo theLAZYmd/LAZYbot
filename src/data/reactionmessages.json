@@ -7569,6 +7569,63 @@
                 "page": 0,
                 "author": "515524778530963473",
                 "cmdID": "566011571311083530"
+            },
+            "566012200461008896": {
+                "embedgroup": [
+                    {
+                        "description": "**#1** okei#1207 1772\n",
+                        "fields": [],
+                        "title": " House leaderboard for Trivia players",
+                        "footer": {
+                            "text": "1 / 1"
+                        },
+                        "color": 53380
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "185412969130229760",
+                "cmdID": "566012192386711556"
+            },
+            "566016203995217961": {
+                "embedgroup": [
+                    {
+                        "description": "**#1** okei#1207 1772\n",
+                        "fields": [],
+                        "title": " House leaderboard for Trivia players",
+                        "footer": {
+                            "text": "1 / 1"
+                        },
+                        "color": 53380
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "185412969130229760",
+                "cmdID": "566016203034984450"
+            },
+            "566016992675496001": {
+                "embedgroup": [
+                    {
+                        "description": "**General**\nThe channel moderators are elected moderators chosen by people in that channel. Each variant channel (crazyhouse, 3-check, atomic etc) has two (2) channel mods. They are the representatives of their variant community. \n\n**Assignment**\nIn each channel, two channel mods will:\n• Maintain the channel and make it as good-a-place as possible.\n• Invite and build up the channel community for that variant.\n• Organise events for the channel/community (tournaments, new ideas, vs, giveaways).\n• Manage (delete, pin) messages.\n• Change channel name and description. \n• Control channel specific bot functions (new 'nowplaying' feature, live stream notifications)",
+                        "color": 53380,
+                        "author": {
+                            "name": "Channel moderators",
+                            "icon_url": "https://vignette.wikia.nocookie.net/clubpenguin/images/9/9b/Moderator_Badge_new.png/revision/latest?cb=20140206150417"
+                        },
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/VId4nJT.png"
+                        },
+                        "fields": [],
+                        "footer": {
+                            "text": "1 / 1"
+                        }
+                    }
+                ],
+                "period": 180000,
+                "page": 0,
+                "author": "373480715276517376",
+                "cmdID": "566016991840960552"
             }
         },
         "election": {
