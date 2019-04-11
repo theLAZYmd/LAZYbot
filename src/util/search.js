@@ -336,6 +336,7 @@ class DBusers extends Search {
 	byAliases(alias, exactmode) {
 		let dbuser = this.tally.find((dbuser) => {
 			for (let source of Object.keys(config.sources)) {
+				if (!dbuser[source]) continue;
 				for (let account of Object.keys(dbuser[source])) {
 					if (account.startsWith('_')) continue;
 					if (!exactmode && account.toLowerCase().startsWith(alias.toLowerCase())) return true;
