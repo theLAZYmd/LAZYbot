@@ -24,7 +24,7 @@ class Profile extends Parse {
 				value: Object.assign({}, this.dbuser)
 			});
 			Object.defineProperty(this, 'dbindex', {
-				value: this.dbuser.getIndex();
+				value: this.dbuser.getIndex()
 			});
 			let embedgroup = [];
 			for (let i = 0; i < this.pages; i++) {

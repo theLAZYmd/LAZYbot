@@ -2,7 +2,6 @@ const Main = require('./main');
 const DataManager = require('../../util/datamanager');
 const Search = require('../../util/search');
 const Embed = require('../../util/embed');
-const config = require('../../config.json');
 
 class Voters extends Main {
 
@@ -23,7 +22,7 @@ class Voters extends Main {
 			else if (election.type === 'channel') {
 				instance = await this.Output.response({
 					description: 'Please state the election for which you would like to view the voting list.',
-					'filter': m => election.elections.hasOwnProperty(m.content)
+					filter: m => election.elections.hasOwnProperty(m.content)
 				});
 			} else instance = '';
 			if (!instance) throw 'Couldn\'t find matching election. Use `' + this.server.prefixes.generic + 'election config` to configure elections.';
@@ -89,7 +88,7 @@ class Voters extends Main {
 				if (this.args.length === 0 || this.args.inArray(key))
 					election.elections[key] = {
 						voters: {},
-						'candidates': {}
+						candidates: {}
 					};
 			}
 			this.generate();
@@ -112,7 +111,7 @@ class Voters extends Main {
 				while (!role) {
 					let emsg = argsInfo.Output.onError('Couldn\'t find role **' + response + '&**.');
 					response = await argsInfo.Output.response({
-						description: await argsInfo.criteria === 'role-choose' ? 'Please write the name of the role for channel **' + channel + '**.' : 'Please write the name of the role for the list of eligible voters.'
+						description: await argsInfo.criteria === 'role-choose' ? 'Please write the name of the role to find eligible members.' : 'Please write the name of the role for the list of eligible voters.'
 					});
 					role = argsInfo.Search.roles.get(response);
 					emsg.delete();
@@ -148,7 +147,7 @@ class Voters extends Main {
 						while (!role) {
 							let emsg = await argsInfo.Output.onError('Couldn\'t find role **' + response + '**.');
 							response = await argsInfo.Output.response({
-								'description': await argsInfo.criteria === 'role-choose' ? 'Please write the name of the role for channel **' + channel + '**.' : 'Please write the name of the role for the list of eligible voters.'
+								description: await argsInfo.criteria === 'role-choose' ? 'Please write the name of the role for channel **' + channel + '**.' : 'Please write the name of the role for the list of eligible voters.'
 							});
 							role = argsInfo.Search.roles.get(response);
 							emsg.delete();
@@ -232,9 +231,8 @@ class Voters extends Main {
 			let election = this.election;
 			if (election[argument.toLowerCase()]) return argument.toLowerCase();
 			let channel = this.Search.channels.get(argument);
-			if (!channel) throw e;
-			if (election[channel.name.toLowerCase()]) return channel.name.toLowerCase();
-			throw e;
+			if (!channel || !election[channel.name.toLowerCase()]) throw '';
+			return channel.name.toLowerCase();
 		} catch (e) {
 			throw 'Couldn\'t find channel **' + argument + '**.';
 		}
@@ -272,7 +270,7 @@ class Voters extends Main {
 
 	async eligible(argument) {
 		try {
-			let user, count = 0, embed = {'description': ''}, election = this.election;
+			let user, count = 0, embed = {description: ''}, election = this.election;
 			if (argument) {
 				let _user = this.Search.users.get(argument);
 				if (_user) user = _user;
