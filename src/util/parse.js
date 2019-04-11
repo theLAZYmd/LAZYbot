@@ -212,9 +212,9 @@ class Parse {
 		try {
 			let account = dbuser[source.key][username];
 			if (!account) throw 'No account found for that username!';
-			return Object.entries(config.variants)
-				.filter(([k, v]) => v[source.k] && account[k])
-				.map(([k, v]) => [v.name, account[k].endsWith('?') ? account[k] : account[k].bold()])
+			return Object.values(config.variants)
+				.filter(variant => variant[source.key] && account[variant.key])
+				.map((variant) => [variant.name, account[variant.key].endsWith('?') ? account[variant.key] : account[variant.key].bold()])
 				.toPairs();
 		} catch (e) {
 			if (e) throw e;

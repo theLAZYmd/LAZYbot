@@ -1,7 +1,7 @@
-const config = require("../../config.json");
-const Parse = require("../../util/parse.js");
-const Embed = require("../../util/embed.js");
-const DBuser = require("../../util/dbuser.js");
+const config = require('../../config.json');
+const Parse = require('../../util/parse.js');
+const Embed = require('../../util/embed.js');
+const DBuser = require('../../util/dbuser.js');
 
 class Profile extends Parse {
 
@@ -18,7 +18,7 @@ class Profile extends Parse {
 			if (this.args.length === 1) { //!profile titsinablender
 				let user = this.Search.users.get(this.args[0]);
 				if (user) this.member = this.Search.members.byUser(user);
-				else throw "Couldn't find user!";
+				else throw 'Couldn\'t find user!';
 			}
 			this.user = this.member.user;
 			Object.defineProperty(this, 'dbuser', {
@@ -44,7 +44,7 @@ class Profile extends Parse {
 	build(page) {
 		this.page = page;
 		let embed = {};
-		let properties = ["title", "color", "thumbnail", "description", "fields"];
+		let properties = ['title', 'color', 'thumbnail', 'description', 'fields'];
 		for (let property of properties) {
 			embed[property] = this[property];
 		}
@@ -73,8 +73,8 @@ class Profile extends Parse {
 				chessTitle = this.Search.emojis.get(this.dbuser[source]._title.toLowerCase());
 				break;
 			}
-        }
-		return this._title = `${this.flairs.join(" ")}Profile for ${chessTitle ? chessTitle + " " : ""} ${this.user.tag}`;
+		}
+		return this._title = `${this.flairs.join(' ')}Profile for ${chessTitle ? chessTitle + ' ' : ''} ${this.user.tag}`;
 	}
 
 	/**
@@ -83,10 +83,10 @@ class Profile extends Parse {
 	 */
 	get flairs() {
 		if (this._flairs) return this._flairs;
-        return this._flairs = Object.entries({
+		return this._flairs = Object.entries({
 			bot: this.user.bot,
 			patron: this.dbuser.patron
-        }).filter(([, value]) => value).map(([key]) => this.Search.emojis.get(key))
+		}).filter(([, value]) => value).map(([key]) => this.Search.emojis.get(key));
 	}
 
 	/**
@@ -104,7 +104,7 @@ class Profile extends Parse {
 	 */
 	get thumbnail() {
 		if (this._thumbnail) return this._thumbanil;
-		return this._thumbnail = Embed.thumbnail(this.user.avatarURL ? this.user.avatarURL : "https://i.imgur.com/EncsMs8.png");
+		return this._thumbnail = Embed.thumbnail(this.user.avatarURL ? this.user.avatarURL : 'https://i.imgur.com/EncsMs8.png');
 	}
 
 	/**
@@ -113,9 +113,9 @@ class Profile extends Parse {
 	 */
 	get description() {
 		if (this._description) return this._description;
-		let string = "";
+		let string = '';
 		if (this.dbuser.finger) string += this.dbuser.finger.format();
-		if (this.dbuser.modnotes) string += ("-mod notes\n" + this.dbuser.modnotes).format("diff");
+		if (this.dbuser.modnotes) string += ('-mod notes\n' + this.dbuser.modnotes).format('diff');
 		return this._description = string;
 	}
 
@@ -139,14 +139,13 @@ class Profile extends Parse {
 		if (!this._ProfileFields) {
 			this._ProfileFields = [];
 			let fields = [
-				["a.k.a.", this.aliases, false],
-				[(this.dbuser.modverified ? " " + this.Search.emojis.get(this.dbuser.modverified[0]) : "") + "Info", this.info, true],
-				["Joined Date", this.joined, this.info ? true : false],
-				["Index", this.ids, this.dbuser.messages ? true : false],
-				["Messages Sent", this.dbuser.messages ? this.dbuser.messages.count.toLocaleString() : undefined, true],
-				["Last Message", this.lastMessage, false],
+				['a.k.a.', this.aliases, false],
+				[(this.dbuser.modverified ? ' ' + this.Search.emojis.get(this.dbuser.modverified[0]) : '') + 'Info', this.info, true],
+				['Joined Date', this.joined, this.info ? true : false],
+				['Index', this.ids, this.dbuser.messages ? true : false],
+				['Messages Sent', this.dbuser.messages ? this.dbuser.messages.count.toLocaleString() : undefined, true],
 				//["Roles", this.roles],
-				["House Trophies", this.award, true]
+				['House Trophies', this.award, true]
 			];
 			for (let field of fields) {
 				if (field[1]) {
@@ -168,10 +167,10 @@ class Profile extends Parse {
 		for (let [key, source] of Object.entries(config.sources)) {
 			if (!this.dbuser[key]) continue;
 			for (let account of Object.keys(this.dbuser[key])) {
-				if (account.startsWith("_")) continue;
+				if (account.startsWith('_')) continue;
 				this._chessFields.push([
-					this.Search.emojis.get(key) + " " + source.name,
-					Parse.profile(this.dbuser, source, account) + "\n" + Parse.ratingData(this.dbuser, source, account),
+					this.Search.emojis.get(key) + ' ' + source.name,
+					Parse.profile(this.dbuser, source, account) + '\n' + Parse.ratingData(this.dbuser, source, account),
 					true
 				].toField());
 			}
@@ -187,7 +186,7 @@ class Profile extends Parse {
 		if (this._aliases) return this._aliases;
 		let names = [this.user.username];
 		if (this.member.nickname) names.push(this.member.nickname);
-        for (let source of Object.keys(config.sources)) {
+		for (let source of Object.keys(config.sources)) {
 			if (!this.dbuser[source]) continue;
 			for (let account of Object.keys(this.dbuser[source])) {
 				if (account.startsWith('_')) continue;
@@ -195,9 +194,9 @@ class Profile extends Parse {
 				names.push(account);
 			}
 			let name = this.dbuser[source]._name;
-            if (name && !names.inArray(name)) names.unshift(this.dbuser[source]._name);
-        }
-        return this._aliases = names.slice(1).join('\n');
+			if (name && !names.inArray(name)) names.unshift(this.dbuser[source]._name);
+		}
+		return this._aliases = names.slice(1).join('\n');
 	}
 
 	/**
@@ -206,15 +205,15 @@ class Profile extends Parse {
 	 * @private
 	 */
 	get info() {
-		let region = this.server.regions.find(r => this.Search.roles.get(r) && this.member.roles.some(role => role.name.toLowerCase() === r.toLowerCase())) || "None set.";
+		let region = this.server.regions.find(r => this.Search.roles.get(r) && this.member.roles.some(role => role.name.toLowerCase() === r.toLowerCase())) || 'None set.';
 		let emoji = this.Search.emojis.get(this.dbuser.sex);
 		return [
-			["Age", this.dbuser.age],
-			["Sex", this.dbuser.sex ? (emoji ? emoji : this.dbuser.sex) : ""],
+			['Age', this.dbuser.age],
+			['Sex', this.dbuser.sex ? (emoji ? emoji : this.dbuser.sex) : ''],
 			//check if emoji exists, otherwise just display text
-			["Location", this.dbuser.location],
-			["Region", region]
-		].filter(entry => entry[1]).toPairs("bold");
+			['Location', this.dbuser.location],
+			['Region', region]
+		].filter(entry => entry[1]).toPairs('bold');
 	}
 
 	/**
@@ -224,9 +223,9 @@ class Profile extends Parse {
 	 */
 	get joined() {
 		return [
-			["Discord", Date.getISOtime(this.user.createdTimestamp).slice(4, 15)],
+			['Discord', Date.getISOtime(this.user.createdTimestamp).slice(4, 15)],
 			[this.guild.name, Date.getISOtime(this.member.joinedTimestamp).slice(4, 15)]
-		].toPairs("bold");
+		].toPairs('bold');
 	}
 
 	/**
@@ -236,25 +235,21 @@ class Profile extends Parse {
 	 */
 	get ids() {
 		return [
-			["UID", "`" + this.user.id + "`", false],
-			["Position in Database", this.dbindex]
-		].toPairs("bold")
+			['UID', '`' + this.user.id + '`', false],
+			['Position in Database', this.dbindex]
+		].toPairs('bold');
 	}
 
 	get lastMessage() {
-		if (!this.dbuser.lastmessage) return "";
-		let string =
-			(this.dbuser.lastmessagedate ? `\nSent at ${Date.getISOtime(this.dbuser.lastmessagedate)}.` : "") +
-			(this.dbuser.lastmessage.startsWith("<:") && this.dbuser.lastmessage.endsWith(">") ?
-				"\n" + this.dbuser.lastmessage :
-				"\`\`\`" + this.dbuser.lastmessage + "\`\`\`"
-			);
-		return string;
+		if (this._lastMessage) return this._lastMessage;
+		if (!this.dbuser.messages.last) return '';
+		let string = this.dbuser.messages.last.replace(/<@!?([0-9]{18})>/g, (match, p1) => '@' + this.Search.users.byID(p1).name);
+		return this._lastMessage = string.format();
 	}
 
 	get roles() {
 		let rolelist = this.Search.members.get(this.member).splice(0, 1);
-		return rolelist ? rolelist.toPairs() : ""; //in case we want to display roles in the future.
+		return rolelist ? rolelist.toPairs() : ''; //in case we want to display roles in the future.
 	}
 
 	/**
@@ -277,14 +272,17 @@ class Profile extends Parse {
 	 */
 	get medal() {
 		if (this._medal) return this._medal;
-		let medal = "";
+		let medal = '';
 		switch (this.dbindex) {
 			case (1):
-				medal = ":first_place: **First in Database.**";
+				medal = ':first_place: **First in Database.**';
+				break;
 			case (2):
-				medal = ":second_place: **Second in Database.**";
+				medal = ':second_place: **Second in Database.**';
+				break;
 			case (3):
-				medal = ":third_place: **Third in Database.**";
+				medal = ':third_place: **Third in Database.**';
+				break;
 		}
 		return this._medal = medal;
 	}
@@ -296,8 +294,8 @@ class Profile extends Parse {
 	 */
 	get trophies() {
 		if (this._trophies) return this._trophies;
-		if (!this.dbuser.trophy) return "";
-		return this._trophies = this.dbuser.trophy.toPairs("bold", ":trophy: ");
+		if (!this.dbuser.trophy) return '';
+		return this._trophies = this.dbuser.trophy.toPairs('bold', ':trophy: ');
 	}
 
 	/**
@@ -306,7 +304,7 @@ class Profile extends Parse {
 	 * @private
 	 */
 	get modnotes() {
-		return (this.dbuser.modnotes ? this.dbuser.modnotes.toPairs() : "");
+		return (this.dbuser.modnotes ? this.dbuser.modnotes.toPairs() : '');
 	}
 
 }

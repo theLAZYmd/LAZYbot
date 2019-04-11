@@ -145,7 +145,7 @@ class Track {
 		let account = this.dbuser[this.source.key] || {
 			_main: this.username
 		};
-		account[this.username] = Tracker.parseRatings(parsedData.ratings);
+		account[this.username] = Tracker.parseRatings(parsedData.ratings, this.source);
 		if (account._main === parsedData.username) { //if it's the main one
 			for (let prop of ['name', 'country', 'language', 'title', 'bio', 'language']) {
 				if (parsedData[prop]) account['_' + prop] = parsedData[prop]; //grab info
@@ -181,8 +181,6 @@ class Track {
 				let accounts = this._command === 'update' ? Object.keys(this.dbuser[source.key]) : [this.username];
 				for (let account of accounts) {
 					if (account.startsWith('_')) continue;
-					console.log(source.key, account);
-					console.log(this.dbuser[source.key]);
 					if (this.successes.every(([s, a]) => s !== source.key && a !== account)) {
 						errors.push(`${this.argsInfo.Search.emojis.get(source.key)} Couldn't ${this._command === 'update' ? 'update' : 'link to'} '${account}' on ${source.name}`);
 					} else embed.addField(
@@ -374,10 +372,15 @@ class Tracker extends Parse {
 	 * @param {RatingStore} ratingObj
 	 * @private
 	 */
-	static parseRatings(ratingObj) {
+	static parseRatings(ratingObj, source) {
+		const vmap = new Map(
+			Object.values(config.variants)
+				.filter(v => v[source.key])
+				.map(v => [v[source.key], v.key])
+		);
 		return Array.from(ratingObj).reduce((acc, [key, value]) => {
 			if (!value.rating) return acc;
-			acc[key] = value.rating.toString() + (value.prov ? '?' : '');
+			acc[vmap.get(key)] = value.rating.toString() + (value.prov ? '?' : '');
 			if (value.rating > acc.maxRating && !value.prov) acc.maxRating = value.rating;
 			return acc;
 		}, {
@@ -400,12 +403,13 @@ class Tracker extends Parse {
 			}
 			let dbuser = DBuser.getUser(user);
 			let accounts = [];
-			for (let s of Object.keys(config.sources))
-				if (dbuser[s])
-					for (let a of Object.keys(dbuser[s])) {
-						if (a.startsWith('_')) continue;
-						accounts.push([s, a]);
-					}
+			for (let s of Object.keys(config.sources)) {
+				if (!dbuser[s]) continue;
+				for (let a of Object.keys(dbuser[s])) {
+					if (a.startsWith('_')) continue;
+					accounts.push([s, a]);
+				}
+			}
 			let options = accounts.map(([source, username]) => this.Search.emojis.get(source) + ' ' + username);
 			let val = await this.Output.choose({
 				option: 'account to remove',
