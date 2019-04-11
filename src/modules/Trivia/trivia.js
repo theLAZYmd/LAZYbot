@@ -31,8 +31,12 @@ class Trivia extends Parse {
 		trivia.players = obj;
 		this.trivia = trivia;
 	}
-    
-	async gen() {
+	
+	/**
+	 * Lists the users who are currently playing trivia
+	 * @private
+	 */
+	gen() {
 		this.Output.sender(new Embed()
 			.setTitle('Now playing rated trivia')
 			.setDescription(Object.entries(this.players)
@@ -42,9 +46,15 @@ class Trivia extends Parse {
 				.join('\n') || ''
 			)
 		);
+		return this;
 	}
 
-	async init(args) {
+	/**
+	 * Starts logging users participating in a new Trivia game on nadeko bot
+	 * @param {string[]} args 
+	 * @private
+	 */
+	init(args = this.args) {
 		if (this.server.states.trivia) return;
 		for (let a of args) {
 			if (/^(:?--pokemon|-p)$/.test(a)) return;
@@ -52,15 +62,24 @@ class Trivia extends Parse {
 		this.server.states.trivia = true;
 		DataManager.setServer(this.server);
 		this.gen();
+		return this;
 	}
 
+	/**
+	 * Ends logging of trivia players
+	 * @private
+	 */
 	async end() {
 		this.players = {};
 		let server = this.server;
 		server.states.trivia = false;
 		this.server = server;
 	}
-    
+	
+	/**
+	 * Lists the users who are currently playing trivia
+	 * @public
+	 */
 	async show() {
 		try {
 			if (!this.server.states.trivia) throw 'Not currently playing rated trivia!';
@@ -70,7 +89,12 @@ class Trivia extends Parse {
 		}
 	}
 
-	async rate(argument) {
+	/**
+	 * Forces a users who was not previous rated to be rated
+	 * @param {string} argument
+	 * @public
+	 */
+	async rate(argument = this.argument) {
 		try {
 			if (!this.server.states.trivia) throw 'Not currently playing rated trivia!';
 			if (argument) {
@@ -84,6 +108,10 @@ class Trivia extends Parse {
 		}
 	}
 
+	/**
+	 * Logs a new user to the database
+	 * @param {User} user 
+	 */
 	async onNewMessage(user = this.author) {
 		try {
 			if (user.id === '392031018313580546') throw '';
@@ -106,28 +134,50 @@ class Trivia extends Parse {
 		}
 	}
 
+	/**
+	 * Converts a 2x2 Array of tags (UserResolvables) and scores to 2x3 of dbuser objects, an estimate of strength, and their score
+	 * @param {string} tag 
+	 * @param {number} score 
+	 */
+	nameToTriviaData(tag, score) {
+		let user = this.Search.users.byTag(tag.replace(/\*/g, '')); //byTag filters out the **
+		if (!user) return null;
+		let dbuser = this.Search.dbusers.getUser(user);
+		if (!dbuser.trivia) dbuser.trivia = {
+			rating: 1500,
+			games: 0
+		};
+		let estimate = Math.pow(10, (dbuser.trivia.rating - config.trivia.initial) / config.trivia.spread); //ex: (2000 - 1500) / 1589 or (1400 - 1500 / 1589
+		return [dbuser, estimate, Number(score)];
+	}
+
+	/**
+	 * Parses the result object outputted at the end of a trivia game and uses it to update trivia score values
+	 * @param {Embed} embed 
+	 * @private
+	 */
 	async ratingUpdate(embed) {
 		try {
 			const lines = embed.description.split('\n');
-			let data = lines.map(line => {
-				let [name, , score] = line.match(/[^\s]+/gi); //[**ObiWanBenoni#3488**, has, 3, points]
-				let user = this.Search.users.byTag(name.replace(/\*/g, '')); //byTag filters out the **
-				if (!user) return null;
-				let dbuser = this.Search.dbusers.getUser(user);
-				if (!dbuser.trivia) dbuser.trivia = {
-					rating: 1500,
-					games: 0
-				};
-				let estimate = Math.pow(10, (dbuser.trivia.rating - config.trivia.initial) / config.trivia.spread); //ex: (2000 - 1500) / 1589 or (1400 - 1500 / 1589
-				return [dbuser, estimate, Number(score)]; //a number from 0 to 10. If less than 1500, it's between 0 and 1. Realistically not above 5
+			let scored = lines
+				.map(line => line.match(/\*\*([\S \t^@#:`]{2,32}#\d{4})\*\* has( \d{1,3}) points/).slice(1))
+				.map(arr => this.nameToTriviaData(...arr));
+			let players = this.players;
+			scored = scored.filter((d) => {
+				if (!d) return false;											//Users who left the server halfway through the trivia match
+				if (!this.server.trivia.players[d[0].username]) return false;	//Anyone not playing is excluded
+				players[d[0].username] = false;									//Only people not scored but playing are left
+				return true;
 			});
-			data = data.filter(d => d && this.server.trivia.players[d[0].username]);    //d is dbuser, not user            
+			let unscored = Object.entries(players)
+				.filter(([, unranked]) => unranked)
+				.map(([name]) => this.nameToTriviaData(name, 0));
+			let data = scored.concat(unscored);
 			let description = '';
 			try {
 				if (data.length === 0) throw '';
-				let totalEstimate = data.reduce((a, [, estimate]) => a + estimate, 0);
-				let totalScore = data.reduce((a, [, , score]) => a + score, 0);
-				if (totalScore < this.server.trivia.min) throw `Only ${this.server.trivia.min}+ point games are rated.\nActive players: ` + data.map(([dbuser]) => dbuser.username).join(', ');
+				let [totalEstimate, totalScore] = data.reduce(([e, s], [, estimate, score]) => [e + estimate, s + score], [0, 0]);
+				if (totalScore < this.server.trivia.min) throw `Only ${this.server.trivia.min}+ point games are rated.\nActive players: ${data.map(([dbuser]) => dbuser.username).join(', ')}`;
 				if (data.length < 2) throw 'Only games with 2+ players are rated.\nActive players: ' + data.map(([dbuser]) => dbuser.username).join(', ');
 				for (let [dbuser, estimate, score] of data) {
 					let shareEstimate = (estimate / totalEstimate) * totalScore;
@@ -152,8 +202,11 @@ class Trivia extends Parse {
 		}
 	}
 
-
-	async rating(argument) {
+	/**
+	 * 
+	 * @param {string} argument 
+	 */
+	async rating(argument = this.argument) {
 		try {
 			let user = this.user;
 			if (argument) user = this.Search.users.get(argument);
