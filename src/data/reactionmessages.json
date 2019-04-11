@@ -7376,6 +7376,199 @@
                 "page": 0,
                 "author": "185412969130229760",
                 "cmdID": "565972104198225921"
+            },
+            "565993097675276304": {
+                "embedgroup": [
+                    {
+                        "title": "Profile for  theLAZYmd#2353",
+                        "description": "```\nIt's finally spring vac!```",
+                        "color": 53380,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "lazychox\ntheLAZYbot",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Age: **19**\nSex: **<:male:430870358133047306>**\nLocation: **Toronto**\nRegion: **None set.**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **May 26 2016**\nThe House: **May 16 2017**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`185412969130229760`**\nPosition in Database: 0",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "79,381",
+                                "inline": true
+                            },
+                            {
+                                "name": "House Trophies",
+                                "value": ":trophy: **champion du mondeeeeeeee**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/185412969130229760/5f740f5cffe2614dc65ccd28702d150d.png?size=2048"
+                        },
+                        "footer": {
+                            "text": "1 / 2"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": "Profile for  theLAZYmd#2353",
+                        "description": "```\nIt's finally spring vac!```",
+                        "color": 0,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[TheLAZYmd](https://lichess.org/@/TheLAZYmd)\nUltrabullet: **1819**\nBullet: **2008**\nBlitz: **1958**\nRapid: **1985**\nClassical: 1500?\nCorrespondence: 1861?\nCrazyhouse: **2148**\nKing of the Hill: 1710?\n3-check: **1720**\nAtomic: 1563?\nPuzzle: **2002**",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[lazychox](https://lichess.org/@/lazychox)\nBullet: 2110?\nBlitz: 1500?\nRapid: 1500?\nClassical: 1500?\nCorrespondence: 1500?\nCrazyhouse: **2136**",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:chesscom:430038158244184064> Chess.com",
+                                "value": "[theLAZYbot](https://www.chess.com/member/theLAZYbot)\nBullet: **1817**\nCrazyhouse: **2104**\nBughouse: **1951**",
+                                "inline": true
+                            }
+                        ],
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "185412969130229760",
+                "cmdID": "565993096396144665"
+            },
+            "566004857321029658": {
+                "embedgroup": [
+                    {
+                        "description": "**#1** TcubesAK#3940 2289\n**#2** Wildfire#9567 1928\n**#3** crptone#1398 1838\n**#4** okei#1207 1772\n**#5** moonenane#3553 1387\n",
+                        "fields": [],
+                        "title": " House leaderboard for Trivia players",
+                        "footer": {
+                            "text": "1 / 1"
+                        },
+                        "color": 53380
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "373480715276517376",
+                "cmdID": "566004856477974536"
+            },
+            "566004922919682049": {
+                "embedgroup": [
+                    {
+                        "description": "**#1** TcubesAK#3940 2289\n**#2** crptone#1398 1838\n**#3** okei#1207 1772\n",
+                        "fields": [],
+                        "title": " House leaderboard foractive Trivia players",
+                        "footer": {
+                            "text": "1 / 1"
+                        },
+                        "color": 53380
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "373480715276517376",
+                "cmdID": "566004922521223178"
+            },
+            "566005493349220353": {
+                "embedgroup": [
+                    {
+                        "description": "**#1** okei#1207 1772\n",
+                        "fields": [],
+                        "title": " House leaderboard for Trivia players",
+                        "footer": {
+                            "text": "1 / 1"
+                        },
+                        "color": 53380
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "185412969130229760",
+                "cmdID": "566005492409827378"
+            },
+            "566005520868048914": {
+                "embedgroup": [
+                    {
+                        "description": "**#1** okei#1207 1772\n",
+                        "fields": [],
+                        "title": " House leaderboard for Trivia players",
+                        "footer": {
+                            "text": "1 / 1"
+                        },
+                        "color": 53380
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "185412969130229760",
+                "cmdID": "566005519995633664"
+            },
+            "566007066905542656": {
+                "embedgroup": [
+                    {
+                        "description": "**#1** okei#1207 1772\n",
+                        "fields": [],
+                        "title": " House leaderboard for Trivia players",
+                        "footer": {
+                            "text": "1 / 1"
+                        },
+                        "color": 53380
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "373480715276517376",
+                "cmdID": "566007066091716608"
+            },
+            "566007101407756291": {
+                "embedgroup": [
+                    {
+                        "description": "**#1** okei#1207 1772\n",
+                        "fields": [],
+                        "title": " House leaderboard foractive Trivia players",
+                        "footer": {
+                            "text": "1 / 1"
+                        },
+                        "color": 53380
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "373480715276517376",
+                "cmdID": "566007100329820200"
+            },
+            "566011572863107076": {
+                "embedgroup": [
+                    {
+                        "title": "Official House Shop Roles",
+                        "description": "Congrats on accumulating a whole bunch of flowers. Here are the roles you can buy; they will give you a special colour flair and make you superior to other members on the right sidebar! The colors look really nice.\n\nCheck savings by `.$`. Check level by `.xp`\n\n__Bronze__: 200 🌸; **if level 5**, 90 🌸\n__Silver__: 360 🌸; **if level 10**, 180 🌸 \n__Gold__: 680 🌸; **if level 20**, 370 🌸 \n__Diamond__: 1320 🌸; **if level 30**, 760 🌸 \n\nAre you just that special that you want your own colour? Well then buy:\n\n__ChooseColor__: 500 🌸 \n\nChange your colour to whatever you want using the `!color` command.\n Does not affect your right sidebar standings; it's for ye vain ones.",
+                        "footer": {
+                            "text": "Role rewards must be bought in order."
+                        },
+                        "color": 53380
+                    }
+                ],
+                "period": 180000,
+                "page": 0,
+                "author": "515524778530963473",
+                "cmdID": "566011571311083530"
             }
         },
         "election": {
