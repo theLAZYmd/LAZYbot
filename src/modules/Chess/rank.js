@@ -1,8 +1,8 @@
-const Leaderboard = require('./leaderboard.js');
-const Parse = require('../../util/parse.js');
+const Leaderboard = require('./leaderboard');
+const Parse = require('../../util/parse');
+const Embed = require('../../util/embed');
+
 const config = require('../../config.json');
-const Embed = require('../../util/embed.js');
-const DBuser = require('../../util/dbuser.js');
 
 class Rank extends Parse {
 
@@ -51,7 +51,7 @@ class Rank extends Parse {
 				user: argument ? this.Search.users.get(argument) : user
 			};
 			if (!data.user && argument) throw 'Couldn\'t find **' + argument + '**!';
-			data.dbuser = DBuser.getUser(data.user);
+			data.dbuser = Parse.prototype.Search.dbusers.getUser(data.user);
 			data.sources = Object.values(config.sources).filter(source => data.dbuser[source.key]); //applicable sources are those on the dbuser
 			if (data.sources.length === 0) throw 'No linked accounts found.\nPlease link an account to your profile through `!lichess` or `!chess.com`';
 			return data;

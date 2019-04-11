@@ -5,7 +5,6 @@ const rp = require('request-promise');
 const Parse = require('../../util/parse');
 const Embed = require('../../util/embed');
 const DataManager = require('../../util/datamanager');
-const DBuser = require('../../util/dbuser');
 const Logger = require('../../util/logger');
 const Commands = require('../../util/commands');
 const config = DataManager.getFile('./src/config.json');
@@ -141,10 +140,11 @@ class Track {
 	 * @private
 	 */
 	assign(parsedData) {
+		this.setUsername(parsedData.username);
 		let account = this.dbuser[this.source.key] || {
-			_main: parsedData.username
+			_main: this.username
 		};
-		account[parsedData.username] = Tracker.parseRatings(parsedData.ratings);
+		account[this.username] = Tracker.parseRatings(parsedData.ratings, this.source);
 		if (account._main === parsedData.username) { //if it's the main one
 			for (let prop of ['name', 'country', 'language', 'title', 'bio', 'language']) {
 				if (parsedData[prop]) account['_' + prop] = parsedData[prop]; //grab info
@@ -162,7 +162,7 @@ class Track {
 	setData() {
 		if (this.dbuser.lastupdate) delete this.dbuser.lastupdate;
 		this.dbuser.lastUpdate = Date.now();
-		DBuser.setData(this.dbuser);
+		this.dbuser.setData();
 		return this;
 	}
 
@@ -178,16 +178,16 @@ class Track {
 			let sources = this._command === 'update' ? this.sources : [this.source];
 			for (let source of sources) {
 				let accounts = this._command === 'update' ? Object.keys(this.dbuser[source.key]) : [this.username];
-				for (let account of accounts)
-					if (!account.startsWith('_')) {
-						if (this.successes.every(([s, a]) => s !== source.key && a !== account)) {
-							errors.push(`${this.argsInfo.Search.emojis.get(source.key)} Couldn't ${this._command === 'update' ? 'update' : 'link to'} '${account}' on ${source.name}`);
-						} else embed.addField(
-							`${this.argsInfo.Search.emojis.get(source.key)} ${this._command === 'update' ? 'Updated' : `Linked ${this.dbuser.username} to`} '${account}'`,
-							Parse.profile(this.dbuser, source, account) + '\nCurrent highest rating is **' + this.dbuser[source.key][account].maxRating + '**' + whitespace + '\n' + Parse.ratingData(this.dbuser, source, account),
-							true
-						);
-					}
+				for (let account of accounts) {
+					if (account.startsWith('_')) continue;
+					if (this.successes.every(([s, a]) => s !== source.key && a !== account)) {
+						errors.push(`${this.argsInfo.Search.emojis.get(source.key)} Couldn't ${this._command === 'update' ? 'update' : 'link to'} '${account}' on ${source.name}`);
+					} else embed.addField(
+						`${this.argsInfo.Search.emojis.get(source.key)} ${this._command === 'update' ? 'Updated' : `Linked ${this.dbuser.username} to`} '${account}'`,
+						Parse.profile(this.dbuser, source, account) + '\nCurrent highest rating is **' + this.dbuser[source.key][account].maxRating + '**' + whitespace + '\n' + Parse.ratingData(this.dbuser, source, account),
+						true
+					);
+				}
 			}
 			if (embed.fields.length) await this.argsInfo.Output[this._command === 'update' ? 'editor' : 'sender'](embed, this.message);
 			if (errors.length)
@@ -226,7 +226,7 @@ class Tracker extends Parse {
 					let user = this.Search.users.get(this.argument);
 					username = this.args[0];
 					if (!user) throw new Error('Invalid user given **' + this.argument.slice(username.length) + '**');
-					dbuser = DBuser.getUser(user);
+					this.Search.dbusers.getUser(user);
 				}
 			}
 			let source = Object.values(config.sources).find(s => s.key === command.toLowerCase().replace(/\./g, ''));
@@ -249,7 +249,7 @@ class Tracker extends Parse {
 				if (!this.Permissions.role('admin', this)) throw this.Permissions.output('role');
 				user = this.Search.users.get(this.argument);
 				if (!user) throw new Error('Couldn\'t find user **' + this.argument + '** in this server');
-				dbuser = DBuser.getUser(user);
+				dbuser = this.Search.dbusers.getUser(user);
 			}
 			if (this.user && dbuser.username !== this.user.tag) dbuser.username = user.tag;
 			let data = new Track(this, dbuser);
@@ -304,10 +304,9 @@ class Tracker extends Parse {
 			let users = await Lichess.users.get(ids);
 			users.tap((parsedData, username) => {
 				let id = accounts.get(parsedData.username);
-				let dbuser = DBuser.byID(id);
+				let dbuser = this.Search.dbusers.byID(id);
 				if (!dbuser) {
-					dbuser.left = true;
-					DBuser.setData(dbuser);
+					dbuser.left();
 					return this.error([username, id, dbuser]);
 				}
 				let data = DataStore.get(id) || new Track(this, dbuser);
@@ -338,7 +337,7 @@ class Tracker extends Parse {
 			let user = this.Search.users.byID(dbuser.id);
 			if (!user) {
 				dbuser.left = true;
-				DBuser.setData(dbuser);
+				dbuser.setData();
 				return false;
 			}
 			if (!/online|idle|dnd/.test(user.presence.status)) return false;
@@ -371,10 +370,15 @@ class Tracker extends Parse {
 	 * @param {RatingStore} ratingObj
 	 * @private
 	 */
-	static parseRatings(ratingObj) {
+	static parseRatings(ratingObj, source) {
+		const vmap = new Map(
+			Object.values(config.variants)
+				.filter(v => v[source.key])
+				.map(v => [v[source.key], v.key])
+		);
 		return Array.from(ratingObj).reduce((acc, [key, value]) => {
 			if (!value.rating) return acc;
-			acc[key] = value.rating.toString() + (value.prov ? '?' : '');
+			acc[vmap.get(key)] = value.rating.toString() + (value.prov ? '?' : '');
 			if (value.rating > acc.maxRating && !value.prov) acc.maxRating = value.rating;
 			return acc;
 		}, {
@@ -395,14 +399,15 @@ class Tracker extends Parse {
 				user = this.Search.users.get(this.argument);
 				if (!user) throw new Error('Couldn\'t find user **' + this.argument + '** in this server');
 			}
-			let dbuser = DBuser.getUser(user);
+			let dbuser = this.Search.dbusers.getUser(user);
 			let accounts = [];
-			for (let s of Object.keys(config.sources))
-				if (dbuser[s])
-					for (let a of Object.keys(dbuser[s])) {
-						if (a.startsWith('_')) continue;
-						accounts.push([s, a]);
-					}
+			for (let s of Object.keys(config.sources)) {
+				if (!dbuser[s]) continue;
+				for (let a of Object.keys(dbuser[s])) {
+					if (a.startsWith('_')) continue;
+					accounts.push([s, a]);
+				}
+			}
 			let options = accounts.map(([source, username]) => this.Search.emojis.get(source) + ' ' + username);
 			let val = await this.Output.choose({
 				option: 'account to remove',
@@ -417,7 +422,7 @@ class Tracker extends Parse {
 					}
 				}
 			}
-			DBuser.setData(dbuser);
+			dbuser.setData();
 			this.Output.sender(new Embed()
 				.setTitle(`Stopped tracking via ${this.prefix}remove command`)
 				.setDescription(`Unlinked **${options[val]}** from ${user.tag}`)

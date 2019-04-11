@@ -1,5 +1,4 @@
 const config = require('../config.json');
-const DBuser = require('./dbuser.js');
 const DataManager = require('./datamanager.js');
 const Permissions = require('./permissions.js');
 const Logger = require('./logger.js');
@@ -150,14 +149,17 @@ class Parse {
 		this._user = user;
 	}
 
+	/**
+	 * @type {DBuser}
+	 */
 	get dbuser() {
 		if (!this.user) return null;
-		return DBuser.getUser(this.user);
+		return this.Search.dbusers.getUser(this.user);
 	}
 
 	get dbindex() {
 		if (!this.dbuser) return null;
-		return DBuser.byIndex(this.dbuser);
+		return this.dbuser.getIndex();
 	}
 
 	get prefix() {
@@ -212,9 +214,9 @@ class Parse {
 		try {
 			let account = dbuser[source.key][username];
 			if (!account) throw 'No account found for that username!';
-			return Object.entries(config.variants)
-				.filter(([k, v]) => v[source.k] && account[k])
-				.map(([k, v]) => [v.name, account[k].endsWith('?') ? account[k] : account[k].bold()])
+			return Object.values(config.variants)
+				.filter(variant => variant[source.key] && account[variant.key])
+				.map((variant) => [variant.name, account[variant.key].endsWith('?') ? account[variant.key] : account[variant.key].bold()])
 				.toPairs();
 		} catch (e) {
 			if (e) throw e;
