@@ -337,7 +337,6 @@ class Tracker extends Parse {
 			let user = this.Search.users.byID(dbuser.id);
 			if (!user) {
 				dbuser.left = true;
-				dbuser.setData();
 				return false;
 			}
 			if (!/online|idle|dnd/.test(user.presence.status)) return false;
