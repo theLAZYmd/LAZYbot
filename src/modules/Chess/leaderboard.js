@@ -69,7 +69,7 @@ class Leaderboard extends Parse {
 					rating: dbuser.trivia.rating
 				});
 			}
-			if (data.leaderboard.length !== 0 && data.variant.key !== 'all') data.leaderboard.sort((a, b) => parseInt(b.rating) - parseInt(a.rating));
+			if (data.leaderboard.length) data.leaderboard.sort((a, b) => parseInt(b.rating) - parseInt(a.rating));
 			delete data.source;
 			return data;
 		} catch (e) {
