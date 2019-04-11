@@ -1,5 +1,4 @@
 const config = require('../config.json');
-const DBuser = require('./dbuser.js');
 const DataManager = require('./datamanager.js');
 const Permissions = require('./permissions.js');
 const Logger = require('./logger.js');
@@ -150,14 +149,17 @@ class Parse {
 		this._user = user;
 	}
 
+	/**
+	 * @type {DBuser}
+	 */
 	get dbuser() {
 		if (!this.user) return null;
-		return DBuser.getUser(this.user);
+		return this.Search.dbusers.getUser(this.user);
 	}
 
 	get dbindex() {
 		if (!this.dbuser) return null;
-		return DBuser.byIndex(this.dbuser);
+		return this.dbuser.getIndex();
 	}
 
 	get prefix() {

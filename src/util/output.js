@@ -221,7 +221,7 @@ class Output extends Parse {
 				type: 'option'
 			}, data);
 			let description = '';
-			let emojis = this.Search.Emojis.unicodes.slice(1, data.options.length + 1);
+			let emojis = this.Search.emojis.constructor.unicodes.slice(1, data.options.length + 1);
 			let author = data.title ? {
 				name: data.title
 			} : {};
@@ -238,8 +238,8 @@ class Output extends Parse {
 			let rfilter = (reaction, user) => {
 				if (user.id !== data.author.id) return false;
 				if (reaction.emoji.name === '❎') return true;
-				if (this.Search.Emojis.unicodes.indexOf(reaction.emoji.name) < 1) return false;
-				if (this.Search.Emojis.unicodes.indexOf(reaction.emoji.name) > data.options.length) return false;
+				if (this.Search.emojis.constructor.unicodes.indexOf(reaction.emoji.name) < 1) return false;
+				if (this.Search.emojis.constructor.unicodes.indexOf(reaction.emoji.name) > data.options.length) return false;
 				return true;
 			};
 			let mfilter = (m) => {
@@ -247,8 +247,8 @@ class Output extends Parse {
 				if (!m.content) return false;
 				if (m.content === 'cancel') return true;
 				if (m.content.length !== 1) return false;
-				if (this.Search.Emojis.hexatrigintamals.indexOf(m.content) < 1) return false;
-				if (this.Search.Emojis.hexatrigintamals.indexOf(m.content) > data.options.length) return false;
+				if (this.Search.emojis.constructor.hexatrigintamals.indexOf(m.content) < 1) return false;
+				if (this.Search.emojis.constructor.hexatrigintamals.indexOf(m.content) > data.options.length) return false;
 				return true;
 			};
 			try {
@@ -260,7 +260,7 @@ class Output extends Parse {
 							errors: ['time']
 						}).catch(() => {});
 						if (rcollected.first().emoji.name === '❎') throw '';
-						return this.Search.Emojis.hexatrigintamals[this.Search.Emojis.unicodes.indexOf(rcollected.first().emoji.name)];
+						return this.Search.emojis.constructor.hexatrigintamals[this.Search.emojis.constructor.unicodes.indexOf(rcollected.first().emoji.name)];
 					})().catch(() => {}),
 					(async () => {
 						let mcollected = await msg.channel.awaitMessages(mfilter, {
@@ -270,7 +270,7 @@ class Output extends Parse {
 						}).catch(() => {});                          
 						mcollected.first().delete(1000).catch(() => {}); 
 						if (mcollected.first().content === 'cancel') throw ''; 
-						return this.Search.Emojis.hexatrigintamals.indexOf(mcollected.first().content);
+						return this.Search.emojis.constructor.hexatrigintamals.indexOf(mcollected.first().content);
 					})().catch(() => {})
 				]);
 				if (!number) throw null;                
@@ -298,7 +298,6 @@ class Output extends Parse {
 				number: false,
 				time: 60000
 			}, data);
-			let author = data.title ? Embed.author(data.title) : {};
 			let msg = await this.reactor(new Embed()
 				.setAuthor(data.title || '')
 				.setDescription(data.description || '')
@@ -339,8 +338,7 @@ class Output extends Parse {
 					return value;
 				}
 			} catch (e) {
-				msg.delete().catch((e) => {
-				});
+				msg.delete().catch(() => {});
 				throw e;
 			}
 		} catch (e) {

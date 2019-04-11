@@ -5,7 +5,6 @@ const rp = require('request-promise');
 const Parse = require('../../util/parse');
 const Embed = require('../../util/embed');
 const DataManager = require('../../util/datamanager');
-const DBuser = require('../../util/dbuser');
 const Logger = require('../../util/logger');
 const Commands = require('../../util/commands');
 const config = DataManager.getFile('./src/config.json');
@@ -163,7 +162,7 @@ class Track {
 	setData() {
 		if (this.dbuser.lastupdate) delete this.dbuser.lastupdate;
 		this.dbuser.lastUpdate = Date.now();
-		DBuser.setData(this.dbuser);
+		this.dbuser.setData();
 		return this;
 	}
 
@@ -227,7 +226,7 @@ class Tracker extends Parse {
 					let user = this.Search.users.get(this.argument);
 					username = this.args[0];
 					if (!user) throw new Error('Invalid user given **' + this.argument.slice(username.length) + '**');
-					dbuser = DBuser.getUser(user);
+					this.Search.dbusers.getUser(user);
 				}
 			}
 			let source = Object.values(config.sources).find(s => s.key === command.toLowerCase().replace(/\./g, ''));
@@ -250,7 +249,7 @@ class Tracker extends Parse {
 				if (!this.Permissions.role('admin', this)) throw this.Permissions.output('role');
 				user = this.Search.users.get(this.argument);
 				if (!user) throw new Error('Couldn\'t find user **' + this.argument + '** in this server');
-				dbuser = DBuser.getUser(user);
+				dbuser = this.Search.dbusers.getUser(user);
 			}
 			if (this.user && dbuser.username !== this.user.tag) dbuser.username = user.tag;
 			let data = new Track(this, dbuser);
@@ -305,10 +304,9 @@ class Tracker extends Parse {
 			let users = await Lichess.users.get(ids);
 			users.tap((parsedData, username) => {
 				let id = accounts.get(parsedData.username);
-				let dbuser = DBuser.byID(id);
+				let dbuser = this.Search.dbusers.byID(id);
 				if (!dbuser) {
-					dbuser.left = true;
-					DBuser.setData(dbuser);
+					dbuser.left();
 					return this.error([username, id, dbuser]);
 				}
 				let data = DataStore.get(id) || new Track(this, dbuser);
@@ -339,7 +337,7 @@ class Tracker extends Parse {
 			let user = this.Search.users.byID(dbuser.id);
 			if (!user) {
 				dbuser.left = true;
-				DBuser.setData(dbuser);
+				dbuser.setData();
 				return false;
 			}
 			if (!/online|idle|dnd/.test(user.presence.status)) return false;
@@ -401,7 +399,7 @@ class Tracker extends Parse {
 				user = this.Search.users.get(this.argument);
 				if (!user) throw new Error('Couldn\'t find user **' + this.argument + '** in this server');
 			}
-			let dbuser = DBuser.getUser(user);
+			let dbuser = this.Search.dbusers.getUser(user);
 			let accounts = [];
 			for (let s of Object.keys(config.sources)) {
 				if (!dbuser[s]) continue;
@@ -424,7 +422,7 @@ class Tracker extends Parse {
 					}
 				}
 			}
-			DBuser.setData(dbuser);
+			dbuser.setData();
 			this.Output.sender(new Embed()
 				.setTitle(`Stopped tracking via ${this.prefix}remove command`)
 				.setDescription(`Unlinked **${options[val]}** from ${user.tag}`)

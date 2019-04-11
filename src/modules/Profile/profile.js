@@ -1,7 +1,6 @@
 const config = require('../../config.json');
 const Parse = require('../../util/parse.js');
 const Embed = require('../../util/embed.js');
-const DBuser = require('../../util/dbuser.js');
 
 class Profile extends Parse {
 
@@ -25,7 +24,7 @@ class Profile extends Parse {
 				value: Object.assign({}, this.dbuser)
 			});
 			Object.defineProperty(this, 'dbindex', {
-				value: DBuser.getIndex(this.dbuser)
+				value: this.dbuser.getIndex();
 			});
 			let embedgroup = [];
 			for (let i = 0; i < this.pages; i++) {
@@ -238,13 +237,6 @@ class Profile extends Parse {
 			['UID', '`' + this.user.id + '`', false],
 			['Position in Database', this.dbindex]
 		].toPairs('bold');
-	}
-
-	get lastMessage() {
-		if (this._lastMessage) return this._lastMessage;
-		if (!this.dbuser.messages.last) return '';
-		let string = this.dbuser.messages.last.replace(/<@!?([0-9]{18})>/g, (match, p1) => '@' + this.Search.users.byID(p1).name);
-		return this._lastMessage = string.format();
 	}
 
 	get roles() {
