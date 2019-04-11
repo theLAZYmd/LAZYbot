@@ -141,10 +141,11 @@ class Track {
 	 * @private
 	 */
 	assign(parsedData) {
+		this.setUsername(parsedData.username);
 		let account = this.dbuser[this.source.key] || {
-			_main: parsedData.username
+			_main: this.username
 		};
-		account[parsedData.username] = Tracker.parseRatings(parsedData.ratings);
+		account[this.username] = Tracker.parseRatings(parsedData.ratings);
 		if (account._main === parsedData.username) { //if it's the main one
 			for (let prop of ['name', 'country', 'language', 'title', 'bio', 'language']) {
 				if (parsedData[prop]) account['_' + prop] = parsedData[prop]; //grab info
@@ -178,16 +179,18 @@ class Track {
 			let sources = this._command === 'update' ? this.sources : [this.source];
 			for (let source of sources) {
 				let accounts = this._command === 'update' ? Object.keys(this.dbuser[source.key]) : [this.username];
-				for (let account of accounts)
-					if (!account.startsWith('_')) {
-						if (this.successes.every(([s, a]) => s !== source.key && a !== account)) {
-							errors.push(`${this.argsInfo.Search.emojis.get(source.key)} Couldn't ${this._command === 'update' ? 'update' : 'link to'} '${account}' on ${source.name}`);
-						} else embed.addField(
-							`${this.argsInfo.Search.emojis.get(source.key)} ${this._command === 'update' ? 'Updated' : `Linked ${this.dbuser.username} to`} '${account}'`,
-							Parse.profile(this.dbuser, source, account) + '\nCurrent highest rating is **' + this.dbuser[source.key][account].maxRating + '**' + whitespace + '\n' + Parse.ratingData(this.dbuser, source, account),
-							true
-						);
-					}
+				for (let account of accounts) {
+					if (account.startsWith('_')) continue;
+					console.log(source.key, account);
+					console.log(this.dbuser[source.key]);
+					if (this.successes.every(([s, a]) => s !== source.key && a !== account)) {
+						errors.push(`${this.argsInfo.Search.emojis.get(source.key)} Couldn't ${this._command === 'update' ? 'update' : 'link to'} '${account}' on ${source.name}`);
+					} else embed.addField(
+						`${this.argsInfo.Search.emojis.get(source.key)} ${this._command === 'update' ? 'Updated' : `Linked ${this.dbuser.username} to`} '${account}'`,
+						Parse.profile(this.dbuser, source, account) + '\nCurrent highest rating is **' + this.dbuser[source.key][account].maxRating + '**' + whitespace + '\n' + Parse.ratingData(this.dbuser, source, account),
+						true
+					);
+				}
 			}
 			if (embed.fields.length) await this.argsInfo.Output[this._command === 'update' ? 'editor' : 'sender'](embed, this.message);
 			if (errors.length)
