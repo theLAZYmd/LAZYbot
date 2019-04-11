@@ -12,10 +12,10 @@ class Profile extends Parse {
 	 * Creates a new profile embed for a given Discord user
 	 * @public
 	 */
-	async get() {
+	async get(argument = this.argument) {
 		try {
-			if (this.args.length === 1) { //!profile titsinablender
-				let user = this.Search.users.get(this.args[0]);
+			if (argument) { //!profile titsinablender
+				let user = this.Search.users.get(argument);
 				if (user) this.member = this.Search.members.byUser(user);
 				else throw 'Couldn\'t find user!';
 			}
