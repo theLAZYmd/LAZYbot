@@ -305,10 +305,7 @@ class Tracker extends Parse {
 			users.tap((parsedData, username) => {
 				let id = accounts.get(parsedData.username);
 				let dbuser = this.Search.dbusers.byID(id);
-				if (!dbuser) {
-					dbuser.left();
-					return this.error([username, id, dbuser]);
-				}
+				if (!dbuser) return dbuser.left();
 				let data = DataStore.get(id) || new Track(this, dbuser);
 				data.setSource(lichess).setUsername(username).assign(parsedData).setSuccess();
 				DataStore.set(id, data);
@@ -332,11 +329,11 @@ class Tracker extends Parse {
 	nextUpdate() { //Least Up-to-Date User
 		let currentValue = Infinity;
 		return DataManager.getData().findd((dbuser) => {
+			if (dbuser.left) delete dbuser.left;
+			dbuser = this.Search.dbusers.getDBuser(dbuser);
 			if (Object.values(config.sources).filter(source => dbuser[source.key]).length === 0) return false; //sources
-			if (dbuser.left) return false;
 			let user = this.Search.users.byID(dbuser.id);
 			if (!user) {
-				dbuser.left = true;
 				return false;
 			}
 			if (!/online|idle|dnd/.test(user.presence.status)) return false;
@@ -439,14 +436,9 @@ module.exports = Tracker;
 function parseChesscom(chesscomData, data) {
 	return {
 		get ratings() {
-			let vmap = new Map(
-				Object.values(config.variants)
-					.filter(v => v.chesscom)
-					.map(v => [v.chesscom, v.key])
-			);
 			return new Map(
 				chesscomData.stats
-					.map(s => [vmap.get(s.key), {
+					.map(s => [s.key, {
 						rating: s.stats.rating,
 						prov: s.gameCount >= 10,
 						rd: null,

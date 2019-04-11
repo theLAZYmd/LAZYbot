@@ -18,7 +18,6 @@ class Leaderboard extends Parse {
 			if (!data.leaderboard || data.leaderboard.length === 0) throw 'Couldn\'t fetch players for **' + data.variant.name + '**.';
 			let embedgroup = [];
 			data.emoji = this.Search.emojis.get(data.variant.key);
-			console.log(data.leaderboard.length);
 			for (let i = 0; i < Math.ceil(data.leaderboard.length / 10); i++) {
 				embedgroup.push(await Leaderboard.build(data, i));
 			}
@@ -33,7 +32,6 @@ class Leaderboard extends Parse {
 			let tally = DataManager.getData();
 			data.leaderboard = [];
 			for (let dbuser of tally) {
-				if (dbuser.left) continue; //skip ppl who have left
 				if (data.active && Date.now() - dbuser.messages.lastSeen > 604800000) continue; //skip inactives
 				if (!dbuser[data.source.key] || dbuser[data.source.key]._cheating) continue; //skip ppl not tracked on that source and cheaters
 				let username = dbuser[data.source.key]._main;
@@ -60,7 +58,6 @@ class Leaderboard extends Parse {
 		try {
 			data.leaderboard = [];
 			for (let dbuser of DataManager.getData()) {
-				if (dbuser.left) continue; //skip ppl who have left
 				if (data.active && Date.now() - dbuser.messages.lastSeen > 604800000) continue; //skip inactives
 				if (!dbuser.trivia || dbuser.trivia.games < data.argsInfo.server.trivia.provisional) continue;
 				data.leaderboard.push({
@@ -70,7 +67,7 @@ class Leaderboard extends Parse {
 					rating: dbuser.trivia.rating
 				});
 			}
-			if (data.leaderboard.length) data.leaderboard.sort((a, b) => parseInt(b.rating) - parseInt(a.rating));
+			if (data.leaderboard.length) data.leaderboard.sort((a, b) => b.rating - a.rating);
 			delete data.source;
 			return data;
 		} catch (e) {
@@ -88,7 +85,6 @@ class Leaderboard extends Parse {
 					return [entry.tag + ' ' + entry.rating];
 				}
 			});
-			console.log(array);
 			let lbembed = array.toLeaderboard(page, 10, false); //Case 2 Leaderboard:
 			lbembed.title = `${data.emoji} House leaderboard${data.source ? ' on ' + data.source.name : ''} for${data.active ? 'active ' : ' '}${data.variant.name} players`;
 			return lbembed;

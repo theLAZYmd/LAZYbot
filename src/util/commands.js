@@ -189,7 +189,6 @@ class Commands {
 		let accounts = new Map();
 		let tally = DataManager.getData();
 		tally.forEach((dbuser) => {
-			if (dbuser.left) return;
 			for (let s of Object.keys(config.sources)) {
 				if (s !== 'lichess') continue;  //lichess block
 				if (!dbuser[s]) continue;
