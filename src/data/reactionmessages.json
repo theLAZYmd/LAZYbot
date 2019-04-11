@@ -7353,6 +7353,29 @@
                 "page": 0,
                 "author": "185412969130229760",
                 "cmdID": "565642092202950657"
+            },
+            "565972105238413362": {
+                "embedgroup": [
+                    {
+                        "title": "What is Discord and how does it work?",
+                        "description": "**Discord**\nDiscord is a program which you can use on the web or download an app from, you can chat and voice chat in there, it has become more and more popular among gamers.\n\n**Channels**\nThere exist different channels which are used to keep the conversations on a specific topic, for instance there are different ones for each variant here. \n\n**Roles and bots**\nPeople can acquire roles which give them permissions to see certain channels, that is so you don't have to see the variant channels you are not interested in. There are also non-human members, known as bots, who react only to certain commands.",
+                        "color": 53380,
+                        "author": {
+                            "name": "House Guide to Discord"
+                        },
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/YWF70U4.png"
+                        },
+                        "fields": [],
+                        "footer": {
+                            "text": "1 / 1"
+                        }
+                    }
+                ],
+                "period": 180000,
+                "page": 0,
+                "author": "185412969130229760",
+                "cmdID": "565972104198225921"
             }
         },
         "election": {
