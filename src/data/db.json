@@ -3,9 +3,9 @@
         "id": "185412969130229760",
         "username": "theLAZYmd#2353",
         "messages": {
-            "count": 79717,
-            "last": "on the lb",
-            "lastSeen": 1555019614668
+            "count": 79721,
+            "last": ".prune 3",
+            "lastSeen": 1555021532996
         },
         "bidamount": 100000000000000000,
         "location": "Toronto",
@@ -550,9 +550,9 @@
         "id": "365933164725534722",
         "username": "Bouncer#8585",
         "messages": {
-            "count": 1994,
-            "last": "post in the right channel please",
-            "lastSeen": 1555019282563
+            "count": 1995,
+            "last": "A random 🎂 appeared! Pick it up by typing .pick",
+            "lastSeen": 1555021497700
         },
         "bidamount": 0
     },
@@ -4036,7 +4036,7 @@
             "_bio": ":)"
         },
         "location": "Croatia",
-        "lastUpdate": 1555018222386
+        "lastUpdate": 1555021523519
     },
     {
         "id": "300644131284189184",
@@ -8975,10 +8975,11 @@
             "_main": "Diademus",
             "Diademus": {
                 "maxRating": 1008,
-                "undefined": "1008"
+                "blitz": "1898?",
+                "puzzles": "1008"
             }
         },
-        "lastUpdate": 1555012559713
+        "lastUpdate": 1555021493238
     },
     {
         "id": "264964953138528267",
