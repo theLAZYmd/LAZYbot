@@ -34,7 +34,7 @@
     "states": {
         "debug": false
     },
-    "lastUpdate": 1555018224366,
+    "lastUpdate": 1555086372650,
     "backupdb": [
         "Fri Apr 12 2019 15:53:34 GMT+01",
         "Fri Apr 12 2019 15:33:34 GMT+01",
@@ -77,7 +77,7 @@
     "variants": {
         "960": {
             "name": "960",
-            "lichess": "960",
+            "lichess": "chess960",
             "chesscom": "livechess960",
             "key": "960"
         },
