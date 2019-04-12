@@ -276,7 +276,7 @@ class DBusers extends Search {
 	getUser(user) {
 		let dbuser = this.byID(user.id);
 		if (dbuser) return dbuser;
-		else new DBuser().joined(user);
+		else return new DBuser().joined(user);
 	}
 
 	/**

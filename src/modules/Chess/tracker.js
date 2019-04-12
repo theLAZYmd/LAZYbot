@@ -304,8 +304,10 @@ class Tracker extends Parse {
 			let users = await Lichess.users.get(ids);
 			users.tap((parsedData, username) => {
 				let id = accounts.get(parsedData.username);
-				let dbuser = this.Search.dbusers.byID(id);
-				if (!dbuser) return dbuser.left();
+                let dbuser = this.Search.dbusers.byID(id);
+                if (!dbuser) return Logger.error([username, id]);
+                let user = this.Search.users.byID(id);
+				if (!user) return dbuser.left();
 				let data = DataStore.get(id) || new Track(this, dbuser);
 				data.setSource(lichess).setUsername(username).assign(parsedData).setSuccess();
 				DataStore.set(id, data);

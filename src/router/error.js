@@ -2,7 +2,7 @@ const Logger = require("../util/logger.js");
 
 module.exports = async (client, e) => {
     try {
-        Logger.error(e);
+        if (e && e.message) Logger.error(e.message);
         await Logger.log("Destroying client...");
         await client.destroy();
         await Logger.log("Client successfully destroyed!");
