@@ -33,10 +33,10 @@ class MessageCount extends Parse {
 		try {
 			let number;
 			for (let a of this.args) {
-				if (typeof a === 'number') number = a;
+				if (!isNaN(Number(a))) number = Number(a);
 				else {
 					let _user = this.Search.users.get(a);
-					if (_user) user = _user;
+                    if (_user) user = _user;
 					else throw this.Permissions.output('args');
 				}
 			}
