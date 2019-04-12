@@ -106,7 +106,8 @@ module.exports = async (client, message) => {
 			let Command = new Message(argsInfo);
 			if (argsInfo.author.bot) {
 				let cmdInfo = await Command.bot(message.embeds[0]);
-				if (cmdInfo) return await Message.run(argsInfo, cmdInfo);
+                if (cmdInfo) await Message.run(argsInfo, cmdInfo);
+                return;
 			}
 			if (!/[a-z]/i.test(message.content)) throw '';
 			if (!argsInfo.message.guild) {

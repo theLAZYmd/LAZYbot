@@ -1691,9 +1691,6 @@
             "module": "Profile",
             "file": "messagecount",
             "method": "update",
-            "arguments": [
-                "user"
-            ],
             "prefix": "generic",
             "requires": {
                 "user": "owner",

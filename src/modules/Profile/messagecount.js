@@ -7,9 +7,12 @@ class MessageCount extends Parse {
 		super(message);
 	}
 
-	async count() { //section for message logging
+    /**
+     * Ups the message count for a given user stored in the database
+     * @private
+     */
+	async count(dbuser = this.dbuser) { //section for message logging
 		try {
-			let dbuser = this.dbuser;
 			dbuser.messages.count++;
 			dbuser.setData();
 		} catch (e) {
@@ -17,6 +20,10 @@ class MessageCount extends Parse {
 		}
 	}
 
+    /**
+     * Stores the last message a user has written
+     * @private
+     */
 	async log() {
 		try {
 			let dbuser = this.dbuser;
@@ -29,10 +36,16 @@ class MessageCount extends Parse {
 		}
 	}
 
-	async update(user = this.author) {
+    /**
+     * Parses a string and number combination to update the message.count of the user found from that string with that number
+     * @param {User} user - A discord user
+     * @param {string[]} args - A list of searchResolvable variables
+     * @public
+     */
+	async update(user = this.author, args = this.args) {
 		try {
 			let number;
-			for (let a of this.args) {
+			for (let a of args) {
 				if (!isNaN(Number(a))) number = Number(a);
 				else {
 					let _user = this.Search.users.get(a);
@@ -49,6 +62,12 @@ class MessageCount extends Parse {
 		}
 	}
 
+    /**
+     * Outputs the number of messages a user has sent
+     * @public
+     * @param {string[]} args 
+     * @param {User} user 
+     */
 	async get(args, user) {
 		try {
 			if (args.length > 1) throw this.Permissions.output('args');
@@ -63,6 +82,11 @@ class MessageCount extends Parse {
 		}
 	}
 
+    /**
+     * Outputs the last message a user has sent
+     * @public
+     * @param {string} argument 
+     */
 	async last(argument) {
 		try {
 			let user = this.author;
