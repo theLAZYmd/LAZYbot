@@ -15,7 +15,7 @@ class Permissions {
 		else if (Array.isArray(value)) {
 			for (let passable of value)
 				if (passable === argsInfo.author.id) return true; //if Array. No support for object.
-		}
+        }
 		return false;
 	}
 
@@ -79,7 +79,7 @@ class Permissions {
 		else return !j;
 	}
 
-	static output(key, argsInfo) {
+	static output(key) {
 		switch (key) {
 			case "user":
 				return "That command is bot owner only.\nIf you are not an active developer on the bot, you cannot use this command.";
@@ -88,7 +88,9 @@ class Permissions {
 			case "channel":
 				return "Wrong channel to use this command.";
 			case "args":
-				return "Inapplicable number of parameters.";
+                return "Inapplicable number of parameters.";
+            default:
+                return false;
 		}
 	}
 

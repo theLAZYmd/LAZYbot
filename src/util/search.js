@@ -438,10 +438,10 @@ class DBuser {
 	joined(user) {		
 		let dbuser = this.fromUser(user);
 		let tally = DataManager.getData();
-		tally.push(this);
+		tally.push(dbuser);
 		DataManager.setData(tally);
 		Logger.log(`User ${dbuser.username} has been logged in the database!`);
-		return this;
+		return dbuser;
 	}
 
 	/**

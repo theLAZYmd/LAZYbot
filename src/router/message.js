@@ -69,11 +69,11 @@ class Message {
 
 	static async requires(argsInfo, cmdInfo) {
 		for (let [type, value] of Object.entries(cmdInfo.requires)) try {
-			if (!Array.isArray(value)) value = [value]; //if it's not array (i.e. multiple possible satisfactory conditions)
-			for (let v of value) {
-				if (!(await Permissions[type](v, argsInfo))) throw cmdInfo.method;
-			}
-		} catch (e) { //if it fails any of requirements, throw
+            if (!Array.isArray(value)) value = [value];
+            if ((await Promise.all(value
+                .map(async v => await Permissions[type](v, argsInfo))))
+                .every(pass => !Boolean(pass))) throw cmdInfo.method;
+        } catch (e) {
 			return Permissions.output(type, argsInfo) ? Permissions.output(type, argsInfo) + '\nUse `' + argsInfo.server.prefixes[cmdInfo.prefix] + 'help` followed by command name to see command info.' : ''; //if no Permissions, kill it
 		}
 		return true;
