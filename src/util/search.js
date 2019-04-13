@@ -451,7 +451,7 @@ class DBuser {
 	left() {
 		let tally = DataManager.getData();
 		let index = this.getIndex();
-		tally.splice(index);
+		tally.splice(index, 1);
 		DataManager.setData(tally);
 		return null;
 	}
