@@ -285,16 +285,44 @@ class Output extends Parse {
 			else throw e;
 		}
 	}
+    
+	/**
+     * @typedef {object} responseOptions
+     * @property {object} author - The user allowed to choose an option
+     * @property {object} channel - The channel this message should be posted in
+	 * @property {string} description = The description to display in the embed message
+     * @property {function} filter - Valid message.content responses that shold be accepted
+     * @property {number} time - The time in milliseconds allowed for the user to respond. Defaults to 60000 (100 seconds).
+     * @property {string} title - The embed title of the choose message that should be displayed. Can be anything.
+     * @property {string} footer - A footer to be included in the embed, if desired
+	 * @property {Message} editor - If this response message should be posted as an edit of a previous message, the message should be sent here
+	 * @property {Boolean} number - If acceptable responses should be numbers
+	 * @property {Boolean} oneword - If acceptable responses should be only one word
+     */
 
+	/**
+     * Returns a user-defined option
+     * @param {responseOptions} data 
+     * @property {object} author - The user allowed to choose an option. Defaults to this.author
+     * @property {object} channel - The channel in which this message should be posted. Defaults to this.channel
+	 * @property {string} description = The description to display in the embed message. Defaults to 'Please type your response below'
+     * @property {function} filter - Valid message.content responses that shold be accepted. Defaults to any
+     * @property {number} time - The time in milliseconds allowed for the user to respond. Defaults to 60000 (100 seconds).
+     * @property {string} title - The embed title of the choose message that should be displayed, if desired. Can be anything.
+     * @property {string} footer - A footer to be included in the embed, if desired
+	 * @property {Message} editor - If this response message should be posted as an edit of a previous message, the message should be sent here
+	 * @property {Boolean} number - If acceptable responses should be numbers
+	 * @property {Boolean} oneword - If acceptable responses should be only one word
+	 * @param {Boolean} r - If the whole message object should be returned, rather than just the content
+     * @returns {number}
+     */
 	async response(data = {}, r) {
 		try {
 			data = Object.assign({
 				author: this.author,
 				channel: this.channel,
 				description: 'Please type your response below.',
-				filter: () => {
-					return true;
-				},
+				filter: () => true,
 				number: false,
 				time: 60000
 			}, data);
@@ -333,8 +361,7 @@ class Output extends Parse {
 				if (r) return collected.first();
 				else {
 					let value = collected.first().content;
-					collected.first().delete().catch(() => {
-					});
+					collected.first().delete().catch(() => {});
 					return value;
 				}
 			} catch (e) {
