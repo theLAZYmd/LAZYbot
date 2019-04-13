@@ -76,8 +76,7 @@ class CustomReactions extends Parse {
 	check(string) { //router
 		try {
 			if (this.command && /^(?:[a-z](?:c|e)r|[a-z]+customreaction)$/i.test(this.command)) throw '';
-			let w = this.trie.whole.get(string.trim()profile
-			);
+			let w = this.trie.whole.get(string.trim());
 			if (w) this[w.type](w.reaction);
 			let result = this.trie.dict.search(string).filter(r => this.trie.anyword.get(r));
 			for (let r of result) {
