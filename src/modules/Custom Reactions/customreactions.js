@@ -76,7 +76,8 @@ class CustomReactions extends Parse {
 	check(string) { //router
 		try {
 			if (this.command && /^(?:[a-z](?:c|e)r|[a-z]+customreaction)$/i.test(this.command)) throw '';
-			let w = this.trie.whole.get(string);
+			let w = this.trie.whole.get(string.trim()profile
+			);
 			if (w) this[w.type](w.reaction);
 			let result = this.trie.dict.search(string).filter(r => this.trie.anyword.get(r));
 			for (let r of result) {
@@ -122,7 +123,7 @@ class CustomReactions extends Parse {
 		try {
 			let trigger = this.argument;
 			if (/^".+"$/.test(trigger)) trigger = trigger.slice(1, -1);
-			if (trigger.slice() in this.CRData[this.type]) throw `Reaction ${trigger} already exists!`;
+			if (Object.keys(this.CRData[this.type]).find(t => this.argument.trim() === t.trim())) throw `Reaction ${trigger} already exists!`;
 			let reaction = await this.Output.response({
 				description: `Please type the ${this.type} response you would like to respond to your trigger '${trigger}'`,
 			});

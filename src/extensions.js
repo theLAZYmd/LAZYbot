@@ -179,7 +179,7 @@ Array.prototype.findd = function (f) { //Array.prototype.find() but the function
 };
 
 Array.prototype.inArray = function (string) { //same as Array.prototype.indexOf() !== -1 but allows for 'close' matches, i.e. lowercase letters with some punctuation
-	let regex = /[a-z_$£@!.?]/gi;
+	const regex = /[a-z_$£@!.?]/gi;
 	for (let i = 0; i < this.length; i++) {
 		if ((string.match(regex) || []).join('').toLowerCase() === (this[i].match(regex) || []).join('').toLowerCase()) return true;
 	}

@@ -313,6 +313,7 @@ class Output extends Parse {
 	 * @property {Message} editor - If this response message should be posted as an edit of a previous message, the message should be sent here
 	 * @property {Boolean} number - If acceptable responses should be numbers
 	 * @property {Boolean} oneword - If acceptable responses should be only one word
+	 * @property {Boolean} json - If the response should be parsed as a JSON
 	 * @param {Boolean} r - If the whole message object should be returned, rather than just the content
      * @returns {number}
      */
