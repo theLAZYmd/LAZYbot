@@ -60,7 +60,6 @@ class Embeds extends Parse {
 	}
 
 	async getEmbeds() {
-		if (this._embeds) return this._embeds;
 		try {
 			if (this.client.user.id === config.ids.betabot) throw '';
 			return await rp.get({
@@ -71,7 +70,6 @@ class Embeds extends Parse {
 			if (e) this.Output.onError(e);
 			this._embeds = DataManager.getFile('./src/data/embeds.json');
 		}
-		return this._embeds;
 	}
 
 }
