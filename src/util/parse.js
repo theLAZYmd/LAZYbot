@@ -112,7 +112,7 @@ class Parse {
 	
 	get content() {
 		if (this._content) return this._content;
-		return this._content = !this.message || !this.message.content ? null : this.message.content
+		return this._content = !this.message || !this.message.content ? '' : this.message.content
 			.replace('’', '\'')
 			.replace('…', '...')
 			.replace('—', '--')
@@ -202,7 +202,11 @@ class Parse {
 
 	get argument() {
 		if (this._argument) return this._argument;
-		return this._argument = this.args.join(' ') || '';
+		return this._argument = this.content.slice(this.prefix.length + this.command.length + 1);
+	}
+
+	set argument(argument) {
+		this._argument = argument;
 	}
 
 	get embed() {

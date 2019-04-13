@@ -8,7 +8,7 @@
 //STRING PROTOTYPE METHODS
 
 String.prototype.vowel = function () {
-    return /^(a|e|i|o|u)/.test(this);
+	return /^(a|e|i|o|u)/.test(this);
 };
 
 String.prototype.toProperCase = function () { //Sets All Words In The String To Have First Letter Capitalised
@@ -17,39 +17,39 @@ String.prototype.toProperCase = function () { //Sets All Words In The String To 
 	for (let i = 0; i < words.length; i++) {
 		newArray[i] = words[i][0].toUpperCase() + words[i].slice(1, words[i].length).toLowerCase();
 	}
-	let newString = newArray.join(" ");
+	let newString = newArray.join(' ');
 	return newString;
 };
 
 String.prototype.reverse = function () { //reverses a string
-    return this.split("").reverse().join("");
+	return this.split('').reverse().join('');
 };
 
 String.prototype.url = function (link) { //converts texts to have a link for markdown
-    if (!/(https?:\/\/[\S\.]+\.\w+\/?)\s?/.test(link)) return this;
-    return "[" + this + "](" + link + ")";
-}
+	if (!/(https?:\/\/[\S\.]+\.\w+\/?)\s?/.test(link)) return this;
+	return '[' + this + '](' + link + ')';
+};
 
 String.prototype.bold = function () { //bolds text for markdown
-	if (this.length > 0) return "**" + this + "**";
-	return "";
+	if (this.length > 0) return '**' + this + '**';
+	return '';
 };
 
-String.prototype.format = function (type = "") { //adds a codeblock for markdown
-	if (this.length > 0) return "```" + type.replace(/```/g, "\\`\\`\\`") + "\n" + this + "```";
-	return "```\n```";
+String.prototype.format = function (type = '') { //adds a codeblock for markdown
+	if (this.length > 0) return '```' + type.replace(/```/g, '\\`\\`\\`') + '\n' + this + '```';
+	return '```\n```';
 };
 
-String.prototype.parseTime = function (units = ["hours", "minutes", "seconds"]) { //checks for time units in a given string
-    return units.map((u) => {
-        let regex = new RegExp("\\b([0-9])+\\s*h(?:ours?)?\\b");
-        if (!regex.test(u)) return null;
-        return Number(u.match(regex)[1]);
-    })
+String.prototype.parseTime = function (units = ['hours', 'minutes', 'seconds']) { //checks for time units in a given string
+	return units.map((u) => {
+		let regex = new RegExp('\\b([0-9])+\\s*h(?:ours?)?\\b');
+		if (!regex.test(u)) return null;
+		return Number(u.match(regex)[1]);
+	});
 };
 
 String.prototype.occurrences = function (subString, allowOverlapping = false) { //occurrences of a substring
-	subString += "";
+	subString += '';
 	if (subString.length <= 0) return (this.length + 1);
 	let n = 0;
 	let position = 0;
@@ -65,76 +65,76 @@ String.prototype.occurrences = function (subString, allowOverlapping = false) { 
 };
 
 String.prototype.stripQuotes = function() {
-    if (this.startsWith('"') && this.endsWith('"')) return this.slice(1, -1);
-    return this;
+	if (this.startsWith('"') && this.endsWith('"')) return this.slice(1, -1);
+	return this;
 };
 
 //ARRAY PROTOTYPE METHODS
 
 Array.prototype.rotate = function () { //rotates a 2-Dimensional array
-    return Object.keys(this[0]).map(column => this.map(row => row[column]));
+	return Object.keys(this[0]).map(column => this.map(row => row[column]));
 };
 
 Array.prototype.toFrequency = function () { //reduces down an array to its frequencies of elements
-    return this.reduce((acc, curr) => {
-        if (curr === undefined || curr == null) return acc;
-        if (!acc[curr.toString()]) acc[curr.toString()] = 1;
-        else acc[curr.toString()]++;
-        return acc;
-    }, {});
-}
+	return this.reduce((acc, curr) => {
+		if (curr === undefined || curr == null) return acc;
+		if (!acc[curr.toString()]) acc[curr.toString()] = 1;
+		else acc[curr.toString()]++;
+		return acc;
+	}, {});
+};
 
 Array.prototype.partition = function (f) { //like Array.prototype.filter but creates an array for elements that fail the test too
-    let res = [], rej = [];  
-    for (let element of this) {
-        if (f(element)) res.push(element);
-        else rej.push(element);
-    }
-    return [res, rej];
+	let res = [], rej = [];  
+	for (let element of this) {
+		if (f(element)) res.push(element);
+		else rej.push(element);
+	}
+	return [res, rej];
 };
 
 Array.prototype.flat = function (depth) { // this method implemented https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat
-    return this.reduce(function (flat, toFlatten) {
-        return flat.concat((Array.isArray(toFlatten) && (depth - 1)) ? toFlatten.flat(depth - 1) : toFlatten);
-    }, []);
-}
+	return this.reduce(function (flat, toFlatten) {
+		return flat.concat((Array.isArray(toFlatten) && (depth - 1)) ? toFlatten.flat(depth - 1) : toFlatten);
+	}, []);
+};
 
-Array.prototype.toPairs = function (bold = false, constant = "") { //returns an array concatenated to a "key: value\n" format
-    return this.map((entry) => {
-        if (Array.isArray(entry)) {
-            let [k, v] = entry;
-            return k + ": " + (bold && v ? v.toString().bold() : v)
-        } else
-        if (/string|number/.test(typeof entry)) {
-            return constant + (bold ? entry.bold() : entry);
-        }
-    }).join("\n");
+Array.prototype.toPairs = function (bold = false, constant = '') { //returns an array concatenated to a "key: value\n" format
+	return this.map((entry) => {
+		if (Array.isArray(entry)) {
+			let [k, v] = entry;
+			return k + ': ' + (bold && v ? v.toString().bold() : v);
+		} else
+		if (/string|number/.test(typeof entry)) {
+			return constant + (bold ? entry.bold() : entry);
+		}
+	}).join('\n');
 };
 
 Array.prototype.toRank = function(startAt) { //returns an array concatenated to a "#1 item1" format
-    let string = "";
-    for (let i = 0; i < this.length; i++) {
-        string += ("#" + (i + startAt)).bold() + " " + this[i] + (i < this.length + 1 ? "\n" : "");
-    }
-    return string;
+	let string = '';
+	for (let i = 0; i < this.length; i++) {
+		string += ('#' + (i + startAt)).bold() + ' ' + this[i] + (i < this.length + 1 ? '\n' : '');
+	}
+	return string;
 };
 
 Array.prototype.toLeaderboard = function(page = 0, pagekey = 9, inline = true) { //see explanation at bottom
-    let startAt = 1 + page * pagekey;
-    let i = this.findIndex(entry => entry[1]);
-    if (i === -1) i = this.length;
-    let j = -1;    
-    let description = this.slice(0, i).toRank(startAt);
-    let fields = this.slice(i).map(([k, v]) => {
-        j++;
-        return [`#${i + j + startAt} ${k} `, v, inline].toField(i);
-    });
-    return { description, fields };
+	let startAt = 1 + page * pagekey;
+	let i = this.findIndex(entry => entry[1]);
+	if (i === -1) i = this.length;
+	let j = -1;    
+	let description = this.slice(0, i).toRank(startAt);
+	let fields = this.slice(i).map(([k, v]) => {
+		j++;
+		return [`#${i + j + startAt} ${k} `, v, inline].toField(i);
+	});
+	return { description, fields };
 };
 
 Array.prototype.toField = function () { //returns an array formatted as a 'Field Object' for a Discord embed
-    let [name, value, inline] = this;
-    return {  name, value, inline };
+	let [name, value, inline] = this;
+	return {  name, value, inline };
 };
 
 Array.prototype.toProperCase = function () { //does String.prototype.toProperCase() on every element in an array
@@ -162,60 +162,60 @@ Array.prototype.shuffle = function () { //Fisher-Yates shuffle algorithm for jav
 };
 
 Array.prototype.validate = async function () { //parse to mathematical inputs: numbers and booleans
-    for (let [i, item] of Object.entries(this)) {
-        if (typeof item !== "string") continue;
-        item = item.trim();
-        if (item === "true") this[i] = true;
-        else if (item === "false") this[i] = false;
-        this[i] = Number(item);
-        if (isNaN(item)) throw "Invalid inputs to operation!";
-    }
-    return this;
+	for (let [i, item] of Object.entries(this)) {
+		if (typeof item !== 'string') continue;
+		item = item.trim();
+		if (item === 'true') this[i] = true;
+		else if (item === 'false') this[i] = false;
+		this[i] = Number(item);
+		if (isNaN(item)) throw 'Invalid inputs to operation!';
+	}
+	return this;
 };
 
 Array.prototype.findd = function (f) { //Array.prototype.find() but the function is run for all members of the array. Useful for when there's a running variable that gets changed with each iteration.
-    let array = this.filter(f);
-    return array.length > 0 ? array.pop() : null;
-}
+	let array = this.filter(f);
+	return array.length > 0 ? array.pop() : null;
+};
 
 Array.prototype.inArray = function (string) { //same as Array.prototype.indexOf() !== -1 but allows for 'close' matches, i.e. lowercase letters with some punctuation
 	let regex = /[a-z_$£@!.?]/gi;
 	for (let i = 0; i < this.length; i++) {
-		if ((string.match(regex) || []).join("").toLowerCase() === (this[i].match(regex) || []).join("").toLowerCase()) return true;
+		if ((string.match(regex) || []).join('').toLowerCase() === (this[i].match(regex) || []).join('').toLowerCase()) return true;
 	}
 	return false;
 };
 
 Array.prototype.findIndex = function (f, startIndex = 0) { //same as Array.prototype.find() but returns an index. Like if .indexOf() took a function
-    if (typeof f !== "function") return -1;
-    if (startIndex >= this.length) throw "Invalid start index.";
-    for (let i = startIndex; i < this.length; i++) {
-        if (f(this[i])) {
-            return i;
-        }
-    }
-    return -1;
+	if (typeof f !== 'function') return -1;
+	if (startIndex >= this.length) throw 'Invalid start index.';
+	for (let i = startIndex; i < this.length; i++) {
+		if (f(this[i])) {
+			return i;
+		}
+	}
+	return -1;
 };
 
 Array.prototype.findIndexes = function (f) { //same as Array.prototype.findIndexes() but returns all matching indexes
-    if (typeof f !== "function") return [];
+	if (typeof f !== 'function') return [];
 	let indexes = [];
 	for (let i = 0; i < this.length; i++) {
 		if (f(this[i])) {
-			indexes.push(i)
+			indexes.push(i);
 		}
 	}
 	return indexes;
 };
 
 Array.prototype.indexesOf = function (str) { //same as Array.prototype.indexOf() but returns all matching indexes
-    let arr = [];
-    let currValue = 0;
-    while (this.indexOf(str) !== -1) {
-        currValue = this.indexOf(str, currValue);
-        arr.push(currValue);
-    }
-    return arr;
+	let arr = [];
+	let currValue = 0;
+	while (this.indexOf(str) !== -1) {
+		currValue = this.indexOf(str, currValue);
+		arr.push(currValue);
+	}
+	return arr;
 };
 
 
@@ -230,7 +230,7 @@ Array.prototype.clean = function () { //removes null or undefined values from an
 };
 
 Array.prototype.remove = function (index) { //remove an index or a set of indexes from an Array. Same as this.splice(index, 1) but allows for multi-index functionality
-    if (typeof index !== "number") throw new TypeError(index);
+	if (typeof index !== 'number') throw new TypeError(index);
 	if (Array.isArray(index)) {
 		for (let i of index.sort((a, b) => b - a)) {
 			this.splice(i, 1);
@@ -242,12 +242,11 @@ Array.prototype.remove = function (index) { //remove an index or a set of indexe
 };
 
 Array.prototype.list = function (oxfordcomma = true) {    //turning an array into a string as it ould 
-    let str = "";
-    for (let val of this) {
-        if (val.length === 0) this.remove(val);
-    }
-    if (this.length < 3) return this.join(" and ");
-    return this.slice(0, -1).join(", ") + (oxfordcomma ? "," : "") + " and " + this.slice(-1);
+	for (let val of this) {
+		if (val.length === 0) this.remove(val);
+	}
+	if (this.length < 3) return this.join(' and ');
+	return this.slice(0, -1).join(', ') + (oxfordcomma ? ',' : '') + ' and ' + this.slice(-1);
 };
 
 //OBJECT PROTOTYPE METHODS
@@ -269,53 +268,53 @@ Object.prototype.setProp = function (desc, value) {
 };
 
 Object.compare = function (obj1, obj2) {
-    for (let [k, v] of Object.entries(obj1)) {
-        if (obj2[k] === undefined || obj2[k] === null) return false;
-        if (obj2[k].toString() !== v.toString()) return false;
-    }
-    for (let [k, v] of Object.entries(obj2)) {
-        if (obj1[k] === undefined || obj1[k] === null) return false;
-        if (obj1[k].toString() !== v.toString()) return false;
-    }
-    return true;
+	for (let [k, v] of Object.entries(obj1)) {
+		if (obj2[k] === undefined || obj2[k] === null) return false;
+		if (obj2[k].toString() !== v.toString()) return false;
+	}
+	for (let [k, v] of Object.entries(obj2)) {
+		if (obj1[k] === undefined || obj1[k] === null) return false;
+		if (obj1[k].toString() !== v.toString()) return false;
+	}
+	return true;
 };
 
 //FUNCTION PROTOTYPE METHODS (note: mdn says these are 'uneditable'. Oh well.)
 
 Function.prototype.getInputs = function() {
-    let str = this.toString().trim();
-    let arrowRegex = /^\(?([\w\s,]+)\)?\s*\=\>/;
-    let functionRegex = /^(?:function|static|async)?\s*\w+\s?\(([\w\s,]*)\)/;
-    let input;
-    if (arrowRegex.test(str)) input = str.match(arrowRegex)[1];
-    else if (functionRegex.test(str)) input = str.match(functionRegex)[1];
-    if (!input) throw str;
-    let inputs = input.split(",").map(i => i.trim());
-    return inputs;
+	let str = this.toString().trim();
+	let arrowRegex = /^\(?([\w\s,]+)\)?\s*=>/;
+	let functionRegex = /^(?:function|static|async)?\s*\w+\s?\(([\w\s,]*)\)/;
+	let input;
+	if (arrowRegex.test(str)) input = str.match(arrowRegex)[1];
+	else if (functionRegex.test(str)) input = str.match(functionRegex)[1];
+	if (!input) throw str;
+	let inputs = input.split(',').map(i => i.trim());
+	return inputs;
 };
 
 //NUMBER PROTOTYPE METHODS
 
 Number.prototype.radix = function (base) { //converts a number to an array where each element in the array read right to left is the base place value, ex: 9.radix(2) === [1, 0, 0, 1]
-    if (this <= 0) return [0];
-    let sum = this;
-    let value = Math.floor(Math.logBase(base, this));
-    let radix = [];
-    do {
-        let digit = Math.floor(sum / base ** value);
-        radix.push(digit);
-        sum -= digit * base ** value;
-        value--;
-    } while (value >= 0);
-    return radix;
+	if (this <= 0) return [0];
+	let sum = this;
+	let value = Math.floor(Math.logBase(base, this));
+	let radix = [];
+	do {
+		let digit = Math.floor(sum / base ** value);
+		radix.push(digit);
+		sum -= digit * base ** value;
+		value--;
+	} while (value >= 0);
+	return radix;
 };
 
 Number.prototype.round = function (places) { //rounds a number to a certain number of places. Give negative value to reduce accuracy. 2259.round(-2) === 2300
-    return (Math.round(this * Math.pow(10, places)) / Math.pow(10, places));
+	return (Math.round(this * Math.pow(10, places)) / Math.pow(10, places));
 };
 
 Number.prototype.toSign = function () {
-	if (this > 0) return "+" + Math.round(this);
+	if (this > 0) return '+' + Math.round(this);
 	return Math.round(this).toString();
 };
 
@@ -341,13 +340,13 @@ Date.getISOtime = function (ms) {
 
 Date.getMonth = function (ms) {
 	let string = Date.getTime(ms).toString();
-	return string.slice(4, 7) + " " + string.slice(11, 15);
+	return string.slice(4, 7) + ' ' + string.slice(11, 15);
 };
 
 //MATHS PROTOTYPE METHODS
 
 Math.logBase = function (base, number) {
-    return (Math.log(number) / Math.log(base)).round(12);
+	return (Math.log(number) / Math.log(base)).round(12);
 };
 
 Math.randBetween = function (min, max) {
