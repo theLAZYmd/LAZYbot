@@ -193,7 +193,7 @@ class Profile extends Parse {
 				names.push(account);
 			}
 			let name = this.dbuser[source]._name;
-			if (name && !names.inArray(name)) names.unshift(this.dbuser[source]._name);
+			if (name && !names.inArray(name)) names.splice(1, 0, name);
 		}
 		return this._aliases = names.slice(1).join('\n');
 	}

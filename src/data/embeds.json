@@ -239,7 +239,7 @@
 		],
 		"960": [{
 				"title": "House Guide to Chess960",
-				"description": "__**ABOUT**__\n\n**Chess960 (960)** is a chess variant, which uses the same board and pieces as orthodox chess, but the starting position of the pieces is randomized. However, the pieces on the both sides will be placed symmetrical. The random starting position is to hinder players from memorizing the opening lines and it forces them to rely more on their talent and creativity. \n\nOther names for this variant are Fischer Random Chess and **Fischerandom**, both named after Bobby Fischer, who invented the variant. It's also known as it’s also known as wild 22.\n\n__**RULES**__ \n\nThe rules are the same as in orthodox chess. However, the castling may seem different because the king and the rooks might have a different starting square than in standard chess.\n\n[Rules page on lichess](<https://lichess.org/variant/chess960>).\n		 \n__**SITES**__\n\n● [lichess.org](https://lichess.org)\n● [chess.com](https://chess.com)\n● [Free Internet Chess Server](http://www.freechess.org/)\n● [Internet Chess Club](https://www.chessclub.com/)",
+				"description": "__**ABOUT**__\n\n**Chess960 (960)** is a chess variant, which uses the same board and pieces as orthodox chess, but the starting position of the pieces is randomized. However, the pieces on the both sides will be placed symmetrical. The random starting position is to hinder players from memorizing the opening lines and it forces them to rely more on their talent and creativity. \n\nOther names for this variant are Fischer Random Chess and **Fischerandom**, both named after Bobby Fischer, who invented the variant. It's also known as it’s also known as wild 22.\n\n__**RULES**__ \n\nThe rules are the same as in orthodox chess. However, the castling may seem different because the king and the rooks might have a different starting square than in standard chess.\n\n[Rules page on lichess](<https://lichess.org/variant/chess960>).\n\n__**SITES**__\n\n● [lichess.org](https://lichess.org)\n● [chess.com](https://chess.com)\n● [Free Internet Chess Server](http://www.freechess.org/)\n● [Internet Chess Club](https://www.chessclub.com/)",
 				"color": 14841132,
 				"thumbnail": {
 					"url": "https://i.imgur.com/YMgh4dH.png"
@@ -289,7 +289,7 @@
 		],
 		"racingkings": [{
 				"title": "House Guide to Racing Kings",
-				"description": "__**ABOUT**__\n\n**Racing Kings (RK)** is a chess variant. The objective of the game is to move one’s own king to the last rank and do it faster than the opponent.\n\n__**RULES**__ \n\nAll pieces are positioned at the first two ranks and both players see the board from the same perspective. The starting position is [following](<https://i.imgur.com/sdnJ3Jz.png>).\n\nStandard chess rules apply, with the following restrictions:\n\n• It is not allowed to attack the opponent’s king. The concept of check is entirely forbidden.\n• The king is not allowed to move to a square which is attacked by an opponent’s piece (just like in standard chess).\n\nThe game is finished if one player moves their own king to the last rank. However, if white moves his king to the last row, and black moves immediately that their king to the last rank, the game is draw (in order to compensate the fact that white player started the game.)\n\n[Rules page on lichess](<https://lichess.org/variant/racingKings>).\n		 \n__**SITES**__\n\n● [Lichess.org](https://lichess.org/)",
+				"description": "__**ABOUT**__\n\n**Racing Kings (RK)** is a chess variant. The objective of the game is to move one’s own king to the last rank and do it faster than the opponent.\n\n__**RULES**__ \n\nAll pieces are positioned at the first two ranks and both players see the board from the same perspective. The starting position is [following](<https://i.imgur.com/sdnJ3Jz.png>).\n\nStandard chess rules apply, with the following restrictions:\n\n• It is not allowed to attack the opponent’s king. The concept of check is entirely forbidden.\n• The king is not allowed to move to a square which is attacked by an opponent’s piece (just like in standard chess).\n\nThe game is finished if one player moves their own king to the last rank. However, if white moves his king to the last row, and black moves immediately that their king to the last rank, the game is draw (in order to compensate the fact that white player started the game.)\n\n[Rules page on lichess](<https://lichess.org/variant/racingKings>).\n\n__**SITES**__\n\n● [Lichess.org](https://lichess.org/)",
 				"color": 14841132,
 				"thumbnail": {
 					"url": "https://i.imgur.com/2YAoPMG.png"
@@ -930,19 +930,19 @@
 				}
 			},
 			{
-				"description": "```css\n| #   Name				 Rtng |	   \u200b\n|							   |\n| 1   gnejs				2878 |\n| 2   allyouneedisluft	 2870 |\n| 3   mastertan ∗		  2837 |\n| 4   xuanet ∗			 2748 |\n| 5   blitzbullet		  2739 |\n| 6   FeegLood			 2717 |\n| 7   littleplotkin ∗	  2683 |\n| 8   penguingim1 ∗		2680 |\n| 9   Vempele ∗			2668 |\n| 10  B0N0B0			   2658 |\n| 11  Mugwort ∗			2656 |\n| 12  garnek123 ∗		  2628 |\n| 13  gsvc ∗			   2625 |\n| 14  JohnStuckey		  2615 |\n| 15  SpinalTap			2612 |\n| 16  helmsknight ∗		2605 |\n| 17  sexy_and_i_know_it ∗ 2601 |\n| 18  HighContrast ∗	   2594 |\n| 19  atamek ∗			 2583 |\n| 20  apterigo			 2564 |\n| 21  profz				2563 |\n| 22  Kleerkast ∗		  2562 |\n| 23  retardedplatypus123∗ 2561 |\n| 24  pknm				 2546 |\n| 25  CheeseMuffin		 2542 |\n| 26  TaylorEternity	   2534 |\n| 27  crosky ∗			 2524 |\n| 28  Fumitoks ∗		   2523 |\n| 29  chewythechewer	   2518 |\n| 30  terra87			  2515 |\n| 31  Gabix94			  2513 |\n| 32  larso ∗			  2504 |\n| 33  mathace ∗			2494 |\n| 34  exMOHAX ∗			2483 |\n| 35  ArtOfDeception ∗	 2469 |\n| 36  matser			   2460 |\n| 37  Kielileike ∗		 2447 |\n| 38  ciw				  2443 |\n| 39  MrSok				2429 |\n| 40  amaidel			  2418 |\n\n∗ Participant is a member of The House\n```",
+				"description": "```css\n| #   Name\t\t\t\t Rtng |\t   \u200b\n|\t\t\t\t\t\t\t   |\n| 1   gnejs\t\t\t\t2878 |\n| 2   allyouneedisluft\t 2870 |\n| 3   mastertan ∗\t\t  2837 |\n| 4   xuanet ∗\t\t\t 2748 |\n| 5   blitzbullet\t\t  2739 |\n| 6   FeegLood\t\t\t 2717 |\n| 7   littleplotkin ∗\t  2683 |\n| 8   penguingim1 ∗\t\t2680 |\n| 9   Vempele ∗\t\t\t2668 |\n| 10  B0N0B0\t\t\t   2658 |\n| 11  Mugwort ∗\t\t\t2656 |\n| 12  garnek123 ∗\t\t  2628 |\n| 13  gsvc ∗\t\t\t   2625 |\n| 14  JohnStuckey\t\t  2615 |\n| 15  SpinalTap\t\t\t2612 |\n| 16  helmsknight ∗\t\t2605 |\n| 17  sexy_and_i_know_it ∗ 2601 |\n| 18  HighContrast ∗\t   2594 |\n| 19  atamek ∗\t\t\t 2583 |\n| 20  apterigo\t\t\t 2564 |\n| 21  profz\t\t\t\t2563 |\n| 22  Kleerkast ∗\t\t  2562 |\n| 23  retardedplatypus123∗ 2561 |\n| 24  pknm\t\t\t\t 2546 |\n| 25  CheeseMuffin\t\t 2542 |\n| 26  TaylorEternity\t   2534 |\n| 27  crosky ∗\t\t\t 2524 |\n| 28  Fumitoks ∗\t\t   2523 |\n| 29  chewythechewer\t   2518 |\n| 30  terra87\t\t\t  2515 |\n| 31  Gabix94\t\t\t  2513 |\n| 32  larso ∗\t\t\t  2504 |\n| 33  mathace ∗\t\t\t2494 |\n| 34  exMOHAX ∗\t\t\t2483 |\n| 35  ArtOfDeception ∗\t 2469 |\n| 36  matser\t\t\t   2460 |\n| 37  Kielileike ∗\t\t 2447 |\n| 38  ciw\t\t\t\t  2443 |\n| 39  MrSok\t\t\t\t2429 |\n| 40  amaidel\t\t\t  2418 |\n\n∗ Participant is a member of The House\n```",
 				"color": 53380
 			},
 			{
-				"description": "```css\n| #   Name				 Rtng |	   \u200b\n| 41  burpcow ∗			2415 |\n| 42  Chucklemagne ∗	   2410 |\n| 43  emrty ∗			  2403 |\n| 44  gekkokamen		   2395 |\n| 45  KingSwitcher		 2382 |\n| 46  MagicAndy			2382 |\n| 47  esken ∗			  2379 |\n| 48  I0euros			  2374 |\n| 49  arjelol			  2373 |\n| 50  TcubesAK ∗		   2366 |\n| 51  Arka50			   2354 |\n| 52  vsshk ∗			  2346 |\n| 53  onubense			 2337 |\n| 54  VariantsOnly ∗	   2329 |\n| 55  samuelhaupt3		 2326 |\n| 56  anduchess			2314 |\n| 57  recastrov			2308 |\n| 58  KyleLegion ∗		 2307 |\n| 59  Orlando_Gloom		2304 |\n| 60  theLAZYmd ∗		  2302 |\n| 61  JakeF				2296 |\n| 62  BughouseMASTER	   2285 |\n| 63  Antic ∗			  2284 |\n| 64  wannabe2700		  2280 |\n| 65  unjournakamura ∗	 2280 |\n| 66  MrBadbeat			2279 |\n| 67  off_white			2278 |\n| 68  Melee				2271 |\n| 69  Mollus			   2267 |\n| 70  Phuzer			   2266 |\n| 71  PawnInTraining ∗	 2260 |\n| 72  bennyk			   2259 |\n| 73  Alexnader123		 2249 |\n| 74  cross_online ∗	   2248 |\n| 75  Nekipelov			2244 |\n| 76  AusHoin			  2243 |\n| 77  CrazyHome ∗		  2232 |\n| 78  dampooo			  2230 |\n| 79  V2chess ∗			2227 |\n| 80  Cocaino74 ∗		  2225 |\n\n∗ Participant is a member of The House\n```",
+				"description": "```css\n| #   Name\t\t\t\t Rtng |\t   \u200b\n| 41  burpcow ∗\t\t\t2415 |\n| 42  Chucklemagne ∗\t   2410 |\n| 43  emrty ∗\t\t\t  2403 |\n| 44  gekkokamen\t\t   2395 |\n| 45  KingSwitcher\t\t 2382 |\n| 46  MagicAndy\t\t\t2382 |\n| 47  esken ∗\t\t\t  2379 |\n| 48  I0euros\t\t\t  2374 |\n| 49  arjelol\t\t\t  2373 |\n| 50  TcubesAK ∗\t\t   2366 |\n| 51  Arka50\t\t\t   2354 |\n| 52  vsshk ∗\t\t\t  2346 |\n| 53  onubense\t\t\t 2337 |\n| 54  VariantsOnly ∗\t   2329 |\n| 55  samuelhaupt3\t\t 2326 |\n| 56  anduchess\t\t\t2314 |\n| 57  recastrov\t\t\t2308 |\n| 58  KyleLegion ∗\t\t 2307 |\n| 59  Orlando_Gloom\t\t2304 |\n| 60  theLAZYmd ∗\t\t  2302 |\n| 61  JakeF\t\t\t\t2296 |\n| 62  BughouseMASTER\t   2285 |\n| 63  Antic ∗\t\t\t  2284 |\n| 64  wannabe2700\t\t  2280 |\n| 65  unjournakamura ∗\t 2280 |\n| 66  MrBadbeat\t\t\t2279 |\n| 67  off_white\t\t\t2278 |\n| 68  Melee\t\t\t\t2271 |\n| 69  Mollus\t\t\t   2267 |\n| 70  Phuzer\t\t\t   2266 |\n| 71  PawnInTraining ∗\t 2260 |\n| 72  bennyk\t\t\t   2259 |\n| 73  Alexnader123\t\t 2249 |\n| 74  cross_online ∗\t   2248 |\n| 75  Nekipelov\t\t\t2244 |\n| 76  AusHoin\t\t\t  2243 |\n| 77  CrazyHome ∗\t\t  2232 |\n| 78  dampooo\t\t\t  2230 |\n| 79  V2chess ∗\t\t\t2227 |\n| 80  Cocaino74 ∗\t\t  2225 |\n\n∗ Participant is a member of The House\n```",
 				"color": 53380
 			},
 			{
-				"description": "```css\n| #   Name				 Rtng |	   \u200b\n| 81  Karagialis		   2218 |\n| 82  Bofrostmann		  2215 |\n| 83  kathiyitis		   2213 |\n| 84  bferl				2208 |\n| 85  IgorBugMate ∗		2202 |\n| 86  ubdip				2192 |\n| 87  broskall6			2191 |\n| 88  isaacly ∗			2179 |\n| 89  Flourish ∗		   2178 |\n| 90  anandthelegend	   2171 |\n| 91  Yery				 2168 |\n| 92  TheBayArea		   2162 |\n| 93  LegionDestroyer ∗	2149 |\n| 94  the-lone-wolf ∗	  2148 |\n| 95  jbegis ∗			 2145 |\n| 96  TrumPower			2140 |\n| 97  googa				2138 |\n| 98  RequiemZH ∗		  2137 |\n| 99  Ominous ∗			2122 |\n| 100 samoyd ∗			 2118 |\n| 101 blunderman1 ∗		2117 |\n| 102 chesssky2 ∗		  2116 |\n| 103 syncopation ∗		2116 |\n| 104 amaan1			   2109 |\n| 105 Schachmalanders	  2109 |\n| 106 medeved9112		  2104 |\n| 107 lovlas ∗			 2097 |\n| 108 Toadofsky ∗		  2085 |\n| 109 Simba7 ∗			 2093 |\n| 110 Velpeau			  2086 |\n| 111 blindlyzerking	   2056 |\n| 112 Sonata2 ∗			2051 |\n| 113 RussianDragun		2041 |\n| 114 rohangupta4398	   2037 |\n| 115 Andrey_2888 ∗		2018 |\n| 116 ilaaaaaaaaaaaaaaares 1996 |\n| 117 okei ∗			   1993 |\n| 118 Superclass		   1987 |\n| 119 Vycm				 1969 |\n| 120 szura				1968 |\n\n∗ Participant is a member of The House\n```",
+				"description": "```css\n| #   Name\t\t\t\t Rtng |\t   \u200b\n| 81  Karagialis\t\t   2218 |\n| 82  Bofrostmann\t\t  2215 |\n| 83  kathiyitis\t\t   2213 |\n| 84  bferl\t\t\t\t2208 |\n| 85  IgorBugMate ∗\t\t2202 |\n| 86  ubdip\t\t\t\t2192 |\n| 87  broskall6\t\t\t2191 |\n| 88  isaacly ∗\t\t\t2179 |\n| 89  Flourish ∗\t\t   2178 |\n| 90  anandthelegend\t   2171 |\n| 91  Yery\t\t\t\t 2168 |\n| 92  TheBayArea\t\t   2162 |\n| 93  LegionDestroyer ∗\t2149 |\n| 94  the-lone-wolf ∗\t  2148 |\n| 95  jbegis ∗\t\t\t 2145 |\n| 96  TrumPower\t\t\t2140 |\n| 97  googa\t\t\t\t2138 |\n| 98  RequiemZH ∗\t\t  2137 |\n| 99  Ominous ∗\t\t\t2122 |\n| 100 samoyd ∗\t\t\t 2118 |\n| 101 blunderman1 ∗\t\t2117 |\n| 102 chesssky2 ∗\t\t  2116 |\n| 103 syncopation ∗\t\t2116 |\n| 104 amaan1\t\t\t   2109 |\n| 105 Schachmalanders\t  2109 |\n| 106 medeved9112\t\t  2104 |\n| 107 lovlas ∗\t\t\t 2097 |\n| 108 Toadofsky ∗\t\t  2085 |\n| 109 Simba7 ∗\t\t\t 2093 |\n| 110 Velpeau\t\t\t  2086 |\n| 111 blindlyzerking\t   2056 |\n| 112 Sonata2 ∗\t\t\t2051 |\n| 113 RussianDragun\t\t2041 |\n| 114 rohangupta4398\t   2037 |\n| 115 Andrey_2888 ∗\t\t2018 |\n| 116 ilaaaaaaaaaaaaaaares 1996 |\n| 117 okei ∗\t\t\t   1993 |\n| 118 Superclass\t\t   1987 |\n| 119 Vycm\t\t\t\t 1969 |\n| 120 szura\t\t\t\t1968 |\n\n∗ Participant is a member of The House\n```",
 				"color": 53380
 			},
 			{
-				"description": "```css\n| #   Name				 Rtng |	   \u200b\n| 121 ProgramFOX ∗		 1958 |\n| 122 DeepInTheHole ∗	  1944 |\n| 123 Deadban ∗			1942 |\n| 124 kordet26			 1940 |\n| 125 Shalter			  1933 |\n| 126 just2play			1930 |\n| 127 yellowdragoon		1926 |\n| 128 Conquerrist		  1910 |\n| 129 ilovepie			 1910 |\n| 130 bermudas			 1899 |\n| 131 Viktor_le_Terrible   1875 |\n| 132 andreijl ∗		   1863 |\n| 133 staskamaev		   1862 |\n| 134 vagician			 1854 |\n| 135 MeetYourDemise	   1831 |\n| 136 eashwar			  1831 |\n| 137 viiiiiid			 1813 |\n| 138 Snotaap			  1781 |\n| 139 liamchez			 1777 |\n| 140 Mis_Drndac		   1765 |\n| 141 aljopeljhan		  1748 |\n| 142 BigChicken		   1745 |\n| 143 azuaga_casual		1735 |\n| 144 andreask27		   1713 |\n| 145 chesscoachIM		 1697 |\n| 146 adityapande9		 1685 |\n| 147 marinavalenciamorena 1646 |\n| 148 Overliner			1642 |\n| 149 DraculeTheDarkOne	1641 |\n| 150 verdy ∗			  1610 |\n| 151 acgusta2			 1581 |\n| 152 Big_McLargeHuge	  1567 |\n| 153 jg2017			   1560 |\n| 154 surajaswath		  1545 |\n| 155 Marafonez			1540 |\n| 156 J--p				 1510 |\n| 157 the_loving_boy	   1448 |\n| 158 RisingChessStarMWOW  1422 |\n| 159 Kronsteen33		  1403 |\n\n∗ Participant is a member of The House\n```",
+				"description": "```css\n| #   Name\t\t\t\t Rtng |\t   \u200b\n| 121 ProgramFOX ∗\t\t 1958 |\n| 122 DeepInTheHole ∗\t  1944 |\n| 123 Deadban ∗\t\t\t1942 |\n| 124 kordet26\t\t\t 1940 |\n| 125 Shalter\t\t\t  1933 |\n| 126 just2play\t\t\t1930 |\n| 127 yellowdragoon\t\t1926 |\n| 128 Conquerrist\t\t  1910 |\n| 129 ilovepie\t\t\t 1910 |\n| 130 bermudas\t\t\t 1899 |\n| 131 Viktor_le_Terrible   1875 |\n| 132 andreijl ∗\t\t   1863 |\n| 133 staskamaev\t\t   1862 |\n| 134 vagician\t\t\t 1854 |\n| 135 MeetYourDemise\t   1831 |\n| 136 eashwar\t\t\t  1831 |\n| 137 viiiiiid\t\t\t 1813 |\n| 138 Snotaap\t\t\t  1781 |\n| 139 liamchez\t\t\t 1777 |\n| 140 Mis_Drndac\t\t   1765 |\n| 141 aljopeljhan\t\t  1748 |\n| 142 BigChicken\t\t   1745 |\n| 143 azuaga_casual\t\t1735 |\n| 144 andreask27\t\t   1713 |\n| 145 chesscoachIM\t\t 1697 |\n| 146 adityapande9\t\t 1685 |\n| 147 marinavalenciamorena 1646 |\n| 148 Overliner\t\t\t1642 |\n| 149 DraculeTheDarkOne\t1641 |\n| 150 verdy ∗\t\t\t  1610 |\n| 151 acgusta2\t\t\t 1581 |\n| 152 Big_McLargeHuge\t  1567 |\n| 153 jg2017\t\t\t   1560 |\n| 154 surajaswath\t\t  1545 |\n| 155 Marafonez\t\t\t1540 |\n| 156 J--p\t\t\t\t 1510 |\n| 157 the_loving_boy\t   1448 |\n| 158 RisingChessStarMWOW  1422 |\n| 159 Kronsteen33\t\t  1403 |\n\n∗ Participant is a member of The House\n```",
 				"color": 53380
 			}
 		],
@@ -1089,6 +1089,61 @@
 				},
 				"fields": []
 			}
-		]
+		],
+		"rules": {
+			"title": "<:housediscord:485510528769196068> House Discord Rules",
+			"fields": [
+				{
+					"name": "Rule 1: Be civil",
+					"value": "Be polite, courteous and respectful of others.\n\u200b",
+					"inline": false
+				},
+				{
+					"name": "Rule 2: Don't be uncivil",
+					"value": "Instances of uncivil behaviour include but are not limited to:\n- Repeated trolling\n- Belittling\n- Inciting hostility\n- Personal attacks\n- Harrassment (in server or through DMs)\n- Repeated user pinging\nand will not be tolerated.\n\u200b",
+					"inline": false
+				},
+				{
+					"name": "Rule 3: Content control",
+					"value": "The following content is not permitted:\n- graphic NSFW\n- information that could be used to dox another member, maintaining the presumption that they wish to stay anonymous unless explicitly stated otherwise\n- racism\n- sexism\n- homophobia\n- videos or images of gore and death\n- symbols of radical ideologies\n- links or instructions to content that could detrimentally harm an individual's computer or own person (computer viruses and the like)\n\u200b",
+					"inline": false
+				},
+				{
+					"name": "Rule 4: Chess server bans",
+					"value": "Anyone receiving a ban from a live chess is required to keep discussion of the ban to a minimum. Banned members from the following sites should be redirected to:\n- [Lichess Ban Appeal](https://lichess.org/contact#help-root)\n- [Chess.com support](https://support.chess.com/customer/portal/emails/new)\n\u200b",
+					"inline": false
+				},				
+				{
+					"name": "Rule 5: Incitement",
+					"value": "Encouraging any of the actions outlined in rules 2, 3, or 4 is not permitted.\n\u200b",
+					"inline": false
+				},
+				{
+					"name": "Rule 6: Be on-topic",
+					"value": "Keep chat in each channel to its respective discussion guidelines as much as possible.\n\u200b",
+					"inline": false
+				},
+				{
+					"name": "Rule 7: Don't spam",
+					"value": "Exceptions are permitted in <#390273555084083210>, <#390259390709497857>. The ability of user discussion should never be impeded in any way.\n\u200b",
+					"inline": false
+				},
+				{
+					"name": "Rule 8: Follow the Discord Community guidelines",
+					"value": "[Available here](https://discordapp.com/guidelines)\n\u200b",
+					"inline": false
+				},
+				{
+					"name": "Rule 9: No excessive advertising",
+					"value": "Advertising of other servers or similar projects without asking an admin first, especially for non-established users, is highly frowned upon.\n\u200b",
+					"inline": false
+				},
+				{
+					"name": "Rule 10: Respect moderator decisions",
+					"value": "All the admins you see on this server contribute their time and effort for free, without asking for anything back. Be respectful to them. Any warning or decision enacted by them or through a bot should be engaged with in a polite and civil fashion.",
+					"inline": false
+				}
+			]
+		}
 	}
 }

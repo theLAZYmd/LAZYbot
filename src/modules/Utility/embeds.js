@@ -38,24 +38,20 @@ class Embeds extends Parse {
 		try {
 			let prefix = this.server.prefixes.nadeko + '..';
 			let file = await this.getEmbeds();
-			let embed = { //define embed first
-				title: 'Guides for server ' + this.guild.name + ' on ' + this.client.user.username,
-				color: 11126483,
-				fields: [],
-				footer: Embed.footer(`Type "${prefix} GuideName" to view a guide. e.g. "${prefix} zh"`)
-			};
+			let embed = new Embed()
+				.setTitle(`Guides for server ${this.guild.name} on ${this.client.user.username}`)
+				.setColor(11126483)
+				.setFooter(`Type "${prefix} GuideName" to view a guide. e.g. "${prefix} zh"`);
 			for (let [name, collection] of Object.entries(file)) { //for each subsection
-				let value = '```css\n'; //to get coloured text
 				let embeds = Object.keys(collection);
-				for (let i = 0; i < embeds.length; i++) { //for the name of each command
-					if (!collection.hasOwnProperty(embeds[i])) continue;
-					let line = prefix + ' ' + embeds[i];
-					value += line; //necessary so that we can count line length
-					value += (i < embeds.length - 1 && !(i & 1) ? ' '.repeat(Math.max(0, 28 - line.length)) + '\u200b' : ''); //spacer
-					value += (i & 1 ? '\n' : '');
-				}
-				value += '```';
-				embed.fields = Embed.fielder(embed.fields, name.toProperCase(), value, true);
+				let value = embeds.reduce((str, guide, i) => {
+					let line = prefix + ' ' + guide;
+					str += line;
+					str += (i < embeds.length - 1 && !(i & 1) ? ' '.repeat(Math.max(0, 28 - line.length)) + '\u200b' : '');
+					str += (i & 1 ? '\n' : '');
+					return str;
+				}, '').format('css');
+				embed.addField(name.toProperCase(), value, true);
 			}
 			this.Output.sender(embed);
 		} catch (e) {
@@ -64,7 +60,6 @@ class Embeds extends Parse {
 	}
 
 	async getEmbeds() {
-		if (this._embeds) return this._embeds;
 		try {
 			if (this.client.user.id === config.ids.betabot) throw '';
 			return await rp.get({
@@ -75,7 +70,6 @@ class Embeds extends Parse {
 			if (e) this.Output.onError(e);
 			this._embeds = DataManager.getFile('./src/data/embeds.json');
 		}
-		return this._embeds;
 	}
 
 }
