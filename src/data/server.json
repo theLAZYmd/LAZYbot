@@ -12,7 +12,7 @@
                 "count": true,
                 "results": true
             },
-            "trivia": false
+            "trivia": true
         },
         "prefixes": {
             "generic": "!",
@@ -57,7 +57,12 @@
         "trivia": {
             "min": 10,
             "provisional": 10,
-            "players": {}
+            "players": {
+                "Musickn#8622": true,
+                "ObiWanBenoni#3488": true,
+                "theLAZYmd#2353": false,
+                "Whitedancingrockstar#8646": false
+            }
         },
         "notify": {
             "185412969130229760": 1536336039927,

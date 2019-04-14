@@ -159,6 +159,10 @@
             "565560872106328074": {
                 "tag": "Natso#0116",
                 "lastMail": 1554910619700
+            },
+            "566712382571937821": {
+                "tag": "Musickn#8622",
+                "lastMail": 1555185161104
             }
         },
         "paginator": {
@@ -7626,6 +7630,231 @@
                 "page": 0,
                 "author": "373480715276517376",
                 "cmdID": "566016991840960552"
+            },
+            "566638846624661515": {
+                "embedgroup": [
+                    {
+                        "title": "Profile for <:gm:455851408462446602>  penguingm1#2487",
+                        "description": "",
+                        "color": 15844367,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "penguingm1\n.\npenguingim1\nKuuhaku1",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Region: **Americas**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Jun 21 2017**\nThe House: **Jan 30 2018**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`326918898178064396`**\nPosition in Database: **5**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "17,158",
+                                "inline": true
+                            },
+                            {
+                                "name": "House Trophies",
+                                "value": ":trophy: **Reached 3200 Bullet**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/326918898178064396/0c1c7d876ce232e2b87da0c5285a9134.png?size=2048"
+                        },
+                        "footer": {
+                            "text": "1 / 2"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": "Profile for <:gm:455851408462446602>  penguingm1#2487",
+                        "description": "",
+                        "color": 15844367,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[penguingim1](https://lichess.org/@/penguingim1)\n960: **2351**\nUltrabullet: **2936**\nBullet: **3122**\nBlitz: **2511**\nRapid: **2646**\nClassical: 2571?\nCorrespondence: 1658?\nCrazyhouse: **2641**\nKing of the Hill: **2480**\n3-check: **2525**\nAntichess: **2213**\nAtomic: **2416**\nHorde: **2627**\nRacing Kings: **2388**\nPuzzle: **2283**",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:chesscom:430038158244184064> Chess.com",
+                                "value": "[penguingm1](https://www.chess.com/member/penguingm1)\nBullet: 3143?\nBlitz: 2916?\nRapid: 2489?\nClassical: 1828?\nCrazyhouse: **2743**\nBughouse: **2571**\nKing of the Hill: **2645**\nPuzzle: 2958?",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:bughousetest:433422387867025409> BughouseTest.com",
+                                "value": "[Kuuhaku1](http://bughousetest.com/@/Kuuhaku1)\n",
+                                "inline": true
+                            }
+                        ],
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "185412969130229760",
+                "cmdID": "566638846146510848"
+            },
+            "566639037071228958": {
+                "embedgroup": [
+                    {
+                        "title": "Profile for <:gm:455851408462446602>  penguingm1#2487",
+                        "description": "",
+                        "color": 15844367,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "penguingm1\n.\npenguingim1\nKuuhaku1",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Region: **Americas**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Jun 21 2017**\nThe House: **Jan 30 2018**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`326918898178064396`**\nPosition in Database: **5**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "17,158",
+                                "inline": true
+                            },
+                            {
+                                "name": "House Trophies",
+                                "value": ":trophy: **Reached 3200 Bullet**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/326918898178064396/0c1c7d876ce232e2b87da0c5285a9134.png?size=2048"
+                        },
+                        "footer": {
+                            "text": "1 / 2"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": "Profile for <:gm:455851408462446602>  penguingm1#2487",
+                        "description": "",
+                        "color": 15844367,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[penguingim1](https://lichess.org/@/penguingim1)\n960: **2351**\nUltrabullet: **2936**\nBullet: **3122**\nBlitz: **2511**\nRapid: **2646**\nClassical: 2571?\nCorrespondence: 1658?\nCrazyhouse: **2641**\nKing of the Hill: **2480**\n3-check: **2525**\nAntichess: **2213**\nAtomic: **2416**\nHorde: **2627**\nRacing Kings: **2388**\nPuzzle: **2283**",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:chesscom:430038158244184064> Chess.com",
+                                "value": "[penguingm1](https://www.chess.com/member/penguingm1)\nBullet: 3143?\nBlitz: 2916?\nRapid: 2489?\nClassical: 1828?\nCrazyhouse: **2743**\nBughouse: **2571**\nKing of the Hill: **2645**\nPuzzle: 2958?",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:bughousetest:433422387867025409> BughouseTest.com",
+                                "value": "[Kuuhaku1](http://bughousetest.com/@/Kuuhaku1)\n",
+                                "inline": true
+                            }
+                        ],
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "185412969130229760",
+                "cmdID": "566639036026978325"
+            },
+            "566640852756332598": {
+                "embedgroup": [
+                    {
+                        "title": "Profile for <:gm:455851408462446602>  penguingm1#2487",
+                        "description": "",
+                        "color": 15844367,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "penguingm1\n.\npenguingim1\nKuuhaku1",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Region: **Americas**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Jun 21 2017**\nThe House: **Jan 30 2018**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`326918898178064396`**\nPosition in Database: **5**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "17,158",
+                                "inline": true
+                            },
+                            {
+                                "name": "House Trophies",
+                                "value": ":trophy: **Reached 3200 Bullet**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/326918898178064396/0c1c7d876ce232e2b87da0c5285a9134.png?size=2048"
+                        },
+                        "footer": {
+                            "text": "1 / 2"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": "Profile for <:gm:455851408462446602>  penguingm1#2487",
+                        "description": "",
+                        "color": 15844367,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[penguingim1](https://lichess.org/@/penguingim1)\n960: **2351**\nUltrabullet: **2936**\nBullet: **3122**\nBlitz: **2511**\nRapid: **2646**\nClassical: 2571?\nCorrespondence: 1658?\nCrazyhouse: **2641**\nKing of the Hill: **2480**\n3-check: **2525**\nAntichess: **2213**\nAtomic: **2416**\nHorde: **2627**\nRacing Kings: **2388**\nPuzzle: **2283**",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:chesscom:430038158244184064> Chess.com",
+                                "value": "[penguingm1](https://www.chess.com/member/penguingm1)\nBullet: 3143?\nBlitz: 2916?\nRapid: 2489?\nClassical: 1828?\nCrazyhouse: **2743**\nBughouse: **2571**\nKing of the Hill: **2645**\nPuzzle: 2958?",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:bughousetest:433422387867025409> BughouseTest.com",
+                                "value": "[Kuuhaku1](http://bughousetest.com/@/Kuuhaku1)\n",
+                                "inline": true
+                            }
+                        ],
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "185412969130229760",
+                "cmdID": "566640851930054687"
             }
         },
         "election": {
