@@ -29,6 +29,6 @@ module.exports = async (client, member) => {
     console.log('left');
 	Logger.log(['auto', 'guildMemberAdd', 'leave', '[' + member.user.tag + ']']);
 	let argsInfo = new GuildMemberRemove({     client, member     });
-    argsInfo.output();
+    await argsInfo.output();
     argsInfo.dbuser.left();
 };
