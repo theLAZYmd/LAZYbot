@@ -146,7 +146,8 @@
         },
         "3-check": {
             "name": "3-check",
-            "lichess": "threeCheck",
+			"lichess": "threeCheck",
+			"chesscom": "threeCheck",
             "cvt": "ThreeCheck",
             "key": "3-check"
         },
@@ -175,7 +176,7 @@
             "key": "racing-kings"
         },
         "puzzles": {
-            "name": "Puzzle",
+            "name": "Puzzles",
             "lichess": "puzzle",
             "chesscom": "tactics",
             "key": "puzzles"

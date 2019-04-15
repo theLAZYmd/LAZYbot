@@ -69,11 +69,11 @@ class Message {
 
 	static async requires(argsInfo, cmdInfo) {
 		for (let [type, value] of Object.entries(cmdInfo.requires)) try {
-            if (!Array.isArray(value)) value = [value];
-            if ((await Promise.all(value
-                .map(async v => await Permissions[type](v, argsInfo))))
-                .every(pass => !Boolean(pass))) throw cmdInfo.method;
-        } catch (e) {
+			if (!Array.isArray(value)) value = [value];
+			if ((await Promise.all(value
+				.map(async v => await Permissions[type](v, argsInfo))))
+				.every(pass => !pass)) throw cmdInfo.method;
+		} catch (e) {
 			return Permissions.output(type, argsInfo) ? Permissions.output(type, argsInfo) + '\nUse `' + argsInfo.server.prefixes[cmdInfo.prefix] + 'help` followed by command name to see command info.' : ''; //if no Permissions, kill it
 		}
 		return true;
@@ -87,8 +87,8 @@ class Message {
 					guilds.push(guild); //and fill it with all guilds the bot has access to that the user is a member of.
 			let index = guilds.length === 1 ? 0 : await argsInfo.Output.choose({
 				title,
-				'type': 'server',
-				'options': guilds.map(guild => guild.name)
+				type: 'server',
+				options: guilds.map(guild => guild.name)
 			});
 			return guilds[index]; //and if valid input, send of modmail for that guild
 		} catch (e) {
@@ -106,8 +106,8 @@ module.exports = async (client, message) => {
 			let Command = new Message(argsInfo);
 			if (argsInfo.author.bot) {
 				let cmdInfo = await Command.bot(message.embeds[0]);
-                if (cmdInfo) await Message.run(argsInfo, cmdInfo);
-                return;
+				if (cmdInfo) await Message.run(argsInfo, cmdInfo);
+				return;
 			}
 			if (!/[a-z]/i.test(message.content)) throw '';
 			if (!argsInfo.message.guild) {
@@ -135,7 +135,7 @@ module.exports = async (client, message) => {
 
 function beta(argsInfo, s, f) {
 	argsInfo.Output.sender({
-		'color': config.colors.beta,
-		'description': ((f - s) / 1000).toLocaleString() + ' seconds to process command'
+		color: config.colors.beta,
+		description: ((f - s) / 1000).toLocaleString() + ' seconds to process command'
 	});
 }
