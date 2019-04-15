@@ -68,7 +68,7 @@ class Embeds extends Parse {
 			});
 		} catch (e) {
 			if (e) this.Output.onError(e);
-			this._embeds = DataManager.getFile('./src/data/embeds.json');
+			return this._embeds = DataManager.getFile('./src/data/embeds.json');
 		}
 	}
 
