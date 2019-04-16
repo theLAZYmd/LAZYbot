@@ -717,9 +717,6 @@
             "module": "Chess",
             "file": "rank",
             "method": "variant",
-            "arguments": [
-                "argument"
-            ],
             "prefix": "generic"
         }
     ],

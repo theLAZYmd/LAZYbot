@@ -27,12 +27,22 @@ class Leaderboard extends Parse {
 		}
 	}
 
+	/**
+	 * Populates leaderboard data with rankings from the database
+	 * @param {leaderboardData} data
+	 * @property {object} variant
+	 * @property {object} source
+	 * @property {Boolean} active
+	 * @property {Parse} argsInfo
+	 * @property {object[]} leaderboard
+	 * @returns {Promise<leaderboardData>}
+	 */
 	static async generate(data) {
 		try {
 			let tally = DataManager.getData();
 			data.leaderboard = [];
 			for (let dbuser of tally) {
-				if (data.active && Date.now() - dbuser.messages.lastSeen > 604800000) continue; //skip inactives
+				if (data.active && dbuser.messages && Date.now() - dbuser.messages.lastSeen > 604800000) continue; //skip inactives
 				if (!dbuser[data.source.key] || dbuser[data.source.key]._cheating) continue; //skip ppl not tracked on that source and cheaters
 				let username = dbuser[data.source.key]._main;
 				if (!username || !dbuser[data.source.key][username]) {
@@ -78,12 +88,9 @@ class Leaderboard extends Parse {
 	static async build(data, page = 0) {
 		try {
 			let array = data.leaderboard.slice(10 * page, 10 * (page + 1)).map((entry) => {
-				if (data.source) {
-					let urllink = data.source.url.profile.replace('|', entry.username); //lichess.org/@/V2chess
-					return ['[' + entry.tag + '](' + urllink + ') ' + entry.rating];
-				} else {
-					return [entry.tag + ' ' + entry.rating];
-				}
+				if (!data.source) return [entry.tag + ' ' + entry.rating];
+				let uri = data.source.url.profile.replace('|', entry.username);
+				return [`[${entry.tag}](${uri}) ${entry.rating}`];
 			});
 			let lbembed = array.toLeaderboard(page, 10, false); //Case 2 Leaderboard:
 			lbembed.title = `${data.emoji} House leaderboard${data.source ? ' on ' + data.source.name : ''} for${data.active ? 'active ' : ' '}${data.variant.name} players`;
