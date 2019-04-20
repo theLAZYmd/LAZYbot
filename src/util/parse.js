@@ -153,8 +153,13 @@ class Parse {
 	 * @type {DBuser}
 	 */
 	get dbuser() {
+		if (this._dbuser) return this._dbuser;
 		if (!this.user) return null;
 		return this.Search.dbusers.getUser(this.user);
+	}
+
+	set dbuser(dbuser) {
+		this._dbuser = dbuser;
 	}
 
 	get dbindex() {
