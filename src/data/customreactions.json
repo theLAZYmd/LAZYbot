@@ -24,7 +24,7 @@
             },
             "region role": {
                 "type": "text",
-                "reaction": "Please go to <#404374157045006346> and assign yourself a region role",
+                "reaction": "Please go to <#404374157045006346> and assign yourself a region role.\nThis will allow you to see all the main discussion channels of the server.",
                 "anyword": true
             }
         },

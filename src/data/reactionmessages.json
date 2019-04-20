@@ -163,6 +163,10 @@
             "566712382571937821": {
                 "tag": "Musickn#8622",
                 "lastMail": 1555185161104
+            },
+            "567336181025472530": {
+                "tag": "RacingKingsKing#7988",
+                "lastMail": 1555333911705
             }
         },
         "paginator": {
@@ -7855,6 +7859,208 @@
                 "page": 0,
                 "author": "185412969130229760",
                 "cmdID": "566640851930054687"
+            },
+            "567807944758919179": {
+                "embedgroup": [
+                    {
+                        "image": {
+                            "url": "https://i.imgur.com/ZSI6HEj.png"
+                        },
+                        "footer": {
+                            "text": "1 / 3"
+                        },
+                        "color": 53380
+                    },
+                    {
+                        "author": {
+                            "name": "CRAZYHOUSE WORLD CHAMPIONSHIP 2018"
+                        },
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/pMkkATk.png"
+                        },
+                        "title": "FOREWORD",
+                        "description": "Over a year has passed since lichess’s Crazyhouse World Championship (CWC) was created. Last time we had a qualification round with 64 players, then three knockout rounds (R64, R32 and R16), after which the eight Candidates remained. Those final eight players played a Candidates Tournament which led to the finals between **TwelveTeen** and **JannLee**. During three weeks, they played 60 thrilling games. After the dust settled, the final score was 31,5-28,5 in favor of **JannLee**, making him the first Crazyhouse World Champion. \n\nToday, it’s time to continue this story. Champions are not born; they are made in the quiet hours when nobody is watching. Sign-ups for the 2nd edition of the CWC start on February 1. Do you have what it takes to be the next champion?",
+                        "footer": {
+                            "text": "2 / 3"
+                        },
+                        "color": 53380
+                    },
+                    {
+                        "author": {
+                            "name": "CRAZYHOUSE WORLD CHAMPIONSHIP 2018"
+                        },
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/pMkkATk.png"
+                        },
+                        "title": "INFORMATION",
+                        "fields": [
+                            {
+                                "name": "Time Control",
+                                "value": "3 + 2 for the whole event",
+                                "inline": false
+                            },
+                            {
+                                "name": "Format",
+                                "value": "The championship will start out as a knockout, but when 8 players are left, they will play a round-robin Candidates tournament! The first place finisher of that tournament will play a WC match against the incumbent WC (1st CWC WC, JannLee).",
+                                "inline": false
+                            },
+                            {
+                                "name": "Prize Pool",
+                                "value": "$1000\n**Update:** upped by an additional $1100 from the generous fundraising of <@364388430412513281> through his Twitch donators to payout to the candidates.",
+                                "inline": false
+                            },
+                            {
+                                "name": "Prize Fund Distribution",
+                                "value": "$300 WC, $200 challenger, $50 for 8 candidates, 100$ Prediction tournament ($50 #1, $30 #2, $20 #3)\n<@364388430412513281> fundraising is distributed with $100 to each candidate.",
+                                "inline": false
+                            },
+                            {
+                                "name": "Start Date",
+                                "value": "Feb 15 2018",
+                                "inline": true
+                            },
+                            {
+                                "name": "Sign-Ups",
+                                "value": "Feb 1 2018 - Feb 14 2018",
+                                "inline": true
+                            },
+                            {
+                                "name": "Information and Rules",
+                                "value": "https://sites.google.com/site/2ndcrazyhouseworldchampionship/",
+                                "inline": false
+                            },
+                            {
+                                "name": "History",
+                                "value": "<https://sites.google.com/site/crazyhouseworldchampionship/home>\n<https://lichess.org/forum/team-crazyhouse-world-championship/time-control>\n<https://lichess.org/forum/team-crazyhouse-world-championship/time-control-voting>",
+                                "inline": false
+                            }
+                        ],
+                        "footer": {
+                            "text": "3 / 3"
+                        },
+                        "color": 53380
+                    }
+                ],
+                "period": 180000,
+                "page": 2,
+                "author": "185412969130229760",
+                "cmdID": "567807943110688799"
+            },
+            "567809207361863680": {
+                "embedgroup": [
+                    {
+                        "image": {
+                            "url": "https://i.imgur.com/v5fg6wH.png"
+                        },
+                        "footer": {
+                            "text": "1 / 8"
+                        },
+                        "color": 53380
+                    },
+                    {
+                        "title": "Entrant Eligibility",
+                        "description": "Entrants who meet the following criteria will be accepted automatically:\n\n**1.** Have an established crazyhouse rating on lichess.\n\n**2.** Have played at least 50 rated crazyhouse games on lichess.\n\n**3.** Have had an account on lichess for over 1 month at the time of entry.\n\n**4.** Be participating only using their main account (no dupe accounts).\n\n**5.** Have messaged the TD (FischyVishy) with intent to join **within** the entry period.\n\n**6.** Have joined the Crazyhouse World Championship group.\n\nPoints 1, 2 and 3 above are aimed primarily at preventing duplicate accounts from entering. Entries not meeting these criteria may still be accepted and seeded at the TD's discretion.\n\nExceptions are most likely to be made for players known within the crazyhouse community who clearly are not using duplicate accounts.\n\nAny player attempting to use multiple accounts or computer assistance will be kicked out and if necessary reported to lichess moderators.",
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/AaQkW8G.png"
+                        },
+                        "footer": {
+                            "text": "2 / 8"
+                        },
+                        "color": 53380
+                    },
+                    {
+                        "title": "Knockout Tournament Rules I",
+                        "description": "You will be paired with a player for a round. There will be a week for you to play your round in, with a week in between rounds as breaks / negotiation periods. Please note the following stipulations:\n\n**1.** It is preferable if the games are rated. If **both** players agree then some or all games can be unrated.\n\n**2.** Results **and** games of each match should be messaged to the TD upon completion.\n\n**3.** All matches will consist of an equal number of White games per player.\n\n**4.** Each match will consist of ten (10) games of 3 + 2.\n\n**5.** If the score is 5-5 after 10 games then the tie-break will consist of games of 3 + 2, until one player is ahead after an even number of games.\n\n**6.** Either player can stop the match if someone reaches 5.5 points in the first 10 games, as long as the player stopping the match has not played more rated White games than their opponent.\n\n**7.** Each player is entitled to a short break of approximately 10 minutes after every 2 games (these breaks can be accumulated).\n\n**8.** The tournament main draw will have 128 players. If the number of entrants is not equal to 128 players, a qualification tournament will be held. The x number of top-finishers from said tournament will get a spot in the knockouts.",
+                        "color": 53380,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/0koqrUA.png"
+                        },
+                        "footer": {
+                            "text": "3 / 8"
+                        }
+                    },
+                    {
+                        "title": "Knockout Tournament Rules II",
+                        "description": "**9.** Assuming there are 128 players, after the first round there will be 64 players left and so on until there are 8 players left.\n\n**10.** The initial pairing will have the top seed vs. bottom seed, the second seed vs. second from bottom, etc. For example, in an eight player event: (1) vs. (8), (2) vs. (7), (3) vs. (6), (4) vs. (5). The winner of (1) vs. (8) will then play the winner of (4) vs. (5) and the winner of (2) vs. (7) will play the winner of (3) vs. (6). The winner of those matches would then contest the \"final\" (before the Candidates).\n\n**11.** The seeding will be based on the average between a player’s current rating and highest rating at the time their entry is received & logged.\n\n**12.** If somebody is unable to complete a series, or has to withdraw, their opponent is considered the victor. Only emergencies can exempt players from having this rule applied to them. Byes may be issued in the case of an odd number of players.\n\n**13.** If someone knows they will not be able to play a certain week when a round is scheduled, they must notify the TD before they play their prior match. At the TD's discretion their match may be moved to the following week. This will only occur a maximum of one time per player.\n\n**14.** After each match, players will typically have at least a week's rest until the next match. A possible exception is when a player has notified the TD of their unavailability (point 13).\n\n**15.** Once the knockout tournament cuts down the number of players to 8, a candidates tournament will take place.",
+                        "color": 53380,
+                        "thumbnail": "https://i.imgur.com/0koqrUA.png"
+                    },
+                    {
+                        "title": "Candidates Tournament Rules",
+                        "description": "The candidates tournament will be a round robin event. Each player will play each of the other seven players in a 3 + 2 match similar to those matches of the knockout tournament stage. Thus, each player will play 90 games in the Candidates. The playing period of these matches will extend for two weeks. The winner of the candidates tournament will challenge the world champion ([JannLee](https://lichess.org/@/JannLee)) for a shot at the crazyhouse title.\n\n**1.** It is preferable if the games are rated. If **both** players agree then some or all games can be unrated.\n\n**2.** Results **and** games of each match should be messaged to the TD upon completion.\n\n**3.** All matches will consist of an equal number of White games per player.\n\n**4.** Each match will consist of ten (10) games of 3 + 2.\n\n**5.** Do note that there are no tie breaks and the matches cannot be stopped if a player reaches 5.5. Only in case of a tie after all 90 games will tiebreak rules apply (the tiebreaks are the same as those of the knockout tournament stage).\n\n**6.** Each player is entitled to a short break of 10 minutes after every 2 games (these breaks can be accumulated).\n\n**7.** If somebody is unable to complete a series, or has to withdraw, their opponent is considered the victor. Only emergencies can exempt players from having this rule applied to them.\n\n**8.** One candidates spot is reserved for last year's challenger to the crown ([TwelveTeen](https://lichess.org/@/TwelveTeen)) and another is reserved for a wild card ([opperwezen](https://lichess.org/@/opperwezen), third place in last year's Candidates). There will be 8 participants from the knockout event, so the number of Candidates tournament participants is 10 players.",
+                        "color": 53380,
+                        "thumbnail": "https://i.imgur.com/R6LA5bC.png"
+                    },
+                    {
+                        "title": "Match Negotiations",
+                        "description": "**1.** Players may begin negotiating a playing start time as soon as their next pairing is known.\n\n**2.** Each player is responsible to offer at least three separate times for the match, during the rest week, unless an offer has been accepted before that number is reached.\n\n**3.** The three offered times should be no closer than three hours to each other and no more than two on a single date.\n\n**4.** If three offers are not made in time, the player at fault must accept a time chosen by the opponent.\n\n**5.** If both players fail to make three offers by the deadline, a match arbiter will assign a time.\n\n**6.** A player should respond to an offer by accepting or making a different offer, preferably within 24 hours.\n\n**7.** If a player is excessively or repeatedly late for scheduled matches, they may be forfeited.\n\n**8.** If both players make three offers but no agreement is made before the playing week begins, a match arbiter will determine if fault lies with a particular player.\n\n**9.** If a player is at fault, their opponent will decide the match time; if no player is at fault, the match arbiter will assign a match time.",
+                        "color": 53380,
+                        "thumbnail": "https://i.imgur.com/7Btk5jL.png"
+                    },
+                    {
+                        "title": "World Championship Rules",
+                        "description": "The world championship will be played in a three-week period. In each week, two 10-game 3 + 2 matches will take place. The first player to reach 30.5 / 60 will be declared the winner. Please note the following stipulations:\n\n**1.** It is preferable if the games are rated. If **both** players agree then some or all games can be unrated.\n\n**2.** Results **and** games of each match should be messaged to the TD upon completion.\n\n**3.** All matches will consist of an equal number of White games per player.\n\n**4.** Each match will consist of ten (10) games of 3 + 2.\n\n**5.** Each player is entitled to a short break after every 2 games of approximately 10 minutes (these breaks can be accumulated).\n\n**6.** If somebody is unable to complete a series, or has to withdraw, their opponent is considered the victor. Only emergencies can exempt players from having this rule applied to them.\n\n**7.** Note that the final of the Crazyhouse World Championship will be played during three consecutive weeks – there will be no rest weeks.",
+                        "color": 53380,
+                        "thumbnail": "https://i.imgur.com/JbhAKpz.png"
+                    },
+                    {
+                        "title": "Reporting Cheaters",
+                        "description": "**1.** Accusations of cheating must be made privately to a member of the anti-cheating panel.\n\n**2.** The accusation must make reference to at least one specific game.\n\n**3.** If an accusation is made publicly and does not lead to a guilty verdict, the accuser will be forfeited & banned from future events.\n\n**4.** The anti-cheating panel will consist of five members.\n\n**5.** The anti-cheating panel must all believe a player to be guilty 5-0 for a player to be forfeited. 100% proof is not required.\n\n**6.** If a member of the panel is either the accuser or accused, their place on the panel will be taken by a substitute.",
+                        "color": 53380,
+                        "thumbnail": "https://i.imgur.com/bzTbisk.png"
+                    }
+                ],
+                "period": 180000,
+                "page": 2,
+                "author": "185412969130229760",
+                "cmdID": "567809204799406080"
+            },
+            "567867119799369731": {
+                "embedgroup": [
+                    {
+                        "title": "<:bot:455847127365582864>Profile for  Test_Bot#2186",
+                        "description": "",
+                        "color": 15461355,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "Tcubestestbot",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Region: **None set.**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **May 11 2018**\nThe House: **May 11 2018**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`444362761452126209`**\nPosition in Database: **906**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "0",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/EncsMs8.png"
+                        },
+                        "footer": {
+                            "text": "1 / 1"
+                        },
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "185412969130229760",
+                "cmdID": "567867118788280372"
             }
         },
         "election": {
