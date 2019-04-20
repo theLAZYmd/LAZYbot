@@ -11,15 +11,14 @@ class GuildMemberRemove extends Parse {
 	async output() {
 		let channel = this.Search.channels.get(this.server.channels.leave);
 		let emoji = this.Search.emojis.get('F');
-		let dbuser = this.Search.dbusers.getUser(this.member);
 		let message = await this.Output.sender(new Embed()
 			.setTitle('❌ User left')
 			.setDescription(this.member.user.tag)
 			.setColor(this.server.colors.error)
 			.setThumbnail(this.member.user.displayAvatarURL === this.member.user.defaultAvatarURL ? null : this.member.user.displayAvatarURL)
 			.addField('ID', this.member.id, true)
-			.addField('Messages', dbuser.messages.count.toLocaleString(), true)
-			.addField('Last Message', dbuser.messages.last.format(), false)
+			.addField('Messages', this.dbuser.messages.count.toLocaleString(), true)
+			.addField('Last Message', this.dbuser.messages.last.format(), false)
 		, channel);
 		if (message) message.react(emoji).catch(() => {});
 	}
@@ -27,8 +26,9 @@ class GuildMemberRemove extends Parse {
 }
 
 module.exports = async (client, member) => {
+    console.log('left');
 	Logger.log(['auto', 'guildMemberAdd', 'leave', '[' + member.user.tag + ']']);
 	let argsInfo = new GuildMemberRemove({     client, member     });
-	argsInfo.Search.dbusers.byID(member.id).left();
-	R.output();
+    await argsInfo.output();
+    argsInfo.dbuser.left();
 };

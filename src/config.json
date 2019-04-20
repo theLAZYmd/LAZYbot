@@ -34,11 +34,11 @@
     "states": {
         "debug": false
     },
-    "lastUpdate": 1555086372650,
+    "lastUpdate": 1555338437712,
     "backupdb": [
-        "Sat Apr 13 2019 12:31:33 GMT+01",
-        "Sat Apr 13 2019 12:24:30 GMT+01",
-        "Sat Apr 13 2019 12:24:30 GMT+01"
+        "Sat Apr 20 2019 22:45:27 GMT+01",
+        "Sat Apr 20 2019 22:44:31 GMT+01",
+        "Sat Apr 20 2019 22:34:28 GMT+01"
     ],
     "delays": {
         "repeat": 1800000
