@@ -1,5 +1,5 @@
-const Parse = require("../../util/parse.js");
-const Embed = require("../../util/embed.js");
+const Parse = require('../../util/parse.js');
+const Embed = require('../../util/embed.js');
 
 class Paginator extends Parse {
 	constructor(message) {
@@ -31,20 +31,20 @@ class Paginator extends Parse {
 		try {
 			let embed = new Embed(embedgroup[0]);
 			let paginator = this.paginator;
-			let emojis = ["⬅", "➡"];
-			emojis.push(period === Infinity ? "🔄" : "❎");
-			if (!embed.footer || embedgroup.length !== 1) embed.footer(`1 / ${embedgroup.length}`);
-			let msg = await this.Output[embedgroup.length < 2 ? "sender" : "reactor"](embed, this.channel, emojis);
+			let emojis = ['⬅', '➡'];
+			emojis.push(period === Infinity ? '🔄' : '❎');
+			if (!embed.footer || embedgroup.length !== 1) embed.setFooter(`1 / ${embedgroup.length}`);
+			let msg = await this.Output[embedgroup.length < 2 ? 'sender' : 'reactor'](embed, this.channel, emojis);
 			paginator[msg.id] = {
 				embedgroup,
-				period: period === Infinity ? "Infinity" : period,
+				period: period === Infinity ? 'Infinity' : period,
 				page: 0,
 				author: this.author.id,
 				cmdID: this.message.id
 			};
-			if (this.command === "...") paginator[msg.id].path = path;
+			if (this.command === '...') paginator[msg.id].path = path;
 			this.paginator = paginator;
-			if (period === Infinity || period > 2147483647 || (this.command && this.command === "...")) return;
+			if (period === Infinity || period > 2147483647 || (this.command && this.command === '...')) return;
 			setTimeout(() => {
 				msg.clearReactions()
 					.catch(() => {});
@@ -60,16 +60,16 @@ class Paginator extends Parse {
 		try {
 			reaction.remove(user);
 			switch (reaction.emoji.name) {
-				case ("➡"):
+				case ('➡'):
 					data.page++;
 					break;
-				case ("⬅"):
+				case ('⬅'):
 					data.page--;
 					break;
-				case ("🔄"):
+				case ('🔄'):
 					data.page = 0;
 					break;
-				case ("❎"):
+				case ('❎'):
 					if (user.id !== data.author) return;
 					reaction.message.delete();
 					let paginator = this.paginator;
@@ -84,17 +84,17 @@ class Paginator extends Parse {
 			if (data.page < 0 || data.page >= data.embedgroup.length) return;
 			let paginator = this.paginator;
 			let embed = new Embed(data.embedgroup[data.page]);
-			if (!embed) throw "Couldn't generate embed for page " + (data.page + 1) + ".";
+			if (!embed) throw 'Couldn\'t generate embed for page ' + (data.page + 1) + '.';
 			embed.footer(`${data.page + 1} / ${data.embedgroup.length}`);
 			this.Output.editor(embed, reaction.message);
 			paginator[reaction.message.id] = data;
 			this.paginator = paginator;
-			if (data.page === 0 || data.period !== "Infinity") return;
+			if (data.page === 0 || data.period !== 'Infinity') return;
 			if (!this.client.timeouts) this.client.timeouts = {};
 			if (this.client.timeouts[reaction.message.id]) clearTimeout(this.client.timeouts[reaction.message.id]);
 			this.client.timeouts[reaction.message.id] = setTimeout(() => {
-				reaction.emoji.name = "🔄";
-				this.client.emit("messageReactionAdd", reaction, user);
+				reaction.emoji.name = '🔄';
+				this.client.emit('messageReactionAdd', reaction, user);
 			}, 600000);
 		} catch (e) {
 			if (e) throw e;

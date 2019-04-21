@@ -1,6 +1,7 @@
 const config = require('../config.json');
 const Embed = require('./embed');
 const Parse = require('./parse');
+const Package = require('../../package.json');
 
 class Output extends Parse {
 
@@ -89,15 +90,21 @@ class Output extends Parse {
 
 	async onError(error, channel = this.channel) {
 		try {
-			console.log(error);
 			if (!error) throw '';
 			this.error(error);
-			let description = error;
-			if (typeof error === 'object') {
-				if (error.name && error.message) description = '**' + error.name + ':** ' + error.message;
-				else return;
-			}
+			let title, description, url;
+			if (typeof error === 'object' && error.stack && error.name && error.message) {
+				let lines = error.stack.split('\n');
+				let [full, lineNumber, columnNumber] = lines[1].match(/([\w:()\\.]+):([0-9]+):([0-9]+)\)$/).splice(1);
+				let path = full.split('\\');
+				let trace = path.splice(path.indexOf('LAZYbot') + 1);
+				url = Package.branch + trace.join('/') + '#L' + lineNumber;
+				title = error.name;
+				description = error.message.format();
+			} else description === error;
 			return await this.sender(new Embed()
+				.setTitle(title)
+				.setURL(url)
 				.setDescription(description.replace(/\${([a-z]+)}/gi, value => this.server.prefixes[value.match(/[a-z]+/i)]))
 				.setColor(config.colors.error)
 			, channel);
