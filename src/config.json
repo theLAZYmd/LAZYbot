@@ -34,11 +34,11 @@
     "states": {
         "debug": false
     },
-    "lastUpdate": 1555338437712,
+    "lastUpdate": 1555878098444,
     "backupdb": [
-        "Sat Apr 20 2019 22:45:27 GMT+01",
-        "Sat Apr 20 2019 22:44:31 GMT+01",
-        "Sat Apr 20 2019 22:34:28 GMT+01"
+        "Sun Apr 21 2019 21:02:31 GMT+01",
+        "Sun Apr 21 2019 21:02:31 GMT+01",
+        "Sun Apr 21 2019 21:02:31 GMT+01"
     ],
     "delays": {
         "repeat": 1800000
@@ -146,8 +146,8 @@
         },
         "3-check": {
             "name": "3-check",
-			"lichess": "threeCheck",
-			"chesscom": "threeCheck",
+            "lichess": "threeCheck",
+            "chesscom": "threeCheck",
             "cvt": "ThreeCheck",
             "key": "3-check"
         },
