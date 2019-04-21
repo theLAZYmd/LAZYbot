@@ -85,7 +85,7 @@ class Paginator extends Parse {
 			let paginator = this.paginator;
 			let embed = new Embed(data.embedgroup[data.page]);
 			if (!embed) throw 'Couldn\'t generate embed for page ' + (data.page + 1) + '.';
-			embed.footer(`${data.page + 1} / ${data.embedgroup.length}`);
+			embed.setFooter(`${data.page + 1} / ${data.embedgroup.length}`);
 			this.Output.editor(embed, reaction.message);
 			paginator[reaction.message.id] = data;
 			this.paginator = paginator;

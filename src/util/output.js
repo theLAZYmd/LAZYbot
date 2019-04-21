@@ -101,13 +101,13 @@ class Output extends Parse {
 				url = Package.branch + trace.join('/') + '#L' + lineNumber;
 				title = error.name;
 				description = error.message.format();
-			} else description === error;
-			return await this.sender(new Embed()
-				.setTitle(title)
-				.setURL(url)
+			} else description = error;
+			let embed = new Embed()
 				.setDescription(description.replace(/\${([a-z]+)}/gi, value => this.server.prefixes[value.match(/[a-z]+/i)]))
-				.setColor(config.colors.error)
-			, channel);
+				.setColor(config.colors.error);
+			if (url) embed.setURL(url);
+			if (title) embed.setTitle(title);
+			return await this.sender(embed, channel);
 		} catch (e) {
 			if (e) this.log(e);
 		}
