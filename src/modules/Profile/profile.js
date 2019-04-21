@@ -57,7 +57,7 @@ class Profile extends Parse {
 	 */
 	get pages() {
 		if (this._pages) return this._pages;
-		return this._pages = 1 + Math.ceil(this.chessFields.length / 4);
+		return this._pages = 1 + Math.ceil(this.chessFields.length / 25);
 	}
 
 	/**
@@ -123,10 +123,16 @@ class Profile extends Parse {
 	 * @type {RichEmbed#field[]}
 	 */
 	get fields() {
-		if (this.page === 0) return this._string = this.ProfileFields;
-		let minField = 4 * (this.page - 1);
-		let maxField = Math.max(this.chessFields.length, 4); //solved issue of making array longer than it was
-		return this.chessFields.slice(minField, maxField); //if page === 1, 1, 2, 3, 4; if page = 2, 5, 6, 7, 8
+		switch (this.page) {
+			case (0):
+				return this.ProfileFields;
+			case (1):
+				return this.chessFields.slice(0, 25);
+			default: {
+				let min = (this.page - 1) * 25 + 1;
+				return this.chessFields.length >= min ? this.chessFields.slice(min - 1, min + 24) : [];
+			}
+		}
 	}
 
 	/**
