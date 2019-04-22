@@ -139,8 +139,31 @@ class Output extends Parse {
 			throw e;
 		}
 	}
+    
+	/**
+     * @typedef {object} confirmOptions
+     * @property {object} author - The user allowed to choose an option
+     * @property {object} channel - The channel this message should be posted in
+     * @property {function} action - The type of action that is being confirmed. Default description is 'Please confirm \'action\''
+     * @property {number} time - The time in milliseconds allowed for the user to pick an option in ms. Defaults to 18000 (18 seconds).
+     * @property {Message} editor - Whether the message should edit a previous message, rather than posting a new confirmation message
+     * @property {Boolean} cancel - Is this a confirmation to cancel? If so, return true on timeout
+     */
 
-	async confirm(data = {}, r) {
+	/**
+     * Returns a user-defined option
+     * @param {confirmOptions} data 
+     * @property {object} author - The user allowed to choose an option
+     * @property {object} channel - The channel this message should be posted in
+	 * @property {string} description - Write a custom description for the confirmation message? If so, renders redundant the 'action' property
+     * @property {string} action - The type of action that is being confirmed. Default description is 'Please confirm \'action\''
+     * @property {number} time - The time in milliseconds allowed for the user to pick an option in ms. Defaults to 18000 (18 seconds).
+     * @property {Message} editor - Whether the message should edit a previous message, rather than posting a new confirmation message
+     * @property {Boolean} cancel - Is this a confirmation to cancel? If so, return true on timeout
+	 * @param {Boolean} r - Whether to return a Boolean value of the confirmation result (true) or simply throw on confirmation failure
+     * @returns {Boolean?}
+     */
+	async confirm(data = {}, r = false) {
 		try {
 			data = Object.assign({
 				action: 'this action',
@@ -211,7 +234,7 @@ class Output extends Parse {
      * @param {chooseOptions} data 
      * @property {object} author - The user allowed to choose an option
      * @property {object} channel - The channel this message should be posted in
-     * @property {function} filter - The list of options that should be displayed in the choose message
+     * @property {function} options - The list of options that should be displayed in the choose message
      * @property {number} time - The time in milliseconds allowed for the user to pick an option in ms. Defaults to 18000 (18 seconds).
      * @property {string} title - The embed title of the choose message that should be displayed. Can be anything.
      * @property {string} option - The kind of thing that is chosen. Will be displayed as 'Please choose a [...]'
