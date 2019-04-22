@@ -13,11 +13,11 @@ class Commands {
 
 	static async run (cmdInfo, message) {
 		if (!cmdInfo.args) cmdInfo.args = [];
-		let directory = 'modules/' + cmdInfo.module + '/' + cmdInfo.file.toLowerCase();
-		let path = 'modules/' + cmdInfo.module + '/' + cmdInfo.file.toLowerCase();
+		let directory = 'modules/' + cmdInfo.module + '/' + cmdInfo.file;
+		let path = 'modules/' + cmdInfo.module + '/' + cmdInfo.file;
 		let extensions = ['.js', '.ts', '.mjs'];
 		while (!fs.existsSync('./src/' + path)) {
-			if (extensions.length === 0) throw 'Couldn\'t find module ./src/' + directory;
+			if (extensions.length === 0) throw new Error('Couldn\'t find module ./src/' + directory);
 			path = directory + extensions.shift();
 		}
 		let Constructor = require('../' + path);

@@ -342,7 +342,139 @@
                 "user": "owner"
             }
         }
-    ],
+	],
+	"Builders": [
+		{
+			"aliases": [
+				"new"
+			],
+			"description": "Creates a new builder",
+			"module": "Builders",
+			"file": "main",
+			"method": "run",
+			"syntax": "type",
+			"prefix": "generic",
+			"subcommands": [
+				{
+					"aliases": [
+						"embed"
+					],
+					"description": "Builds a new embed in the specified channel",
+					"method": "embed"
+				}
+			]
+		},
+		{
+			"aliases": [
+				"setTitle"
+			],
+			"description": "Sets the title of an active embed",
+			"module": "Builders",
+			"file": "embedBuilder",
+			"method": "set",
+			"prefix": "generic"
+		},
+		{
+			"aliases": [
+				"setDescription"
+			],
+			"description": "Sets the description of an active embed",
+			"module": "Builders",
+			"file": "embedBuilder",
+			"method": "set",
+			"prefix": "generic"
+		},
+		{
+			"aliases": [
+				"setAuthor"
+			],
+			"description": "Sets the author of an active embed",
+			"module": "Builders",
+			"file": "embedBuilder",
+			"method": "set",
+			"prefix": "generic"
+		},
+		{
+			"aliases": [
+				"setThumbnail"
+			],
+			"description": "Sets the thumbnail of an active embed",
+			"module": "Builders",
+			"file": "embedBuilder",
+			"method": "set",
+			"prefix": "generic"
+		},
+		{
+			"aliases": [
+				"setImage"
+			],
+			"description": "Sets the image of an active embed",
+			"module": "Builders",
+			"file": "embedBuilder",
+			"method": "set",
+			"prefix": "generic"
+		},
+		{
+			"aliases": [
+				"setFooter"
+			],
+			"description": "Sets the footer of an active embed",
+			"module": "Builders",
+			"file": "embedBuilder",
+			"method": "set",
+			"prefix": "generic"
+		},
+		{
+			"aliases": [
+				"setContent"
+			],
+			"description": "Sets the content of an active embed",
+			"module": "Builders",
+			"file": "embedBuilder",
+			"method": "set",
+			"prefix": "generic"
+		},
+		{
+			"aliases": [
+				"setColor"
+			],
+			"description": "Sets the colour of an active embed",
+			"module": "Builders",
+			"file": "embedBuilder",
+			"method": "set",
+			"prefix": "generic"
+		},
+		{
+			"aliases": [
+				"setURL"
+			],
+			"description": "Sets the URL of an active embed",
+			"module": "Builders",
+			"file": "embedBuilder",
+			"method": "set",
+			"prefix": "generic"
+		},
+		{
+			"aliases": [
+				"addField"
+			],
+			"description": "Adds a field to an active embed",
+			"module": "Builders",
+			"file": "embedBuilder",
+			"method": "addField",
+			"prefix": "generic"
+		},
+		{
+			"aliases": [
+				"publish"
+			],
+			"description": "Locks an embed preventing further changes",
+			"module": "Builders",
+			"file": "embedBuilder",
+			"method": "publish",
+			"prefix": "generic"
+		}
+	],
     "Calculation": [
         {
             "aliases": [
