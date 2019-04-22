@@ -103,6 +103,11 @@
                 "type": "emoji",
                 "reaction": "<:banhammer:372821267260375040>",
                 "anyword": false
+            },
+            "wolf": {
+                "type": "emoji",
+                "reaction": "<:wolfie:376833339866349582>",
+                "anyword": true
             }
         }
     }
