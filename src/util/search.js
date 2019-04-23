@@ -390,15 +390,15 @@ class DBuser {
 			.replace(/<@&!?([0-9]{18})>/g, (match, p1) => '@' + this.Search.roles.byID(p1).name)
 			.replace(/<#!?([0-9]{18})>/g, (match, p1) => '#' + this.Search.channels.byID(p1).name);
 		return this._lastMessage = string.format();
-    }
+	}
     
-    /**
+	/**
      * Returns a dbuser object
      * @returns {DBuser}
      */
-    get() {
-        return this;
-    }
+	get() {
+		return this;
+	}
 	
 	/**
 	 * Creates a new DBuser from a Discord User object
@@ -422,10 +422,10 @@ class DBuser {
 	 * @param {DBuser} dbuser 
 	 */
 	setData() {
-        let index = this.getIndex();
-        if (!this.username || !this.id) return console.error(this);
-        if (this.hasOwnProperty('lastMessage')) delete this.lastMessage;
-        if (this.hasOwnProperty('lastmessage')) delete this.lastmessage;
+		let index = this.getIndex();
+		if (!this.username || !this.id) return console.error(this);
+		if (this.hasOwnProperty('lastMessage')) delete this.lastMessage;
+		if (this.hasOwnProperty('lastmessage')) delete this.lastmessage;
 		let tally = DataManager.getData();
 		tally[index] = this;
 		DataManager.setData(tally);
@@ -447,7 +447,7 @@ class DBuser {
 	 * @returns {DBuser}
 	 */
 	joined(user) {
-        if (!user) return this;
+		if (!user) return this;
 		let dbuser = this.fromUser(user);
 		let tally = DataManager.getData();
 		tally.push(dbuser);
