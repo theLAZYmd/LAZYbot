@@ -69,7 +69,7 @@ class Paginator extends Parse {
 				case ('🔄'):
 					data.page = 0;
 					break;
-				case ('❎'):
+				case ('❎'): {
 					if (user.id !== data.author) return;
 					reaction.message.delete();
 					let paginator = this.paginator;
@@ -78,6 +78,7 @@ class Paginator extends Parse {
 					delete paginator[reaction.message.id];
 					this.paginator = paginator;
 					return;
+				}
 				default:
 					return;
 			}

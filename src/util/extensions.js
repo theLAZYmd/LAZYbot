@@ -400,7 +400,7 @@ String.prototype.splitEquals = function() {
 			else acc.push(curr);
 			return acc;
 		}, []);
-}
+};
 
 /**
  * Parses the code used for a function and determines the expected string-value 'inputs' of them
@@ -435,13 +435,6 @@ Function.prototype.getInputs = function() {
 			return i.decompose();
 		});
 };
-
-async function status(ids, {
-	fetchUsers = false,
-	filter = user => user
-} = {}) {}
-
-console.log(status.getInputs());
 
 //NUMBER PROTOTYPE METHODS
 
