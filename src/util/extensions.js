@@ -1,4 +1,5 @@
-/* Built by @theLAZYmd
+/* 
+ * Built by @theLAZYmd
  * Derived from experience from the experience of what methods might be useful to call straight from a native object
  * Understandably, these will clash with other people's code or future updates to node.js. This will be maintained frequently and 
  * Formatting methods are designed for markdown or for displaying front-end
@@ -7,11 +8,28 @@
 
 //STRING PROTOTYPE METHODS
 
-String.prototype.vowel = function () {
-	return /^(a|e|i|o|u)/.test(this);
+/**
+ * Checks if a substring is present in a string
+ * @param substring
+ * @returns {Boolean}
+ */
+String.prototype.has = function (substring = '') {
+	return this.indexOf(substring) !== -1;
 };
 
-String.prototype.toProperCase = function () { //Sets All Words In The String To Have First Letter Capitalised
+/**
+ * Checks if the first letter of a string is a vowel
+ * @returns {Boolean}
+ */
+String.prototype.vowel = function () {
+	return /^(a|e|i|o|u)/i.test(this);
+};
+
+/**
+ * Turns a string into Proper Case format, i.e. the first letter of each word should be capitalised
+ * @returns {string}
+ */
+String.prototype.toProperCase = function () {
 	let words = this.split(/ +/g);
 	let newArray = [];
 	for (let i = 0; i < words.length; i++) {
@@ -21,61 +39,103 @@ String.prototype.toProperCase = function () { //Sets All Words In The String To 
 	return newString;
 };
 
-String.prototype.reverse = function () { //reverses a string
+/**
+ * Reverses a string. Function does not work on palindromes
+ * @returns {string}
+ */
+String.prototype.reverse = function () {
 	return this.split('').reverse().join('');
 };
 
-String.prototype.url = function (link) { //converts texts to have a link for markdown
+/**
+ * Converts text into markdown formatting of a hyperlink
+ * @param {Link} link - the URL to link to
+ * @returns {string}
+ */
+String.prototype.url = function (link) {
 	if (!/(https?:\/\/[\S\.]+\.\w+\/?)\s?/.test(link)) return this;
 	return '[' + this + '](' + link + ')';
 };
 
-String.prototype.bold = function () { //bolds text for markdown
-	if (this.length > 0) return '**' + this + '**';
-	return '';
+/**
+ * Adds markdown bold formatting to a string, which is '**' characters on either side
+ * @returns {string}
+ */
+String.prototype.bold = function () {
+	if (this.length === 0) return this;
+	return '**' + this + '**';
 };
 
-String.prototype.format = function (type = '') { //adds a codeblock for markdown
+/**
+ * Converts text into markdown codeblock syntax formatting with ``` notation
+ * @param {string?} type - the type of syntax highlighting to use, if desired. Defaults to none
+ * @returns {string} 
+ */
+String.prototype.format = function (type = '') {
 	if (this.length > 0) return '```' + type.replace(/```/g, '\\`\\`\\`') + '\n' + this + '```';
 	return '```\n```';
 };
 
-String.prototype.parseTime = function (units = ['hours', 'minutes', 'seconds']) { //checks for time units in a given string
+/**
+ * Checks for time units in a string and parses numbers if it finds them
+ * @param {string[]}
+ * @returns {number[]|null}
+ */
+String.prototype.parseTime = function (units = ['hours', 'minutes', 'seconds']) {
 	return units.map((u) => {
-		let regex = new RegExp('\\b([0-9])+\\s*h(?:ours?)?\\b');
-		if (!regex.test(u)) return null;
-		return Number(u.match(regex)[1]);
+		let str = `\\b([0-9])+\\s*${u.charAt(0)}(?:${u.slice(1)}?)?\\b`;
+		let regex = new RegExp(str);
+		if (!regex.test(this)) return null;
+		return Number(this.match(regex)[1]);
 	});
 };
 
-String.prototype.occurrences = function (subString, allowOverlapping = false) { //occurrences of a substring
-	subString += '';
-	if (subString.length <= 0) return (this.length + 1);
+/**
+ * Returns the number of times a substring occurs in a string object
+ * The aho-corasick library is now the preferred method for this
+ * @deprecated
+ * @returns {Number}
+ */
+String.prototype.occurrences = function (subString = '', allowOverlapping = false) { //occurrences of a substring
 	let n = 0;
-	let position = 0;
+	if (subString.length <= 0) return n;
+	let position = this.indexOf(subString, position);
 	let step = allowOverlapping ? 1 : subString.length;
-	while (true) {
+	while (position >= 0) {
+		n++;
+		position += step;
 		position = this.indexOf(subString, position);
-		if (position >= 0) {
-			++n;
-			position += step;
-		} else break;
 	}
 	return n;
 };
 
+/**
+ * Removes all quotes from the beginning and end of a string object
+ * @returns {string}
+ */
 String.prototype.stripQuotes = function() {
-	if (this.startsWith('"') && this.endsWith('"')) return this.slice(1, -1);
-	return this;
+	let str = this;
+	while (str.charAt(0) === str.charAt(this.length -1) && /^["'`]$/.test(str.charAt(0))) {
+		str = str.slice(1, -1);
+	}
+	return str;
 };
 
 //ARRAY PROTOTYPE METHODS
 
-Array.prototype.rotate = function () { //rotates a 2-Dimensional array
+/**
+ * Rotates a 2 Dimensional array so that all rows are columns and all columns, rows
+ * @returns {Array}
+ */
+Array.prototype.rotate = function () {
 	return Object.keys(this[0]).map(column => this.map(row => row[column]));
 };
 
-Array.prototype.toFrequency = function () { //reduces down an array to its frequencies of elements
+/**
+ * Converts an array to a dictionary of frequencies of its elements
+ * @returns {Object}
+ */
+Array.prototype.dict = function () {
 	return this.reduce((acc, curr) => {
 		if (curr === undefined || curr == null) return acc;
 		if (!acc[curr.toString()]) acc[curr.toString()] = 1;
@@ -249,24 +309,42 @@ Array.prototype.list = function (oxfordcomma = true) {    //turning an array int
 	return this.slice(0, -1).join(', ') + (oxfordcomma ? ',' : '') + ' and ' + this.slice(-1);
 };
 
-//OBJECT PROTOTYPE METHODS
+//OBJECT CONSTRUCTOR METHODS
 
-Object.prototype.getProp = function (desc) {
-	let arr = desc.split('.'), obj = this;
+/**
+ * Parses a descendent path string to find a property on an object, if it exists
+ * @param {Object} obj
+ * @param {string} desc
+ * @returns {*}
+ */
+Object.getProp = function (obj, desc) {
+	let arr = desc.split('.');
 	while (arr.length) {
 		obj = obj[arr.shift()];
 	}
 	return obj;
 };
 
-Object.prototype.setProp = function (desc, value) {
-	let arr = desc.split('.'), obj = this;
+/**
+ * Parses a descendent path string to find a property on an object and sets a value to it
+ * @param {Object} obj
+ * @param {string} desc
+ * @returns {*}
+ */
+Object.setProp = function (obj, desc, value) {
+	let arr = desc.split('.');
 	while (arr.length > 1) {
 		obj = obj[arr.shift()];
 	}
 	return obj[arr[0]] = value;
 };
 
+/**
+ * Compares if two objects share all the same properties
+ * @param {Object} obj1
+ * @param {Object} obj2
+ * @returns {Boolean}
+ */
 Object.compare = function (obj1, obj2) {
 	for (let [k, v] of Object.entries(obj1)) {
 		if (obj2[k] === undefined || obj2[k] === null) return false;
@@ -281,17 +359,89 @@ Object.compare = function (obj1, obj2) {
 
 //FUNCTION PROTOTYPE METHODS (note: mdn says these are 'uneditable'. Oh well.)
 
+/**
+ * Takes a string input which is an input to a function and decomposes it, as a compiler would, to get variable names
+ * @returns {*[]}
+ */
+String.prototype.decompose = function () {
+	if (/^{([\w\s=>"'{}[\],]*)+}$/.test(this)) {
+		let obj = {};
+		const str = this.slice(1, -1).trim();
+		const entries = str.split(',');
+		for (let entry of entries) {
+			let [key, value] = entry.splitEquals();
+			value = typeof value !== 'undefined' ? value.trim().decompose() : true;
+			obj[key.trim()] = value;
+		}
+		return obj;
+	} else
+	if (/^\[[\w\s=>"'{}[\],]+]$/.test(this)) {
+		let arr = [this.slice(1, -1).trim()];
+		for (let i = 0; i < arr.length; i++) {
+			arr[i] = new String(arr[i].decompose());
+		}
+		return arr;
+	} else
+	if (this.trim() === 'true') return true;
+	else if (this.trim() === 'false') return false;
+	return this;
+};
+
+/**
+ * Splits a single at any '=' sign, critically ignoring any '=>' signs
+ * @returns {string[]}
+ */
+String.prototype.splitEquals = function() {
+	return this
+		.trim()
+		.split('=')
+		.reduce((acc, curr) => {
+			if (curr.startsWith('>')) acc[acc.length - 1] += '=' + curr;
+			else acc.push(curr);
+			return acc;
+		}, []);
+}
+
+/**
+ * Parses the code used for a function and determines the expected string-value 'inputs' of them
+ */
 Function.prototype.getInputs = function() {
-	let str = this.toString().trim();
-	let arrowRegex = /^\(?([\w\s,]+)\)?\s*=>/;
-	let functionRegex = /^(?:function|static|async)?\s*\w+\s?\(([\w\s,]*)\)/;
+	const str = this.toString().trim();
+	const arrowRegex = /^\(?([\w\s,]+)\)?\s*=>/;
+	const functionRegex = /(?:function|static|async)?\s*\w+\s?\(([\w\s=>"'{}[\],]*)\)/;
 	let input;
 	if (arrowRegex.test(str)) input = str.match(arrowRegex)[1];
 	else if (functionRegex.test(str)) input = str.match(functionRegex)[1];
 	if (!input) throw str;
-	let inputs = input.split(',').map(i => i.trim());
-	return inputs;
+	let obj = null;
+	return input
+		.replace(/((\/\/.*$)|(\/\*[\s\S]*?\*\/))/mg, '')
+		.split(',')
+		.map(i => i.trim())
+		.reduce((acc, curr) => {
+			if (obj) acc[acc.length - 1] += ', ' + curr.trim();
+			else acc.push(curr.trim());
+			if (curr.startsWith('[')) obj = ']';
+			else if (curr.startsWith('{')) obj ='}';
+			if (curr.endsWith(obj)) obj = null;
+			return acc;
+		}, [])
+		.map(i => {
+			if (i.has('=')) i = i
+				.splitEquals()
+				.slice(0, -1)
+				.join('=')
+				.trim();
+			return i.decompose();
+		});
 };
+
+async function status(ids, {
+	fetchUsers = false,
+	filter = user => user
+} = {}) {}
+
+console.log(status.getInputs());
 
 //NUMBER PROTOTYPE METHODS
 

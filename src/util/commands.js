@@ -36,7 +36,7 @@ class Commands {
 		}
 		let Constructor = require('../' + path);
 		let method = Constructor.prototype[cmdInfo.method];
-		if (typeof method !== 'function') method = Constructor.prototype.getProp(cmdInfo.method); // eval("Constructor.prototype." + cmdInfo.method);
+		if (typeof method !== 'function') method = Object.getProp(Constructor.prototype, cmdInfo.method); // eval("Constructor.prototype." + cmdInfo.method);
 		if (typeof method !== 'function') console.error(path, cmdInfo.method);
 		if (typeof method !== 'function') return null;
 		return method;
