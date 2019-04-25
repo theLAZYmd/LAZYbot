@@ -1,35 +1,22 @@
-const config = require("../config.json");
-const Permissions = require("./permissions.js");
+const config = require('../config.json');
+const AC = require('lazy-aho-corasick');
+let sources = new AC(Object.keys(config.sources));
+let variants = new AC(Object.keys(config.variants));
 
-module.exports = async (content, channel, args, argsInfo) => { //this function finds input parameters and returns an embed. Needs source, variant, and active.
-    try {
-        let defsources = Object.values(config.sources);
-        let source = Object.values(config.sources).find((s) => {
-            for (let a of args) {
-                if (a.replace(/[^a-z]/gi, "").toLowerCase() === s.key.toLowerCase()) return true;
-            }
-        });
-        let variant, active = /-a|--active/gi.test(content); //active is just if the message contains the word
-        if (await Permissions.channels("trivia", argsInfo)) variant = { //check if it's a trivia channel first
-            "name": "Trivia",
-            "api": "trivia",
-            "key": "trivia"
-        };
-        while (!variant) {
-            if (source) {
-                let found = {};
-                for (let v of Object.values(config.variants[source.key])) {
-                    if (content.includes(v.key)) found.args = v, variant = v; //if in args, match it.
-                    if (channel.topic && channel.topic.includes(v.key)) found.channel = v, variant = v; //if in topic match it.
-                    if (channel.name.includes(v.key)) found.channel = v, variant = v; //if in channel name, match it.
-                    if (found.channel) break;
-                }
-                if (found.args && found.channel && found.channel !== found.args) throw "Wrong channel to summon this leaderboard!"; //if no possibilities or match conflict, return.
-            } else if (defsources.length === 0) throw "Couldn't find matching variant";   //if none found, return.
-            if (!variant) source = defsources.shift();
-        }
-        return {variant, source, active, argsInfo}; //data object for generating leaderboard
-    } catch (e) {
-        if (e) throw e;
-    }
-}
+module.exports = async (content, channel, args, argsInfo) => {
+	try {
+		const active = /-a|--active/gi.test(content.toLowerCase());												//Checks if 'active' flag should be set if content contained active flag
+		let source = sources.search(content.replace(/[^a-z]/gi, '').toLowerCase(), {return: 'first'});			//looks for all occurrences of source names in the message
+		let variant = variants.search(content.toLowerCase(), {return: 'first'});								//looks for all occurrences of variant names in the mesage
+		let cvariant = variants.search((channel.name || '').toLowerCase(), {return: 'first'}) || variants.search((channel.topic || '').toLowerCase(), {return: 'first'});	//checks to see if the channel matches a variant
+		if (!variant && !cvariant) throw 'Couldn\'t find matching variant';										//if no variants have been found in the message or name, sets it equal to null
+		if (variant && cvariant && variant !== cvariant) throw 'Wrong channel to summon this leaderboard!';		//if user specifically tries to call a leaderboard for a variant in a different channel, sends them an error
+		variant = config.variants[variant || cvariant];															//renders foundString to a variant object
+		if (source) source = config.sources[source];															//renders sourceString to a source object
+		if (source && !variant[source.key]) throw `Variant ${variant.name} is not played on ${source.name}`;	//if user explicitly specified a source and that source is incompatible with the variant, throws an error
+		if (!source) source = Object.values(config.sources).find(s => variant[s.key]);							//otherwise finds a default source for that variant
+		return {variant, source, active, argsInfo};
+	} catch (e) {
+		if (e) throw e;
+	}
+};

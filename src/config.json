@@ -34,10 +34,11 @@
     "states": {
         "debug": false
     },
+    "lastUpdate": 1555878098444,
     "backupdb": [
-        "Tue Apr 09 2019 16:02:35 GMT+01",
-        "Tue Apr 09 2019 15:52:31 GMT+01",
-        "Tue Apr 09 2019 15:43:34 GMT+01"
+        "Sun Apr 21 2019 21:02:31 GMT+01",
+        "Sun Apr 21 2019 21:02:31 GMT+01",
+        "Sun Apr 21 2019 21:02:31 GMT+01"
     ],
     "delays": {
         "repeat": 1800000
@@ -74,168 +75,115 @@
         }
     },
     "variants": {
-        "lichess": {
-            "960": {
-                "name": "960",
-                "api": "960",
-                "key": "960"
-            },
-            "blitz": {
-                "name": "Blitz",
-                "api": "blitz",
-                "key": "blitz"
-            },
-            "bullet": {
-                "name": "Bullet",
-                "api": "bullet",
-                "key": "bullet"
-            },
-            "rapid": {
-                "name": "Rapid",
-                "api": "rapid",
-                "key": "rapid"
-            },
-            "classical": {
-                "name": "Classical",
-                "api": "classical",
-                "key": "classical"
-            },
-            "crazyhouse": {
-                "name": "Crazyhouse",
-                "api": "crazyhouse",
-                "key": "crazyhouse"
-            },
-            "3-check": {
-                "name": "3-check",
-                "api": "threeCheck",
-                "key": "3-check"
-            },
-            "anti": {
-                "name": "Antichess",
-                "api": "antichess",
-                "key": "anti"
-            },
-            "horde": {
-                "name": "Horde",
-                "api": "horde",
-                "key": "horde"
-            },
-            "atomic": {
-                "name": "Atomic",
-                "api": "atomic",
-                "key": "atomic"
-            },
-            "koth": {
-                "name": "King of the Hill",
-                "api": "kingOfTheHill",
-                "key": "koth"
-            },
-            "racing-kings": {
-                "name": "Racing Kings",
-                "api": "racingKings",
-                "key": "racing-kings"
-            }
+        "960": {
+            "name": "960",
+            "lichess": "chess960",
+            "chesscom": "livechess960",
+            "key": "960"
         },
-        "chesscom": {
-            "960": {
-                "name": "960",
-                "api": "livechess960",
-                "key": "960"
-            },
-            "daily960": {
-                "name": "Daily 960",
-                "api": "960",
-                "key": "daily960"
-            },
-            "bullet": {
-                "name": "Bullet",
-                "api": "bullet",
-                "key": "bullet"
-            },
-            "lightning": {
-                "name": "Blitz",
-                "api": "lightning",
-                "key": "lightning"
-            },
-            "chess": {
-                "name": "Daily",
-                "api": "chess",
-                "key": "chess"
-            },
-            "rapid": {
-                "name": "Rapid",
-                "api": "rapid",
-                "key": "rapid"
-            },
-            "koth": {
-                "name": "King of the Hill",
-                "api": "kingofthehill",
-                "key": "koth"
-            },
-            "crazyhouse": {
-                "name": "Crazyhouse",
-                "api": "crazyhouse",
-                "key": "crazyhouse"
-            },
-            "bughouse": {
-                "name": "Bughouse",
-                "api": "bughouse",
-                "key": "bughouse"
-            },
-            "tactics": {
-                "name": "Tactics",
-                "api": "tactics",
-                "key": "tactics"
-            },
-            "lessons": {
-                "name": "Lessons",
-                "api": "lessons",
-                "key": "lessons"
-            }
+        "chess": {
+            "name": "chess",
+            "key": "chess"
         },
-        "bughousetest": {
-            "bughouse": {
-                "name": "Bughouse",
-                "api": "bughouse",
-                "key": "bughouse"
-            }
+        "ultra": {
+            "name": "Ultrabullet",
+            "lichess": "ultraBullet",
+            "key": "ultra"
         },
-        "cvt": {
-            "anti": {
-                "name": "Antichess",
-                "key": "anti",
-                "api": "Antichess"
-            },
-            "atomic": {
-                "name": "Atomic",
-                "api": "Atomic",
-                "key": "atomic"
-            },
-            "crazyhouse": {
-                "name": "Crazyhouse",
-                "api": "Crazyhouse",
-                "key": "crazyhouse"
-            },
-            "horde": {
-                "name": "Horde",
-                "api": "Horde",
-                "key": "horde"
-            },
-            "koth": {
-                "name": "King of the Hill",
-                "api": "KingOfTheHill",
-                "key": "kingOfTheHill"
-            },
-            "3-check": {
-                "name": "Three-check",
-                "key": "3-check",
-                "api": "ThreeCheck"
-            },
-            "racing-kings": {
-                "name": "Racing Kings",
-                "key": "racing-kings",
-                "api": "RacingKings"
-            }
+        "bullet": {
+            "name": "Bullet",
+            "lichess": "bullet",
+            "chesscom": "bullet",
+            "key": "bullet"
+        },
+        "blitz": {
+            "name": "Blitz",
+            "lichess": "blitz",
+            "chesscom": "lightning",
+            "key": "blitz"
+        },
+        "rapid": {
+            "name": "Rapid",
+            "lichess": "rapid",
+            "chesscom": "rapid",
+            "key": "rapid"
+        },
+        "classical": {
+            "name": "Classical",
+            "lichess": "classical",
+            "chesscom": "chess",
+            "key": "classical"
+        },
+        "correspondence": {
+            "name": "Correspondence",
+            "lichess": "correspondence",
+            "key": "correspondence"
+        },
+        "crazyhouse": {
+            "name": "Crazyhouse",
+            "lichess": "crazyhouse",
+            "chesscom": "crazyhouse",
+            "cvt": "Crazyhouse",
+            "key": "crazyhouse"
+        },
+        "bughouse": {
+            "name": "Bughouse",
+            "chesscom": "bughouse",
+            "bughousetest": "bughouse",
+            "key": "bughouse"
+        },
+        "daily960": {
+            "name": "Daily 960",
+            "chesscom": "960",
+            "key": "daily960"
+        },
+        "koth": {
+            "name": "King of the Hill",
+            "lichess": "kingOfTheHill",
+            "chesscom": "kingofthehill",
+            "cvt": "KingOfTheHill",
+            "key": "koth"
+        },
+        "3-check": {
+            "name": "3-check",
+            "lichess": "threeCheck",
+            "chesscom": "threeCheck",
+            "cvt": "ThreeCheck",
+            "key": "3-check"
+        },
+        "anti": {
+            "name": "Antichess",
+            "lichess": "antichess",
+            "cvt": "Antichess",
+            "key": "anti"
+        },
+        "atomic": {
+            "name": "Atomic",
+            "lichess": "atomic",
+            "cvt": "Atomic",
+            "key": "atomic"
+        },
+        "horde": {
+            "name": "Horde",
+            "lichess": "horde",
+            "cvt": "horde",
+            "key": "horde"
+        },
+        "racing-kings": {
+            "name": "Racing Kings",
+            "lichess": "racingKings",
+            "cvt": "RacingKings",
+            "key": "racing-kings"
+        },
+        "puzzles": {
+            "name": "Puzzles",
+            "lichess": "puzzle",
+            "chesscom": "tactics",
+            "key": "puzzles"
+        },
+        "trivia": {
+            "name": "Trivia",
+            "key": "trivia"
         }
     },
     "sources": {

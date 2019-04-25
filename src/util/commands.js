@@ -1,5 +1,4 @@
 const DataManager = require('./datamanager');
-const Logger = require('./logger');
 const All = DataManager.getFile('./src/commands/all.json');
 const Bot = DataManager.getFile('./src/commands/bot.json');
 const DM = DataManager.getFile('./src/commands/DM.json');
@@ -13,11 +12,11 @@ class Commands {
 
 	static async run (cmdInfo, message) {
 		if (!cmdInfo.args) cmdInfo.args = [];
-		let directory = 'modules/' + cmdInfo.module + '/' + cmdInfo.file.toLowerCase();
-		let path = 'modules/' + cmdInfo.module + '/' + cmdInfo.file.toLowerCase();
+		let directory = 'modules/' + cmdInfo.module + '/' + cmdInfo.file;
+		let path = 'modules/' + cmdInfo.module + '/' + cmdInfo.file;
 		let extensions = ['.js', '.ts', '.mjs'];
 		while (!fs.existsSync('./src/' + path)) {
-			if (extensions.length === 0) throw 'Couldn\'t find module ./src/' + directory;
+			if (extensions.length === 0) throw new Error('Couldn\'t find module ./src/' + directory);
 			path = directory + extensions.shift();
 		}
 		let Constructor = require('../' + path);
@@ -36,7 +35,7 @@ class Commands {
 		}
 		let Constructor = require('../' + path);
 		let method = Constructor.prototype[cmdInfo.method];
-		if (typeof method !== 'function') method = Constructor.prototype.getProp(cmdInfo.method); // eval("Constructor.prototype." + cmdInfo.method);
+		if (typeof method !== 'function') method = Object.getProp(Constructor.prototype, cmdInfo.method); // eval("Constructor.prototype." + cmdInfo.method);
 		if (typeof method !== 'function') console.error(path, cmdInfo.method);
 		if (typeof method !== 'function') return null;
 		return method;
@@ -189,7 +188,6 @@ class Commands {
 		let accounts = new Map();
 		let tally = DataManager.getData();
 		tally.forEach((dbuser) => {
-			if (dbuser.left) return;
 			for (let s of Object.keys(config.sources)) {
 				if (s !== 'lichess') continue;  //lichess block
 				if (!dbuser[s]) continue;
