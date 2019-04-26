@@ -27,7 +27,7 @@ class Leaderboard extends Parse {
 				let DiscordID = commands.accounts.accounts.get(user.username);
 				if (DiscordID) acc.push([
 					('#' + (i + 1)).bold(),
-					`[${user.username}](https://lichess.org/@/${user.username}) ${this.Search.users.byID(DiscordID)}`
+					`[${user.username}](https://lichess.org/@/${user.username}) ${this.Search.users.byID(DiscordID)} ${user.score}`
 				]);
 				return acc;
 			}, []);
