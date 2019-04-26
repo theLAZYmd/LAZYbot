@@ -261,6 +261,7 @@ class Tracker extends Parse {
 					if (data.command) await data.edit();
 					for (let account of Object.keys(data.dbuser[source.key])) {
 						if (account.startsWith('_')) continue;
+						await sleep(1000);
 						await data.setUsername(account).getData();
 						data.setUsername();
 					}
@@ -452,4 +453,10 @@ function parseChesscom(chesscomData, data) {
 			return data.username;
 		}
 	};
+}
+
+async function sleep(ms) {
+	return new Promise(resolve => {
+		setTimeout(resolve, ms);
+	});
 }

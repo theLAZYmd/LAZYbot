@@ -1,8 +1,7 @@
 const DataManager = require('./datamanager');
-const Logger = require('./logger');
 const All = DataManager.getFile('./src/commands/all.json');
 const Bot = DataManager.getFile('./src/commands/bot.json');
-const DM = DataManager.getFile('./src/commands/DM.json');
+const DM = DataManager.getFile('./src/commands/dm.json');
 const Message = DataManager.getFile('./src/commands/message.json');
 const Reaction = DataManager.getFile('./src/commands/reaction.json');
 const Interval = DataManager.getFile('./src/commands/interval.json');
@@ -23,7 +22,7 @@ class Commands {
 		let Constructor = require('../' + path);
 		let Instance = await new Constructor(message);
 		if (typeof Instance[cmdInfo.method] === 'function') return Instance[cmdInfo.method](...cmdInfo.args);
-		return !!eval('Instance.' + cmdInfo.method + '(...cmdInfo.args)');
+		return false;
 	}
 
 	static getFunction (cmdInfo) {
@@ -36,7 +35,7 @@ class Commands {
 		}
 		let Constructor = require('../' + path);
 		let method = Constructor.prototype[cmdInfo.method];
-		if (typeof method !== 'function') method = Constructor.prototype.getProp(cmdInfo.method); // eval("Constructor.prototype." + cmdInfo.method);
+		if (typeof method !== 'function') method = Object.getProp(Constructor.prototype, cmdInfo.method); // eval("Constructor.prototype." + cmdInfo.method);
 		if (typeof method !== 'function') console.error(path, cmdInfo.method);
 		if (typeof method !== 'function') return null;
 		return method;
