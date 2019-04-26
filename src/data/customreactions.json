@@ -26,6 +26,11 @@
                 "type": "text",
                 "reaction": "Please go to <#404374157045006346> and assign yourself a region role.\nThis will allow you to see all the main discussion channels of the server.",
                 "anyword": true
+            },
+            "challonge": {
+                "type": "text",
+                "reaction": "<https://challonge.com/en/tournament/bracket_generator.html?ref=ovRmwPCC51>",
+                "anyword": false
             }
         },
         "emoji": {
@@ -103,6 +108,11 @@
                 "type": "emoji",
                 "reaction": "<:banhammer:372821267260375040>",
                 "anyword": false
+            },
+            "wolf": {
+                "type": "emoji",
+                "reaction": "<:wolfie:376833339866349582>",
+                "anyword": true
             }
         }
     }
