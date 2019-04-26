@@ -24,7 +24,11 @@ class Leaderboard extends Parse {
 			const data = await lila.tournaments.results(id, {nb, fetchUser: false});
 			if (!data) throw 'Invalid ID, couldn\'t fetch Lichess tournament data';
 			const lb = data.array().reduce((acc, user, i) => {
-				if (commands.accounts.accounts.get(user.username)) acc.push([('#' + (i + 1)).bold(), user.username]);
+				let DiscordID = commands.accounts.accounts.get(user.username);
+				if (DiscordID) acc.push([
+					('#' + (i + 1)).bold(),
+					`[${user.username}](https://lichess.org/@/${user.username}) ${this.Search.users.byID(DiscordID)}`
+				]);
 				return acc;
 			}, []);
 			this.Output.sender(new Embed()
