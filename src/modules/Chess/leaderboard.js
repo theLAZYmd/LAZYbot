@@ -1,9 +1,10 @@
-const config = require('../../config.json');
-const DataManager = require('../../util/datamanager.js');
-const Parse = require('../../util/parse.js');
-const Embed = require('../../util/embed.js');
-const Permissions = require('../../util/permissions.js');
-const Logger = require('../../util/logger.js');
+const DataManager = require('../../util/datamanager');
+const Parse = require('../../util/parse');
+const Embed = require('../../util/embed');
+const Logger = require('../../util/logger');
+const commands = require('../../util/commands');
+const client = require('lichess');
+const lila = new client();
 
 class Leaderboard extends Parse {
 
@@ -11,6 +12,37 @@ class Leaderboard extends Parse {
 		super(message);
 	}
 
+	/**
+	 * Gets a leaderboard of results in a tournament on Lichess and filters them to players from the database
+	 * @param {string} id - The tournamnet ID on Lichess to get
+	 * @param {Number} nb - The number of players to check against the database
+	 */
+	async tournament(id = '', nb = 30) {
+		try {
+			if (!id) [id, nb = 30] = this.args;
+			if (!id) throw this.Permissions.output('args');
+			const data = await lila.tournaments.results(id, {nb, fetchUser: false});
+			if (!data) throw 'Invalid ID, couldn\'t fetch Lichess tournament data';
+			const lb = data.array().reduce((acc, user, i) => {
+				if (commands.accounts.accounts.get(user.username)) acc.push([('#' + (i + 1)).bold(), user.username]);
+				return acc;
+			}, []);
+			this.Output.sender(new Embed()
+				.setTitle('Lichess Tournament')
+				.setURL('https://lichess.org/tournament/' + id)
+				.setDescription(lb.toPairs())
+			);
+		} catch (e) {
+			if (e) this.Output.onError(e);
+		}
+	}
+
+	/**
+	 * Sends a leaderboard to a given channel
+	 * @param {Channel} channel
+	 * @param {string[]} args
+	 * @public
+	 */
 	async variant(channel, args) {
 		try {
 			let data = await require('../../util/variant.js')(this.message.content, channel, args, this); //variant, source, active

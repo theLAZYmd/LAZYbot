@@ -843,14 +843,28 @@
             ],
             "description": "Gets the rank of a user across all leaderboards. Default is yourself.",
             "usage": [
-                "myrank",
                 "myrank DragonMateZ"
             ],
             "module": "Chess",
             "file": "rank",
             "method": "variant",
             "prefix": "generic"
-        }
+		},
+		{
+			"aliases": [
+				"tournament",
+				"tourn"
+			],
+			"description": "Gets a leaderboard of results in a tournament on Lichess and filters them to players from the database",
+			"usage": [
+				"results OQIEzLzG",
+				"res SHEUqsbY"
+			],
+			"module": "Chess",
+			"file": "leaderboard",
+			"method": "tournament",
+			"prefix": "generic"
+		}
     ],
     "Currency": [
         {

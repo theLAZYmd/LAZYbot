@@ -22,7 +22,7 @@ class Commands {
 		let Constructor = require('../' + path);
 		let Instance = await new Constructor(message);
 		if (typeof Instance[cmdInfo.method] === 'function') return Instance[cmdInfo.method](...cmdInfo.args);
-		return !!eval('Instance.' + cmdInfo.method + '(...cmdInfo.args)');
+		return false;
 	}
 
 	static getFunction (cmdInfo) {
