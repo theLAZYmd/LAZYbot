@@ -352,9 +352,9 @@ class Tracker extends Parse {
 	 * Grabs JSON data from the API for all other (chess.com) sites
 	 * @param {Tracker} data 
 	 */
-	static async request(data) {
+	static request(data) {
 		try {
-			return await rp({
+			return rp({
 				uri: config.sources.chesscom.url.user.replace('|', data.username),
 				json: true,
 				timeout: 4000

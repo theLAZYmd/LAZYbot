@@ -77,9 +77,12 @@ class Output extends Parse {
 			let index = Math.ceil(string.length / 2000);
 			let keylength = Math.floor(string.length / index);
 			for (let i = 0; i < index; i++) {
+				let start = i * keylength;
+				let finish = i === index.length - 1 ? string.length + 2 : (i + 1) * keylength;
+				let description = string.slice(start, finish) + ' '.repeat(48) + '\u200b';
 				this.sender(new Embed()
 					.setColor(config.colors.data)
-					.setDescription((string.slice(i * keylength, (i === index.length - 1 ? string.length + 2 : i * keylength + keylength)) + ' '.repeat(48) + '\u200b').format(type))
+					.setDescription(description.format(type))
 					.setFooter((i + 1) + ' / ' + index)
 				, channel);
 			}
@@ -139,30 +142,30 @@ class Output extends Parse {
 			throw e;
 		}
 	}
-    
+	
 	/**
-     * @typedef {object} confirmOptions
-     * @property {object} author - The user allowed to choose an option
-     * @property {object} channel - The channel this message should be posted in
-     * @property {function} action - The type of action that is being confirmed. Default description is 'Please confirm \'action\''
-     * @property {number} time - The time in milliseconds allowed for the user to pick an option in ms. Defaults to 18000 (18 seconds).
-     * @property {Message} editor - Whether the message should edit a previous message, rather than posting a new confirmation message
-     * @property {Boolean} cancel - Is this a confirmation to cancel? If so, return true on timeout
-     */
+	 * @typedef {object} confirmOptions
+	 * @property {object} author - The user allowed to choose an option
+	 * @property {object} channel - The channel this message should be posted in
+	 * @property {function} action - The type of action that is being confirmed. Default description is 'Please confirm \'action\''
+	 * @property {number} time - The time in milliseconds allowed for the user to pick an option in ms. Defaults to 18000 (18 seconds).
+	 * @property {Message} editor - Whether the message should edit a previous message, rather than posting a new confirmation message
+	 * @property {Boolean} cancel - Is this a confirmation to cancel? If so, return true on timeout
+	 */
 
 	/**
-     * Returns a user-defined option
-     * @param {confirmOptions} data 
-     * @property {object} author - The user allowed to choose an option
-     * @property {object} channel - The channel this message should be posted in
+	 * Returns a user-defined option
+	 * @param {confirmOptions} data 
+	 * @property {object} author - The user allowed to choose an option
+	 * @property {object} channel - The channel this message should be posted in
 	 * @property {string} description - Write a custom description for the confirmation message? If so, renders redundant the 'action' property
-     * @property {string} action - The type of action that is being confirmed. Default description is 'Please confirm \'action\''
-     * @property {number} time - The time in milliseconds allowed for the user to pick an option in ms. Defaults to 18000 (18 seconds).
-     * @property {Message} editor - Whether the message should edit a previous message, rather than posting a new confirmation message
-     * @property {Boolean} cancel - Is this a confirmation to cancel? If so, return true on timeout
+	 * @property {string} action - The type of action that is being confirmed. Default description is 'Please confirm \'action\''
+	 * @property {number} time - The time in milliseconds allowed for the user to pick an option in ms. Defaults to 18000 (18 seconds).
+	 * @property {Message} editor - Whether the message should edit a previous message, rather than posting a new confirmation message
+	 * @property {Boolean} cancel - Is this a confirmation to cancel? If so, return true on timeout
 	 * @param {Boolean} r - Whether to return a Boolean value of the confirmation result (true) or simply throw on confirmation failure
-     * @returns {Boolean?}
-     */
+	 * @returns {Boolean?}
+	 */
 	async confirm(data = {}, r = false) {
 		try {
 			data = Object.assign({
@@ -218,96 +221,87 @@ class Output extends Parse {
 			throw '';
 		}
 	}
-    
+	
 	/**
-     * @typedef {object} chooseOptions
-     * @property {object} author - The user allowed to choose an option
-     * @property {object} channel - The channel this message should be posted in
-     * @property {function} filter - The list of options that should be displayed in the choose message
-     * @property {number} time - The time in milliseconds allowed for the user to pick an option in ms. Defaults to 18000 (18 seconds).
-     * @property {string} title - The embed title of the choose message that should be displayed. Can be anything.
-     * @property {string} option - The kind of thing that is chosen. Will be displayed as 'Please choose a [...]'
-     */
+	 * @typedef {object} chooseOptions
+	 * @property {object} author - The user allowed to choose an option
+	 * @property {object} channel - The channel this message should be posted in
+	 * @property {function} filter - The list of options that should be displayed in the choose message
+	 * @property {number} time - The time in milliseconds allowed for the user to pick an option in ms. Defaults to 18000 (18 seconds).
+	 * @property {string} title - The embed title of the choose message that should be displayed. Can be anything.
+	 * @property {string} option - The kind of thing that is chosen. Will be displayed as 'Please choose a [...]'
+	 */
 
 	/**
-     * Returns a user-defined option
-     * @param {chooseOptions} data 
-     * @property {object} author - The user allowed to choose an option
-     * @property {object} channel - The channel this message should be posted in
-     * @property {function} options - The list of options that should be displayed in the choose message
-     * @property {number} time - The time in milliseconds allowed for the user to pick an option in ms. Defaults to 18000 (18 seconds).
-     * @property {string} title - The embed title of the choose message that should be displayed. Can be anything.
-     * @property {string} option - The kind of thing that is chosen. Will be displayed as 'Please choose a [...]'
-     * @returns {number}
-     */
-	async choose(data = {}) {
+	 * Returns a user-defined option
+	 * @param {chooseOptions} data 
+	 * @property {object} author - The user allowed to choose an option
+	 * @property {Boolean} autodelete - Whether the choose dialogue should be delete once an option has been chosen. Defaults to true.
+	 * @property {object} channel - The channel this message should be posted in
+	 * @property {description} description - A message to be displaye with the choose dialogue. Will be displayed in the 'title' field
+	 * @property {function} options - The list of options that should be displayed in the choose message
+	 * @property {number} time - The time in milliseconds allowed for the user to pick an option in ms. Defaults to 18000 (18 seconds).
+	 * @property {string} title - The embed title of the choose message that should be displayed. Can be anything.
+	 * @property {string} type - The kind of thing that is chosen. Will be displayed as 'Please choose a [...]'
+	 * @returns {Number}
+	 */
+	async choose({
+		author = this.author,
+		autodelete = true,
+		channel = this.channel,
+		description = '',
+		options = [],
+		time = 18000,
+		title = '',
+		type = 'option'
+	} = {}) {
 		try {
-			data = Object.assign({
-				author: this.author,
-				channel: this.channel,
-				options: [],
-				time: 18000,
-				title: '',
-				type: 'option'
-			}, data);
-			let description = '';
-			let emojis = this.Search.emojis.constructor.unicodes.slice(1, data.options.length + 1);
-			let author = data.title ? {
-				name: data.title
-			} : {};
-			let title = data.description ? data.description : `Please choose a${data.type.vowel() ? 'n' : ''} ${data.type}:`;
-			for (let i = 0; i < data.options.length; i++) {
-				description += this.Search.emojis.get(emojis[i]) + '**' + data.options[i] + '**\n';
-			}
-			emojis.push('❎');
-			let msg = await this.reactor({
-				author,
-				title,
-				description
-			}, data.channel, emojis);
-			let rfilter = (reaction, user) => {
-				if (user.id !== data.author.id) return false;
+			let emojis = this.Search.emojis.constructor.unicodes.slice(1, options.length + 1).push('❎');
+			let embed = new Embed()
+				.setTitle(description ? description : `Please choose a${type.vowel() ? 'n' : ''} ${type}:`)
+				.setDescription(options.map((option, i) => this.Search.emojis.get(emojis[i]) + '**' + option + '**\n'))
+				.setAuthor(title);
+			let msg = await this.reactor(embed, channel, emojis);
+			const rfilter = (reaction, user) => {
+				if (user.id !== author.id) return false;
 				if (reaction.emoji.name === '❎') return true;
 				if (this.Search.emojis.constructor.unicodes.indexOf(reaction.emoji.name) < 1) return false;
-				if (this.Search.emojis.constructor.unicodes.indexOf(reaction.emoji.name) > data.options.length) return false;
+				if (this.Search.emojis.constructor.unicodes.indexOf(reaction.emoji.name) > options.length) return false;
 				return true;
 			};
-			let mfilter = (m) => {
-				if (m.author.id !== data.author.id) return false;
+			const mfilter = (m) => {
+				if (m.author.id !== author.id) return false;
 				if (!m.content) return false;
 				if (m.content === 'cancel') return true;
 				if (m.content.length !== 1) return false;
 				if (this.Search.emojis.constructor.hexatrigintamals.indexOf(m.content) < 1) return false;
-				if (this.Search.emojis.constructor.hexatrigintamals.indexOf(m.content) > data.options.length) return false;
+				if (this.Search.emojis.constructor.hexatrigintamals.indexOf(m.content) > options.length) return false;
 				return true;
 			};
+			const awaitOptions = {
+				max: 1,
+				time,
+				errors: ['time']
+			};
 			try {
-				let number = await Promise.race([
+				const number = await Promise.race([
 					(async () => {
-						let rcollected = await msg.awaitReactions(rfilter, { //wait for them to react back
-							max: 1,
-							time: data.time,
-							errors: ['time']
-						}).catch(() => {});
+						let rcollected = await msg.awaitReactions(rfilter, awaitOptions).catch(() => {});
 						if (rcollected.first().emoji.name === '❎') throw '';
 						return this.Search.emojis.constructor.hexatrigintamals[this.Search.emojis.constructor.unicodes.indexOf(rcollected.first().emoji.name)];
 					})().catch(() => {}),
 					(async () => {
-						let mcollected = await msg.channel.awaitMessages(mfilter, {
-							max: 1,
-							time: data.time,
-							errors: ['time']
-						}).catch(() => {});                          
+						let mcollected = await msg.channel.awaitMessages(mfilter, awaitOptions).catch(() => {});                          
 						mcollected.first().delete(1000).catch(() => {}); 
 						if (mcollected.first().content === 'cancel') throw ''; 
 						return this.Search.emojis.constructor.hexatrigintamals.indexOf(mcollected.first().content);
 					})().catch(() => {})
 				]);
 				if (!number) throw null;                
-				data.autodelete !== false ? msg.delete().catch(() => {}) : msg.clearReactions().catch(() => {});
-				return number - 1; //and if valid input, send of modmail for that guild
+				autodelete !== false ? msg.delete().catch(() => {}) : msg.clearReactions().catch(() => {});
+				return number - 1;
 			} catch (e) {
-				data.autodelete !== false ? msg.delete().catch(() => {}) : msg.clearReactions().catch(() => {});
+				autodelete !== false ? msg.delete().catch(() => {}) : msg.clearReactions().catch(() => {});
 				throw e;
 			}
 		} catch (e) {
@@ -315,38 +309,38 @@ class Output extends Parse {
 			else throw e;
 		}
 	}
-    
+	
 	/**
-     * @typedef {object} responseOptions
-     * @property {object} author - The user allowed to choose an option
-     * @property {object} channel - The channel this message should be posted in
+	 * @typedef {object} responseOptions
+	 * @property {object} author - The user allowed to choose an option
+	 * @property {object} channel - The channel this message should be posted in
 	 * @property {string} description = The description to display in the embed message
-     * @property {function} filter - Valid message.content responses that shold be accepted
-     * @property {number} time - The time in milliseconds allowed for the user to respond. Defaults to 60000 (100 seconds).
-     * @property {string} title - The embed title of the choose message that should be displayed. Can be anything.
-     * @property {string} footer - A footer to be included in the embed, if desired
+	 * @property {function} filter - Valid message.content responses that shold be accepted
+	 * @property {number} time - The time in milliseconds allowed for the user to respond. Defaults to 60000 (100 seconds).
+	 * @property {string} title - The embed title of the choose message that should be displayed. Can be anything.
+	 * @property {string} footer - A footer to be included in the embed, if desired
 	 * @property {Message} editor - If this response message should be posted as an edit of a previous message, the message should be sent here
 	 * @property {Boolean} number - If acceptable responses should be numbers
 	 * @property {Boolean} oneword - If acceptable responses should be only one word
-     */
+	 */
 
 	/**
-     * Returns a user-defined option
-     * @param {responseOptions} data 
-     * @property {object} author - The user allowed to choose an option. Defaults to this.author
-     * @property {object} channel - The channel in which this message should be posted. Defaults to this.channel
+	 * Returns a user-defined option
+	 * @param {responseOptions} data 
+	 * @property {object} author - The user allowed to choose an option. Defaults to this.author
+	 * @property {object} channel - The channel in which this message should be posted. Defaults to this.channel
 	 * @property {string} description = The description to display in the embed message. Defaults to 'Please type your response below'
-     * @property {function} filter - Valid message.content responses that shold be accepted. Defaults to any
-     * @property {number} time - The time in milliseconds allowed for the user to respond. Defaults to 60000 (100 seconds).
-     * @property {string} title - The embed title of the choose message that should be displayed, if desired. Can be anything.
-     * @property {string} footer - A footer to be included in the embed, if desired
+	 * @property {function} filter - Valid message.content responses that shold be accepted. Defaults to any
+	 * @property {number} time - The time in milliseconds allowed for the user to respond. Defaults to 60000 (100 seconds).
+	 * @property {string} title - The embed title of the choose message that should be displayed, if desired. Can be anything.
+	 * @property {string} footer - A footer to be included in the embed, if desired
 	 * @property {Message} editor - If this response message should be posted as an edit of a previous message, the message should be sent here
 	 * @property {Boolean} number - If acceptable responses should be numbers
 	 * @property {Boolean} oneword - If acceptable responses should be only one word
 	 * @property {Boolean} json - If the response should be parsed as a JSON
 	 * @param {Boolean} r - If the whole message object should be returned, rather than just the content
-     * @returns {number}
-     */
+	 * @returns {number}
+	 */
 	async response(data = {}, r) {
 		try {
 			data = Object.assign({
