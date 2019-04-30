@@ -157,8 +157,10 @@ class Output extends Parse {
 	 * Returns a user-defined option
 	 * @param {confirmOptions} data 
 	 * @property {object} author - The user allowed to choose an option
+	 * @property {role} role - If no author is supplied, the role allowed to choose an option
 	 * @property {object} channel - The channel this message should be posted in
 	 * @property {string} description - Write a custom description for the confirmation message? If so, renders redundant the 'action' property
+	 * @property {Embed} embed - An embed to use. If found, bypasses 'description' field.
 	 * @property {string} action - The type of action that is being confirmed. Default description is 'Please confirm \'action\''
 	 * @property {number} time - The time in milliseconds allowed for the user to pick an option in ms. Defaults to 18000 (18 seconds).
 	 * @property {Message} editor - Whether the message should edit a previous message, rather than posting a new confirmation message
@@ -166,53 +168,57 @@ class Output extends Parse {
 	 * @param {Boolean} r - Whether to return a Boolean value of the confirmation result (true) or simply throw on confirmation failure
 	 * @returns {Boolean?}
 	 */
-	async confirm(data = {}, r = false) {
+	async confirm({
+		author = this.author,
+		channel = this.channel,
+		description = '',
+		action = 'this action',
+		time = 30000,
+		embed = undefined,
+		editor = undefined,
+		role = undefined,
+		cancel = false,
+		autodelete = true,
+		errors = []
+	} = {}, r = false) {
 		try {
-			data = Object.assign({
-				action: 'this action',
-				channel: this.channel,
-				author: this.author,
-				time: 30000,
-				errors: []
-			}, data);
-			data.emojis = ['✅', '❎'];
-			let msg = await this.reactor(data.embed ? data.embed : {
-				description: data.description ? data.description : '**' + data.author.tag + '** Please confirm ' + data.action + '.'
-			}, data.editor ? data.editor : data.channel, data.emojis);
-			let rfilter = (reaction, user) => data.emojis.includes(reaction.emoji.name) && (data.author.id === user.id || (data.role && this.Permissions.role(data.role, new Parse(msg))));
-			let mfilter = (m) => m.author.id === data.author.id && /^(?:y(?:es)?|n(?:o)?|true|false)$/i.test(m.content);
+			const emojis = ['✅', '❎'];
+			let msg = await this.reactor(
+				embed || new Embed().setDescription(description || '**' + author.tag + '** Please confirm ' + action + '.'),
+				editor || channel,
+				emojis
+			);
+			const rfilter = (reaction, user) => {
+				if (!emojis.includes(reaction.emoji.name)) return false;
+				if (author.id === user.id) return true;
+				if (role && this.Permissions.role(role, this)) return true;
+				return false;
+			};
+			const mfilter = m => m.author.id === author.id && /^(?:y(?:es)?|n(?:o)?|true|false)$/i.test(m.content);
+			const awaitOptions = {
+				max: 1,
+				time,
+				errors: ['time']
+			};
 			let collected = await Promise.race([
 				(async () => {
-					let rcollected = await msg.awaitReactions(rfilter, { //wait for them to react back
-						max: 1,
-						time: data.time,
-						errors: ['time']
-					}).catch(() => {
-					});
+					let rcollected = await msg.awaitReactions(rfilter, awaitOptions).catch(() => {});
 					if (rcollected.first().emoji.name === '✅') return true;
 					if (rcollected.first().emoji.name === '❎') return false;
-				})().catch(() => {
-				}),
+				})().catch(() => {}),
 				(async () => {
-					let mcollected = await msg.channel.awaitMessages(mfilter, {
-						max: 1,
-						time: data.time,
-						errors: ['time']
-					});
-					mcollected.first().delete(1000).catch(() => {
-					});
+					let mcollected = await msg.channel.awaitMessages(mfilter, awaitOptions).catch(() => {});
+					mcollected.first().delete(1000).catch(() => {});
 					if (/^(?:y(?:es)?|true)$/i.test(mcollected.first().content)) return true;
 					if (/^(?:n(?:o)?|false)$/i.test(mcollected.first().content)) return false;
-				})().catch(() => {
-				})
+				})().catch(() => {})
 			]);
-			data.autodelete !== false ? msg.delete().catch(() => {
-			}) : msg.clearReactions().catch(() => {
-			});
+			if (autodelete !== false) msg.delete().catch(() => {});
+			else msg.clearReactions().catch(() => {});
 			if (typeof collected !== 'boolean') {
 				collected = false;
-				if (data.cancel) return true;
-				if (data.errors.includes('time')) throw '';
+				if (cancel) return true;
+				if (errors.includes('time')) throw '';
 			}
 			if (!collected && !r) throw '';
 			return collected;
@@ -243,7 +249,7 @@ class Output extends Parse {
 	 * @property {number} time - The time in milliseconds allowed for the user to pick an option in ms. Defaults to 18000 (18 seconds).
 	 * @property {string} title - The embed title of the choose message that should be displayed. Can be anything.
 	 * @property {string} type - The kind of thing that is chosen. Will be displayed as 'Please choose a [...]'
-	 * @returns {Number}
+	 * @returns {Number?}
 	 */
 	async choose({
 		author = this.author,
@@ -297,11 +303,13 @@ class Output extends Parse {
 						return this.Search.emojis.constructor.hexatrigintamals.indexOf(mcollected.first().content);
 					})().catch(() => {})
 				]);
-				if (!number) throw null;                
-				autodelete !== false ? msg.delete().catch(() => {}) : msg.clearReactions().catch(() => {});
+				if (!number) throw null;
+				if (autodelete !== false) msg.delete().catch(() => {});
+				else msg.clearReactions().catch(() => {});
 				return number - 1;
 			} catch (e) {
-				autodelete !== false ? msg.delete().catch(() => {}) : msg.clearReactions().catch(() => {});
+				if (autodelete !== false) msg.delete().catch(() => {});
+				else msg.clearReactions().catch(() => {});
 				throw e;
 			}
 		} catch (e) {
