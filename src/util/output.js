@@ -349,48 +349,58 @@ class Output extends Parse {
 	 * @param {Boolean} r - If the whole message object should be returned, rather than just the content
 	 * @returns {number}
 	 */
-	async response(data = {}, r) {
+	async response({
+		title = '',
+		description = 'Please type your response below.',
+		footer = '',
+		author = this.author,
+		channel = this.channel,
+		editor = undefined,
+		filter = () => true,
+		number = false,
+		oneword = false,
+		json = false,
+		time = 60000
+	} = {}, r) {
 		try {
-			data = Object.assign({
-				author: this.author,
-				channel: this.channel,
-				description: 'Please type your response below.',
-				filter: () => true,
-				number: false,
-				time: 60000
-			}, data);
 			let msg = await this.reactor(new Embed()
-				.setAuthor(data.title || '')
-				.setDescription(data.description || '')
-				.setFooter(data.footer || '')
-			, data.editor ? data.editor : data.channel, ['❎']);
-			let rfilter = (reaction, user) => {
-				if (user.id !== data.author.id) return false;
+				.setAuthor(title)
+				.setDescription(description)
+				.setFooter(footer)
+			, editor || channel, ['❎']);
+			const rfilter = (reaction, user) => {
+				if (user.id !== author.id) return false;
 				if (reaction.emoji.name !== '❎') return false;
 				return true;
 			};
-			let mfilter = m => m.author.id === data.author.id && m.content !== undefined && (!isNaN(m.content) || !data.number) && (m.content.trim().split(/\s+/g).length === 1 || !data.oneword) && data.filter(m); //condition, plus user speicifed filter
+			const mfilter = (m) => {
+				if (m.author.id !== author.id) return false;
+				if (m.content === undefined) return false;
+				if (isNaN(m.content) && number) return false;
+				if (m.content.trim().split(/\s+/g).length > 1 && oneword) return false;
+				return filter(m);
+			};
+			const awaitOptions = {
+				max: 1,
+				time: time,
+				errors: ['time']
+			};
 			try {
 				let collected = await Promise.race([
 					(async () => {
-						let reaction = await msg.awaitReactions(rfilter, { //wait for them to react back
-							max: 1,
-							time: data.time,
-							errors: ['time']
-						});
+						let reaction = await msg.awaitReactions(rfilter, awaitOptions).catch(() => {});
 						if (reaction) return false;
 						throw '';
-					})().catch(() => {
-					}),
-					msg.channel.awaitMessages(mfilter, {
-						max: 1,
-						time: data.time,
-						errors: ['time']
-					})
+					})().catch(() => {}),
+					msg.channel.awaitMessages(mfilter, awaitOptions).catch(() => {})
 				]);
+				msg.delete().catch(() => {});
 				if (!collected) throw '';
-				msg.delete().catch(() => {
-				});
+				try {
+					if (json) r = JSON.parse(r);
+				} catch (e) {
+					throw 'Couldn\t parse ' + r + ' as JSON';
+				}
 				if (r) return collected.first();
 				else {
 					let value = collected.first().content;
@@ -398,7 +408,6 @@ class Output extends Parse {
 					return value;
 				}
 			} catch (e) {
-				msg.delete().catch(() => {});
 				throw e;
 			}
 		} catch (e) {
