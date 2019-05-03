@@ -304,13 +304,12 @@ class Output extends Parse {
 					})().catch(() => {})
 				]);
 				if (!number) throw null;
-				if (autodelete !== false) msg.delete().catch(() => {});
-				else msg.clearReactions().catch(() => {});
 				return number - 1;
 			} catch (e) {
+				throw e;
+			} finally {
 				if (autodelete !== false) msg.delete().catch(() => {});
 				else msg.clearReactions().catch(() => {});
-				throw e;
 			}
 		} catch (e) {
 			if (e) this.onError(e);

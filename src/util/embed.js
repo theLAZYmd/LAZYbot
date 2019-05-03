@@ -7,6 +7,11 @@ class Embed extends RichEmbed {
 		this.content = data.content;
 	}
 
+	/**
+	 * Sets the content of an embed to be sent as message.content
+	 * @param {string} content 
+	 * @returns {Embed}
+	 */
 	setContent(content) {
 		content = resolveString(content);
 		if (content.length > 2000) throw new RangeError('Message content may not exceed 2000 characters.');
@@ -14,11 +19,32 @@ class Embed extends RichEmbed {
 		return this;
 	}
 
+	/**
+	 * Sets a field on a RichEmbed, identified by an index number
+	 * @param {string} name 
+	 * @param {string} value 
+	 * @param {Boolean} inline 
+	 * @param {Number} index 
+	 */
+	setField(name, value, inline, index) {
+		if (typeof index === 'undefined') return this.addField(name, value, index);
+		if (typeof index !== 'number') throw new TypeError('Index must be a number');
+		if (index < 0) index = this.fields.length + index;
+		if (!this.fields[index]) throw new RangeError('Index value must be between 0 and ' + this.fields.length - 1 );
+		this.fields[index](name, value, inline, index);
+		return this;
+	}
+
+	/**
+	 * Removes a field from an embed, identified by index number
+	 * @param {Number} index 
+	 * @returns {Embed}
+	 */
 	removeField(index) {
 		if (typeof index !== 'number') throw new TypeError('Index must be a number');
 		if (index < 0) index = this.fields.length + index;
 		if (!this.fields[index]) throw new RangeError('Index value must be between 0 and ' + this.fields.length - 1 );
-		this.fields.remove(index);
+		this.fields.splice(index, 1);
 		return this;
 	}
 
