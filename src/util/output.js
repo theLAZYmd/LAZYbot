@@ -262,7 +262,7 @@ class Output extends Parse {
 		type = 'option'
 	} = {}) {
 		try {
-			let emojis = this.Search.emojis.constructor.unicodes.slice(1, options.length + 1).push('❎');
+			let emojis = this.Search.emojis.constructor.unicodes.slice(1, options.length + 1).concat(['❎']);
 			let embed = new Embed()
 				.setTitle(description ? description : `Please choose a${type.vowel() ? 'n' : ''} ${type}:`)
 				.setDescription(options.map((option, i) => this.Search.emojis.get(emojis[i]) + '**' + option + '**\n'))
