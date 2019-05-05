@@ -2,6 +2,38 @@
     "Administration": [
         {
             "aliases": [
+                "settings"
+            ],
+            "description": "Displays server settings on the bot.",
+            "usage": [
+                "settings roles"
+            ],
+            "module": "Administration",
+            "file": "set",
+            "method": "generate",
+            "prefix": "generic",
+            "requires": {
+                "role": "admin"
+            }
+        },
+        {
+            "aliases": [
+                "set"
+            ],
+            "description": "Sets a server settings.",
+            "usage": [
+                "settings roles bot"
+            ],
+            "module": "Administration",
+            "file": "set",
+            "method": "set",
+            "prefix": "generic",
+            "requires": {
+                "role": "admin"
+            }
+        },
+        {
+            "aliases": [
                 "setusername"
             ],
             "description": "Sets bot client's username to a the single argument given.",
@@ -15,44 +47,6 @@
                 "args"
             ],
             "prefix": "generic",
-            "requires": {
-                "user": "owner"
-            }
-        },
-        {
-            "aliases": [
-                "setprefix"
-            ],
-            "description": "Sets the default prefix for commands for this server to the argument given. Prefixes are followed by spaces.",
-            "usage": [
-                "setprefix =="
-            ],
-            "module": "Administration",
-            "file": "set",
-            "method": "genericprefix",
-            "arguments": [
-                "argument"
-            ],
-            "prefix": "generic",
-            "requires": {
-                "user": "owner"
-            }
-        },
-        {
-            "aliases": [
-                "setnadekoprefix"
-            ],
-            "description": "Sets the prefix for commands emulating Nadeko comands for this server. Prefixes are followed by spaces.",
-            "usage": [
-                "setnadekoprefix !"
-            ],
-            "module": "Administration",
-            "file": "set",
-            "method": "nadekoprefix",
-            "arguments": [
-                "argument"
-            ],
-            "prefix": "nadeko",
             "requires": {
                 "user": "owner"
             }

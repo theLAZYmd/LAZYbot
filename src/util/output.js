@@ -19,7 +19,7 @@ class Output extends Parse {
 			if (typeof embed._apiTransform === 'function') embed = embed._apiTransform();
 			return await channel.send(content, {embed});
 		} catch (e) {
-			if (e) this.log(e);
+			if (e) this.onError(e);
 		}
 	}
 
@@ -33,7 +33,7 @@ class Output extends Parse {
 			if (typeof embed._apiTransform === 'function') embed = embed._apiTransform();
 			return await msg.edit(content, {embed});
 		} catch (e) {
-			if (e) this.log(e);
+			if (e) this.onError(e);
 		}
 	}
 
