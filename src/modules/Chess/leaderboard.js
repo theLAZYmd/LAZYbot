@@ -12,23 +12,32 @@ class Leaderboard extends Parse {
 	constructor(message) {
 		super(message);
 	}
+
+	/**
+	 * Gets the results of the latest shield arena on lichess for a given variant. Filters them to only server members unless '--all' flag is used
+	 * @param {LichessVariant} variant - A valid string one of the accepted lichess variant keys or names
+	 * @param {Number} nb - The number of results to get. Defaults to 30
+	 */
 	async shield (variant = this.args[0] || 'Bullet', nb = this.args[1]) {
 		try {
 			if (!variant) throw this.Permissions.output('args');
 			if (typeof nb !== 'number') nb = 30;
-			let variants = Object.values(config.variants).map(v => v.name).concat(['SuperBlitz']);
-			if (variants.indexOf(variant) === -1) {
-				if (config.variants[variant]) variant = config.variants[variant].name;
-				else {
-					let index = await this.Output.choose({
-						type: 'variant to get shield results',
-						options: variants
-					});
-					variant = variants[index];
-				}
+			config.variants['superblitz'] = {
+				name: 'SuperBlitz',
+				key: 'superblitz',
+				lichess: 'superblitz'
+			};
+			variant = Object.values(config.variants).find(v => new RegExp(`${v.key}|${v.name}|${v.lichess}`, 'i').test(variant));
+			if (!variant) {
+				let values = Object.values(config.variants);
+				let index = await this.Output.choose({
+					type: 'variant to get shield results',
+					options: values.map(v => v.key)
+				});
+				variant = values[index];
 			}
-			this.msg = await this.Output.generic(`Getting Lichess data for **${variant} Shield Arena**...`);
-			let data = await lila.tournaments.lastShield(variant, {nb, fetchUser: false});
+			this.msg = await this.Output.generic(`Getting Lichess data for **${variant.name} Shield Arena**...`);
+			let data = await lila.tournaments.lastShield(variant.lichess, {nb, fetchUser: false});
 			if (!data) throw 'Invalid ID, couldn\'t fetch Lichess tournament data';
 			data.variant = variant;
 			this.outputTournament(data, this.argument.includes('-a') || this.argument.includes('--a'));
@@ -73,7 +82,7 @@ class Leaderboard extends Parse {
 				return acc;
 			}, []);
 			this.Output[this.msg ? 'editor' : 'sender'](new Embed()
-				.setTitle(this.command === 'shield' ? `${variant} Shield Arena` : 'Lichess Tournament')
+				.setTitle(this.command === 'shield' ? `${variant.name} Shield Arena` : 'Lichess Tournament')
 				.setURL('https://lichess.org/tournament/' + id)
 				.setDescription(lb[0] ? lb.toPairs() : 'No tracked members found.')
 			, this.msg || this.channel);
