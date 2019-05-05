@@ -22,7 +22,7 @@ class Permissions {
 	static role(roleType, argsInfo) { //admin, {object}
 		if (roleType === 'owner') return (argsInfo.guild.ownerID === argsInfo.member.id || config.ids.owner.includes(argsInfo.author.id));
 		let roleName = argsInfo.server.roles[roleType];
-		if (!argsInfo.guild.roles.some(role => role.name = roleName) || !roleName) return true;
+		if (!argsInfo.guild.roles.some(role => role.name === roleName) || !roleName) return true;
 		return (argsInfo.member.roles.some(role => role.name.toLowerCase().startsWith(roleName)) || argsInfo.guild.ownerID === argsInfo.member.id);
 	}
 
