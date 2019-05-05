@@ -35,7 +35,7 @@ class Leaderboard extends Parse {
 			this.Output.sender(new Embed()
 				.setTitle('Lichess Tournament')
 				.setURL('https://lichess.org/tournament/' + id)
-				.setDescription(lb.toPairs())
+				.setDescription(lb[0] ? lb.toPairs() : 'No tracked members found.')
 			);
 		} catch (e) {
 			if (e) this.Output.onError(e);
