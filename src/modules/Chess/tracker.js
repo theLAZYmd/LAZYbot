@@ -233,6 +233,7 @@ class Tracker extends Parse {
 			if (dbuser[source.key] && dbuser[source.key][username]) throw 'Already linked account.';
 			let data = new Track(this, dbuser);
 			await data.setSource(source).setUsername(username).getData();
+			Commands.accounts.accounts.set(username, dbuser.id);
 			data.setData().log().output();
 		} catch (e) {
 			if (e) this.Output.onError(e);
@@ -422,6 +423,7 @@ class Tracker extends Parse {
 				}
 			}
 			dbuser.setData();
+			Commands.accounts.accounts.delete(account);
 			this.Output.sender(new Embed()
 				.setTitle(`Stopped tracking via ${this.prefix}remove command`)
 				.setDescription(`Unlinked **${options[val]}** from ${user.tag}`)
