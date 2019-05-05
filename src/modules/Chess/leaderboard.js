@@ -12,21 +12,13 @@ class Leaderboard extends Parse {
 	constructor(message) {
 		super(message);
 	}
-
-	/**
-	 * Gets a leaderboard of results in a tournament on Lichess and filters them to players from the database
-	 * @param {string} id - The tournamnet ID on Lichess to get
-	 * @param {Number} nb - The number of players to check against the database
-	 */
-	async tournament(id = this.args[0], nb = this.args[1] || 30, _variant = this.args[2] || '') {
+	async shield (variant = this.args[0] || 'Bullet', nb = this.args[1]) {
 		try {
-			if (!id) throw this.Permissions.output('args');
-			let data;
-			if (id === 'shield') {
-				let variant;
-				let variants = Object.values(config.variants).map(v => v.name).concat(['SuperBlitz']);
-				if (variants.indexOf(variant) !== -1) variant = _variant;
-				else if (config.variants[_variant]) variant = config.variants[_variant].name;
+			if (!variant) throw this.Permissions.output('args');
+			if (typeof nb !== 'number') nb = 30;
+			let variants = Object.values(config.variants).map(v => v.name).concat(['SuperBlitz']);
+			if (variants.indexOf(variant) === -1) {
+				if (config.variants[variant]) variant = config.variants[variant].name;
 				else {
 					let index = await this.Output.choose({
 						type: 'variant to get shield results',
@@ -34,37 +26,57 @@ class Leaderboard extends Parse {
 					});
 					variant = variants[index];
 				}
-				data = await lila.tournaments.lastShield(variant, {nb, fetchUser: false});
-			} else data = await lila.tournaments.results(id, {nb, fetchUser: false});
+			}
+			this.msg = await this.Output.generic(`Getting Lichess data for **${variant} Shield Arena**...`);
+			let data = await lila.tournaments.lastShield(variant, {nb, fetchUser: false});
 			if (!data) throw 'Invalid ID, couldn\'t fetch Lichess tournament data';
-			console.log(data);
+			data.variant = variant;
 			this.outputTournament(data, this.argument.includes('-a') || this.argument.includes('--a'));
 		} catch (e) {
 			if (e) this.Output.onError(e);
 		}
 	}
 
+	/**
+	 * Gets a leaderboard of results in a tournament on Lichess and filters them to players from the database
+	 * @param {string} id - The tournamnet ID on Lichess to get
+	 * @param {Number} nb - The number of players to check against the database
+	 */
+	async tournament(id = this.args[0], nb = this.args[1] || 30) {
+		try {
+			if (!id) throw this.Permissions.output('args');
+			if (typeof nb !== 'number') nb = 30;
+			this.msg = await this.Output.generic(`Getting data for [Lichess Tournament](https://lichess.org/tournament/${id})...`);
+			let data = await lila.tournaments.results(id, {nb, fetchUser: false});
+			if (!data) throw 'Invalid ID, couldn\'t fetch Lichess tournament data';
+			this.outputTournament(data);
+		} catch (e) {
+			if (e) this.Output.onError(e);
+		}
+	}
+
 	async outputTournament({
-		id, results
-	}, all = false) {
+		id, results, variant
+	}, all = this.argument.includes('-a') || false) {
 		try {
 			const lb = results.array().reduce((acc, user, i) => {
-				let DiscordID;
+				let name;
 				if (!all) {
-					DiscordID = commands.accounts.accounts.get(user.username);
+					let DiscordID = commands.accounts.accounts.get(user.username);
 					if (!DiscordID) return acc;
-				}
+					name = (this.Search.users.byID(DiscordID) || {}).tag;
+				} else name = user.username;
 				acc.push([
 					('#' + (i + 1)).bold(),
-					`[${(this.Search.users.byID(DiscordID) || {}).tag}](https://lichess.org/@/${user.username}) ${user.score}`
+					`[${name}](https://lichess.org/@/${user.username}) ${user.score}`
 				]);
 				return acc;
 			}, []);
-			this.Output.sender(new Embed()
-				.setTitle('Lichess Tournament')
+			this.Output[this.msg ? 'editor' : 'sender'](new Embed()
+				.setTitle(this.command === 'shield' ? `${variant} Shield Arena` : 'Lichess Tournament')
 				.setURL('https://lichess.org/tournament/' + id)
 				.setDescription(lb[0] ? lb.toPairs() : 'No tracked members found.')
-			);
+			, this.msg || this.channel);
 		} catch (e) {
 			if (e) this.Output.onError(e);
 		}

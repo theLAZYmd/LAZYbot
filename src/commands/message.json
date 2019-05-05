@@ -864,6 +864,21 @@
 			"file": "leaderboard",
 			"method": "tournament",
 			"prefix": "generic"
+		},
+		{
+			"aliases": [
+				"shield"
+			],
+			"description": "Gets a leaderboard of results for a shield tournament on Lichess and filters them to players from the database",
+			"usage": [
+				"shield Crazyhouse 30",
+				"shield antichess 50",
+				"shield [defaults to Bullet] [defauls to 30]"
+			],
+			"module": "Chess",
+			"file": "leaderboard",
+			"method": "shield",
+			"prefix": "generic"
 		}
     ],
     "Currency": [
