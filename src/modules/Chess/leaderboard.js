@@ -19,7 +19,8 @@ class Leaderboard extends Parse {
 	 */
 	async tournament(id = '', nb = 30) {
 		try {
-			if (!id) [id, nb = 30] = this.args;
+            if (!id) [id, nb = 30] = this.args;
+            nb = nb ? Number(nb) : 30;
 			if (!id) throw this.Permissions.output('args');
 			const data = await lila.tournaments.results(id, {nb, fetchUser: false});
 			if (!data) throw 'Invalid ID, couldn\'t fetch Lichess tournament data';

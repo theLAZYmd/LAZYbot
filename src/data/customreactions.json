@@ -29,14 +29,14 @@
             },
             "challonge": {
                 "type": "text",
-                "reaction": "<https://challonge.com/en/tournament/bracket_generator.html?ref=ovRmwPCC51>",
+                "reaction": "https://challonge.com/24bdsh40",
                 "anyword": false
             }
         },
         "emoji": {
             "lazy": {
                 "type": "emoji",
-                "anyword": false,
+                "anyword": true,
                 "reaction": "lazy"
             },
             "cubes": {
