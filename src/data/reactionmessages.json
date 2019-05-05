@@ -171,6 +171,10 @@
             "570026202216136704": {
                 "tag": "Natso#0116",
                 "lastMail": 1555975237279
+            },
+            "573865108405616640": {
+                "tag": "420Blaziken_it#4524",
+                "lastMail": 1556890503821
             }
         },
         "paginator": {
@@ -8376,6 +8380,204 @@
                 "page": 1,
                 "author": "566664516839145492",
                 "cmdID": "571241207175315477"
+            },
+            "571414245539840021": {
+                "embedgroup": [
+                    {
+                        "title": "Profile for  kingswitcher#7212",
+                        "description": "",
+                        "color": 0,
+                        "fields": [
+                            {
+                                "name": "Info",
+                                "value": "Region: **None set.**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Mar 30 2019**\nThe House: **Mar 30 2019**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`561365116273164308`**\nPosition in Database: **931**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "0",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/EncsMs8.png"
+                        },
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "333586342275710978",
+                "cmdID": "571414244248125445"
+            },
+            "571934292796768266": {
+                "embedgroup": [
+                    {
+                        "title": "Profile for  Ogul#1233",
+                        "description": "```\nI'm Movag Bastmadijan and I'm poor.```",
+                        "color": 12884558,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "Emirhan Oğul\nnabla\nf4-opening",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Location: **Turkey**\nRegion: **Europe**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Dec 04 2018**\nThe House: **Feb 08 2019**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`519602977380761621`**\nPosition in Database: **711**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "8,197",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/519602977380761621/8ff72910b9d6448e28c22ed0b1aa95ba.png?size=2048"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": "Profile for  Ogul#1233",
+                        "description": "```\nI'm Movag Bastmadijan and I'm poor.```",
+                        "color": 12884558,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[Ogul1](https://lichess.org/@/Ogul1)\n960: **1529**\nUltrabullet: **1572**\nBullet: **1704**\nBlitz: **1444**\nRapid: 1533?\nClassical: 1500?\nCorrespondence: 1398?\nCrazyhouse: **1640**\nKing of the Hill: **1616**\n3-check: **1426**\nAntichess: **2256**\nAtomic: **1683**\nHorde: **1646**\nRacing Kings: **1853**\nPuzzles: **1456**",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[f4-opening](https://lichess.org/@/f4-opening)\nBullet: 1500?\nBlitz: 1500?\nRapid: 1500?\nClassical: 1500?\nCorrespondence: 1500?\nAntichess: **2255**\nPuzzles: 1615?",
+                                "inline": true
+                            }
+                        ],
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "373480715276517376",
+                "cmdID": "571934291425230855"
+            },
+            "571936594760826880": {
+                "embedgroup": [
+                    {
+                        "description": "Winner wins 50 :cherry_blossom: + VIP role as long as you keep the shield",
+                        "author": {
+                            "name": "Win a lichess shield to obtain the vip role and flowers!",
+                            "icon_url": "https://i.imgur.com/JbhAKpz.png"
+                        },
+                        "fields": [
+                            {
+                                "name": "Prizes for high performers",
+                                "value": "Top 3 win 40 :cherry_blossom:\nTop 10 win 30 🌸\nTop 20 win 20 🌸\nTop 30 win 10 🌸",
+                                "inline": false
+                            },
+                            {
+                                "name": "Date",
+                                "value": "Check out the upcoming Shield tournaments from [the tournament calendar](https://lichess.org/tournament/calendar).",
+                                "inline": false
+                            }
+                        ]
+                    }
+                ],
+                "period": 180000,
+                "page": 0,
+                "author": "373480715276517376",
+                "cmdID": "571936593229905922"
+            },
+            "573150770690523155": {
+                "embedgroup": [
+                    {
+                        "title": "Profile for  Professor Chronatog#2674",
+                        "description": "```\nhttp://www.nicklong.net/chess/```",
+                        "color": 3447003,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "Nick Long\nChronatog",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Location: **Aruba (netherlands)**\nRegion: **Americas**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Mar 19 2018**\nThe House: **Mar 19 2018**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`425397119315214336`**\nPosition in Database: **148**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "12,793",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/425397119315214336/7d2f542ce586267e31458e182c187d89.png?size=2048"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": "Profile for  Professor Chronatog#2674",
+                        "description": "```\nhttp://www.nicklong.net/chess/```",
+                        "color": 3447003,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[Chronatog](https://lichess.org/@/Chronatog)\n960: **1921**\nUltrabullet: **1637**\nBullet: **1974**\nBlitz: **1924**\nRapid: **2064**\nClassical: 1500?\nCorrespondence: 1500?\nCrazyhouse: **1916**\nKing of the Hill: 1652?\n3-check: **1778**\nAntichess: **2018**\nAtomic: **2128**\nHorde: 1696?\nRacing Kings: 1461?\nPuzzles: **1666**",
+                                "inline": true
+                            }
+                        ],
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "425397119315214336",
+                "cmdID": "573150769079910401"
+            },
+            "573584736589447178": {
+                "embedgroup": [
+                    {
+                        "description": "**#1** TcubesAK#3940 2264\n**#2** PsyMar#2210 2079\n**#3** theLAZYmd#2353 1935\n**#4** Wildfire#9567 1928\n**#5** crptone#1398 1838\n**#6** okei#1207 1772\n**#7** ObiWanBenoni#3488 1596\n**#8** moonenane#3553 1387\n**#9** Musickn#8622 1183\n",
+                        "fields": [],
+                        "title": " House leaderboard for Trivia players"
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "377227077859934208",
+                "cmdID": "573584735075565569"
             }
         },
         "election": {
