@@ -298,7 +298,7 @@ class Output extends Parse {
 					})().catch(() => {}),
 					(async () => {
 						let mcollected = await msg.channel.awaitMessages(mfilter, awaitOptions).catch(() => {});                          
-						mcollected.first().delete(1000).catch(() => {}); 
+						await mcollected.first().delete(1000).catch(() => {}); 
 						if (mcollected.first().content === 'cancel') throw ''; 
 						return this.Search.emojis.constructor.hexatrigintamals.indexOf(mcollected.first().content);
 					})().catch(() => {})
@@ -308,7 +308,7 @@ class Output extends Parse {
 			} catch (e) {
 				throw e;
 			} finally {
-				if (autodelete !== false) msg.delete().catch(() => {});
+				if (autodelete !== false) await msg.delete().catch(() => {});
 				else msg.clearReactions().catch(() => {});
 			}
 		} catch (e) {

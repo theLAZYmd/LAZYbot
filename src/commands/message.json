@@ -360,6 +360,26 @@
 		},
 		{
 			"aliases": [
+				"edit"
+			],
+			"description": "Creates a new builder by editing a previous message of LAZYbot's",
+			"module": "Builders",
+			"file": "main",
+			"method": "run",
+			"syntax": "type",
+			"prefix": "generic",
+			"subcommands": [
+				{
+					"aliases": [
+						"embed"
+					],
+					"description": "Edits a new embed in the specified channel",
+					"method": "embed"
+				}
+			]
+		},
+		{
+			"aliases": [
 				"setTitle"
 			],
 			"description": "Sets the title of an active embed",
@@ -456,6 +476,16 @@
 			"module": "Builders",
 			"file": "embedBuilder",
 			"method": "addField",
+			"prefix": "generic"
+		},
+		{
+			"aliases": [
+				"removeField"
+			],
+			"description": "Removes a field to an active embed",
+			"module": "Builders",
+			"file": "embedBuilder",
+			"method": "removeField",
 			"prefix": "generic"
 		},
 		{
@@ -1730,12 +1760,7 @@
             "module": "Help",
             "file": "commands",
             "method": "list",
-            "prefix": "generic",
-            "requires": {
-                "args": {
-                    "length": 0
-                }
-            }
+            "prefix": "generic"
         },
         {
             "aliases": [
