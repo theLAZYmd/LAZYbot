@@ -224,6 +224,10 @@ class Emoji extends Search {
 		return id ? this.client.emojis.find(emoji => id[0] === emoji.id) || '' : null;
 	}
 
+	byKey(key) {
+		return config.emojis[key] ? this.byID(config.emojis[key]) : null;
+	}
+
 	byName(name) {
 		return this.client.emojis.find(emoji => emoji.name.replace(/[^a-z0-9]+/gi, '').toLowerCase() === name.replace(/[^a-z0-9]+/gi, '').toLowerCase()) || '';
 	}
