@@ -28,8 +28,11 @@
             "log": "comment-log",
             "join": "join",
             "leave": "393020247604592640",
-            "trivia": "arena",
-            "welcome": "welcome"
+            "trivia": "390289422802747403",
+            "welcome": "welcome",
+            "reddit": [
+                "576429987905929216"
+            ]
         },
         "colors": {
             "generic": 53380,
