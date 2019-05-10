@@ -20,6 +20,7 @@ class Builder extends Parse{
 			});
 			method = options[index];
 		}
+		await this.message.delete().catch(() => {});
 		this[method]();
 	}
 
@@ -29,7 +30,14 @@ class Builder extends Parse{
 	 */
 	async embed () {
 		const Instance = new embedBuilder(this.message);
-		Instance.build();
+		switch (this.command) {
+			case ('new'):
+				return Instance.build();
+			case ('edit'):
+				return Instance.edit();
+			default:
+				return this.Output.onError('Invalid command');
+		}
 	}
 }
 
