@@ -38,5 +38,13 @@
 			"state": "trivia",
 			"channels": "trivia"
 		}
+	},
+	{
+		"module": "Utility",
+		"file": "reddit",
+		"method": "channel",
+		"requires": {
+			"channels": "reddit"
+		}
 	}
 ]

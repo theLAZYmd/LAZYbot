@@ -29,15 +29,19 @@ class Permissions {
 	static channels(channelResolvable, argsInfo) {
 		let name;
 		let id;
-		if (typeof channelResolvable === 'string') name = channelResolvable;
+		if (typeof channelResolvable === 'string') name = argsInfo.server.channels[channelResolvable] || channelResolvable;
 		else if (typeof channelResolvable === 'object') {
 			if (channelResolvable.id) id = channelResolvable.id;
 			if (channelResolvable.name) name = channelResolvable.name;
 			else if (channelResolvable.type) return channelResolvable.type === argsInfo.channel.type;
 		}
-		if (argsInfo.channel.id === id) return true;
-		if (!argsInfo.guild.channels.some(channel => channel.name.toLowerCase() === name.toLowerCase())) name = 'general';
-		if (argsInfo.channel.name.toLowerCase() === name.toLowerCase()) return true;
+		let names = Array.isArray(name) ? name : [name];
+		for (let n of names) {
+			if (argsInfo.channel.id === id) return true;
+			if (argsInfo.channel.id === n) return true;
+			if (!argsInfo.guild.channels.some(channel => channel.name.toLowerCase() === n.toLowerCase())) name = 'general';
+			if (argsInfo.channel.name.toLowerCase() === n.toLowerCase()) return true;
+		}
 		return false;
 	}
 

@@ -9,6 +9,13 @@ class Output extends Parse {
 		super(message);
 	}
 
+	/**
+	 * Sends an embed through the Discord API
+	 * @param {Embed} embed 
+	 * @param {Channel|Message} channel 
+	 * @private
+	 * @returns {Promise<Message>}
+	 */
 	async sender(embed, channel = this.channel) {
 		try {
 			if (!embed) throw 'this.Output.sender(): Embed object is undefined.';
@@ -23,6 +30,13 @@ class Output extends Parse {
 		}
 	}
 
+	/**
+	 * Edits an message with an embed through the Discord API
+	 * @param {Embed} embed 
+	 * @param {Message} msg 
+	 * @private
+	 * @returns {Promise<Message>}
+	 */
 	async editor(embed, msg) {
 		try {
 			if (!embed) throw 'this.Output.editor(): Embed object is undefined.';
@@ -37,16 +51,27 @@ class Output extends Parse {
 		}
 	}
 
+	/**
+	 * Sends an embed throught the Discord API with a single description value of a string message
+	 * @param {string} description 
+	 * @param {Channel} channel 
+	 * @private
+	 * @returns {Promise<Message>}
+	 */
 	async generic(description, channel) {
 		try {
-			return await this.sender({
-				description
-			}, channel);
+			return await this.sender({	description	 }, channel);
 		} catch (e) {
 			if (e) this.onError(e);
 		}
 	}
 
+	/**
+	 * Sends a named embed from the database to the Discord API
+	 * @param {string} name 
+	 * @private
+	 * @returns {Promise<Message>}
+	 */
 	async embed(name) {
 		try {
 			try {
@@ -71,6 +96,13 @@ class Output extends Parse {
 		}
 	}
 
+	/**
+	 * Sends a JavaScript Object through the Discord API as a Discord Embed by stringifying JSON values. Permits overspill. Primarily a debugging tool.
+	 * @param {Object|Array} json 
+	 * @param {Channel} channel 
+	 * @param {string} type 
+	 * @private
+	 */
 	async data(json, channel, type = 'json') {
 		try {
 			let string = (typeof json === 'object' ? JSON.stringify((typeof json._apiTransform === 'function' ? json._apiTransform() : json), null, 2) : json).replace(/`/g, '\\`');
@@ -91,6 +123,13 @@ class Output extends Parse {
 		}
 	}
 
+	/**
+	 * Outputs an error as a Discord Embed through the Discord API
+	 * @param {string|Error} error 
+	 * @param {Channel} channel 
+	 * @private
+	 * @returns {Promise<Message>}
+	 */
 	async onError(error, channel = this.channel) {
 		try {
 			if (!error) throw '';
@@ -116,25 +155,39 @@ class Output extends Parse {
 		}
 	}
 
+	/**
+	 * DMs a message to all 'bot owners' in the form of a Discord Embed
+	 * @param {string} description 
+	 * @private
+	 */
 	async owner(description) {
 		try {
 			let owners = config.ids.owner.map(owner => this.Search.users.byID(owner));
-			for (let owner of owners)
+			for (let owner of owners) {
 				this.generic(description, owner);
+			}
 		} catch (e) {
 			if (e) this.onError(e);
 		}
 	}
 
-	async reactor(embed, channel, emojis) { //sends a message with custom emojis
+	/**
+	 * Same as Output.prototype.sender but reacts to the message afterwards with a set of custom emojis. Order is maintained.
+	 * @param {Embed} embed 
+	 * @param {Channel} channel 
+	 * @param {string[]} emojis - The list of emojis with which to react
+	 * @param {Boolean} promisify - Use if outputting as the final call for a function and a return value is not needed
+	 * @returns {Promise<Message>}
+	 */
+	async reactor(embed, channel, emojis, promisify = false) {
 		try {
 			if (!embed) throw '';
-			let msg = await this[typeof channel.send === 'function' ? 'sender' : 'editor'](embed, channel); //send it
-			for (let i = 0; i < emojis.length; i++) { //then react to it
-				setTimeout(() => {
-					if (msg) msg.react(emojis[i]).catch(() => {
-					});
-				}, i * 1000); //prevent api spam and to get the order right
+			let msg = await this[typeof channel.send === 'function' ? 'sender' : 'editor'](embed, channel);
+			let f = i => msg ? msg.react(emojis[i]).catch(() => {}) : () => {};
+			for (let i = 0; i < emojis.length; i++) {
+				if (!msg) break;
+				if (promisify) f();
+				else setTimeout(f, i * 1000);
 			}
 			return msg;
 		} catch (e) {
@@ -166,7 +219,7 @@ class Output extends Parse {
 	 * @property {Message} editor - Whether the message should edit a previous message, rather than posting a new confirmation message
 	 * @property {Boolean} cancel - Is this a confirmation to cancel? If so, return true on timeout
 	 * @param {Boolean} r - Whether to return a Boolean value of the confirmation result (true) or simply throw on confirmation failure
-	 * @returns {Boolean?}
+	 * @returns {Promise<Boolean?>}
 	 */
 	async confirm({
 		author = this.author,
@@ -249,7 +302,7 @@ class Output extends Parse {
 	 * @property {number} time - The time in milliseconds allowed for the user to pick an option in ms. Defaults to 18000 (18 seconds).
 	 * @property {string} title - The embed title of the choose message that should be displayed. Can be anything.
 	 * @property {string} type - The kind of thing that is chosen. Will be displayed as 'Please choose a [...]'
-	 * @returns {Number?}
+	 * @returns {Promise<Number?>}
 	 */
 	async choose({
 		author = this.author,
@@ -346,7 +399,7 @@ class Output extends Parse {
 	 * @property {Boolean} oneword - If acceptable responses should be only one word
 	 * @property {Boolean} json - If the response should be parsed as a JSON
 	 * @param {Boolean} r - If the whole message object should be returned, rather than just the content
-	 * @returns {number}
+	 * @returns {Promise<string|Number|Message>}
 	 */
 	async response({
 		title = '',
