@@ -137,7 +137,7 @@ class Output extends Parse {
 			let title, description, url;
 			if (typeof error === 'object' && error.stack && error.name && error.message) {
 				let lines = error.stack.split('\n');
-				let [full, lineNumber, columnNumber] = lines[1].match(/([\w:()\\.]+):([0-9]+):([0-9]+)\)$/).splice(1);
+				let [full, lineNumber, columnNumber] = lines[1].match(/([\w:()\\.]+):([0-9]+):([0-9]+)\)/).splice(1);
 				let path = full.split('\\');
 				let trace = path.splice(path.indexOf('LAZYbot') + 1);
 				url = Package.branch + trace.join('/') + '#L' + lineNumber;
