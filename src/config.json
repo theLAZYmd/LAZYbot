@@ -36,9 +36,9 @@
     },
     "lastUpdate": 1557054573236,
     "backupdb": [
-        "Sun May 05 2019 00:41:32 GMT+01",
-        "Sun May 05 2019 00:25:56 GMT+01",
-        "Sun May 05 2019 00:25:56 GMT+01"
+        "Fri May 10 2019 16:26:36 GMT+01",
+        "Fri May 10 2019 15:26:36 GMT+01",
+        "Fri May 10 2019 13:26:37 GMT+01"
     ],
     "delays": {
         "repeat": 1800000
@@ -184,6 +184,11 @@
         "trivia": {
             "name": "Trivia",
             "key": "trivia"
+        },
+        "superblitz": {
+            "name": "SuperBlitz",
+            "key": "superblitz",
+            "lichess": "superblitz"
         }
     },
     "sources": {
