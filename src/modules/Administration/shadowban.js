@@ -139,7 +139,7 @@ class Shadowban extends Parse {
 					.setTitle('Automod filtered message')
 					.addField('Author', this.author, true)
 					.addField('Channel', this.channel, true)
-					.addField('Time', '[' + (message.editedTimestamp || message.createdTimestamp).toString().slice(0, 24) + '](' + message.url + ')', true)
+					.addField('Time', '[' + Date.getISOtime(message.editedTimestamp || message.createdTimestamp).slice(0, 24) + '](' + message.url + ')', true)
 					.addField('Rule', r.toString().format('css'), false)
 					.addField('Content', message.content.format(), false)
 				, this.Search.channels.get(this.server.channels.modmail));
