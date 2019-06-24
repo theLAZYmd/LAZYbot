@@ -27,10 +27,10 @@ class Shadowban extends Parse {
 			phrases: []
 		};
 		let shadowbanned = this.server.shadowbanned || def;
-		for (let k of ['usernames', 'newMessages']) {
-			let array = shadowbanned[k].split('/');
-			shadowbanned[k] = new RegExp(array.slice(1, -1).join('/'), array.pop());
-		}
+		for (let k of ['usernames', 'newMessages']) shadowbanned[k] = shadowbanned[k].map((str) => {
+			let array = str.split('/');
+			return new RegExp(array.slice(1, -1).join('/'), array.pop());
+		});
 		return this._shadowbanned = shadowbanned;
 	}
 
@@ -372,13 +372,13 @@ class Shadowban extends Parse {
 				options: Object.keys(shadowbanned),
 				type: 'condition of shadowbanning to modify'
 			});
-			if (typeof key !== 'number' || key < 0 || key >= Object.keys(shadowbanned).length) throw RangeError(key);
+			if (typeof key !== 'number' || key < 0 || key >= Object.keys(shadowbanned).length) throw new RangeError(key);
 			let type = Object.keys(shadowbanned)[key];
 			if (!index) index = await this.Output.choose({
 				options:  this.shadowbanned[type].map(c => c.format(/usernames|newMessages/.test(type) ? 'css' : 'fix')),
 				type: 'data entry to remove'
 			});
-			if (typeof index !== 'number' || index < 0 || index >= shadowbanned[type].length) throw RangeError(index);
+			if (typeof index !== 'number' || index < 0 || index >= shadowbanned[type].length) throw new RangeError(index);
 			let entry = shadowbanned[type][index];
 			shadowbanned[type].remove(index);
 			this.shadowbanned = shadowbanned;
