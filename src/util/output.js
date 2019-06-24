@@ -20,6 +20,7 @@ class Output extends Parse {
 		try {
 			if (!embed) throw 'this.Output.sender(): Embed object is undefined.';
 			if (!embed.color) embed.color = config.colors.generic;
+			if (!channel) throw [embed, channel];
 			if (channel.channel || channel.constructor.name === 'Message') channel = channel.channel;
 			let content = embed.content;
 			embed = Embed.receiver(embed);
@@ -119,7 +120,7 @@ class Output extends Parse {
 				, channel);
 			}
 		} catch (e) {
-			if (e) this.onError(e);
+			if (e) this.log(e);
 		}
 	}
 
@@ -143,7 +144,7 @@ class Output extends Parse {
 				url = Package.branch + trace.join('/') + '#L' + lineNumber;
 				title = error.name;
 				description = error.message.format();
-			} else description = error;
+			} else description = error.toString();
 			let embed = new Embed()
 				.setDescription(description.replace(/\${([a-z]+)}/gi, value => this.server.prefixes[value.match(/[a-z]+/i)]))
 				.setColor(config.colors.error);
@@ -183,11 +184,11 @@ class Output extends Parse {
 		try {
 			if (!embed) throw '';
 			let msg = await this[typeof channel.send === 'function' ? 'sender' : 'editor'](embed, channel);
-			let f = i => msg ? msg.react(emojis[i]).catch(() => {}) : () => {};
+			let f = () => msg ? msg.react(emojis.shift()).catch(() => {}) : () => {};
 			for (let i = 0; i < emojis.length; i++) {
 				if (!msg) break;
-				if (promisify) f();
-				else setTimeout(f, i * 1000, i);
+				if (promisify) await f();
+				else setTimeout(f, i * 1000);
 			}
 			return msg;
 		} catch (e) {
@@ -235,11 +236,6 @@ class Output extends Parse {
 	} = {}, r = false) {
 		try {
 			const emojis = ['✅', '❎'];
-			let msg = await this.reactor(
-				embed || new Embed().setDescription(description || '**' + author.tag + '** Please confirm ' + action + '.'),
-				editor || channel,
-				emojis
-			);
 			const rfilter = (reaction, user) => {
 				if (!emojis.includes(reaction.emoji.name)) return false;
 				if (author.id === user.id) return true;
@@ -252,6 +248,11 @@ class Output extends Parse {
 				time,
 				errors: ['time']
 			};
+			let msg = await this.reactor(
+				embed || new Embed().setDescription(description || '**' + author.tag + '** Please confirm ' + action + '.'),
+				editor || channel,
+				emojis.slice(0)
+			);
 			let collected = await Promise.race([
 				(async () => {
 					let rcollected = await msg.awaitReactions(rfilter, awaitOptions).catch(() => {});

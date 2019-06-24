@@ -2035,6 +2035,47 @@
         }
     ],
     "Utility": [
+		{
+			"aliases": [
+                "teamadd"
+            ],
+            "description": "Registers a new 'team' in a server",
+            "usage": [
+				"teamadd natso"
+            ],
+            "module": "Utility",
+            "file": "teams",
+            "method": "register",
+            "prefix": "generic"
+		},		
+		{
+			"aliases": [
+                "teamrem"
+            ],
+            "description": "Removes a 'team' from a server",
+            "usage": [
+				"teamarem natso"
+            ],
+            "module": "Utility",
+            "file": "teams",
+            "method": "remove",
+            "prefix": "generic"
+		},
+		{
+			"aliases": [
+                "teamlist",
+                "teams"
+            ],
+            "description": "Lists the 'teams' in a server, based on a pre-registry",
+            "usage": [
+				"teams --all",
+				"teams -a"
+            ],
+            "module": "Utility",
+            "file": "teams",
+            "method": "list",
+            "prefix": "generic"
+		},
         {
             "aliases": [
                 "fetch",

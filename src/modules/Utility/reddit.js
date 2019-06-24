@@ -20,10 +20,14 @@ class Reddit extends Parse {
 	async channel(message = this.message) {
 		try {
 			if (message.attachments.size === 0) return message.delete().catch(() => {});
-			const emojis = ['upvote', 'downvote'].map(emoji => this.Search.emojis.get(emoji));
-			for (let i = 0; i < emojis.length; i++) {
+			const names = ['upvote', 'downvote'];
+			const emojis = names.map(emoji => this.Search.emojis.get(emoji));
+			for (let i = 0; i < emojis.length; i++) try {
 				if (!message) break;
+				if (!emojis[i]) throw names[i];
 				await message.react(emojis[i]).catch(() => {});
+			} catch (e) {
+				if (e) this.error(e);
 			}
 		} catch (e) {
 			if (e) this.Output.onError(e);

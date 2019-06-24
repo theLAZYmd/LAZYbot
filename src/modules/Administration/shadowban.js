@@ -9,28 +9,55 @@ class Shadowban extends Parse {
 		super(message);
 	}
 
-	get shadowbanned () { //this is just a utility function, pls ignore
+	/**
+	 * Compiles the strings into regexes upon load.
+	 * @returns {Object}
+	 * @property {RegExp[]} usernames - Disallowed string pattern usernames
+	 * @property {string[]} users - In the form of IDs
+	 * @property {RegExp[]} newMessages - Problematic string messages, usually URLs
+	 * @property {string[]} phrases - List of words to be entered into trie
+	 * @private
+	 */
+	get shadowbanned () {
 		if (this._shadowbanned) return this._shadowbanned;
-		return this._shadowbanned = this.server.shadowbanned || {
+		let def = {
 			usernames: [],
 			users: [],
 			newMessages: [],
 			phrases: []
 		};
+		let shadowbanned = this.server.shadowbanned || def;
+		for (let k of ['usernames', 'newMessages']) shadowbanned[k] = shadowbanned[k].map((str) => {
+			let array = str.split('/');
+			return new RegExp(array.slice(1, -1).join('/'), array.pop());
+		});
+		return this._shadowbanned = shadowbanned;
 	}
 
-	set shadowbanned (shadowbanned) { //this is just a utility function, pls ignore
+	/**
+	 * Sets shadowban conditions
+	 * @private
+	 */
+	set shadowbanned (shadowbanned) {
 		let server = this.server;
 		server.shadowbanned = shadowbanned;
 		this._server = server;
 		this.server = server;
 	}
 
+	/**
+	 * Returns a new Aho-Corasick Trie object for all data stored
+	 * @returns {ac}
+	 */
 	static get trie () {
 		if (Shadowban._trie) return Shadowban._trie;
 		return Shadowban._trie = Shadowban.getTrie();
 	}
 
+	/**
+	 * Returns a new Aho-Corasick Trie Object
+	 * @returns {ac}
+	 */
 	static getTrie() {
 		let servers = DataManager.getFile('./src/data/server.json');
 		let data = Object.entries(servers).map(([id, data]) => [id, (data.shadowbanned || {}).phrases || []]);
@@ -41,11 +68,19 @@ class Shadowban extends Parse {
 		return obj;
 	}
 
+	/**
+	 * Returns a new Aho-Corasick Trie Object for the specific server in which the command is run
+	 * @returns {ac}
+	 */
 	get trie () {
 		if (this._trie) return this.trie;
 		return this._trie = Shadowban.trie[this.guild.id];
 	}
 
+	/**
+	 * Produces an embed listing the shadowban conditions
+	 * @public
+	 */
 	async list() { //displays list of information for conditions for shadowbanning
 		let shadowbanned = this.shadowbanned;
 		this.Output.sender(new Embed()
@@ -57,17 +92,25 @@ class Shadowban extends Parse {
 		);
 	}
 
+	/**
+	 * Runs through the list of conditions for a new message to be verified against
+	 * @param {Message} message
+	 * @public
+	 */
 	async check(message) {
 		let x = await this.sbuser(message);
 		if (!x) x = await this.sbphrase(message);
 		if (!x) x = await this.sbnm(message);
 	}
 
-	async sbusername({  user  }) { //if a new User's username matches a regex, BAN them
+	/**
+	 * If a new User's username matches a regex, BAN them
+	 * @param {Member} User
+	 * @public
+	 */
+	async sbusername({  user  }) {
 		try {
-			for (let n of this.shadowbanned.usernames) {
-				let array = n.split('/');
-				let r = new RegExp(array.slice(1, -1).join('/'), array.pop());
+			for (let r of this.shadowbanned.usernames) {
 				if (!r.test(user.username)) continue;
 				this.log(['auto', 'Shadowban', 'byUsername', '[' + [user.tag, r].join(', ') + ']']);
 				await this.guild.ban(user, {
@@ -86,9 +129,15 @@ class Shadowban extends Parse {
 		}
 	}
 
-	async sbuser(message) { //if a specific user specified, delete all their messages. Ban them if they ping someone.
+	/**
+	 * If a specific user specified, delete all their messages. Ban them if they ping someone.
+	 * @param {Member} User
+	 * @public
+	 * @returns {Boolean}
+	 */
+	async sbuser(message) {
 		try {
-			if (!this.shadowbanned.users.some(id => id === this.message.author.id)) return;
+			if (!this.shadowbanned.users.some(id => id === this.message.author.id)) return false;
 			this.log(['auto', 'Shadowban', 'byUser', '[' + [message.author.tag, message.content].join(', ') + ']']);
 			message.delete();
 			if (!((m) => {
@@ -114,12 +163,16 @@ class Shadowban extends Parse {
 		}
 	}
 
+	/**
+	 * If a specific user specified, delete all their messages. Ban them if they ping someone.
+	 * @param {Member} User
+	 * @public
+	 * @returns {Boolean}
+	 */
 	async sbnm(message) { //for all new users (less than 50 messages), if their message matches the content, ban them. Otherwise if it's just a content match, alert mods.
 		try {
-			if (/^!(?:sb|shadowban)/.test(message.content)) return;
-			for (let n of this.shadowbanned.newMessages) {
-				let array = n.split('/');
-				let r = new RegExp(array.slice(1, -1).join('/'), array.pop());
+			if (/^!(?:sb|shadowban)/.test(message.content)) return false;
+			for (let r of this.shadowbanned.newMessages) {
 				if (!r.test(message.content)) continue;
 				this.log(['auto', 'Shadowban', 'byNewMessage', '[' + [message.author.tag, message.content].join(', ') + ']']);
 				if (Date.now() - this.member.joinedTimestamp < 48 * 60 * 60 * 1000) {
@@ -139,22 +192,29 @@ class Shadowban extends Parse {
 					.setTitle('Automod filtered message')
 					.addField('Author', this.author, true)
 					.addField('Channel', this.channel, true)
-					.addField('Time', '[' + (message.editedTimestamp || message.createdTimestamp).toString().slice(0, 24) + '](' + message.url + ')', true)
+					.addField('Time', '[' + Date.getISOtime(message.editedTimestamp || message.createdTimestamp).slice(0, 24) + '](' + message.url + ')', true)
 					.addField('Rule', r.toString().format('css'), false)
 					.addField('Content', message.content.format(), false)
 				, this.Search.channels.get(this.server.channels.modmail));
 				return true;
 			}
+			return false;
 		} catch (e) {
 			if (e) this.Output.onError(e);
 		}
 	}
 
-	async sbphrase(message) { //for all new users (less than 50 messages), if their message matches the content, ban them. Otherwise if it's just a content match, alert mods.
+	/**
+	 * For all new users (less than 50 messages), if their message matches word content, ban them. Otherwise if it's just a content match, alert mods.
+	 * @param {Member} User
+	 * @public
+	 * @returns {Boolean}
+	 */
+	async sbphrase(message) {
 		try {
-			if (/^!(?:sb|shadowban)/.test(message.content)) return;
+			if (/^!(?:sb|shadowban)/.test(message.content)) return false;
 			let matches = this.trie.search(message.content);
-			if (!matches.length) return;
+			if (!matches.length) return false;
 			this.log(['auto', 'Shadowban', 'byPhrase', '[' + [message.author.tag, message.content].join(', ') + ']']);
 			if (Date.now() - this.member.joinedTimestamp < 48 * 60 * 60 * 1000) {
 				if (this.dbuser.messages.count < 100) {
@@ -183,6 +243,11 @@ class Shadowban extends Parse {
 		}
 	}
 
+	/**
+	 * Router based on a command to add a shadowban condition
+	 * @param {string[]}
+	 * @public
+	 */
 	async adder(args) { //router
 		try {
 			let command = 'add' + (/User|Username|NewMessage|Phrase/i.test(args[0]) ? args.shift() : 'User');
@@ -195,7 +260,13 @@ class Shadowban extends Parse {
 		}
 	}
 
-	async addUser([_user]) { //if a user has a specific ID, DELETE all their messages
+	/**
+	 * If a user has a specific ID, instantly DELETE all their messages and add them to the list
+	 * Requires an exact match of search resolvable or a user mention
+	 * @param {string[]} User 
+	 * @public
+	 */
+	async addUser([_user]) {
 		try {
 			let member = this.Search.members.get(_user, true);
 			if (!member) throw 'Couldn\'t find matching member to shadowban.';
@@ -220,6 +291,11 @@ class Shadowban extends Parse {
 		}
 	}
 
+	/**
+	 * Adds a username pattern to the list of regexes to ban upon arrival
+	 * @param {string[]} User 
+	 * @public
+	 */
 	async addUsername([username]) { //if a user
 		try {
 			let array = username.split('/');
@@ -238,40 +314,54 @@ class Shadowban extends Parse {
 		}
 	}
 
+	/**
+	 * Adds a message content pattern to the list of filtered message contents
+	 * @param {string[]} args 
+	 * @public
+	 */
 	async addNewMessage(args) {
 		try {
-			let msg = args.join(' ');
-			let array = msg.split('/');
+			let content = args.join(' ');
+			let array = content.split('/');
 			let regex = new RegExp(array.slice(0, -1).join('/'), array.pop());
 			if (!regex) throw 'Invalid RegExp to validate messages from new users!';
 			let shadowbanned = this.shadowbanned;
-			shadowbanned.newMessages.push(msg);
+			shadowbanned.newMessages.push(content);
 			this.shadowbanned = shadowbanned;
 			this.Output.sender(new Embed()
 				.setTitle('⛔️ Message Content Shadowbanned')
-				.addField('Message Content', msg.format('css'), true)
+				.addField('Message Content', content.format('css'), true)
 			);
 		} catch (e) {
 			if (e) this.Output.onError(e);
 		}
 	}
 
+	/**
+	 * Adds a single phrase to scan messages for to filter
+	 * @param {string[]} args 
+	 * @public
+	 */
 	async addPhrase(args) {
 		try {
-			let msg = args.join(' ');
-			if (!msg) throw 'Invalid phrase';
+			let content = args.join(' ');
+			if (!content) throw 'Invalid phrase';
 			let shadowbanned = this.shadowbanned;
-			shadowbanned.phrases.push(msg);
+			shadowbanned.phrases.push(content);
 			this.shadowbanned = shadowbanned;
 			this.Output.sender(new Embed()
 				.setTitle('⛔️ Phrase Shadowbanned')
-				.addField('Phrase', msg.format(), true)
+				.addField('Phrase', content.format(), true)
 			);
 		} catch (e) {
 			if (e) this.Output.onError(e);
 		}
 	}
 
+	/**
+	 * Provides a mechanism to remove an item from the shadowban conditions list
+	 * @public
+	 */
 	async remove() {
 		try {
 			let shadowbanned = this.shadowbanned;
@@ -282,13 +372,13 @@ class Shadowban extends Parse {
 				options: Object.keys(shadowbanned),
 				type: 'condition of shadowbanning to modify'
 			});
-			if (typeof key !== 'number' || key < 0 || key >= Object.keys(shadowbanned).length) throw RangeError(key);
+			if (typeof key !== 'number' || key < 0 || key >= Object.keys(shadowbanned).length) throw new RangeError(key);
 			let type = Object.keys(shadowbanned)[key];
 			if (!index) index = await this.Output.choose({
 				options:  this.shadowbanned[type].map(c => c.format(/usernames|newMessages/.test(type) ? 'css' : 'fix')),
 				type: 'data entry to remove'
 			});
-			if (typeof index !== 'number' || index < 0 || index >= shadowbanned[type].length) throw RangeError(index);
+			if (typeof index !== 'number' || index < 0 || index >= shadowbanned[type].length) throw new RangeError(index);
 			let entry = shadowbanned[type][index];
 			shadowbanned[type].remove(index);
 			this.shadowbanned = shadowbanned;
