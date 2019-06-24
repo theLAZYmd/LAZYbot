@@ -1,5 +1,4 @@
 $ cat .gitignore
-src/util/config.json
 node_modules/
 
 src/.vscode/
@@ -13,7 +12,6 @@ token.json
 package-lock.json
 requireForce: false
 tsconfig.json
-src/modules/tracker/config.json
 LAZYbot.code-workspace
 combined.log
 watch.json

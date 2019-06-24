@@ -1,11 +1,11 @@
 import Discord from 'discord.js';
 import fs from 'fs';
 import listeners from 'events'
-import './extensions'
+import '../extensions'
 
-import DataManager from './util/datamanager';
-import Logger from './util/logger';
-import Ready from "./router/ready";
+import DataManager from '../util/datamanager';
+import Logger from '../util/logger';
+import Ready from "../router/ready";
 
 const {    token   } = DataManager.getFile("./src/token.json");
 const router = "router/";

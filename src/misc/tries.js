@@ -1,5 +1,5 @@
-const DataManager = require("./datamanager");
-const Logger = require("./logger");
+const DataManager = require("../util/datamanager");
+const Logger = require("../util/logger");
 const All = DataManager.getFile("./src/commands/all.json");
 const Bot = DataManager.getFile("./src/commands/bot.json");
 const DM = DataManager.getFile("./src/commands/DM.json");

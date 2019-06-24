@@ -88,10 +88,6 @@
                 "tag": "PawnInTraining#5209",
                 "lastMail": 1545554304839
             },
-            "529237458596921355": {
-                "tag": "theLAZYmd#2353",
-                "lastMail": 1546250442997
-            },
             "529345659271249927": {
                 "tag": "Waredude#7719",
                 "lastMail": 1546276240136
@@ -116,10 +112,6 @@
                 "tag": "hiiiii#7381",
                 "lastMail": 1551447900617
             },
-            "551037491952746497": {
-                "tag": "Natso#0116",
-                "lastMail": 1551447976036
-            },
             "552536812556517376": {
                 "tag": "Ogul#1233",
                 "lastMail": 1551466678952
@@ -132,17 +124,9 @@
                 "tag": "hiiiii#0116",
                 "lastMail": 1551805442627
             },
-            "553703353817759946": {
-                "tag": "Falcon#6507",
-                "lastMail": 1552083798564
-            },
             "557703261130457088": {
                 "tag": "PsyMar#2210",
                 "lastMail": 1553037222988
-            },
-            "557744751227437076": {
-                "tag": "Raven#9079",
-                "lastMail": 1553047111293
             },
             "558086323349749811": {
                 "tag": "JaakkoT#0116",
@@ -155,6 +139,46 @@
             "558150337635287043": {
                 "tag": "ijh#0966",
                 "lastMail": 1553143810605
+            },
+            "565311388629598220": {
+                "tag": "ObiWanBenoni#0116",
+                "lastMail": 1554851138145
+            },
+            "565325634155446289": {
+                "tag": "theLAZYmd#2353",
+                "lastMail": 1554854534492
+            },
+            "566712382571937821": {
+                "tag": "Musickn#8622",
+                "lastMail": 1555185161104
+            },
+            "567336181025472530": {
+                "tag": "RacingKingsKing#7988",
+                "lastMail": 1555333911705
+            },
+            "569576882371035166": {
+                "tag": "darkcoder#7928",
+                "lastMail": 1555868111091
+            },
+            "570026202216136704": {
+                "tag": "Natso#0116",
+                "lastMail": 1555975237279
+            },
+            "573865108405616640": {
+                "tag": "420Blaziken_it#4524",
+                "lastMail": 1556890503821
+            },
+            "575109444447502357": {
+                "tag": "Raven#9079",
+                "lastMail": 1553047111293
+            },
+            "575109446049595433": {
+                "tag": "hiya#0828",
+                "lastMail": 1557187177087
+            },
+            "575899437021528087": {
+                "tag": "Falcon#6507",
+                "lastMail": 1557375525616
             }
         },
         "paginator": {
@@ -6999,6 +7023,2006 @@
                 "page": 1,
                 "author": "185412969130229760",
                 "cmdID": "564659528918892548"
+            },
+            "564912955825717258": {
+                "embedgroup": [
+                    {
+                        "description": "**#1** [ab#2280](https://lichess.org/@/wabadabakalakaboo) 2450\n**#2** [penguingm1#2487](https://lichess.org/@/penguingim1) 2416\n**#3** [hiiii#0116](https://lichess.org/@/Natso) 2334\n**#4** [Our Messiah#1582](https://lichess.org/@/Ingrid-Vengeance) 2287\n**#5** [HighestCliff#1222](https://lichess.org/@/highestcliff) 2286\n**#6** [ProgramFOX#1012](https://lichess.org/@/ProgramFOX) 2280\n**#7** [Illion#1918](https://lichess.org/@/Illion) 2276\n**#8** [Natso#7381](https://lichess.org/@/JaakkoT) 2268\n**#9** [ijh#0966](https://lichess.org/@/ijh) 2250\n**#10** [Coucouplay#6192](https://lichess.org/@/Rapidplayer) 2236\n",
+                        "fields": [],
+                        "title": "<:atomic:471114116556128256> House leaderboard on Lichess.org for Atomic players",
+                        "footer": {
+                            "text": "1 / 8"
+                        },
+                        "color": 53380
+                    },
+                    {
+                        "description": "**#11** [Professor Chronatog#2674](https://lichess.org/@/Chronatog) 2222\n**#12** [HipnoTheGambler#0082](https://lichess.org/@/hipno) 2214\n**#13** [MMichael#3973](https://lichess.org/@/TheFinnisher) 2176\n**#14** [Sean B#6257](https://lichess.org/@/seanysean) 2149\n**#15** [Mark Plotkin#1754](https://lichess.org/@/littleplotkin) 2138\n**#16** [Truthdoc#5694](https://lichess.org/@/FischyVishy) 2132\n**#17** [TheWinterSoldier#5715](https://lichess.org/@/Grainiac) 2095\n**#18** [laurens#0324](https://lichess.org/@/chessape) 2087\n**#19** [Raven#9079](https://lichess.org/@/PepsiNGaming) 2054\n**#20** [a_47#4756](https://lichess.org/@/a_47) 2031\n",
+                        "fields": [],
+                        "title": "<:atomic:471114116556128256> House leaderboard on Lichess.org for Atomic players"
+                    },
+                    {
+                        "description": "**#21** [L2B#9326](https://lichess.org/@/TwitchWainaut) 2028\n**#22** [MeneerMandje#9220](https://lichess.org/@/VariantsOnly) 2014\n**#23** [Floluk2718#0919](https://lichess.org/@/ChessApple78) 2013\n**#24** [RoyalManiac#1918](https://lichess.org/@/RoyalManiac) 2011\n**#25** [best mod#8259](https://lichess.org/@/opperwezen) 2009\n**#26** [hierik#3356](https://lichess.org/@/blindfoldbilly) 2002\n**#27** [TheLoneWolf#4001](https://lichess.org/@/the-lone-wolf) 1927\n**#28** [Musickn#8622](https://lichess.org/@/Musicknight123) 1899\n**#29** [Maelstrom#5079](https://lichess.org/@/TooStrongTooFast) 1894\n**#30** [jazzii#1899](https://lichess.org/@/jazzii) 1881\n",
+                        "fields": [],
+                        "title": "<:atomic:471114116556128256> House leaderboard on Lichess.org for Atomic players"
+                    },
+                    {
+                        "description": "**#31** [TheM492017#5103](https://lichess.org/@/TheM492017) 1850\n**#32** [Wildfire#9567](https://lichess.org/@/Sonata2) 1829\n**#33** [crptone#1398](https://lichess.org/@/crptone) 1816\n**#34** [CamelClutcher#1687](https://lichess.org/@/CamelClutcher) 1801\n**#35** [Lesau#6766](https://lichess.org/@/Lesau) 1798\n**#36** [Greg Finley#8702](https://lichess.org/@/gbfgbfgbf) 1796\n**#37** [ted#5021](https://lichess.org/@/TheodoreMariani) 1784\n**#38** [Kyle#4287](https://lichess.org/@/KyleLegion) 1779\n**#39** [ah#7777](https://lichess.org/@/ikidude) 1750\n**#40** [okei#1207](https://lichess.org/@/okei) 1745\n",
+                        "fields": [],
+                        "title": "<:atomic:471114116556128256> House leaderboard on Lichess.org for Atomic players"
+                    },
+                    {
+                        "description": "**#41** [ericw31415#6314](https://lichess.org/@/ericw31415) 1730\n**#42** [FaZe_ Jingle Bell Cat#8226](https://lichess.org/@/TheUnknownGuyReborn) 1722\n**#43** [ilares#0829](https://lichess.org/@/ilaaaaaaaaaaaaaaares) 1720\n**#44** [Romeore#5887](https://lichess.org/@/Opening_Player) 1719\n**#45** [chessguy101#2066](https://lichess.org/@/chesssky2) 1719\n**#46** [retardedplatypus123#0264](https://lichess.org/@/retardedplatypus123) 1715\n**#47** [blunderman1#2451](https://lichess.org/@/blunderman1) 1714\n**#48** [Andrew#5850](https://lichess.org/@/Link) 1714\n**#49** [pepellou#7258](https://lichess.org/@/pepellou) 1714\n**#50** [Ogul#1233](https://lichess.org/@/Ogul1) 1711\n",
+                        "fields": [],
+                        "title": "<:atomic:471114116556128256> House leaderboard on Lichess.org for Atomic players"
+                    },
+                    {
+                        "description": "**#51** [undefined](https://lichess.org/@/DifferentKing) 1710\n**#52** [javi0111#6730](https://lichess.org/@/Javi0111) 1697\n**#53** [best pleb na#5152](https://lichess.org/@/lucyismywaifu) 1687\n**#54** [Friendly Neighborhood Hug Dealer#1065](https://lichess.org/@/Veeronica) 1677\n**#55** [IceFire19#8717](https://lichess.org/@/IceFire1921) 1677\n**#56** [Yeti#0449](https://lichess.org/@/yatinagarwal) 1674\n**#57** [Juanma206#4765](https://lichess.org/@/SadLittleTurtle) 1672\n**#58** [insinorater#3419](https://lichess.org/@/I_cant_win) 1655\n**#59** [tobiasfunke35#7793](https://lichess.org/@/BurakYarol) 1646\n**#60** [Babosos#3628](https://lichess.org/@/Babosos) 1640\n",
+                        "fields": [],
+                        "title": "<:atomic:471114116556128256> House leaderboard on Lichess.org for Atomic players"
+                    },
+                    {
+                        "description": "**#61** [dooms#4944](https://lichess.org/@/Cogline) 1626\n**#62** [ohjay#7914](https://lichess.org/@/ojb) 1615\n**#63** [undefined](https://lichess.org/@/faramir) 1601\n**#64** [darkcoder#7928](https://lichess.org/@/deepan434) 1600\n**#65** [Stubenfisch#9958](https://lichess.org/@/Stubenfisch) 1595\n**#66** [jamarlo#8806](https://lichess.org/@/jamesog) 1595\n**#67** [poriluk#3839](https://lichess.org/@/Brokula) 1591\n**#68** [loukas435#2646](https://lichess.org/@/loukas435) 1583\n**#69** [nowayouwin#1285](https://lichess.org/@/Nowayouwin) 1579\n**#70** [acecace9801#4811](https://lichess.org/@/Tysace) 1567\n",
+                        "fields": [],
+                        "title": "<:atomic:471114116556128256> House leaderboard on Lichess.org for Atomic players"
+                    },
+                    {
+                        "description": "**#71** [Nitrogen#6533](https://lichess.org/@/Hitman047) 1558\n**#72** [undefined](https://lichess.org/@/Noah1377) 1556\n**#73** [rizka#7593](https://lichess.org/@/rizka10) 1494\n**#74** [ObiWanBenoni#3488](https://lichess.org/@/andreijl) 1476\n**#75** [Prometheus#4964](https://lichess.org/@/Sleipnir1216) 1471\n**#76** [TauPiPhi#6392](https://lichess.org/@/FibonacciWCS) 1445\n**#77** [stevis5#7413](https://lichess.org/@/stevis5) 1187\n",
+                        "fields": [],
+                        "title": "<:atomic:471114116556128256> House leaderboard on Lichess.org for Atomic players"
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "334447969451638784",
+                "cmdID": "564912954475020298"
+            },
+            "564921681953554463": {
+                "embedgroup": [
+                    {
+                        "title": "How to edit an Official™ House Discord Guide",
+                        "description": "Head to [this url](https://github.com/theLAZYmd/LAZYbot/edit/master/src/data/embeds.json) which is the bot's **GitHub Repo**.\nScroll down to the section of the data relevant to you. You can do that by viewing the `\"title`\" of each embed and making the correlation to the title you're looking for, or `Ctrl+F`-ing a suitable word or phrase that will help you identify it.",
+                        "fields": [
+                            {
+                                "name": "1. Edit the JSON for that embed.",
+                                "value": "If it's a minor correction, this shouldn't be an issue, just add it in the change required. If you're doing something more complicated, or you don't understyand what's going on here, have a look at [this article](https://www.red-gate.com/simple-talk/sql/oracle/json-for-absolute-beginners-part-1-introduction/) or ask someone in #devs for help.\nSwitch to the `soft-wrap` mode in the top right of the editing box if that makes things easier.",
+                                "inline": false
+                            },
+                            {
+                                "name": "2. Submit the Pull Request.",
+                                "value": "Scroll down to the bottom.\nWrite a one-line description for what you've done to the file in the 'Update embeds.json' field, then write a more detailed description below if necessary.\nPress `Propose file change`! When the next page loads up, click `Create Pull Request` whenever it appears. \nWe'll review what you've done and correct it if necessary before approving! As soon as your changes are approved their live on the bot!",
+                                "inline": false
+                            }
+                        ],
+                        "footer": {
+                            "text": "1 / 1"
+                        },
+                        "color": 53380
+                    }
+                ],
+                "period": 180000,
+                "page": 0,
+                "author": "185412969130229760",
+                "cmdID": "564921680724754442"
+            },
+            "564923382634905600": {
+                "embedgroup": [
+                    {
+                        "image": {
+                            "url": "https://i.imgur.com/Fqsev0t.png"
+                        },
+                        "footer": {
+                            "text": "1 / 11"
+                        },
+                        "color": 53380
+                    },
+                    {
+                        "title": "Rule 1: Be civil",
+                        "description": "Be polite, courteous and respectful of others. With this in mind, expect to be treated this way back, by all members.",
+                        "footer": {
+                            "text": "2 / 11"
+                        },
+                        "color": 53380
+                    },
+                    {
+                        "title": "Rule 2: Don't be uncivil",
+                        "description": "Formerly known as 'Rule 2: Don't be a dick'. Repeated trolling, belittling, or otherwise undesirable behaviour is not tolerated. Don't incite hostility from or make personal attacks on other server members. Don't bitch. Don't become Channel 24.",
+                        "footer": {
+                            "text": "3 / 11"
+                        },
+                        "color": 53380
+                    },
+                    {
+                        "title": "Rule 3: Content control",
+                        "description": "The following content is not permitted:\n\n- graphic NSFW\n- information that could be used to dox another member, maintaining the presumption that they wish to stay anonymous unless explicitly stated otherwise\n- racism\n- sexism\n- homophobia\n- videos or images of gore and death- symbols of radical ideologies\n- links or instructions to content that could detrimentally harm an individual's computer or own person (computer viruses and the like)\n\n<@!338772451565502474> will deal ruthlessly with anyone posting malicious content",
+                        "footer": {
+                            "text": "4 / 11"
+                        },
+                        "color": 53380
+                    },
+                    {
+                        "title": "Rule 4: We condone any 'present but not involved' behaviour",
+                        "description": "Behaviour encouraging any of the actions outlined in rules 2 or 3 is not permitted",
+                        "footer": {
+                            "text": "5 / 11"
+                        },
+                        "color": 53380
+                    },
+                    {
+                        "title": "Rule 5: We condone the formation of 'hives of scum and villainy' discussion",
+                        "description": "This rule relates to members banned from the large chess-playing websites with whom we work closely and from which many of our members come from. On the event of receiving a ban from any such site, we expect for members to keep discussion of the ban to a minimum, with the maximum such allowed being an impartial presentation of basic facts to satisfy the curiosity of any asking. We will direct banned members towards the appeal points for relevant sites, for instance, [Lichess Ban Appeal](https://lichess.org/contact#help-root) and [Chess.com support](https://support.chess.com/customer/portal/emails/new) are both available.",
+                        "footer": {
+                            "text": "6 / 11"
+                        },
+                        "color": 53380
+                    },
+                    {
+                        "title": "Rule 6: Be on-topic",
+                        "description": "Follow discussion guidelines for the channel you are in and keep content to those communities, as much as possible. Each variant channel should be a discussion hub for that variant's community. Keep general discussion in <#390249300589805570>. Information can be found in each channel's description or by channel name",
+                        "footer": {
+                            "text": "7 / 11"
+                        },
+                        "color": 53380
+                    },
+                    {
+                        "title": "Rule 7: Do not spam",
+                        "description": "Exceptions are permitted in <#390273555084083210>, <#390259390709497857>, and anywhere else directed by admin instruction. Otherwise, the ability of user discussion should not be impeded in any way. Any quantity of messages irrelevant to the majority of users using a channel that impedes a conversation taking place is considered spam.",
+                        "footer": {
+                            "text": "8 / 11"
+                        },
+                        "color": 53380
+                    },
+                    {
+                        "title": "Rule 8: Follow the Discord Community guidelines",
+                        "description": "[Available here](https://discordapp.com/guidelines)",
+                        "footer": {
+                            "text": "9 / 11"
+                        },
+                        "color": 53380
+                    },
+                    {
+                        "title": "Rule 9: No excessive advertising",
+                        "description": "Advertising of other servers or similar projects without asking an admin first, especially for non-established users is highly frowned upon. Repeat violations will result in punishment. Links to petitions or campaign fundraisers are banned without exception. The House is happy to advertise / partner with most chess Discord servers upon request.",
+                        "footer": {
+                            "text": "10 / 11"
+                        },
+                        "color": 53380
+                    },
+                    {
+                        "title": "Rule 10: Respect moderator decision",
+                        "description": "All the admins you see on this server contribute their time and effort for free, without asking for anything back. Be respectful to them. Any warning or decision enacted by them or through a bot stands and should be engaged with in a polite and civil fashion.",
+                        "footer": {
+                            "text": "11 / 11"
+                        },
+                        "color": 53380
+                    }
+                ],
+                "period": "Infinity",
+                "page": 0,
+                "author": "185412969130229760",
+                "cmdID": "564923380835549188",
+                "path": "rules"
+            },
+            "565192074576658432": {
+                "embedgroup": [
+                    {
+                        "title": " Profile for theLAZYmd#2353",
+                        "description": "```\nIt's finally spring vac!```",
+                        "color": 53380,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "theLAZYbot",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Age: **19**\nSex: **<:male:430870358133047306>**\nLocation: **Toronto**\nRegion: **None set.**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **May 26 2016**\nThe House: **May 16 2017**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`185412969130229760`**\nPosition in Database: 0",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "79,167",
+                                "inline": true
+                            },
+                            {
+                                "name": "House Trophies",
+                                "value": ":trophy: **champion du mondeeeeeeee**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/185412969130229760/5f740f5cffe2614dc65ccd28702d150d.png?size=2048"
+                        },
+                        "footer": {
+                            "text": "1 / 2"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": " Profile for theLAZYmd#2353",
+                        "description": "```\nIt's finally spring vac!```",
+                        "color": 0,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[TheLAZYmd](https://lichess.org/@/TheLAZYmd)\nBlitz: **1958**\nBullet: **1957**\nRapid: **1985**\nClassical: 1500?\nCrazyhouse: **2159**\nAtomic: 1563?",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:chesscom:430038158244184064> Chess.com",
+                                "value": "[theLAZYbot](https://www.chess.com/member/theLAZYbot)\nBullet: 1817?\nCrazyhouse: **2104**\nBughouse: **1935**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/185412969130229760/5f740f5cffe2614dc65ccd28702d150d.png?size=2048"
+                        },
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "185412969130229760",
+                "cmdID": "565192072743878667"
+            },
+            "565586455989321748": {
+                "embedgroup": [
+                    {
+                        "description": "**#1** [DuskyMountain#2584](https://www.chess.com/member/wildllama) 2130\n**#2** [liamchez#8300](https://www.chess.com/member/Liamchez) 2115\n**#3** [Simba7#0506](https://www.chess.com/member/siemba) 2052\n**#4** [TcubesAK#3940](https://www.chess.com/member/TcubesAK) 2004\n**#5** [Mugwort#6375](https://www.chess.com/member/Mugwort) 2004\n**#6** [Yeti#0449](https://www.chess.com/member/bugging_lie) 1915\n**#7** [theLAZYmd#2353](https://www.chess.com/member/theLAZYbot) 1817\n**#8** [Prometheus#4964](https://www.chess.com/member/sleipnir1216) 1810\n**#9** [sdf#8138](https://www.chess.com/member/shift3) 1809\n**#10** [the420boss#8639](https://www.chess.com/member/khiggins89) 1696\n",
+                        "fields": [],
+                        "title": " House leaderboard on Chess.com for Bullet players",
+                        "footer": {
+                            "text": "1 / 4"
+                        },
+                        "color": 53380
+                    },
+                    {
+                        "description": "**#11** [moonenane#3553](https://www.chess.com/member/hydrosuit) 1696\n**#12** [Italian Roasted Vanilla#9959](https://www.chess.com/member/Cosmicaly_Religious) 1674\n**#13** [okei#1207](https://www.chess.com/member/okeizh) 1652\n**#14** [samoyd#2402](https://www.chess.com/member/silvershell) 1608\n**#15** [IceFire19#8717](https://www.chess.com/member/Saketh1905) 1594\n**#16** [XxX_JMC_XxX#6180](https://www.chess.com/member/Programmer57) 1503\n**#17** [Waredude#7719](https://www.chess.com/member/Waredude) 1311\n**#18** [dankCervonWong#8006](https://www.chess.com/member/cerv0nw0ng) 1274\n**#19** [Lasker#4807](https://www.chess.com/member/largecheeseburger) 1273\n**#20** [KIKSUMAS](https://www.chess.com/member/KIKSUMAS) 1231\n",
+                        "fields": [],
+                        "title": " House leaderboard on Chess.com for Bullet players"
+                    },
+                    {
+                        "description": "**#21** [Kyle#4287](https://www.chess.com/member/KyleLegion) 1228\n**#22** [TheM492017#5103](https://www.chess.com/member/TheM492017) 1220\n**#23** [undefined](https://www.chess.com/member/gloves22) 1208\n**#24** [no#4880](https://www.chess.com/member/thepiercingarrow) 1168\n**#25** [electronaTone#8557](https://www.chess.com/member/electronatone) 1160\n**#26** [TauPiPhi#6392](https://www.chess.com/member/taupiphi) 1113\n**#27** [Richie#1075](https://www.chess.com/member/Casper_J) 1098\n**#28** [stevis5#1056](https://www.chess.com/member/stevis5) 1092\n**#29** [Alihene22#3760](https://www.chess.com/member/Alihene) 1066\n**#30** [Areckx#9580](https://www.chess.com/member/areckx) 835\n",
+                        "fields": [],
+                        "title": " House leaderboard on Chess.com for Bullet players"
+                    },
+                    {
+                        "description": "**#31** [Speckled Jim#3378](https://www.chess.com/member/Jetterna) 829\n**#32** [Alramech#2895](https://www.chess.com/member/Alramech) 828\n",
+                        "fields": [],
+                        "title": " House leaderboard on Chess.com for Bullet players"
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "185412969130229760",
+                "cmdID": "565586454680698880"
+            },
+            "565642094043988019": {
+                "embedgroup": [
+                    {
+                        "title": "<:housediscord:485510528769196068> House Discord Rules",
+                        "fields": [
+                            {
+                                "name": "Rule 1: Be civil",
+                                "value": "Be polite, courteous and respectful of others.\n​",
+                                "inline": false
+                            },
+                            {
+                                "name": "Rule 2: Don't be uncivil",
+                                "value": "Instances of uncivil behaviour include but are not limited to:\n- Repeated trolling\n- Belittling\n- Inciting hostility\n- Personal attacks\n- Harrassment (in server or through DMs)\n- Repeated user pinging\nand will not be tolerated.\n​",
+                                "inline": false
+                            },
+                            {
+                                "name": "Rule 3: Content control",
+                                "value": "The following content is not permitted:\n- graphic NSFW\n- information that could be used to dox another member, maintaining the presumption that they wish to stay anonymous unless explicitly stated otherwise\n- racism\n- sexism\n- homophobia\n- videos or images of gore and death\n- symbols of radical ideologies\n- links or instructions to content that could detrimentally harm an individual's computer or own person (computer viruses and the like)\n​",
+                                "inline": false
+                            },
+                            {
+                                "name": "Rule 4: Chess server bans",
+                                "value": "Anyone receiving a ban from a live chess is required to keep discussion of the ban to a minimum. Banned members from the following sites should be redirected to:\n- [Lichess Ban Appeal](https://lichess.org/contact#help-root)\n- [Chess.com support](https://support.chess.com/customer/portal/emails/new)\n​",
+                                "inline": false
+                            },
+                            {
+                                "name": "Rule 5: Incitement",
+                                "value": "Encouraging any of the actions outlined in rules 2, 3, or 4 is not permitted.\n​",
+                                "inline": false
+                            },
+                            {
+                                "name": "Rule 6: Be on-topic",
+                                "value": "Keep chat in each channel to its respective discussion guidelines as much as possible.\n​",
+                                "inline": false
+                            },
+                            {
+                                "name": "Rule 7: Don't spam",
+                                "value": "Exceptions are permitted in <#390273555084083210>, <#390259390709497857>. The ability of user discussion should never be impeded in any way.\n​",
+                                "inline": false
+                            },
+                            {
+                                "name": "Rule 8: Follow the Discord Community guidelines",
+                                "value": "[Available here](https://discordapp.com/guidelines)\n​",
+                                "inline": false
+                            },
+                            {
+                                "name": "Rule 9: No excessive advertising",
+                                "value": "Advertising of other servers or similar projects without asking an admin first, especially for non-established users, is highly frowned upon.\n​",
+                                "inline": false
+                            },
+                            {
+                                "name": "Rule 10: Respect moderator decisions",
+                                "value": "All the admins you see on this server contribute their time and effort for free, without asking for anything back. Be respectful to them. Any warning or decision enacted by them or through a bot should be engaged with in a polite and civil fashion.",
+                                "inline": false
+                            }
+                        ],
+                        "footer": {
+                            "text": "1 / 1"
+                        },
+                        "color": 53380
+                    }
+                ],
+                "period": 180000,
+                "page": 0,
+                "author": "185412969130229760",
+                "cmdID": "565642092202950657"
+            },
+            "565972105238413362": {
+                "embedgroup": [
+                    {
+                        "title": "What is Discord and how does it work?",
+                        "description": "**Discord**\nDiscord is a program which you can use on the web or download an app from, you can chat and voice chat in there, it has become more and more popular among gamers.\n\n**Channels**\nThere exist different channels which are used to keep the conversations on a specific topic, for instance there are different ones for each variant here. \n\n**Roles and bots**\nPeople can acquire roles which give them permissions to see certain channels, that is so you don't have to see the variant channels you are not interested in. There are also non-human members, known as bots, who react only to certain commands.",
+                        "color": 53380,
+                        "author": {
+                            "name": "House Guide to Discord"
+                        },
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/YWF70U4.png"
+                        },
+                        "fields": [],
+                        "footer": {
+                            "text": "1 / 1"
+                        }
+                    }
+                ],
+                "period": 180000,
+                "page": 0,
+                "author": "185412969130229760",
+                "cmdID": "565972104198225921"
+            },
+            "565993097675276304": {
+                "embedgroup": [
+                    {
+                        "title": "Profile for  theLAZYmd#2353",
+                        "description": "```\nIt's finally spring vac!```",
+                        "color": 53380,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "lazychox\ntheLAZYbot",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Age: **19**\nSex: **<:male:430870358133047306>**\nLocation: **Toronto**\nRegion: **None set.**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **May 26 2016**\nThe House: **May 16 2017**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`185412969130229760`**\nPosition in Database: 0",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "79,381",
+                                "inline": true
+                            },
+                            {
+                                "name": "House Trophies",
+                                "value": ":trophy: **champion du mondeeeeeeee**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/185412969130229760/5f740f5cffe2614dc65ccd28702d150d.png?size=2048"
+                        },
+                        "footer": {
+                            "text": "1 / 2"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": "Profile for  theLAZYmd#2353",
+                        "description": "```\nIt's finally spring vac!```",
+                        "color": 0,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[TheLAZYmd](https://lichess.org/@/TheLAZYmd)\nUltrabullet: **1819**\nBullet: **2008**\nBlitz: **1958**\nRapid: **1985**\nClassical: 1500?\nCorrespondence: 1861?\nCrazyhouse: **2148**\nKing of the Hill: 1710?\n3-check: **1720**\nAtomic: 1563?\nPuzzle: **2002**",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[lazychox](https://lichess.org/@/lazychox)\nBullet: 2110?\nBlitz: 1500?\nRapid: 1500?\nClassical: 1500?\nCorrespondence: 1500?\nCrazyhouse: **2136**",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:chesscom:430038158244184064> Chess.com",
+                                "value": "[theLAZYbot](https://www.chess.com/member/theLAZYbot)\nBullet: **1817**\nCrazyhouse: **2104**\nBughouse: **1951**",
+                                "inline": true
+                            }
+                        ],
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "185412969130229760",
+                "cmdID": "565993096396144665"
+            },
+            "566004857321029658": {
+                "embedgroup": [
+                    {
+                        "description": "**#1** TcubesAK#3940 2289\n**#2** Wildfire#9567 1928\n**#3** crptone#1398 1838\n**#4** okei#1207 1772\n**#5** moonenane#3553 1387\n",
+                        "fields": [],
+                        "title": " House leaderboard for Trivia players",
+                        "footer": {
+                            "text": "1 / 1"
+                        },
+                        "color": 53380
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "373480715276517376",
+                "cmdID": "566004856477974536"
+            },
+            "566004922919682049": {
+                "embedgroup": [
+                    {
+                        "description": "**#1** TcubesAK#3940 2289\n**#2** crptone#1398 1838\n**#3** okei#1207 1772\n",
+                        "fields": [],
+                        "title": " House leaderboard foractive Trivia players",
+                        "footer": {
+                            "text": "1 / 1"
+                        },
+                        "color": 53380
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "373480715276517376",
+                "cmdID": "566004922521223178"
+            },
+            "566005493349220353": {
+                "embedgroup": [
+                    {
+                        "description": "**#1** okei#1207 1772\n",
+                        "fields": [],
+                        "title": " House leaderboard for Trivia players",
+                        "footer": {
+                            "text": "1 / 1"
+                        },
+                        "color": 53380
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "185412969130229760",
+                "cmdID": "566005492409827378"
+            },
+            "566005520868048914": {
+                "embedgroup": [
+                    {
+                        "description": "**#1** okei#1207 1772\n",
+                        "fields": [],
+                        "title": " House leaderboard for Trivia players",
+                        "footer": {
+                            "text": "1 / 1"
+                        },
+                        "color": 53380
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "185412969130229760",
+                "cmdID": "566005519995633664"
+            },
+            "566007066905542656": {
+                "embedgroup": [
+                    {
+                        "description": "**#1** okei#1207 1772\n",
+                        "fields": [],
+                        "title": " House leaderboard for Trivia players",
+                        "footer": {
+                            "text": "1 / 1"
+                        },
+                        "color": 53380
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "373480715276517376",
+                "cmdID": "566007066091716608"
+            },
+            "566007101407756291": {
+                "embedgroup": [
+                    {
+                        "description": "**#1** okei#1207 1772\n",
+                        "fields": [],
+                        "title": " House leaderboard foractive Trivia players",
+                        "footer": {
+                            "text": "1 / 1"
+                        },
+                        "color": 53380
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "373480715276517376",
+                "cmdID": "566007100329820200"
+            },
+            "566011572863107076": {
+                "embedgroup": [
+                    {
+                        "title": "Official House Shop Roles",
+                        "description": "Congrats on accumulating a whole bunch of flowers. Here are the roles you can buy; they will give you a special colour flair and make you superior to other members on the right sidebar! The colors look really nice.\n\nCheck savings by `.$`. Check level by `.xp`\n\n__Bronze__: 200 🌸; **if level 5**, 90 🌸\n__Silver__: 360 🌸; **if level 10**, 180 🌸 \n__Gold__: 680 🌸; **if level 20**, 370 🌸 \n__Diamond__: 1320 🌸; **if level 30**, 760 🌸 \n\nAre you just that special that you want your own colour? Well then buy:\n\n__ChooseColor__: 500 🌸 \n\nChange your colour to whatever you want using the `!color` command.\n Does not affect your right sidebar standings; it's for ye vain ones.",
+                        "footer": {
+                            "text": "Role rewards must be bought in order."
+                        },
+                        "color": 53380
+                    }
+                ],
+                "period": 180000,
+                "page": 0,
+                "author": "515524778530963473",
+                "cmdID": "566011571311083530"
+            },
+            "566012200461008896": {
+                "embedgroup": [
+                    {
+                        "description": "**#1** okei#1207 1772\n",
+                        "fields": [],
+                        "title": " House leaderboard for Trivia players",
+                        "footer": {
+                            "text": "1 / 1"
+                        },
+                        "color": 53380
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "185412969130229760",
+                "cmdID": "566012192386711556"
+            },
+            "566016203995217961": {
+                "embedgroup": [
+                    {
+                        "description": "**#1** okei#1207 1772\n",
+                        "fields": [],
+                        "title": " House leaderboard for Trivia players",
+                        "footer": {
+                            "text": "1 / 1"
+                        },
+                        "color": 53380
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "185412969130229760",
+                "cmdID": "566016203034984450"
+            },
+            "566016992675496001": {
+                "embedgroup": [
+                    {
+                        "description": "**General**\nThe channel moderators are elected moderators chosen by people in that channel. Each variant channel (crazyhouse, 3-check, atomic etc) has two (2) channel mods. They are the representatives of their variant community. \n\n**Assignment**\nIn each channel, two channel mods will:\n• Maintain the channel and make it as good-a-place as possible.\n• Invite and build up the channel community for that variant.\n• Organise events for the channel/community (tournaments, new ideas, vs, giveaways).\n• Manage (delete, pin) messages.\n• Change channel name and description. \n• Control channel specific bot functions (new 'nowplaying' feature, live stream notifications)",
+                        "color": 53380,
+                        "author": {
+                            "name": "Channel moderators",
+                            "icon_url": "https://vignette.wikia.nocookie.net/clubpenguin/images/9/9b/Moderator_Badge_new.png/revision/latest?cb=20140206150417"
+                        },
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/VId4nJT.png"
+                        },
+                        "fields": [],
+                        "footer": {
+                            "text": "1 / 1"
+                        }
+                    }
+                ],
+                "period": 180000,
+                "page": 0,
+                "author": "373480715276517376",
+                "cmdID": "566016991840960552"
+            },
+            "566638846624661515": {
+                "embedgroup": [
+                    {
+                        "title": "Profile for <:gm:455851408462446602>  penguingm1#2487",
+                        "description": "",
+                        "color": 15844367,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "penguingm1\n.\npenguingim1\nKuuhaku1",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Region: **Americas**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Jun 21 2017**\nThe House: **Jan 30 2018**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`326918898178064396`**\nPosition in Database: **5**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "17,158",
+                                "inline": true
+                            },
+                            {
+                                "name": "House Trophies",
+                                "value": ":trophy: **Reached 3200 Bullet**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/326918898178064396/0c1c7d876ce232e2b87da0c5285a9134.png?size=2048"
+                        },
+                        "footer": {
+                            "text": "1 / 2"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": "Profile for <:gm:455851408462446602>  penguingm1#2487",
+                        "description": "",
+                        "color": 15844367,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[penguingim1](https://lichess.org/@/penguingim1)\n960: **2351**\nUltrabullet: **2936**\nBullet: **3122**\nBlitz: **2511**\nRapid: **2646**\nClassical: 2571?\nCorrespondence: 1658?\nCrazyhouse: **2641**\nKing of the Hill: **2480**\n3-check: **2525**\nAntichess: **2213**\nAtomic: **2416**\nHorde: **2627**\nRacing Kings: **2388**\nPuzzle: **2283**",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:chesscom:430038158244184064> Chess.com",
+                                "value": "[penguingm1](https://www.chess.com/member/penguingm1)\nBullet: 3143?\nBlitz: 2916?\nRapid: 2489?\nClassical: 1828?\nCrazyhouse: **2743**\nBughouse: **2571**\nKing of the Hill: **2645**\nPuzzle: 2958?",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:bughousetest:433422387867025409> BughouseTest.com",
+                                "value": "[Kuuhaku1](http://bughousetest.com/@/Kuuhaku1)\n",
+                                "inline": true
+                            }
+                        ],
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "185412969130229760",
+                "cmdID": "566638846146510848"
+            },
+            "566639037071228958": {
+                "embedgroup": [
+                    {
+                        "title": "Profile for <:gm:455851408462446602>  penguingm1#2487",
+                        "description": "",
+                        "color": 15844367,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "penguingm1\n.\npenguingim1\nKuuhaku1",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Region: **Americas**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Jun 21 2017**\nThe House: **Jan 30 2018**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`326918898178064396`**\nPosition in Database: **5**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "17,158",
+                                "inline": true
+                            },
+                            {
+                                "name": "House Trophies",
+                                "value": ":trophy: **Reached 3200 Bullet**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/326918898178064396/0c1c7d876ce232e2b87da0c5285a9134.png?size=2048"
+                        },
+                        "footer": {
+                            "text": "1 / 2"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": "Profile for <:gm:455851408462446602>  penguingm1#2487",
+                        "description": "",
+                        "color": 15844367,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[penguingim1](https://lichess.org/@/penguingim1)\n960: **2351**\nUltrabullet: **2936**\nBullet: **3122**\nBlitz: **2511**\nRapid: **2646**\nClassical: 2571?\nCorrespondence: 1658?\nCrazyhouse: **2641**\nKing of the Hill: **2480**\n3-check: **2525**\nAntichess: **2213**\nAtomic: **2416**\nHorde: **2627**\nRacing Kings: **2388**\nPuzzle: **2283**",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:chesscom:430038158244184064> Chess.com",
+                                "value": "[penguingm1](https://www.chess.com/member/penguingm1)\nBullet: 3143?\nBlitz: 2916?\nRapid: 2489?\nClassical: 1828?\nCrazyhouse: **2743**\nBughouse: **2571**\nKing of the Hill: **2645**\nPuzzle: 2958?",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:bughousetest:433422387867025409> BughouseTest.com",
+                                "value": "[Kuuhaku1](http://bughousetest.com/@/Kuuhaku1)\n",
+                                "inline": true
+                            }
+                        ],
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "185412969130229760",
+                "cmdID": "566639036026978325"
+            },
+            "566640852756332598": {
+                "embedgroup": [
+                    {
+                        "title": "Profile for <:gm:455851408462446602>  penguingm1#2487",
+                        "description": "",
+                        "color": 15844367,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "penguingm1\n.\npenguingim1\nKuuhaku1",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Region: **Americas**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Jun 21 2017**\nThe House: **Jan 30 2018**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`326918898178064396`**\nPosition in Database: **5**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "17,158",
+                                "inline": true
+                            },
+                            {
+                                "name": "House Trophies",
+                                "value": ":trophy: **Reached 3200 Bullet**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/326918898178064396/0c1c7d876ce232e2b87da0c5285a9134.png?size=2048"
+                        },
+                        "footer": {
+                            "text": "1 / 2"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": "Profile for <:gm:455851408462446602>  penguingm1#2487",
+                        "description": "",
+                        "color": 15844367,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[penguingim1](https://lichess.org/@/penguingim1)\n960: **2351**\nUltrabullet: **2936**\nBullet: **3122**\nBlitz: **2511**\nRapid: **2646**\nClassical: 2571?\nCorrespondence: 1658?\nCrazyhouse: **2641**\nKing of the Hill: **2480**\n3-check: **2525**\nAntichess: **2213**\nAtomic: **2416**\nHorde: **2627**\nRacing Kings: **2388**\nPuzzle: **2283**",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:chesscom:430038158244184064> Chess.com",
+                                "value": "[penguingm1](https://www.chess.com/member/penguingm1)\nBullet: 3143?\nBlitz: 2916?\nRapid: 2489?\nClassical: 1828?\nCrazyhouse: **2743**\nBughouse: **2571**\nKing of the Hill: **2645**\nPuzzle: 2958?",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:bughousetest:433422387867025409> BughouseTest.com",
+                                "value": "[Kuuhaku1](http://bughousetest.com/@/Kuuhaku1)\n",
+                                "inline": true
+                            }
+                        ],
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "185412969130229760",
+                "cmdID": "566640851930054687"
+            },
+            "567807944758919179": {
+                "embedgroup": [
+                    {
+                        "image": {
+                            "url": "https://i.imgur.com/ZSI6HEj.png"
+                        },
+                        "footer": {
+                            "text": "1 / 3"
+                        },
+                        "color": 53380
+                    },
+                    {
+                        "author": {
+                            "name": "CRAZYHOUSE WORLD CHAMPIONSHIP 2018"
+                        },
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/pMkkATk.png"
+                        },
+                        "title": "FOREWORD",
+                        "description": "Over a year has passed since lichess’s Crazyhouse World Championship (CWC) was created. Last time we had a qualification round with 64 players, then three knockout rounds (R64, R32 and R16), after which the eight Candidates remained. Those final eight players played a Candidates Tournament which led to the finals between **TwelveTeen** and **JannLee**. During three weeks, they played 60 thrilling games. After the dust settled, the final score was 31,5-28,5 in favor of **JannLee**, making him the first Crazyhouse World Champion. \n\nToday, it’s time to continue this story. Champions are not born; they are made in the quiet hours when nobody is watching. Sign-ups for the 2nd edition of the CWC start on February 1. Do you have what it takes to be the next champion?",
+                        "footer": {
+                            "text": "2 / 3"
+                        },
+                        "color": 53380
+                    },
+                    {
+                        "author": {
+                            "name": "CRAZYHOUSE WORLD CHAMPIONSHIP 2018"
+                        },
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/pMkkATk.png"
+                        },
+                        "title": "INFORMATION",
+                        "fields": [
+                            {
+                                "name": "Time Control",
+                                "value": "3 + 2 for the whole event",
+                                "inline": false
+                            },
+                            {
+                                "name": "Format",
+                                "value": "The championship will start out as a knockout, but when 8 players are left, they will play a round-robin Candidates tournament! The first place finisher of that tournament will play a WC match against the incumbent WC (1st CWC WC, JannLee).",
+                                "inline": false
+                            },
+                            {
+                                "name": "Prize Pool",
+                                "value": "$1000\n**Update:** upped by an additional $1100 from the generous fundraising of <@364388430412513281> through his Twitch donators to payout to the candidates.",
+                                "inline": false
+                            },
+                            {
+                                "name": "Prize Fund Distribution",
+                                "value": "$300 WC, $200 challenger, $50 for 8 candidates, 100$ Prediction tournament ($50 #1, $30 #2, $20 #3)\n<@364388430412513281> fundraising is distributed with $100 to each candidate.",
+                                "inline": false
+                            },
+                            {
+                                "name": "Start Date",
+                                "value": "Feb 15 2018",
+                                "inline": true
+                            },
+                            {
+                                "name": "Sign-Ups",
+                                "value": "Feb 1 2018 - Feb 14 2018",
+                                "inline": true
+                            },
+                            {
+                                "name": "Information and Rules",
+                                "value": "https://sites.google.com/site/2ndcrazyhouseworldchampionship/",
+                                "inline": false
+                            },
+                            {
+                                "name": "History",
+                                "value": "<https://sites.google.com/site/crazyhouseworldchampionship/home>\n<https://lichess.org/forum/team-crazyhouse-world-championship/time-control>\n<https://lichess.org/forum/team-crazyhouse-world-championship/time-control-voting>",
+                                "inline": false
+                            }
+                        ],
+                        "footer": {
+                            "text": "3 / 3"
+                        },
+                        "color": 53380
+                    }
+                ],
+                "period": 180000,
+                "page": 2,
+                "author": "185412969130229760",
+                "cmdID": "567807943110688799"
+            },
+            "567809207361863680": {
+                "embedgroup": [
+                    {
+                        "image": {
+                            "url": "https://i.imgur.com/v5fg6wH.png"
+                        },
+                        "footer": {
+                            "text": "1 / 8"
+                        },
+                        "color": 53380
+                    },
+                    {
+                        "title": "Entrant Eligibility",
+                        "description": "Entrants who meet the following criteria will be accepted automatically:\n\n**1.** Have an established crazyhouse rating on lichess.\n\n**2.** Have played at least 50 rated crazyhouse games on lichess.\n\n**3.** Have had an account on lichess for over 1 month at the time of entry.\n\n**4.** Be participating only using their main account (no dupe accounts).\n\n**5.** Have messaged the TD (FischyVishy) with intent to join **within** the entry period.\n\n**6.** Have joined the Crazyhouse World Championship group.\n\nPoints 1, 2 and 3 above are aimed primarily at preventing duplicate accounts from entering. Entries not meeting these criteria may still be accepted and seeded at the TD's discretion.\n\nExceptions are most likely to be made for players known within the crazyhouse community who clearly are not using duplicate accounts.\n\nAny player attempting to use multiple accounts or computer assistance will be kicked out and if necessary reported to lichess moderators.",
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/AaQkW8G.png"
+                        },
+                        "footer": {
+                            "text": "2 / 8"
+                        },
+                        "color": 53380
+                    },
+                    {
+                        "title": "Knockout Tournament Rules I",
+                        "description": "You will be paired with a player for a round. There will be a week for you to play your round in, with a week in between rounds as breaks / negotiation periods. Please note the following stipulations:\n\n**1.** It is preferable if the games are rated. If **both** players agree then some or all games can be unrated.\n\n**2.** Results **and** games of each match should be messaged to the TD upon completion.\n\n**3.** All matches will consist of an equal number of White games per player.\n\n**4.** Each match will consist of ten (10) games of 3 + 2.\n\n**5.** If the score is 5-5 after 10 games then the tie-break will consist of games of 3 + 2, until one player is ahead after an even number of games.\n\n**6.** Either player can stop the match if someone reaches 5.5 points in the first 10 games, as long as the player stopping the match has not played more rated White games than their opponent.\n\n**7.** Each player is entitled to a short break of approximately 10 minutes after every 2 games (these breaks can be accumulated).\n\n**8.** The tournament main draw will have 128 players. If the number of entrants is not equal to 128 players, a qualification tournament will be held. The x number of top-finishers from said tournament will get a spot in the knockouts.",
+                        "color": 53380,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/0koqrUA.png"
+                        },
+                        "footer": {
+                            "text": "3 / 8"
+                        }
+                    },
+                    {
+                        "title": "Knockout Tournament Rules II",
+                        "description": "**9.** Assuming there are 128 players, after the first round there will be 64 players left and so on until there are 8 players left.\n\n**10.** The initial pairing will have the top seed vs. bottom seed, the second seed vs. second from bottom, etc. For example, in an eight player event: (1) vs. (8), (2) vs. (7), (3) vs. (6), (4) vs. (5). The winner of (1) vs. (8) will then play the winner of (4) vs. (5) and the winner of (2) vs. (7) will play the winner of (3) vs. (6). The winner of those matches would then contest the \"final\" (before the Candidates).\n\n**11.** The seeding will be based on the average between a player’s current rating and highest rating at the time their entry is received & logged.\n\n**12.** If somebody is unable to complete a series, or has to withdraw, their opponent is considered the victor. Only emergencies can exempt players from having this rule applied to them. Byes may be issued in the case of an odd number of players.\n\n**13.** If someone knows they will not be able to play a certain week when a round is scheduled, they must notify the TD before they play their prior match. At the TD's discretion their match may be moved to the following week. This will only occur a maximum of one time per player.\n\n**14.** After each match, players will typically have at least a week's rest until the next match. A possible exception is when a player has notified the TD of their unavailability (point 13).\n\n**15.** Once the knockout tournament cuts down the number of players to 8, a candidates tournament will take place.",
+                        "color": 53380,
+                        "thumbnail": "https://i.imgur.com/0koqrUA.png"
+                    },
+                    {
+                        "title": "Candidates Tournament Rules",
+                        "description": "The candidates tournament will be a round robin event. Each player will play each of the other seven players in a 3 + 2 match similar to those matches of the knockout tournament stage. Thus, each player will play 90 games in the Candidates. The playing period of these matches will extend for two weeks. The winner of the candidates tournament will challenge the world champion ([JannLee](https://lichess.org/@/JannLee)) for a shot at the crazyhouse title.\n\n**1.** It is preferable if the games are rated. If **both** players agree then some or all games can be unrated.\n\n**2.** Results **and** games of each match should be messaged to the TD upon completion.\n\n**3.** All matches will consist of an equal number of White games per player.\n\n**4.** Each match will consist of ten (10) games of 3 + 2.\n\n**5.** Do note that there are no tie breaks and the matches cannot be stopped if a player reaches 5.5. Only in case of a tie after all 90 games will tiebreak rules apply (the tiebreaks are the same as those of the knockout tournament stage).\n\n**6.** Each player is entitled to a short break of 10 minutes after every 2 games (these breaks can be accumulated).\n\n**7.** If somebody is unable to complete a series, or has to withdraw, their opponent is considered the victor. Only emergencies can exempt players from having this rule applied to them.\n\n**8.** One candidates spot is reserved for last year's challenger to the crown ([TwelveTeen](https://lichess.org/@/TwelveTeen)) and another is reserved for a wild card ([opperwezen](https://lichess.org/@/opperwezen), third place in last year's Candidates). There will be 8 participants from the knockout event, so the number of Candidates tournament participants is 10 players.",
+                        "color": 53380,
+                        "thumbnail": "https://i.imgur.com/R6LA5bC.png"
+                    },
+                    {
+                        "title": "Match Negotiations",
+                        "description": "**1.** Players may begin negotiating a playing start time as soon as their next pairing is known.\n\n**2.** Each player is responsible to offer at least three separate times for the match, during the rest week, unless an offer has been accepted before that number is reached.\n\n**3.** The three offered times should be no closer than three hours to each other and no more than two on a single date.\n\n**4.** If three offers are not made in time, the player at fault must accept a time chosen by the opponent.\n\n**5.** If both players fail to make three offers by the deadline, a match arbiter will assign a time.\n\n**6.** A player should respond to an offer by accepting or making a different offer, preferably within 24 hours.\n\n**7.** If a player is excessively or repeatedly late for scheduled matches, they may be forfeited.\n\n**8.** If both players make three offers but no agreement is made before the playing week begins, a match arbiter will determine if fault lies with a particular player.\n\n**9.** If a player is at fault, their opponent will decide the match time; if no player is at fault, the match arbiter will assign a match time.",
+                        "color": 53380,
+                        "thumbnail": "https://i.imgur.com/7Btk5jL.png"
+                    },
+                    {
+                        "title": "World Championship Rules",
+                        "description": "The world championship will be played in a three-week period. In each week, two 10-game 3 + 2 matches will take place. The first player to reach 30.5 / 60 will be declared the winner. Please note the following stipulations:\n\n**1.** It is preferable if the games are rated. If **both** players agree then some or all games can be unrated.\n\n**2.** Results **and** games of each match should be messaged to the TD upon completion.\n\n**3.** All matches will consist of an equal number of White games per player.\n\n**4.** Each match will consist of ten (10) games of 3 + 2.\n\n**5.** Each player is entitled to a short break after every 2 games of approximately 10 minutes (these breaks can be accumulated).\n\n**6.** If somebody is unable to complete a series, or has to withdraw, their opponent is considered the victor. Only emergencies can exempt players from having this rule applied to them.\n\n**7.** Note that the final of the Crazyhouse World Championship will be played during three consecutive weeks – there will be no rest weeks.",
+                        "color": 53380,
+                        "thumbnail": "https://i.imgur.com/JbhAKpz.png"
+                    },
+                    {
+                        "title": "Reporting Cheaters",
+                        "description": "**1.** Accusations of cheating must be made privately to a member of the anti-cheating panel.\n\n**2.** The accusation must make reference to at least one specific game.\n\n**3.** If an accusation is made publicly and does not lead to a guilty verdict, the accuser will be forfeited & banned from future events.\n\n**4.** The anti-cheating panel will consist of five members.\n\n**5.** The anti-cheating panel must all believe a player to be guilty 5-0 for a player to be forfeited. 100% proof is not required.\n\n**6.** If a member of the panel is either the accuser or accused, their place on the panel will be taken by a substitute.",
+                        "color": 53380,
+                        "thumbnail": "https://i.imgur.com/bzTbisk.png"
+                    }
+                ],
+                "period": 180000,
+                "page": 2,
+                "author": "185412969130229760",
+                "cmdID": "567809204799406080"
+            },
+            "567867119799369731": {
+                "embedgroup": [
+                    {
+                        "title": "<:bot:455847127365582864>Profile for  Test_Bot#2186",
+                        "description": "",
+                        "color": 15461355,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "Tcubestestbot",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Region: **None set.**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **May 11 2018**\nThe House: **May 11 2018**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`444362761452126209`**\nPosition in Database: **906**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "0",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/EncsMs8.png"
+                        },
+                        "footer": {
+                            "text": "1 / 1"
+                        },
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "185412969130229760",
+                "cmdID": "567867118788280372"
+            },
+            "570002664512028672": {
+                "embedgroup": [
+                    {
+                        "title": "House Guide to Crazyhouse",
+                        "description": "\n__**ABOUT**__\n\n#zh\n\n**Crazyhouse** (ZH) is a chess variant in which an opponent's captured pieces can be dropped back on the board instead of moving a piece. Crazyhouse is a variant similar to bughouse chess, but with only two players.\n\nOther names for this variant are drop chess, mad chess, reinforcement chess, turnabout chess and schizo-chess. It’s also known as wild 23. \n\n__**RULES**__\n\nAll the rules and conventions of standard chess apply, with the addition of drops, as explained below.\n\n • A captured piece reverses colour and goes to the capturing player's pocket. At any time, instead of making a move with a piece on the board, a player can drop a piece from their pocket onto an empty square on the board.\n• Drops resulting in immediate checkmate are permitted.\n• Pawns may not be dropped on the players' 1st or 8th ranks.\n• Promoted but captured pawns are dropped as pawns.\n\nRules-page on lichess with video: https://lichess.org/variant/crazyhouse\n\n__**WHERE?**__\n\n● [lichess.org](https://lichess.org)\n● [chess.com](https://chess.com)\n● [Free Internet Chess Server](http://www.freechess.org/)\n● [Internet Chess Club](https://www.chessclub.com/)",
+                        "color": 14841132,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/pMkkATk.png"
+                        }
+                    },
+                    {
+                        "title": "House Guide to Crazyhouse",
+                        "description": "**__IMPROVE__**\n\nCrazyhouse is a fast-paced game that needs strong tactics and a good awareness of positional weaknesses. Unlike regular chess, draws are rare because new pieces keep being reintroduced to the board. Check out [crosky’s crazyhouse overview](http://bit.ly/2FfYYMX).\n\n• As GM Yasser Seirawan would say, **king safety** comes first and foremost. Ensure that your king's position is safe from attack; this does not necessarily imply castling – dropping pieces around your king can effectively guard it from serious threats.\n\n• **Develop** your pieces in the opening and **control key squares**, especially around your king.\n\n• Beware of **holes** in your position. A hole provides an opening for an opponent's piece which can lead to a strong attack. If pieces do enter, chase them away and secure your position. As helmsknight would say, “get out of my house!” Similarly, seek to exploit any holes your opponent leaves in their position.\n\n• Beware of **piece sacs** on [f2/f7](https://youtu.be/kZPSNF8XHQI) or [g2/g7](https://youtu.be/6Gh2n9kWdb8), especially if the opponent has many pieces in hand.\n\n• Often the best defence is **attack**, as any mating sequence threatened must be dealt; the majority of crazyhouse moves have an **attacking purpose**. As Vempele says, the best defence against @h3 might be @h6. Launch counter-attacks that are faster and cannot be ignored.\n\n• **Initiative** is more important than material. If a player has initiative they can drop their pieces in hand with check and threats and dominate the board. It’s important to utilise positional dominance because if the initiative runs out, the opponent can take back initiative with pieces in hand and reassert control.",
+                        "color": 14841132,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/pMkkATk.png"
+                        }
+                    },
+                    {
+                        "title": "House Guide to Crazyhouse",
+                        "description": "**__MATERIAL__**\n\n• **Pawns** are more valuable than in regular chess, because they can be dropped anywhere on the board including the seventh rank. A minor pieces can be happily traded for 2 pawns in most situations. Unlike chess, **Doubled Pawns** are less of a weakness because pawn structures can be fixed with pawns in hand, and a doubled pawn can even be a strength because it controls squares of both colours. \n\n• **Knights** are wonderful attackers because their threats can’t be blocked [...].\n\n• **Bishops** are strong defenders as they cover diagonals going backwards as well as forwards. A Bishop on g2, for instance, is able to take on h3 and still cover g2. They can also be good attackers because they control channels of a single colour. Pawns and Bishops are known as **\"diags”** because they can penetrate an opponent position along diagonals of a single colour. If all your pawns are on light squares for example, you must take care to defend dark square weaknesses. For more on the importance of colour complexes, check out [mastertan’s visual guide](http://bit.ly/2FQmVZn).\n\n• **Rooks** are useful to defend and attack open files. Dropping a rook on the back rank with check is a good way to force an opponent to “waste” a piece; combined with a pawn drop on the 7th exploiting the pin, this combination can have lethal effect. Rooks are often sacked on the backrank promoting a pawn to remove defenders. [Example](https://lichess.org/yUwqzUBO/black#27).\n\n• **Queens** are worth less in crazyhouse than in normal chess, because they can be hit with a tempo by minors, especially when dropped. Crazyhouse favors numeracy in pieces; a Bishop and Knight in hand have more versatility than a Queen. In general, Queens are worth about 2 minors.",
+                        "color": 14841132,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/pMkkATk.png"
+                        }
+                    },
+                    {
+                        "title": "House Guide to Crazyhouse",
+                        "description": "**__STRATEGY__**\n\n• Crazyhouse is still chess, so **common chess tactics** still apply: try not to hang pieces or block in your own pieces; trap opponent pieces and use forks, pins and discovered checks. Because pieces can land anywhere on the board, one must be even more alert.\n\n• **Defending**. Under heavy attack, it is important to evaluate your position. You usually have three options: **First**, you could take your opponent’s attackers, try to stay safe and hope the attack exhausts itself and they run out of material. You might try to limit the flow of exchanges to give time to get the king safe and not give pieces that the opponent needs to mate you. **Second**, if a sacrifice is too dangerous to take, you could focus on defending, dropping pieces near your king to cover important squares. One could also make luft, giving the king a flight path, or a safe square it can fall back or run up to. **The third option** is to ignore the threat and start an attack of your own: if you are the one getting to the opponent’s king first, go for it! Going all in can also be a last resort hoping your opponent makes a mistake.\n\n• **Attacking**. To keep initiative, it is common for mating sequences to comprise purely of checks: [drawing the king out and/or cornering it](https://goo.gl/QLp4DY), [picking up pieces needed for mate](https://goo.gl/uNPKqG), [cutting off escape squares](https://goo.gl/2okT35), [luring the king to a mating square](https://goo.gl/Dd4BvF), [deflecting defending pieces](https://goo.gl/hX6Q85), and [opening up a file, diagonal or key square](https://goo.gl/AqLN86).\n\n• It is important to be familiar with [common mating patterns](https://goo.gl/7ejioW).",
+                        "color": 14841132,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/pMkkATk.png"
+                        }
+                    },
+                    {
+                        "title": "House Guide to Crazyhouse",
+                        "description": "**__VIDEOS__**\n\nStreaming chess has become more popular in the past few years and crazyhouse has shared the fruits of this growing trend. The House presents to you the best and most famous streamers of crazyhouse.\n\n• **JannLee**: [YouTube](<https://www.youtube.com/channel/UCbo8-5AEH7u3lE-yOGeNW1Q>), [Twitch](<https://www.twitch.tv/jannleecrazyhouse>).\n• **Nikolas Theiss**: [YouTube](<https://www.youtube.com/channel/UCsjRN9g1AYODJZOPVJKzUmw/>).\n• **Thomas Crosky**: [YouTube](<https://www.youtube.com/channel/UCvowgcm56sLguWxYp8oqI1w>).\n• **Helmsknight**: [YouTube](<https://www.youtube.com/channel/UCcKXwA_lo3Zpz3_Mc-WVLtw>), [Twitch](<https://www.twitch.tv/helmsknight>).\n• **Okei**: [Twitch](<https://www.twitch.tv/okeizh>).\n• **Mugwort**: [YouTube](https://www.youtube.com/channel/UCNMhNQybeLGJHWJv5qT1liQ), [Twitch](https://www.twitch.tv/mugwortcrazyhouse).\n  \nWant your stream to appear here? Let the mods know.\nWhat to create a bio page for your stream? Type `... embedex` and design yourself a page; alternatively send one of the mods the details you want to be included.",
+                        "color": 14841132,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/pMkkATk.png"
+                        }
+                    }
+                ],
+                "period": 180000,
+                "page": 4,
+                "author": "333586342275710978",
+                "cmdID": "570002662737575947"
+            },
+            "570236514785558556": {
+                "embedgroup": [
+                    {
+                        "description": "**#1** [ab#2280](https://lichess.org/@/wabadabakalakaboo) 2450\n**#2** [HighestCliff#1222](https://lichess.org/@/highestcliff) 2446\n**#3** [penguingm1#2487](https://lichess.org/@/penguingim1) 2416\n**#4** [Natso#0116](https://lichess.org/@/Natso) 2331\n**#5** [Our Messiah#1582](https://lichess.org/@/Ingrid-Vengeance) 2299\n**#6** [Natso4#7381](https://lichess.org/@/JaakkoT) 2287\n**#7** [Illion#1918](https://lichess.org/@/Illion) 2281\n**#8** [ProgramFOX#1012](https://lichess.org/@/ProgramFOX) 2280\n**#9** [ijh#0966](https://lichess.org/@/ijh) 2241\n**#10** [Coucouplay#6192](https://lichess.org/@/Rapidplayer) 2236\n",
+                        "fields": [],
+                        "title": "<:atomic:471114116556128256> House leaderboard on Lichess.org for Atomic players"
+                    },
+                    {
+                        "description": "**#11** [Brainkiller#5680](https://lichess.org/@/hipno) 2214\n**#12** [hipno#0082](https://lichess.org/@/hipno) 2214\n**#13** [MMichael#3973](https://lichess.org/@/TheFinnisher) 2176\n**#14** [Sean B#6257](https://lichess.org/@/seanysean) 2153\n**#15** [Mark Plotkin#1754](https://lichess.org/@/littleplotkin) 2152\n**#16** [Professor Chronatog#2674](https://lichess.org/@/Chronatog) 2139\n**#17** [Truthdoc#5694](https://lichess.org/@/FischyVishy) 2132\n**#18** [laurens#0324](https://lichess.org/@/chessape) 2094\n**#19** [TheWinterSoldier#5715](https://lichess.org/@/Grainiac) 2058\n**#20** [Raven#9079](https://lichess.org/@/PepsiNGaming) 2052\n",
+                        "fields": [],
+                        "title": "<:atomic:471114116556128256> House leaderboard on Lichess.org for Atomic players"
+                    },
+                    {
+                        "description": "**#21** [hierik#3356](https://lichess.org/@/blindfoldbilly) 2043\n**#22** [a_47#4756](https://lichess.org/@/a_47) 2031\n**#23** [MeneerMandje#9220](https://lichess.org/@/VariantsOnly) 2030\n**#24** [L2B#9326](https://lichess.org/@/TwitchWainaut) 2028\n**#25** [schaker#9757](https://lichess.org/@/opperwezen) 2019\n**#26** [schaker90#8259](https://lichess.org/@/opperwezen) 1990\n**#27** [TheLoneWolf#4001](https://lichess.org/@/the-lone-wolf) 1927\n**#28** [Musickn#8622](https://lichess.org/@/Musicknight123) 1899\n**#29** [Maelstrom#5079](https://lichess.org/@/TooStrongTooFast) 1894\n**#30** [jazzii#1899](https://lichess.org/@/jazzii) 1881\n",
+                        "fields": [],
+                        "title": "<:atomic:471114116556128256> House leaderboard on Lichess.org for Atomic players"
+                    },
+                    {
+                        "description": "**#31** [TheM492017#5103](https://lichess.org/@/TheM492017) 1850\n**#32** [Wildfire#9567](https://lichess.org/@/Sonata2) 1829\n**#33** [crptone#1398](https://lichess.org/@/crptone) 1816\n**#34** [Kyle#4287](https://lichess.org/@/KyleLegion) 1779\n**#35** [Lesau#6766](https://lichess.org/@/Lesau) 1765\n**#36** [okei#1207](https://lichess.org/@/okei) 1756\n**#37** [ericw31415#6314](https://lichess.org/@/ericw31415) 1730\n**#38** [ah#7777](https://lichess.org/@/ikidude) 1727\n**#39** [FaZe_ Jingle Bell Cat#8226](https://lichess.org/@/TheUnknownGuyReborn) 1722\n**#40** [ilares#0829](https://lichess.org/@/ilaaaaaaaaaaaaaaares) 1720\n",
+                        "fields": [],
+                        "title": "<:atomic:471114116556128256> House leaderboard on Lichess.org for Atomic players"
+                    },
+                    {
+                        "description": "**#41** [Romeore#5887](https://lichess.org/@/Opening_Player) 1719\n**#42** [chessguy101#2066](https://lichess.org/@/chesssky2) 1719\n**#43** [retardedplatypus123#0264](https://lichess.org/@/retardedplatypus123) 1715\n**#44** [blunderman1#2451](https://lichess.org/@/blunderman1) 1714\n**#45** [pepellou#7258](https://lichess.org/@/pepellou) 1714\n**#46** [Andrew#5850](https://lichess.org/@/Link) 1702\n**#47** [javi0111#6730](https://lichess.org/@/Javi0111) 1697\n**#48** [Ogul#1233](https://lichess.org/@/Ogul1) 1683\n**#49** [IceFire19#8717](https://lichess.org/@/IceFire1921) 1677\n**#50** [Yeti#0449](https://lichess.org/@/yatinagarwal) 1674\n",
+                        "fields": [],
+                        "title": "<:atomic:471114116556128256> House leaderboard on Lichess.org for Atomic players"
+                    },
+                    {
+                        "description": "**#51** [Juanma206#4765](https://lichess.org/@/SadLittleTurtle) 1672\n**#52** [Friendly Neighborhood Hug Dealer#1065](https://lichess.org/@/Veeronica) 1663\n**#53** [insinorater#3419](https://lichess.org/@/I_cant_win) 1655\n**#54** [tobiasfunke35#7793](https://lichess.org/@/BurakYarol) 1646\n**#55** [Babosos#3628](https://lichess.org/@/Babosos) 1636\n**#56** [Uni#8610](https://lichess.org/@/thibault) 1633\n**#57** [dooms#4944](https://lichess.org/@/Cogline) 1626\n**#58** [ohjay#7914](https://lichess.org/@/ojb) 1615\n**#59** [darkcoder#7928](https://lichess.org/@/deepan434) 1600\n**#60** [Stubenfisch#9958](https://lichess.org/@/Stubenfisch) 1595\n",
+                        "fields": [],
+                        "title": "<:atomic:471114116556128256> House leaderboard on Lichess.org for Atomic players"
+                    },
+                    {
+                        "description": "**#61** [pydlv#9320](https://lichess.org/@/PMethod) 1594\n**#62** [poriluk#3839](https://lichess.org/@/Brokula) 1591\n**#63** [jamarlo#8806](https://lichess.org/@/jamesog) 1584\n**#64** [loukas435#2646](https://lichess.org/@/loukas435) 1583\n**#65** [nowayouwin#1285](https://lichess.org/@/Nowayouwin) 1579\n**#66** [acecace9801#4811](https://lichess.org/@/Tysace) 1567\n**#67** [Nitrogen#6533](https://lichess.org/@/Hitman047) 1558\n**#68** [rizka#7593](https://lichess.org/@/rizka10) 1508\n**#69** [Sleipnir1216#4964](https://lichess.org/@/Sleipnir1216) 1471\n**#70** [JabbaHlaing#3606](https://lichess.org/@/MidknightHyperX) 1464\n",
+                        "fields": [],
+                        "title": "<:atomic:471114116556128256> House leaderboard on Lichess.org for Atomic players"
+                    },
+                    {
+                        "description": "**#71** [stevis5#7413](https://lichess.org/@/stevis5) 1187\n**#72** [stevis5#1056](https://lichess.org/@/stevis5) 1187\n",
+                        "fields": [],
+                        "title": "<:atomic:471114116556128256> House leaderboard on Lichess.org for Atomic players"
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "532131133702406174",
+                "cmdID": "570236513917468702"
+            },
+            "570737691482914828": {
+                "embedgroup": [
+                    {
+                        "title": "Profile for  Babosos#3628",
+                        "description": "```\nI am Natso```",
+                        "color": 3447003,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "Babosos But Not A Mad One\nChessApple78",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Age: **23**\nSex: **<:male:430870358133047306>**\nLocation: **Usa**\nRegion: **Americas**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Nov 06 2017**\nThe House: **Apr 09 2019**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`377227077859934208`**\nPosition in Database: **20**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "28,089",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/377227077859934208/52e51bcc60642dcec337bb77eda7c0b9.png?size=2048"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": "Profile for  Babosos#3628",
+                        "description": "```\nI am Natso```",
+                        "color": 3447003,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[Babosos](https://lichess.org/@/Babosos)\n960: **1374**\nUltrabullet: **1412**\nBullet: **1504**\nBlitz: **1471**\nRapid: **1578**\nClassical: 1585?\nCorrespondence: 1662?\nCrazyhouse: **1491**\nKing of the Hill: **1526**\n3-check: **1471**\nAntichess: **2011**\nAtomic: **1636**\nHorde: **2005**\nRacing Kings: **2068**\nPuzzles: **2032**",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[ChessApple78](https://lichess.org/@/ChessApple78)\n960: **2201**\nUltrabullet: **1916**\nBullet: **2404**\nBlitz: **2364**\nRapid: **2042**\nClassical: **1959**\nCorrespondence: 1936?\nCrazyhouse: **1867**\nKing of the Hill: **2076**\n3-check: 1637?\nAntichess: **1721**\nAtomic: **2013**\nHorde: **1731**\nRacing Kings: **1873**\nPuzzles: **2702**",
+                                "inline": true
+                            }
+                        ],
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "377227077859934208",
+                "cmdID": "570737691042381826"
+            },
+            "570738963933954058": {
+                "embedgroup": [
+                    {
+                        "title": "Profile for  Babosos#3628",
+                        "description": "```\nI am Natso```",
+                        "color": 3447003,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "Babosos But Not A Mad One",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Age: **23**\nSex: **<:male:430870358133047306>**\nLocation: **Usa**\nRegion: **Americas**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Nov 06 2017**\nThe House: **Apr 09 2019**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`377227077859934208`**\nPosition in Database: **20**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "28,110",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/377227077859934208/52e51bcc60642dcec337bb77eda7c0b9.png?size=2048"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": "Profile for  Babosos#3628",
+                        "description": "```\nI am Natso```",
+                        "color": 3447003,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[Babosos](https://lichess.org/@/Babosos)\n960: **1374**\nUltrabullet: **1412**\nBullet: **1504**\nBlitz: **1471**\nRapid: **1578**\nClassical: 1585?\nCorrespondence: 1662?\nCrazyhouse: **1491**\nKing of the Hill: **1526**\n3-check: **1471**\nAntichess: **2011**\nAtomic: **1636**\nHorde: **2005**\nRacing Kings: **2068**\nPuzzles: **2032**",
+                                "inline": true
+                            }
+                        ],
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 1,
+                "author": "377227077859934208",
+                "cmdID": "570738962222546989"
+            },
+            "570739090719375360": {
+                "embedgroup": [
+                    {
+                        "title": "Profile for  MangoTownTravis#2559",
+                        "description": "",
+                        "color": 3447003,
+                        "fields": [
+                            {
+                                "name": "Info",
+                                "value": "Region: **Americas**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Mar 11 2018**\nThe House: **May 12 2018**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`422494551010443274`**\nPosition in Database: **198**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "67",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/422494551010443274/bd74dcadd95703a0233b2c79a980b0d5.png?size=2048"
+                        },
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "377227077859934208",
+                "cmdID": "570739089536581644"
+            },
+            "571241208303583242": {
+                "embedgroup": [
+                    {
+                        "title": "Profile for  Brainkiller#5680",
+                        "description": "",
+                        "color": 15105570,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "hipno",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Region: **Europe**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Apr 13 2019**\nThe House: **Apr 13 2019**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`566664516839145492`**\nPosition in Database: **888**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "928",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/566664516839145492/a81f0cadf4c637f4a31ec740f90d903e.png?size=2048"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": "Profile for  Brainkiller#5680",
+                        "description": "",
+                        "color": 15105570,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[hipno](https://lichess.org/@/hipno)\nBullet: **1764**\nBlitz: **1758**\nRapid: 1500?\nClassical: 1500?\nCorrespondence: 1500?\nCrazyhouse: **1591**\nKing of the Hill: **1784**\n3-check: **1759**\nAntichess: **1820**\nAtomic: **2214**\nHorde: **1708**\nRacing Kings: **2169**\nPuzzles: **1847**",
+                                "inline": true
+                            }
+                        ],
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 1,
+                "author": "566664516839145492",
+                "cmdID": "571241207175315477"
+            },
+            "571414245539840021": {
+                "embedgroup": [
+                    {
+                        "title": "Profile for  kingswitcher#7212",
+                        "description": "",
+                        "color": 0,
+                        "fields": [
+                            {
+                                "name": "Info",
+                                "value": "Region: **None set.**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Mar 30 2019**\nThe House: **Mar 30 2019**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`561365116273164308`**\nPosition in Database: **931**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "0",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/EncsMs8.png"
+                        },
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "333586342275710978",
+                "cmdID": "571414244248125445"
+            },
+            "571934292796768266": {
+                "embedgroup": [
+                    {
+                        "title": "Profile for  Ogul#1233",
+                        "description": "```\nI'm Movag Bastmadijan and I'm poor.```",
+                        "color": 12884558,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "Emirhan Oğul\nnabla\nf4-opening",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Location: **Turkey**\nRegion: **Europe**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Dec 04 2018**\nThe House: **Feb 08 2019**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`519602977380761621`**\nPosition in Database: **711**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "8,197",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/519602977380761621/8ff72910b9d6448e28c22ed0b1aa95ba.png?size=2048"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": "Profile for  Ogul#1233",
+                        "description": "```\nI'm Movag Bastmadijan and I'm poor.```",
+                        "color": 12884558,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[Ogul1](https://lichess.org/@/Ogul1)\n960: **1529**\nUltrabullet: **1572**\nBullet: **1704**\nBlitz: **1444**\nRapid: 1533?\nClassical: 1500?\nCorrespondence: 1398?\nCrazyhouse: **1640**\nKing of the Hill: **1616**\n3-check: **1426**\nAntichess: **2256**\nAtomic: **1683**\nHorde: **1646**\nRacing Kings: **1853**\nPuzzles: **1456**",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[f4-opening](https://lichess.org/@/f4-opening)\nBullet: 1500?\nBlitz: 1500?\nRapid: 1500?\nClassical: 1500?\nCorrespondence: 1500?\nAntichess: **2255**\nPuzzles: 1615?",
+                                "inline": true
+                            }
+                        ],
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "373480715276517376",
+                "cmdID": "571934291425230855"
+            },
+            "571936594760826880": {
+                "embedgroup": [
+                    {
+                        "description": "Winner wins 50 :cherry_blossom: + VIP role as long as you keep the shield",
+                        "author": {
+                            "name": "Win a lichess shield to obtain the vip role and flowers!",
+                            "icon_url": "https://i.imgur.com/JbhAKpz.png"
+                        },
+                        "fields": [
+                            {
+                                "name": "Prizes for high performers",
+                                "value": "Top 3 win 40 :cherry_blossom:\nTop 10 win 30 🌸\nTop 20 win 20 🌸\nTop 30 win 10 🌸",
+                                "inline": false
+                            },
+                            {
+                                "name": "Date",
+                                "value": "Check out the upcoming Shield tournaments from [the tournament calendar](https://lichess.org/tournament/calendar).",
+                                "inline": false
+                            }
+                        ]
+                    }
+                ],
+                "period": 180000,
+                "page": 0,
+                "author": "373480715276517376",
+                "cmdID": "571936593229905922"
+            },
+            "573150770690523155": {
+                "embedgroup": [
+                    {
+                        "title": "Profile for  Professor Chronatog#2674",
+                        "description": "```\nhttp://www.nicklong.net/chess/```",
+                        "color": 3447003,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "Nick Long\nChronatog",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Location: **Aruba (netherlands)**\nRegion: **Americas**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Mar 19 2018**\nThe House: **Mar 19 2018**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`425397119315214336`**\nPosition in Database: **148**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "12,793",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/425397119315214336/7d2f542ce586267e31458e182c187d89.png?size=2048"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": "Profile for  Professor Chronatog#2674",
+                        "description": "```\nhttp://www.nicklong.net/chess/```",
+                        "color": 3447003,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[Chronatog](https://lichess.org/@/Chronatog)\n960: **1921**\nUltrabullet: **1637**\nBullet: **1974**\nBlitz: **1924**\nRapid: **2064**\nClassical: 1500?\nCorrespondence: 1500?\nCrazyhouse: **1916**\nKing of the Hill: 1652?\n3-check: **1778**\nAntichess: **2018**\nAtomic: **2128**\nHorde: 1696?\nRacing Kings: 1461?\nPuzzles: **1666**",
+                                "inline": true
+                            }
+                        ],
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "425397119315214336",
+                "cmdID": "573150769079910401"
+            },
+            "573584736589447178": {
+                "embedgroup": [
+                    {
+                        "description": "**#1** TcubesAK#3940 2264\n**#2** PsyMar#2210 2079\n**#3** theLAZYmd#2353 1935\n**#4** Wildfire#9567 1928\n**#5** crptone#1398 1838\n**#6** okei#1207 1772\n**#7** ObiWanBenoni#3488 1596\n**#8** moonenane#3553 1387\n**#9** Musickn#8622 1183\n",
+                        "fields": [],
+                        "title": " House leaderboard for Trivia players"
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "377227077859934208",
+                "cmdID": "573584735075565569"
+            },
+            "574964261982306314": {
+                "embedgroup": [
+                    {
+                        "title": "Profile for  Babosos#3628",
+                        "description": "```\nI don't want to eat uarekomodo, however obi changed my nick and I couldn't change back. After putting this message in my finger the admins gave into public shaming in a finger. Remember it was all obi's doing! After that I tried to settle things and joined team obi, only to be team obi removed by lazy, so that he could get the most popular team. As such I am now in team lazy #adminabuse```",
+                        "color": 11126483,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "Babosos But Not A Mad One",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Age: **23**\nSex: **<:male:430870358133047306>**\nLocation: **Usa**\nRegion: **Americas**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Nov 06 2017**\nThe House: **Apr 09 2019**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`377227077859934208`**\nPosition in Database: **20**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "39,855",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/377227077859934208/129f76b2405fa95e3b3a05b80d0a2bec.png?size=2048"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": "Profile for  Babosos#3628",
+                        "description": "```\nI don't want to eat uarekomodo, however obi changed my nick and I couldn't change back. After putting this message in my finger the admins gave into public shaming in a finger. Remember it was all obi's doing! After that I tried to settle things and joined team obi, only to be team obi removed by lazy, so that he could get the most popular team. As such I am now in team lazy #adminabuse```",
+                        "color": 11126483,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[Babosos](https://lichess.org/@/Babosos)\n960: **1374**\nUltrabullet: **1412**\nBullet: **1504**\nBlitz: **1481**\nRapid: **1578**\nClassical: 1585?\nCorrespondence: 1662?\nCrazyhouse: **1479**\nKing of the Hill: **1526**\n3-check: **1550**\nAntichess: **2011**\nAtomic: **1743**\nHorde: **1995**\nRacing Kings: **2068**\nPuzzles: **2051**",
+                                "inline": true
+                            }
+                        ],
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 1,
+                "author": "267767816847884299",
+                "cmdID": "574964260786929675"
+            },
+            "575119451796537364": {
+                "embedgroup": [
+                    {
+                        "title": "Profile for  Andrew#5850",
+                        "description": "",
+                        "color": 10181046,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "Link",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Location: **United States**\nRegion: **Americas**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Apr 17 2017**\nThe House: **Feb 14 2018**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`303609777756438529`**\nPosition in Database: **12**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "16,315",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/303609777756438529/2ca0589a5541351fbdc45fb310519d38.png?size=2048"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": "Profile for  Andrew#5850",
+                        "description": "",
+                        "color": 10181046,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[Link](https://lichess.org/@/Link)\n960: **1378**\nUltrabullet: **1297**\nBullet: **1441**\nBlitz: **1336**\nRapid: **1381**\nClassical: **1427**\nCorrespondence: **1837**\nCrazyhouse: **1413**\nKing of the Hill: **1520**\n3-check: **1493**\nAntichess: **2020**\nAtomic: **1710**\nHorde: **1471**\nRacing Kings: **1604**\nPuzzles: **1482**",
+                                "inline": true
+                            }
+                        ],
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "570714796123488258",
+                "cmdID": "575119450877984789"
+            },
+            "575274131214434306": {
+                "embedgroup": [
+                    {
+                        "description": "**#1** [fins-love#5553](https://lichess.org/@/Fins-Love) 2295\n**#2** [ProgramFOX#1012](https://lichess.org/@/ProgramFOX) 2295\n**#3** [Raven#9079](https://lichess.org/@/PepsiNGaming) 2279\n**#4** [Ogul#1233](https://lichess.org/@/Ogul1) 2263\n**#5** [a wnd is a wnd#7642](https://lichess.org/@/ODMWND) 2242\n**#6** [penguingm1#2487](https://lichess.org/@/penguingim1) 2213\n**#7** [Mark Plotkin#1754](https://lichess.org/@/littleplotkin) 2177\n**#8** [FaZe_ Jingle Bell Cat#8226](https://lichess.org/@/TheUnknownGuyReborn) 2159\n**#9** [SREGORG#1204](https://lichess.org/@/grogers) 2119\n**#10** [Cran#1010](https://lichess.org/@/Shibb) 2103\n",
+                        "fields": [],
+                        "title": "<:anti:471114115478192128> House leaderboard on Lichess.org for Antichess players"
+                    },
+                    {
+                        "description": "**#11** [Sean B#6257](https://lichess.org/@/seanysean) 2083\n**#12** [TheShiOne#3237](https://lichess.org/@/Shiaxou) 2077\n**#13** [schaker#9757](https://lichess.org/@/opperwezen) 2069\n**#14** [ilares#0829](https://lichess.org/@/ilaaaaaaaaaaaaaaares) 2023\n**#15** [Andrew#5850](https://lichess.org/@/Link) 2020\n**#16** [Professor Chronatog#2674](https://lichess.org/@/Chronatog) 2018\n**#17** [Babosos#3628](https://lichess.org/@/Babosos) 2011\n**#18** [aNOnyMOUSE#0801](https://lichess.org/@/HopelessWanderer) 2001\n**#19** [schaker90#8259](https://lichess.org/@/opperwezen) 1944\n**#20** [Coucouplay#6192](https://lichess.org/@/Rapidplayer) 1939\n",
+                        "fields": [],
+                        "title": "<:anti:471114115478192128> House leaderboard on Lichess.org for Antichess players"
+                    },
+                    {
+                        "description": "**#21** [ijh#0966](https://lichess.org/@/ijh) 1918\n**#22** [MeneerMandje#9220](https://lichess.org/@/VariantsOnly) 1904\n**#23** [Sinamon#7982](https://lichess.org/@/Sinamon73) 1899\n**#24** [Wildfire#9567](https://lichess.org/@/Sonata2) 1899\n**#25** [Kyle#4287](https://lichess.org/@/KyleLegion) 1878\n**#26** [xнүρεяsραcε__үσυтυвε#9028](https://lichess.org/@/The__Finale) 1873\n**#27** [Romeore#5887](https://lichess.org/@/Opening_Player) 1856\n**#28** [Natso584#7381](https://lichess.org/@/JaakkoT) 1855\n**#29** [pepellou#7258](https://lichess.org/@/pepellou) 1851\n**#30** [Master#3941](https://lichess.org/@/TrapAlert) 1845\n",
+                        "fields": [],
+                        "title": "<:anti:471114115478192128> House leaderboard on Lichess.org for Antichess players"
+                    },
+                    {
+                        "description": "**#31** [TheM492017#5103](https://lichess.org/@/TheM492017) 1826\n**#32** [Brainkiller#5680](https://lichess.org/@/hipno) 1820\n**#33** [Firefox#0116](https://lichess.org/@/Natso) 1801\n**#34** [Musickn#8622](https://lichess.org/@/Musicknight123) 1799\n**#35** [Truthdoc#5694](https://lichess.org/@/FischyVishy) 1795\n**#36** [a_47#4756](https://lichess.org/@/a_47) 1789\n**#37** [okei#1207](https://lichess.org/@/okei) 1769\n**#38** [EF#3964](https://lichess.org/@/eflc) 1767\n**#39** [hierik#3356](https://lichess.org/@/blindfoldbilly) 1763\n**#40** [chessguy101#2066](https://lichess.org/@/chesssky2) 1757\n",
+                        "fields": [],
+                        "title": "<:anti:471114115478192128> House leaderboard on Lichess.org for Antichess players"
+                    },
+                    {
+                        "description": "**#41** [TcubesAK#3940](https://lichess.org/@/TcubesAK) 1751\n**#42** [tobiasfunke35#7793](https://lichess.org/@/BurakYarol) 1743\n**#43** [ObiWanBenoni#3488](https://lichess.org/@/andreijl) 1735\n**#44** [ab#2280](https://lichess.org/@/wabadabakalakaboo) 1678\n**#45** [Stubenfisch#9958](https://lichess.org/@/Stubenfisch) 1644\n**#46** [Yeti#0449](https://lichess.org/@/yatinagarwal) 1641\n**#47** [PsyMar#2210](https://lichess.org/@/PsyMar2) 1639\n**#48** [JabbaHlaing#3606](https://lichess.org/@/MidknightHyperX) 1600\n**#49** [nunners60007#7781](https://lichess.org/@/Nunners) 1586\n**#50** [javi0111#6730](https://lichess.org/@/Javi0111) 1579\n",
+                        "fields": [],
+                        "title": "<:anti:471114115478192128> House leaderboard on Lichess.org for Antichess players"
+                    },
+                    {
+                        "description": "**#51** [blunderman1#2451](https://lichess.org/@/blunderman1) 1572\n**#52** [laurens#0324](https://lichess.org/@/chessape) 1569\n**#53** [Juanma206#4765](https://lichess.org/@/SadLittleTurtle) 1521\n**#54** [darkcoder#7928](https://lichess.org/@/deepan434) 1520\n**#55** [Uni#8610](https://lichess.org/@/thibault) 1512\n**#56** [jamarlo#8806](https://lichess.org/@/jamesog) 1470\n**#57** [loukas435#2646](https://lichess.org/@/loukas435) 1462\n**#58** [Forhavu#1168](https://lichess.org/@/Forhavu) 1460\n**#59** [stevis5#7413](https://lichess.org/@/stevis5) 1442\n**#60** [stevis5#1056](https://lichess.org/@/stevis5) 1442\n",
+                        "fields": [],
+                        "title": "<:anti:471114115478192128> House leaderboard on Lichess.org for Antichess players"
+                    },
+                    {
+                        "description": "**#61** [nowayouwin#1285](https://lichess.org/@/Nowayouwin) 1418\n**#62** [insinorater#3419](https://lichess.org/@/I_cant_win) 1391\n**#63** [Robin#8660](https://lichess.org/@/BanDen8) 1370\n**#64** [rizka#7593](https://lichess.org/@/rizka10) 1313\n**#65** [dooms#4944](https://lichess.org/@/Cogline) 1284\n",
+                        "fields": [],
+                        "title": "<:anti:471114115478192128> House leaderboard on Lichess.org for Antichess players"
+                    }
+                ],
+                "period": 30000,
+                "page": 1,
+                "author": "373480715276517376",
+                "cmdID": "575274130551603210"
+            },
+            "575353871216541696": {
+                "embedgroup": [
+                    {
+                        "description": "**#1** [schaker90#8259](https://lichess.org/@/opperwezen) 2652\n**#2** [gsvc#3746](https://lichess.org/@/gsvc) 2637\n**#3** [penguingm1#2487](https://lichess.org/@/penguingim1) 2608\n**#4** [schaker#9757](https://lichess.org/@/opperwezen) 2584\n**#5** [retardedplatypus123#0264](https://lichess.org/@/retardedplatypus123) 2572\n**#6** [TcubesAK#3940](https://lichess.org/@/TcubesAK) 2554\n**#7** [zyxon#4717](https://lichess.org/@/zyxon) 2541\n**#8** [Mugwort#6375](https://lichess.org/@/Mugwort) 2539\n**#9** [Mark Plotkin#1754](https://lichess.org/@/littleplotkin) 2526\n**#10** [mastertan#2161](https://lichess.org/@/mastertan) 2499\n",
+                        "fields": [],
+                        "title": "<:crazyhouse:471114113599406110> House leaderboard on Lichess.org for Crazyhouse players"
+                    },
+                    {
+                        "description": "**#11** [HighContrast#2584](https://lichess.org/@/HighContrast) 2496\n**#12** [MeneerMandje#9220](https://lichess.org/@/VariantsOnly) 2480\n**#13** [schwinggggg#6422](https://lichess.org/@/schwinggggg) 2452\n**#14** [TheLoneWolf#4001](https://lichess.org/@/the-lone-wolf) 2416\n**#15** [jazzii#1899](https://lichess.org/@/jazzii) 2401\n**#16** [LegionDestroyer#1652](https://lichess.org/@/LegionDestroyer) 2358\n**#17** [crptone#1398](https://lichess.org/@/crptone) 2356\n**#18** [Atamek#9914](https://lichess.org/@/atamek) 2339\n**#19** [moonenane#3553](https://lichess.org/@/moonenaneBETA) 2333\n**#20** [nowayouwin#1285](https://lichess.org/@/Nowayouwin) 2319\n",
+                        "fields": [],
+                        "title": "<:crazyhouse:471114113599406110> House leaderboard on Lichess.org for Crazyhouse players"
+                    },
+                    {
+                        "description": "**#21** [crimsonvortex#6313](https://lichess.org/@/crimsonvortex) 2308\n**#22** [PawnInTraining#5209](https://lichess.org/@/PawnInTraining) 2292\n**#23** [Zaphikel#6127](https://lichess.org/@/Metatronic) 2286\n**#24** [Crazy_Eight#1198](https://lichess.org/@/Cocaino74) 2285\n**#25** [antic#0405](https://lichess.org/@/Antic) 2282\n**#26** [Dragonmaster#7816](https://lichess.org/@/HisokaCC) 2273\n**#27** [the420boss#8639](https://lichess.org/@/FreeBee) 2265\n**#28** [okei#1207](https://lichess.org/@/okei) 2243\n**#29** [HighestCliff#1222](https://lichess.org/@/highestcliff) 2229\n**#30** [Maelstrom#5079](https://lichess.org/@/TooStrongTooFast) 2228\n",
+                        "fields": [],
+                        "title": "<:crazyhouse:471114113599406110> House leaderboard on Lichess.org for Crazyhouse players"
+                    },
+                    {
+                        "description": "**#31** [CrossOnline#6043](https://lichess.org/@/cross_online) 2205\n**#32** [Our Messiah#1582](https://lichess.org/@/Ingrid-Vengeance) 2203\n**#33** [theLAZYmd#2353](https://lichess.org/@/TheLAZYmd) 2190\n**#34** [Kyle#4287](https://lichess.org/@/KyleLegion) 2182\n**#35** [svenos#5250](https://lichess.org/@/svenos) 2169\n**#36** [Truthdoc#5694](https://lichess.org/@/FischyVishy) 2166\n**#37** [aNOnyMOUSE#0801](https://lichess.org/@/HopelessWanderer) 2161\n**#38** [Musickn#8622](https://lichess.org/@/Musicknight123) 2158\n**#39** [hans#8619](https://lichess.org/@/HansMoke) 2150\n**#40** [Alduto#8125](https://lichess.org/@/Alduto) 2136\n",
+                        "fields": [],
+                        "title": "<:crazyhouse:471114113599406110> House leaderboard on Lichess.org for Crazyhouse players"
+                    },
+                    {
+                        "description": "**#41** [SREGORG#1204](https://lichess.org/@/grogers) 2130\n**#42** [Yeti#0449](https://lichess.org/@/yatinagarwal) 2118\n**#43** [pepellou#7258](https://lichess.org/@/pepellou) 2100\n**#44** [chuckmoulton#2381](https://lichess.org/@/chuckmoulton) 2091\n**#45** [hierik#3356](https://lichess.org/@/blindfoldbilly) 2086\n**#46** [EF#3964](https://lichess.org/@/eflc) 2065\n**#47** [Sean B#6257](https://lichess.org/@/seanysean) 2046\n**#48** [chessguy101#2066](https://lichess.org/@/chesssky2) 2041\n**#49** [samoyd#2402](https://lichess.org/@/samoyd) 2023\n**#50** [lasz1#0150](https://lichess.org/@/lasz1) 2021\n",
+                        "fields": [],
+                        "title": "<:crazyhouse:471114113599406110> House leaderboard on Lichess.org for Crazyhouse players"
+                    },
+                    {
+                        "description": "**#51** [Sjaarti#1989](https://lichess.org/@/Sjaart) 2018\n**#52** [Illion#1918](https://lichess.org/@/Illion) 2015\n**#53** [blunderman1#2451](https://lichess.org/@/blunderman1) 2013\n**#54** [Alex78#2596](https://lichess.org/@/Caffe_Latte) 1967\n**#55** [Sleipnir1216#4964](https://lichess.org/@/Sleipnir1216) 1956\n**#56** [Professor Chronatog#2674](https://lichess.org/@/Chronatog) 1955\n**#57** [tobiasfunke35#7793](https://lichess.org/@/BurakYarol) 1939\n**#58** [Romeore#5887](https://lichess.org/@/Opening_Player) 1937\n**#59** [Raven#9079](https://lichess.org/@/PepsiNGaming) 1929\n**#60** [poriluk#3839](https://lichess.org/@/Brokula) 1913\n",
+                        "fields": [],
+                        "title": "<:crazyhouse:471114113599406110> House leaderboard on Lichess.org for Crazyhouse players"
+                    },
+                    {
+                        "description": "**#61** [Wildfire#9567](https://lichess.org/@/Sonata2) 1911\n**#62** [Forhavu#1168](https://lichess.org/@/Forhavu) 1910\n**#63** [liamchez#8300](https://lichess.org/@/liamchez) 1905\n**#64** [jamarlo#8806](https://lichess.org/@/jamesog) 1885\n**#65** [ProgramFOX#1012](https://lichess.org/@/ProgramFOX) 1885\n**#66** [Firefox#0116](https://lichess.org/@/Natso) 1880\n**#67** [ilares#0829](https://lichess.org/@/ilaaaaaaaaaaaaaaares) 1855\n**#68** [Master#3941](https://lichess.org/@/TrapAlert) 1831\n**#69** [ab#2280](https://lichess.org/@/wabadabakalakaboo) 1811\n**#70** [beppos#0440](https://lichess.org/@/repetitaiuvant) 1798\n",
+                        "fields": [],
+                        "title": "<:crazyhouse:471114113599406110> House leaderboard on Lichess.org for Crazyhouse players"
+                    },
+                    {
+                        "description": "**#71** [SharkFeet#8717](https://lichess.org/@/IceFire1921) 1795\n**#72** [ObiWanBenoni#3488](https://lichess.org/@/andreijl) 1795\n**#73** [bettik](https://lichess.org/@/bettik) 1779\n**#74** [Natso584#7381](https://lichess.org/@/JaakkoT) 1772\n**#75** [laurens#0324](https://lichess.org/@/chessape) 1761\n**#76** [Mystiko#7318](https://lichess.org/@/marczhouse) 1759\n**#77** [Tomitau#0423](https://lichess.org/@/tomitau) 1757\n**#78** [pethidine#2915](https://lichess.org/@/fgalla) 1741\n**#79** [javi0111#6730](https://lichess.org/@/Javi0111) 1738\n**#80** [FaZe_ Jingle Bell Cat#8226](https://lichess.org/@/TheUnknownGuyReborn) 1732\n",
+                        "fields": [],
+                        "title": "<:crazyhouse:471114113599406110> House leaderboard on Lichess.org for Crazyhouse players"
+                    },
+                    {
+                        "description": "**#81** [Megash1983#8767](https://lichess.org/@/Megash1983) 1731\n**#82** [ohjay#7914](https://lichess.org/@/ojb) 1710\n**#83** [JustinJuiceman#7136](https://lichess.org/@/Justini) 1703\n**#84** [ericw31415#6314](https://lichess.org/@/ericw31415) 1655\n**#85** [Sinamon#7982](https://lichess.org/@/Sinamon73) 1640\n**#86** [Ogul#1233](https://lichess.org/@/Ogul1) 1640\n**#87** [Brainkiller#5680](https://lichess.org/@/hipno) 1591\n**#88** [Juanma206#4765](https://lichess.org/@/SadLittleTurtle) 1580\n**#89** [Uni#8610](https://lichess.org/@/thibault) 1567\n**#90** [Kota#7281](https://lichess.org/@/Kota4095) 1555\n",
+                        "fields": [],
+                        "title": "<:crazyhouse:471114113599406110> House leaderboard on Lichess.org for Crazyhouse players"
+                    },
+                    {
+                        "description": "**#91** [ijh#0966](https://lichess.org/@/ijh) 1550\n**#92** [IMCJEBS#7671](https://lichess.org/@/Isachess) 1538\n**#93** [TheM492017#5103](https://lichess.org/@/TheM492017) 1535\n**#94** [loukas435#2646](https://lichess.org/@/loukas435) 1515\n**#95** [colwem#3129](https://lichess.org/@/colwem) 1510\n**#96** [darkcoder#7928](https://lichess.org/@/deepan434) 1501\n**#97** [Stubenfisch#9958](https://lichess.org/@/Stubenfisch) 1494\n**#98** [rizka#7593](https://lichess.org/@/rizka10) 1486\n**#99** [Babosos#3628](https://lichess.org/@/Babosos) 1479\n**#100** [stevis5#1056](https://lichess.org/@/stevis5) 1449\n",
+                        "fields": [],
+                        "title": "<:crazyhouse:471114113599406110> House leaderboard on Lichess.org for Crazyhouse players"
+                    },
+                    {
+                        "description": "**#101** [stevis5#7413](https://lichess.org/@/stevis5) 1449\n**#102** [Nitrogen#6533](https://lichess.org/@/Hitman047) 1447\n**#103** [Frolic#6823](https://lichess.org/@/jwwells42) 1446\n**#104** [dooms#4944](https://lichess.org/@/Cogline) 1435\n**#105** [Andrew#5850](https://lichess.org/@/Link) 1413\n**#106** [pydlv#9320](https://lichess.org/@/PMethod) 1332\n**#107** [Jellyman92#6743](https://lichess.org/@/jelly0451) 1201\n**#108** [nunners60007#7781](https://lichess.org/@/Nunners) 1126\n",
+                        "fields": [],
+                        "title": "<:crazyhouse:471114113599406110> House leaderboard on Lichess.org for Crazyhouse players"
+                    }
+                ],
+                "period": 30000,
+                "page": 1,
+                "author": "515524778530963473",
+                "cmdID": "575353870042005524"
+            },
+            "575365773997113345": {
+                "embedgroup": [
+                    {
+                        "title": "Profile for  ObiWanBenoni#3488",
+                        "description": "",
+                        "color": 10181046,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "andreijl",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Age: **25**\nSex: **non-binary**\nLocation: **tatooine**\nRegion: **Europe**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Oct 27 2017**\nThe House: **Apr 16 2019**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`373480715276517376`**\nPosition in Database: **888**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "1,775",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/373480715276517376/83c472386dec64159d942c1d2fe283e1.png?size=2048"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": "Profile for  ObiWanBenoni#3488",
+                        "description": "",
+                        "color": 10181046,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[andreijl](https://lichess.org/@/andreijl)\n960: **1690**\nUltrabullet: **1571**\nBullet: **1823**\nBlitz: **1688**\nRapid: **1815**\nClassical: 1788?\nCorrespondence: **1788**\nCrazyhouse: **1795**\nKing of the Hill: 1636?\n3-check: **1611**\nAntichess: **1735**\nAtomic: **1459**\nHorde: 1574?\nRacing Kings: **1730**\nPuzzles: **1671**",
+                                "inline": true
+                            }
+                        ],
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "471771674833059882",
+                "cmdID": "575365771471880206"
+            },
+            "575433495812374555": {
+                "embedgroup": [
+                    {
+                        "title": "Profile for  queen_skysky#4417",
+                        "description": "",
+                        "color": 3447003,
+                        "fields": [
+                            {
+                                "name": "Info",
+                                "value": "Region: **Americas**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Apr 24 2019**\nThe House: **Apr 24 2019**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`570714796123488258`**\nPosition in Database: **911**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "346",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/570714796123488258/625204c74182557fafc6e4b67f943412.png?size=2048"
+                        },
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "570714796123488258",
+                "cmdID": "575433494738763786"
+            },
+            "576033568531415040": {
+                "embedgroup": [
+                    {
+                        "title": "Profile for  optilink#2135",
+                        "description": "",
+                        "color": 12884558,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "a5opening\nRapidVariants",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Region: **Europe**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Jul 27 2018**\nThe House: **Feb 19 2019**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`472293316025647105`**\nPosition in Database: **408**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "1,572",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/EncsMs8.png"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": "Profile for  optilink#2135",
+                        "description": "",
+                        "color": 12884558,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[a5opening](https://lichess.org/@/a5opening)\nBullet: **1844**\nBlitz: 1500?\nRapid: **2191**\nClassical: 1500?\nCorrespondence: 1500?\nAntichess: 2036?",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[optilink](https://lichess.org/@/optilink)\n960: 1953?\nUltrabullet: **2139**\nBullet: **2402**\nBlitz: 1730?\nRapid: 1500?\nClassical: 1500?\nCorrespondence: 1500?\nCrazyhouse: **2423**\nKing of the Hill: 1847?\n3-check: **2185**\nAntichess: **2047**\nAtomic: **2042**\nHorde: **2215**\nRacing Kings: 1662?\nPuzzles: **2019**",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[RapidVariants](https://lichess.org/@/RapidVariants)\nBullet: 1500?\nBlitz: 1500?\nRapid: 1500?\nClassical: 1500?\nCorrespondence: 1500?\nCrazyhouse: **2515**\n3-check: 1475?\nAntichess: **2272**\nAtomic: **2112**\nHorde: 2211?\nRacing Kings: 1917?",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:chesscom:430038158244184064> Chess.com",
+                                "value": "[optilink](https://www.chess.com/member/optilink)\nPuzzles: 1497?",
+                                "inline": true
+                            }
+                        ],
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 1,
+                "author": "185412969130229760",
+                "cmdID": "576033567394758657"
+            },
+            "576404006474219540": {
+                "embedgroup": [
+                    {
+                        "description": "**#1** [penguingm1#2487](https://lichess.org/@/penguingim1) 3071\n**#2** [schaker90#8259](https://lichess.org/@/opperwezen) 2614\n**#3** [MeneerMandje#9220](https://lichess.org/@/VariantsOnly) 2488\n**#4** [Zaphikel#6127](https://lichess.org/@/Metatronic) 2411\n**#5** [Our Messiah#1582](https://lichess.org/@/Ingrid-Vengeance) 2297\n**#6** [ChessWeeb#9515](https://lichess.org/@/ChessWeeb) 2295\n**#7** [Mark Plotkin#1754](https://lichess.org/@/littleplotkin) 2204\n**#8** [svenos#5250](https://lichess.org/@/svenos) 2163\n**#9** [hierik#3356](https://lichess.org/@/blindfoldbilly) 2124\n**#10** [nowayouwin#1285](https://lichess.org/@/Nowayouwin) 2110\n",
+                        "fields": [],
+                        "title": "<:ultra:471114113565720577> House leaderboard on Lichess.org for Ultrabullet players"
+                    },
+                    {
+                        "description": "**#11** [Stubenfisch#9958](https://lichess.org/@/Stubenfisch) 2095\n**#12** [Sean B#6257](https://lichess.org/@/seanysean) 2092\n**#13** [mastertan#2161](https://lichess.org/@/mastertan) 2088\n**#14** [chessguy101#2066](https://lichess.org/@/chesssky2) 2078\n**#15** [TcubesAK#3940](https://lichess.org/@/TcubesAK) 2027\n**#16** [LovelyByte#1604](https://lichess.org/@/KingOfTheAndals) 2014\n**#17** [pepellou#7258](https://lichess.org/@/pepellou) 2010\n**#18** [ProgramFOX#1012](https://lichess.org/@/ProgramFOX) 2007\n**#19** [HighestCliff#1222](https://lichess.org/@/highestcliff) 2007\n**#20** [jazzii#1899](https://lichess.org/@/jazzii) 2000\n",
+                        "fields": [],
+                        "title": "<:ultra:471114113565720577> House leaderboard on Lichess.org for Ultrabullet players"
+                    },
+                    {
+                        "description": "**#21** [Truthdoc#5694](https://lichess.org/@/FischyVishy) 2000\n**#22** [Maelstrom#5079](https://lichess.org/@/TooStrongTooFast) 1986\n**#23** [samoyd#2402](https://lichess.org/@/samoyd) 1967\n**#24** [Wildfire#9567](https://lichess.org/@/Sonata2) 1951\n**#25** [Atamek#9914](https://lichess.org/@/atamek) 1942\n**#26** [crptone#1398](https://lichess.org/@/crptone) 1940\n**#27** [TheSummerJanitor#5715](https://lichess.org/@/Grainiac) 1932\n**#28** [retardedplatypus123#0264](https://lichess.org/@/retardedplatypus123) 1928\n**#29** [theLAZYmd#2353](https://lichess.org/@/TheLAZYmd) 1918\n**#30** [schwinggggg#6422](https://lichess.org/@/schwinggggg) 1917\n",
+                        "fields": [],
+                        "title": "<:ultra:471114113565720577> House leaderboard on Lichess.org for Ultrabullet players"
+                    },
+                    {
+                        "description": "**#31** [Musickn#8622](https://lichess.org/@/Musicknight123) 1915\n**#32** [Romeore#5887](https://lichess.org/@/Opening_Player) 1902\n**#33** [Kyle#4287](https://lichess.org/@/KyleLegion) 1881\n**#34** [DuskyMountain#2584](https://lichess.org/@/DuskySucks) 1841\n**#35** [Yeti#0449](https://lichess.org/@/yatinagarwal) 1839\n**#36** [Dhiren_GM#8055](https://lichess.org/@/DynamoAlchemyst) 1823\n**#37** [Crazy_Eight#1198](https://lichess.org/@/Cocaino74) 1805\n**#38** [Natso584#7381](https://lichess.org/@/JaakkoT) 1802\n**#39** [ab#2280](https://lichess.org/@/wabadabakalakaboo) 1783\n**#40** [hans#8619](https://lichess.org/@/HansMoke) 1777\n",
+                        "fields": [],
+                        "title": "<:ultra:471114113565720577> House leaderboard on Lichess.org for Ultrabullet players"
+                    },
+                    {
+                        "description": "**#41** [Coucouplay#6192](https://lichess.org/@/Rapidplayer) 1770\n**#42** [beppos#0440](https://lichess.org/@/repetitaiuvant) 1760\n**#43** [Mystiko#7318](https://lichess.org/@/marczhouse) 1743\n**#44** [laurens#0324](https://lichess.org/@/chessape) 1739\n**#45** [Solarus#8584](https://lichess.org/@/Larouss) 1734\n**#46** [LegionDestroyer#1652](https://lichess.org/@/LegionDestroyer) 1723\n**#47** [SharkFeet#8717](https://lichess.org/@/IceFire1921) 1715\n**#48** [Raven#9079](https://lichess.org/@/PepsiNGaming) 1711\n**#49** [sapolo ss](https://lichess.org/@/SaulSerrano) 1692\n**#50** [Forhavu#1168](https://lichess.org/@/Forhavu) 1688\n",
+                        "fields": [],
+                        "title": "<:ultra:471114113565720577> House leaderboard on Lichess.org for Ultrabullet players"
+                    },
+                    {
+                        "description": "**#51** [tobiasfunke35#7793](https://lichess.org/@/BurakYarol) 1678\n**#52** [TheShiOne#3237](https://lichess.org/@/Shiaxou) 1645\n**#53** [Professor Chronatog#2674](https://lichess.org/@/Chronatog) 1637\n**#54** [xнүρεяsραcε__үσυтυвε#9028](https://lichess.org/@/The__Finale) 1613\n**#55** [poriluk#3839](https://lichess.org/@/Brokula) 1612\n**#56** [okei#1207](https://lichess.org/@/okei) 1606\n**#57** [Megash1983#8767](https://lichess.org/@/Megash1983) 1601\n**#58** [Cran#1010](https://lichess.org/@/Shibb) 1573\n**#59** [Ogul#1233](https://lichess.org/@/Ogul1) 1572\n**#60** [Lesau#6766](https://lichess.org/@/Lesau) 1572\n",
+                        "fields": [],
+                        "title": "<:ultra:471114113565720577> House leaderboard on Lichess.org for Ultrabullet players"
+                    },
+                    {
+                        "description": "**#61** [ObiWanBenoni#3488](https://lichess.org/@/andreijl) 1571\n**#62** [acecace9801#4811](https://lichess.org/@/Tysace) 1569\n**#63** [gueustt4114#2497](https://lichess.org/@/Stefan973) 1567\n**#64** [moonenane#3553](https://lichess.org/@/moonenaneBETA) 1562\n**#65** [javi0111#6730](https://lichess.org/@/Javi0111) 1539\n**#66** [FaZe_ Jingle Bell Cat#8226](https://lichess.org/@/TheUnknownGuyReborn) 1535\n**#67** [Geometry Scheme#3717](https://lichess.org/@/god_of_variants) 1531\n**#68** [Alihene22#3760](https://lichess.org/@/Alihene2) 1530\n**#69** [dankCervonWong#8006](https://lichess.org/@/cerv0nw0ng) 1485\n**#70** [stevis5#7413](https://lichess.org/@/stevis5) 1475\n",
+                        "fields": [],
+                        "title": "<:ultra:471114113565720577> House leaderboard on Lichess.org for Ultrabullet players"
+                    },
+                    {
+                        "description": "**#71** [stevis5#1056](https://lichess.org/@/stevis5) 1475\n**#72** [JabbaHlaing#3606](https://lichess.org/@/MidknightHyperX) 1468\n**#73** [Kota#7281](https://lichess.org/@/Kota4095) 1455\n**#74** [ah#7777](https://lichess.org/@/ikidude) 1450\n**#75** [dooms#4944](https://lichess.org/@/Cogline) 1449\n**#76** [TheM492017#5103](https://lichess.org/@/TheM492017) 1393\n**#77** [Babosos#4525](https://lichess.org/@/Babosos) 1359\n**#78** [Master#3941](https://lichess.org/@/TrapAlert) 1356\n**#79** [loukas435#2646](https://lichess.org/@/loukas435) 1342\n**#80** [Juanma206#4765](https://lichess.org/@/SadLittleTurtle) 1315\n",
+                        "fields": [],
+                        "title": "<:ultra:471114113565720577> House leaderboard on Lichess.org for Ultrabullet players"
+                    },
+                    {
+                        "description": "**#81** [Andrew#5850](https://lichess.org/@/Link) 1297\n**#82** [ericw31415#6314](https://lichess.org/@/ericw31415) 1248\n**#83** [oDeacon#2908](https://lichess.org/@/alexdecamillo) 1193\n**#84** [jamarlo#8806](https://lichess.org/@/jamesog) 1132\n**#85** [Jellyman92#6743](https://lichess.org/@/jelly0451) 1019\n",
+                        "fields": [],
+                        "title": "<:ultra:471114113565720577> House leaderboard on Lichess.org for Ultrabullet players"
+                    }
+                ],
+                "period": 30000,
+                "page": 2,
+                "author": "312050689511784449",
+                "cmdID": "576404005501272064"
             }
         },
         "election": {

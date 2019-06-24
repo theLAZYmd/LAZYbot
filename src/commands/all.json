@@ -11,10 +11,7 @@
 		"method": "check",
 		"arguments": [
 			"message"
-		],
-        "requires": {
-            "bot": false
-        }
+		]
     },
 	{
 		"module": "Custom Reactions",
@@ -39,8 +36,15 @@
 		"arguments": [],
 		"requires": {
 			"state": "trivia",
-			"channels": "trivia",
-			"bot": false
+			"channels": "trivia"
+		}
+	},
+	{
+		"module": "Utility",
+		"file": "reddit",
+		"method": "channel",
+		"requires": {
+			"channels": "reddit"
 		}
 	}
 ]

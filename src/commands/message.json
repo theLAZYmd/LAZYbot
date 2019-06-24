@@ -2,6 +2,38 @@
     "Administration": [
         {
             "aliases": [
+                "settings"
+            ],
+            "description": "Displays server settings on the bot.",
+            "usage": [
+                "settings roles"
+            ],
+            "module": "Administration",
+            "file": "set",
+            "method": "generate",
+            "prefix": "generic",
+            "requires": {
+                "role": "admin"
+            }
+        },
+        {
+            "aliases": [
+                "set"
+            ],
+            "description": "Sets a server settings.",
+            "usage": [
+                "settings roles bot"
+            ],
+            "module": "Administration",
+            "file": "set",
+            "method": "set",
+            "prefix": "generic",
+            "requires": {
+                "role": "admin"
+            }
+        },
+        {
+            "aliases": [
                 "setusername"
             ],
             "description": "Sets bot client's username to a the single argument given.",
@@ -15,44 +47,6 @@
                 "args"
             ],
             "prefix": "generic",
-            "requires": {
-                "user": "owner"
-            }
-        },
-        {
-            "aliases": [
-                "setprefix"
-            ],
-            "description": "Sets the default prefix for commands for this server to the argument given. Prefixes are followed by spaces.",
-            "usage": [
-                "setprefix =="
-            ],
-            "module": "Administration",
-            "file": "set",
-            "method": "genericprefix",
-            "arguments": [
-                "argument"
-            ],
-            "prefix": "generic",
-            "requires": {
-                "user": "owner"
-            }
-        },
-        {
-            "aliases": [
-                "setnadekoprefix"
-            ],
-            "description": "Sets the prefix for commands emulating Nadeko comands for this server. Prefixes are followed by spaces.",
-            "usage": [
-                "setnadekoprefix !"
-            ],
-            "module": "Administration",
-            "file": "set",
-            "method": "nadekoprefix",
-            "arguments": [
-                "argument"
-            ],
-            "prefix": "nadeko",
             "requires": {
                 "user": "owner"
             }
@@ -342,7 +336,169 @@
                 "user": "owner"
             }
         }
-    ],
+	],
+	"Builders": [
+		{
+			"aliases": [
+				"new"
+			],
+			"description": "Creates a new builder",
+			"module": "Builders",
+			"file": "main",
+			"method": "run",
+			"syntax": "type",
+			"prefix": "generic",
+			"subcommands": [
+				{
+					"aliases": [
+						"embed"
+					],
+					"description": "Builds a new embed in the specified channel",
+					"method": "embed"
+				}
+			]
+		},
+		{
+			"aliases": [
+				"edit"
+			],
+			"description": "Creates a new builder by editing a previous message of LAZYbot's",
+			"module": "Builders",
+			"file": "main",
+			"method": "run",
+			"syntax": "type",
+			"prefix": "generic",
+			"subcommands": [
+				{
+					"aliases": [
+						"embed"
+					],
+					"description": "Edits a new embed in the specified channel",
+					"method": "embed"
+				}
+			]
+		},
+		{
+			"aliases": [
+				"setTitle"
+			],
+			"description": "Sets the title of an active embed",
+			"module": "Builders",
+			"file": "embedBuilder",
+			"method": "set",
+			"prefix": "generic"
+		},
+		{
+			"aliases": [
+				"setDescription"
+			],
+			"description": "Sets the description of an active embed",
+			"module": "Builders",
+			"file": "embedBuilder",
+			"method": "set",
+			"prefix": "generic"
+		},
+		{
+			"aliases": [
+				"setAuthor"
+			],
+			"description": "Sets the author of an active embed",
+			"module": "Builders",
+			"file": "embedBuilder",
+			"method": "set",
+			"prefix": "generic"
+		},
+		{
+			"aliases": [
+				"setThumbnail"
+			],
+			"description": "Sets the thumbnail of an active embed",
+			"module": "Builders",
+			"file": "embedBuilder",
+			"method": "set",
+			"prefix": "generic"
+		},
+		{
+			"aliases": [
+				"setImage"
+			],
+			"description": "Sets the image of an active embed",
+			"module": "Builders",
+			"file": "embedBuilder",
+			"method": "set",
+			"prefix": "generic"
+		},
+		{
+			"aliases": [
+				"setFooter"
+			],
+			"description": "Sets the footer of an active embed",
+			"module": "Builders",
+			"file": "embedBuilder",
+			"method": "set",
+			"prefix": "generic"
+		},
+		{
+			"aliases": [
+				"setContent"
+			],
+			"description": "Sets the content of an active embed",
+			"module": "Builders",
+			"file": "embedBuilder",
+			"method": "set",
+			"prefix": "generic"
+		},
+		{
+			"aliases": [
+				"setColor"
+			],
+			"description": "Sets the colour of an active embed",
+			"module": "Builders",
+			"file": "embedBuilder",
+			"method": "set",
+			"prefix": "generic"
+		},
+		{
+			"aliases": [
+				"setURL"
+			],
+			"description": "Sets the URL of an active embed",
+			"module": "Builders",
+			"file": "embedBuilder",
+			"method": "set",
+			"prefix": "generic"
+		},
+		{
+			"aliases": [
+				"addField"
+			],
+			"description": "Adds a field to an active embed",
+			"module": "Builders",
+			"file": "embedBuilder",
+			"method": "addField",
+			"prefix": "generic"
+		},
+		{
+			"aliases": [
+				"removeField"
+			],
+			"description": "Removes a field to an active embed",
+			"module": "Builders",
+			"file": "embedBuilder",
+			"method": "removeField",
+			"prefix": "generic"
+		},
+		{
+			"aliases": [
+				"publish"
+			],
+			"description": "Locks an embed preventing further changes",
+			"module": "Builders",
+			"file": "embedBuilder",
+			"method": "publish",
+			"prefix": "generic"
+		}
+	],
     "Calculation": [
         {
             "aliases": [
@@ -636,8 +792,7 @@
             "module": "Chess",
             "file": "tracker",
             "method": "run",
-            "prefix": "generic",
-            "active": false
+            "prefix": "generic"
         },
         {
             "aliases": [
@@ -651,8 +806,7 @@
             "module": "Chess",
             "file": "tracker",
             "method": "run",
-            "prefix": "generic",
-            "active": false
+            "prefix": "generic"
         },
         {
             "aliases": [
@@ -666,8 +820,7 @@
             "module": "Chess",
             "file": "tracker",
             "method": "run",
-            "prefix": "generic",
-            "active": false
+            "prefix": "generic"
         },
         {
             "aliases": [
@@ -691,8 +844,7 @@
             "module": "Chess",
             "file": "tracker",
             "method": "update",
-            "prefix": "generic",
-            "active": false
+            "prefix": "generic"
         },
         {
             "aliases": [
@@ -706,8 +858,7 @@
             "prefix": "generic",
             "requires": {
                 "user": "owner"
-            },
-            "active": false
+            }
         },
         {
             "aliases": [
@@ -716,17 +867,43 @@
             ],
             "description": "Gets the rank of a user across all leaderboards. Default is yourself.",
             "usage": [
-                "myrank",
                 "myrank DragonMateZ"
             ],
             "module": "Chess",
             "file": "rank",
             "method": "variant",
-            "arguments": [
-                "argument"
-            ],
             "prefix": "generic"
-        }
+		},
+		{
+			"aliases": [
+				"tournament",
+				"tourn"
+			],
+			"description": "Gets a leaderboard of results in a tournament on Lichess and filters them to players from the database",
+			"usage": [
+				"results OQIEzLzG",
+				"res SHEUqsbY"
+			],
+			"module": "Chess",
+			"file": "leaderboard",
+			"method": "tournament",
+			"prefix": "generic"
+		},
+		{
+			"aliases": [
+				"shield"
+			],
+			"description": "Gets a leaderboard of results for a shield tournament on Lichess and filters them to players from the database",
+			"usage": [
+				"shield Crazyhouse 30",
+				"shield antichess 50",
+				"shield [defaults to Bullet] [defauls to 30]"
+			],
+			"module": "Chess",
+			"file": "leaderboard",
+			"method": "shield",
+			"prefix": "generic"
+		}
     ],
     "Currency": [
         {
@@ -1583,12 +1760,7 @@
             "module": "Help",
             "file": "commands",
             "method": "list",
-            "prefix": "generic",
-            "requires": {
-                "args": {
-                    "length": 0
-                }
-            }
+            "prefix": "generic"
         },
         {
             "aliases": [
@@ -1624,9 +1796,6 @@
             "module": "Profile",
             "file": "profile",
             "method": "get",
-            "arguments": [
-                "args"
-            ],
             "prefix": "generic"
         },
         {
@@ -1699,9 +1868,6 @@
             "module": "Profile",
             "file": "messagecount",
             "method": "update",
-            "arguments": [
-                "user"
-            ],
             "prefix": "generic",
             "requires": {
                 "user": "owner",
@@ -1800,7 +1966,6 @@
                 "tq"
             ],
             "description": "Ends a trivia game on Bouncer.",
-            "active": false,
             "usage": [
                 "tq"
             ],

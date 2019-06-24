@@ -1,40 +1,42 @@
 {
-	"name": "lazybot",
-	"description": "Discord bot operating in the House server http://dscrd.me/housechessvariants just to further lazy's understanding of basic js. ",
-	"main": "src/lazybot.js",
-	"version": "1.8.1",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "node src/lazybot.js",
-		"_start": "node --experimental-modules src/lazybot.mjs"
-	},
-	"keywords": [
-		"lazy",
-		"discord",
-		"node",
-		"utility"
-	],
-	"homepage": "https://github.com/theLAZYmd/LAZYbot/blob/master/README.md",
-	"releases": "https://github.com/theLAZYmd/LAZYbot/releases",
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/theLAZYmd/LAZYbot/.git"
-	},
-	"author": "theLAZYmd",
-	"license": "MIT",
-	"preinstall": "rm package-lock.json",
-	"dependencies": {
-		"discord.js": "^11.4.2",
-		"enmap": "^0.3.2",
-		"es6": "0.0.7",
-		"express": "^4.16.4",
-		"lazy-aho-corasick": "^1.0.0",
-		"lichess": "^1.0.7",
-		"opusscript": "0.0.6",
-		"request": "^2.88.0",
-		"request-promise": "^4.2.2",
-		"simple-oauth2": "^2.2.1",
-		"winston": "^3.1.0",
-		"yarn": "^1.10.1"
-	}
+    "name": "lazybot",
+    "description": "Discord bot operating in the House server http://dscrd.me/housechessvariants just to further lazy's understanding of basic js. ",
+    "main": "src/lazybot.js",
+    "version": "1.8.8",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node src/lazybot.js",
+        "_start": "node --experimental-modules src/lazybot.mjs"
+    },
+    "keywords": [
+        "lazy",
+        "discord",
+        "node",
+        "utility"
+    ],
+    "branch": "https://github.com/theLAZYmd/LAZYbot/blob/master/",
+    "homepage": "https://github.com/theLAZYmd/LAZYbot/blob/master/README.md",
+    "releases": "https://github.com/theLAZYmd/LAZYbot/releases",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/theLAZYmd/LAZYbot/.git"
+    },
+    "author": "theLAZYmd",
+    "license": "MIT",
+    "preinstall": "rm package-lock.json",
+    "dependencies": {
+        "cheerio": "^1.0.0-rc.3",
+        "discord.js": "^11.4.2",
+        "enmap": "^0.3.2",
+        "es6": "0.0.7",
+        "express": "^4.16.4",
+        "lazy-aho-corasick": "^1.0.0",
+        "lichess": "^1.0.15",
+        "opusscript": "0.0.6",
+        "request": "^2.88.0",
+        "request-promise": "^4.2.2",
+        "simple-oauth2": "^2.2.1",
+        "winston": "^3.1.0",
+        "yarn": "^1.10.1"
+    }
 }
