@@ -128,7 +128,7 @@ class Parse {
 
 	get channel() {
 		if (this._channel) return this._channel;
-		return this._channel = this.message ? this.message.channel : null;
+		return this._channel = typeof this.message !== 'undefined' ? this.message.channel : null;
 	}
 
 	get member() {
