@@ -105,7 +105,7 @@ class Output extends Parse {
 	 */
 	async data(json, channel, type = 'json') {
 		try {
-			let string = (typeof json === 'object' ? JSON.stringify((typeof json._apiTransform === 'function' ? json._apiTransform() : json), null, 2) : json).replace(/`/g, '\\`');
+			let string = (typeof json === 'object' ? JSON.stringify((typeof json._apiTransform === 'function' ? json._apiTransform() : json), null, 2) : json.toString()).replace(/`/g, '\\`');
 			let index = Math.ceil(string.length / 2000);
 			let keylength = Math.floor(string.length / index);
 			for (let i = 0; i < index; i++) {
@@ -187,12 +187,11 @@ class Output extends Parse {
 			for (let i = 0; i < emojis.length; i++) {
 				if (!msg) break;
 				if (promisify) f();
-				else setTimeout(f, i * 1000);
+				else setTimeout(f, i * 1000, i);
 			}
 			return msg;
 		} catch (e) {
 			if (e) this.Output.onError(e);
-			throw e;
 		}
 	}
 	
