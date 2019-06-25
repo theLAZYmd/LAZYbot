@@ -16,7 +16,7 @@ class Teams extends Parse { //fairly miscelanneous functions
 		try {
 			if (!this.Permissions.role('admin', this)) throw this.Permissions.output.role;
 			let server = this.server;
-			if (server.teams.map(t => t.toLowerCase()).includes(argument)) throw 'Team already registered!';
+			if ((server.teams || []).map(t => t.toLowerCase()).includes(argument)) throw 'Team already registered!';
 			await this.Output.confirm({
 				action: 'new team name ' + argument.bold()
 			});
@@ -39,7 +39,7 @@ class Teams extends Parse { //fairly miscelanneous functions
 			embed.setTitle('👥 List of registered teams on The House');
 			for (let t of this.server.teams || []) {
 				let team = this.guild.members.array().filter(m => m.displayName.toLowerCase().startsWith(t.toLowerCase()));
-				if (all) embed.addField(t, team.map(m => m.displayName).join('\n').format('css'), false);
+				if (all) embed.addField(t + ' (' + team.length + ')', team.join('\n'), true);
 				else embed.addField(t, team.length, true);
 			}
 			embed.fields = embed.fields.sort((a, b) => all ? b.value.split('\n').length - a.value.split('\n').length : b.value - a.value);
