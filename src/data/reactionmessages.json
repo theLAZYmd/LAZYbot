@@ -11333,6 +11333,202 @@
                 "page": 1,
                 "author": "515524778530963473",
                 "cmdID": "592736780319719454"
+            },
+            "592839143524925461": {
+                "embedgroup": [
+                    {
+                        "title": "Official House Shop Roles",
+                        "description": "Congrats on accumulating a whole bunch of flowers. Here are the roles you can buy; they will give you a special colour flair and make you superior to other members on the right sidebar! The colors look really nice.\n\nCheck savings by `.$`. Check level by `.xp`\n\n__Bronze__: 200 🌸; **if level 5**, 90 🌸\n__Silver__: 360 🌸; **if level 10**, 180 🌸 \n__Gold__: 680 🌸; **if level 20**, 370 🌸 \n__Diamond__: 1320 🌸; **if level 30**, 760 🌸 \n\nAre you just that special that you want your own colour? Well then buy:\n\n__ChooseColor__: 500 🌸 \n\nChange your colour to whatever you want using the `!color` command.\n Does not affect your right sidebar standings; it's for ye vain ones.",
+                        "footer": {
+                            "text": "Role rewards must be bought in order."
+                        }
+                    }
+                ],
+                "period": 180000,
+                "page": 0,
+                "author": "341275354020839424",
+                "cmdID": "592839139959767042"
+            },
+            "593052410713210890": {
+                "embedgroup": [
+                    {
+                        "title": "Profile for  ObiWanBenoni#3488",
+                        "description": "",
+                        "color": 10181046,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "antic3\nandreijl",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Age: **25**\nSex: **non-binary**\nLocation: **tatooine**\nRegion: **Europe**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Oct 27 2017**\nThe House: **Apr 16 2019**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`373480715276517376`**\nPosition in Database: **871**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "3,724",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/373480715276517376/83c472386dec64159d942c1d2fe283e1.png?size=2048"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": "Profile for  ObiWanBenoni#3488",
+                        "description": "",
+                        "color": 10181046,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[andreijl](https://lichess.org/@/andreijl)\n960: **1690**\nUltrabullet: **1571**\nBullet: **1811**\nBlitz: **1688**\nRapid: **1815**\nClassical: 1788?\nCorrespondence: **1788**\nCrazyhouse: **1795**\nKing of the Hill: 1636?\n3-check: **1611**\nAntichess: **1735**\nAtomic: **1459**\nHorde: 1574?\nRacing Kings: **1722**\nPuzzles: **1677**",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[ObiWanBenoni](https://lichess.org/@/ObiWanBenoni)\nBullet: **1833**\nBlitz: 1500?\nRapid: 1500?\nClassical: 1500?\nCorrespondence: 1500?\nCrazyhouse: **1887**\nAntichess: **1721**",
+                                "inline": true
+                            }
+                        ],
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 1,
+                "author": "312050689511784449",
+                "cmdID": "593052409564102676"
+            },
+            "593073515725455360": {
+                "embedgroup": [
+                    {
+                        "title": "Profile for  wumpus#4525",
+                        "description": "```\nobi will will give you in_debt role if you dont join his team```",
+                        "color": 15844367,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "Natso620\nBabosos",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Region: **Americas**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Nov 06 2017**\nThe House: **Jun 13 2019**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`377227077859934208`**\nPosition in Database: **967**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "22,870",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/377227077859934208/e1d6bd6936c6bdcae7c45c95c46b9b05.png?size=2048"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": "Profile for  wumpus#4525",
+                        "description": "```\nobi will will give you in_debt role if you dont join his team```",
+                        "color": 15844367,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[Babosos](https://lichess.org/@/Babosos)\n960: **1374**\nUltrabullet: **1342**\nBullet: **1510**\nBlitz: **1495**\nRapid: **1585**\nClassical: 1585?\nCorrespondence: 1662?\nCrazyhouse: **1530**\nKing of the Hill: **1437**\n3-check: **1524**\nAntichess: **1866**\nAtomic: **1630**\nHorde: **2050**\nRacing Kings: **2044**\nPuzzles: **2051**",
+                                "inline": true
+                            }
+                        ],
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "377227077859934208",
+                "cmdID": "593073514563764234"
+            },
+            "593074042517323817": {
+                "embedgroup": [
+                    {
+                        "title": "Profile for  Azelf#4971",
+                        "description": "",
+                        "color": 15844367,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "Natso623\nUarekomodo",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Age: **25**\nSex: **non-binary**\nLocation: **China**\nRegion: **Asia / Australia**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **May 11 2017**\nThe House: **Apr 04 2019**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`312050689511784449`**\nPosition in Database: **368**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "5,437",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/312050689511784449/60844d3880e92e2509c4b1343ee8b235.png?size=2048"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": "Profile for  Azelf#4971",
+                        "description": "",
+                        "color": 15844367,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[Uarekomodo](https://lichess.org/@/Uarekomodo)\nUltrabullet: **1615**\nBullet: **1596**\nBlitz: **1602**\nRapid: 1430?\nClassical: 1500?\nCorrespondence: 1500?\nCrazyhouse: 1645?\nAntichess: 1265?\nAtomic: 1319?\nRacing Kings: 1544?",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:chesscom:430038158244184064> Chess.com",
+                                "value": "[Uarekomodo9](https://www.chess.com/member/Uarekomodo9)\nBullet: 1683?\nBlitz: 1682?\nRapid: **1828**\nClassical: 1945?\nCrazyhouse: **1464**\nBughouse: **1800**\nKing of the Hill: **1556**\nPuzzles: 1832?",
+                                "inline": true
+                            }
+                        ],
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "312050689511784449",
+                "cmdID": "593074041342918658"
             }
         },
         "election": {

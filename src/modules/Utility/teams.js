@@ -16,7 +16,7 @@ class Teams extends Parse { //fairly miscelanneous functions
 		try {
 			if (!this.Permissions.role('admin', this)) throw this.Permissions.output.role;
 			let server = this.server;
-			if (server.teams.map(t => t.toLowerCase()).includes(argument)) throw 'Team already registered!';
+			if ((server.teams || []).map(t => t.toLowerCase()).includes(argument)) throw 'Team already registered!';
 			await this.Output.confirm({
 				action: 'new team name ' + argument.bold()
 			});

@@ -12,7 +12,7 @@
                 "count": true,
                 "results": true
             },
-            "trivia": false
+            "trivia": true
         },
         "prefixes": {
             "generic": "!",
@@ -126,7 +126,12 @@
                 "niggger"
             ]
         },
-        "builds": {}
+        "builds": {},
+        "teams": [
+            "natso",
+            "gsvc",
+            "ProgramFOX"
+        ]
     },
     "433936141989969931": {
         "_id": "433936141989969931",
