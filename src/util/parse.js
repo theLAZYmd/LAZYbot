@@ -101,20 +101,7 @@ class Parse {
 
 	get prefix() {
 		if (this._prefix) return this._prefix;
-		return this._prefix = Array.from(this.prefixes.values()).find(p => this.content.startsWith(p)) || '';
-	}
-	
-	get prefixes() {
-		if (this._prefixes) return this._prefixes;
-		let prefixes = this.server ? this.server.prefixes : {
-			generic: '!',
-			nadeko: '.'
-		};
-		return this._prefixes = new Map(Object.entries(prefixes));
-	}
-
-	get generic() {
-		return this.prefixes.get('generic');
+		return this._prefix.startsWith(config.prefix) || '';
 	}
 
 	get words() {

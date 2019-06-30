@@ -1,51 +1,49 @@
-const DataManager = require("../util/datamanager.js");
-const Logger = require("../util/logger.js");
+const Parse = require('../util/parse');
+const Logger = require('../util/logger');
 
-const Commands = require("../util/commands.js");
-const {    name, key    } = Commands.reaction;
+class messageReactionAdd extends Parse {
 
-class messageReactionAdd {
+	constructor (message, user) {
+		super(message);
+		this.messageReactionUser = user;
+	}
 
-    static async bot () {
+	async left () {
 
-    }
+	}
 
-    static async button (messageReaction, user) {
-        const reactionMessages = DataManager.getFile("./src/data/reactionmessages.json")[messageReaction.message.guild.id];
-        let array = [];
-        for (let [type, data] of Object.entries(reactionMessages)) {
-            if (type.startsWith("_")) continue;
-            array = array.concat(Object.entries(data).map(([k, v]) => [k, [v, type]]));
-        }
-        let ids = new Map(array);
-        let val = ids.get(messageReaction.message.id);
-        if (!val) return;
-        let [msgInfo, type] = val;
-        let cmdInfo = key.get(type);
-        let path = "../modules/" + (cmdInfo.module ? cmdInfo.module + "/" : "") + cmdInfo.file.toLowerCase() + ".js";
-        let Constructor = require(path);
-        let Instance = new Constructor(messageReaction.message);
-        if (typeof Instance[cmdInfo.method] !== "function") return Logger.error(path + " | " + cmdInfo.method + "() is not a function.")
-        Instance[cmdInfo.method](messageReaction, user, msgInfo);
-    }
+	async right () {
 
-    static async name (messageReaction, user) {
-        let cmdInfo = name.get(messageReaction.name);
-        if (!cmdInfo) return null;
-        if (cmdInfo.active === false) return null;
-        let Constructor = require("../modules/" + cmdInfo.module + cmdInfo.file.toLowerCase() + ".js");
-        let Instance = new Constructor(messageReaction.message);
-        Instance[cmdInfo.method.toLowerCase()](messageReaction, user);
-    }
+	}
+
+	async confirm () {
+
+	}
+
+	async channel () {
+
+	}
 
 }
 
 module.exports = async (client, messageReaction, user) => {
-    try {
-        if (user.bot) messageReactionAdd.bot(messageReaction, user);
-        else if (messageReaction.message.guild && messageReaction.message.author.bot) messageReactionAdd.button(messageReaction, user);
-        else messageReactionAdd.name(messageReaction, user);
-    } catch (e) {
-        if (e) Logger.error(e);
-    }
-}
+	try {
+		if (user.bot) throw '';
+		if (!messageReaction.message.user.id !== client.user.id) throw '';
+		if (!messageReaction.message.guild) throw '';
+		messageReaction.remove(user);
+		const Reaction = new messageReactionAdd(messageReaction.message, user);
+		switch (messageReaction.emoji) {
+			case '⬅':
+				return Reaction.left();
+			case '➡':
+				return Reaction.right();
+			case '✅':
+				return Reaction.confirm();
+			case '#⃣':
+				return Reaction.channel();
+		}
+	} catch (e) {
+		if (e) Logger.error(e);
+	}
+};
