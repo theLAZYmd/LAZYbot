@@ -1,21 +1,21 @@
 {
-    "name": "lazybot",
-    "description": "Discord bot operating in the House server http://dscrd.me/housechessvariants just to further lazy's understanding of basic js. ",
-    "main": "src/lazybot.js",
-    "version": "1.8.8",
+    "name": "quote-bot",
+    "description": "Discord bot fixing Discord's basic lack of quotes ",
+    "main": "src/bot.js",
+    "version": "0.0.1",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "node src/lazybot.js",
-        "_start": "node --experimental-modules src/lazybot.mjs"
+        "start": "node src/bot.js"
     },
     "keywords": [
         "lazy",
         "discord",
         "node",
-        "utility"
+		"utility",
+		"quote"
     ],
-    "branch": "https://github.com/theLAZYmd/LAZYbot/blob/master/",
-    "homepage": "https://github.com/theLAZYmd/LAZYbot/blob/master/README.md",
+    "branch": "https://github.com/theLAZYmd/LAZYbot/blob/quote-bot/",
+    "homepage": "https://github.com/theLAZYmd/LAZYbot/blob/quote-bot/README.md",
     "releases": "https://github.com/theLAZYmd/LAZYbot/releases",
     "repository": {
         "type": "git",
@@ -25,18 +25,9 @@
     "license": "MIT",
     "preinstall": "rm package-lock.json",
     "dependencies": {
-        "cheerio": "^1.0.0-rc.3",
         "discord.js": "^11.4.2",
         "enmap": "^0.3.2",
         "es6": "0.0.7",
-        "express": "^4.16.4",
-        "lazy-aho-corasick": "^1.0.0",
-        "lichess": "^1.0.15",
-        "opusscript": "0.0.6",
-        "request": "^2.88.0",
-        "request-promise": "^4.2.2",
-        "simple-oauth2": "^2.2.1",
-        "winston": "^3.1.0",
         "yarn": "^1.10.1"
     }
 }

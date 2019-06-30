@@ -1,39 +1,10 @@
 const config = require('../config.json');
-const DataManager = require('./datamanager.js');
-const Permissions = require('./permissions.js');
 const Logger = require('./logger.js');
 
 class Parse {
 
 	constructor(message) { //everything extends to here
 		this.message = message;
-	}
-
-	//DATA
-
-	get server() {
-		if (!this.guild) return null;
-		if (this._server) return this._server;
-		return this._server = this.getServer();
-	}
-	
-	set server(server) {
-		DataManager.setServer(server);
-		this._server = server;
-	}
-
-	getServer() {
-		return DataManager.getServer(this.guild.id);
-	}
-
-	get reactionmessages() {
-		if (!this._reactionmessages) if (this.guild) this._reactionmessages = DataManager.getServer(this.guild.id, './src/data/reactionmessages.json');
-		return this._reactionmessages || {};
-	}
-
-	set reactionmessages(reactionmessages) {
-		DataManager.setServer(reactionmessages, './src/data/reactionmessages.json');
-		this._reactionmessages = reactionmessages;
 	}
 
 	//Methods
@@ -46,19 +17,6 @@ class Parse {
 		return this._Output;
 	}
 
-	get Permissions() {
-		if (!this._Permissions) this._Permissions = Permissions;
-		return this._Permissions;
-	}
-
-	get Paginator() {
-		if (!this._Paginator) {
-			let PaginatorConstructor = require('../modules/Utility/paginator');
-			this._Paginator = new PaginatorConstructor(this.message);
-		}
-		return this._Paginator;
-	}
-
 	get Embeds() {
 		if (!this._Paginator) {
 			let EmbedsConstructor = require('../modules/Utility/embeds');
@@ -66,18 +24,10 @@ class Parse {
 		}
 		return this._Embeds;
 	}
-
+	
 	get Search() {
 		let SearchConstructor = require('./search.js');
 		return new SearchConstructor(this.message);
-	}
-
-	get Check() {
-		if (!this._Check) {
-			let CheckConstructor = require('./check.js');
-			return this._Check = new CheckConstructor(this.message);
-		}
-		return this._Check;
 	}
 
 	get error() {
@@ -149,24 +99,6 @@ class Parse {
 		this._user = user;
 	}
 
-	/**
-	 * @type {DBuser}
-	 */
-	get dbuser() {
-		if (this._dbuser) return this._dbuser;
-		if (!this.user) return null;
-		return this.Search.dbusers.getUser(this.user);
-	}
-
-	set dbuser(dbuser) {
-		this._dbuser = dbuser;
-	}
-
-	get dbindex() {
-		if (!this.dbuser) return null;
-		return this.dbuser.getIndex();
-	}
-
 	get prefix() {
 		if (this._prefix) return this._prefix;
 		return this._prefix = Array.from(this.prefixes.values()).find(p => this.content.startsWith(p)) || '';
@@ -183,10 +115,6 @@ class Parse {
 
 	get generic() {
 		return this.prefixes.get('generic');
-	}
-
-	get nadeko() {
-		return this.prefixes.get('nadeko');
 	}
 
 	get words() {
