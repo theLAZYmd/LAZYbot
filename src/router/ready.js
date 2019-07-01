@@ -24,24 +24,16 @@ class Ready {
 	}
 
 	async setRole() {
-		if (this.guild.me.displayColor === config.colors.background) return;
-		let role = await this.guild.me.roles.find(r => r.name === this.client.user.username);
-		if (!role) role = await this.guild.createRole({
-			name: this.client.user.username,
-			position: this.guild.me.colorRole.position + 1
-		}); else role.setPosition(this.guild.me.colorRole.position + 1);
-	}
-   
-	async setPresence() {
-		let name = '!h for help or DM me';
-		this.client.user.setPresence({
-			game: {
-				name,
-				url: 'https://twitch.tv/housediscord',
-				type: 'STREAMING'
-			}
+		this.client.guilds.forEach(async (guild) => {
+			if (guild.me.displayColor === config.colors.background) return;
+			let role = await guild.me.roles.find(r => r.name.toLowerCase() === this.client.user.username.toLowerCase());
+			if (!role) role = await guild.createRole({
+				name: this.client.user.username,
+				position: guild.me.colorRole.position + 1,
+				color: config.colors.background
+			});
+			else role.setColor(config.colors.background);
 		});
-		Logger.log(`Set bot user presence to ${name} in ${Date.now() - this.client.readyTimestamp}ms.`);
 	}
 
 	async setUsername() {   //Name in package.json + version number
@@ -52,6 +44,15 @@ class Ready {
 			if (guild.me.nickname !== name) {
 				await guild.me.setNickname(name);
 				Logger.log(`Set bot nickname to ${name} in guild ${guild.name} in ${Date.now() - this.client.readyTimestamp}ms.`);
+			}
+		});
+	}
+
+	async setNickname() {
+		this.client.guilds.forEach(async (guild) => {
+			let name = '.';
+			if (guild.me.nickname !== name) {
+				await guild.me.setNickname(name);
 			}
 		});
 	}

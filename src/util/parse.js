@@ -101,7 +101,7 @@ class Parse {
 
 	get prefix() {
 		if (this._prefix) return this._prefix;
-		return this._prefix.startsWith(config.prefix) || '';
+		return this.content.startsWith(config.prefix) ? config.prefix : '';
 	}
 
 	get words() {

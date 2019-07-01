@@ -52,7 +52,6 @@ class User extends Search {
 			if (!user) user = this.byID(searchstring);
 			if (!user) user = this.byTag(searchstring);
 			if (!user) user = this.byUsername(searchstring, exactmode);
-			if (!user) user = this.byAliases(searchstring, exactmode);
 			if (!user) user = this.byDisplayName(searchstring, exactmode);
 		}
 		return user;
