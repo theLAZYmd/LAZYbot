@@ -1,11 +1,6 @@
 const config = require('../config.json');
 const Package = require('../../package.json');
-
-const rp = require('request-promise');
 const Logger = require('../util/logger');
-const Commands = require('../util/commands');
-const CustomReactions = require('../modules/Custom Reactions/customreactions');
-const Shadowban = require('../modules/Administration/shadowban');
 
 class Ready {
 
@@ -15,16 +10,6 @@ class Ready {
 
 	async getGuilds() {
 		Logger.load(this.client.readyTimestamp, [[this.client.guilds.keyArray().length, 'Client servers']]);
-	}
-    
-	async getBots() {
-		let list = this.client.users.array()
-			.filter(u => u.bot)
-			.partition(u => !/online|idle|dnd/.test(u.presence.status))
-			.map((arr) => [arr.length]);
-		list[0].push('Online bots');
-		list[1].push('Offline bots');
-		Logger.load(this.client.readyTimestamp, list);
 	}
 
 	async getOwners() {
@@ -37,64 +22,15 @@ class Ready {
 		list[1].push('Offline bot owners');
 		Logger.load(this.client.readyTimestamp, list);
 	}
-       
-	async getCommands() {
-		let A = Commands.getAll();
-		Logger.load(this.client.readyTimestamp, [[A.length, 'Processes']], 'All');
-		let B = Commands.getBot(this.client.readyTimestamp);
-		Logger.load(this.client.readyTimestamp, [[B.size, 'Title Keys']], 'Bot');
-		let C = Commands.getMessage(this.client.readyTimestamp);
-		Logger.load(this.client.readyTimestamp, [[C.commands.size, 'Command Keys'], [C.aliases.size, 'Aliases']], 'Commands');
-		let D = Commands.getDM(this.client.readyTimestamp);
-		Logger.load(this.client.readyTimestamp, [[D.aliases.size, 'Command keys'], [D.regexes.size, 'Regexes']], 'DM');
-		let E = Commands.getReaction(this.client.readyTimestamp);
-		Logger.load(this.client.readyTimestamp, [[E.name.size, 'Command Keys'], [E.key.size, 'ID-constructor keys']], 'Emoji Reactions');
-	}
 
-	async getCustomReactions() {
-		let CR = CustomReactions.getTrie();
-		Logger.load(this.client.readyTimestamp, [[Object.keys(CR).length, 'Servers'], [Object.values(CR).reduce((acc, curr) => acc += curr.anyword.size + curr.whole.size, 0), 'Keys']], 'Custom Reactions');
+	async setRole() {
+		if (this.guild.me.displayColor === config.colors.background) return;
+		let role = await this.guild.me.roles.find(r => r.name === this.client.user.username);
+		if (!role) role = await this.guild.createRole({
+			name: this.client.user.username,
+			position: this.guild.me.colorRole.position + 1
+		}); else role.setPosition(this.guild.me.colorRole.position + 1);
 	}
-
-	async getShadowbanPhrases() {
-		let servers = Object.keys(Shadowban.getTrie());
-		Logger.load(this.client.readyTimestamp, [[servers.length, 'Servers']], 'Shadowban Phrases');
-	}
-
-	async getSources() {
-		let time = Date.now();
-		let sources = new Map();
-		for (let source of Object.values(config.sources)) try {
-			let body = await rp({
-				method: 'GET',
-				uri: source.url.ping,
-				timeout: 1500,
-			});
-			if (!body) throw source + ': ' + 404;
-			sources.set(source, true);
-		} catch (e) {
-			sources.set(source, false);
-		}        
-		Logger.load(time, [[Array.from(sources.values()).filter(v => v).length, 'Online sources'], [Array.from(sources.values()).filter(v => !v).length, 'Offline sources']]);
-		this.sources = sources;
-	}
-	/*
-	async autoupdates() {
-		let TrackerConstructor = require("../modules/tracker/tracker.js");
-		for (let [id, server] of Object.entries(DataManager.getFile("./src/data/server.json"))) {
-			if (server.states.au) {
-				TrackerConstructor.initUpdateCycle(this.client, id)
-				return Logger.log("Beginning update cycle...");
-			}
-		}
-    }*/
-	/*  
-    async reddit() {
-        let str = Math.random().toString().replace(/[^a-z]+/g, '')
-        let url = config.urls.reddit.oauth.replace("this.client_ID", config.ids.reddit).replace("TYPE", token.reddit).replace("RANDOM_STRING", str).replace("URL", "http://localhost").replace("SCOPE_STRING", "identity");
-        Logger.log(await rp.get(url));
-    }
-    */
    
 	async setPresence() {
 		let name = '!h for help or DM me';
@@ -120,24 +56,6 @@ class Ready {
 		});
 	}
 
-	async intervals() {
-		for (let [_time, cmds] of Commands.interval) {
-			let time = Number(_time);
-			for (let cmdInfo of cmds) {
-				if (config.ids.betabot === this.client.user.id) break;
-				if (cmdInfo.active === false) continue;
-				if (cmdInfo.once !== true) continue;
-				this.client.emit('interval', cmdInfo);
-			}
-			setInterval(() => {
-				for (let cmdInfo of cmds) {
-					if (cmdInfo.active === false) continue;
-					this.client.emit('interval', cmdInfo);
-				}
-			}, time);
-		}
-	}
-
 }
 
 module.exports = async (client) => {
@@ -150,8 +68,6 @@ module.exports = async (client) => {
 			if (e) Logger.error(e);
 		}
 		Logger.log('bleep bloop! It\'s showtime.');
-		//require("./intervals.js")();
-		client.sources = ready.sources;
 		return client;
 	} catch (e) {
 		if (e) Logger.error(e);
