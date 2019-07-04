@@ -11,8 +11,11 @@ class messageReactionAdd extends Quote {
 				for (let method of Object.getOwnPropertyNames(messageReactionAdd.prototype)) {
 					if (typeof method !== 'function') continue;
 					this[method] = () => {};
-				}
+				};
+				return;
 			}
+			if (this.client.open[this.message.id].timeout) clearTimeout(this.client.open[this.message.id].timeout);
+			this.client.open[this.message.id].timeout = setTimeout(() => this.confirm(), 20000);
 		} catch (e) {
 			if (e) this.Output.onError(e);
 		}
