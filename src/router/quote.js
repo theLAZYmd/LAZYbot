@@ -1,6 +1,5 @@
 const Parse = require('../util/parse');
 const Embed = require('../util/embed');
-const Logger = require('../util/logger');
 const config = require('../config.json');
 
 class Quote extends Parse {
@@ -41,9 +40,12 @@ class Quote extends Parse {
 	async getUserm () {
 		this.userm = this.quoteChannel.messages.filter(m => m.author.id === this.quote.target);
 		let i = 0;
+		let size = 0;
 		while (this.userm.size === 0 && i < 10) {
 			this.all = await this.extend();
 			this.userm = this.userm.concat(this.all.filter(m => m.author.id === this.quote.target));
+			if (this.userm.size === size) break;
+			size = this.userm.size;
 			i++;
 		}
 		return this.userm;
@@ -55,7 +57,16 @@ class Quote extends Parse {
 	}
 
 	async getEmbed(index) {
-		const arr = await this.getArr();
+		let arr = await this.getArr();
+		let i = 0;
+		let size = 0;
+		while (index >= arr.length - 3 && i < 5) {
+			await this.extend();
+			arr = await this.getArr();
+			if (this.userm.size === size) break;
+			size = this.userm.size;
+			i++;
+		}
 		let m = arr[index];
 		return new Embed(this.message.embeds[0])
 			.setColor(config.colors.background)

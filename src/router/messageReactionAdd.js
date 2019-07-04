@@ -5,11 +5,16 @@ class messageReactionAdd extends Quote {
 
 	constructor (message, user) {
 		super(message, user);
-		if (user.id !== this.quote.author) {
-			for (let method of Object.getOwnPropertyNames(messageReactionAdd.prototype)) {
-				if (typeof method !== 'function') continue;
-				this[method] = () => {};
+		try {
+			if (!this.quote) return this.Output.data(this.client.open);
+			if (user.id !== this.quote.author) {
+				for (let method of Object.getOwnPropertyNames(messageReactionAdd.prototype)) {
+					if (typeof method !== 'function') continue;
+					this[method] = () => {};
+				}
 			}
+		} catch (e) {
+			if (e) this.Output.onError(e);
 		}
 	}
 	
@@ -24,7 +29,7 @@ class messageReactionAdd extends Quote {
 		let index = this.quote.index;
 		index++;
 		if (index < 0) index = 0;
-		else if (index > arr.length) index = arr.length;
+		else if (index >= arr.length) index = arr.length - 1;
 		this.getMessage(index);
 		this.client.open[this.message.id].index--;
 	}
@@ -34,7 +39,7 @@ class messageReactionAdd extends Quote {
 		let index = this.quote.index;
 		index--;
 		if (index < 0) index = 0;
-		else if (index > arr.length) index = arr.length;
+		else if (index >= arr.length) index = arr.length - 1;
 		this.getMessage(index);
 		this.client.open[this.message.id].index++;
 	}

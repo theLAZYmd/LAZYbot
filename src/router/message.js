@@ -38,8 +38,8 @@ class Message extends Quote {
 				channel: channel.id
 			};
 			let embed = await this.getEmbed(0);
-			const msg = await this.Output.reactor(embed, this.channel, ['⬅', '➡', '✅', '❎', '#⃣']);
 			if (!this.client.open) this.client.open = {};
+			const msg = await this.Output.reactor(embed, this.channel, ['⬅', '➡', '✅', '❎', '#⃣']);
 			this.client.open[msg.id] = this.quote;
 			Logger.log(['Quote', this.author.tag, user.tag, embed.description]);
 		} catch (e) {
