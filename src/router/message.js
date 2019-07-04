@@ -28,6 +28,7 @@ class Message extends Quote {
 			let user = await this.getUser();
 			if (!user) throw 'No such user found';
 			let channel = args[1] ? (this.Search.channels.get(args[1]) || this.channel) : this.channel;
+			if (!channel.permissionsFor(this.author).has('VIEW_CHANNEL')) throw this.Permissions.output('role');
 			this.message.delete();
 			this.quote = {
 				target: user.id,

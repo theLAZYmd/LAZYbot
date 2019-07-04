@@ -2,7 +2,7 @@
     "name": "quote-bot",
     "description": "Discord bot fixing Discord's basic lack of quotes ",
     "main": "src/bot.js",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "node src/bot.js"

@@ -1,5 +1,6 @@
 const config = require('../config.json');
-const Logger = require('./logger.js');
+const Logger = require('./logger');
+const Permissions = require('./permissions');
 
 class Parse {
 
@@ -15,6 +16,11 @@ class Parse {
 			this._Output = new OutputConstructor(this.message);
 		}
 		return this._Output;
+	}
+
+	get Permissions() {
+		if (!this._Permissions) this._Permissions = Permissions;
+		return this._Permissions;
 	}
 
 	get Embeds() {

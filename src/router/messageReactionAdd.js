@@ -69,12 +69,14 @@ class messageReactionAdd extends Quote {
 
 	async channel () {
 		try {
-			let channel = await this.Output.response({
+			let c = await this.Output.response({
 				author: this.messageReactionUser,
 				description: 'Please specify a channel from which messages should be gotten',
 				filter: m => this.Search.channels.get(m.content)
 			});
-			this.quote.channel = this.Search.channels.get(channel).id;
+			let channel = this.Search.channels.get(c);
+			if (!channel.permissionsFor(this.messageReactionUser).has('VIEW_CHANNEL')) throw this.Permissions.output('role');
+			this.quote.channel = channel.id;
 			this.getMessage(0);
 			this.client.open[this.message.id].index = 0;
 			this.client.open[this.message.id].channel = this.quote.channel;
