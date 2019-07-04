@@ -192,13 +192,17 @@
                 "tag": "RacingKingsKing#2077",
                 "lastMail": 1560850504790
             },
-            "590585382794428476": {
-                "tag": "ijh#0966",
-                "lastMail": 1560876928060
-            },
             "591828654493925376": {
                 "tag": "Illion#1918",
                 "lastMail": 1561173346963
+            },
+            "595678693032984608": {
+                "tag": "RacingKingKing#2077",
+                "lastMail": 1562091267711
+            },
+            "596059839847989290": {
+                "tag": "ijh#0966",
+                "lastMail": 1562182140334
             }
         },
         "paginator": {
@@ -11529,6 +11533,629 @@
                 "page": 0,
                 "author": "312050689511784449",
                 "cmdID": "593074041342918658"
+            },
+            "593205036155404311": {
+                "embedgroup": [
+                    {
+                        "title": "Official House Shop Roles",
+                        "description": "Congrats on accumulating a whole bunch of flowers. Here are the roles you can buy; they will give you a special colour flair and make you superior to other members on the right sidebar! The colors look really nice.\n\nCheck savings by `.$`. Check level by `.xp`\n\n__Bronze__: 200 🌸; **if level 5**, 90 🌸\n__Silver__: 360 🌸; **if level 10**, 180 🌸 \n__Gold__: 680 🌸; **if level 20**, 370 🌸 \n__Diamond__: 1320 🌸; **if level 30**, 760 🌸 \n\nAre you just that special that you want your own colour? Well then buy:\n\n__ChooseColor__: 500 🌸 \n\nChange your colour to whatever you want using the `!color` command.\n Does not affect your right sidebar standings; it's for ye vain ones.",
+                        "footer": {
+                            "text": "Role rewards must be bought in order."
+                        }
+                    }
+                ],
+                "period": 180000,
+                "page": 0,
+                "author": "377227077859934208",
+                "cmdID": "593205034120904724"
+            },
+            "593678310051938304": {
+                "embedgroup": [
+                    {
+                        "title": "Profile for  rllybadatcrazyhouse#2139",
+                        "description": "",
+                        "color": 3447003,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "rllybadatcrazyhouse",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Region: **Americas**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Mar 23 2016**\nThe House: **Apr 14 2019**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`162033973680275456`**\nPosition in Database: **867**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "30",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/EncsMs8.png"
+                        },
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "377227077859934208",
+                "cmdID": "593678308848435200"
+            },
+            "593824232329445396": {
+                "embedgroup": [
+                    {
+                        "title": "Official House Shop Roles",
+                        "description": "Congrats on accumulating a whole bunch of flowers. Here are the roles you can buy; they will give you a special colour flair and make you superior to other members on the right sidebar! The colors look really nice.\n\nCheck savings by `.$`. Check level by `.xp`\n\n__Bronze__: 200 🌸; **if level 5**, 90 🌸\n__Silver__: 360 🌸; **if level 10**, 180 🌸 \n__Gold__: 680 🌸; **if level 20**, 370 🌸 \n__Diamond__: 1320 🌸; **if level 30**, 760 🌸 \n\nAre you just that special that you want your own colour? Well then buy:\n\n__ChooseColor__: 500 🌸 \n\nChange your colour to whatever you want using the `!color` command.\n Does not affect your right sidebar standings; it's for ye vain ones.",
+                        "footer": {
+                            "text": "Role rewards must be bought in order."
+                        }
+                    }
+                ],
+                "period": 180000,
+                "page": 0,
+                "author": "332654587175632906",
+                "cmdID": "593824230882148363"
+            },
+            "594280928868565006": {
+                "embedgroup": [
+                    {
+                        "title": "Profile for  Laminator#5892",
+                        "description": "",
+                        "color": 15105570,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "The Laminator\nNatsoLaminator\nThe_Laminator",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Region: **Europe**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Aug 14 2017**\nThe House: **Jun 28 2019**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`346484064636895232`**\nPosition in Database: **983**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "290",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/346484064636895232/a17331d92ed349632a1050a154bdf9db.png?size=2048"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": "Profile for  Laminator#5892",
+                        "description": "",
+                        "color": 15105570,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[The_Laminator](https://lichess.org/@/The_Laminator)\n960: **1977**\nUltrabullet: **2458**\nBullet: **2506**\nBlitz: **2202**\nRapid: **2200**\nClassical: **2037**\nCorrespondence: **1946**\nCrazyhouse: **1894**\nKing of the Hill: **1974**\n3-check: **1962**\nAntichess: **1559**\nAtomic: **1697**\nHorde: **1576**\nRacing Kings: 1415?\nPuzzles: **2286**",
+                                "inline": true
+                            }
+                        ],
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 1,
+                "author": "377227077859934208",
+                "cmdID": "594280927845416960"
+            },
+            "594461456725180417": {
+                "embedgroup": [
+                    {
+                        "title": "Official House Shop Roles",
+                        "description": "Congrats on accumulating a whole bunch of flowers. Here are the roles you can buy; they will give you a special colour flair and make you superior to other members on the right sidebar! The colors look really nice.\n\nCheck savings by `.$`. Check level by `.xp`\n\n__Bronze__: 200 🌸; **if level 5**, 90 🌸\n__Silver__: 360 🌸; **if level 10**, 180 🌸 \n__Gold__: 680 🌸; **if level 20**, 370 🌸 \n__Diamond__: 1320 🌸; **if level 30**, 760 🌸 \n\nAre you just that special that you want your own colour? Well then buy:\n\n__ChooseColor__: 500 🌸 \n\nChange your colour to whatever you want using the `!color` command.\n Does not affect your right sidebar standings; it's for ye vain ones.",
+                        "footer": {
+                            "text": "Role rewards must be bought in order."
+                        }
+                    }
+                ],
+                "period": 180000,
+                "page": 0,
+                "author": "472293316025647105",
+                "cmdID": "594461454674165760"
+            },
+            "594461554586550272": {
+                "embedgroup": [
+                    {
+                        "title": "What are flowers?",
+                        "description": "Flowers are the artificial currency we use on this Discord server. We use them for fun purposes, like betting on tournaments and challenging each other to achieve things.\n\nObviously it doesn't mean anything, but it's fun, and those who have lots are the best.",
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/Jnbg4fG.png"
+                        }
+                    },
+                    {
+                        "title": "How can I earn flowers?",
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/Jnbg4fG.png"
+                        },
+                        "fields": [
+                            {
+                                "name": "Invite people to the server",
+                                "value": "Inviting someone to the server nets 20 🌸! This is often best done through DMs on lichess or posting in tournament or game chats. Invite your opponents after long match series! The larger the community we build here the better this place becomes. Bonus 🌸 for inviting through tournaments.",
+                                "inline": false
+                            },
+                            {
+                                "name": "Create a House tournament",
+                                "value": "Hugely popular - create a tournament on lichess and we'll sponsor you 🌸! Type `... tournament` for details.",
+                                "inline": false
+                            },
+                            {
+                                "name": "Do something impressive",
+                                "value": "Get a a FIDE title; win a big Lichess shield or tournament; beat out some folk in a Titled Tuesday arena... let us know and we might dish out 🌸 for anything that sounds vaguely impressive.",
+                                "inline": false
+                            },
+                            {
+                                "name": "Complete a challenge",
+                                "value": "Listed in <#406161920308150272>. Ask someone to give you a challenge like reaching a high rating or high position in a tournament. The server might offer extremely high payouts on certain events.",
+                                "inline": false
+                            },
+                            {
+                                "name": "Leave us a great quote",
+                                "value": "We're looking for quotes to add to our typecontest game. Have a look at the criteria in `... typeadd` then leave us a quote. If we approve it you'll earn 🌸.",
+                                "inline": false
+                            }
+                        ]
+                    },
+                    {
+                        "title": "How can I get free flowers?",
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/Jnbg4fG.png"
+                        },
+                        "fields": [
+                            {
+                                "name": "React with 🌸 when there's an event",
+                                "value": "Every now and then, <@!185412969130229760> will create an event that gives out free flowers in <#390264166843154433>. Simply react with 🌸 to the message to get them, so check <#390264166843154433> frequently!",
+                                "inline": false
+                            },
+                            {
+                                "name": "Pick 🌸 when they appear in a text channel",
+                                "value": "Everyone message has a 2% of generating 🌸. Type `.pick` as they appear, alternatively people might type `.plant` to drop them for you.",
+                                "inline": false
+                            },
+                            {
+                                "name": "Collect `.timely` periodically",
+                                "value": "You may collect 2 🌸 every 2 hours from <#390273555084083210> using the command `.timely`",
+                                "inline": false
+                            },
+                            {
+                                "name": "Win Trivia games",
+                                "value": "The House's speciality game - trivia contests between its highly competetive members! Play at any time in <#390289422802747403> by typing `.t`, the first to 10 wins. Bigger and better games win more 🌸! `... tr` to see the rewards.",
+                                "inline": false
+                            }
+                        ]
+                    },
+                    {
+                        "title": "How can I get even more flowers?",
+                        "description": "You need to risk 🌸 to get 🌸. Here's some of the ways you can do that:",
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/Jnbg4fG.png"
+                        },
+                        "fields": [
+                            {
+                                "name": "Betting",
+                                "value": "The hallmark of this server - you can place bets on your friends and favourites playing matches and tournaments. Odds are offered by our @licensed bookies, become one simply by asking! Bookies will give odds on certain outcomes of those tournaments and matches, you can choose one to invest in, with the hope of a high return. See `...howtobet` for more information.",
+                                "inline": false
+                            },
+                            {
+                                "name": "Gambling",
+                                "value": "For the truly adventurous - gamble away your savings in our bot's in-built casino. Head to <#390259390709497857> and type `.commands gambling` to see what you can play. The list of commands is also written up in the **GAMBLING** section of <#390259315816005644>.",
+                                "inline": false
+                            }
+                        ]
+                    },
+                    {
+                        "title": "How can I spend my flowers?",
+                        "description": "Have you acquired a handy amount of flowers?\nHere’s few ways how you can spend them.",
+                        "color": 53380,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/YWF70U4.png"
+                        },
+                        "fields": [
+                            {
+                                "name": "Buying roles in the shop",
+                                "value": "You can certain roles from the shop. They will give you a special color flair and make you superior to other members on the right sidebar. If your level is high enough, you’re eligible for discount. See `… shop`.",
+                                "inline": false
+                            },
+                            {
+                                "name": "Offering challenges to other users",
+                                "value": "You can give a challenge, like reaching a high rating or high position in a tournament, to someone in order to encourage them to get better. Challenges are recorded in <#406161920308150272>.",
+                                "inline": false
+                            },
+                            {
+                                "name": "Claiming waifus and gifts",
+                                "value": "You can claim waifu(s) and give them gifts. See `.gift` and `.waifus`.",
+                                "inline": false
+                            },
+                            {
+                                "name": "Trying to get more flowers",
+                                "value": "You spend flowers by betting on odds offered by licensed bookies, or by gambling in <#390259390709497857>. See `… flowers`.",
+                                "inline": false
+                            }
+                        ]
+                    }
+                ],
+                "period": 180000,
+                "page": 1,
+                "author": "515524778530963473",
+                "cmdID": "594461553299030017"
+            },
+            "594462092858490901": {
+                "embedgroup": [
+                    {
+                        "title": "Profile for  optilink#2135",
+                        "description": "",
+                        "color": 15105570,
+                        "fields": [
+                            {
+                                "name": "Info",
+                                "value": "Region: **Europe**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Jul 27 2018**\nThe House: **Jun 22 2019**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`472293316025647105`**\nPosition in Database: **974**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "156",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/472293316025647105/7fa38ee0bdc5a0c85f55b30f25da0822.png?size=2048"
+                        },
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "515524778530963473",
+                "cmdID": "594462091432296466"
+            },
+            "594501383701659658": {
+                "embedgroup": [
+                    {
+                        "title": "What are flowers?",
+                        "description": "Flowers are the artificial currency we use on this Discord server. We use them for fun purposes, like betting on tournaments and challenging each other to achieve things.\n\nObviously it doesn't mean anything, but it's fun, and those who have lots are the best.",
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/Jnbg4fG.png"
+                        }
+                    },
+                    {
+                        "title": "How can I earn flowers?",
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/Jnbg4fG.png"
+                        },
+                        "fields": [
+                            {
+                                "name": "Invite people to the server",
+                                "value": "Inviting someone to the server nets 20 🌸! This is often best done through DMs on lichess or posting in tournament or game chats. Invite your opponents after long match series! The larger the community we build here the better this place becomes. Bonus 🌸 for inviting through tournaments.",
+                                "inline": false
+                            },
+                            {
+                                "name": "Create a House tournament",
+                                "value": "Hugely popular - create a tournament on lichess and we'll sponsor you 🌸! Type `... tournament` for details.",
+                                "inline": false
+                            },
+                            {
+                                "name": "Do something impressive",
+                                "value": "Get a a FIDE title; win a big Lichess shield or tournament; beat out some folk in a Titled Tuesday arena... let us know and we might dish out 🌸 for anything that sounds vaguely impressive.",
+                                "inline": false
+                            },
+                            {
+                                "name": "Complete a challenge",
+                                "value": "Listed in <#406161920308150272>. Ask someone to give you a challenge like reaching a high rating or high position in a tournament. The server might offer extremely high payouts on certain events.",
+                                "inline": false
+                            },
+                            {
+                                "name": "Leave us a great quote",
+                                "value": "We're looking for quotes to add to our typecontest game. Have a look at the criteria in `... typeadd` then leave us a quote. If we approve it you'll earn 🌸.",
+                                "inline": false
+                            }
+                        ]
+                    },
+                    {
+                        "title": "How can I get free flowers?",
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/Jnbg4fG.png"
+                        },
+                        "fields": [
+                            {
+                                "name": "React with 🌸 when there's an event",
+                                "value": "Every now and then, <@!185412969130229760> will create an event that gives out free flowers in <#390264166843154433>. Simply react with 🌸 to the message to get them, so check <#390264166843154433> frequently!",
+                                "inline": false
+                            },
+                            {
+                                "name": "Pick 🌸 when they appear in a text channel",
+                                "value": "Everyone message has a 2% of generating 🌸. Type `.pick` as they appear, alternatively people might type `.plant` to drop them for you.",
+                                "inline": false
+                            },
+                            {
+                                "name": "Collect `.timely` periodically",
+                                "value": "You may collect 2 🌸 every 2 hours from <#390273555084083210> using the command `.timely`",
+                                "inline": false
+                            },
+                            {
+                                "name": "Win Trivia games",
+                                "value": "The House's speciality game - trivia contests between its highly competetive members! Play at any time in <#390289422802747403> by typing `.t`, the first to 10 wins. Bigger and better games win more 🌸! `... tr` to see the rewards.",
+                                "inline": false
+                            }
+                        ]
+                    },
+                    {
+                        "title": "How can I get even more flowers?",
+                        "description": "You need to risk 🌸 to get 🌸. Here's some of the ways you can do that:",
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/Jnbg4fG.png"
+                        },
+                        "fields": [
+                            {
+                                "name": "Betting",
+                                "value": "The hallmark of this server - you can place bets on your friends and favourites playing matches and tournaments. Odds are offered by our @licensed bookies, become one simply by asking! Bookies will give odds on certain outcomes of those tournaments and matches, you can choose one to invest in, with the hope of a high return. See `...howtobet` for more information.",
+                                "inline": false
+                            },
+                            {
+                                "name": "Gambling",
+                                "value": "For the truly adventurous - gamble away your savings in our bot's in-built casino. Head to <#390259390709497857> and type `.commands gambling` to see what you can play. The list of commands is also written up in the **GAMBLING** section of <#390259315816005644>.",
+                                "inline": false
+                            }
+                        ]
+                    },
+                    {
+                        "title": "How can I spend my flowers?",
+                        "description": "Have you acquired a handy amount of flowers?\nHere’s few ways how you can spend them.",
+                        "color": 53380,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/YWF70U4.png"
+                        },
+                        "fields": [
+                            {
+                                "name": "Buying roles in the shop",
+                                "value": "You can certain roles from the shop. They will give you a special color flair and make you superior to other members on the right sidebar. If your level is high enough, you’re eligible for discount. See `… shop`.",
+                                "inline": false
+                            },
+                            {
+                                "name": "Offering challenges to other users",
+                                "value": "You can give a challenge, like reaching a high rating or high position in a tournament, to someone in order to encourage them to get better. Challenges are recorded in <#406161920308150272>.",
+                                "inline": false
+                            },
+                            {
+                                "name": "Claiming waifus and gifts",
+                                "value": "You can claim waifu(s) and give them gifts. See `.gift` and `.waifus`.",
+                                "inline": false
+                            },
+                            {
+                                "name": "Trying to get more flowers",
+                                "value": "You spend flowers by betting on odds offered by licensed bookies, or by gambling in <#390259390709497857>. See `… flowers`.",
+                                "inline": false
+                            }
+                        ]
+                    }
+                ],
+                "period": "Infinity",
+                "page": 0,
+                "author": "377227077859934208",
+                "cmdID": "594501381868617740",
+                "path": "flowers"
+            },
+            "594969438739234818": {
+                "embedgroup": [
+                    {
+                        "title": "Profile for  RacingKingKing#2077",
+                        "description": "```\nIam the king of racing kings```",
+                        "color": 11126483,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "RacingKingsKing\nE505\nBulletAndRK\nCrazyRKKing",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Region: **Europe**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Nov 23 2018**\nThe House: **Dec 08 2018**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`515524778530963473`**\nPosition in Database: **764**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "10,759",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/515524778530963473/6cbbdd8277e48ca294ad5cc1ff422c04.png?size=2048"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": "Profile for  RacingKingKing#2077",
+                        "description": "```\nIam the king of racing kings```",
+                        "color": 11126483,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[RacingKingsKing](https://lichess.org/@/RacingKingsKing)\nBullet: 1500?\nBlitz: 1500?\nRapid: 1500?\nClassical: 1500?\nCorrespondence: 1500?\nRacing Kings: **2092**\nPuzzles: 1515?",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[E505](https://lichess.org/@/E505)\nUltrabullet: **1556**\nBullet: **1557**\nBlitz: 1297?\nRapid: 1500?\nClassical: 1500?\nCorrespondence: 1500?\nCrazyhouse: **1895**\nAtomic: 1596?\nRacing Kings: **2004**",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[BulletAndRK](https://lichess.org/@/BulletAndRK)\nUltrabullet: **1465**\nBullet: **1602**\nBlitz: 1500?\nRapid: 1500?\nClassical: 1500?\nCorrespondence: 1500?\nRacing Kings: **1887**\nPuzzles: **1790**",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[CrazyRKKing](https://lichess.org/@/CrazyRKKing)\nBullet: 1500?\nBlitz: 1500?\nRapid: 1500?\nClassical: 1500?\nCorrespondence: 1500?\nCrazyhouse: **1714**\nRacing Kings: **1992**",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:chesscom:430038158244184064> Chess.com",
+                                "value": "[RacingKingsKing](https://www.chess.com/member/RacingKingsKing)\nBullet: 1198?\nCrazyhouse: **1525**\nBughouse: **1423**\nPuzzles: **460**",
+                                "inline": true
+                            }
+                        ],
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "515524778530963473",
+                "cmdID": "594969437950574602"
+            },
+            "594969685133361185": {
+                "embedgroup": [
+                    {
+                        "title": "Profile for  RacingKingKing#2077",
+                        "description": "```\nIam the king of racing kings```",
+                        "color": 11126483,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "RacingKingsKing\nE505\nBulletAndRK\nCrazyRKKing",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Region: **Europe**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Nov 23 2018**\nThe House: **Dec 08 2018**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`515524778530963473`**\nPosition in Database: **764**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "10,761",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/515524778530963473/6cbbdd8277e48ca294ad5cc1ff422c04.png?size=2048"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": "Profile for  RacingKingKing#2077",
+                        "description": "```\nIam the king of racing kings```",
+                        "color": 11126483,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[RacingKingsKing](https://lichess.org/@/RacingKingsKing)\nBullet: 1500?\nBlitz: 1500?\nRapid: 1500?\nClassical: 1500?\nCorrespondence: 1500?\nRacing Kings: **2092**\nPuzzles: 1515?",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[E505](https://lichess.org/@/E505)\nUltrabullet: **1556**\nBullet: **1557**\nBlitz: 1297?\nRapid: 1500?\nClassical: 1500?\nCorrespondence: 1500?\nCrazyhouse: **1895**\nAtomic: 1596?\nRacing Kings: **2004**",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[BulletAndRK](https://lichess.org/@/BulletAndRK)\nUltrabullet: **1465**\nBullet: **1602**\nBlitz: 1500?\nRapid: 1500?\nClassical: 1500?\nCorrespondence: 1500?\nRacing Kings: **1887**\nPuzzles: **1790**",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[CrazyRKKing](https://lichess.org/@/CrazyRKKing)\nBullet: 1500?\nBlitz: 1500?\nRapid: 1500?\nClassical: 1500?\nCorrespondence: 1500?\nCrazyhouse: **1714**\nRacing Kings: **1992**",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:chesscom:430038158244184064> Chess.com",
+                                "value": "[RacingKingsKing](https://www.chess.com/member/RacingKingsKing)\nBullet: 1198?\nCrazyhouse: **1525**\nBughouse: **1423**\nPuzzles: **460**",
+                                "inline": true
+                            }
+                        ],
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 1,
+                "author": "515524778530963473",
+                "cmdID": "594969684428980246"
+            },
+            "595781161964535808": {
+                "embedgroup": [
+                    {
+                        "description": "**#1** gsvc777#3940 2522\n**#2** theLAZYmd#2353 2150\n**#3** PsyMar#2210 2079\n**#4** Wildfire#9567 1928\n**#5** crptone#1398 1838\n**#6** Illion#1918 1798\n**#7** ObiWanBenoni#3488 1791\n**#8** okei#1207 1772\n**#9** Laminator#5892 1669\n**#10** Shortdood#4523 1623\n",
+                        "fields": [],
+                        "title": " House leaderboard for Trivia players"
+                    },
+                    {
+                        "description": "**#11** Musickn#8622 1486\n**#12** wumpus#4525 1453\n**#13** moonenane#3553 1387\n**#14** Brainkiller#5680 552\n",
+                        "fields": [],
+                        "title": " House leaderboard for Trivia players"
+                    }
+                ],
+                "period": 30000,
+                "page": 1,
+                "author": "377227077859934208",
+                "cmdID": "595781160920154122"
+            },
+            "596011306398515211": {
+                "embedgroup": [
+                    {
+                        "title": "Official House Shop Roles",
+                        "description": "Congrats on accumulating a whole bunch of flowers. Here are the roles you can buy; they will give you a special colour flair and make you superior to other members on the right sidebar! The colors look really nice.\n\nCheck savings by `.$`. Check level by `.xp`\n\n__Bronze__: 200 🌸; **if level 5**, 90 🌸\n__Silver__: 360 🌸; **if level 10**, 180 🌸 \n__Gold__: 680 🌸; **if level 20**, 370 🌸 \n__Diamond__: 1320 🌸; **if level 30**, 760 🌸 \n\nAre you just that special that you want your own colour? Well then buy:\n\n__ChooseColor__: 500 🌸 \n\nChange your colour to whatever you want using the `!color` command.\n Does not affect your right sidebar standings; it's for ye vain ones.",
+                        "footer": {
+                            "text": "Role rewards must be bought in order."
+                        }
+                    }
+                ],
+                "period": 180000,
+                "page": 0,
+                "author": "346484064636895232",
+                "cmdID": "596011304192573450"
             }
         },
         "election": {

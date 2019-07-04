@@ -12,7 +12,7 @@
                 "count": true,
                 "results": true
             },
-            "trivia": true
+            "trivia": false
         },
         "prefixes": {
             "generic": "!",
@@ -126,7 +126,12 @@
                 "niggger"
             ]
         },
-        "builds": {},
+        "builds": {
+            "393106994162171904": {
+                "dialogue": "595057826733359107",
+                "embed": "595057827522019329"
+            }
+        },
         "teams": [
             "natso",
             "gsvc",
