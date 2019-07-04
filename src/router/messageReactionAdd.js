@@ -6,18 +6,22 @@ class messageReactionAdd extends Parse {
 
 	constructor (message, user) {
 		super(message);
+		this.quote = this.client.open[this.message.id];
+		this.target = this.Search.users.byID(this.quote.target);
 		if (user.id !== this.quote.author) {
 			for (let method of Object.getOwnPropertyNames(messageReactionAdd.prototype)) {
 				if (typeof method !== 'function') continue;
 				this[method] = () => {};
 			}
 		}
-		this.quote = this.client.open[this.message.id];
-		this.target = this.Search.users.byID(this.quote.target);
 	}
 
-	get usernm () {
-		return this.Search.channels.byID(this.quote.channel).messages.filter(m => m.author.id === this.quote.target);
+	get userm () {
+		if (this._userm) return this._userm;
+		let channel = this.Search.channels.byID(this.quote.channel);
+		if (!channel) delete this.client.open[this.message.id];
+		let messages = channel.messages.filter(m => m.author.id === this.quote.target);
+		return this._userm = messages;
 	}
 
 	get arr () {
@@ -27,12 +31,14 @@ class messageReactionAdd extends Parse {
 
 	async getMessage(index) {
 		const arr = this.arr;
-		let m = arr[index - 1];
+		//console.log(arr.map(m => m.content), index);
+		let m = arr[index];
 		this.Output.editor(new Embed(this.message.embeds[0])
 			.setAuthor([
 				m.author.tag,
-				m.createdAt.toString().slice(0, 24),
-				'#' + m.channel.name
+				m.createdAt.toString().slice(0, 21),
+				'#' + m.channel.name,
+				(index + 1) + ' / ' + this.arr.length
 			].join(', '), m.author.avatarURL)
 			.setDescription(m.content)
 		, this.message);
@@ -53,12 +59,14 @@ class messageReactionAdd extends Parse {
 		else if (index >= this.arr.length) index = this.arr.length - 2;
 		index++;
 		this.getMessage(index);
-		this.client.open[this.message.id].index--;
+		this.client.open[this.message.id].index++;
 	}
 
 	async confirm () {
 		delete this.client.open[this.message.id];
-		this.message.clearReactions();
+		if (this.message.createdTimestamp - Date.now() < 5000) {
+			setTimeout(() => this.message.clearReactions(), 1500);
+		} else this.message.clearReactions();
 	}
 
 	async delete () {
@@ -97,7 +105,6 @@ module.exports = async (client, messageReaction, user) => {
 		if (user.id === client.user.id) throw '';
 		if (messageReaction.message.author.id !== client.user.id) throw '';
 		if (!messageReaction.message.guild) throw '';
-		messageReaction.remove(user);
 		const Reaction = new messageReactionAdd(messageReaction.message, user);
 		switch (messageReaction.emoji.name) {
 			case '⬅':

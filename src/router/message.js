@@ -12,14 +12,14 @@ class Quote extends Parse {
 	}
 
 	async getUser (argument = this.argument) {
-		if (this.author.id === this.client.user.id) throw '';
+		if (this.user.bot) throw '';
+		if (!this.prefix) throw '';
 		if (keys.indexOf(this.command) === -1) throw '';
 		let user;
-		if (!/[a-z]/i.test(argument)) user = await this.Output.response({
+		if (!/\w+/i.test(argument)) user = await this.Output.response({
 			description: 'Please specify a user to quote',
 			filter: content => this.Search.users.get(content)
 		});
-		if (!this.prefix) throw '';
 		user = this.Search.users.get(argument);
 		if (!user) throw 'No such user found';
 		return user;
@@ -39,7 +39,8 @@ class Quote extends Parse {
 				.setAuthor([
 					user.tag,
 					m ? m.createdAt.toString().slice(0, 24) : '-',
-					'#' + this.channel.name
+					'#' + this.channel.name,
+					1 + ' / ' + userm.size
 				].join(', '), user.avatarURL)
 				.setDescription(m ? m.content : '')
 			, this.channel, ['⬅', '➡', '✅', '❎', '#⃣']);
@@ -49,6 +50,7 @@ class Quote extends Parse {
 				index: 0,
 				channel: this.channel.id
 			};
+			Logger.log(['Quote', this.author.tag, user.tag, m.content]);
 		} catch (e) {
 			if (e) this.Output.onError(e);
 		}

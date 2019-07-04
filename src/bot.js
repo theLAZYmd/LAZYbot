@@ -42,7 +42,7 @@ const events = [
 	['messageDelete', ['message']],
 	['messageDeleteBulk', ['messages']],
 	['messageReactionAdd', ['messageReaction', 'user'], true],
-	['messageReactionRemove', ['messageReaction', 'user']],
+	['messageReactionRemove', ['messageReaction', 'user'], true],
 	['messageReactionRemoveAll', ['message']],
 	['messageUpdate', ['oldMessage', 'newMessage']],
 	['presenceUpdate', ['oldMember', 'newMember'], false],
