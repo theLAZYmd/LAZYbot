@@ -39,7 +39,7 @@ class Message extends Quote {
 			if (!this.client.open) this.client.open = {};
 			const msg = await this.Output.reactor(embed, this.channel, ['⬅', '➡', '✅', '❎', '#⃣']);
 			this.client.open[msg.id] = this.quote;
-			Logger.log(['Quote', this.author.tag, user.tag, embed.description]);
+			Logger.log(['Quote', this.author.tag, user.tag, embed.description, 0]);
 		} catch (e) {
 			if (e) this.Output.onError(e);
 		}

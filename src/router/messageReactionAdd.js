@@ -26,13 +26,13 @@ class messageReactionAdd extends Quote {
 	async getMessage(index) {
 		let embed = await this.getEmbed(index);
 		this.Output.editor(embed, this.message);
-		Logger.log(['Quote', this.messageReactionUser.tag, this.target.tag, embed.description]);
+		Logger.log(['Quote', this.messageReactionUser.tag, this.target.tag, embed.description, index]);
 	}
 
 	async left () {
 		const arr = await this.getArr();
 		let index = this.quote.index;
-		index++;
+		index--;
 		if (index < 0) {
 			index = 0;
 			this.messageReaction.remove(this.messageReactionUser);
@@ -45,7 +45,7 @@ class messageReactionAdd extends Quote {
 	async right () {
 		const arr = await this.getArr();
 		let index = this.quote.index;
-		index--;
+		index++;
 		if (index < 0) index = 0;
 		else if (index >= arr.length) {
 			index = arr.length - 1;
