@@ -4,9 +4,8 @@ const config = require('../config.json');
 
 class Quote extends Parse {
 
-	constructor (message, user) {
+	constructor (message) {
 		super(message);
-		this.messageReactionUser = user;
 	}
 
 	get quote () {

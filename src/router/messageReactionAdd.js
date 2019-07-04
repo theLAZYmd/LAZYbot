@@ -3,15 +3,17 @@ const Logger = require('../util/logger');
 
 class messageReactionAdd extends Quote {
 
-	constructor (message, user) {
-		super(message, user);
+	constructor (message, user, messageReaction) {
+		super(message);
+		this.messageReaction = messageReaction;
+		this.messageReactionUser = user;
 		try {
 			if (!this.quote) return this.Output.data(this.client.open);
 			if (user.id !== this.quote.author) {
 				for (let method of Object.getOwnPropertyNames(messageReactionAdd.prototype)) {
 					if (typeof method !== 'function') continue;
 					this[method] = () => {};
-				};
+				}
 				return;
 			}
 			if (this.client.open[this.message.id].timeout) clearTimeout(this.client.open[this.message.id].timeout);
@@ -31,7 +33,10 @@ class messageReactionAdd extends Quote {
 		const arr = await this.getArr();
 		let index = this.quote.index;
 		index++;
-		if (index < 0) index = 0;
+		if (index < 0) {
+			index = 0;
+			this.messageReaction.remove(this.messageReactionUser);
+		}
 		else if (index >= arr.length) index = arr.length - 1;
 		this.getMessage(index);
 		this.client.open[this.message.id].index--;
@@ -42,7 +47,10 @@ class messageReactionAdd extends Quote {
 		let index = this.quote.index;
 		index--;
 		if (index < 0) index = 0;
-		else if (index >= arr.length) index = arr.length - 1;
+		else if (index >= arr.length) {
+			index = arr.length - 1;
+			this.messageReaction.remove(this.messageReactionUser);
+		}
 		this.getMessage(index);
 		this.client.open[this.message.id].index++;
 	}
@@ -83,7 +91,7 @@ module.exports = async (client, messageReaction, user) => {
 		if (user.id === client.user.id) throw '';
 		if (messageReaction.message.author.id !== client.user.id) throw '';
 		if (!messageReaction.message.guild) throw '';
-		const Reaction = new messageReactionAdd(messageReaction.message, user);
+		const Reaction = new messageReactionAdd(messageReaction.message, user, messageReaction);
 		switch (messageReaction.emoji.name) {
 			case '⬅':
 				return Reaction.left();

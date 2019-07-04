@@ -1,7 +1,5 @@
 const Quote = require('./quote');
-const Embed = require('../util/embed');
 const Logger = require('../util/logger');
-const config = require('../config.json');
 
 const keys = ['quote'];
 
