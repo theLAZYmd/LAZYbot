@@ -23,7 +23,7 @@ class Quote extends Parse {
 			let messages = await this.channel.fetchMessages({
 				limit: 100
 			});
-			let userm = messages.filter(m => m.author && m.author.id === user.id);
+			let userm = messages.filter(m => m.author.id === user.id);
 			let m = userm.first();
 			if (!this.client.open) this.client.open = {};
 			let msg = await this.Output.reactor(new Embed()
@@ -31,7 +31,7 @@ class Quote extends Parse {
 				.setAuthor([
 					user.tag,
 					m ? m.createdAt.toString().slice(0, 24) : '-',
-					'#' + this.name
+					'#' + this.channel.name
 				].join(', '), user.avatarURL)
 				.setDescription(m ? m.content : '')
 			, this.channel, ['⬅', '➡', '✅', '#⃣']);
