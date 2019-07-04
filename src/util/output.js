@@ -428,8 +428,8 @@ class Output extends Parse {
 			const mfilter = (m) => {
 				if (m.author.id !== author.id) return false;
 				if (m.content === undefined) return false;
-				if (isNaN(m.content) && number) return false;
-				if (m.content.trim().split(/\s+/g).length > 1 && oneword) return false;
+				if (number && isNaN(m.content)) return false;
+				if (oneword && m.content.trim().split(/\s+/g).length > 1) return false;
 				return filter(m);
 			};
 			const awaitOptions = {

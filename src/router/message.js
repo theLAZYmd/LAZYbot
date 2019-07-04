@@ -1,56 +1,47 @@
-const Parse = require('../util/parse');
+const Quote = require('./quote');
 const Embed = require('../util/embed');
 const Logger = require('../util/logger');
 const config = require('../config.json');
 
 const keys = ['quote'];
 
-class Quote extends Parse {
+class Message extends Quote {
 
 	constructor (message) {
 		super(message);
 	}
 
-	async getUser (argument = this.argument) {
-		if (this.user.bot) throw '';
-		if (!this.prefix) throw '';
-		if (keys.indexOf(this.command) === -1) throw '';
+	async getUser (args = this.args) {
 		let user;
-		if (!/\w+/i.test(argument)) user = await this.Output.response({
+		if (!/\w+/i.test(args[0])) user = await this.Output.response({
 			description: 'Please specify a user to quote',
 			filter: content => this.Search.users.get(content)
 		});
-		user = this.Search.users.get(argument);
+		user = this.Search.users.get(args[0]);
 		if (!user) throw 'No such user found';
 		return user;
 	}
 
-	async run () {
+	async run (args = this.args) {
 		try {
+			if (this.author.bot) throw '';
+			if (!this.prefix) throw '';
+			if (keys.indexOf(this.command) === -1) throw '';
 			let user = await this.getUser();
 			if (!user) throw 'No such user found';
+			let channel = args[1] ? (this.Search.channels.get(args[1]) || this.channel) : this.channel;
 			this.message.delete();
-			let messages = await this.channel.fetchMessages({ limit: 100 });
-			let userm = messages.filter(m => m.author.id === user.id);
-			let m = userm.first();
-			if (!this.client.open) this.client.open = {};
-			let msg = await this.Output.reactor(new Embed()
-				.setColor(config.colors.background)
-				.setAuthor([
-					user.tag,
-					m ? m.createdAt.toString().slice(0, 24) : '-',
-					'#' + this.channel.name,
-					1 + ' / ' + userm.size
-				].join(', '), user.avatarURL)
-				.setDescription(m ? m.content : '')
-			, this.channel, ['⬅', '➡', '✅', '❎', '#⃣']);
-			this.client.open[msg.id] = {
+			this.quote = {
 				target: user.id,
 				author: this.author.id,
 				index: 0,
-				channel: this.channel.id
+				channel: channel.id
 			};
-			Logger.log(['Quote', this.author.tag, user.tag, m.content]);
+			let embed = await this.getEmbed(0);
+			const msg = await this.Output.reactor(embed, this.channel, ['⬅', '➡', '✅', '❎', '#⃣']);
+			if (!this.client.open) this.client.open = {};
+			this.client.open[msg.id] = this.quote;
+			Logger.log(['Quote', this.author.tag, user.tag, embed.description]);
 		} catch (e) {
 			if (e) this.Output.onError(e);
 		}
@@ -60,7 +51,7 @@ class Quote extends Parse {
 
 module.exports = async (client, message) => {
 	try {
-		const Module = new Quote(message);
+		const Module = new Message(message);
 		Module.run();
 	} catch (e) {
 		if (e) Logger.error(e);

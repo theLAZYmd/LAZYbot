@@ -1,13 +1,10 @@
-const Parse = require('../util/parse');
-const Embed = require('../util/embed');
+const Quote = require('./quote');
 const Logger = require('../util/logger');
 
-class messageReactionAdd extends Parse {
+class messageReactionAdd extends Quote {
 
 	constructor (message, user) {
-		super(message);
-		this.quote = this.client.open[this.message.id];
-		this.target = this.Search.users.byID(this.quote.target);
+		super(message, user);
 		if (user.id !== this.quote.author) {
 			for (let method of Object.getOwnPropertyNames(messageReactionAdd.prototype)) {
 				if (typeof method !== 'function') continue;
@@ -15,49 +12,29 @@ class messageReactionAdd extends Parse {
 			}
 		}
 	}
-
-	get userm () {
-		if (this._userm) return this._userm;
-		let channel = this.Search.channels.byID(this.quote.channel);
-		if (!channel) delete this.client.open[this.message.id];
-		let messages = channel.messages.filter(m => m.author.id === this.quote.target);
-		return this._userm = messages;
-	}
-
-	get arr () {
-		if (this._arr) return this._arr;
-		return this._arr = this.userm.array().sort((a, b) => b.createdTimestamp - a.createdTimestamp);
-	}
-
+	
 	async getMessage(index) {
-		const arr = this.arr;
-		//console.log(arr.map(m => m.content), index);
-		let m = arr[index];
-		this.Output.editor(new Embed(this.message.embeds[0])
-			.setAuthor([
-				m.author.tag,
-				m.createdAt.toString().slice(0, 21),
-				'#' + m.channel.name,
-				(index + 1) + ' / ' + this.arr.length
-			].join(', '), m.author.avatarURL)
-			.setDescription(m.content)
-		, this.message);
+		let embed = await this.getEmbed(index);
+		this.Output.editor(embed, this.message);
+		Logger.log(['Quote', this.messageReactionUser.tag, this.target.tag, embed.description]);
 	}
 
 	async left () {
+		const arr = await this.getArr();
 		let index = this.quote.index;
-		if (index < 1) index = 1;
-		else if (index > this.arr.length) index = this.arr.length;
-		index--;
+		index++;
+		if (index < 0) index = 0;
+		else if (index > arr.length) index = arr.length;
 		this.getMessage(index);
 		this.client.open[this.message.id].index--;
 	}
 
 	async right () {
+		const arr = await this.getArr();
 		let index = this.quote.index;
+		index--;
 		if (index < 0) index = 0;
-		else if (index >= this.arr.length) index = this.arr.length - 2;
-		index++;
+		else if (index > arr.length) index = arr.length;
 		this.getMessage(index);
 		this.client.open[this.message.id].index++;
 	}
@@ -77,19 +54,12 @@ class messageReactionAdd extends Parse {
 	async channel () {
 		try {
 			let channel = await this.Output.response({
+				author: this.messageReactionUser,
 				description: 'Please specify a channel from which messages should be gotten',
-				filter: content => this.Search.channels.get(content)
+				filter: m => this.Search.channels.get(m.content)
 			});
-			this.quote.channel = this.Seaarch.channels.get(channel).id;
-			let m = this.userm.first();
-			this.Output.editor(new Embed(this.message.embeds[0])
-				.setAuthor([
-					this.target.tag,
-					m ? m.createdAt.toString().slice(0, 24) : '-',
-					'#' + channel.name
-				].join(', '), this.target.avatarURL)
-				.setDescription(m ? m.content : '')
-			, this.message);
+			this.quote.channel = this.Search.channels.get(channel).id;
+			this.getMessage(0);
 			this.client.open[this.message.id].index = 0;
 			this.client.open[this.message.id].channel = this.quote.channel;
 		} catch (e) {
