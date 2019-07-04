@@ -6,25 +6,27 @@ class messageReactionAdd extends Parse {
 
 	constructor (message, user) {
 		super(message);
-		this.messageReactionUser = user;
+		if (user.id !== this.quote.author) {
+			for (let method of Object.getOwnPropertyNames(messageReactionAdd.prototype)) {
+				if (typeof method !== 'function') continue;
+				this[method] = () => {};
+			}
+		}
 		this.quote = this.client.open[this.message.id];
 		this.target = this.Search.users.byID(this.quote.target);
 	}
 
 	get usernm () {
-		this.Search.channels.byID(this.quote.channel).messages.filter(m => m.author.id === this.quote.target);
+		return this.Search.channels.byID(this.quote.channel).messages.filter(m => m.author.id === this.quote.target);
 	}
 
 	get arr () {
-		return this.userm.array().sort((a, b) => b.createdTimestamp - a.createdTimestamp);
+		if (this._arr) return this._arr;
+		return this._arr = this.userm.array().sort((a, b) => b.createdTimestamp - a.createdTimestamp);
 	}
 
-	async left () {
-		if (this.messageReactionUser.id !== this.quote.author) return;
+	async getMessage(index) {
 		const arr = this.arr;
-		let index = this.quote.index;
-		if (index < 1) index = 1;
-		else if (index > arr.length) index = arr.length;
 		let m = arr[index - 1];
 		this.Output.editor(new Embed(this.message.embeds[0])
 			.setAuthor([
@@ -34,30 +36,34 @@ class messageReactionAdd extends Parse {
 			].join(', '), m.author.avatarURL)
 			.setDescription(m.content)
 		, this.message);
+	}
+
+	async left () {
+		let index = this.quote.index;
+		if (index < 1) index = 1;
+		else if (index > this.arr.length) index = this.arr.length;
+		index--;
+		this.getMessage(index);
 		this.client.open[this.message.id].index--;
 	}
 
 	async right () {
-		if (this.messageReactionUser.id !== this.quote.author) return;
-		const arr = this.arr;
 		let index = this.quote.index;
 		if (index < 0) index = 0;
-		else if (index >= arr.length) index = arr.length - 2;
-		let m = arr[index + 1];
-		this.Output.editor(new Embed(this.message.embeds[0])
-			.setAuthor([
-				m.author.tag,
-				m.createdAt.toString().slice(0, 24),
-				'#' + m.channel.name
-			].join(', '), m.author.avatarURL)
-			.setDescription(m.content)
-		, this.message);
-		this.client.open[this.message.id].index++;
+		else if (index >= this.arr.length) index = this.arr.length - 2;
+		index++;
+		this.getMessage(index);
+		this.client.open[this.message.id].index--;
 	}
 
 	async confirm () {
 		delete this.client.open[this.message.id];
 		this.message.clearReactions();
+	}
+
+	async delete () {
+		delete this.client.open[this.message.id];
+		this.message.delete();
 	}
 
 	async channel () {
@@ -100,6 +106,8 @@ module.exports = async (client, messageReaction, user) => {
 				return Reaction.right();
 			case '✅':
 				return Reaction.confirm();
+			case '❎':
+				return Reaction.delete();
 			case '#⃣':
 				return Reaction.channel();
 		}

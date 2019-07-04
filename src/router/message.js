@@ -11,18 +11,26 @@ class Quote extends Parse {
 		super(message);
 	}
 
-	async run (argument = this.argument) {
+	async getUser (argument = this.argument) {
+		if (this.author.id === this.client.user.id) throw '';
+		if (keys.indexOf(this.command) === -1) throw '';
+		let user;
+		if (!/[a-z]/i.test(argument)) user = await this.Output.response({
+			description: 'Please specify a user to quote',
+			filter: content => this.Search.users.get(content)
+		});
+		if (!this.prefix) throw '';
+		user = this.Search.users.get(argument);
+		if (!user) throw 'No such user found';
+		return user;
+	}
+
+	async run () {
 		try {
-			if (this.author.id === this.client.user.id) throw '';
-			if (!/[a-z]/i.test(this.content)) throw '';
-			if (!this.prefix) throw '';
-			if (keys.indexOf(this.command) === -1) throw '';
-			let user = this.Search.users.get(argument);
+			let user = await this.getUser();
 			if (!user) throw 'No such user found';
 			this.message.delete();
-			let messages = await this.channel.fetchMessages({
-				limit: 100
-			});
+			let messages = await this.channel.fetchMessages({ limit: 100 });
 			let userm = messages.filter(m => m.author.id === user.id);
 			let m = userm.first();
 			if (!this.client.open) this.client.open = {};
@@ -34,7 +42,7 @@ class Quote extends Parse {
 					'#' + this.channel.name
 				].join(', '), user.avatarURL)
 				.setDescription(m ? m.content : '')
-			, this.channel, ['⬅', '➡', '✅', '#⃣']);
+			, this.channel, ['⬅', '➡', '✅', '❎', '#⃣']);
 			this.client.open[msg.id] = {
 				target: user.id,
 				author: this.author.id,

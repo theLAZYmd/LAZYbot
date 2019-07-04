@@ -25,6 +25,7 @@ class Ready {
 
 	async setRole() {
 		this.client.guilds.forEach(async (guild) => {
+			console.log(guild.me.displayColor, config.colors.background);
 			if (guild.me.displayColor === config.colors.background) return;
 			let role = await guild.me.roles.find(r => r.name.toLowerCase() === this.client.user.username.toLowerCase());
 			if (!role) role = await guild.createRole({
