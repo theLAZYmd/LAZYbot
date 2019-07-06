@@ -109,8 +109,8 @@ module.exports = async (client, message) => {
 				if (cmdInfo) await Message.run(argsInfo, cmdInfo);
 				return;
 			}
-			if (!/[a-z]/i.test(message.content)) throw '';
 			if (!argsInfo.message.guild) {
+				if (!/[a-z]/i.test(message.content)) throw '';
 				let cmdInfo = await Command.dm(argsInfo.command);
 				if (cmdInfo.guild) {
 					argsInfo.message._guild = await Message.setGuild(argsInfo, cmdInfo.guild); //now passed, just check if it needs a guild
@@ -119,6 +119,7 @@ module.exports = async (client, message) => {
 				return await Message.run(argsInfo, cmdInfo);
 			} else {
 				Command.all(argsInfo);
+				if (!/[a-z]/i.test(message.content)) throw '';
 				let cmdInfo = await Command.command(argsInfo.command);
 				if (cmdInfo) {
 					cmdInfo.command = true;
