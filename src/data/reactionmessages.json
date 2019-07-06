@@ -12156,6 +12156,187 @@
                 "page": 0,
                 "author": "346484064636895232",
                 "cmdID": "596011304192573450"
+            },
+            "596276398520270848": {
+                "embedgroup": [
+                    {
+                        "title": "Profile for  housebank#5970",
+                        "description": "",
+                        "color": 15461355,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "HouseDiscord",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Region: **Europe**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Dec 17 2017**\nThe House: **Feb 23 2018**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`392031018313580546`**\nPosition in Database: **93**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "952",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/392031018313580546/b1cd0bba883687a5e91c29a08eb29cc0.png?size=2048"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": "Profile for  housebank#5970",
+                        "description": "",
+                        "color": 15461355,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[HouseDiscord](https://lichess.org/@/HouseDiscord)\nBullet: 1500?\nBlitz: 1500?\nRapid: 1500?\nClassical: 1500?\nCorrespondence: 1500?",
+                                "inline": true
+                            }
+                        ],
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 1,
+                "author": "515524778530963473",
+                "cmdID": "596276397723353109"
+            },
+            "596276639567052800": {
+                "embedgroup": [
+                    {
+                        "title": "Profile for  okei#1207",
+                        "description": "```\nCheck out zhchess.blogspot.com```",
+                        "color": 52360,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "okeizh",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Location: **United Kingdom**\nRegion: **Europe**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Jun 01 2017**\nThe House: **Dec 12 2017**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`319901088557957122`**\nPosition in Database: **9**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "73,116",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/319901088557957122/137fbe1b474bfeada4071872f7d3666d.png?size=2048"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": "Profile for  okei#1207",
+                        "description": "```\nCheck out zhchess.blogspot.com```",
+                        "color": 52360,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[okei](https://lichess.org/@/okei)\n960: **1737**\nUltrabullet: **1606**\nBullet: **1808**\nBlitz: **1836**\nRapid: **1821**\nClassical: **2017**\nCorrespondence: **2154**\nCrazyhouse: **2023**\n3-check: **1750**\nAntichess: **1769**\nAtomic: **1808**\nHorde: **1526**\nPuzzles: **2400**",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:chesscom:430038158244184064> Chess.com",
+                                "value": "[okeizh](https://www.chess.com/member/okeizh)\nBullet: 1652?\nBlitz: 1621?\nRapid: **1399**\nCrazyhouse: **1804**\nBughouse: **1793**\nPuzzles: 2211?",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:bughousetest:433422387867025409> BughouseTest.com",
+                                "value": "[okeizh](http://bughousetest.com/@/okeizh)\n",
+                                "inline": true
+                            }
+                        ],
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 1,
+                "author": "515524778530963473",
+                "cmdID": "596276638698700840"
+            },
+            "596364411128774656": {
+                "embedgroup": [
+                    {
+                        "title": "Profile for  Laminator#5892",
+                        "description": "",
+                        "color": 12884558,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "The Laminator\nNatsoLaminator\nThe_Laminator",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Region: **Europe**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Aug 14 2017**\nThe House: **Jun 28 2019**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`346484064636895232`**\nPosition in Database: **980**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "7,670",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/346484064636895232/a17331d92ed349632a1050a154bdf9db.png?size=2048"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": "Profile for  Laminator#5892",
+                        "description": "",
+                        "color": 12884558,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[The_Laminator](https://lichess.org/@/The_Laminator)\n960: **1977**\nUltrabullet: **2454**\nBullet: **2506**\nBlitz: **2202**\nRapid: **2200**\nClassical: **2037**\nCorrespondence: **1946**\nCrazyhouse: **1894**\nKing of the Hill: **1994**\n3-check: **1935**\nAntichess: **1548**\nAtomic: **1697**\nHorde: **1558**\nRacing Kings: 1415?\nPuzzles: **2286**",
+                                "inline": true
+                            }
+                        ],
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 1,
+                "author": "571351154739642380",
+                "cmdID": "596364410055032833"
             }
         },
         "election": {
