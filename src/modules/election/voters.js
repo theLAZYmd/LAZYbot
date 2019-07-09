@@ -2,6 +2,7 @@ const Main = require('./main');
 const DataManager = require('../../util/datamanager');
 const Search = require('../../util/search');
 const Embed = require('../../util/embed');
+const Logger = require('../../util/logger');
 
 class Voters extends Main {
 
@@ -182,7 +183,7 @@ class Voters extends Main {
 					let dbuser = new Search().dbusers.getUser(member);
 					if (!data.inactives && (Date.now() - (dbuser.messages.lastSeen || 0) > 1210000000)) return false;
 					if (dbuser.messages.count < data.messages) return false;
-					this.log(`[Register, ${type}, ${member.user.tag}]`);
+					Logger.command(`[Register, ${type}, ${member.user.tag}]`);
 					return true;
 				});
 				data.elections[type].voters = voters.reduce((acc, cur) => { //converts the collection to an object with keys as items and values []

@@ -1,147 +1,148 @@
-const Parse = require("../../util/parse.js");
-const Embed = require("../../util/embed.js");
-const Maths = require("./maths.js");
-const Calc = require("./calc.js");
+const Parse = require('../../util/parse');
+const Embed = require('../../util/embed');
+const Logger = require('../../util/logger');
+const Maths = require('./maths');
+const Calc = require('./calc');
 
 class All extends Parse {
-    constructor(message) {
-        super(message);
-    }
+	constructor(message) {
+		super(message);
+	}
 }
 
 class Series extends All {
-    constructor(message) {
-        super(message);
-    }
+	constructor(message) {
+		super(message);
+	}
 
-    async input() { //if there's a draw the bettor just gets all the money
-        try {
-            let data = { //alright create the big data object to be passed around
-                "players": []
-            };
-            data.length = parseInt(await this.Output.response({ //get the number of games played. Game total must add up to this number.
-                "description": "Please input the number of games about to be played in the series.",
-                "footer": "max: 20",
-                "filter": m => Number(m.content) < 21,
-                "number": true
-            }));
-            data.players[0] = {
-                "name": await this.Output.response({ //first name. String literal for object. Purely aesthetic, we don't take into account ratings
-                    "description": "Please input the name of the first player."
-                })
-            };
-            data.players[1] = {
-                "name": await this.Output.response({ //second name. String literal for object. Purely aesthetic, we don't take into account ratings
-                    "description": "Please input the name of the second player."
-                })
-            };
-            data.players[0].score = Number(await this.Output.response({ //these are important - not only do they provide the ratio but the degree of accuracy too
-                "description": "Please input past number of **" + data.players[0].name + "** wins against " + data.players[1].name + ".",
-                "number": true
-            }));
-            data.players[1].score = Number(await this.Output.response({
-                "description": "Please input past number of **" + data.players[1].name + "** wins against " + data.players[0].name + ".",
-                "number": true
-            }));
-            this.gen(data);
-        } catch (e) {
-            this.Output.onError(e);
-        }
-    }
+	async input() { //if there's a draw the bettor just gets all the money
+		try {
+			let data = { //alright create the big data object to be passed around
+				players: []
+			};
+			data.length = parseInt(await this.Output.response({ //get the number of games played. Game total must add up to this number.
+				description: 'Please input the number of games about to be played in the series.',
+				footer: 'max: 20',
+				filter: m => Number(m.content) < 21,
+				number: true
+			}));
+			data.players[0] = {
+				name: await this.Output.response({ //first name. String literal for object. Purely aesthetic, we don't take into account ratings
+					description: 'Please input the name of the first player.'
+				})
+			};
+			data.players[1] = {
+				name: await this.Output.response({ //second name. String literal for object. Purely aesthetic, we don't take into account ratings
+					description: 'Please input the name of the second player.'
+				})
+			};
+			data.players[0].score = Number(await this.Output.response({ //these are important - not only do they provide the ratio but the degree of accuracy too
+				description: 'Please input past number of **' + data.players[0].name + '** wins against ' + data.players[1].name + '.',
+				number: true
+			}));
+			data.players[1].score = Number(await this.Output.response({
+				description: 'Please input past number of **' + data.players[1].name + '** wins against ' + data.players[0].name + '.',
+				number: true
+			}));
+			this.gen(data);
+		} catch (e) {
+			this.Output.onError(e);
+		}
+	}
 
-    gen(data) {
-        data.total = data.players[0].score + data.players[1].score;
-        if (!data.total) return this.Output.onError("Couldn't calculate odds for this data.");
-        data.reliability = (Math.pow(Math.E, (Math.min(data.total, 200) / 200)) //e^(total/200) or if total is more than 1000, 1
+	gen(data) {
+		data.total = data.players[0].score + data.players[1].score;
+		if (!data.total) return this.Output.onError('Couldn\'t calculate odds for this data.');
+		data.reliability = (Math.pow(Math.E, (Math.min(data.total, 200) / 200)) //e^(total/200) or if total is more than 1000, 1
             *
             (1 / (Math.E)) //divided by (e), now a number between 0 and 1
             *
             0.25); //now a number between 0 and 0.25
-        data.accuracy = (Math.pow(Math.E, (Math.min(data.length, 20) / 20)) //e^(number of games/50) or if total is more than 50, 1
+		data.accuracy = (Math.pow(Math.E, (Math.min(data.length, 20) / 20)) //e^(number of games/50) or if total is more than 50, 1
             *
             (1 / Math.E) //divided by (e), now a number between 0 and 1
             *
             0.25); //now a number between 0 and 0.25
-        data.confidence = 0.45 + data.reliability + data.accuracy; //base value
-        this.log(["data.reliability: " + data.reliability, "data.accuracy:" + data.accuracy, "data.confidence: " + data.confidence]);
-        for (let player of data.players) { //for each player
-            player.discrete = {
-                "probability": [],
-                "decimal": []
-            };
-            player.cumulative = {
-                "probability": [],
-                "decimal": []
-            };
-            player.winchance = (player.score / data.total);
-            for (let j = 0; j < data.length + 1; j++) {
-                player.discrete.probability[j] = Maths.binomial(data.length, player.winchance, j, false);
-                player.discrete.decimal[j] = data.confidence / player.discrete.probability[j];
-                player.cumulative.probability[j] = 1 - Maths.binomial(data.length, player.winchance, j - 1, true);
-                player.cumulative.decimal[j] = data.confidence / player.cumulative.probability[j];
-            }
-        }
-        let embedgroup = [];
-        for (let j = 0; j < 2; j++) { //maxpages is 2
-            embedgroup.push(this.build(data, j));
-        }
-        this.Paginator.sender(embedgroup, 180000)
-    }
+		data.confidence = 0.45 + data.reliability + data.accuracy; //base value
+		Logger.command(['data.reliability: ' + data.reliability, 'data.accuracy:' + data.accuracy, 'data.confidence: ' + data.confidence]);
+		for (let player of data.players) { //for each player
+			player.discrete = {
+				probability: [],
+				decimal: []
+			};
+			player.cumulative = {
+				probability: [],
+				decimal: []
+			};
+			player.winchance = (player.score / data.total);
+			for (let j = 0; j < data.length + 1; j++) {
+				player.discrete.probability[j] = Maths.binomial(data.length, player.winchance, j, false);
+				player.discrete.decimal[j] = data.confidence / player.discrete.probability[j];
+				player.cumulative.probability[j] = 1 - Maths.binomial(data.length, player.winchance, j - 1, true);
+				player.cumulative.decimal[j] = data.confidence / player.cumulative.probability[j];
+			}
+		}
+		let embedgroup = [];
+		for (let j = 0; j < 2; j++) { //maxpages is 2
+			embedgroup.push(this.build(data, j));
+		}
+		this.Paginator.sender(embedgroup, 180000);
+	}
 
-    build(data, page) {
-        let type = page === 0 ? "discrete" : "cumulative";
-        let embed = new Embed()
-            .setTitle(this.Search.emojis.get("lazyslack") + " LAZY odds for match " + data.players[0].name + " vs " + data.players[1].name)
-            .setDescription([
-                "Showing " + type + " odds...",
-                "Reliability: **" + (data.reliability * 4).toFixed(2) + "**",
-                "Accuracy: **" + (data.accuracy * 4).toFixed(2) + "**",
-                "**Note:** these odds are not valid unless it is <@!185412969130229760> who has request them."
-            ].join("\n"));
-        for (let player of data.players) {
-            let array = [];
-            for (let j = 0; j < data.length + 1; j++) {
-                let decimal = player[type].decimal[j] && player[type].decimal[j] > 1 ? player[type].decimal[j].toFixed(2) : null;
-                let us = decimal ? (decimal > 2 ? "+" : "") + Calc.tous(decimal).toFixed() : null;
-                array.push([
-                    (type === "discrete" ? "Exactly " : "At least ") + j, !decimal || decimal > 80 ? "-" : "**" + decimal + "** (" + us + ")"
-                ]);
-            }
-            let w = Math.floor((data.length - 1) / 2);
-            let matchodds = player.cumulative.decimal[w] && player.cumulative.decimal[w] > 1 ? player.cumulative.decimal[w].toFixed(2) : "";
-            let usmatchodds = matchodds ? (matchodds > 2 ? "+" : "") + Calc.tous(matchodds).toFixed() : null;
-            array.push([
-                "The match", !matchodds || matchodds > 80 ? "-" : "**" + matchodds + "** (" + usmatchodds + ")"
-            ]);
-            embed.addField("How many games will " + player.name + " win?    \u200b", array.toPairs(), true);
-        }
-        return embed;
-    }
+	build(data, page) {
+		let type = page === 0 ? 'discrete' : 'cumulative';
+		let embed = new Embed()
+			.setTitle(this.Search.emojis.get('lazyslack') + ' LAZY odds for match ' + data.players[0].name + ' vs ' + data.players[1].name)
+			.setDescription([
+				'Showing ' + type + ' odds...',
+				'Reliability: **' + (data.reliability * 4).toFixed(2) + '**',
+				'Accuracy: **' + (data.accuracy * 4).toFixed(2) + '**',
+				'**Note:** these odds are not valid unless it is <@!185412969130229760> who has request them.'
+			].join('\n'));
+		for (let player of data.players) {
+			let array = [];
+			for (let j = 0; j < data.length + 1; j++) {
+				let decimal = player[type].decimal[j] && player[type].decimal[j] > 1 ? player[type].decimal[j].toFixed(2) : null;
+				let us = decimal ? (decimal > 2 ? '+' : '') + Calc.tous(decimal).toFixed() : null;
+				array.push([
+					(type === 'discrete' ? 'Exactly ' : 'At least ') + j, !decimal || decimal > 80 ? '-' : '**' + decimal + '** (' + us + ')'
+				]);
+			}
+			let w = Math.floor((data.length - 1) / 2);
+			let matchodds = player.cumulative.decimal[w] && player.cumulative.decimal[w] > 1 ? player.cumulative.decimal[w].toFixed(2) : '';
+			let usmatchodds = matchodds ? (matchodds > 2 ? '+' : '') + Calc.tous(matchodds).toFixed() : null;
+			array.push([
+				'The match', !matchodds || matchodds > 80 ? '-' : '**' + matchodds + '** (' + usmatchodds + ')'
+			]);
+			embed.addField('How many games will ' + player.name + ' win?    \u200b', array.toPairs(), true);
+		}
+		return embed;
+	}
 
 }
 
 class Odds {
 
-    constructor(message) {
-        this.message = message;
-    }
+	constructor(message) {
+		this.message = message;
+	}
 
-    get series() {
-        return new Series(this.message);
-    }
+	get series() {
+		return new Series(this.message);
+	}
 
-    get match() {
-        return new Match(this.message);
-    }
+	get match() {
+		return new Match(this.message);
+	}
 
-    get tournament() {
-        return new Tournament(this.message);
-    }
+	get tournament() {
+		return new Tournament(this.message);
+	}
 
-    run(args) {
-        if (this[args[0]]) return this[args[0]].input();
-        this.Output.onError("Invalid type of odds requested.");
-    }
+	run(args) {
+		if (this[args[0]]) return this[args[0]].input();
+		this.Output.onError('Invalid type of odds requested.');
+	}
 
 }
 

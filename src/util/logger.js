@@ -1,72 +1,197 @@
-const winston = require('winston');
-const logger = winston.createLogger({
-	level: 'info',
-	format: winston.format.json(),
+const { createLogger, format, transports, addColors } = require('winston');
+const { combine, timestamp, printf, colorize } = format;
+const levels = { 
+	error: 0, 
+	warn: 1, 
+	info: 2, 
+	verbose: 3, 
+	debug: 4,
+	load: 4,
+	command: 4,
+	data: 5
+};
+addColors({
+	error: 'red', 
+	warn: 'yellow', 
+	info: 'white', 
+	verbose: 'green', 
+	debug: 'green',
+	load: 'green',
+	command: 'blue',
+	data: 'blue'
+});
+
+const myFormat = printf(({ level, message, timestamp }) => {
+	return `${timestamp} | ${level}: ${message}`;
+});
+ 
+const logger = createLogger({
+	levels,
+	format: combine(
+		colorize(),
+		timestamp(),
+		myFormat
+	),
+	exitOnError: false,
 	transports: [
-		new winston.transports.Console(),
-		new winston.transports.File({   filename: 'combined.log'  })
+		new transports.Console({
+			level: 'command'
+		}),
+		new transports.File({
+			filename: './src/logs/error.log',
+			level: 'warn'
+		}),
+		new transports.File({
+			filename: './src/logs/debug.log',
+			level: 'command'
+		})
+	]
+});
+
+const data = createLogger({
+	levels,
+	format: combine(
+		colorize(),
+		timestamp(),
+		myFormat
+	),
+	exitOnError: false,
+	transports: [
+		new transports.File({
+			filename: './src/logs/data.log',
+			level: 'data'
+		})
 	]
 });
 
 class Logger {
-    
-	static async command(argsInfo, cmdInfo) {
-		try {
-			let time = Date.getISOtime(Date.now()).slice(0, 24);
-			let author = argsInfo.author.tag;
-			let Constructor = cmdInfo.file.toProperCase();
-			let command = (cmdInfo.command ? argsInfo.server.prefixes[cmdInfo.prefix] : cmdInfo.prefix) + argsInfo.command;
-			let args = argsInfo.args;
-			//logger.log({
-			//	"level": "info",
-			//	"message": time + " | " + author + " | " + Constructor + " | " + command + " | [" + args + "]"
-			//});
-			Logger.output(time + ' | ' + author + ' | ' + Constructor + ' | ' + command + ' | [' + args + ']');
-			return '';
-		} catch (e) {
-			Logger.error(e);
-		}
-	}
 
 	/**
-     * Asynchronously logs a value
-     * @param {*} value
-     */
-	static async log() {
-		let str = '';
-		for (let r of arguments) str += ((s) => {
-			if (/string|number|boolean/.test(typeof s)) return s;
-			if (Array.isArray(s)) return [Date.getISOtime(Date.now()).slice(0, 24), ...s].join(' | ');
-			if (typeof s === 'object') return [Date.getISOtime(Date.now()).slice(0, 24), ...Object.entries(s).map(([k, v]) => k + ': ' + v)].join(' | ');
-			if (typeof s === 'function') return s.toString();
-		})(r) + ' ';
-		Logger.output(str);
-	}
-
-	static async load(startTime, list, source) {
-		let arr = [
-			Date.getISOtime(Date.now()).slice(0, 24),
-			'loaded'
-		];
-		if (typeof startTime === 'number') arr.push((Date.now() - startTime) + 'ms');
-		if (source) arr.push(source);
-		Logger.output(arr.join(' | ') + '\n' + list.map(([s, k]) => ['    ' + k, s]).toPairs());
-	}
-
-	/**
-	 * Logs a new item to the console
+	 * Logs data for a new command instance
+	 * @param {Parse} argsInfo 
+	 * @param {Object} cmdInfo 
 	 */
-	static async output() {
-		console.log(...arguments);
+	static async trigger(argsInfo, cmdInfo) {
+		const author = argsInfo.author.tag;
+		const Constructor = cmdInfo.file.toProperCase();
+		const command = (cmdInfo.command ? argsInfo.server.prefixes[cmdInfo.prefix] : cmdInfo.prefix) + argsInfo.command;
+		const args = argsInfo.args;
+		Logger.command([author, Constructor, command, args]);
+		return '';
+	}
+
+	/**
+	 * Logs a new command asynchronously
+	 */
+	static async command(arr) {
+		logger.log({
+			level: 'command',
+			message: arr
+				.map(a => typeof a === 'object' ? JSON.stringify(a) : a)
+				.join(' | ')
+		});
+	}
+	
+	/**
+	 * Logs data when a new module loads
+	 * @param {*} startTime 
+	 * @param {*} list 
+	 * @param {*} source 
+	 */
+	static async load(startTime, list = [], source) {
+		if (typeof startTime === 'number') list.push((Date.now() - startTime) + 'ms');
+		if (source) list.push(source);
+		logger.log({
+			level: 'load',
+			message: list
+				.map(a => typeof a === 'object' ? JSON.stringify(a) : a)
+				.join(' | ')
+		});
 	}
 
 	/**
 	 * Logs a new error message asynchronously
 	 * @param {Error} e 
 	 */
-	static async error(e) {
-		console.error(e);
+	static async error() {
+		for (let a of Array.from(arguments)) {
+			logger.log({
+				level: 'error',
+				message: a.stack || a
+			});
+		}
 	}
+
+	/**
+	 * Logs a new warn message asynchronously
+	 */
+	static async warn() {
+		for (let a of Array.from(arguments)) {
+			let message = a;
+			if (typeof a === 'object') message = JSON.stringify(a, null, 4);
+			logger.log({
+				level: 'warn',
+				message
+			});
+		}
+	}
+
+	/**
+	 * Logs info data asynchronously
+	 */
+	static async info() {
+		for (let a of Array.from(arguments)) {
+			let message = a;
+			if (typeof a === 'object') message = JSON.stringify(a, null, 4);
+			logger.log({
+				level: 'info',
+				message
+			});
+		}
+	}
+	
+	/**
+	 * Logs any verbose information asynchronously
+	 */
+	static async verbose() {
+		for (let a of Array.from(arguments)) {
+			let message = a;
+			if (typeof a === 'object') message = JSON.stringify(a, null, 4);
+			logger.log({
+				level: 'verbose',
+				message
+			});
+		}
+	}
+
+	/**
+	 * For outputting debug data to the console as well as a debug file
+	 */
+	static async debug() {
+		for (let a of Array.from(arguments)) {
+			let message = a;
+			if (typeof a === 'object') message = JSON.stringify(a, null, 4);
+			logger.log({
+				level: 'debug',
+				message
+			});
+		}
+	}
+
+	/**
+	 * For outputting debug data to a data file
+	 */
+	static async data() {
+		for (let a of Array.from(arguments)) {
+			let message = a;
+			if (typeof a === 'object') message = JSON.stringify(a, null, 4);
+			data.log({
+				level: 'data',
+				message
+			});
+		}
+	}
+
 }
 
 module.exports = Logger;

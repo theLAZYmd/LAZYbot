@@ -86,7 +86,7 @@ class Parse {
 	}
 	
 	get log() {
-		if (!this._log) return this._log = Logger.log;
+		if (!this._log) return this._log = Logger.info;
 		return this._log;
 	}
 

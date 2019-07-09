@@ -1,5 +1,6 @@
-const Main = require("./main.js");
-const Embed = require("../../util/embed");
+const Main = require('./main.js');
+const Embed = require('../../util/embed');
+const Logger = require('../../util/logger');
 
 class Action extends Main {
 
@@ -8,7 +9,7 @@ class Action extends Main {
 	}
 
 	get output () {
-		let outputConstructor = require("./output.js");
+		let outputConstructor = require('./output.js');
 		return new outputConstructor(this.message);
 	}
 
@@ -26,31 +27,31 @@ class Action extends Main {
 	async react(reaction, user) {
 		try {
 			let data = {
-				"mod": user,
-				"message": reaction.message,
-				"embed": new Embed(reaction.message.embeds[0])
+				mod: user,
+				message: reaction.message,
+				embed: new Embed(reaction.message.embeds[0])
 			};
 			data.user = this.Search.users.byTag(this.modmail[reaction.message.id].tag);
-			if (!data.user) throw "User **" + user.tag + "** no longer exists!";
+			if (!data.user) throw 'User **' + user.tag + '** no longer exists!';
 			data.mod.flair = false;
 			switch (reaction.emoji.name) {
-				case "❎":
+				case '❎':
 					this.close(data);
 					break;
-				case "🗣":
+				case '🗣':
 					data.mod.flair = true;
 					this.reply(data);
 					break;
-				case "👤":
+				case '👤':
 					data.mod.flair = false;
 					this.reply(data);
 					break;
-				case "👁": //"seen"
+				case '👁': //"seen"
 					return; //"Don't remove the emoji"
-				case "❗":
+				case '❗':
 					this.warn(data);
 					break;
-				case "⏲":
+				case '⏲':
 					this.timeout(data);
 					break;
 			}
@@ -63,17 +64,17 @@ class Action extends Main {
 	async reply(data) {
 		try {
 			let msg = await this.Output.response({
-				"author": data.mod,
-				"description": "**" + data.mod.tag + "** Please type your response below (replying as " + (data.mod.flair ? "server" : "yourself") + ")"
-            }, true);
-            let content = msg.content + " " + msg.attachments.map(([,a]) => "[Attachment](" + a.url + ")").join(" ");
-			if (content.length > 1024) throw "Your message must be less than 1024 characters!\nPlease shorten it by **" + (content.length - 1024) + "** characters.";
+				author: data.mod,
+				description: '**' + data.mod.tag + '** Please type your response below (replying as ' + (data.mod.flair ? 'server' : 'yourself') + ')'
+			}, true);
+			let content = msg.content + ' ' + msg.attachments.map(([,a]) => '[Attachment](' + a.url + ')').join(' ');
+			if (content.length > 1024) throw 'Your message must be less than 1024 characters!\nPlease shorten it by **' + (content.length - 1024) + '** characters.';
 			else data.content = content; //DATA.CONTENT SET
 			msg.delete();
-			data.command = "reply";
+			data.command = 'reply';
 			this.output.amend(data);
 			this.output.send(data);
-			this.log(data);
+			Logger.data(data);
 		} catch (e) {
 			if (e) this.Output.onError(e);
 		}
@@ -82,8 +83,8 @@ class Action extends Main {
 	async close(data) {
 		try {
 			await this.Output.confirm({
-				"action": "closing conversation for user **" + data.user.tag + "**",
-				"author": data.mod
+				action: 'closing conversation for user **' + data.user.tag + '**',
+				author: data.mod
 			});
 			for (let id of Object.keys(this.modmail)) {
 				if (this.modmail[id].tag === data.user.tag) {
@@ -91,14 +92,15 @@ class Action extends Main {
 						let msg = await this.mchannel.fetchMessage(id);
 						msg.delete();
 					} catch (e) {
+						return '';
 					}
 					delete this.modmail[id];
 				}
 			}
 			this.setData(this.modmail);
-			this.Output.generic("**" + data.mod.tag + "** closed the ModMail conversation for **" + data.user.tag + "**.");
-			data.command = "close";
-			this.log(data);
+			this.Output.generic('**' + data.mod.tag + '** closed the ModMail conversation for **' + data.user.tag + '**.');
+			data.command = 'close';
+			Logger.data(data);
 		} catch (e) {
 			if (e) this.Output.onError(e);
 		}
@@ -107,18 +109,18 @@ class Action extends Main {
 	async warn(data) {
 		try {
 			await this.Output.confirm({
-				"action": "warning for user **" + data.user.tag + "**",
-				"author": data.mod
+				action: 'warning for user **' + data.user.tag + '**',
+				author: data.mod
 			});
 			Object.assign(data, {
-				"title": "Warning from server " + this.guild.name + ":",
-				"content": "You are abusing server modmail. Please be polite and do not spam the inbox.",
-				"command": "warn",
-				"name": "On " + Date.getISOtime(Date.now()) + ", " + data.mod.tag + " warned user."
+				title: 'Warning from server ' + this.guild.name + ':',
+				content: 'You are abusing server modmail. Please be polite and do not spam the inbox.',
+				command: 'warn',
+				name: 'On ' + Date.getISOtime(Date.now()) + ', ' + data.mod.tag + ' warned user.'
 			});
 			this.output.moderate(data);
 			this.output.send(data);
-			this.log(data);
+			Logger.data(data);
 		} catch (e) {
 			if (e) this.Output.onError(e);
 		}
@@ -127,21 +129,21 @@ class Action extends Main {
 	async timeout(data) {
 		try {
 			await this.Output.confirm({
-				"action": "timeout for user **" + data.user.tag + "**",
-				"author": data.mod
+				action: 'timeout for user **' + data.user.tag + '**',
+				author: data.mod
 			});
 			Object.assign(data, {
-				"title": "You have been timed out from sending messages to server " + this.guild.name + ":",
-				"content": "The mod team will not receive your messages for 24 hours.",
-				"command": "timeout",
-				"name": "On " + Date.getISOtime(Date.now()) + ", " + data.mod.tag + " timed out user for 24h."
+				title: 'You have been timed out from sending messages to server ' + this.guild.name + ':',
+				content: 'The mod team will not receive your messages for 24 hours.',
+				command: 'timeout',
+				name: 'On ' + Date.getISOtime(Date.now()) + ', ' + data.mod.tag + ' timed out user for 24h.'
 			});
 			if (!this.modmail._timeout) this.modmail._timeout = {};
 			this.modmail._timeout[data.user.tag] = Date.now();
 			this.setData(this.modmail);
 			this.output.moderate(data);
 			this.output.send(data);
-			this.log(data);
+			Logger.data(data);
 		} catch (e) {
 			if (e) this.Output.onError(e);
 		}

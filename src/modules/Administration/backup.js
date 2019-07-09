@@ -41,7 +41,10 @@ class Backup extends Parse {
 			DataManager.setFile(tally, `./src/data/dbbackup${degree}.json`);
 			config.backupdb[parseInt(degree) - 1] = Date.getISOtime(Date.now());
 			DataManager.setFile(config, './src/config.json');
-			if (!this.command) Backup.log('backup', degree);
+			Logger.data(tally);
+			if (!this.command) Logger.command(['Backup', 'auto', {
+				degree
+			}]);
 		} catch (e) {
 			if (e) throw e;
 		}
@@ -51,25 +54,13 @@ class Backup extends Parse {
 		try {
 			let tally = DataManager.getFile(`./src/data/dbbackup${degree}.json`);
 			DataManager.setData(tally);
-			if (!this.command) Backup.log('restore', degree);
+			if (!this.command) Logger.command(['Backup', 'restore', {
+				degree
+			}]);
 		} catch (e) {
 			if (e) throw e;
 		}
 	}
-
-	static async log(command, degree) {
-		Logger.command({
-			author: {
-				tag: 'auto'
-			},
-			args: [`./src/data/dbbackup${degree}.json`],
-			'command': command
-		}, {
-			file: 'Backup',
-			'prefix': ''
-		});
-	}
-
 
 }
 

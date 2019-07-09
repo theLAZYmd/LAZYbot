@@ -456,7 +456,7 @@ class DBuser {
 		let tally = DataManager.getData();
 		tally.push(dbuser);
 		DataManager.setData(tally);
-		Logger.log(`User ${dbuser.username} has been logged in the database!`);
+		Logger.info(`User ${dbuser.username} has been logged in the database!`);
 		return dbuser;
 	}
 

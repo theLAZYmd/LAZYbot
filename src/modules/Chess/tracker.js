@@ -120,7 +120,7 @@ class Track {
 	 */
 	log() {
 		if (this.successes.length === 0) return this;
-		Logger.log(['Tracker', 'update', 'auto', '[' + [this.dbuser.username, ...(this.successes.map(s => `${s[0]}: ${s[1]}`))].join(', ') + ']']);
+		Logger.command(['Tracker', 'update', 'auto', '[' + [this.dbuser.username, ...(this.successes.map(s => `${s[0]}: ${s[1]}`))].join(', ') + ']']);
 		return this;
 	}
 
@@ -322,7 +322,8 @@ class Tracker extends Parse {
 			if (msg) await this.Output.editor(embed
 				.setTitle(`${this.Search.emojis.get('lichess')} All updates successfully completed`)
 				.setDescription(description.slice(0, 2048)), msg);
-			Logger.output(userObj);
+			Logger.data(userObj);
+			Logger.command(['Tracker', 'updateAll', 'auto', [ids.length]]);
 			config.lastUpdate = Date.now();
 			DataManager.setFile(config, './src/config.json');
 		} catch (e) {

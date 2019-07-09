@@ -26,9 +26,8 @@ class GuildMemberRemove extends Parse {
 }
 
 module.exports = async (client, member) => {
-    console.log('left');
-	Logger.log(['auto', 'guildMemberAdd', 'leave', '[' + member.user.tag + ']']);
+	Logger.command(['auto', 'guildMemberAdd', 'leave', '[' + member.user.tag + ']']);
 	let argsInfo = new GuildMemberRemove({     client, member     });
-    await argsInfo.output();
-    argsInfo.dbuser.left();
+	await argsInfo.output();
+	argsInfo.dbuser.left();
 };

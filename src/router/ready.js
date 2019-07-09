@@ -84,7 +84,7 @@ class Ready {
 		for (let [id, server] of Object.entries(DataManager.getFile("./src/data/server.json"))) {
 			if (server.states.au) {
 				TrackerConstructor.initUpdateCycle(this.client, id)
-				return Logger.log("Beginning update cycle...");
+				return Logger.verbose("Beginning update cycle...");
 			}
 		}
     }*/
@@ -92,7 +92,7 @@ class Ready {
     async reddit() {
         let str = Math.random().toString().replace(/[^a-z]+/g, '')
         let url = config.urls.reddit.oauth.replace("this.client_ID", config.ids.reddit).replace("TYPE", token.reddit).replace("RANDOM_STRING", str).replace("URL", "http://localhost").replace("SCOPE_STRING", "identity");
-        Logger.log(await rp.get(url));
+        Logger.verbose(await rp.get(url));
     }
     */
    
@@ -105,17 +105,17 @@ class Ready {
 				type: 'STREAMING'
 			}
 		});
-		Logger.log(`Set bot user presence to ${name} in ${Date.now() - this.client.readyTimestamp}ms.`);
+		Logger.verbose(`Set bot user presence to ${name} in ${Date.now() - this.client.readyTimestamp}ms.`);
 	}
 
 	async setUsername() {   //Name in package.json + version number
 		let version = Package.version.match(/[0-9]+.[0-9]+.[0-9]/);
-		if (!version) throw Logger.log('Invalid versioning in package.json, please review.');
+		if (!version) throw Logger.error('Invalid versioning in package.json, please review.');
 		this.client.guilds.forEach(async (guild) => {
 			let name = `${Package.name.replace('lazy', 'LAZY')}${this.client.user.id === config.ids.betabot ? 'beta' : ''} v.${version}`;
 			if (guild.me.nickname !== name) {
 				await guild.me.setNickname(name);
-				Logger.log(`Set bot nickname to ${name} in guild ${guild.name} in ${Date.now() - this.client.readyTimestamp}ms.`);
+				Logger.verbose(`Set bot nickname to ${name} in guild ${guild.name} in ${Date.now() - this.client.readyTimestamp}ms.`);
 			}
 		});
 	}
@@ -149,7 +149,7 @@ module.exports = async (client) => {
 		} catch (e) {
 			if (e) Logger.error(e);
 		}
-		Logger.log('bleep bloop! It\'s showtime.');
+		Logger.verbose('bleep bloop! It\'s showtime.');
 		//require("./intervals.js")();
 		client.sources = ready.sources;
 		return client;
