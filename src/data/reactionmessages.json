@@ -12337,6 +12337,120 @@
                 "page": 1,
                 "author": "571351154739642380",
                 "cmdID": "596364410055032833"
+            },
+            "597123076743888896": {
+                "embedgroup": [
+                    {
+                        "title": "Profile for  wumpus#4525",
+                        "description": "```\nobi will will give you in_debt role if you dont join his team```",
+                        "color": 16711680,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "NatsoBabosos620 (debt 2,113)\nBabosos",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Region: **Americas**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Nov 06 2017**\nThe House: **Jun 13 2019**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`377227077859934208`**\nPosition in Database: **961**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "55,249",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/377227077859934208/e1d6bd6936c6bdcae7c45c95c46b9b05.png?size=2048"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": "Profile for  wumpus#4525",
+                        "description": "```\nobi will will give you in_debt role if you dont join his team```",
+                        "color": 16711680,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[Babosos](https://lichess.org/@/Babosos)\n960: **1374**\nUltrabullet: **1320**\nBullet: **1510**\nBlitz: **1429**\nRapid: **1585**\nClassical: 1585?\nCorrespondence: 1662?\nCrazyhouse: **1530**\nKing of the Hill: **1437**\n3-check: **1524**\nAntichess: **1886**\nAtomic: **1630**\nHorde: **2015**\nRacing Kings: **2058**\nPuzzles: **2051**",
+                                "inline": true
+                            }
+                        ],
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "377227077859934208",
+                "cmdID": "597123075347185714"
+            },
+            "597368384153190400": {
+                "embedgroup": [
+                    {
+                        "title": "Official House Shop Roles",
+                        "description": "Congrats on accumulating a whole bunch of flowers. Here are the roles you can buy; they will give you a special colour flair and make you superior to other members on the right sidebar! The colors look really nice.\n\nCheck savings by `.$`. Check level by `.xp`\n\n__Bronze__: 200 🌸; **if level 5**, 90 🌸\n__Silver__: 360 🌸; **if level 10**, 180 🌸 \n__Gold__: 680 🌸; **if level 20**, 370 🌸 \n__Diamond__: 1320 🌸; **if level 30**, 760 🌸 \n\nAre you just that special that you want your own colour? Well then buy:\n\n__ChooseColor__: 500 🌸 \n\nChange your colour to whatever you want using the `!color` command.\n Does not affect your right sidebar standings; it's for ye vain ones.",
+                        "footer": {
+                            "text": "Role rewards must be bought in order."
+                        }
+                    }
+                ],
+                "period": 180000,
+                "page": 0,
+                "author": "377227077859934208",
+                "cmdID": "597368381888266251"
+            },
+            "597368470266576906": {
+                "embedgroup": [
+                    {
+                        "title": "Official House Shop Roles",
+                        "description": "Congrats on accumulating a whole bunch of flowers. Here are the roles you can buy; they will give you a special colour flair and make you superior to other members on the right sidebar! The colors look really nice.\n\nCheck savings by `.$`. Check level by `.xp`\n\n__Bronze__: 200 🌸; **if level 5**, 90 🌸\n__Silver__: 360 🌸; **if level 10**, 180 🌸 \n__Gold__: 680 🌸; **if level 20**, 370 🌸 \n__Diamond__: 1320 🌸; **if level 30**, 760 🌸 \n\nAre you just that special that you want your own colour? Well then buy:\n\n__ChooseColor__: 500 🌸 \n\nChange your colour to whatever you want using the `!color` command.\n Does not affect your right sidebar standings; it's for ye vain ones.",
+                        "footer": {
+                            "text": "Role rewards must be bought in order."
+                        }
+                    }
+                ],
+                "period": 180000,
+                "page": 0,
+                "author": "377227077859934208",
+                "cmdID": "597368468593049602"
+            },
+            "597368745702457373": {
+                "embedgroup": [
+                    {
+                        "description": "Winner wins 50 :cherry_blossom: + VIP role as long as you keep the shield",
+                        "author": {
+                            "name": "Win a lichess shield to obtain the vip role and flowers!",
+                            "icon_url": "https://i.imgur.com/JbhAKpz.png"
+                        },
+                        "fields": [
+                            {
+                                "name": "Prizes for high performers",
+                                "value": "Top 3 win 40 :cherry_blossom:\nTop 10 win 30 🌸\nTop 20 win 20 🌸\nTop 30 win 10 🌸",
+                                "inline": false
+                            },
+                            {
+                                "name": "Date",
+                                "value": "Check out the upcoming Shield tournaments from [the tournament calendar](https://lichess.org/tournament/calendar).",
+                                "inline": false
+                            }
+                        ]
+                    }
+                ],
+                "period": 180000,
+                "page": 0,
+                "author": "515524778530963473",
+                "cmdID": "597368744687304704"
             }
         },
         "election": {
