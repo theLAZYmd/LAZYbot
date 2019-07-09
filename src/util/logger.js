@@ -38,19 +38,31 @@ const logger = createLogger({
 			level: 'command'
 		}),
 		new transports.File({
-			filename: '../error.log',
+			filename: './src/logs/error.log',
 			level: 'warn'
 		}),
 		new transports.File({
-			filename: '../debug.log',
+			filename: './src/logs/debug.log',
 			level: 'command'
-		}),
+		})
+	]
+});
+
+const data = createLogger({
+	levels,
+	format: combine(
+		colorize(),
+		timestamp(),
+		myFormat
+	),
+	exitOnError: false,
+	transports: [
 		new transports.File({
-			filename: '../data.log',
+			filename: './src/logs/data.log',
 			level: 'data'
 		})
 	]
-});        
+});
 
 class Logger {
 
@@ -71,15 +83,13 @@ class Logger {
 	/**
 	 * Logs a new command asynchronously
 	 */
-	static command(list) {
-		for (let arr of list) {
-			logger.log({
-				level: 'load',
-				message: arr
-					.map(a => typeof a === 'object' ? JSON.stringify(a) : a)
-					.join(' | ')
-			});
-		}
+	static command(arr) {
+		logger.log({
+			level: 'command',
+			message: arr
+				.map(a => typeof a === 'object' ? JSON.stringify(a) : a)
+				.join(' | ')
+		});
 	}
 	
 	/**
@@ -107,7 +117,7 @@ class Logger {
 		for (let a of Array.from(arguments)) {
 			logger.log({
 				level: 'error',
-				message: a.stack
+				message: a.stack || a
 			});
 		}
 	}
@@ -175,7 +185,7 @@ class Logger {
 		for (let a of Array.from(arguments)) {
 			let message = a;
 			if (typeof a === 'object') message = JSON.stringify(a, null, 4);
-			logger.log({
+			data.log({
 				level: 'data',
 				message
 			});

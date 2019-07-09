@@ -323,6 +323,7 @@ class Tracker extends Parse {
 				.setTitle(`${this.Search.emojis.get('lichess')} All updates successfully completed`)
 				.setDescription(description.slice(0, 2048)), msg);
 			Logger.data(userObj);
+			Logger.command(['Tracker', 'updateAll', 'auto', [ids.length]]);
 			config.lastUpdate = Date.now();
 			DataManager.setFile(config, './src/config.json');
 		} catch (e) {
