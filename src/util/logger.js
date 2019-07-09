@@ -71,7 +71,7 @@ class Logger {
 	 * @param {Parse} argsInfo 
 	 * @param {Object} cmdInfo 
 	 */
-	static trigger(argsInfo, cmdInfo) {
+	static async trigger(argsInfo, cmdInfo) {
 		const author = argsInfo.author.tag;
 		const Constructor = cmdInfo.file.toProperCase();
 		const command = (cmdInfo.command ? argsInfo.server.prefixes[cmdInfo.prefix] : cmdInfo.prefix) + argsInfo.command;
@@ -83,7 +83,7 @@ class Logger {
 	/**
 	 * Logs a new command asynchronously
 	 */
-	static command(arr) {
+	static async command(arr) {
 		logger.log({
 			level: 'command',
 			message: arr
@@ -98,7 +98,7 @@ class Logger {
 	 * @param {*} list 
 	 * @param {*} source 
 	 */
-	static load(startTime, list = [], source) {
+	static async load(startTime, list = [], source) {
 		if (typeof startTime === 'number') list.push((Date.now() - startTime) + 'ms');
 		if (source) list.push(source);
 		logger.log({
@@ -113,7 +113,7 @@ class Logger {
 	 * Logs a new error message asynchronously
 	 * @param {Error} e 
 	 */
-	static error() {
+	static async error() {
 		for (let a of Array.from(arguments)) {
 			logger.log({
 				level: 'error',
@@ -125,7 +125,7 @@ class Logger {
 	/**
 	 * Logs a new warn message asynchronously
 	 */
-	static warn() {
+	static async warn() {
 		for (let a of Array.from(arguments)) {
 			let message = a;
 			if (typeof a === 'object') message = JSON.stringify(a, null, 4);
@@ -139,7 +139,7 @@ class Logger {
 	/**
 	 * Logs info data asynchronously
 	 */
-	static info() {
+	static async info() {
 		for (let a of Array.from(arguments)) {
 			let message = a;
 			if (typeof a === 'object') message = JSON.stringify(a, null, 4);
@@ -153,7 +153,7 @@ class Logger {
 	/**
 	 * Logs any verbose information asynchronously
 	 */
-	static verbose() {
+	static async verbose() {
 		for (let a of Array.from(arguments)) {
 			let message = a;
 			if (typeof a === 'object') message = JSON.stringify(a, null, 4);
@@ -167,7 +167,7 @@ class Logger {
 	/**
 	 * For outputting debug data to the console as well as a debug file
 	 */
-	static debug() {
+	static async debug() {
 		for (let a of Array.from(arguments)) {
 			let message = a;
 			if (typeof a === 'object') message = JSON.stringify(a, null, 4);
@@ -181,7 +181,7 @@ class Logger {
 	/**
 	 * For outputting debug data to a data file
 	 */
-	static data() {
+	static async data() {
 		for (let a of Array.from(arguments)) {
 			let message = a;
 			if (typeof a === 'object') message = JSON.stringify(a, null, 4);
