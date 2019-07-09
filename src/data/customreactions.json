@@ -32,11 +32,6 @@
                 "reaction": "https://challonge.com/24bdsh40",
                 "anyword": false
             },
-            "": {
-                "type": "text",
-                "reaction": "zh calendar",
-                "anyword": false
-            },
             "zh calendar": {
                 "type": "text",
                 "reaction": "<https://teamup.com/ks3ozaeaopfk1v98bf?view=agenda>",

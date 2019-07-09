@@ -37,11 +37,6 @@ class ModMail extends Parse {
 		DataManager.setServer(this.reactionmessages, './src/data/reactionmessages.json');
 	}
 
-	get output() {
-		let outputConstructor = require('./output.js');
-		return new outputConstructor(this.message);
-	}
-
 	setData(modmail) {
 		this.reactionmessages.modmail = modmail;
 		DataManager.setServer(this.reactionmessages, './src/data/reactionmessages.json');
@@ -85,7 +80,7 @@ class ModMail extends Parse {
 				}); //so if they have a chat history, find it
 			data = Object.assign(data, {
 				message: modmail,
-				'embed': Embed.receiver(modmail.embeds[0])
+				embed: Embed.receiver(modmail.embeds[0])
 			});
 			if (Date.now() - mailInfo.lastMail < 1800000 && !data.mod && data.embed.fields[data.embed.fields.length - 1].name.includes('user wrote:')) await this.output.append(data);
 			else await this.output.renew(data);
