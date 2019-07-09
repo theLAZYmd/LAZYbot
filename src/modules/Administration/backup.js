@@ -63,10 +63,10 @@ class Backup extends Parse {
 				tag: 'auto'
 			},
 			args: [`./src/data/dbbackup${degree}.json`],
-			'command': command
+			command: command
 		}, {
 			file: 'Backup',
-			'prefix': ''
+			prefix: ''
 		});
 	}
 

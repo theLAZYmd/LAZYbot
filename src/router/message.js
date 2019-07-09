@@ -54,7 +54,7 @@ class Message {
 
 	static async run(argsInfo, cmdInfo) {
 		try {
-			if (cmdInfo.command) await Logger.command(argsInfo, cmdInfo);
+			if (cmdInfo.command) await Logger.trigger(argsInfo, cmdInfo);
 			if (cmdInfo.requires) {
 				let P = await Message.requires(argsInfo, cmdInfo);
 				if (P !== true) throw P; //halts it if fails permissions test

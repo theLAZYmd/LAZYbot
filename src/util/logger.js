@@ -59,18 +59,27 @@ class Logger {
 	 * @param {Parse} argsInfo 
 	 * @param {Object} cmdInfo 
 	 */
-	static command(argsInfo, cmdInfo) {
+	static trigger(argsInfo, cmdInfo) {
 		const author = argsInfo.author.tag;
 		const Constructor = cmdInfo.file.toProperCase();
 		const command = (cmdInfo.command ? argsInfo.server.prefixes[cmdInfo.prefix] : cmdInfo.prefix) + argsInfo.command;
 		const args = argsInfo.args;
-		logger.log({
-			level: 'command',
-			message: [author, Constructor, command, args]
-				.map(a => typeof a === 'object' ? JSON.stringify(a, null) : a)
-				.join(' | ')
-		});
+		Logger.command([author, Constructor, command, args]);
 		return '';
+	}
+
+	/**
+	 * Logs a new command asynchronously
+	 */
+	static command(list) {
+		for (let arr of list) {
+			logger.log({
+				level: 'load',
+				message: arr
+					.map(a => typeof a === 'object' ? JSON.stringify(a) : a)
+					.join(' | ')
+			});
+		}
 	}
 	
 	/**
@@ -85,7 +94,7 @@ class Logger {
 		logger.log({
 			level: 'load',
 			message: list
-				.map(a => typeof a === 'object' ? JSON.stringify(a, null, 4) : a)
+				.map(a => typeof a === 'object' ? JSON.stringify(a) : a)
 				.join(' | ')
 		});
 	}
@@ -174,7 +183,5 @@ class Logger {
 	}
 
 }
-
-Logger.load(Date.now(), ['online', 'offline', {obj1: true, obj2: false}], 'lichess');
 
 module.exports = Logger;

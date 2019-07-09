@@ -58,7 +58,7 @@ class Main {
 			}
 			data.eliminated.push(removeList.join(""));
 			if (data.eliminated.join("").length === data.count) data.finished = true;
-			Logger.log('Cycle ' + data.cycle + "; " + "Eliminated: " + data.eliminated.join("").length + ", Target: " + data.count + "\n",
+			Logger.command('Cycle ' + data.cycle + "; " + "Eliminated: " + data.eliminated.join("").length + ", Target: " + data.count + "\n",
 				m,
 				//"\nEliminated Candidates: '" + data.eliminated.join("', '") + "'"
 			);

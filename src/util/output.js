@@ -1,6 +1,7 @@
 const config = require('../config.json');
 const Embed = require('./embed');
 const Parse = require('./parse');
+const Logger = require('./logger');
 const Package = require('../../package.json');
 
 class Output extends Parse {
@@ -120,7 +121,7 @@ class Output extends Parse {
 				, channel);
 			}
 		} catch (e) {
-			if (e) this.log(e);
+			if (e) Logger.error(e);
 		}
 	}
 
@@ -152,7 +153,7 @@ class Output extends Parse {
 			if (title) embed.setTitle(title);
 			return await this.sender(embed, channel);
 		} catch (e) {
-			if (e) this.log(e);
+			if (e) Logger.error(e);
 		}
 	}
 

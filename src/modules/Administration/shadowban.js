@@ -2,6 +2,7 @@ const Parse = require('../../util/parse');
 const Embed = require('../../util/embed');
 const DataManager = require('../../util/datamanager');
 const ac = require('lazy-aho-corasick');
+const Logger = require('../../util/logger');
 
 class Shadowban extends Parse {
 
@@ -112,7 +113,7 @@ class Shadowban extends Parse {
 		try {
 			for (let r of this.shadowbanned.usernames) {
 				if (!r.test(user.username)) continue;
-				this.log(['auto', 'Shadowban', 'byUsername', '[' + [user.tag, r].join(', ') + ']']);
+				Logger.command(['auto', 'Shadowban', 'byUsername', '[' + [user.tag, r].join(', ') + ']']);
 				await this.guild.ban(user, {
 					days: 1
 				});
@@ -138,7 +139,7 @@ class Shadowban extends Parse {
 	async sbuser(message) {
 		try {
 			if (!this.shadowbanned.users.some(id => id === this.message.author.id)) return false;
-			this.log(['auto', 'Shadowban', 'byUser', '[' + [message.author.tag, message.content].join(', ') + ']']);
+			Logger.command(['auto', 'Shadowban', 'byUser', '[' + [message.author.tag, message.content].join(', ') + ']']);
 			message.delete();
 			if (!((m) => {
 				if (m.mentions.everyone) return true;
@@ -174,7 +175,7 @@ class Shadowban extends Parse {
 			if (/^!(?:sb|shadowban)/.test(message.content)) return false;
 			for (let r of this.shadowbanned.newMessages) {
 				if (!r.test(message.content)) continue;
-				this.log(['auto', 'Shadowban', 'byNewMessage', '[' + [message.author.tag, message.content].join(', ') + ']']);
+				Logger.command(['auto', 'Shadowban', 'byNewMessage', '[' + [message.author.tag, message.content].join(', ') + ']']);
 				if (Date.now() - this.member.joinedTimestamp < 48 * 60 * 60 * 1000) {
 					if (this.dbuser.messages.count < 100) {
 						await this.guild.ban(message.author, {
@@ -215,7 +216,7 @@ class Shadowban extends Parse {
 			if (/^!(?:sb|shadowban)/.test(message.content)) return false;
 			let matches = this.trie.search(message.content);
 			if (!matches.length) return false;
-			this.log(['auto', 'Shadowban', 'byPhrase', '[' + [message.author.tag, message.content].join(', ') + ']']);
+			Logger.command(['auto', 'Shadowban', 'byPhrase', '[' + [message.author.tag, message.content].join(', ') + ']']);
 			if (Date.now() - this.member.joinedTimestamp < 48 * 60 * 60 * 1000) {
 				if (this.dbuser.messages.count < 100) {
 					await this.guild.ban(message.author, {

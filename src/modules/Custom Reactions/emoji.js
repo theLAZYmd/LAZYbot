@@ -1,4 +1,5 @@
 const Parse = require('../../util/parse');
+const Logger = require('../../util/logger');
 const UtilityConstructor = require('../Utility/utility');
 const config = require('../../config.json');
 
@@ -59,7 +60,7 @@ class Emoji extends Parse {
 				try {
 					await reaction.remove(this.client.user);
 				} catch (e) {
-					if (e) this.log(e);
+					if (e) Logger.error(e);
 				}
 			});
 			if (failed[0]) this.Output.onError('Couldn\'t find emoji ' + failed.join(', ') + '.');

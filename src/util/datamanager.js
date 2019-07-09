@@ -30,7 +30,7 @@ class DataManager {
 		if (!server) { //if there's no data for that server
 			server = new Server(_id);
 			DataManager.setServer(server, filepath); //set it
-			Logger.log('Server ' + server._id + ' has been logged in the database!');
+			Logger.verbose('Server ' + server._id + ' has been logged in the database!');
 		}
 		return server; //and return the object
 	}
