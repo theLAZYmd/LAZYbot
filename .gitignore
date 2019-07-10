@@ -15,3 +15,6 @@ tsconfig.json
 LAZYbot.code-workspace
 combined.log
 watch.json
+src/logs/data.log
+src/logs/debug.log
+src/logs/error.log

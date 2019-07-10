@@ -7,7 +7,7 @@ module.exports = async (client, e) => {
 		await client.destroy();
 		await Logger.verbose('Client successfully destroyed!');
 		await Logger.verbose('Re-establishing a webconnection...');
-		await client.verbose(require('../token.json').token);
+		await client.login(require('../token.json').token);
 		await Logger.verbose('Webconnection successfully established!');
 	} catch (e) {
 		if (e) Logger.error(e);
