@@ -2,14 +2,27 @@
 <html>
 
 <head>
-	<title> LAZYbot </title>
+	<title>LAZYbot</title>
 	<meta property=og:image content="images/profile.jpg">
-	<link rel="shortcut icon" type="image/x-icon" href="images/profile.ico">
-	<meta name="description" content="Website for LAZYbot" http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="shortcut icon" type="image/x-icon" href="images/favico.ico">
+	<meta name="description" content="The perfect utility bot, with a speciality for Chess Discord servers." http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
 
 <body>
-	<a href="/logs/debug.log">View debug log for LAZYbot</a>
-	<br>
-	<a href="/logs/error.log">View error log for LAZYbot</a>
+	<script src="/scripts/commands.js" defer></script>
+	<h1>Logs</h1>
+	<a href="/logs/debug.log">View debug log for LAZYbot</a><br>
+	<a href="/logs/error.log">View error log for LAZYbot</a><br>
+	<h1>Commands</h1>
+	<table id="commands">
+		<thead>
+			<tr>
+				<th>Command Name</th>
+				<td>Description</td>
+				<td>Usage</td>
+			</tr>
+		</thead>
+		<tbody id="commands_body">
+		</tbody>
+	</table>
 </body>

@@ -7,6 +7,7 @@ const app = express();
 const fs = require('fs');
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/commands', express.static(path.join(__dirname, '..', 'commands')));
 app.get('/logs/debug.log', function (req, res) {
 	try {
 		let buffer = fs.readFileSync('./src/logs/debug.log', 'utf8');
@@ -26,7 +27,6 @@ app.get('/logs/error.log', function (req, res) {
 		if (e) res.status(404).type('text/plain').send(e.message);
 	}
 });
-
 app.get('/', function (req, res) {
 	res.sendFile('./index.html', {
 		root: __dirname
