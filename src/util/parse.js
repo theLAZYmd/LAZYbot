@@ -130,6 +130,11 @@ class Parse {
 		if (this._channel) return this._channel;
 		return this._channel = typeof this.message !== 'undefined' ? this.message.channel : null;
 	}
+	
+	set channel(channel) {
+		if (!/(?:Category|DM|Guild|News|Text|Voice)Channel/.test(channel.constructor.name)) throw new TypeError(channel.constructor.name);
+		this._channel = channel;
+	}
 
 	get member() {
 		if (this._member) return this._member;

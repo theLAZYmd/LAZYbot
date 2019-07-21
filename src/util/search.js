@@ -44,7 +44,7 @@ class Search extends Parse {
 		return new Emoji(this.message);
 	}
 
-	get message() {
+	get messages() {
 		const Message = require('../search/message');
 		return new Message(this.message);
 	}

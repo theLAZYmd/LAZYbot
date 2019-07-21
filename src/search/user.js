@@ -9,6 +9,7 @@ class User extends Search {
      * @typedef {string} UserResolvable
      * @param {UserResolvable} searchstring 
      * @param {boolean} exactmode 
+	 * @public
      */
 	get(searchstring, exactmode) {
 		let user;
@@ -23,27 +24,55 @@ class User extends Search {
 		return user;
 	}
 
+	/**
+	 * @param {string} snowflake 
+	 * @returns {User|null}
+	 * @public
+	 */
 	byID(snowflake) {
 		let id = snowflake.match(/[0-9]{18}/);
 		return id ? this.client.users.find(user => id[0] === user.id) : null;
 	}
 
+	/**
+	 * @param {string} string 
+	 * @returns {User|null}
+	 * @public
+	 */
 	byTag(string) {
 		let tag = string.match(/[\S \t^@#:`]{2,32}#\d{4}/);
 		return tag ? this.client.users.find(user => tag[0].toLowerCase() === user.tag.toLowerCase()) : null;
 	}
 
+	/**
+	 * @param {string} string 
+	 * @param {boolean} exactmode
+	 * @returns {User|null}
+	 * @public
+	 */
 	byUsername(string, exactmode) {
 		let username = string.match(/[\S \t^@#:`]{2,32}/);
 		if (!username) return null;
 		return exactmode ? this.client.users.find(user => user.username.toLowerCase() === username[0].toLowerCase()) : this.client.users.find(user => user.username.toLowerCase().startsWith(username[0].toLowerCase()));
 	}
 
+	/**
+	 * @param {string} string 
+	 * @param {boolean} exactmode
+	 * @returns {User|null}
+	 * @public
+	 */
 	byAliases(searchstring, exactmode) {
 		let dbuser = this.dbusers.get(searchstring, exactmode);
 		return dbuser ? this.byID(dbuser.id) : '';
 	}
 
+	/**
+	 * @param {string} string 
+	 * @param {boolean} exactmode
+	 * @returns {User|null}
+	 * @public
+	 */
 	byDisplayName(string, exactmode) {
 		let displayName = string.match(/[\S \t^@#:`]{2,32}/);
 		if (!displayName) return null;
