@@ -102,7 +102,7 @@ class Trivia extends Parse {
 				this.user = this.Search.users.get(argument);
 				if (!this.user) throw 'Couldn\'t find user ' + argument + '!';
 			}
-			this.onNewMessage(this.user);
+			this.onNewMessage(this.user, true);
 		} catch (e) {
 			if (e) this.Output.onError(e);
 		}
@@ -112,10 +112,10 @@ class Trivia extends Parse {
 	 * Logs a new user to the database
 	 * @param {User} user 
 	 */
-	async onNewMessage(user = this.author) {
+	async onNewMessage(user = this.author, force = false) {
 		try {
 			if (user.id === '392031018313580546') throw '';
-			if (typeof this.players[user.tag] !== 'undefined') throw '';
+			if (typeof this.players[user.tag] !== 'undefined' && !force) throw '';
 			let players = this.players;
 			players[user.tag] = true;
 			this.players = players;
@@ -160,7 +160,7 @@ class Trivia extends Parse {
 		try {
 			const lines = embed.description.split('\n');
 			let scored = lines
-                .map(line => /\*\*([\S \t^@#:`]{2,32}#\d{4})\*\* has( \d{1,3}) points?/.test(line) ? line.match(/\*\*([\S \t^@#:`]{2,32}#\d{4})\*\* has( \d{1,3}) points?/).slice(1) : [''])
+				.map(line => /\*\*([\S \t^@#:`]{2,32}#\d{4})\*\* has( \d{1,3}) points?/.test(line) ? line.match(/\*\*([\S \t^@#:`]{2,32}#\d{4})\*\* has( \d{1,3}) points?/).slice(1) : [''])
 				.map(arr => this.nameToTriviaData(...arr));
 			let players = this.players;
 			scored = scored.filter((d) => {
