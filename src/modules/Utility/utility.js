@@ -60,12 +60,10 @@ class Utility extends Parse { //fairly miscelanneous functions
 
 	async find(args) { //function needs a channel input
 		try {
-			let [id, channel] = args;
-			if (channel) {
-				channel = this.Search.channels.get(channel);
-				if (!channel) throw 'No such channel!';
-			} else channel = this.channel;
-			let msg = await channel.fetchMessage(id);
+			let channel = args[1] ? this.Search.channels.get(args[1]) : this.channel;
+			if (!channel) throw 'No such channel!';
+			let msg = await this.Search.messages.get(args[0], true);
+			if (!msg) throw 'Unknown Message';
 			msg.embed = msg.embeds && msg.embeds[0] ? Embed.receiver(msg.embeds[0]) : null;
 			return msg;
 		} catch (e) {
@@ -74,7 +72,7 @@ class Utility extends Parse { //fairly miscelanneous functions
 			let string = '**Fetch Error:** ';
 			if (e.message ==='Unknown Message') throw string += 'Couldn\'t find message, check ID and channel is correct.';
 			if (e.message === 'Missing Access') throw string += 'Bot doesn\'t have access to channel.';
-			if (e.startsWith('Invalid Form Body')) throw string += 'Couldn\'t recognise ' + args[0] + ' as a valid message ID';
+			if (e.message.startsWith('Invalid Form Body')) throw string += 'Couldn\'t recognise ' + args[0] + ' as a valid message ID';
 			throw e;
 		}
 	}

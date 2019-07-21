@@ -8,7 +8,9 @@
 			"type": "node",
 			"request": "launch",
 			"name": "Launch Program",
-			"program": "${workspaceFolder}\\src\\lazybot.js"
+			"program": "${workspaceFolder}\\src\\lazybot.js",
+			"cwd": "${workspaceFolder}",
+			"outputCapture": "std"
 		}
 	]
 }
