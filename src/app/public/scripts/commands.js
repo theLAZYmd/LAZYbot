@@ -11,7 +11,8 @@ loadJSON('/commands/message.json', (data) => {
 			if (!Array.isArray(c.aliases)) continue;
 			let prefix = prefixes.get(c.prefix);
 			let th = document.createElement('th');
-			let name = document.createTextNode(prefix + c.aliases.join(', ' + prefix) + '\n');
+			let cmds = c.aliases.reduce((acc, curr, i) => acc += (curr.split(/\s+/).length < 2 ? prefix : '') + curr + (i < c.aliases.length - 1 ? ', ' : '\n'), '');
+			let name = document.createTextNode(cmds);
 			th.appendChild(name);
 			let mod = document.createElement('span');
 			let moduleText = document.createTextNode(moduleName);
