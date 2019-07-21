@@ -6,21 +6,23 @@ const prefixes = new Map([
 
 loadJSON('/commands/message.json', (data) => {
 	let Message = JSON.parse(data);
-	for (let [Module, data] of Object.entries(Message)) {
+	for (let [moduleName, data] of Object.entries(Message)) {
 		for (let c of data) try {
 			if (!Array.isArray(c.aliases)) continue;
 			let prefix = prefixes.get(c.prefix);
 			let th = document.createElement('th');
-			let name = document.createTextNode(prefix + c.aliases[0]);
+			let name = document.createTextNode(prefix + c.aliases[0] + '\n');
 			th.appendChild(name);
+			let mod = document.createElement('span');
+			let moduleText = document.createTextNode(moduleName);
+			mod.appendChild(moduleText);
+			mod.className = 'module';
+			th.appendChild(mod);
 			let desc = document.createElement('td');
 			let text1 = document.createTextNode(c.description);
 			desc.appendChild(text1);
 			let usage = document.createElement('td');
-			let str = '';
-			for (let u of c.usage) {
-				str += prefix + u;
-			}
+			let str = (c.usage || []).reduce((acc, curr) => acc += prefix + curr + '\n', '');
 			let text2 = document.createTextNode(str);
 			usage.appendChild(text2);
 			let row = tbody.insertRow();

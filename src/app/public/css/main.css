@@ -1,0 +1,79 @@
+body {
+	padding: 0px 20px;
+	color: black;
+	font-family: Arial;
+}
+
+h1 {
+	font-family: Futura;
+}
+
+.title {
+	font-size: 30px;
+	line-height: 57px;
+	color: #002147;
+	font-weight: bold;
+	margin-right: .5em
+}
+
+.title span {
+	color:#ccc;
+}
+
+.subtitle {
+	color: rgb(61, 58, 58);
+	text-transform: uppercase;
+}
+
+
+table, thead {
+	border: 3px solid black;
+	border-collapse: collapse;
+}
+
+th, tr, td {
+	white-space: pre-wrap;
+	border: 1px solid black;
+	border-collapse: collapse;
+	padding: 10px;
+}
+
+thead {
+	color: rgb(223, 233, 255);
+	text-transform: uppercase;
+	background-color: #002147;
+}
+
+th, thead {
+	font-weight: bold;
+	text-align: center;
+}
+
+th span {
+	display: inline-block;
+	padding: 5px;
+	margin: 5px;
+	background: rgba(0,155,191,.3);
+	border: 1px solid #009bbf;
+	color: rgb(5, 0, 49);
+	text-transform: uppercase;
+	font-size: 12px;
+	font-weight: bold;
+	text-shadow: "5px 5px 2px black"
+}
+
+/*
+.module {
+}*/
+
+tr:nth-child(even) {
+	background-color: #f5f5f5;
+}
+
+thead tr:hover {
+	color: rgb(53, 53, 53);
+}
+
+tr:hover {
+	background-color: #aeb1ff;
+}
