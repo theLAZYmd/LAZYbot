@@ -21,7 +21,8 @@ loadJSON('/commands/message.json', (data) => {
 			th.appendChild(mod);
 			th.scope = 'row';
 			let desc = document.createElement('td');
-			let text1 = document.createTextNode(c.description);
+			let description = c.description;//.replace(/\[([\w\s]+)]\((https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_+.~#?&/=]*))/g, (match, text, url) => text.link(url));
+			let text1 = document.createTextNode(description);
 			desc.appendChild(text1);
 			let usage = document.createElement('td');
 			let str = (c.usage || []).reduce((acc, curr) => acc += prefix + curr + '\n', '');
