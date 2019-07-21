@@ -43,7 +43,7 @@ class Utility extends Parse { //fairly miscelanneous functions
 			let msg = await this.find(this.args);
 			let embed = new Embed(msg.embed || {});
 			let denoter = 'Fetched Message for ' + this.author.tag;
-			let timestamp = '\On ' + Date.getISOtime(msg.createdTimestamp || Date.now()) + ', user **' + msg.author.tag + '** said:';
+			let timestamp = 'On ' + Date.getISOtime(msg.createdTimestamp || Date.now()) + ', user **' + msg.author.tag + '** said:';
 			if (msg.content) {
 				if (!/^On [a-zA-Z]{3} [a-zA-Z]{3} [0-9][0-9]? [0-9]{4} [0-9][0-9]:[0-9][0-9]:[0-9][0-9] GMT\+[0-9][0-9], user \*\*[\S \t^@#:`]{2,32}#\d{4}\*\* said:/.test(msg.content)) {
 					embed.setContent(timestamp).setTitle(denoter).setDescription(msg.content.format());
@@ -71,12 +71,11 @@ class Utility extends Parse { //fairly miscelanneous functions
 		} catch (e) {
 			if (!e) return null;
 			if (typeof e === 'string') throw e;
-			switch (e.message) {
-				case 'Unknown Message':
-					throw '**Fetch Error:** Couldn\'t find message, check ID and channel is correct.';
-				case 'Missing Access':
-					throw '**Fetch Error:** Bot doesn\'t have access to channel.';
-			}
+			let string = '**Fetch Error:** ';
+			if (e.message ==='Unknown Message') throw string += 'Couldn\'t find message, check ID and channel is correct.';
+			if (e.message === 'Missing Access') throw string += 'Bot doesn\'t have access to channel.';
+			if (e.startsWith('Invalid Form Body')) throw string += 'Couldn\'t recognise ' + args[0] + ' as a valid message ID';
+			throw e;
 		}
 	}
 

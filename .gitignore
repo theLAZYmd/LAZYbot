@@ -18,3 +18,13 @@ watch.json
 src/logs/data.log
 src/logs/debug.log
 src/logs/error.log
+.vs/LAZYbot/v16/.suo
+.vs/ProjectSettings.json
+.vs/slnx.sqlite
+.vs/VSWorkspaceState.json
+bin/Microsoft.NodejsTools.WebRole.dll
+LAZYbot.njsproj
+LAZYbot.njsproj.user
+obj/Debug/LAZYbot.njsproj.CoreCompileInputs.cache
+obj/Debug/LAZYbot.njsproj.FileListAbsolute.txt
+obj/Debug/LAZYbot.njsprojAssemblyReference.cache
