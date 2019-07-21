@@ -88,3 +88,4 @@ fs.readdir('./src/' + router, (err, _files) => {
 });
 
 client.login(require('./token.json').token);
+require('./app/server');
