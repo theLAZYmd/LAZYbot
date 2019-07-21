@@ -11,13 +11,14 @@ loadJSON('/commands/message.json', (data) => {
 			if (!Array.isArray(c.aliases)) continue;
 			let prefix = prefixes.get(c.prefix);
 			let th = document.createElement('th');
-			let name = document.createTextNode(prefix + c.aliases[0] + '\n');
+			let name = document.createTextNode(prefix + c.aliases.join(', ' + prefix) + '\n');
 			th.appendChild(name);
 			let mod = document.createElement('span');
 			let moduleText = document.createTextNode(moduleName);
 			mod.appendChild(moduleText);
 			mod.className = 'module';
 			th.appendChild(mod);
+			th.scope = 'row';
 			let desc = document.createElement('td');
 			let text1 = document.createTextNode(c.description);
 			desc.appendChild(text1);
@@ -29,6 +30,7 @@ loadJSON('/commands/message.json', (data) => {
 			row.appendChild(th);
 			row.appendChild(desc);
 			row.appendChild(usage);
+			row.id = 'command_' + c.aliases[0];
 		} catch (e) {
 			if (e) console.error(e);
 		}

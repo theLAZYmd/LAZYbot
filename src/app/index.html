@@ -16,20 +16,31 @@
 			LAZY<span>bot</span>
 		</h1>
 	</div>
-	<div class="subtitle">
-		<h1>Logs</h1>
+	<div id="container" class="sliders_container subtitle">
+		<div class="log_box arrow_box">
+				<h1>Logs</h1>
+				<div id="ll1;" class="log_link log_link1 arrow_box">
+					<h1 class="text">
+						<a href=/logs/debug.log target="_blank">Debug</a>
+					</h1>		
+					<div id="ll2;" class="log_link log_link2 arrow_box">
+						<h1 class="text">
+							<a href=/logs/debug.log target="_blank">Error</a>
+						</h1>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
-	<a href="/logs/debug.log">View debug log for LAZYbot</a><br>
-	<a href="/logs/error.log">View error log for LAZYbot</a><br>
 	<div class="subtitle">
 		<h1>Commands</h1>
 	</div>
 	<table id="commands">
 		<thead>
 			<tr>
-				<th>Command Name</th>
-				<td>Description</td>
-				<td>Usage</td>
+				<th scope="col">Command Name</th>
+				<th scope="col">Description</th>
+				<th scope="col">Usage</th>
 			</tr>
 		</thead>
 		<tbody id="commands_body">
