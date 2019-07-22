@@ -11,6 +11,7 @@
 <body>
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<script src="/scripts/commands.js" defer></script>
+	<script src="/scripts/logs.js" defer></script>
 	<div class="banner">
 		<div class="title" >
 			<h1>
@@ -22,15 +23,15 @@
 	</div>
 	<br>
 	<div id="container" class="sliders_container subtitle">
-		<div class="log_box arrow_box">
+		<div id="ll0" class="log_box arrow_box">
 				<h1>Logs</h1>
-				<div id="ll1;" class="log_link log_link1 arrow_box">
+				<div id="ll1" class="log_link log_link1 arrow_box">
 					<h1 class="text">
-						<a href=/logs/debug.log target="_blank">Debug</a>
+						<a id=link1 href=/logs/debug.log target="_blank">Debug</a>
 					</h1>		
-					<div id="ll2;" class="log_link log_link2 arrow_box">
+					<div id="ll2" class="log_link log_link2 arrow_box">
 						<h1 class="text">
-							<a href=/logs/debug.log target="_blank">Error</a>
+							<a id=link2 href=/logs/error.log target="_blank">Error</a>
 						</h1>
 					</div>
 				</div>

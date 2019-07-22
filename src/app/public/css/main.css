@@ -5,7 +5,7 @@ body {
 }
 
 h1 {
-	font-family: Futura;
+	font-family: Didact Gothic, Muli, Lucida Sans, Sans Serif;
 }
 
 a {
@@ -46,6 +46,7 @@ table {
 	background-color: #c3c4df;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
+	background-position: center;
 }
 
 th, tr, td {
@@ -123,6 +124,7 @@ tbody tr:hover {
 	text-align: center;
 	background: #002366;
 	border-left-style: visible;
+    cursor: pointer;
 }
 
 .log_box:after {
@@ -164,19 +166,13 @@ tbody tr:hover {
 
 .log_link {
 	position: absolute;
-	left: 100%;
 	top: -4px;
-	width: 0;
 	height: 100%;
 	transition: .5s ease;
+	left: 100%;
+	width: 0;
 	overflow: hidden;
 	z-index: -1;
-}
-
-.sliders_container:hover .log_link {
-	width: 100%;
-	left: 100;
-	overflow: visible;
 }
 
 .log_link1 {
