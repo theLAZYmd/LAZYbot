@@ -46,6 +46,7 @@ table {
 	background-color: #c3c4df;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
+	background-position: center;
 }
 
 th, tr, td {
