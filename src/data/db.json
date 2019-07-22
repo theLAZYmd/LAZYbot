@@ -1016,7 +1016,7 @@
         "id": "341618941317349376",
         "username": "Nobody#4620",
         "messages": {
-            "count": 5724,
+            "count": 5725,
             "last": "f",
             "lastSeen": 1562696854348
         }
@@ -3323,7 +3323,7 @@
         "id": "363519664875372556",
         "username": "chuckmoulton#2381",
         "messages": {
-            "count": 3774,
+            "count": 3776,
             "last": "shades?",
             "lastSeen": 1562607877676
         },
@@ -4674,7 +4674,7 @@
         "id": "454390762185031691",
         "username": "Illion#1918",
         "messages": {
-            "count": 25693,
+            "count": 25694,
             "last": "kpme on",
             "lastSeen": 1562671238281
         },
@@ -4736,19 +4736,19 @@
         "lichess": {
             "_main": "fgalla",
             "fgalla": {
-                "maxRating": 1692,
+                "maxRating": 1596,
                 "blitz": "1149",
-                "crazyhouse": "1692",
-                "bullet": "1032",
+                "crazyhouse": "1544",
+                "bullet": "1091",
                 "correspondence": "1591?",
-                "puzzles": "1644",
+                "puzzles": "1596",
                 "classical": "1662?",
                 "rapid": "1307?"
             },
             "_country": "IE"
         },
         "location": "Ireland",
-        "lastUpdate": 1562657006082
+        "lastUpdate": 1563727402385
     },
     {
         "id": "277142335425478657",
@@ -4866,7 +4866,7 @@
                 "bughouse": "2112"
             }
         },
-        "lastUpdate": 1562654101840
+        "lastUpdate": 1563726802873
     },
     {
         "id": "306795251564019713",
@@ -6001,11 +6001,11 @@
     },
     {
         "id": "312050689511784449",
-        "username": "Natso627#0254",
+        "username": "Azelf#0254",
         "messages": {
-            "count": 8577,
-            "last": "f",
-            "lastSeen": 1562694547241
+            "count": 8579,
+            "last": "<:monkaS:453004503520641045>",
+            "lastSeen": 1563732983524
         },
         "lichess": {
             "Uarekomodo": {
@@ -10257,9 +10257,9 @@
         "id": "519602977380761621",
         "username": "Ogul#1233",
         "messages": {
-            "count": 16708,
-            "last": "so? <:cmonBruh:504335346390007848>",
-            "lastSeen": 1562696992771
+            "count": 16710,
+            "last": ".bf all h",
+            "lastSeen": 1563732509813
         },
         "lichess": {
             "Ogul1": {
@@ -11166,9 +11166,9 @@
         "id": "515524778530963473",
         "username": "RacingKingsKing#2077",
         "messages": {
-            "count": 15091,
-            "last": "thx",
-            "lastSeen": 1562696252137
+            "count": 15095,
+            "last": ".bf all t",
+            "lastSeen": 1563732215982
         },
         "lichess": {
             "_main": "RacingKingsKing",
@@ -11523,9 +11523,9 @@
         "id": "257270566652870657",
         "username": "ODMWND#7642",
         "messages": {
-            "count": 992,
-            "last": ".bf 11 h",
-            "lastSeen": 1562657438222
+            "count": 996,
+            "last": ".xp",
+            "lastSeen": 1563727436534
         },
         "lichess": {
             "_main": "ODMWND",
@@ -12383,7 +12383,7 @@
         "id": "445644685269139478",
         "username": "RoyalManiac#1918",
         "messages": {
-            "count": 15581,
+            "count": 15583,
             "last": "<@519602977380761621> that's a perfect self-portrait <:cmonBruhGlasses:546273520636919808>",
             "lastSeen": 1562695525567
         },
@@ -12506,7 +12506,7 @@
         "id": "566664516839145492",
         "username": "Evilmind#5680",
         "messages": {
-            "count": 15719,
+            "count": 15721,
             "last": "<:cmonBruh:504335346390007848>",
             "lastSeen": 1562695801083
         },
@@ -13897,7 +13897,7 @@
                 "puzzles": "2250",
                 "atomic": "2007?",
                 "classical": "2373?",
-                "rapid": "2212",
+                "rapid": "2256",
                 "ultra": "1856?"
             },
             "_name": "Vitaly ******",
@@ -13905,7 +13905,7 @@
             "_language": "en-US",
             "_bio": "https://imgur.com/IsMVaUO\r\nFIDE Rapid 1998;      \r\n\r\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\nЗаймусь обучением до 1800 FIDE (подробности в личке) "
         },
-        "lastUpdate": 1562657006053
+        "lastUpdate": 1563727102737
     },
     {
         "id": "586226260619952129",
@@ -14174,9 +14174,9 @@
         "id": "346484064636895232",
         "username": "Laminator#5892",
         "messages": {
-            "count": 10150,
-            "last": ".flip 10",
-            "lastSeen": 1562697097701
+            "count": 10153,
+            "last": ".xp",
+            "lastSeen": 1563727486711
         },
         "lichess": {
             "_main": "The_Laminator",
@@ -14485,6 +14485,15 @@
             "count": 2,
             "last": "this is the server for chess yes?",
             "lastSeen": 1562604448116
+        }
+    },
+    {
+        "id": "471771674833059882",
+        "username": "Falcon#6507",
+        "messages": {
+            "count": 1,
+            "last": ".timely",
+            "lastSeen": 1563731281928
         }
     }
 ]
