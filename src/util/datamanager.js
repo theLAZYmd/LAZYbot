@@ -2,6 +2,12 @@ const fs = require('fs');
 const config = require('../config.json');
 const Logger = require('./logger.js');
 const Server = require('../templates/server.js');
+const sqlite3 = require('sqlite3').verbose();
+
+let db = new sqlite3.Database(config.dataFile, (err) => {
+	if (err) console.error(err.message);
+	Logger.info('Connected to the sqlite database.');
+});
 
 class DataManager {
 
@@ -44,5 +50,7 @@ class DataManager {
 	}
 
 }
+
+DataManager.db = db;
 
 module.exports = DataManager;

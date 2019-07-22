@@ -25,6 +25,7 @@
     "license": "MIT",
     "preinstall": "rm package-lock.json",
     "dependencies": {
+        "bufferutil": "^4.0.1",
         "cheerio": "^1.0.0-rc.3",
         "discord.js": "^11.4.2",
         "enmap": "^0.3.2",
@@ -36,6 +37,7 @@
         "request": "^2.88.0",
         "request-promise": "^4.2.2",
         "simple-oauth2": "^2.2.1",
+        "sqlite3": "^4.0.9",
         "winston": "^3.1.0",
         "yarn": "^1.10.1"
     }
