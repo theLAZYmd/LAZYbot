@@ -19,19 +19,15 @@ log_box.onclick = function() {
 	else container.onmouseleave();
 };
 
-let link1 = document.createElement('a');
-link1.href = '/logs/debug.log';
-link1.target = 'blank';
-let link2 = document.createElement('a');
-link2.target = 'blank';
-link2.href = '/logs/error.log';
+let link1 = document.getElementById('link1');
+let link2 = document.getElementById('link2');
 
-log_link1.onclick = function() {
-	link1.click();
+log_link1.onclick = function(e) {
+	if (this === e.target) link1.click();
 };
 
-log_link2.onclick = function() {
-	link2.click();
+log_link2.onclick = function(e = window.event) {
+	if (this === e.target) link2.click();
 };
 
 function transition_right(element) {
