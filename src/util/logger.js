@@ -115,7 +115,7 @@ class Logger {
 	 */
 	static async error() {
 		for (let a of Array.from(arguments)) {
-			logger.log({
+			if (a) logger.log({
 				level: 'error',
 				message: a.stack || a
 			});

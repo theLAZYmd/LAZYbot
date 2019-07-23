@@ -7,20 +7,21 @@ class MessageCount extends Parse {
 		super(message);
 	}
 
-    /**
+	/**
      * Ups the message count for a given user stored in the database
      * @private
      */
 	async count(dbuser = this.dbuser) { //section for message logging
 		try {
 			dbuser.messages.count++;
+			dbuser.fromUser(this.user);
 			dbuser.setData();
 		} catch (e) {
 			if (e) this.Output.onError(e);
 		}
 	}
 
-    /**
+	/**
      * Stores the last message a user has written
      * @private
      */
@@ -36,7 +37,7 @@ class MessageCount extends Parse {
 		}
 	}
 
-    /**
+	/**
      * Parses a string and number combination to update the message.count of the user found from that string with that number
      * @param {User} user - A discord user
      * @param {string[]} args - A list of searchResolvable variables
@@ -49,7 +50,7 @@ class MessageCount extends Parse {
 				if (!isNaN(Number(a))) number = Number(a);
 				else {
 					let _user = this.Search.users.get(a);
-                    if (_user) user = _user;
+					if (_user) user = _user;
 					else throw this.Permissions.output('args');
 				}
 			}
@@ -62,7 +63,7 @@ class MessageCount extends Parse {
 		}
 	}
 
-    /**
+	/**
      * Outputs the number of messages a user has sent
      * @public
      * @param {string[]} args 
@@ -82,7 +83,7 @@ class MessageCount extends Parse {
 		}
 	}
 
-    /**
+	/**
      * Outputs the last message a user has sent
      * @public
      * @param {string} argument 

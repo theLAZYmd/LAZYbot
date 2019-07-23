@@ -168,7 +168,28 @@ class DBuser {
 	 * @param {User} user 
 	 * @returns {DBuser}
 	 */
-	fromUser(user) {
+	fromUser(user) {		
+		DataManager.db.serialize(() => {
+			DataManager.db
+				.run(`CREATE TABLE IF NOT EXISTS Users (
+					id TEXT NOT NULL UNIQUE,
+					tag text NOT NULL,
+					messageCount INTEGER DEFAULT 0,
+					lastMessageContent text,
+					lastMessageTime INTEGER
+				)`, (e) => e ? Logger.error(new Error(e)) : '')
+				.run(`INSERT INTO Users(
+					id,
+					tag
+				) VALUES (
+					?,
+					?
+				)`, [user.id, user.tag], (e) => e ? Logger.error(new Error(e)) : '')
+				.get(`SELECT id
+					FROM Users
+					WHERE id = ?
+				`, [user.id], (e) => e ? Logger.error(new Error(e)) : '');
+		});
 		let obj = {};
 		obj.id = user.id,
 		obj.username = user.tag,
@@ -179,6 +200,16 @@ class DBuser {
 		};
 		return new DBuser(obj);
 	}
+
+	/**
+	 * Sets a user property in the database
+	 */
+	setProp(key, value) {
+		DataManager.db.run(`UPDATE Users
+			SET ? = ?
+			WHERE id = ?
+		`, [key, value, this.id], (e) => e ? Logger.error(new Error(e)) : '');
+	}
 	
 	/**
 	 * Sets the data in the database
@@ -187,8 +218,6 @@ class DBuser {
 	setData() {
 		let index = this.getIndex();
 		if (!this.username || !this.id) return console.error(this);
-		if (this.hasOwnProperty('lastMessage')) delete this.lastMessage;
-		if (this.hasOwnProperty('lastmessage')) delete this.lastmessage;
 		let tally = DataManager.getData();
 		tally[index] = this;
 		DataManager.setData(tally);

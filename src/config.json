@@ -1,5 +1,6 @@
 {
     "dataFile": "./src/data/db.json",
+    "dataBase": "./src/data/data.db",
     "guildFile": "./src/data/server.json",
     "ids": {
         "bot": "338772451565502474",
