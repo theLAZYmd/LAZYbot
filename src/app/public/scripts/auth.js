@@ -4,7 +4,7 @@ const params = new URLSearchParams(uri.split('?').slice(1).join('?'));
 const tokenHost = 'https://oauth.lichess.org';
 const authorizePath = '/oauth/authorize';
 const clientId = '1nNYMjg2i4DvLXPw';
-const redirectUri = 'http://localhost:80/callback';
+const redirectUri = 'http://lazybot.co.uk/callback';
 const scopes = [
 	//'game:read',
 	//'preference:read'

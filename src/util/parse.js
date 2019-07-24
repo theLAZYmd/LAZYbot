@@ -94,7 +94,7 @@ class Parse {
 
 	get client() {
 		if (this._client) return this._client;
-		return this._client = this.message ? this.message.client : null;
+		return this._client = this.message ? this.message.client : require('../lazybot');
 	}
 
 	get guild() {

@@ -10,6 +10,7 @@ const app = express();
 const DataManager = require('../util/datamanager');
 const config = require('../config.json');
 const token = require('../token.json');
+const auth = require('../modules/Chess/auth');
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -50,12 +51,12 @@ const oauth2 = simpleOauth.create({
 		authorizePath,
 	},
 });
-const redirectUri = 'http://localhost:80/callback';
+const redirectUri = 'http://lazybot.co.uk/callback';
 
 app.get('/auth', function (req, res) {
 	try {
 		const keys = DataManager.getFile('./src/modules/Chess/auth.json');
-		//if (!req.query.id || !keys[req.query.id]) throw new Error('Invalid state.');
+		if (!req.query.state || !keys[req.query.state]) throw new Error('Invalid state.');
 		res.status(200).sendFile('./auth.html', {
 			root: __dirname
 		});
@@ -87,6 +88,7 @@ function sendData(state, code) {
 		const access = oauth2.accessToken.create(result);
 		const lila = new lichess().setPersonal(access.token.access_token);
 		const userInfo = await lila.profile.get();
+		new auth().verifyRes(state, userInfo);
 		res.status(200).json(userInfo);
 	});
 }

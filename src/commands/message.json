@@ -656,6 +656,17 @@
         }
     ],
     "Chess": [
+		{
+			"aliases": [
+				"verify",
+				"lichessverify"
+			],
+			"description": "Begins the process to use an OAuth2 grant to link the identity of a Discord profile with a Lichess profile",
+			"module": "Chess",
+			"file": "auth",
+			"method": "verifyReq",
+			"prefix": "generic"
+		},
         {
             "aliases": [
                 "puzzleadd"

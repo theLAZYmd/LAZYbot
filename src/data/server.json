@@ -48,7 +48,7 @@
             "unranked": "unranked",
             "league": "league",
             "trivia": "arena",
-            "beta": "verified",
+            "verified": "lichess-verified",
             "livenotifications": "subs"
         },
         "regions": [
