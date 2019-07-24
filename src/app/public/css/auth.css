@@ -27,6 +27,11 @@ hgroup h1 {
     font-size: 1.5em;
 }
 
+#profile_data {
+    text-align: left;
+    white-space: pre-wrap
+}
+
 .container {
     width: 500px;
     margin: 2em auto;

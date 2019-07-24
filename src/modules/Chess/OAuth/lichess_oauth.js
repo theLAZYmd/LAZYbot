@@ -4,7 +4,7 @@ const axios = require('axios');
 const path = require('path');
 const DataManager = require(path.join(__dirname, '..', '..', '..', 'util', 'datamanager'));
 const config = DataManager.getFile(path.join(__dirname, '..', '..', '..', 'config.json'));
-//const Token = DataManager.getFile('./token.json');
+const secret = DataManager.getFile(path.join(__dirname, '..', '..', '..', 'token.json'));
 
 /* Create your lichess OAuth app on https://lichess.org/account/oauth/app/create
  * Homepage URL: http://localhost:8087
@@ -12,10 +12,10 @@ const config = DataManager.getFile(path.join(__dirname, '..', '..', '..', 'confi
  */
 
 /* --- Fill in your app config here --- */
-const port = 3000;
+const port = 80;
 const clientId = config.ids.lichess;
-//const clientSecret = '';
-const redirectUri = 'http://localhost:3000/callback';
+const clientSecret = secret.lichess;
+const redirectUri = 'http://localhost:80/callback';
 // uncomment the scopes you need
 // list of scopes: https://lichess.org/api#section/Authentication
 const scopes = [
@@ -34,7 +34,7 @@ const tokenPath = '/oauth';
 const oauth2 = simpleOauth.create({
 	client: {
 		id: clientId,
-		// secret: clientSecret,
+		secret: clientSecret,
 	},
 	auth: {
 		tokenHost,
@@ -60,6 +60,7 @@ app.get('/auth', (req, res) => {
 // Redirect URI: parse the authorization token and ask for the access token
 app.get('/callback', async (req, res) => {
 	try {
+		console.log(oauth2);
 		const result = await oauth2.authorizationCode.getToken({
 			code: req.query.code,
 			redirect_uri: redirectUri

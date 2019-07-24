@@ -6,7 +6,7 @@ const authorizePath = '/oauth/authorize';
 const clientId = '1nNYMjg2i4DvLXPw';
 const redirectUri = 'http://localhost:80/callback';
 const scopes = [
-	'game:read',
+	//'game:read',
 	//'preference:read'
 	// 'preference:write',
 ];

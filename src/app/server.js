@@ -2,10 +2,14 @@
 
 const express = require('express');
 const path = require('path');
+const simpleOauth = require('simple-oauth2');
+const fs = require('fs');
+const lichess = require('lichess');
+
 const app = express();
 const DataManager = require('../util/datamanager');
-const fs = require('fs');
 const config = require('../config.json');
+const token = require('../token.json');
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -32,6 +36,22 @@ app.get('/logs/error.log', function (req, res) {
 	}
 });
 
+const tokenHost = 'https://oauth.lichess.org';
+const authorizePath = '/oauth/authorize';
+const tokenPath = '/oauth';
+const oauth2 = simpleOauth.create({
+	client: {
+		id: config.ids.lichess,
+		secret: token.lichess,
+	},
+	auth: {
+		tokenHost,
+		tokenPath,
+		authorizePath,
+	},
+});
+const redirectUri = 'http://localhost:80/callback';
+
 app.get('/auth', function (req, res) {
 	try {
 		const keys = DataManager.getFile('./src/modules/Chess/auth.json');
@@ -45,16 +65,31 @@ app.get('/auth', function (req, res) {
 	}
 });
 
-app.get('/callback', function (req, res) {
+app.get('/callback', async function (req, res) {
 	try {
+		await sendData(req.query.state, req.query.code);
 		res.status(200).sendFile('./callback.html', {
 			root: __dirname
 		});
-	} catch (e) {
-		if (typeof e === 'object') res.status(400).type('text/plain').send(e.message);
-		else res.status(404);
+	} catch(e) {
+		if (typeof e === 'object') res.status(500).type('text/plain').send(e.message);
+		else res.status(500).json('Authentication failed');
 	}
 });
+
+function sendData(state, code) {
+	app.get('/profile', async function (req, res) {
+		if (!req.query.state || req.query.state !== state) throw new Error('Invalid state.');
+		const result = await oauth2.authorizationCode.getToken({
+			code,
+			redirect_uri: redirectUri
+		});
+		const access = oauth2.accessToken.create(result);
+		const lila = new lichess().setPersonal(access.token.access_token);
+		const userInfo = await lila.profile.get();
+		res.status(200).json(userInfo);
+	});
+}
 
 app.get('/config.json', function (req, res) {
 	res.status(200).json({
@@ -66,10 +101,6 @@ app.get('/', function (req, res) {
 	res.status(200).sendFile('./index.html', {
 		root: __dirname
 	});
-});
-   
-app.get('/callback', function (req, res) {
-	res.status(200).send('good job.');
 });
 
 app.listen(80);

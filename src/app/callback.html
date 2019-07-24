@@ -9,9 +9,14 @@
 </head>
 
 <body>
+	<script src="scripts/callback.js" defer></script>
 	<hgroup>
 		<img src="https://lichess1.org/assets/favicon.svg" alt="lichess.org" class="logo" />
 		<h1>Successfully authorised! You can now close this tab.</h1>
+		<h2>Your data:</h2>
+		<div class="container">
+			<h5 id="profile_data"></h5>
+		</div>
 	</hgroup>
 	<footer>
 		Open Authorization using the <a href="https://lichess.org/api">Lichess API</a> through<br><a
