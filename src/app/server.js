@@ -1,4 +1,3 @@
-//https://discordapp.com/api/oauth2/authorize?client_id=602327372372377642&redirect_uri=ec2-3-8-123-0.eu-west-2.compute.amazonaws.com%3A80%2Fredirect&response_type=code&scope=identify
 //94.136.40.82
 
 const express = require('express');
@@ -6,6 +5,7 @@ const path = require('path');
 const app = express();
 const DataManager = require('../util/datamanager');
 const fs = require('fs');
+const config = require('../config.json');
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -54,6 +54,12 @@ app.get('/callback', function (req, res) {
 		if (typeof e === 'object') res.status(400).type('text/plain').send(e.message);
 		else res.status(404);
 	}
+});
+
+app.get('/config.json', function (req, res) {
+	res.status(200).json({
+		id: config.ids.lichess
+	});
 });
 
 app.get('/', function (req, res) {
