@@ -4,10 +4,13 @@
 const express = require('express');
 const path = require('path');
 const app = express();
+const DataManager = require('../util/datamanager');
 const fs = require('fs');
 
 app.use(express.static(path.join(__dirname, 'public')));
+
 app.use('/commands', express.static(path.join(__dirname, '..', 'commands')));
+
 app.get('/logs/debug.log', function (req, res) {
 	try {
 		let buffer = fs.readFileSync('./src/logs/debug.log', 'utf8');
@@ -17,6 +20,7 @@ app.get('/logs/debug.log', function (req, res) {
 		if (e) res.status(404).type('text/plain').send(e.message);
 	}
 });
+
 app.get('/logs/error.log', function (req, res) {
 	try {
 		if (req.params.name === 'data.log') throw new Error('Access denied');
@@ -27,10 +31,39 @@ app.get('/logs/error.log', function (req, res) {
 		if (e) res.status(404).type('text/plain').send(e.message);
 	}
 });
+
+app.get('/auth', function (req, res) {
+	try {
+		const keys = DataManager.getFile('./src/modules/Chess/auth.json');
+		//if (!req.query.id || !keys[req.query.id]) throw new Error('Invalid state.');
+		res.status(200).sendFile('./auth.html', {
+			root: __dirname
+		});
+	} catch (e) {
+		if (typeof e === 'object') res.status(400).type('text/plain').send(e.message);
+		else res.status(404);
+	}
+});
+
+app.get('/callback', function (req, res) {
+	try {
+		res.status(200).sendFile('./callback.html', {
+			root: __dirname
+		});
+	} catch (e) {
+		if (typeof e === 'object') res.status(400).type('text/plain').send(e.message);
+		else res.status(404);
+	}
+});
+
 app.get('/', function (req, res) {
-	res.sendFile('./index.html', {
+	res.status(200).sendFile('./index.html', {
 		root: __dirname
 	});
 });
    
+app.get('/callback', function (req, res) {
+	res.status(200).send('good job.');
+});
+
 app.listen(80);

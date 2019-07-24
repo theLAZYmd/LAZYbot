@@ -1,5 +1,5 @@
 const {		Builder, By, Key, until		} = require('selenium-webdriver');
-const chrome = require('chromedriver');
+require('chromedriver');
 const { lichess } = require('./config.json');
 var { username, password, subject, body, recipients } = lichess;
 let driver = new Builder().forBrowser('chrome').build();
