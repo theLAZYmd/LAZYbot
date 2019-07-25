@@ -1,5 +1,3 @@
-//94.136.40.82
-
 const express = require('express');
 const path = require('path');
 const simpleOauth = require('simple-oauth2');
@@ -11,6 +9,22 @@ const DataManager = require('../util/datamanager');
 const config = require('../config.json');
 const token = require('../token.json');
 const auth = require('../modules/Chess/auth');
+
+const tokenHost = 'https://oauth.lichess.org';
+const authorizePath = '/oauth/authorize';
+const tokenPath = '/oauth';
+const oauth2 = simpleOauth.create({
+	client: {
+		id: config.ids.lichess,
+		secret: token.lichess,
+	},
+	auth: {
+		tokenHost,
+		tokenPath,
+		authorizePath,
+	},
+});
+const redirectUri = 'http://localhost:80/callback';//'http://lazybot.co.uk/callback';
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -36,22 +50,6 @@ app.get('/logs/error.log', function (req, res) {
 		if (e) res.status(404).type('text/plain').send(e.message);
 	}
 });
-
-const tokenHost = 'https://oauth.lichess.org';
-const authorizePath = '/oauth/authorize';
-const tokenPath = '/oauth';
-const oauth2 = simpleOauth.create({
-	client: {
-		id: config.ids.lichess,
-		secret: token.lichess,
-	},
-	auth: {
-		tokenHost,
-		tokenPath,
-		authorizePath,
-	},
-});
-const redirectUri = 'http://lazybot.co.uk/callback';
 
 app.get('/auth', function (req, res) {
 	try {
@@ -88,7 +86,9 @@ function sendData(state, code) {
 		const access = oauth2.accessToken.create(result);
 		const lila = new lichess().setPersonal(access.token.access_token);
 		const userInfo = await lila.profile.get();
-		new auth().verifyRes(state, userInfo);
+		let keys = DataManager.getFile('./src/modules/Chess/auth.json');
+		keys[state].data = userInfo;
+		new auth().verifyRes(state, keys[state]);
 		res.status(200).json(userInfo);
 	});
 }

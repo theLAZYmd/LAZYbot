@@ -10,7 +10,7 @@ const scopes = [
 	//'preference:read'
 	// 'preference:write',
 ];
-const state = params.get('id') || Math.random().toString(36).substring(2);
+const state = params.get('state') || Math.random().toString(36).substring(2);
 const scopeString = scopes.join('%20');
 
 const authorizationUri = `${tokenHost}${authorizePath}?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopeString}&state=${state}`;

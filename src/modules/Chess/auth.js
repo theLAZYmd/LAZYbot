@@ -26,14 +26,14 @@ class Auth extends Parse {
 		this.Output.generic('DM-ed a link to verify with Lichess server!');
 		this.Output.sender(new Embed()
 			.setTitle(this.Search.emojis.get('lichess') + ' New Lichess Verification request')
-			.setDescription('[Verification Link](' + 'http://LAZYbot.co.uk/auth?state=' + state + ')')
+			.setDescription('[Verification Link](' + (this.isBetaBot() ? 'http://localhost:80/auth' : 'http://LAZYbot.co.uk/auth') + '?state=' + state + ')')
 		, user);
 	}
 
 	async verifyRes (state, data) {
 		this.guild = this.client.guilds.get(data.guild);
 		let user = this.Search.users.byID(data.id);
-		let dbuser = await this.Search.dbusers.fromUser(user);
+		let dbuser = await this.Search.dbusers.getUser(user);
 		if (!dbuser.lichess.verified) dbuser.lichess.verified = [];
 		dbuser.lichess.verified.push(data.data.username);
 		dbuser.setData();

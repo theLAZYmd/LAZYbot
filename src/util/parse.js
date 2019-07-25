@@ -41,7 +41,7 @@ class Parse {
 	get Output() {
 		if (!this._Output) {
 			let OutputConstructor = require('./output.js');
-			this._Output = new OutputConstructor(this.message);
+			this._Output = new OutputConstructor(this.message || this);
 		}
 		return this._Output;
 	}
@@ -54,7 +54,7 @@ class Parse {
 	get Paginator() {
 		if (!this._Paginator) {
 			let PaginatorConstructor = require('../modules/Utility/paginator');
-			this._Paginator = new PaginatorConstructor(this.message);
+			this._Paginator = new PaginatorConstructor(this.message || this);
 		}
 		return this._Paginator;
 	}
@@ -62,14 +62,14 @@ class Parse {
 	get Embeds() {
 		if (!this._Paginator) {
 			let EmbedsConstructor = require('../modules/Utility/embeds');
-			this._Embeds = new EmbedsConstructor(this.message);
+			this._Embeds = new EmbedsConstructor(this.message || this);
 		}
 		return this._Embeds;
 	}
 
 	get Search() {
 		let SearchConstructor = require('./search.js');
-		return new SearchConstructor(this.message);
+		return new SearchConstructor(this.message || this);
 	}
 
 	get Check() {
@@ -222,6 +222,12 @@ class Parse {
 	get embed() {
 		if (this._embed) return this._embed;
 		return this.message && this.message.embeds ? this.message.embeds[0] : null;
+	}
+
+	//USEFUL FUNCTIONS
+
+	isBetaBot() {
+		return this.client.user.id === config.ids.betabot;
 	}
 
 	static ratingData(dbuser, source, username) {
