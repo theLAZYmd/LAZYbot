@@ -24,7 +24,7 @@ const oauth2 = simpleOauth.create({
 		authorizePath,
 	},
 });
-const redirectUri = 'http://localhost:80/callback';//'http://lazybot.co.uk/callback';
+const redirectUri = 'http://lazybot.co.uk/callback';
 
 app.use(express.static(path.join(__dirname, 'public')));
 
