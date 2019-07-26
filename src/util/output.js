@@ -28,7 +28,7 @@ class Output extends Parse {
 			if (typeof embed._apiTransform === 'function') embed = embed._apiTransform();
 			return await channel.send(content, {embed});
 		} catch (e) {
-			if (e) this.onError(e);
+			if (e) Logger.error(e);
 		}
 	}
 
