@@ -132,11 +132,11 @@
                 "embed": "597367174683688960"
             }
         },
-        "teams": [
-            "natso",
-            "gsvc",
-            "ProgramFOX"
-        ]
+        "teams": {
+            "natso": "natso",
+            "gsvc": "gsvc",
+            "ProgramFOX": "Program"
+        }
     },
     "433936141989969931": {
         "_id": "433936141989969931",
