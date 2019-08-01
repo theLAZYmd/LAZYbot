@@ -17,6 +17,7 @@ class Auth extends Parse {
 	async verifyReq (user = this.user) {
 		let auth = DataManager.getFile(path.join(__dirname, 'auth.json'));
 		const state = Math.random().toString(36).substring(2);
+		this.argument = state;
 		auth[state] = {
 			guild: this.guild.id,
 			id: user.id,

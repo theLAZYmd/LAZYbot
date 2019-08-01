@@ -47,9 +47,9 @@
     },
     "lastUpdate": 1562372430192,
     "backupdb": [
-        "Tue Jul 09 2019 18:23:24 GMT+00",
-        "Tue Jul 09 2019 17:23:24 GMT+00",
-        "Tue Jul 09 2019 15:23:24 GMT+00"
+        "Thu Aug 01 2019 01:04:19 GMT+01",
+        "Thu Aug 01 2019 01:04:19 GMT+01",
+        "Thu Aug 01 2019 01:04:19 GMT+01"
     ],
     "delays": {
         "repeat": 1800000
@@ -213,8 +213,8 @@
                 "users": "https://lichess.org/api/users/",
                 "status": "https://lichess.org/api/users/status?ids=|",
                 "game": "https://lichess.org/api/game/|",
-				"puzzle": "https://lichess.org/training/|",
-				"auth": "http://LAZYbot.co.uk/auth",
+                "puzzle": "https://lichess.org/training/|",
+                "auth": "http://LAZYbot.co.uk/auth",
                 "redirect": "http://lazybot.co.uk/callback"
             }
         },

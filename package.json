@@ -33,6 +33,7 @@
         "lazy-aho-corasick": "^1.0.0",
         "lichess": "^1.0.18",
         "opusscript": "0.0.6",
+        "pug": "^2.0.4",
         "request": "^2.88.0",
         "request-promise": "^4.2.2",
         "simple-oauth2": "^2.2.1",
