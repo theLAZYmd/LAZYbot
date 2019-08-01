@@ -39,7 +39,7 @@ app.use('/commands', express.static(path.join(__dirname, '..', 'commands')));
 app.get('/logs/debug.log', function (req, res) {
 	try {
 		let buffer = fs.readFileSync('./src/logs/debug.log', 'utf8');
-		let str = buffer.toString().trim().split('\n').reverse().join('\n');
+		let str = buffer.toString().trim().split('\n').slice(-200).reverse().join('\n');
 		res.status(200).type('text/plain').send(str);
 	} catch (e) {
 		if (e) res.status(404).type('text/plain').send(e.message);
@@ -50,7 +50,7 @@ app.get('/logs/error.log', function (req, res) {
 	try {
 		if (req.params.name === 'data.log') throw new Error('Access denied');
 		let buffer = fs.readFileSync('./src/logs/error.log', 'utf8');
-		let str = buffer.toString().trim().split(/\n[^\s]/).reverse().join('\n');
+		let str = buffer.toString().trim().split(/\n[^\s]/).slice(-200).reverse().join('\n');
 		res.status(200).type('text/plain').send(str);
 	} catch (e) {
 		if (e) res.status(404).type('text/plain').send(e.message);
