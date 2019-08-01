@@ -1,39 +1,49 @@
 const express = require('express');
 const simpleOauth = require('simple-oauth2');
 const axios = require('axios');
-const DataManager = require("../../datamanager");
-const config = DataManager.getFile("./src/config.json");
-const Token = DataManager.getFile("./token.json");
+const path = require('path');
+const DataManager = require(path.join(__dirname, '..', '..', '..', 'util', 'datamanager'));
+const config = DataManager.getFile(path.join(__dirname, '..', '..', '..', 'config.json'));
+const secret = DataManager.getFile(path.join(__dirname, '..', '..', '..', 'token.json'));
 
+/* Create your lichess OAuth app on https://lichess.org/account/oauth/app/create
+ * Homepage URL: http://localhost:8087
+ * Callback URL: http://localhost:8087/callback
+ */
+
+/* --- Fill in your app config here --- */
+const port = 80;
 const clientId = config.ids.lichess;
-const clientSecret = Token.lichess;
-const redirectUri = config.sources.lichess.url.redirect;
-
+const clientSecret = secret.lichess;
+const redirectUri = 'http://localhost:80/callback';
+// uncomment the scopes you need
 // list of scopes: https://lichess.org/api#section/Authentication
 const scopes = [
-    // 'game:read',
-    'preference:read',
-    // 'preference:write',
+	// 'game:read',
+	// 'preference:read',
+	// 'preference:write',
 ];
+/* --- End of your app config --- */
 
+/* --- Lichess config --- */
 const tokenHost = 'https://oauth.lichess.org';
 const authorizePath = '/oauth/authorize';
 const tokenPath = '/oauth';
+/* --- End of lichess config --- */
 
 const oauth2 = simpleOauth.create({
-    "client": {
-        "id": clientId,
-        "secret": clientSecret,
-    },
-    "auth": {
-        tokenHost,
-        tokenPath,
-        authorizePath,
-    },
+	client: {
+		id: clientId,
+		secret: clientSecret,
+	},
+	auth: {
+		tokenHost,
+		tokenPath,
+		authorizePath,
+	},
 });
 
-//state is a key you generate which should be sent in the request and verified after to ensure that that request finished is the same as the one started
-const state = Math.random().toString(36).substring(2); 
+const state = Math.random().toString(36).substring(2);
 const authorizationUri = `${tokenHost}${authorizePath}?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join('%20')}&state=${state}`;
 
 const app = express();
@@ -43,35 +53,33 @@ app.get('/', (req, res) => res.send('Hello<br><a href="/auth">Log in with liches
 
 // Initial page redirecting to Lichess
 app.get('/auth', (req, res) => {
-    console.log(authorizationUri);
-    res.redirect(authorizationUri);
+	console.log(authorizationUri);
+	res.redirect(authorizationUri);
 });
 
 // Redirect URI: parse the authorization token and ask for the access token
 app.get('/callback', async (req, res) => {
-    try {
-        const result = await oauth2.authorizationCode.getToken({
-            "code": req.query.code,
-            "redirect_uri": redirectUri
-        });
-        console.log(result);
-        const token = oauth2.accessToken.create(result);
-        console.log(token);
-        const userInfo = await getUserInfo(token.token);
-        res.send(`<h1>Success!</h1>Your lichess user info: <pre>${JSON.stringify(userInfo.data)}</pre>`);
-    } catch (e) {
-        console.error('Access Token Error', e.message);
-        res.status(500).json('Authentication failed');
-    }
+	try {
+		console.log(oauth2);
+		const result = await oauth2.authorizationCode.getToken({
+			code: req.query.code,
+			redirect_uri: redirectUri
+		});
+		console.log(result);
+		const token = oauth2.accessToken.create(result);
+		const userInfo = await getUserInfo(token.token);
+		res.send(`<h1>Success!</h1>Your lichess user info: <pre>${JSON.stringify(userInfo.data)}</pre>`);
+	} catch(error) {
+		console.error('Access Token Error', error.message);
+		res.status(500).json('Authentication failed');
+	}
 });
 
-app.listen(3000, () => console.log('Express server started on port 3000'));
+app.listen(port, () => console.log(`Express server started on port ${port}`));
 
 function getUserInfo(token) {
-    return axios.get('/api/account', {
-        "baseURL": 'https://lichess.org/',
-        "headers": {
-            'Authorization': 'Bearer ' + token.access_token
-        }
-    });
+	return axios.get('/api/account', {
+		baseURL: 'https://lichess.org/',
+		headers: { Authorization: 'Bearer ' + token.access_token }
+	});
 }
