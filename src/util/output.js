@@ -4,6 +4,8 @@ const Parse = require('./parse');
 const Logger = require('./logger');
 const Package = require('../../package.json');
 
+const path = require('path');
+
 class Output extends Parse {
 
 	constructor(message) {
@@ -135,22 +137,28 @@ class Output extends Parse {
 	async onError(error, channel = this.channel) {
 		try {
 			if (!error) throw '';
-			this.error(error);
 			let title, description, url;
+			const regex = new RegExp(process.cwd().split(path.sep).join('\\\\'), 'g');
 			if (typeof error === 'object' && error.stack && error.name && error.message) {
-				let lines = error.stack.split('\n');
-				let [full, lineNumber, columnNumber] = lines[1].match(/([\w:()\\.]+):([0-9]+):([0-9]+)\)/).splice(1);
-				let path = full.split('\\');
-				let trace = path.splice(path.indexOf('LAZYbot') + 1);
-				url = Package.branch + trace.join('/') + '#L' + lineNumber;
+				const msg = error.stack.replace(regex, './');
+				const lines = error.stack.split('\n');
+				let res = lines.find(l => l.match(regex)).trim();
+				if (res) {
+					const [cwd] = regex.exec(res);
+					const i = res.indexOf(cwd) + cwd.length;
+					const extension = res.slice(i);
+					const [relativePath, lineNumber, columnNumber] = extension.split(':');
+					url = Package.branch + relativePath.split('\\').join('/') + '#L' + lineNumber;
+				}
 				title = error.name;
 				description = error.message.format();
 			} else description = error.toString();
 			let embed = new Embed()
 				.setDescription(description.replace(/\${([a-z]+)}/gi, value => this.server.prefixes[value.match(/[a-z]+/i)]))
 				.setColor(config.colors.error);
-			if (url) embed.setURL(url);
+			if (url && !url.includes('node_modules')) embed.setURL(url);
 			if (title) embed.setTitle(title);
+			Logger.error(error);
 			return await this.sender(embed, channel);
 		} catch (e) {
 			if (e) Logger.error(e);
