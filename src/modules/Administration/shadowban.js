@@ -31,7 +31,10 @@ class Shadowban extends Parse {
 		for (let k of ['usernames', 'newMessages']) {
 			for (let i = 0; i < shadowbanned[k].length; i++) {
 				let str = shadowbanned[k][i];
-				if (typeof str !== 'string') continue;
+				if (typeof str !== 'string') {
+					console.log(str, str.constructor.name);
+					continue;
+				};
 				let array = str.split('/');
 				let regexString = array.slice(1, -1).join('/');
 				shadowbanned[k][i] = new RegExp(regexString, array.pop());
