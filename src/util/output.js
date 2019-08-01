@@ -142,7 +142,7 @@ class Output extends Parse {
 			if (typeof error === 'object' && error.stack && error.name && error.message) {
 				const msg = error.stack.replace(regex, './');
 				const lines = error.stack.split('\n');
-				let res = lines.find(l => l.match(regex)).trim();
+				let res = lines.find(l => l.match(regex));
 				if (res) {
 					const [cwd] = regex.exec(res);
 					const i = res.indexOf(cwd) + cwd.length;
