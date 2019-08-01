@@ -47,7 +47,7 @@ class Profile extends Parse {
 		for (let property of properties) {
 			embed[property] = this[property];
 		}
-		return Embed.receiver(embed);
+		return new Embed(embed);
 	}
 
 	/**

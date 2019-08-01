@@ -19,12 +19,12 @@ class Output extends Parse {
 	 */
 	async sender(embed, channel = this.channel) {
 		try {
-			if (!embed) throw 'this.Output.sender(): Embed object is undefined.';
+			if (!embed) throw new SyntaxError('Cannot output undefined!');
 			if (!embed.color) embed.color = config.colors.generic;
-			if (!channel) throw [embed, channel];
+			if (!channel) throw new SyntaxError('Invalid channel!');
 			if (channel.channel || channel.constructor.name === 'Message') channel = channel.channel;
 			let content = embed.content;
-			embed = Embed.receiver(embed);
+			embed = new Embed(embed);
 			if (typeof embed._apiTransform === 'function') embed = embed._apiTransform();
 			return await channel.send(content, {embed});
 		} catch (e) {
@@ -45,7 +45,7 @@ class Output extends Parse {
 			if (!msg) throw 'this.Output.editor(): Couldn\'t find message to edit.';
 			if (!embed.color) embed.color = config.colors.generic;
 			let content = embed.content;
-			embed = Embed.receiver(embed);
+			embed = new Embed(embed);
 			if (typeof embed._apiTransform === 'function') embed = embed._apiTransform();
 			return await msg.edit(content, {embed});
 		} catch (e) {

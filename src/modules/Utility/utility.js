@@ -64,7 +64,7 @@ class Utility extends Parse { //fairly miscelanneous functions
 			if (!channel) throw 'No such channel!';
 			let msg = await this.Search.messages.get(args[0], true);
 			if (!msg) throw 'Unknown Message';
-			msg.embed = msg.embeds && msg.embeds[0] ? Embed.receiver(msg.embeds[0]) : null;
+			msg.embed = msg.embeds && msg.embeds[0] ? new Embed(msg.embeds[0]) : null;
 			return msg;
 		} catch (e) {
 			if (!e) return null;

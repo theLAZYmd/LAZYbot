@@ -5,6 +5,15 @@ class Embed extends RichEmbed {
 	constructor(data = {}) {
 		super(data);
 		this.content = data.content;
+		let misprop = ['image', 'thumbnail'];
+		for (let prop of misprop) {
+			if (typeof this[prop] === 'string') this[prop] = {url: this[prop]};
+		}
+		for (let field of this.fields || []) {
+			if (field.name === '') field.name = ' \u200b';
+			if (field.value === '') field.value = ' \u200b';
+			if (field.inline === undefined) field.inline = false;
+		}
 	}
 
 	/**
@@ -82,18 +91,6 @@ class Embed extends RichEmbed {
 		if (text) footer.text = text;
 		if (icon_url) footer.icon_url = icon_url;
 		return footer;
-	}
-
-	static receiver(embed) {
-		let misprop = ['image', 'thumbnail'];
-		for (let prop of misprop)
-			if (typeof embed[prop] === 'string') embed[prop] = {url: embed[prop]};
-		for (let field of embed.fields || []) {
-			if (field.name === '') field.name = ' \u200b';
-			if (field.value === '') field.value = ' \u200b';
-			if (field.inline === undefined) field.inline = false;
-		}
-		return new Embed(embed);
 	}
 
 }
