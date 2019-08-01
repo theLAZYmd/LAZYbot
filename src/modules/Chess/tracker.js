@@ -223,9 +223,10 @@ class Tracker extends Parse {
 					break;
 				default: {
 					if (!this.Permissions.role('admin', this)) throw this.Permissions.output('role');
-					let user = this.Search.users.get(this.argument);
 					username = this.args[0];
-					if (!user) throw new Error('Invalid user given **' + this.argument.slice(username.length) + '**');
+					let searchstring = this.argument.slice(username.length);
+					let user = this.Search.users.get(searchstring);
+					if (!user) throw new Error('Invalid user given ' + searchstring);
 					this.Search.dbusers.getUser(user);
 				}
 			}
@@ -395,12 +396,15 @@ class Tracker extends Parse {
 	 */
 	async remove(user = this.user) {
 		try {
+			//Permissions check for having a target user
 			if (this.argument) {
 				if (!this.Permissions.role('admin', this)) throw this.Permissions.output('role');
 				user = this.Search.users.get(this.argument);
-				if (!user) throw new Error('Couldn\'t find user **' + this.argument + '** in this server');
+				if (!user) throw new Error('Couldn\'t find user ' + this.argument + ' in this server');
 			}
-			let dbuser = this.Search.dbusers.getUser(user);
+
+			//Get the user and grab all their [source, accounts]
+			let dbuser = await this.Search.dbusers.getUser(user);
 			let accounts = [];
 			for (let s of Object.keys(config.sources)) {
 				if (!dbuser[s]) continue;
@@ -409,22 +413,29 @@ class Tracker extends Parse {
 					accounts.push([s, a]);
 				}
 			}
+
+			//Await their choice of account
 			let options = accounts.map(([source, username]) => this.Search.emojis.get(source) + ' ' + username);
 			let val = await this.Output.choose({
 				option: 'account to remove',
 				options
 			});
+			
+			//Delete that account
 			let [source, account] = accounts[val];
 			delete dbuser[source][account];
 			if (dbuser[source]._main === account) {
 				for (let prop of Object.keys(dbuser[source])) {
 					if (prop.startsWith('_')) {
 						delete dbuser[source][prop];
-					}
+					} else
+					if (!dbuser[source]._main) dbuser[source]._main = dbuser[source][prop];
 				}
 			}
-			dbuser.setData();
 			Commands.accounts.accounts.delete(account);
+
+			//Set data and output
+			dbuser.setData();
 			this.Output.sender(new Embed()
 				.setTitle(`Stopped tracking via ${this.prefix}remove command`)
 				.setDescription(`Unlinked **${options[val]}** from ${user.tag}`)
