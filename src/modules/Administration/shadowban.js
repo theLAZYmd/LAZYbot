@@ -28,10 +28,14 @@ class Shadowban extends Parse {
 			phrases: []
 		};
 		let shadowbanned = this.server.shadowbanned || def;
-		for (let k of ['usernames', 'newMessages']) shadowbanned[k] = shadowbanned[k].map((str) => {
-			let array = str.split('/');
-			return new RegExp(array.slice(1, -1).join('/'), array.pop());
-		});
+		for (let k of ['usernames', 'newMessages']) {
+			for (let i = 0; i < shadowbanned[k].length; i++) {
+				let str = shadowbanned[k][i];
+				let array = str.split('/');
+				let regexString = array.slice(1, -1).join('/');
+				shadowbanned[k][i] = new RegExp(regexString, array.pop());
+			}
+		}
 		return this._shadowbanned = shadowbanned;
 	}
 
