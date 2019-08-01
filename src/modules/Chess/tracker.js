@@ -141,9 +141,8 @@ class Track {
 	 */
 	assign(parsedData) {
 		this.setUsername(parsedData.username);
-		let account = this.dbuser[this.source.key] || {
-			_main: this.username
-		};
+		let account = this.dbuser[this.source.key] || {};
+		if (!account._main) account._main = this.username;
 		account[this.username] = Tracker.parseRatings(parsedData.ratings, this.source);
 		if (account._main === parsedData.username) { //if it's the main one
 			for (let prop of ['name', 'country', 'language', 'title', 'bio', 'language']) {
