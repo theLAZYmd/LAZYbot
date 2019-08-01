@@ -1,4 +1,5 @@
 const DataManager = require('./datamanager');
+const Logger = require('./logger');
 const All = DataManager.getFile('./src/commands/all.json');
 const Bot = DataManager.getFile('./src/commands/bot.json');
 const DM = DataManager.getFile('./src/commands/dm.json');
@@ -36,8 +37,10 @@ class Commands {
 		let Constructor = require('../' + path);
 		let method = Constructor.prototype[cmdInfo.method];
 		if (typeof method !== 'function') method = Object.getProp(Constructor.prototype, cmdInfo.method); // eval("Constructor.prototype." + cmdInfo.method);
-		if (typeof method !== 'function') console.error(path, cmdInfo.method);
-		if (typeof method !== 'function') return null;
+		if (typeof method !== 'function') {
+			Logger.error(path, cmdInfo.method);
+			return null;
+		}
 		return method;
 	}
 
