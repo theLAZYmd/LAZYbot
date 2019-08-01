@@ -12,6 +12,10 @@ class Output extends Parse {
 		super(message);
 	}
 
+	get errorURL () {
+		return this.isBetaBot() ? 'http://localhost:80/logs/error.log' : 'http://lazybot.co.uk/logs/error.log';
+	}
+
 	/**
 	 * Sends an embed through the Discord API
 	 * @param {Embed} embed 
@@ -155,8 +159,8 @@ class Output extends Parse {
 			} else description = error.toString();
 			let embed = new Embed()
 				.setDescription(description.replace(/\${([a-z]+)}/gi, value => this.server.prefixes[value.match(/[a-z]+/i)]))
-				.setColor(config.colors.error);
-			if (url && !url.includes('node_modules')) embed.setURL(url);
+				.setColor(config.colors.error)
+				.setURL(url && !url.includes('node_modules') ? url : this.errorURL);
 			if (title) embed.setTitle(title);
 			Logger.error(error);
 			return await this.sender(embed, channel);
