@@ -144,14 +144,13 @@ class Output extends Parse {
 			let title, description, url;
 			const regex = new RegExp(process.cwd().split(path.sep).join('\\\\'), 'g');
 			if (typeof error === 'object' && error.stack && error.name && error.message) {
-				const msg = error.stack.replace(regex, './');
 				const lines = error.stack.split('\n');
 				let res = lines.find(l => l.match(regex));
 				if (res) {
 					const [cwd] = regex.exec(res);
 					const i = res.indexOf(cwd) + cwd.length;
 					const extension = res.slice(i);
-					const [relativePath, lineNumber, columnNumber] = extension.split(':');
+					const [relativePath, lineNumber] = extension.split(':'); //[relativePath, lineNumber, columnNumber]
 					url = Package.branch + relativePath.split('\\').join('/') + '#L' + lineNumber;
 				}
 				title = error.name;

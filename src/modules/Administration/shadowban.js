@@ -32,9 +32,9 @@ class Shadowban extends Parse {
 			for (let i = 0; i < shadowbanned[k].length; i++) {
 				let str = shadowbanned[k][i];
 				if (typeof str !== 'string') {
-					console.log(str, str.constructor.name);
+					if (str.constructor.name !== 'RegExp') Logger.error('Data corruption in shadowban list: ' + JSON.stringify(shadowbanned[k]));
 					continue;
-				};
+				}
 				let array = str.split('/');
 				let regexString = array.slice(1, -1).join('/');
 				shadowbanned[k][i] = new RegExp(regexString, array.pop());
