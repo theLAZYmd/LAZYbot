@@ -213,6 +213,7 @@ class Tracker extends Parse {
 	 */
 	async run(command = this.command, dbuser = this.dbuser, username = '') {
 		try {
+			//Build command, dbuser, username
 			switch (this.args.length) {
 				case (0):
 					username = this.author.username;
@@ -223,7 +224,7 @@ class Tracker extends Parse {
 				default: {
 					if (!this.Permissions.role('admin', this)) throw this.Permissions.output('role');
 					username = this.args[0];
-					let searchstring = this.argument.slice(username.length);
+					let searchstring = this.argument.slice(username.length).trim();
 					let user = this.Search.users.get(searchstring);
 					if (!user) throw new Error('Invalid user given ' + searchstring);
 					this.Search.dbusers.getUser(user);
