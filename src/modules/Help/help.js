@@ -46,6 +46,11 @@ class Help extends Parse {
 		return 11126483;
 	}
 
+	/**
+	 * Returns the title of an embed
+	 * @name Embed#title
+	 * @type {string}
+	 */
 	get title() {
 		return '`' + this.cmdInfo.aliases.map(alias => /\s| /.test(alias) ? alias : this.prefix + alias).join(' `** / **` ') + '`';
 	}
@@ -104,7 +109,8 @@ class Help extends Parse {
 
 	get usage() {
 		let string = '';
-		for (let alias of this.cmdInfo.aliases.filter(alias => alias.split(/\s+/).length < 2)) {
+		for (let alias of this.cmdInfo.aliases) {
+			if (alias.split(/\s+/).length >= 2) continue;
 			string += '`' + this.prefix + alias + '`\n';
 		}
 		if (this.cmdInfo.subcommands) {
