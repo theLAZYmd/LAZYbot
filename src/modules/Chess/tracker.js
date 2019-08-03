@@ -214,6 +214,7 @@ class Tracker extends Parse {
 	async run(command = this.command, dbuser = this.dbuser, username = '') {
 		try {
 			//Build command, dbuser, username
+			await dbuser;
 			switch (this.args.length) {
 				case (0):
 					username = this.author.username;
@@ -250,26 +251,24 @@ class Tracker extends Parse {
 			if (this.argument) {
 				if (!this.Permissions.role('admin', this)) throw this.Permissions.output('role');
 				user = this.Search.users.get(this.argument);
-				if (!user) throw new Error('Couldn\'t find user **' + this.argument + '** in this server');
+				if (!user) throw new Error('Couldn\'t find user ' + this.argument + ' in this server');
 				dbuser = this.Search.dbusers.getUser(user);
 			}
 			if (this.user && dbuser.username !== this.user.tag) dbuser.username = user.tag;
 			let data = new Track(this, dbuser);
-			try {
-				if (data.sources.length === 0) throw `No linked accounts found.\nPlease link an account to your profile through \`${this.generic}lichess\`, \`${this.generic}chess.com\`, or \`${this.generic}bughousetest\`.`;
-				if (this.command) data.setMessage(await this.Output.generic('Updating user ' + dbuser.username + '...'));
-				for (let source of data.sources) {
-					data.setSource(source);
-					if (data.command) await data.edit();
-					for (let account of Object.keys(data.dbuser[source.key])) {
-						if (account.startsWith('_')) continue;
-						await sleep(1000);
-						await data.setUsername(account).getData();
-						data.setUsername();
-					}
+			if (data.sources.length === 0) throw `No linked accounts found.\nPlease link an account to your profile through \`${this.generic}lichess\`, \`${this.generic}chess.com\`, or \`${this.generic}bughousetest\`.`;
+			if (this.command) data.setMessage(await this.Output.generic('Updating user ' + dbuser.username + '...'));
+			for (let source of data.sources) {
+				data.setSource(source);
+				if (data.command) await data.edit();
+				for (let account of Object.keys(data.dbuser[source.key])) try {
+					if (account.startsWith('_')) continue;
+					await sleep(1000);
+					await data.setUsername(account).getData();
+					data.setUsername();
+				} catch (e) {
+					if (e) data.setError(e);
 				}
-			} catch (e) {
-				if (e) data.setError(e);
 			}
 			data.setData().log();
 			if (data.command) data.output();
