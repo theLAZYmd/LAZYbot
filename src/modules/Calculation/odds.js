@@ -4,13 +4,36 @@ const Logger = require('../../util/logger');
 const Maths = require('./maths');
 const Calc = require('./calc');
 
-class All extends Parse {
+class Odds extends Parse {
+
 	constructor(message) {
 		super(message);
 	}
+
+	get series() {
+		return new Series(this.message);
+	}
+
+	get match() {
+		return new Match(this.message);
+	}
+
+	get tournament() {
+		return new Tournament(this.message);
+	}
+
+	run(args) {
+		try {
+			if (this[args[0]]) return this[args[0]].input();
+			throw 'Invalid type of odds requested.';
+		} catch (e) {
+			if (e) this.Output.onError(e);
+		}
+	}
+
 }
 
-class Series extends All {
+class Series extends Odds {
 	constructor(message) {
 		super(message);
 	}
@@ -64,7 +87,7 @@ class Series extends All {
             *
             0.25); //now a number between 0 and 0.25
 		data.confidence = 0.45 + data.reliability + data.accuracy; //base value
-		Logger.command(['data.reliability: ' + data.reliability, 'data.accuracy:' + data.accuracy, 'data.confidence: ' + data.confidence]);
+		Logger.info(['data.reliability: ' + data.reliability, 'data.accuracy:' + data.accuracy, 'data.confidence: ' + data.confidence]);
 		for (let player of data.players) { //for each player
 			player.discrete = {
 				probability: [],
@@ -121,30 +144,27 @@ class Series extends All {
 
 }
 
-class Odds {
-
+class Match extends Odds {
 	constructor(message) {
-		this.message = message;
+		super(message);
 	}
 
-	get series() {
-		return new Series(this.message);
-	}
-
-	get match() {
-		return new Match(this.message);
-	}
-
-	get tournament() {
-		return new Tournament(this.message);
-	}
-
-	run(args) {
-		if (this[args[0]]) return this[args[0]].input();
-		this.Output.onError('Invalid type of odds requested.');
+	input () {		
+		throw 'This type of odds is not available yet!';
 	}
 
 }
+
+class Tournament extends Odds {
+	constructor(message) {
+		super(message);
+	}
+
+	input () {		
+		throw 'This type of odds is not available yet!';
+	}
+}
+
 
 module.exports = Odds;
 
