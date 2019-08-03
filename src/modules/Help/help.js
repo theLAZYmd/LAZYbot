@@ -4,6 +4,7 @@ const DataManager = require('../../util/datamanager');
 const Commands = require('../../util/commands');
 const { commands, aliases  } = Commands.message;
 const Package = DataManager.getFile('./package.json');
+const config = require('../../config.json');
 
 class Help extends Parse {
 	constructor(message) {
@@ -67,19 +68,24 @@ class Help extends Parse {
 		if (this.cmdInfo.syntax) fields.push(['Syntax', this.cmdInfo.syntax.join(' ').bold(), false].toField());
 		if (this.cmdInfo.subcommands) fields.push(['Subcommands', this.subcommands, false].toField());
 		fields.push(['Usage', this.usage, false].toField());
-		if (typeof this.cmdInfo.requires === 'string' && this.requires.trim()) fields.push(['Requirements', this.requires, false].toField());
+		if (typeof this.requires === 'string' && this.requires.trim()) fields.push(['Requirements', this.requires, false].toField());
 		return fields;
 	}
 
+	/**
+	 * Gets information about what a certain command 'requires' to run, such as number of arguments or permissions, and outputs it
+	 * @public
+	 */
 	get requires() {
 		if (this._requires) return this._requires;
+		if (!this.cmdInfo.requires) return this._requires = '';
 		let array = [];
-		for (let [type, _value] of Object.entries(this.cmdInfo.requires)) { //[channel: "spam"]
-			let value = !Array.isArray(_value) ? [_value] : _value; //if it's not array (i.e. multiple possible satisfactory conditions)
-			value = value.map((item) => {
-				let _item = this.map(type, item);
-				if (typeof _item === 'undefined') return _item; //if couldn't find lookup value, just use the given value
-				return _item;
+		for (let [type, value] of Object.entries(this.cmdInfo.requires)) {
+			value = !Array.isArray(value) ? [value] : value;
+			value = value.map((_item) => {
+				let item = this.map(type, _item);
+				if (typeof _item === 'undefined') return item; //if couldn't find lookup value, just use the given value
+				return item;
 			});
 			if (value.includes('undefined')) continue;
 			array.push([
@@ -87,8 +93,7 @@ class Help extends Parse {
 				value.join(' or ')
 			]);
 		}
-		this._requires = array.toPairs();
-		return this._requires;
+		return this._requires = array.toPairs();
 	}
 
 	/**
@@ -126,13 +131,18 @@ class Help extends Parse {
 		return string;
 	}
 
-	map(type, item) { //basically a custom map function customisable to the type
+	/**
+	 * A set of functions called depending on type
+	 * @param {key} type Key value of the requires object
+	 * @param {*} item Element of an array which made up the 'value' of a requires object
+	 */
+	map(type, item) {
 		let user, string = '';
 		switch (type) {
 			case 'house':
-				return '[House Discord Server](https://discord.gg/RhWgzcC) command only.';
+				return `[House Discord Server](${config.urls.house}) command only.`;
 			case 'user':
-				if (item === 'owner') return '**Bot owner only**. [Active developers](https://github.com/theLAZYmd/LAZYbot/graphs/contributors).';
+				if (item === 'owner') return `Bot owner only. [Active developers](${Package.contributors}).`;
 				user = this.Search.users.get(item);
 				if (user) return user;
 				return '';

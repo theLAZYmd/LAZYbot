@@ -55,6 +55,7 @@
         "repeat": 1800000
     },
     "urls": {
+		"house": "https://discord.gg/RhWgzcC",
         "embeds": "https://raw.githubusercontent.com/theLAZYmd/LAZYbot/embeds/src/data/embeds.json",
         "reddit": {
             "name": "/r/|",

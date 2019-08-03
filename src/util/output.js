@@ -161,6 +161,7 @@ class Output extends Parse {
 				.setColor(config.colors.error)
 				.setURL(url && !url.includes('node_modules') ? url : this.errorURL);
 			if (title) embed.setTitle(title);
+			if (!channel) throw error;
 			Logger.error(error);
 			return await this.sender(embed, channel);
 		} catch (e) {

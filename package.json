@@ -16,7 +16,8 @@
     ],
     "branch": "https://github.com/theLAZYmd/LAZYbot/blob/master",
     "homepage": "https://github.com/theLAZYmd/LAZYbot/blob/master/README.md",
-    "releases": "https://github.com/theLAZYmd/LAZYbot/releases",
+	"releases": "https://github.com/theLAZYmd/LAZYbot/releases",
+	"contributors": "https://github.com/theLAZYmd/LAZYbot/graphs/contributors",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/theLAZYmd/LAZYbot/.git"
