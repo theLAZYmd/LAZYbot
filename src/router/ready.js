@@ -124,7 +124,7 @@ class Ready {
 		for (let [_time, cmds] of Commands.interval) {
 			let time = Number(_time);
 			for (let cmdInfo of cmds) {
-				//if (config.ids.betabot === this.client.user.id) break;
+				if (config.ids.betabot === this.client.user.id) break;
 				if (cmdInfo.active === false) continue;
 				if (cmdInfo.once !== true) continue;
 				this.client.emit('interval', cmdInfo);
