@@ -12,7 +12,7 @@ const config = require('../config.json');
 const token = require('../token.json');
 const auth = require('../modules/Chess/auth');
 
-const betabot = true;
+const betabot = !__dirname.includes('ubuntu');
 const id = betabot ? config.ids.lichess_beta : config.ids.lichess;
 const secret = betabot ? token.lichess_beta : token.lichess;
 const redirectUri = betabot ? 'http://localhost:80/callback' : 'http://lazybot.co.uk/callback';
