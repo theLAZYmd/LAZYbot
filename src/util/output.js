@@ -35,6 +35,7 @@ class Output extends Parse {
 			return await channel.send(content, {embed});
 		} catch (e) {
 			if (e) Logger.error(e);
+			throw e;
 		}
 	}
 
