@@ -37,8 +37,8 @@ class Auth extends Parse {
 		this.channel = this.Search.channels.byID(data.channel);
 		this.user = this.Search.users.byID(data.id);
 		let dbuser = await this.Search.dbusers.getUser(this.user);
-		if (!dbuser.lichess.verified) dbuser.lichess.verified = {};
-		dbuser.lichess.verified[data.data.username] = Date.now();
+		if (!dbuser.lichess._verified) dbuser.lichess._verified = {};
+		dbuser.lichess._verified[data.data.username] = Date.now();
 		dbuser.setData();
 		if (this.server.roles && this.server.roles.verified) {
 			let member = this.Search.members.byUser(this.user);
