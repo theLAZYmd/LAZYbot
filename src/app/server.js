@@ -96,9 +96,8 @@ app.get('/callback', async function (req, res) {
 });
 
 function sendData(state, result) {
-	app.get('/profile', async function (req, res) {
+	app.get('/profile/' + state, async function (req, res) {
 		try {
-			if (!req.query.state || req.query.state !== state) throw new Error('Invalid state.');
 			const access = oauth2.accessToken.create(result);
 			const lila = new lichess().setPersonal(access.token.access_token);
 			const userInfo = await lila.profile.get();
@@ -109,13 +108,24 @@ function sendData(state, result) {
 			}
 			res.status(200).json(userInfo);
 		} catch (e) {
-			if (e) res.json({
+			if (e) res.status(400).json({
 				message: e.message,
 				stack: e.stack.replace(new RegExp(process.cwd().split(path.sep).join('\\\\'), 'g'), '.')
 			});
 		}
 	});
 }
+
+app.get('/profile', function (req, res) {
+	try {
+		throw new Error('Invalid state');
+	} catch (e) {
+		if (e) res.status(400).json({
+			message: 'Invalid state.',
+			stack: e.stack.replace(new RegExp(process.cwd().split(path.sep).join('\\\\'), 'g'), '.')
+		});
+	}
+});
 
 app.get('/config.json', function (req, res) {
 	res.status(200).json({
