@@ -13,7 +13,7 @@ class Message extends Search {
      * @param {boolean} exactmode 
 	 * @public
      */
-	get(searchstring, fetch = false, exactmode) {
+	get(searchstring, fetch = false, exactmode = false) {
 		if (typeof searchstring !== 'string') return null;
 		if (searchstring.length < 2) return null;
 		let message;
@@ -44,7 +44,7 @@ class Message extends Search {
 	byID(snowflake, fetch = false) {
 		let id = snowflake.match(/[0-9]{18}/);
 		if (!id) return null;
-		return fetch ? this.channel.fetchMessage(id) : this.channel.find(message => id[0] === message.id);
+		return fetch ? this.channel.fetchMessage(id[0]) : this.channel.find(message => id[0] === message.id);
 	}
 
 	/**

@@ -58,10 +58,15 @@ class Utility extends Parse { //fairly miscelanneous functions
 		}
 	}
 
-	async find(args) { //function needs a channel input
+	/**
+	 * Parses a message from a user to find or 'edit' something and returns a 'target' message
+	 * @param {string[]} args 
+	 */
+	async find(args = this.args) {
 		try {
 			let channel = args[1] ? this.Search.channels.get(args[1]) : this.channel;
 			if (!channel) throw 'No such channel!';
+			this.message.channel = channel;			//We set through the initialising message nowadays, rather than the setter since the setter is not preserved
 			let msg = await this.Search.messages.get(args[0], true);
 			if (!msg) throw 'Unknown Message';
 			msg.embed = msg.embeds && msg.embeds[0] ? new Embed(msg.embeds[0]) : null;
