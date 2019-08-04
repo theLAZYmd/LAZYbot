@@ -6,8 +6,7 @@ const Embed = require('../../util/embed');
 const regexes = {
 	hex: /(?:0x|#)?([0-9a-f]{1,6})/,
 	rgb: /([0-9]{1,3})\s?,([0-9]{1,3})\s?,([0-9]{1,3})/
-
-}
+};
 
 class Color extends Parse {
 
