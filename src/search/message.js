@@ -3,6 +3,7 @@ const Search = require('../util/search');
 class Message extends Search {
 	constructor(message) {
 		super(message);
+		if (this.searchChannel) this.channel = this.searchChannel;
 	}
 
 	/**

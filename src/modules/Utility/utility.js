@@ -66,7 +66,7 @@ class Utility extends Parse { //fairly miscelanneous functions
 		try {
 			let channel = args[1] ? this.Search.channels.get(args[1]) : this.channel;
 			if (!channel) throw 'No such channel!';
-			this.message.channel = channel;			//We set through the initialising message nowadays, rather than the setter since the setter is not preserved
+			this.message.searchChannel = channel;			//We set through the initialising message nowadays, rather than the setter since the setter is not preserved
 			let msg = await this.Search.messages.get(args[0], true);
 			if (!msg) throw 'Unknown Message';
 			msg.embed = msg.embeds && msg.embeds[0] ? new Embed(msg.embeds[0]) : null;
@@ -74,7 +74,7 @@ class Utility extends Parse { //fairly miscelanneous functions
 		} catch (e) {
 			if (!e) return null;
 			if (typeof e === 'string') throw e;
-			let string = '**Fetch Error:** ';
+			let string = 'Fetch Error: ';
 			if (e.message ==='Unknown Message') throw string += 'Couldn\'t find message, check ID and channel is correct.';
 			if (e.message === 'Missing Access') throw string += 'Bot doesn\'t have access to channel.';
 			if (e.message.startsWith('Invalid Form Body')) throw string += 'Couldn\'t recognise ' + args[0] + ' as a valid message ID';

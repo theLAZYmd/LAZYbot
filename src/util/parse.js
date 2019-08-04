@@ -136,6 +136,16 @@ class Parse {
 		this._channel = channel;
 	}
 
+	get searchChannel() {
+		if (this._searchChannel) return this._searchChannel;
+		return this._searchChannel = typeof this.message !== 'undefined' ? this.message.searchChannel : null;
+	}
+	
+	set searchChannel(channel) {
+		if (!/(?:Category|DM|Guild|News|Text|Voice)Channel/.test(channel.constructor.name)) throw new TypeError(channel.constructor.name);
+		this._searchChannel = channel;
+	}
+
 	get member() {
 		if (this._member) return this._member;
 		return this._member = this.message ? this.message.member : null;
