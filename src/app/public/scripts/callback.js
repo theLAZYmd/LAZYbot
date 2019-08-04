@@ -14,6 +14,7 @@ loadJSON('/profile?state=' + params.get('state'))
 	.catch(console.error);
 
 function loadJSON(file) {
+	//eslint-disable-next-line no-unused-vars
 	return new Promise((res, rej) => {
 		var xobj = new XMLHttpRequest();
 		xobj.open('GET', file, true);
@@ -25,6 +26,7 @@ function loadJSON(file) {
 	});
 }
 
+//eslint-disable-next-line no-unused-vars
 function loadJSONsync(file, callback) {
 	var xobj = new XMLHttpRequest();
 	xobj.setRequestHeader('Cache-Control', 'no-cache, must-revalidate, post-check=0, pre-check=0');

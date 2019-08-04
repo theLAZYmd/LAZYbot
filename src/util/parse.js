@@ -41,7 +41,7 @@ class Parse {
 	get Output() {
 		if (!this._Output) {
 			let OutputConstructor = require('./output.js');
-			this._Output = new OutputConstructor(this.message || this);
+			this._Output = new OutputConstructor(this);
 		}
 		return this._Output;
 	}
@@ -54,7 +54,7 @@ class Parse {
 	get Paginator() {
 		if (!this._Paginator) {
 			let PaginatorConstructor = require('../modules/Utility/paginator');
-			this._Paginator = new PaginatorConstructor(this.message || this);
+			this._Paginator = new PaginatorConstructor(this);
 		}
 		return this._Paginator;
 	}
@@ -62,20 +62,20 @@ class Parse {
 	get Embeds() {
 		if (!this._Paginator) {
 			let EmbedsConstructor = require('../modules/Utility/embeds');
-			this._Embeds = new EmbedsConstructor(this.message || this);
+			this._Embeds = new EmbedsConstructor(this);
 		}
 		return this._Embeds;
 	}
 
 	get Search() {
 		let SearchConstructor = require('./search.js');
-		return new SearchConstructor(this.message || this);
+		return new SearchConstructor(this);
 	}
 
 	get Check() {
 		if (!this._Check) {
 			let CheckConstructor = require('./check.js');
-			return this._Check = new CheckConstructor(this.message);
+			return this._Check = new CheckConstructor(this);
 		}
 		return this._Check;
 	}
@@ -99,14 +99,13 @@ class Parse {
 
 	get guild() {
 		if (this._guild) return this._guild;
-		if (!this._guild && this.member) this._guild = this.member.guild;
-		if (!this._guild && this.message) this._guild = this.message.guild || this.message._guild;
+		if (this.member) this._guild = this.member.guild;
+		else if (this.message) this._guild = this.message.guild || this.message._guild;
 		return this._guild || null;
 	}
 
 	set guild(value) {
 		this._guild = value;
-		this.message.guild = value;
 	}
 
 	//Message properties
@@ -135,7 +134,6 @@ class Parse {
 	set channel(channel) {
 		if (!/(?:Category|DM|Guild|News|Text|Voice)Channel/.test(channel.constructor.name)) throw new TypeError(channel.constructor.name);
 		this._channel = channel;
-		this.message.channel = channel;
 	}
 
 	get searchChannel() {
@@ -146,7 +144,6 @@ class Parse {
 	set searchChannel(channel) {
 		if (!/(?:Category|DM|Guild|News|Text|Voice)Channel/.test(channel.constructor.name)) throw new TypeError(channel.constructor.name);
 		this._searchChannel = channel;
-		this.message.searchChannel = channel;
 	}
 
 	get member() {
@@ -165,7 +162,6 @@ class Parse {
 
 	set user(user) {
 		this._user = user;
-		this.message.user = user;
 	}
 
 	/**
