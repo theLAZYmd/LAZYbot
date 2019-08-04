@@ -139,10 +139,10 @@ class Trivia extends Parse {
 	 * @param {string} tag 
 	 * @param {number} score 
 	 */
-	nameToTriviaData(tag, score) {
+	async nameToTriviaData(tag, score) {
 		let user = this.Search.users.byTag(tag.replace(/\*/g, '')); //byTag filters out the **
 		if (!user) return null;
-		let dbuser = this.Search.dbusers.getUser(user);
+		let dbuser = await this.Search.dbusers.getUser(user);
 		if (!dbuser.trivia) dbuser.trivia = {
 			rating: 1500,
 			games: 0
@@ -161,7 +161,7 @@ class Trivia extends Parse {
 			const lines = embed.description.split('\n');
 			let scored = lines
 				.map(line => /\*\*([\S \t^@#:`]{2,32}#\d{4})\*\* has( \d{1,3}) points?/.test(line) ? line.match(/\*\*([\S \t^@#:`]{2,32}#\d{4})\*\* has( \d{1,3}) points?/).slice(1) : [''])
-				.map(arr => this.nameToTriviaData(...arr));
+				.map(async arr => await this.nameToTriviaData(...arr));
 			let players = this.players;
 			scored = scored.filter((d) => {
 				if (!d) return false;											//Users who left the server halfway through the trivia match
@@ -169,7 +169,7 @@ class Trivia extends Parse {
 				players[d[0].username] = false;									//Only people not scored but playing are left
 				return true;
 			});
-			let unscored = Object.entries(players)
+			let unscored = Object.entries(players)								//Players who got 0
 				.filter(([, unranked]) => unranked)
 				.map(([name]) => this.nameToTriviaData(name, 0));
 			let data = scored.concat(unscored);
@@ -177,7 +177,7 @@ class Trivia extends Parse {
 			try {
 				if (data.length === 0) throw '';
 				let [totalEstimate, totalScore] = data.reduce(([e, s], [, estimate, score]) => [e + estimate, s + score], [0, 0]);
-				if (totalScore < this.server.trivia.min) throw `Only ${this.server.trivia.min}+ point games are rated.\nActive players: ${data.map(([dbuser]) => dbuser.username).join(', ')}`;
+				if (data[0][2] < this.server.trivia.min) throw `Only ${this.server.trivia.min}+ point games are rated.\nActive players: ${data.map(([dbuser]) => dbuser.username).join(', ')}`;
 				if (data.length < 2) throw 'Only games with 2+ players are rated.\nActive players: ' + data.map(([dbuser]) => dbuser.username).join(', ');
 				for (let [dbuser, estimate, score] of data) {
 					let shareEstimate = (estimate / totalEstimate) * totalScore;
