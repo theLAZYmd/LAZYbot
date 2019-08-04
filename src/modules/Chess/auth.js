@@ -25,11 +25,13 @@ class Auth extends Parse {
 			channel: this.channel.id
 		};
 		DataManager.setFile(auth, path.join(__dirname, 'auth.json'));
-		this.Output.generic('DM-ed a link to verify with Lichess server!');
+		
 		this.Output.sender(new Embed()
 			.setTitle(this.Search.emojis.get('lichess') + ' New Lichess Verification request')
 			.setDescription('[Verification Link](' + (this.isBetaBot() ? 'http://localhost:80/auth' : 'http://LAZYbot.co.uk/auth') + '?state=' + state + ')')
-		, user);
+		, user)
+			.then(() => this.Output.generic('DM-ed a link to verify with Lichess server!'))
+			.catch(this.Output.onError);
 	}
 
 	async verifyRes (state, data) {
