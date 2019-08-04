@@ -6,8 +6,7 @@ const Embed = require('../../util/embed');
 const regexes = {
 	hex: /(?:0x|#)?([0-9a-f]{1,6})/,
 	rgb: /([0-9]{1,3})\s?,([0-9]{1,3})\s?,([0-9]{1,3})/
-
-}
+};
 
 class Color extends Parse {
 
@@ -68,7 +67,7 @@ class Color extends Parse {
 			let color, type;
 			const parser = {
 				hex: () => argument.match(regexes.hex),
-				decimal: () => parseInt(argument, 16).match(regexes.hex),
+				decimal: () => !isNaN(parseInt(argument, 16)) ? parseInt(argument, 16).match(regexes.hex) : null,
 				rgb: () => argument.match(regexes.rgb),
 			};
 			const mapper = {
