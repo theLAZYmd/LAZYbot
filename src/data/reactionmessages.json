@@ -12451,6 +12451,45 @@
                 "page": 0,
                 "author": "515524778530963473",
                 "cmdID": "597368744687304704"
+            },
+            "607232019977732136": {
+                "embedgroup": [
+                    {
+                        "title": "Profile for  SamCopeland#7606",
+                        "description": "",
+                        "color": 3447003,
+                        "fields": [
+                            {
+                                "name": "Info",
+                                "value": "Region: **Americas**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Jul 19 2017**\nThe House: **Feb 21 2018**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`337255531045453824`**\nPosition in Database: **243**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "16",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/337255531045453824/dc0b2e5e44ca142f1eec0c07fab5dd84.png?size=2048"
+                        },
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "525711939171778570",
+                "cmdID": "607232018413256707"
             }
         },
         "election": {

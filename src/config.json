@@ -47,15 +47,15 @@
     },
     "lastUpdate": 1562372430192,
     "backupdb": [
-        "Thu Aug 01 2019 01:04:19 GMT+01",
-        "Thu Aug 01 2019 01:04:19 GMT+01",
-        "Thu Aug 01 2019 01:04:19 GMT+01"
+        "Sun Aug 04 2019 16:51:10 GMT+00",
+        "Sun Aug 04 2019 16:51:10 GMT+00",
+        "Sun Aug 04 2019 14:51:10 GMT+00"
     ],
     "delays": {
         "repeat": 1800000
     },
     "urls": {
-		"house": "https://discord.gg/RhWgzcC",
+        "house": "https://discord.gg/RhWgzcC",
         "embeds": "https://raw.githubusercontent.com/theLAZYmd/LAZYbot/embeds/src/data/embeds.json",
         "reddit": {
             "name": "/r/|",
