@@ -37,6 +37,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/commands', express.static(path.join(__dirname, '..', 'commands')));
 
+app.use('/config', (req, res) => res.json({
+	id,
+	redirectUri,
+	betabot
+}));
+
 app.get('/logs/debug.log', function (req, res) {
 	try {
 		let buffer = fs.readFileSync('./src/logs/debug.log', 'utf8');

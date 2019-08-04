@@ -142,7 +142,7 @@ class Help extends Parse {
 			case 'house':
 				return `[House Discord Server](${config.urls.house}) command only.`;
 			case 'user':
-				if (item === 'owner') return `Bot owner only. [Active developers](${Package.contributors}).`;
+				if (item === 'owner') return `Bot owner only. [Active developers](${Package.contributors_page}).`;
 				user = this.Search.users.get(item);
 				if (user) return user;
 				return '';
