@@ -10,10 +10,10 @@ loadJSON('/profile?state=' + params.get('state'))
 		let [key, id] = data.shift();
 		let thead = document.createElement('thead');
 		let col1 = document.createElement('th');
-		col1.innerHTML = key;
+		col1.innerHTML = key.toUpperCase();
 		col1.scope = 'col';
 		let col2 = document.createElement('th');
-		col2.innerHTML = id.toUpperCase();
+		col2.innerHTML = id;
 		col2.scope = 'col';
 		let row = thead.insertRow();
 		row.appendChild(col1);
@@ -60,7 +60,7 @@ function loadJSONsync(file, callback) {
 }
 
 function toProperCase (string) {
-	let words = string.split(/ +/g);
+	let words = string.replace(/[A-Z]/, (letter) => ' ' + letter).split(/ +/g);
 	let newArray = [];
 	for (let i = 0; i < words.length; i++) {
 		newArray[i] = words[i][0].toUpperCase() + words[i].slice(1, words[i].length).toLowerCase();
