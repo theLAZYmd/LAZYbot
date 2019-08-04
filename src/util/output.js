@@ -113,7 +113,26 @@ class Output extends Parse {
 	 */
 	async data(json, channel, type = 'json') {
 		try {
-			let string = (typeof json === 'object' ? JSON.stringify((typeof json._apiTransform === 'function' ? json._apiTransform() : json), null, 2) : json.toString()).replace(/`/g, '\\`');
+			let string, obj;
+			switch (typeof json) {
+				case ('object'):
+					if (typeof json._apiTransform === 'function') obj = json._apiTransform();
+					else obj = json;
+					try {
+						string = JSON.stringify(obj, null, 4);
+					} catch (e) {
+						if (e) {
+							if (e.message.includes('circular')) {
+								Logger.error(e);
+								string = '[circular Object]';
+							} else this.Output.onError(e);
+						}
+					}
+					break;
+				default:
+					string = json.toString().replace(/`/g, '\\`');
+					break;
+			}
 			let index = Math.ceil(string.length / 2000);
 			let keylength = Math.floor(string.length / index);
 			for (let i = 0; i < index; i++) {

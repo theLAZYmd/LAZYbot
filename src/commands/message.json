@@ -2048,6 +2048,26 @@
     "Utility": [
 		{
 			"aliases": [
+				"whatis",
+				"data"
+			],
+			"description": "Outputs data at a specified path on the 'this' tree, for debugging use",
+			"module": "Utility",
+			"file": "utility",
+			"method": "data",
+			"prefix": "generic",
+			"usage": [
+				"data this.server",
+				"data this.member.displayColor",
+				"data this.channel.name"
+			],
+			"requires": {
+				"args": [1],
+				"role": "admin"
+			}
+		},
+		{
+			"aliases": [
                 "teamadd"
             ],
             "description": "Registers a new 'team' in a server",
