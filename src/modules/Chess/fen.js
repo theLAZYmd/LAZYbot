@@ -6,9 +6,12 @@ const qs = require('querystring');
 
 class FEN extends Parse {
 
+	/**
+	 * String used to compile (lazy-load) a regex
+	 */
 	static get regexString () {
-		return '((?:(?:[pnbrqkPNBRQK1-8]{1,8})\\/?){8})' + //Piece Placement: any of those characters, allow 1 to 8 of each, folloed by a slash, all that repeated 8 times. Standard chess FEN produced. Slash is optional (0 or 1). 
-            '((?:[pnbrqkPNBRQK]{1,16})\\/?)?' + //Second group: crazyhouse additional inhand pieces, if they exist.
+		return '((?:(?:[pnbrqkPNBRQK~1-8]{1,8})\\/?){8})' + //Piece Placement: any of those characters, allow 1 to 8 of each, folloed by a slash, all that repeated 8 times. Standard chess FEN produced. Slash is optional (0 or 1). 
+            '((?:[pnbrqkPNBRQK]{1,31})\\/?)?' + //Second group: crazyhouse additional inhand pieces, if they exist.
             '\\s+' + //white space
             '(b|w)' + //Side to Move
             '\\s+' + //white space
@@ -25,13 +28,12 @@ class FEN extends Parse {
 
 	static get regex () {
 		if (FEN._regex) return FEN._regex;
-		//const regex = /((?:(?:[pnbrqkPNBRQK1-8]{1,31})\/?){8})\s?((?:[pnbrqkPNBRQK]{1,16})\/?)?\s+(b|w)\s+(-|K?Q?k?q?)\s+(-|[a-h][3-6])\s+(\d+)\s+(\d+)\s*(\+[0-3]\+[0-3])?/; //for syntax highlighting + copy/paste to debugger
 		return FEN._regex = new RegExp(FEN.regexString);
 	}
 
 	constructor(message, argument) {
 		super(message);
-		this.a = argument || this.argument;
+		if (argument) this.argument = argument;
 	}
 
 	async run() {
@@ -50,7 +52,7 @@ class FEN extends Parse {
 
 	get fenArray() {
 		if (this._fenArray) return this._fenArray;
-		let fenArray = this.a.match(FEN.regex);
+		let fenArray = this.argument.match(FEN.regex);
 		return this._fenArray = fenArray || []; //returns matches witch capture groups [full string, ...each () match group]
 	}
 
@@ -67,7 +69,7 @@ class FEN extends Parse {
 	}
 
 	get positionfen() {
-		return this.positionfenArray.join(' ');
+		return this.positionfenArray.join(' ').replace(/~/, '');
 	}
     
 	get colour () {
@@ -128,7 +130,7 @@ class FEN extends Parse {
 	}
 
 	get hint() {
-		return this.a.replace(this.fen, '').replace(this.puzzleURL || '', '').trim() + (this.lastMove ? '\n' + this.lastMove : '');
+		return this.argument.replace(this.fen, '').replace(this.puzzleURL || '', '').trim() + (this.lastMove ? '\n' + this.lastMove : '');
 	}
     
 	get lastMove() {
@@ -153,7 +155,7 @@ class FEN extends Parse {
 			if (!s.url || !s.url.puzzle) continue;
 			let u = s.url.puzzle.replace(/\//g, '\\/').replace('|', '([0-9]+)');
 			let regex = new RegExp(u);
-			if (regex.test(this.a)) return this.a.match(regex)[0];
+			if (regex.test(this.argument)) return this.argument.match(regex)[0];
 		}
 		return null;
 	}

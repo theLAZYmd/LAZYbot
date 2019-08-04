@@ -516,7 +516,7 @@
             "arguments": [
                 "args"
             ],
-            "prefix": "nadeko",
+            "prefix": "generic",
             "requires": {
                 "args": {
                     "length": 1
@@ -538,7 +538,7 @@
             "arguments": [
                 "args"
             ],
-            "prefix": "nadeko",
+            "prefix": "generic",
             "requires": {
                 "args": {
                     "length": 1
@@ -561,7 +561,7 @@
             "arguments": [
                 "args"
             ],
-            "prefix": "nadeko",
+            "prefix": "generic",
             "requires": {
                 "args": {
                     "length": 3
@@ -2048,6 +2048,26 @@
     "Utility": [
 		{
 			"aliases": [
+				"whatis",
+				"data"
+			],
+			"description": "Outputs data at a specified path on the 'this' tree, for debugging use",
+			"module": "Utility",
+			"file": "utility",
+			"method": "data",
+			"prefix": "generic",
+			"usage": [
+				"data this.server",
+				"data this.member.displayColor",
+				"data this.channel.name"
+			],
+			"requires": {
+				"args": [1],
+				"role": "admin"
+			}
+		},
+		{
+			"aliases": [
                 "teamadd"
             ],
             "description": "Registers a new 'team' in a server",
@@ -2186,7 +2206,7 @@
             "arguments": [
                 "args"
             ],
-            "prefix": "nadeko",
+            "prefix": "generic",
             "requires": {
                 "house": true
             },
@@ -2205,7 +2225,7 @@
             "module": "Utility",
             "file": "states",
             "method": "bcp",
-            "prefix": "nadeko",
+            "prefix": "generic",
             "requires": {
                 "house": true
             }

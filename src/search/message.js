@@ -3,6 +3,7 @@ const Search = require('../util/search');
 class Message extends Search {
 	constructor(message) {
 		super(message);
+		if (this.searchChannel) this.channel = this.searchChannel;
 	}
 
 	/**
@@ -13,21 +14,21 @@ class Message extends Search {
      * @param {boolean} exactmode 
 	 * @public
      */
-	get(searchstring, fetch = false, exactmode) {
+	get(searchstring, fetch = false, exactmode = false) {
 		if (typeof searchstring !== 'string') return null;
 		if (searchstring.length < 2) return null;
 		let message;
 		const getters = [
-			() => message = this.byID(searchstring, fetch),
-			() => message = this.byContent(searchstring, fetch, exactmode),
-			() => message = this.byUserResolvable(searchstring, fetch, exactmode).first()
+			() => this.byID(searchstring, fetch),
+			() => this.byContent(searchstring, fetch, exactmode),
+			() => this.byUserResolvable(searchstring, fetch, exactmode).first()
 		];
 		if (!fetch) {
 			while (!message && getters[0]) getters.shift().call(this);
 			return message;
 		} else return new Promise(async (res, rej) => {
 			try {
-				while (!message && getters[0]) await getters.shift().call(this);
+				while (!message && getters[0]) message = await getters.shift().call(this);
 				res(message);
 			} catch (e) {
 				rej(e);
@@ -44,7 +45,7 @@ class Message extends Search {
 	byID(snowflake, fetch = false) {
 		let id = snowflake.match(/[0-9]{18}/);
 		if (!id) return null;
-		return fetch ? this.channel.fetchMessage(id) : this.channel.find(message => id[0] === message.id);
+		return fetch ? this.channel.fetchMessage(id[0]) : this.channel.find(message => id[0] === message.id);
 	}
 
 	/**

@@ -27,7 +27,8 @@
 		"method": "link",
 		"arguments": [
 			"content"
-		]
+		],
+		"active": false
 	},
 	{
 		"module": "Trivia",

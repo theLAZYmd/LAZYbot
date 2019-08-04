@@ -44,8 +44,7 @@ class Reddit extends Parse {
 		try {
 			if (!content || !regexes.reddit.test(content)) throw '';
 			let arr = await Reddit.stringToLinks(content);
-			this.Output.generic(arr.join('\n'));
-			return arr;
+			if (arr.length) this.Output.generic(arr.join('\n'));
 		} catch (e) {
 			if (e) this.Output.onError(e);
 		}
@@ -58,7 +57,7 @@ class Reddit extends Parse {
 	static async stringToLinks(str) {
 		try {
 			return str.match(regexes.reddit)
-				.filter(n => regexes.uri.test(n))
+				.filter(n => regexes.uri.test(n)) /*
 				.filter(async (name) => {
 					try {
 						let uri = config.urls.reddit.api.replace('|', name);
@@ -74,7 +73,7 @@ class Reddit extends Parse {
 					} catch (e) {
 						return false;
 					}
-				})
+				})*/
 				.map(n => `[${config.urls.reddit.name.replace('|', n)}](${config.urls.reddit.link.replace('|', n)})`);
 		} catch (e) {
 			if (e) throw e;

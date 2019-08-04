@@ -18,6 +18,29 @@ class Utility extends Parse { //fairly miscelanneous functions
 		return this.Output.generic(`**${time.days}** days, **${time.hours}** hours, **${time.minutes}** minutes, and **${time.seconds}** seconds since ${Math.random() > 0.5 ? '**bleep bloop! It\'s showtime**' : 'last reboot'}.`);
 	}
 
+	/**
+	 * Outputs data at a specified path on the 'this' tree, for debugging use
+	 * @param {string} argument 
+	 * @public
+	 */
+	async data(argument = this.argument) {
+		try {
+			let args = argument.split('.');
+			if (args.shift() !== 'this') throw 'Invalid path to data';
+			let x = this;
+			let path = 'this.';
+			for (let i = 0; i < args.length; i++) {
+				path += args[i] + '.';
+				if (x[args[i]]) x = x[args[i]];
+				else throw 'Invalid path to data: ' + path;
+			}
+			if (typeof x === 'string') this.Output.generic(x);
+			else this.Output.data(x);
+		} catch (e) {
+			if (e) this.Output.onError(e);
+		}
+	}
+
 	async markdownify() {
 		try {
 			let msg = await this.find(this.args);
@@ -58,10 +81,15 @@ class Utility extends Parse { //fairly miscelanneous functions
 		}
 	}
 
-	async find(args) { //function needs a channel input
+	/**
+	 * Parses a message from a user to find or 'edit' something and returns a 'target' message
+	 * @param {string[]} args 
+	 */
+	async find(args = this.args) {
 		try {
 			let channel = args[1] ? this.Search.channels.get(args[1]) : this.channel;
 			if (!channel) throw 'No such channel!';
+			this.message.searchChannel = channel;			//We set through the initialising message nowadays, rather than the setter since the setter is not preserved
 			let msg = await this.Search.messages.get(args[0], true);
 			if (!msg) throw 'Unknown Message';
 			msg.embed = msg.embeds && msg.embeds[0] ? new Embed(msg.embeds[0]) : null;
@@ -69,7 +97,7 @@ class Utility extends Parse { //fairly miscelanneous functions
 		} catch (e) {
 			if (!e) return null;
 			if (typeof e === 'string') throw e;
-			let string = '**Fetch Error:** ';
+			let string = 'Fetch Error: ';
 			if (e.message ==='Unknown Message') throw string += 'Couldn\'t find message, check ID and channel is correct.';
 			if (e.message === 'Missing Access') throw string += 'Bot doesn\'t have access to channel.';
 			if (e.message.startsWith('Invalid Form Body')) throw string += 'Couldn\'t recognise ' + args[0] + ' as a valid message ID';

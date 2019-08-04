@@ -31,7 +31,7 @@ class Message {
 		let cmdInfo = commands.get(key.toLowerCase());
 		if (!cmdInfo) cmdInfo = aliases.get(this.argsInfo.message.content.toLowerCase());
 		if (!cmdInfo) return null;
-		if (!cmdInfo.active) throw 'This command is no longer active. Commands get removed for maintenance/safety reasons periodically.\nPlease DM <@!338772451565502474> for more information.';
+		if (cmdInfo.active === false) throw 'This command is no longer active. Commands get removed for maintenance/safety reasons periodically.\nPlease DM <@!338772451565502474> for more information.';
 		if (this.argsInfo.prefixes.get(cmdInfo.prefix) !== this.argsInfo.prefix) return null;
 		return cmdInfo;
 	}

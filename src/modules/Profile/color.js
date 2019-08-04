@@ -3,54 +3,84 @@ const Logger = require('../../util/logger');
 const Maths = require('../Calculation/maths');
 const Embed = require('../../util/embed');
 
+const regexes = {
+	hex: /(?:0x|#)?([0-9a-f]{1,6})/,
+	rgb: /([0-9]{1,3})\s?,([0-9]{1,3})\s?,([0-9]{1,3})/
+
+}
+
 class Color extends Parse {
 
 	constructor(message) {
 		super(message);
 	}
 
-	async run(member) {
+	/**
+	 * Handler for using the !colour command
+	 * @param {Member} member member at which to apply the change colour function, @default this.member
+	 * @param {string[]} args 
+	 * @param {string} argument 
+	 */
+	async run(member = this.member, args = this.args, argument = this.argument) {
 		try {
-			let args = this.args;
-			let argument = this.argument;
-			let modboolean = false;
-			if (args[0] && this.Search.users.get(args[0], true)) { //if the first word summons a user then we do something different
-				member = this.Search.members.get(args[0]); //the user we use becomes the args[0] (instead of message.author);
-				args = args.slice(1);
-				argument = args.join(' ').replace(/[^a-zA-Z0-9\.!\?',;:"£\$%~\+=()\s\u200B-\u200D\uFEFF-]+/g, '');
-				modboolean = true; //need permissions to change somebody else's colour.
+			let color, searchstring;
+			switch (args.length) {
+				case (0):
+					return this.get(member);
+				case (1):
+					break;
+				case (2):
+					if (!this.Permissions.role('admin', this)) throw this.Permissions.output('role');
+					color = args[0];
+					searchstring = argument.slice(color.length).trim();
+					member = this.Search.members.get(searchstring);
+					if (!member) throw new Error('Invalid user given ' + searchstring);
 			}
-			if (!args[0] || !argument) return this.get(member); //if there's no arguments left, view
-			if (modboolean && !await this.Permissions.role('admin', this)) throw this.Permissions.output('role');
-			return this.set(member, argument);
+			this.set(member, argument);
 		} catch (e) {
 			if (e) this.Output.onError(e);
 		}
 	}
 
-	async get(member, action) {
+	/**
+	 * Displays the colour for a user
+	 * @param {Member} member 
+	 * @param {string} action 
+	 */
+	async get(member, action = '') {
 		this.Output.sender(new Embed()
 			.setColor(member.displayColor)
 			.setDescription((action ? action : 'Current') + ` colour for **${member.user.tag}**: **${this.member.displayColor}**.`)
 		);
 	}
 
+	/**
+	 * Parse a colour and set the user to that colour
+	 * @param {Member} member 
+	 * @param {string} argument 
+	 */
 	async set(member, argument) {
 		try {
-			let color = argument.replace(/[^a-zA-Z0-9,]/g, '').toUpperCase();
-			let hex = color.match(/([0-9]{1,3})\s?,([0-9]{1,3})\s?,([0-9]{1,3})/);
-			if (hex) {
-				color = hex.slice(1);
-				for (let i = 0; i < color.length; i++) {
-					color[i] = Number(color[i]);
-				}
-			}
 			if (!member.roles.some(role => role.name.toLowerCase() === 'choosecolor')) throw this.Permissions.output('role');
 			let role = this.Search.roles.get(member.user.username + 'CustomColor');
-			if (role) {
-				role.setColor(color);
-				this.get(member, 'Set');
-			}
+			if (!role) role = await this.guild.createRole(member.user.username + 'CustomColor');
+
+			let color, type;
+			const parser = {
+				hex: () => argument.match(regexes.hex),
+				decimal: () => parseInt(argument, 16).match(regexes.hex),
+				rgb: () => argument.match(regexes.rgb),
+			};
+			const mapper = {
+				hex: val => val[0],
+				decimal: val => val[0],
+				rgb: val => val.slice(1).map(n => Number(n)),
+			};
+			const functions = Object.entries(parser);
+			for (let i = 0; i < functions.length && !color; i++) color = functions[i][1](), type = functions[i][0];
+			if (mapper[type]) color = mapper[type](color);
+			await role.setColor(color);
+			this.get(member, 'Set');
 		} catch (e) {
 			if (e) this.Output.onError(e);
 		}
@@ -60,7 +90,7 @@ class Color extends Parse {
 		try {
 			member.addRole(this.Search.roles.get('ChooseColor'));
 			let role = await this.guild.createRole({
-				name: username + 'CustomColor',
+				name: member.user.username + 'CustomColor',
 				position: 70
 			});
 			member.addRole(role);
