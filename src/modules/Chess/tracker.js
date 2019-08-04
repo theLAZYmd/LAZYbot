@@ -456,7 +456,7 @@ function parseChesscom(chesscomData, data) {
 				chesscomData.stats
 					.map(s => [s.key, {
 						rating: s.stats.rating,
-						prov: s.gameCount >= 10,
+						prov: s.gameCount <= 10,
 						rd: null,
 						games: s.gameCount
 					}])
