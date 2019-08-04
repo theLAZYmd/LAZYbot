@@ -516,7 +516,7 @@
             "arguments": [
                 "args"
             ],
-            "prefix": "nadeko",
+            "prefix": "generic",
             "requires": {
                 "args": {
                     "length": 1
@@ -538,7 +538,7 @@
             "arguments": [
                 "args"
             ],
-            "prefix": "nadeko",
+            "prefix": "generic",
             "requires": {
                 "args": {
                     "length": 1
@@ -561,7 +561,7 @@
             "arguments": [
                 "args"
             ],
-            "prefix": "nadeko",
+            "prefix": "generic",
             "requires": {
                 "args": {
                     "length": 3
@@ -2206,7 +2206,7 @@
             "arguments": [
                 "args"
             ],
-            "prefix": "nadeko",
+            "prefix": "generic",
             "requires": {
                 "house": true
             },
@@ -2225,7 +2225,7 @@
             "module": "Utility",
             "file": "states",
             "method": "bcp",
-            "prefix": "nadeko",
+            "prefix": "generic",
             "requires": {
                 "house": true
             }
