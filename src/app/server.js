@@ -20,7 +20,7 @@ const redirectUri = betabot ? 'http://localhost:80/callback' : 'http://lazybot.c
 const tokenHost = 'https://oauth.lichess.org';
 const authorizePath = '/oauth/authorize';
 const tokenPath = '/oauth';
-const oauth2 = simpleOauth.create({
+const credentials = {
 	client: {
 		id,
 		secret,
@@ -30,7 +30,8 @@ const oauth2 = simpleOauth.create({
 		tokenPath,
 		authorizePath,
 	},
-});
+};
+const oauth2 = simpleOauth.create(credentials);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -72,7 +73,11 @@ app.get('/auth', function (req, res) {
 
 app.get('/callback', async function (req, res) {
 	try {
-		await sendData(req.query.state, req.query.code);
+		const result = await oauth2.authorizationCode.getToken({
+			code: req.query.code,
+			redirect_uri: redirectUri
+		});
+		await sendData(req.query.state, result);
 		res.status(200).sendFile('./callback.html', {
 			root: __dirname
 		});
@@ -82,14 +87,10 @@ app.get('/callback', async function (req, res) {
 	}
 });
 
-async function sendData(state, code) {
-	await app.get('/profile', async function (req, res) {
+function sendData(state, result) {
+	app.get('/profile', async function (req, res) {
 		try {
 			if (!req.query.state || req.query.state !== state) throw new Error('Invalid state.');
-			const result = await oauth2.authorizationCode.getToken({
-				code,
-				redirect_uri: redirectUri
-			});
 			const access = oauth2.accessToken.create(result);
 			const lila = new lichess().setPersonal(access.token.access_token);
 			const userInfo = await lila.profile.get();
@@ -104,7 +105,6 @@ async function sendData(state, code) {
 			});
 		}
 	});
-	return true;
 }
 
 app.get('/config.json', function (req, res) {

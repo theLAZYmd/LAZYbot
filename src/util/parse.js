@@ -106,6 +106,7 @@ class Parse {
 
 	set guild(value) {
 		this._guild = value;
+		this.message.guild = value;
 	}
 
 	//Message properties
@@ -134,6 +135,7 @@ class Parse {
 	set channel(channel) {
 		if (!/(?:Category|DM|Guild|News|Text|Voice)Channel/.test(channel.constructor.name)) throw new TypeError(channel.constructor.name);
 		this._channel = channel;
+		this.message.channel = channel;
 	}
 
 	get searchChannel() {
@@ -144,6 +146,7 @@ class Parse {
 	set searchChannel(channel) {
 		if (!/(?:Category|DM|Guild|News|Text|Voice)Channel/.test(channel.constructor.name)) throw new TypeError(channel.constructor.name);
 		this._searchChannel = channel;
+		this.message.searchChannel = channel;
 	}
 
 	get member() {
@@ -162,6 +165,7 @@ class Parse {
 
 	set user(user) {
 		this._user = user;
+		this.message.user = user;
 	}
 
 	/**
