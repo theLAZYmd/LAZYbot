@@ -69,6 +69,7 @@ class Color extends Parse {
 				hex: () => argument.match(regexes.hex),
 				decimal: () => !isNaN(parseInt(argument, 16)) ? parseInt(argument, 16).match(regexes.hex) : null,
 				rgb: () => argument.match(regexes.rgb),
+				null: () => null
 			};
 			const mapper = {
 				hex: val => val[0],
@@ -77,7 +78,7 @@ class Color extends Parse {
 			};
 			const functions = Object.entries(parser);
 			for (let i = 0; i < functions.length && !color; i++) color = functions[i][1](), type = functions[i][0];
-			if (mapper[type]) color = mapper[type](color);
+			if (color && mapper[type]) color = mapper[type](color);
 			await role.setColor(color);
 			this.get(member, 'Set');
 		} catch (e) {
