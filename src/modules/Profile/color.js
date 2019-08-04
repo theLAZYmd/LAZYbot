@@ -68,7 +68,7 @@ class Color extends Parse {
 			let color, type;
 			const parser = {
 				hex: () => argument.match(regexes.hex),
-				decimal: () => parseInt(argument, 16).match(regexes.hex),
+				decimal: () => !isNaN(parseInt(argument, 16)) ? parseInt(argument, 16).match(regexes.hex) : null,
 				rgb: () => argument.match(regexes.rgb),
 			};
 			const mapper = {
