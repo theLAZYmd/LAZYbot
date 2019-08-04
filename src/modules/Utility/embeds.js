@@ -59,6 +59,11 @@ class Embeds extends Parse {
 		}
 	}
 
+	/**
+	 * Parses raw github file for latest remote version, otherwise falls back to local copy
+	 * @returns {Object}
+	 * @private
+	 */
 	async getEmbeds() {
 		try {
 			if (this.client.user.id === config.ids.betabot) throw '';
