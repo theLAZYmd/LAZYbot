@@ -4,12 +4,34 @@ const params = new URLSearchParams(uri.split('?').slice(1).join('?'));
 loadJSON('/profile?state=' + params.get('state'))
 	.then((buffer) => {
 		let json = JSON.parse(buffer);
+		let data = Object.entries(json);
 		let element = document.getElementById('profile_data');
-		let str = '';
-		for (let [k, v] of Object.entries(json)) {
-			str += (k === 'id' ? 'ID' : toProperCase(k)) + ': ' + (typeof v === 'object' ? JSON.stringify(v, null, 4) : v) + '\n';
+		let table = document.createElement('table');
+		let [key, id] = data.shift();
+		let thead = document.createElement('thead');
+		let col1 = document.createElement('th');
+		col1.innerHTML = key;
+		col1.scope = 'col';
+		let col2 = document.createElement('th');
+		col2.innerHTML = id.toUpperCase();
+		col2.scope = 'col';
+		let row = thead.insertRow();
+		row.appendChild(col1);
+		row.appendChild(col2);
+		table.appendChild(thead);
+		for (let [k, v] of data) {
+			let th = document.createElement('th');
+			th.innerHTML = toProperCase(k);
+			th.scope = 'row';
+			let td = document.createElement('td');
+			td.innerHTML = typeof v === 'object' ? JSON.stringify(v, null, 4) : v.toString();
+			let tbody = document.createElement('tbody');
+			let row = tbody.insertRow();
+			row.appendChild(th);
+			row.appendChild(td);
+			table.appendChild(tbody);
 		}
-		element.innerHTML = str;
+		element.appendChild(table);
 	})
 	.catch(console.error);
 

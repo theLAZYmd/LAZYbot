@@ -32,6 +32,7 @@ const credentials = {
 	},
 };
 const oauth2 = simpleOauth.create(credentials);
+const cached = {};
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -83,10 +84,11 @@ app.get('/callback', async function (req, res) {
 			code: req.query.code,
 			redirect_uri: redirectUri
 		});
-		await sendData(req.query.state, result);
+		if (!cached[req.query.state]) await sendData(req.query.state, result);
 		res.status(200).sendFile('./callback.html', {
 			root: __dirname
 		});
+		cached[req.query.state] = true;
 	} catch(e) {
 		if (typeof e === 'object') res.status(500).type('text/plain').send(e.message);
 		else res.status(500).json('Authentication failed');
@@ -101,8 +103,10 @@ function sendData(state, result) {
 			const lila = new lichess().setPersonal(access.token.access_token);
 			const userInfo = await lila.profile.get();
 			let keys = DataManager.getFile('./src/modules/Chess/auth.json');
-			keys[state].data = userInfo;
-			new auth().verifyRes(state, keys[state]);
+			if (keys[state]) {
+				keys[state].data = userInfo;
+				new auth().verifyRes(state, keys[state]);
+			}
 			res.status(200).json(userInfo);
 		} catch (e) {
 			if (e) res.json({
