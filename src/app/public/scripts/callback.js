@@ -1,7 +1,7 @@
 let uri = window.location.href;
 const params = new URLSearchParams(uri.split('?').slice(1).join('?'));
 
-loadJSON('/profile?state=' + params.get('state'))
+loadJSON('/profile/' + params.get('state'))
 	.then((buffer) => {
 		let json = JSON.parse(buffer);
 		let data = Object.entries(json);

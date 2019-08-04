@@ -95,10 +95,12 @@ app.get('/callback', async function (req, res) {
 	}
 });
 
+let lastState = '';
+
 function sendData(state, result) {
-	app.get('/profile', async function (req, res) {
+	app.get('/profile/:state', async function (req, res) {
 		try {
-			if (!req.query.state || req.query.state !== state) throw new Error('Invalid state.');
+			if (!req.params.state || req.params.state !== state) throw new Error('Invalid state.');
 			const access = oauth2.accessToken.create(result);
 			const lila = new lichess().setPersonal(access.token.access_token);
 			const userInfo = await lila.profile.get();
