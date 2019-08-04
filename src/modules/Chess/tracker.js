@@ -214,7 +214,6 @@ class Tracker extends Parse {
 	async run(command = this.command, dbuser = this.dbuser, username = '') {
 		try {
 			//Build command, dbuser, username
-			await dbuser;
 			switch (this.args.length) {
 				case (0):
 					username = this.author.username;
@@ -228,9 +227,10 @@ class Tracker extends Parse {
 					let searchstring = this.argument.slice(username.length).trim();
 					let user = this.Search.users.get(searchstring);
 					if (!user) throw new Error('Invalid user given ' + searchstring);
-					this.Search.dbusers.getUser(user);
+					dbuser = this.Search.dbusers.getUser(user);
 				}
 			}
+			await dbuser;
 			let source = Object.values(config.sources).find(s => s.key === command.toLowerCase().replace(/\./g, ''));
 			if (dbuser[source.key] && dbuser[source.key][username]) throw 'Already linked account.';
 			let data = new Track(this, dbuser);
