@@ -1,3 +1,6 @@
+const Lichess = require('lichess');
+const lila = new Lichess();
+
 const Parse = require('../../util/parse');
 const Embed = require('../../util/embed');
 const Logger = require('../../util/logger');
@@ -144,6 +147,36 @@ class Series extends Odds {
 
 }
 
+class Tournament extends Odds {
+	constructor(message) {
+		super(message);
+	}
+
+	static get regexes () {
+		if (Tournament._regexes) return Tournament._regexes;
+		return Tournament._regexes = {
+			url: /lichess\.org\/tournament\/(\w+)/
+		}
+	}
+
+	async input () {
+		try {
+			let id = await this.Output.response({
+				description: 'Please provide the ID or URL of the Lichess tournament'
+			});
+			if (Tournament.regexes.url.test(id)) id = id.match(Tournament.regexes.url)[1];
+			let tournament = await lila.tournaments.results(id, {
+				nb: 100,
+				fetchUsers: false
+			});
+			let arr = tournament.results.sort((a, b) => a.rank - b.rank).array();
+			this.Output.data(arr);
+		} catch (e) {
+			this.Output.onError(e);
+		}
+	}
+}
+
 class Match extends Odds {
 	constructor(message) {
 		super(message);
@@ -153,16 +186,6 @@ class Match extends Odds {
 		throw 'This type of odds is not available yet!';
 	}
 
-}
-
-class Tournament extends Odds {
-	constructor(message) {
-		super(message);
-	}
-
-	input () {		
-		throw 'This type of odds is not available yet!';
-	}
 }
 
 
