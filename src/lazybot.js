@@ -1,9 +1,9 @@
 const Discord = require('discord.js');
 const fs = require('fs');
+const path = require('path');
 const client = new Discord.Client();
 
 const Logger = require('./util/logger');
-const router = 'router/';
 
 require('./util/extensions');
 require('events').EventEmitter.prototype._maxListeners = 100;
@@ -66,7 +66,7 @@ const events = [
  * Find the function to execute on event emit of that listener in the src/router folder
  * So each file is only called when that listener is set
  */
-fs.readdir('./src/' + router, (err, _files) => {
+fs.readdir(path.join(process.cwd(), 'src', 'router'), (err, _files) => {
 	try {
 		if (err) throw err;
 		let files = _files.map(f => f.split('.').slice(0, -1).join('.'));
@@ -74,7 +74,7 @@ fs.readdir('./src/' + router, (err, _files) => {
 			if (!event[2]) continue;
 			if (!files.find(f => f === event[0])) throw 'Couldn\'t find matching event handler.';
 			client.on(event[0], async function () {
-				let Instance = require('./' + router + event[0] + '.js');
+				let Instance = require(path.join(__dirname, 'router', event[0]));
 				if (typeof Instance === 'function') Instance(client, ...arguments);
 				else if (typeof Instance === 'object' && typeof Instance.default === 'function') Instance.default(client, ...arguments);
 				else throw 'event ' +  event[0] + ' does not have a listener function';
