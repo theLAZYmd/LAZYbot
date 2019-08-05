@@ -4,6 +4,11 @@ const DataManager = require('../../util/datamanager.js');
 const Permissions = require('../../util/permissions.js');
 const config = require('../../config.json');
 
+const regexes = {
+	bold: /\*/g,
+	trivia: /\*\*([\S \t^@#:`]{2,32}#\d{4})\*\* has( \d{1,3}) points?/
+};
+
 class Trivia extends Parse {
 
 	constructor(message) {
@@ -138,11 +143,15 @@ class Trivia extends Parse {
 	 * Converts a 2x2 Array of tags (UserResolvables) and scores to 2x3 of dbuser objects, an estimate of strength, and their score
 	 * @param {string} tag 
 	 * @param {number} score 
+	 * @returns {string[]}
+	 * @param {DBuser} dbuser
+	 * @param {Number} estimate
+	 * @param {Number} score
 	 */
-	async nameToTriviaData(tag, score) {
-		let user = this.Search.users.byTag(tag.replace(/\*/g, '')); //byTag filters out the **
+	nameToTriviaData(tag, score) {
+		let user = this.Search.users.byTag(tag.replace(regexes.bold, '')); //byTag filters out the **
 		if (!user) return null;
-		let dbuser = await this.Search.dbusers.getUser(user);
+		let dbuser = this.Search.dbusers.getUser(user);
 		if (!dbuser.trivia) dbuser.trivia = {
 			rating: 1500,
 			games: 0
@@ -159,16 +168,16 @@ class Trivia extends Parse {
 	async ratingUpdate(embed) {
 		try {
 			const lines = embed.description.split('\n');
-			let scored = lines
-				.map(line => /\*\*([\S \t^@#:`]{2,32}#\d{4})\*\* has( \d{1,3}) points?/.test(line) ? line.match(/\*\*([\S \t^@#:`]{2,32}#\d{4})\*\* has( \d{1,3}) points?/).slice(1) : [''])
-				.map(async arr => await this.nameToTriviaData(...arr));
 			let players = this.players;
-			scored = scored.filter((d) => {
-				if (!d) return false;											//Users who left the server halfway through the trivia match
-				if (!this.server.trivia.players[d[0].username]) return false;	//Anyone not playing is excluded
-				players[d[0].username] = false;									//Only people not scored but playing are left
-				return true;
-			});
+			let scored = lines
+				.map(line => regexes.trivia.test(line) ? line.match(regexes.trivia).slice(1) : [''])
+				.map(arr => this.nameToTriviaData(...arr))
+				.filter((d) => {
+					if (!d) return false;											//Users who left the server halfway through the trivia match
+					if (!this.server.trivia.players[d[0].username]) return false;	//Anyone not playing is excluded
+					players[d[0].username] = false;									//Only people not scored but playing are left
+					return true;
+				});
 			let unscored = Object.entries(players)								//Players who got 0
 				.filter(([, unranked]) => unranked)
 				.map(([name]) => this.nameToTriviaData(name, 0));
