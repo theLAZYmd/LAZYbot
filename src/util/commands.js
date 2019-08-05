@@ -1,3 +1,6 @@
+const fs = require('fs');
+const path = require('path');
+
 const DataManager = require('./datamanager');
 const Logger = require('./logger');
 const All = DataManager.getFile('./src/commands/all.json');
@@ -6,21 +9,20 @@ const DM = DataManager.getFile('./src/commands/dm.json');
 const Message = DataManager.getFile('./src/commands/message.json');
 const Reaction = DataManager.getFile('./src/commands/reaction.json');
 const Interval = DataManager.getFile('./src/commands/interval.json');
-const fs = require('fs');
 const config = require('../config.json');
 
 class Commands {
 
 	static async run (cmdInfo, message) {
 		if (!cmdInfo.args) cmdInfo.args = [];
-		let directory = 'modules/' + cmdInfo.module + '/' + cmdInfo.file;
-		let path = 'modules/' + cmdInfo.module + '/' + cmdInfo.file;
+		const directory = path.join('modules', cmdInfo.module, cmdInfo.file);
 		let extensions = ['.js', '.ts', '.mjs'];
-		while (!fs.existsSync('./src/' + path)) {
-			if (extensions.length === 0) throw new Error('Couldn\'t find module ./src/' + directory);
-			path = directory + extensions.shift();
+		let testPath = directory;
+		while (!fs.existsSync(path.join(process.cwd(), 'src', testPath))) {
+			if (extensions.length === 0) throw new Error('Couldn\'t find module ' + path.join(process.cwd(), 'src', directory));
+			testPath = directory + extensions.shift();
 		}
-		let Constructor = require('../' + path);
+		let Constructor = require(path.join(process.cwd(), 'src', testPath));
 		let Instance = await new Constructor(message);
 		if (typeof Instance[cmdInfo.method] === 'function') return Instance[cmdInfo.method](...cmdInfo.args);
 		return false;
