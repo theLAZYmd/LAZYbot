@@ -287,12 +287,9 @@
             "module": "Administration",
             "file": "set",
             "method": "version",
-            "arguments": [
-                "argument"
-            ],
             "prefix": "generic",
             "requires": {
-                "user": "owner"
+                "args": [0, 1]
             }
         },
         {

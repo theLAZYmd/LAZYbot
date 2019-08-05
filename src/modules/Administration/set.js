@@ -8,21 +8,33 @@ class Set extends Parse {
 
 	constructor(message) {
 		super(message);
-		Set.get = {
+	}
+
+	static get get () {
+		if (Set._get) return Set._get;
+		return Set._get = {
 			states: s => '`' + s.toString() + '`',
 			prefixes: p => p.bold(),
 			colors:  c => `[${c}](https://convertingcolors.com/decimal-color-${c}.html)`,
 			roles: r => this.Search.roles.get(r),
 			channels: c => this.Search.channels.get(c)
 		};
-		Set.set = {
+	}
+
+	static get set () {
+		if (Set._set) return Set._set;
+		return Set._set = {
 			states: s => s === 'false' ? false : s === 'true' ? true : undefined,
 			prefixes: p => p.toString(),
 			colors: c => Number(c),
 			roles: r => (this.Search.roles.get(r) || {id: undefined}).id,
 			channels: c => (this.Search.channels.get(c) || {id: undefined}).id,
 		};
-		Set.validate = {
+	}
+	
+	static get validate () {
+		if (Set._validate) return Set._validate;
+		return Set._validate = {
 			states: s => typeof s === 'boolean',
 			prefixes: p => typeof p === 'string' && p.length === 1,
 			colors:  c => !isNaN(c),
@@ -114,13 +126,19 @@ class Set extends Parse {
 		this.version(version.join('.'));
 	}
 
-	version(version) {
-		version = version.match(/[0-9]+.[0-9]+.[0-9]/);
-		if (!version) return this.Output.generic(`You are using ${Package.name.replace('lazy', 'LAZY')} version v.${Package.version}`);
-		Package.version = version[0];
-		DataManager.setFile(Package, './package.json');
-		this.guild.me.setNickname(`${Package.name.replace('lazy', 'LAZY')}${this.client.user.id === config.ids.betabot ? 'beta' : ''} v.` + version);
-		this.Output.generic(`${Package.name.replace('lazy', 'LAZY')} version has been ${this.command === 'upversion' ? 'upped' : 'modified'} to **v.${version}**!`);
+	async version(version = this.argument) {
+		try {
+			if (!version) return this.Output.generic(`You are using ${Package.name.replace('lazy', 'LAZY')} version **v.${Package.version}**`);
+			if (!this.Permissions.role('admin', this)) throw this.Permissions.output('role');
+			version = version.match(/[0-9]+.[0-9]+.[0-9]/);
+			if (!version) throw 'Invalid syntax!';
+			Package.version = version[0];
+			DataManager.setFile(Package, './package.json');
+			this.guild.me.setNickname(`${Package.name.replace('lazy', 'LAZY')}${this.client.user.id === config.ids.betabot ? 'beta' : ''} v.` + version);
+			this.Output.generic(`${Package.name.replace('lazy', 'LAZY')} version has been ${this.command === 'upversion' ? 'upped' : 'modified'} to **v.${version}**!`);
+		} catch (e) {
+			if (e) this.Output.onError(e);
+		}
 	}
 
 

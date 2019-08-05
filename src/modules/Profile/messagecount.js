@@ -7,7 +7,7 @@ class MessageCount extends Parse {
 		super(message);
 	}
 
-    /**
+	/**
      * Ups the message count for a given user stored in the database
      * @private
      */
@@ -20,7 +20,7 @@ class MessageCount extends Parse {
 		}
 	}
 
-    /**
+	/**
      * Stores the last message a user has written
      * @private
      */
@@ -36,7 +36,7 @@ class MessageCount extends Parse {
 		}
 	}
 
-    /**
+	/**
      * Parses a string and number combination to update the message.count of the user found from that string with that number
      * @param {User} user - A discord user
      * @param {string[]} args - A list of searchResolvable variables
@@ -49,7 +49,7 @@ class MessageCount extends Parse {
 				if (!isNaN(Number(a))) number = Number(a);
 				else {
 					let _user = this.Search.users.get(a);
-                    if (_user) user = _user;
+					if (_user) user = _user;
 					else throw this.Permissions.output('args');
 				}
 			}
@@ -62,27 +62,27 @@ class MessageCount extends Parse {
 		}
 	}
 
-    /**
+	/**
      * Outputs the number of messages a user has sent
      * @public
      * @param {string[]} args 
      * @param {User} user 
      */
-	async get(args, user) {
+	async get(args, user = this.user) {
 		try {
 			if (args.length > 1) throw this.Permissions.output('args');
 			if (args.length === 1) { //!messages titsinablender
 				user = this.Search.users.get(args[0]);
 				if (!user) throw 'Couldn\'t find user!';
 			}
-			let dbuser = this.Search.dbusers.getUser(user);
+			let dbuser = await this.Search.dbusers.getUser(user);
 			this.Output.generic(`**${user.tag}** has sent **${dbuser.messages.count.toLocaleString()}** messages.`);
 		} catch (e) {
 			if (e) this.Output.onError(e);
 		}
 	}
 
-    /**
+	/**
      * Outputs the last message a user has sent
      * @public
      * @param {string} argument 
