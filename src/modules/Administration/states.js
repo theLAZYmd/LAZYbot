@@ -40,20 +40,19 @@ class States extends Parse {
 		});
 	}
 
-	async bcp(forced) {
+	async bcp(forced = false, channel = this.channel || this.Search.channels.get(this.server.channels.bot)) {
 		try {
-			let channel = this.channel ? this.channel : this.Search.channels.get(this.server.channels.bot);
 			let members = [
 				this.Search.members.get(config.ids.bouncer), //bouncer member
 				this.Search.members.get(config.ids.nadeko) //nadeko member
 			];
 			let role = this.Search.roles.get(this.server.roles.bot);
-			let activeboolean = forced || members[1].roles.some(r => r.name === this.server.roles.bot); //does nadeko already have the role?
-			members[activeboolean ? 0 : 1].addRole(role); //if 0, added to bouncer
-			members[activeboolean ? 1 : 0].removeRole(role); //and remove from nadeko
-			this.Output.generic(`**Bot Contingency Plan ${activeboolean ? 'disabled' : 'enabled'}.**`, channel);
+			let active = forced || members[1].roles.some(r => r.name === this.server.roles.bot); //does nadeko already have the role?
+			members[active ? 0 : 1].addRole(role).catch(() => {}); //if 0, added to bouncer
+			members[active ? 1 : 0].removeRole(role).catch(() => {}); //and remove from nadeko
+			this.Output.generic(`**Bot Contingency Plan ${active ? 'disabled' : 'enabled'}.**`, channel);
 		} catch (e) {
-			if (e) Logger.command(e);
+			if (e) Logger.error(e);
 		}
 	} //if so, then give it to bouncer and take it from nadeko, if not give to nadeko, take from bouncer
 

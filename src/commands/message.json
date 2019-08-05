@@ -2197,7 +2197,7 @@
                 "tm true false",
                 "tm false true"
             ],
-            "module": "Utility",
+            "module": "Administration",
             "file": "states",
             "method": "tm",
             "arguments": [
@@ -2219,7 +2219,7 @@
             ],
             "description": "Switches whether Nadeko or Bouncer has 'Bot-in-Use' role (full permission for server). To be used when Bouncer is offline, triggers automatically.",
             "usage": [],
-            "module": "Utility",
+            "module": "Administration",
             "file": "states",
             "method": "bcp",
             "prefix": "generic",
