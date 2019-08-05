@@ -1946,7 +1946,78 @@
                 "user": "owner"
             }
         }
-    ],
+	],
+	"Roles": [
+		{
+			"aliases": [
+				"role",
+				"iam"
+			],
+			"description": "Toggles your membership of a role. Removes all other roles of that group if you choose a role from an exclusive (>0) group",
+			"module": "Utility",
+			"file": "roles",
+			"method": "assign",
+			"prefix": "generic",
+			"usage": [
+				"dev"
+			],
+			"requires": {
+				"args": [1]
+			}
+		},
+		{
+			"aliases": [
+				"listselfassignable",
+				"lsar"
+			],
+			"description": "Outputs the list of self-assignable roles. The first group is non-exclusve, the following ones all are.",
+			"module": "Utility",
+			"file": "roles",
+			"method": "get",
+			"prefix": "generic",
+			"usage": [
+				"0"
+			],
+			"requires": {
+				"args": [0, 1]
+			}
+		},
+		{
+			"aliases": [
+				"addselfassignable",
+				"asar"
+			],
+			"description": "Adds a self-assignable role. The first group is non-exclusve, the following ones all are.",
+			"module": "Utility",
+			"file": "roles",
+			"method": "add",
+			"prefix": "generic",
+			"usage": [
+				"0 Europe"
+			],
+			"requires": {
+				"role": "admin"
+			}
+		},
+		{
+			"aliases": [
+				"removeselfassignable",
+				"rsar"
+			],
+			"description": "Removes a role from the self-assignable list. Just specify the group number to pick a group.",
+			"module": "Utility",
+			"file": "roles",
+			"method": "add",
+			"prefix": "generic",
+			"usage": [
+				"1",
+				"0 Europe"
+			],
+			"requires": {
+				"role": "admin"
+			}
+		}
+	],
     "Trivia": [
         {
             "aliases": [
