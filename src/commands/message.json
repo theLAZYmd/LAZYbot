@@ -2004,14 +2004,13 @@
 				"removeselfassignable",
 				"rsar"
 			],
-			"description": "Removes a role from the self-assignable list. Just specify the group number to pick a group.",
+			"description": "Removes a role from the self-assignable list.",
 			"module": "Utility",
 			"file": "roles",
-			"method": "add",
+			"method": "remove",
 			"prefix": "generic",
 			"usage": [
-				"1",
-				"0 Europe"
+				"Europe"
 			],
 			"requires": {
 				"role": "admin"

@@ -55,26 +55,24 @@ class Roles extends Parse {
 		}
 	}
 
-	async remove(group = parseInt(this.args[0]), argument = this.argument) {
+	async remove(argument = this.argument) {
 		try {
-			//Parse the values
-			if (isNaN(group)) group = 0;
-			else argument = argument.slice(group.toString().length).trim();
-
 			let server = this.server;
-			if (!server.sars || !server.sars[group]) throw 'No such group ' + group;
 			if (!argument) argument = await this.Output.response({
 				description: 'Please specify a valid role',
 				filter: (r) => {
 					let role = this.Search.roles.get(r);
 					if (!role) return false;
-					if (server.sars.indexOf(role.id) === -1) return false;
-					return true;
+					if (server.sars.find(group => group.find(r => r === role.id))) return true;
+					return false;
 				}
 			});
 			let role = this.Search.roles.get(argument);
-			let index = server.sars.indexOf(role.id);
-			if (index === -1) throw 'Couldn\'t find role ' + argument + ' in group ' + group;
+			if (!role) throw 'Not a role';
+			let group = server.sars.findIndex((group) => group.indexOf(role.id) !== -1);
+			if (group === -1) throw 'No such self-assignable role';
+			let index =  server.sars[group].indexOf(role.id);
+			if (index === -1) throw new Error(server.sars[group]);
 			
 			//Set the values
 			server.sars[group].splice(index, 1);
