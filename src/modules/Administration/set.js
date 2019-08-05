@@ -128,10 +128,10 @@ class Set extends Parse {
 
 	async version(version = this.argument) {
 		try {
-			if (!version) return this.Output.generic(Package.version);
+			if (!version) return this.Output.generic(`You are using ${Package.name.replace('lazy', 'LAZY')} version **v.${Package.version}**`);
 			if (!this.Permissions.role('admin', this)) throw this.Permissions.output('role');
 			version = version.match(/[0-9]+.[0-9]+.[0-9]/);
-			if (!version) return this.Output.generic(`You are using ${Package.name.replace('lazy', 'LAZY')} version v.${Package.version}`);
+			if (!version) throw 'Invalid syntax!';
 			Package.version = version[0];
 			DataManager.setFile(Package, './package.json');
 			this.guild.me.setNickname(`${Package.name.replace('lazy', 'LAZY')}${this.client.user.id === config.ids.betabot ? 'beta' : ''} v.` + version);
