@@ -7,6 +7,56 @@ class Roles extends Parse {
 		super(message);
 	}
 
+	async create(name = this.argument) {
+		this.guild.createRole({name})
+			.then((r) => this.Output.generic('Successfully created role **' + r.name + '**'))
+			.catch(this.Output.onError);
+	}
+
+	async delete(argument = this.argument) {
+		try {
+			let role = this.Search.roles.get(argument);
+			if (!role) throw 'No such role ' + argument;
+			role.delete();
+		} catch (e) {
+			if (e) this.Output.onError(e);
+		}
+	}
+
+	async set(args = this.args) {
+		for (let i = 0; i < args.length; i++) {
+			let userName = args.slice(0, i + 1).join(' ');
+			let roleName = args.slice(i + 1).join(' ');
+			let role = this.Search.roles.get(roleName);
+			if (!role) continue;
+			let member = this.Search.members.get(userName);
+			if (!member) continue;
+			member.addRole(role)
+				.then(() => this.Output.generic('Successfully added role **' + role.name + '** to user **' + member.user.tag + '**'))
+				.catch(this.Output.onError);
+			return;
+		}
+		this.Output.onError('Couldn\'t find matching role and user');
+	}
+
+	async remove(args = this.args) {
+		for (let i = 0; i < args.length; i++) {
+			let userName = args.slice(0, i + 1).join(' ');
+			let roleName = args.slice(i + 1).join(' ');
+			let role = this.Search.roles.get(roleName);
+			if (!role) continue;
+			let member = this.Search.members.get(userName);
+			if (!member) continue;
+			if (!member.roles.has(role.id)) return this.Output.onError('User ' + userName + ' already has that role ' + roleName + '!');
+			member.removeRole(role)
+				.then(() => this.Output.generic('Successfully removed role **' + role.name + '** from user **' + member.user.tag + '**'))
+				.catch(this.Output.onError);
+			return;
+		}
+		this.Output.onError('Couldn\'t find matching role and user');
+	}
+
+
 	get(group) {
 		let server = this.server;
 		if (!server.sars) server.sars = [];
@@ -28,7 +78,7 @@ class Roles extends Parse {
 		this.Output.sender(embed);
 	}
 
-	async add(group = parseInt(this.args[0]), argument = this.argument) {
+	async asar(group = parseInt(this.args[0]), argument = this.argument) {
 		try {
 			//Parse the values
 			if (isNaN(group)) group = 0;
@@ -55,7 +105,7 @@ class Roles extends Parse {
 		}
 	}
 
-	async remove(argument = this.argument) {
+	async rsar(argument = this.argument) {
 		try {
 			let server = this.server;
 			if (!argument) argument = await this.Output.response({
