@@ -23,16 +23,22 @@ class Utility extends Parse { //fairly miscelanneous functions
 	 * @param {string} argument 
 	 * @public
 	 */
-	async data(argument = this.argument) {
+	async data(argument = this.argument, aw = argument.startsWith('await')) {
 		try {
+			if (aw) argument = argument.slice('await'.length).trim();
 			let args = argument.split('.');
 			if (args.shift() !== 'this') throw 'Invalid path to data';
 			let x = this;
 			let path = 'this.';
 			for (let i = 0; i < args.length; i++) {
 				path += args[i] + '.';
-				if (x[args[i]]) x = x[args[i]];
-				else throw 'Invalid path to data: ' + path;
+				if (!aw) {
+					if (x[args[i]]) x = x[args[i]];
+					else throw 'Invalid path to data: ' + path;
+				} else {					
+					if (await x[args[i]]) x = await x[args[i]];
+					else throw 'Invalid path to data: ' + path;
+				}
 			}
 			if (typeof x === 'string') this.Output.generic(x);
 			else this.Output.data(x);
@@ -110,12 +116,12 @@ class Utility extends Parse { //fairly miscelanneous functions
      * @param {UserResolvable} argument 
      * @param {*} user 
      */
-	async dbuser(argument = this.argument, user = this.user) {
+	async gdpr(argument = this.argument, user = this.user) {
 		try {
 			if (argument) {
 				if (!this.Permissions.role('admin', this)) throw this.Permissions.output('role');
 				user = this.Search.users.get(argument);
-				if (!user) throw new Error('Couldn\'t find user **' + argument + '** in this server');
+				if (!user) throw new Error('Couldn\'t find user ' + argument + ' in this server');
 			}
 			let dbuser = this.Search.dbusers.getUser(user);
 			this.Output.data(dbuser, this.channel, 'json');

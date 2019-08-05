@@ -2384,7 +2384,7 @@
             "description": "Returns the data stored on a user",
             "module": "Utility",
             "file": "utility",
-            "method": "dbuser",
+            "method": "gdpr",
             "prefix": "generic"
         }
     ]
