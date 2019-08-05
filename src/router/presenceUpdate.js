@@ -58,5 +58,5 @@ module.exports = (client, oldMember, newMember) => {
 	if (oldMember.user.bot) {
 		Instance.bot(oldMember.presence, newMember.presence);
 	}
-	else Instance.streamer(oldMember.presence, newMember.presence);
+	//else Instance.streamer(oldMember.presence, newMember.presence);
 };
