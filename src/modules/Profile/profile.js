@@ -169,13 +169,15 @@ class Profile extends Parse {
 	get chessFields() {
 		if (this._chessFields) return this._chessFields;
 		this._chessFields = [];
+		let dbuser = this.dbuser;
 		for (let [key, source] of Object.entries(config.sources)) {
-			if (!this.dbuser[key]) continue;
-			for (let account of Object.keys(this.dbuser[key])) {
+			if (!dbuser[key]) continue;
+			let verified = dbuser[key]._verified || {};
+			for (let account of Object.keys(dbuser[key])) {
 				if (account.startsWith('_')) continue;
 				this._chessFields.push([
-					this.Search.emojis.get(key) + ' ' + source.name,
-					Parse.profile(this.dbuser, source, account) + '\n' + Parse.ratingData(this.dbuser, source, account),
+					this.Search.emojis.get(key) + ' ' + source.name + (verified[account] ? ' ' + this.Search.emojis.get('verified') : ''),
+					Parse.profile(dbuser, source, account) + '\n' + Parse.ratingData(dbuser, source, account),
 					true
 				].toField());
 			}

@@ -2059,7 +2059,7 @@
 				"data this.channel.name"
 			],
 			"requires": {
-				"args": [1],
+				"args": [1, 2],
 				"role": "admin"
 			}
 		},
