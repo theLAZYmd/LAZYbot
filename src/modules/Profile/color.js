@@ -4,8 +4,8 @@ const Maths = require('../Calculation/maths');
 const Embed = require('../../util/embed');
 
 const regexes = {
-	hex: /(?:0x|#)?([0-9a-f]{1,6})/,
-	rgb: /([0-9]{1,3})\s?,([0-9]{1,3})\s?,([0-9]{1,3})/
+	rgb: /^([0-9]{1,3}),\s?([0-9]{1,3}),\s?([0-9]{1,3})$/,
+	hex: /(?:0x|#)?([0-9a-f]{1,6})$/,
 };
 
 class Color extends Parse {
@@ -65,18 +65,18 @@ class Color extends Parse {
 			if (!role) role = await this.guild.createRole(member.user.username + 'CustomColor');
 
 			let color, type;
-			const parser = {
-				hex: () => argument.match(regexes.hex),
-				decimal: () => !isNaN(parseInt(argument, 16)) ? parseInt(argument, 16).match(regexes.hex) : null,
-				rgb: () => argument.match(regexes.rgb),
-				null: () => null
-			};
+			const parser = [
+				['rgb', () => argument.match(regexes.rgb)],
+				['hex', () => argument.match(regexes.hex)],
+				['decimal', () => !isNaN(parseInt(argument, 16)) ? parseInt(argument, 16).match(regexes.hex) : null],
+				['null', () => null]
+			];
 			const mapper = {
+				rgb: val => val.slice(1).map(n => Number(n)),
 				hex: val => val[0],
 				decimal: val => val[0],
-				rgb: val => val.slice(1).map(n => Number(n)),
 			};
-			const functions = Object.entries(parser);
+			const functions = parser;
 			for (let i = 0; i < functions.length && !color; i++) color = functions[i][1](), type = functions[i][0];
 			if (color && mapper[type]) color = mapper[type](color);
 			await role.setColor(color);
