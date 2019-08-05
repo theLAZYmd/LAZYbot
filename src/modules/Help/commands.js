@@ -4,6 +4,14 @@ const DataManager = require('../../util/datamanager');
 const Message = DataManager.getFile('./src/commands/message.json');
 const fs = require('fs');
 
+const regexes = {
+	newline: /\r/g,
+	title: /^#\s?([\w\s]+)[\n]/i,
+	footer: /#\s?([\w\s]+)[\n]?$/i,
+	section: / {2}-/g,
+	text: /\w+/i
+};
+
 class Commands extends Parse {
 
 	constructor(message) {
@@ -15,9 +23,9 @@ class Commands extends Parse {
 	 * @public
 	 */
 	async about () {
-		const readMe = fs.readFileSync('./README.md').toString().replace(/\r/g, '');
-		let title = readMe.match(/^#([\w\s]+)[\n]/i);
-		let footer = readMe.match(/#([\w\s]+)[\n]?$/i) || [];    
+		const readMe = fs.readFileSync('./README.md').toString().replace(regexes.newline, '');
+		let title = readMe.match(regexes.title);
+		let footer = readMe.match(regexes.footer) || [];    
 		let sections = readMe.replace(footer[0], '').split('###');    
 		let description = sections.shift().replace(title[0], '').trim() + '\n\u200b';
 		let fields = sections.map((string) => {
@@ -40,13 +48,13 @@ class Commands extends Parse {
 				let array = arr.map((d) => {
 					let i = arr.indexOf(d);
 					let name = i === 0 ? f.name : '\u200b';
-					let value = f.value.substring(arr[i - 1], d).replace(/ {2}-/g, '\u200b\       •');
+					let value = f.value.substring(arr[i - 1], d).replace(regexes.section, '\u200b       •');
 					let inline = false;
 					return {    name, value, inline    };
 				});
 				fields.splice(j, 1, ...array);
 			}
-			if (0 < j && /[a-z0-9]+/i.test(f.name)) fields[j - 1].value += '\n\u200b';
+			if (0 < j && regexes.text.test(f.name)) fields[j - 1].value += '\n\u200b';
 		}
 		let embed = new Embed()
 			.setTitle(title[1])
@@ -54,7 +62,6 @@ class Commands extends Parse {
 			.setThumbnail(this.client.user.avatarURL)
 			.setFooter(footer[1]);
 		embed.fields = fields;
-		fs.writeFileSync('../npf/sandbox.json', JSON.stringify(embed, null, 4));
 		this.Output.sender(embed);
 	}
 
