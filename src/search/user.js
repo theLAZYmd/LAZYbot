@@ -76,7 +76,13 @@ class User extends Search {
 	byDisplayName(string, exactmode) {
 		let displayName = string.match(/[\S \t^@#:`]{2,32}/);
 		if (!displayName) return null;
-		return exactmode ? this.guild.members.find(member => member.nickname && member.nickname.toLowerCase() === displayName[0].toLowerCase()) : this.guild.members.find(member => member.nickname && member.nickname.toLowerCase().startsWith(displayName[0].toLowerCase()));
+		let member = this.guild.members.find((m) => {
+			if (!m.displayName) return false;
+			if (exactmode && m.displayName.toLowerCase() === displayName[0].toLowerCase()) return true;
+			else if (m.displayName.toLowerCase().startsWith(displayName[0].toLowerCase())) return true;
+			return false;
+		});
+		return member ? member.user : null;
 	}
 
 }
