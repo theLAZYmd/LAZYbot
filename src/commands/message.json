@@ -1946,7 +1946,157 @@
                 "user": "owner"
             }
         }
-    ],
+	],
+	"Roles": [
+		{
+			"aliases": [
+				"createrole",
+				"cr"
+			],
+			"description": "Creates a role with a given name",
+			"module": "Utility",
+			"file": "roles",
+			"method": "create",
+			"prefix": "generic",
+			"usage": [
+				"createrole dev"
+			],
+			"requires": {
+				"role": "admin",
+				"args": [1]
+			}
+		},
+		{
+			"aliases": [
+				"deleterole",
+				"dr"
+			],
+			"description": "Creates a role with a given name",
+			"module": "Utility",
+			"file": "roles",
+			"method": "delete",
+			"prefix": "generic",
+			"usage": [
+				"deleterole dev"
+			],
+			"requires": {
+				"role": "admin",
+				"args": [1]
+			}
+		},
+		{
+			"aliases": [
+				"setrole",
+				"sr"
+			],
+			"description": "Assigns a role with a given name to a user",
+			"module": "Utility",
+			"file": "roles",
+			"method": "set",
+			"prefix": "generic",
+			"usage": [
+				"setrole dev MMichael"
+			],
+            "syntax": [
+                "user",
+                "role"
+            ],
+			"requires": {
+				"role": "admin",
+				"args": [2]
+			}
+		},
+		{
+			"aliases": [
+				"removerole",
+				"rr"
+			],
+			"description": "Removes a role with a given name from a user",
+			"module": "Utility",
+			"file": "roles",
+			"method": "remove",
+			"prefix": "generic",
+			"usage": [
+				"removerole dev MMichael"
+			],
+            "syntax": [
+                "user",
+                "role"
+            ],
+			"requires": {
+				"role": "admin",
+				"args": [2]
+			}
+		},
+		{
+			"aliases": [
+				"role",
+				"iam"
+			],
+			"description": "Toggles your membership of a role. Removes all other roles of that group if you choose a role from an exclusive (>0) group",
+			"module": "Utility",
+			"file": "roles",
+			"method": "assign",
+			"prefix": "generic",
+			"usage": [
+				"iam dev"
+			],
+			"requires": {
+				"args": [1]
+			}
+		},
+		{
+			"aliases": [
+				"listselfassignable",
+				"lsar"
+			],
+			"description": "Outputs the list of self-assignable roles. The first group is non-exclusve, the following ones all are.",
+			"module": "Utility",
+			"file": "roles",
+			"method": "get",
+			"prefix": "generic",
+			"usage": [
+				"lsar 0"
+			],
+			"requires": {
+				"args": [0, 1]
+			}
+		},
+		{
+			"aliases": [
+				"addselfassignable",
+				"asar"
+			],
+			"description": "Adds a self-assignable role. The first group is non-exclusve, the following ones all are.",
+			"module": "Utility",
+			"file": "roles",
+			"method": "asar",
+			"prefix": "generic",
+			"usage": [
+				"asar 0 Europe"
+			],
+			"requires": {
+				"role": "admin"
+			}
+		},
+		{
+			"aliases": [
+				"removeselfassignable",
+				"rsar"
+			],
+			"description": "Removes a role from the self-assignable list.",
+			"module": "Utility",
+			"file": "roles",
+			"method": "rsar",
+			"prefix": "generic",
+			"usage": [
+				"rsar Europe"
+			],
+			"requires": {
+				"role": "admin"
+			}
+		}
+	],
     "Trivia": [
         {
             "aliases": [

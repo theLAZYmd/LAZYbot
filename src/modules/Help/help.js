@@ -90,7 +90,7 @@ class Help extends Parse {
 			if (value.includes('undefined')) continue;
 			array.push([
 				'• ' + type.toProperCase(),
-				value.join(' or ')
+				value.join(' or ').toString()
 			]);
 		}
 		return this._requires = array.toPairs();
@@ -164,7 +164,7 @@ class Help extends Parse {
 						if (item.length[i] === '++')
 							item.length[i] = 'more';
 					string += '`' + item.length.join('` or `') + '` arguments';
-				}
+				} else string = item.toString();
 				return string;
 			default:
 				return undefined;

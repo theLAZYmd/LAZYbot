@@ -19,8 +19,8 @@ class CustomReactions extends Parse {
 
 	get type() {
 		if (this._type) return this._type;
-		if (/^(?:[a-z]cr|[a-z]+customreaction)$/i.test(this.command)) return this._type = 'text';
-		if (/^(?:[a-z]er|[a-z]+emojireaction)$/i.test(this.command)) return this._type = 'emoji';
+		if (/^(?:[a-z]cr|[a-z]+cust(?:om)?react(?:ion)?)$/i.test(this.command)) return this._type = 'text';
+		if (/^(?:[a-z]er|[a-z]+emo(?:ji)?react(?:ion)?)$/i.test(this.command)) return this._type = 'emoji';
 		return null;
 	}
 
