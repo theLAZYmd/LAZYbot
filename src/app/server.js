@@ -58,7 +58,7 @@ app.get('/logs/error.log', function (req, res) {
 	try {
 		if (req.params.name === 'data.log') throw new Error('Access denied');
 		let buffer = fs.readFileSync('./src/logs/error.log', 'utf8');
-		let str = buffer.toString().trim().split(/\n[^\s]/).slice(-200).reverse().join('\n');
+		let str = buffer.toString().trim().split(/\n[^\s]/).slice(-50).reverse().join('\n');
 		res.status(200).type('text/plain').send(str);
 	} catch (e) {
 		if (e) res.status(404).type('text/plain').send(e.message);

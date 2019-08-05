@@ -36,6 +36,11 @@
                 "type": "text",
                 "reaction": "<https://teamup.com/ks3ozaeaopfk1v98bf?view=agenda>",
                 "anyword": true
+            },
+            "errorlog": {
+                "type": "text",
+                "reaction": "http://lazybot.co.uk/logs/error.log",
+                "anyword": false
             }
         },
         "emoji": {
