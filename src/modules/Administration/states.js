@@ -26,11 +26,9 @@ class States extends Parse {
 		for (let i = 0; i < channels.length; i++) { //selective toggle is only possible when enabling
 			if (LAZYbot || !this.server.states.tm) channels[i].overwritePermissions(config.ids.bot, {
 				READ_MESSAGES: this.server.states.tm ? false : null, //each set to the opposite
-				SEND_MESSAGES: this.server.states.tm ? false : null //so if testing mode is enabled, permissions are denied
 			});
 			if (bouncer || !this.server.states.tm) channels[i].overwritePermissions(config.ids.bouncer, {
 				READ_MESSAGES: this.server.states.tm ? false : null, //if testing mode is disabled, permissions are allowed
-				SEND_MESSAGES: this.server.states.tm ? false : null
 			});
 		}
 		DataManager.setServer(this.server);
