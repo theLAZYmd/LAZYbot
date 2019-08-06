@@ -16,8 +16,8 @@
     ],
     "branch": "https://github.com/theLAZYmd/LAZYbot/blob/master",
     "homepage": "https://github.com/theLAZYmd/LAZYbot/blob/master/README.md",
-	"releases": "https://github.com/theLAZYmd/LAZYbot/releases",
-	"contributors_page": "https://github.com/theLAZYmd/LAZYbot/graphs/contributors",
+    "releases": "https://github.com/theLAZYmd/LAZYbot/releases",
+    "contributors_page": "https://github.com/theLAZYmd/LAZYbot/graphs/contributors",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/theLAZYmd/LAZYbot/.git"
@@ -31,6 +31,8 @@
         "enmap": "^0.3.2",
         "es6": "0.0.7",
         "express": "^4.17.1",
+        "from": "^0.1.7",
+        "fs-reverse-modern": "^1.0.0",
         "lazy-aho-corasick": "^1.0.0",
         "lichess": "^1.0.18",
         "opusscript": "0.0.6",

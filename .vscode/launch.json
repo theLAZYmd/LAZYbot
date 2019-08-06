@@ -7,8 +7,16 @@
 		{
 			"type": "node",
 			"request": "launch",
-			"name": "Launch Program",
+			"name": "MAIN",
 			"program": "${workspaceFolder}\\src\\lazybot.js",
+			"cwd": "${workspaceFolder}",
+			"outputCapture": "std"
+		},
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "SERVER",
+			"program": "${workspaceFolder}\\src\\app\\server.js",
 			"cwd": "${workspaceFolder}",
 			"outputCapture": "std"
 		}

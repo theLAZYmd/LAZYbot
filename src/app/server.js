@@ -2,12 +2,14 @@ const express = require('express');
 const path = require('path');
 const simpleOauth = require('simple-oauth2');
 const fs = require('fs');
+const fsR = require('fs-reverse-modern');
 const lichess = require('lichess');
 
 process.chdir(path.join(__dirname, '..', '..'));
 
 const app = express();
 const DataManager = require('../util/datamanager');
+const Logger = require('../util/logger');
 const config = require('../config.json');
 const token = require('../token.json');
 const auth = require('../modules/Chess/auth');
@@ -57,9 +59,21 @@ app.get('/logs/debug.log', function (req, res) {
 app.get('/logs/error.log', function (req, res) {
 	try {
 		if (req.params.name === 'data.log') throw new Error('Access denied');
-		let buffer = fs.readFileSync('./src/logs/error.log', 'utf8');
-		let str = buffer.toString().trim().split(/\n[^\s]/).slice(-200).reverse().join('\n');
-		res.status(200).type('text/plain').send(str);
+		const file = './src/logs/error.log';
+		const stats = fs.statSync(file);
+		const bytes = stats.size;
+		let stream = fsR(file, {
+			matcher: /\n\S/,
+			bufferSize: 3 * 1024,
+			flags: 'r',
+			start: bytes - 20 * 1024
+		});
+		stream.on('open', () => res.status(200));
+		stream.on('data', (chunk) => {
+			res.write(chunk);
+		});
+		stream.on('end', () => res.end());
+		stream.on('error', res.send);
 	} catch (e) {
 		if (e) res.status(404).type('text/plain').send(e.message);
 	}
@@ -141,3 +155,4 @@ app.get('/', function (req, res) {
 });
 
 app.listen(80);
+Logger.info('Listening on port 80');
