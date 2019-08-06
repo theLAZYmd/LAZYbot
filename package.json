@@ -26,7 +26,6 @@
     "license": "MIT",
     "preinstall": "rm package-lock.json",
     "dependencies": {
-        "cheerio": "^1.0.0-rc.3",
         "discord.js": "^11.4.2",
         "enmap": "^0.3.2",
         "es6": "0.0.7",
@@ -36,7 +35,6 @@
         "lazy-aho-corasick": "^1.0.0",
         "lichess": "^1.0.18",
         "opusscript": "0.0.6",
-        "pug": "^2.0.4",
         "request": "^2.88.0",
         "request-promise": "^4.2.2",
         "simple-oauth2": "^2.2.1",

@@ -7,6 +7,7 @@ const levels = {
 	verbose: 3, 
 	debug: 4,
 	load: 4,
+	page: 4,
 	command: 4,
 	data: 5
 };
@@ -17,6 +18,7 @@ addColors({
 	verbose: 'green', 
 	debug: 'green',
 	load: 'green',
+	page: 'blue',
 	command: 'blue',
 	data: 'blue'
 });
@@ -117,7 +119,7 @@ class Logger {
 		for (let a of Array.from(arguments)) {
 			logger.log({
 				level: 'error',
-				message: a.stack ? a.stack : a.replace(/\n/g, '\t')
+				message: a.stack ? a.stack : a.toString().replace(/\n/g, '\t')
 			});
 		}
 	}
@@ -162,6 +164,16 @@ class Logger {
 				message
 			});
 		}
+	}
+
+	/**
+	 * Whenever someone requests a page
+	 */
+	static async page() {
+		logger.log({
+			level: 'page',
+			message: JSON.stringify(Array.from(arguments))
+		});
 	}
 
 	/**
