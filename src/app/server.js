@@ -48,9 +48,21 @@ app.use('/config', (req, res) => res.json({
 
 app.get('/logs/debug.log', function (req, res) {
 	try {
-		let buffer = fs.readFileSync('./src/logs/debug.log', 'utf8');
-		let str = buffer.toString().trim().split('\n').slice(-200).reverse().join('\n');
-		res.status(200).type('text/plain').send(str);
+		const file = './src/logs/debug.log';
+		const stats = fs.statSync(file);
+		const bytes = stats.size;
+		let stream = fsR(file, {
+			matcher: /\n\S/,
+			bufferSize: 3 * 1024,
+			flags: 'r',
+			start: bytes - 40 * 1024
+		});
+		stream.on('open', () => res.status(200));
+		stream.on('data', (chunk) => {
+			res.write('2' + chunk);
+		});
+		stream.on('end', () => res.end());
+		stream.on('error', res.send);
 	} catch (e) {
 		if (e) res.status(404).type('text/plain').send(e.message);
 	}
@@ -58,7 +70,6 @@ app.get('/logs/debug.log', function (req, res) {
 
 app.get('/logs/error.log', function (req, res) {
 	try {
-		if (req.params.name === 'data.log') throw new Error('Access denied');
 		const file = './src/logs/error.log';
 		const stats = fs.statSync(file);
 		const bytes = stats.size;
