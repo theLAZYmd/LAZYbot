@@ -70,7 +70,7 @@ app.get('/logs/error.log', function (req, res) {
 		});
 		stream.on('open', () => res.status(200));
 		stream.on('data', (chunk) => {
-			res.write(chunk);
+			res.write('2' + chunk);
 		});
 		stream.on('end', () => res.end());
 		stream.on('error', res.send);
