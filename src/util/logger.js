@@ -117,7 +117,7 @@ class Logger {
 		for (let a of Array.from(arguments)) {
 			logger.log({
 				level: 'error',
-				message: a.stack || a
+				message: a.stack ? a.stack : a.replace(/\n/g, '\t')
 			});
 		}
 	}
