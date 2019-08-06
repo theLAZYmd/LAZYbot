@@ -12451,6 +12451,442 @@
                 "page": 0,
                 "author": "515524778530963473",
                 "cmdID": "597368744687304704"
+            },
+            "607232019977732136": {
+                "embedgroup": [
+                    {
+                        "title": "Profile for  SamCopeland#7606",
+                        "description": "",
+                        "color": 3447003,
+                        "fields": [
+                            {
+                                "name": "Info",
+                                "value": "Region: **Americas**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Jul 19 2017**\nThe House: **Feb 21 2018**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`337255531045453824`**\nPosition in Database: **243**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "16",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/337255531045453824/dc0b2e5e44ca142f1eec0c07fab5dd84.png?size=2048"
+                        },
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "525711939171778570",
+                "cmdID": "607232018413256707"
+            },
+            "607654125244776482": {
+                "embedgroup": [
+                    {
+                        "title": "Profile for  MMichael#3973",
+                        "description": "",
+                        "color": 10181046,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "ProgramMMichael",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Location: **Finland**\nRegion: **Europe**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Jul 09 2017**\nThe House: **Dec 12 2017**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`333586342275710978`**\nPosition in Database: **33**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "41,342",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/333586342275710978/95885e7df0f05cf97fde8d30d35b3538.png?size=2048"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": "Profile for  MMichael#3973",
+                        "description": "",
+                        "color": 10181046,
+                        "fields": [
+                            {
+                                "name": "<:chesscom:430038158244184064> Chess.com",
+                                "value": "[MMichael](https://www.chess.com/member/MMichael)\nBullet: 2397?\nBlitz: 2505?\nRapid: 1762?\nClassical: 1494?\nCrazyhouse: **2433**\nBughouse: **2533**\nPuzzles: 2311?",
+                                "inline": true
+                            }
+                        ],
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 1,
+                "author": "333586342275710978"
+            },
+            "607799259022098432": {
+                "embedgroup": [
+                    {
+                        "title": "Official House Shop Roles",
+                        "description": "Congrats on accumulating a whole bunch of flowers. Here are the roles you can buy; they will give you a special colour flair and make you superior to other members on the right sidebar! The colors look really nice.\n\nCheck savings by `.$`. Check level by `.xp`\n\n__Bronze__: 200 🌸; **if level 5**, 90 🌸\n__Silver__: 360 🌸; **if level 10**, 180 🌸 \n__Gold__: 680 🌸; **if level 20**, 370 🌸 \n__Diamond__: 1320 🌸; **if level 30**, 760 🌸 \n\nAre you just that special that you want your own colour? Well then buy:\n\n__ChooseColor__: 500 🌸 \n\nChange your colour to whatever you want using the `!color` command.\n Does not affect your right sidebar standings; it's for ye vain ones.",
+                        "footer": {
+                            "text": "Role rewards must be bought in order."
+                        }
+                    }
+                ],
+                "period": 180000,
+                "page": 0,
+                "author": "452913680208756736"
+            },
+            "607851980961873940": {
+                "embedgroup": [
+                    {
+                        "title": "House Guide to Horde",
+                        "description": "__**ABOUT**__\n\n**Horde chess** is a chess variant where the white side starts with 36 pawns (*The Pawns*) and the black side (*The Pieces*) needs to destroy the Horde to win. \n\n__**RULES**__\n\n[Starting position](<https://i.imgur.com/Hurb8aW.png>)\n\nThe normal chess rules are valid; for example\n\n• all pawns can be promoted on the final rank\n• stalemate occurs, if either side run out of moves\n\nThe only exception is…\n\n• that white's pawns on the first and second ranks may advance one or two steps, given that the path in the file is free. Unlike in regular chess, this does not have to be the pawn's first move.\n• if a pawn advances two squares from the first to the third rank, black can not capture it with the enpassant rule\n\n[Rules page on lichess](https://lichess.org/variant/horde).\n\n__**WHERE?**__ \n\n● [Lichess.org](https://lichess.org/)",
+                        "color": 14841132,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/BB71aOa.png"
+                        }
+                    },
+                    {
+                        "title": "House Guide to Horde",
+                        "description": "__**IMPROVE**__ \n\n**THE PAWNS**\nWhite should keep their pawns **together** and promote.\n\nThe goal for white is to checkmate. This is most easily achieved after promotion (by which time black will probably resign after all of their sacrifices). White’s weakest files are **A- and H-files** since they are only defended once. White must guard these files and the backrank. White must remember that the power is in the horde, and therefore must not spreadout his pawns in an easily permeable, checker like structure. **Accept or reject** sacrifices as the position calls for. White must also keep in mind that should black get to the back of the horde, it's not always the end of the game. It takes valuable time for black to capture all of the pawns rank by rank -- time white could be using to promote pawns.\n\n**THE PIECES** \nBlack should target the rook files and get to the back ranks.\n\nWinning with black is most easily achieved by getting to the back of the horde. The weakest files are A- and H-files, and therefore black should seek to **pressure** those files.",
+                        "color": 14841132,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/BB71aOa.png"
+                        }
+                    },
+                    {
+                        "title": "House Guide to Horde",
+                        "description": "**__STUDIES__**\n\n**Stubenfisch:** [Opening ideas for beginners](https://lichess.org/study/fKHAjYni)\n**FM svenos:** [My opening repertoire](https://lichess.org/study/yXTpOSfM)",
+                        "color": 14841132,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/BB71aOa.png"
+                        }
+                    },
+                    {
+                        "title": "House Guide to Horde",
+                        "description": "**__VIDEOS__**\n\n● **Stubenfisch**\nTwitch: <https://www.twitch.tv/stubenfisch>",
+                        "color": 14841132,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/BB71aOa.png"
+                        }
+                    }
+                ],
+                "period": 180000,
+                "page": 0,
+                "author": "346484064636895232"
+            },
+            "607852281320177664": {
+                "embedgroup": [
+                    {
+                        "title": "House Guide to Crazyhouse",
+                        "description": "\n__**ABOUT**__\n\n#zh\n\n**Crazyhouse** (ZH) is a chess variant in which an opponent's captured pieces can be dropped back on the board instead of moving a piece. Crazyhouse is a variant similar to bughouse chess, but with only two players.\n\nOther names for this variant are drop chess, mad chess, reinforcement chess, turnabout chess and schizo-chess. It’s also known as wild 23. \n\n__**RULES**__\n\nAll the rules and conventions of standard chess apply, with the addition of drops, as explained below.\n\n • A captured piece reverses colour and goes to the capturing player's pocket. At any time, instead of making a move with a piece on the board, a player can drop a piece from their pocket onto an empty square on the board.\n• Drops resulting in immediate checkmate are permitted.\n• Pawns may not be dropped on the players' 1st or 8th ranks.\n• Promoted but captured pawns are dropped as pawns.\n\nRules-page on lichess with video: https://lichess.org/variant/crazyhouse\n\n__**WHERE?**__\n\n● [lichess.org](https://lichess.org)\n● [chess.com](https://chess.com)\n● [Free Internet Chess Server](http://www.freechess.org/)\n● [Internet Chess Club](https://www.chessclub.com/)",
+                        "color": 14841132,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/pMkkATk.png"
+                        }
+                    },
+                    {
+                        "title": "House Guide to Crazyhouse",
+                        "description": "**__IMPROVE__**\n\nCrazyhouse is a fast-paced game that needs strong tactics and a good awareness of positional weaknesses. Unlike regular chess, draws are rare because new pieces keep being reintroduced to the board. Check out [crosky’s crazyhouse overview](http://bit.ly/2FfYYMX).\n\n• As GM Yasser Seirawan would say, **king safety** comes first and foremost. Ensure that your king's position is safe from attack; this does not necessarily imply castling – dropping pieces around your king can effectively guard it from serious threats.\n\n• **Develop** your pieces in the opening and **control key squares**, especially around your king.\n\n• Beware of **holes** in your position. A hole provides an opening for an opponent's piece which can lead to a strong attack. If pieces do enter, chase them away and secure your position. As helmsknight would say, “get out of my house!” Similarly, seek to exploit any holes your opponent leaves in their position.\n\n• Beware of **piece sacs** on [f2/f7](https://youtu.be/kZPSNF8XHQI) or [g2/g7](https://youtu.be/6Gh2n9kWdb8), especially if the opponent has many pieces in hand.\n\n• Often the best defence is **attack**, as any mating sequence threatened must be dealt; the majority of crazyhouse moves have an **attacking purpose**. As Vempele says, the best defence against @h3 might be @h6. Launch counter-attacks that are faster and cannot be ignored.\n\n• **Initiative** is more important than material. If a player has initiative they can drop their pieces in hand with check and threats and dominate the board. It’s important to utilise positional dominance because if the initiative runs out, the opponent can take back initiative with pieces in hand and reassert control.",
+                        "color": 14841132,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/pMkkATk.png"
+                        }
+                    },
+                    {
+                        "title": "House Guide to Crazyhouse",
+                        "description": "**__MATERIAL__**\n\n• **Pawns** are more valuable than in regular chess, because they can be dropped anywhere on the board including the seventh rank. A minor pieces can be happily traded for 2 pawns in most situations. Unlike chess, **Doubled Pawns** are less of a weakness because pawn structures can be fixed with pawns in hand, and a doubled pawn can even be a strength because it controls squares of both colours. \n\n• **Knights** are wonderful attackers because their threats can’t be blocked [...].\n\n• **Bishops** are strong defenders as they cover diagonals going backwards as well as forwards. A Bishop on g2, for instance, is able to take on h3 and still cover g2. They can also be good attackers because they control channels of a single colour. Pawns and Bishops are known as **\"diags”** because they can penetrate an opponent position along diagonals of a single colour. If all your pawns are on light squares for example, you must take care to defend dark square weaknesses. For more on the importance of colour complexes, check out [mastertan’s visual guide](http://bit.ly/2FQmVZn).\n\n• **Rooks** are useful to defend and attack open files. Dropping a rook on the back rank with check is a good way to force an opponent to “waste” a piece; combined with a pawn drop on the 7th exploiting the pin, this combination can have lethal effect. Rooks are often sacked on the backrank promoting a pawn to remove defenders. [Example](https://lichess.org/yUwqzUBO/black#27).\n\n• **Queens** are worth less in crazyhouse than in normal chess, because they can be hit with a tempo by minors, especially when dropped. Crazyhouse favors numeracy in pieces; a Bishop and Knight in hand have more versatility than a Queen. In general, Queens are worth about 2 minors.",
+                        "color": 14841132,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/pMkkATk.png"
+                        }
+                    },
+                    {
+                        "title": "House Guide to Crazyhouse",
+                        "description": "**__STRATEGY__**\n\n• Crazyhouse is still chess, so **common chess tactics** still apply: try not to hang pieces or block in your own pieces; trap opponent pieces and use forks, pins and discovered checks. Because pieces can land anywhere on the board, one must be even more alert.\n\n• **Defending**. Under heavy attack, it is important to evaluate your position. You usually have three options: **First**, you could take your opponent’s attackers, try to stay safe and hope the attack exhausts itself and they run out of material. You might try to limit the flow of exchanges to give time to get the king safe and not give pieces that the opponent needs to mate you. **Second**, if a sacrifice is too dangerous to take, you could focus on defending, dropping pieces near your king to cover important squares. One could also make luft, giving the king a flight path, or a safe square it can fall back or run up to. **The third option** is to ignore the threat and start an attack of your own: if you are the one getting to the opponent’s king first, go for it! Going all in can also be a last resort hoping your opponent makes a mistake.\n\n• **Attacking**. To keep initiative, it is common for mating sequences to comprise purely of checks: [drawing the king out and/or cornering it](https://goo.gl/QLp4DY), [picking up pieces needed for mate](https://goo.gl/uNPKqG), [cutting off escape squares](https://goo.gl/2okT35), [luring the king to a mating square](https://goo.gl/Dd4BvF), [deflecting defending pieces](https://goo.gl/hX6Q85), and [opening up a file, diagonal or key square](https://goo.gl/AqLN86).\n\n• It is important to be familiar with [common mating patterns](https://goo.gl/7ejioW).",
+                        "color": 14841132,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/pMkkATk.png"
+                        }
+                    },
+                    {
+                        "title": "House Guide to Crazyhouse",
+                        "description": "**__VIDEOS__**\n\nStreaming chess has become more popular in the past few years and crazyhouse has shared the fruits of this growing trend. The House presents to you the best and most famous streamers of crazyhouse.\n\n• **JannLee**: [YouTube](<https://www.youtube.com/channel/UCbo8-5AEH7u3lE-yOGeNW1Q>), [Twitch](<https://www.twitch.tv/jannleecrazyhouse>).\n• **Nikolas Theiss**: [YouTube](<https://www.youtube.com/channel/UCsjRN9g1AYODJZOPVJKzUmw/>).\n• **Thomas Crosky**: [YouTube](<https://www.youtube.com/channel/UCvowgcm56sLguWxYp8oqI1w>).\n• **Helmsknight**: [YouTube](<https://www.youtube.com/channel/UCcKXwA_lo3Zpz3_Mc-WVLtw>), [Twitch](<https://www.twitch.tv/helmsknight>).\n• **Okei**: [Twitch](<https://www.twitch.tv/okeizh>).\n• **Mugwort**: [YouTube](https://www.youtube.com/channel/UCNMhNQybeLGJHWJv5qT1liQ), [Twitch](https://www.twitch.tv/mugwortcrazyhouse).\n  \nWant your stream to appear here? Let the mods know.\nWhat to create a bio page for your stream? Type `... embedex` and design yourself a page; alternatively send one of the mods the details you want to be included.",
+                        "color": 14841132,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/pMkkATk.png"
+                        }
+                    }
+                ],
+                "period": 180000,
+                "page": 0,
+                "author": "333586342275710978"
+            },
+            "607852348840214538": {
+                "embedgroup": [
+                    {
+                        "title": "House Guide to Antichess",
+                        "description": "__**ABOUT**__\n\n**Antichess** (anti) is a variant in which the aim  is to get rid of your own pieces. The game is also known as Losing chess, the Losing Game, Giveaway Chess, Suicide Chess, Killer Chess, Must-Kill, Take-All Chess, Capture Chess, Losums, or Take-Me. The game has recently been solved: there is a tree (called the Watkins tree) which proves a forced win for white from 1. e3. On the other other hand, many starting moves can lead to a forced loss for white which have been known throughout the history of the game, those include 1.e4, 1.d3 and 1.d4.\n\n__**RULES**__\n\nThe rules follow most standard chess rules but demand in addition that **a capture is forced if it can be played**, if more then one capture is possible, then a player is permitted to choose which one to make. In mainstream anti the king is considered a normal piece and promotion to king is allowed and often useful. Victory is achieved by losing all the pieces or getting stalemated in standard rules. When playing on FICS, victory is awarded to the player with the smaller number of pieces on the board in the case of stalemate, and an equal number of pieces is considered to be a draw.\n\n__**WHERE?**__\n\nAntichess can be played on:\n\n• [Free Internet Chess Server](http://www.freechess.org/)\n• [lichess.org](https://lichess.org/)\n\nCompiled by <@346485544848457728>",
+                        "color": 14841132,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/OS9cSlp.png"
+                        }
+                    },
+                    {
+                        "title": "House Guide to Antichess",
+                        "description": "**__PIECES__**\n\nDetails on each piece are given. Rough valuations are shown next to each piece name.\n\n**KING** 0\n+ The most important piece. You can waste moves to avoid zugzwang and solidate key areas.\n- Too slow for other tasks.\n\n**Queen** -1\n+ Useful for middle-game tactics such as \"Queen races\", attacking opponents king and attacking weak squares.\n- Dangerous in the endgame.\n\n**Rook** -3\n+ Quick endgame piece.\n- Can easily turn into a \"loose cannon\".\n\n**Bishop** -6\n+ Good for early game tactics and drawing endgames due to opposite-colored bishops.\n- Can easily turn into a \"loose cannon\".\n\n**Knight** -5\n+ Good for destroying pawn formations and forking weak squares.\n- Immobile and bad in the endgame. Lose them before the endgame!\n\n**Pawns** -1\n+ Useful for restricting opponent's pieces and breaking pawn formations.\n- Slow, immobile. Dangerous when it comes to forced promotions.",
+                        "color": 14841132,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/OS9cSlp.png"
+                        }
+                    },
+                    {
+                        "title": "House Guide to Antichess",
+                        "description": "__**BASIC MISTAKES **__\n\nAntichess is a very theoretical variant and there is lot of theory in it, especially cause of lines being often forced. Opening blunders are common between beginners, so safe openings such as **1. e3** are recommended. Losing openings for White include **1.a3, 1.b4, 1.c3, 1.d3, 1.d4, 1.e4, 1.f3, 1.f4, 1.h3, 1.h4, 1.Nc3** and **1.Nf3** but many of these are not trivial. Apart from 1. e3, other playable openings are **1.c4, 1.Nh3, 1.g3** (other openings are dubious). The most common novice mistakes are:\n\n• Trying to **give away all pieces immediately** is therefore a mistake. One should carefully consider piece position; having more pieces that the opponent gives the ability to 'control' you, then give away all the pieces in one initiative.\n\n• **Not developing.** Anti isn't really about giving away pieces in the beginning; one must develop pieces and make it harder for your opponent to move. That's a good strategy some of the really good players like to use, unless you have a forced win.\n\n• Giving away **important** pieces: it is important to know which pieces to keep and which to give. Bishops are often dangerous, so it is recommended for beginners to get rid of bishops as soon as possible. On the other hand, the king is a precious ally when an opponent tries to zugzwang, giving it away early is often a mistake. It's better to keep pieces instead of pawns, because pawns have a very limited range of moves and can be easily predicted or forced into zugzwang.\n\n• Being overly **passive**: simply trying to avoid exposing yourself to taking pieces lets an opponent 'control' you, then forcing you into zugzwang to take pieces. Carefully consider when one should trade and one should not.",
+                        "color": 14841132,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/OS9cSlp.png"
+                        }
+                    },
+                    {
+                        "title": "House Guide to Antichess",
+                        "description": "__**FURTHER IMPROVE **__\n\nTips on how to advance your play:\n\n• **Utilise choices**. Sometimes, it is advantageous to use one piece to take a piece in the opponent's position while your opponent is taking pieces; this can be referred to as a [queen race](https://lichess.org/0vDXr9aX). Be careful about attempting this with other pieces after: [In this game](https://lichess.org/study/SqCNKpVW), Black is out of bishop moves and must take White's queen, resulting in a loss. [Another example](https://lichess.org/study/2EjMqvsp).\n\n• Be aware of so called quiet moves that can force your opponent **to take an unprotected piece**. [In this game](https://lichess.org/4FF1DBvW#4) an excellent example of such a move is 3. Bg2: preparing to take on b7, which will force Bxb7 and later Bxh1.\n\n• Do **not** be too eager to **push the h- and a-pawns** as this exposes the rooks in mid-game. Rooks can be easily controlled and this can lead to a disastrous position if your opponent forces your rook into their position and is able to give away lots of material for nothing. On the other hand, if the opponent doesn't have a **b/g-pawn** pushing the a/h-pawn is often [a good move](https://lichess.org/study/e7IRQR1f).",
+                        "color": 14841132,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/OS9cSlp.png"
+                        }
+                    },
+                    {
+                        "title": "House Guide to Antichess",
+                        "description": "**__GUIDES__**\n\nSome useful antichess links:\n\n• **Solved Tree**: [Mark Watkins](http://magma.maths.usyd.edu.au/~watkins/LOSING_CHESS/).\n\n• **Finlip**: [YouTube](http://bit.ly/2Hj7Tuo), [Twitch](https://www.twitch.tv/anuppokhrel).\n\n• **FKA_SooP**: [Introduction To Zugzwang](https://lichess.org/study/ad6RvpQb).\n\n• **hauptschule**: [Facing 1. e3 as black](https://lichess.org/study/C2tvnF26).\n\n• **John Beasley**: [Endgame tables: what ending pieces are winning?](http://bit.ly/2FpVkBa).\n\n• **Frestho**: [Antichess tactics](https://lichess.org/study/WLrT4U2E)\n  \nWant your stream to appear here? Let the mods know.\nWhat to create a bio page for your stream? Type `... embedex` and design yourself a page; alternatively send one of the mods the details you want to be included.",
+                        "color": 14841132,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/OS9cSlp.png"
+                        }
+                    }
+                ],
+                "period": 180000,
+                "page": 0,
+                "author": "346484064636895232"
+            },
+            "607852488535834634": {
+                "embedgroup": [
+                    {
+                        "description": "**General**\nThe channel moderators are elected moderators chosen by people in that channel. Each variant channel (crazyhouse, 3-check, atomic etc) has two (2) channel mods. They are the representatives of their variant community. \n\n**Assignment**\nIn each channel, two channel mods will:\n• Maintain the channel and make it as good-a-place as possible.\n• Invite and build up the channel community for that variant.\n• Organise events for the channel/community (tournaments, new ideas, vs, giveaways).\n• Manage (delete, pin) messages.\n• Change channel name and description. \n• Control channel specific bot functions (new 'nowplaying' feature, live stream notifications)",
+                        "color": 53380,
+                        "author": {
+                            "name": "Channel moderators",
+                            "icon_url": "https://vignette.wikia.nocookie.net/clubpenguin/images/9/9b/Moderator_Badge_new.png/revision/latest?cb=20140206150417"
+                        },
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/VId4nJT.png"
+                        },
+                        "fields": []
+                    }
+                ],
+                "period": 180000,
+                "page": 0,
+                "author": "346484064636895232"
+            },
+            "607853410489991178": {
+                "embedgroup": [
+                    {
+                        "title": "Chessvariants.training - The promised land of chess variant puzzles.",
+                        "url": "https://chessvariants.training",
+                        "description": "**Puzzles**\nFor years the chess community has been asking leading sites to add variant compatability to their tactics platforms, which never came to fruition, until now. Being the first of its kind, [chessvariants.training](https://chessvariants.training/) was created and is run by <@163325840136863744>. You can solve antichess, atomic, crazyhouse, king of the hill, three-check, horde, and racing kings puzzles, respectively.\n\n**Variant960**\nIn addition to its tactics trainer, the site also offers Variant960 games, which can be played [here](https://chessvariants.training/Variant960).",
+                        "color": 53380,
+                        "thumbnail": {
+                            "url": "https://chessvariants.training/images/icon.png"
+                        }
+                    }
+                ],
+                "period": 180000,
+                "page": 0,
+                "author": "346484064636895232"
+            },
+            "607853431834804224": {
+                "embedgroup": [
+                    {
+                        "content": "**Welcome to The House %user.mention%!** Let's get the party started @welcome squad.\n",
+                        "description": "**We're the home of chess variants across lichess.org, chess.com, FICS, and anywhere else.**​",
+                        "color": 9359868,
+                        "footer": {
+                            "text": "Have fun!"
+                        },
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/YWF70U4.png"
+                        },
+                        "fields": [
+                            {
+                                "name": "View our channels",
+                                "value": "You won't be able to see most of our channels until you're a **Member.**\nFirstly, familiarise yourself with the rules in #welcome.\nThen, head to #role-assignment and assign yourself permissions to see the chat channels and your favourite variant channels.\n​",
+                                "inline": false
+                            },
+                            {
+                                "name": "How the hell do I use Discord?",
+                                "value": "First time? type `... discord` for our guide on navigating this place.\n​",
+                                "inline": false
+                            },
+                            {
+                                "name": "Link your accounts",
+                                "value": "Type `!lichess` followed by your account name.\nType `!chess.com` followed by your account name.\n​",
+                                "inline": false
+                            },
+                            {
+                                "name": "Crazyhouse World Championships",
+                                "value": "Type `.iam CWC` to see the CWC channels on the left.\n​",
+                                "inline": false
+                            },
+                            {
+                                "name": "Developers",
+                                "value": "If you're a dev, type `@mods I'm a dev` and you'll be added to #devs.",
+                                "inline": false
+                            }
+                        ]
+                    },
+                    {
+                        "content": "**Welcome to The House %user.mention%!** Let's get the party started @welcome squad.",
+                        "description": "**Bienvenue à \"Chez Nous\"!** C'est une plateforme géniale pour discuter les variantes d'échecs de lichess.org, chess.com, FICS, et n'importe où.\n\nVous ne pouvez pas voir et utiliser la majorité de salons de chat avant s'inscrire comme un Membre. Pour faire ça, après avoir lu les règles dans #welcome, allez à #role-assignment et lisez les instructions. Réagissez avec les emojis appropriés pour gagner l'accès aux salons.\n\nSi vous êtes en général plus confortables en parlant français, écrivez `.atl fr>en` pour faire traduire au bot automatiquement vos phrases.",
+                        "color": 12956504,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/E8S8QXE.png"
+                        }
+                    },
+                    {
+                        "content": "**Welcome to The House %user.mention%!** Let's get the party started @welcome squad.",
+                        "description": "**Willkommen in \"The House\"!** Wir sind dein Zuhause für Schachvarianten auf lichess.org, chess.com , FICS und an allen anderen Orten.\n\nDie meisten Kanäle werden für dich unsichtbar sein, solange du noch kein **Mitglied**bist. Wenn du die Regeln in #welcome durchgelesen hast, gehe bitte zu #role-assignment und weise dir die Berechtigungen zu, sodass du die Chat- und Varianten-Kanäle sehen kannst.\n\nFalls du nicht so gut mit English klarkommst, schreibe `.atl de>en`, um deine Nachrichten automatisch übersetzen zu lassen.",
+                        "color": 12956504,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/E8S8QXE.png"
+                        }
+                    },
+                    {
+                        "content": "**Welcome to The House %user.mention%!** Let's get the party started @welcome squad.",
+                        "description": "**Bienvenidos a \"Nuestra Casa\"!** Aquí podrás discutir los variantes de ajedrez de lichess.org, chess.com, FICS y otros sitios.\n\nLa mayoría de los canales aquí solo se pueden ver si eres un **Miembro.** Cuando te has familiarizado con las reglas en #welcome, por favor, ven a #role-assignment para asignarte unas roles y ver los canales de chat y los canales de tus variantes favoritos.\n\nSi prefirirías hablar español, escriba `.atl es>en` para que el bot traduzca automáticamenta lo que escribes.",
+                        "color": 12956504,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/E8S8QXE.png"
+                        }
+                    },
+                    {
+                        "content": "**Welcome to The House %user.mention%!** Let's get the party started @welcome squad.",
+                        "description": "**Benvenuto in \"The House!\"** Questa è la casa di tutte le varianti degli scacchi presenti su lichess.org, chess.com, FICS e in qualsiasi altro luogo.\n\nNon potrai vedere o usare molti dei nostri canali finchè non sarai un Membro degli stessi. Dopo aver  preso visione delle regole in #welcome, entra in #role-assignment e conferisciti i permessi per vedere le chat e i canali delle tue varianti preferite.\n\nSe in generale vi trovate più a vostro agio nel parlare Italiano, digitate `.atl it>en` così che il bot traduca automaticamente le vostre frasi.",
+                        "color": 12956504,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/E8S8QXE.png"
+                        }
+                    }
+                ],
+                "period": 180000,
+                "page": 0,
+                "author": "346484064636895232"
+            },
+            "607967179224252426": {
+                "embedgroup": [
+                    {
+                        "description": "Winner wins 50 :cherry_blossom: + VIP role as long as you keep the shield",
+                        "author": {
+                            "name": "Win a lichess shield to obtain the vip role and flowers!",
+                            "icon_url": "https://i.imgur.com/JbhAKpz.png"
+                        },
+                        "fields": [
+                            {
+                                "name": "Prizes for high performers",
+                                "value": "Top 3 win 40 :cherry_blossom:\nTop 10 win 30 🌸\nTop 20 win 20 🌸\nTop 30 win 10 🌸",
+                                "inline": false
+                            },
+                            {
+                                "name": "Date",
+                                "value": "Check out the upcoming Shield tournaments from [the tournament calendar](https://lichess.org/tournament/calendar).",
+                                "inline": false
+                            }
+                        ]
+                    }
+                ],
+                "period": 180000,
+                "page": 0,
+                "author": "333586342275710978"
+            },
+            "608222457635143699": {
+                "embedgroup": [
+                    {
+                        "title": "Profile for  Falcon#6507",
+                        "description": "",
+                        "color": 3447003,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "Falcon the one\nFalconPower",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Region: **Americas**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Jul 25 2018**\nThe House: **Jul 12 2019**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`471771674833059882`**\nPosition in Database: **997**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "4,778",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/471771674833059882/3f4d70904903d8922afcbf93431c008a.png?size=2048"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": "Profile for  Falcon#6507",
+                        "description": "",
+                        "color": 3447003,
+                        "fields": [
+                            {
+                                "name": "<:chesscom:430038158244184064> Chess.com",
+                                "value": "[FalconPower](https://www.chess.com/member/FalconPower)\nBullet: **1400**\nBlitz: **1500**\nCrazyhouse: **1717**\nBughouse: **1415**\nKing of the Hill: **1734**\nPuzzles: **1308**",
+                                "inline": true
+                            }
+                        ],
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 1,
+                "author": "515524778530963473"
             }
         },
         "election": {
