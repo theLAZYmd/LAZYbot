@@ -72,6 +72,7 @@ class Paginator extends Parse {
 				case ('❎'): {
 					if (user.id !== data.author) return;
 					let paginator = this.paginator;
+					if (!paginator[reaction.message.id].cmdID) return;
 					let msg = await this.channel.fetchMessage(paginator[reaction.message.id].cmdID).catch(() => {});
 					if (msg) msg.delete();
 					delete paginator[reaction.message.id];
