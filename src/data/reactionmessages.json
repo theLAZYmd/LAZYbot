@@ -12805,6 +12805,88 @@
                 "period": 180000,
                 "page": 0,
                 "author": "346484064636895232"
+            },
+            "607967179224252426": {
+                "embedgroup": [
+                    {
+                        "description": "Winner wins 50 :cherry_blossom: + VIP role as long as you keep the shield",
+                        "author": {
+                            "name": "Win a lichess shield to obtain the vip role and flowers!",
+                            "icon_url": "https://i.imgur.com/JbhAKpz.png"
+                        },
+                        "fields": [
+                            {
+                                "name": "Prizes for high performers",
+                                "value": "Top 3 win 40 :cherry_blossom:\nTop 10 win 30 🌸\nTop 20 win 20 🌸\nTop 30 win 10 🌸",
+                                "inline": false
+                            },
+                            {
+                                "name": "Date",
+                                "value": "Check out the upcoming Shield tournaments from [the tournament calendar](https://lichess.org/tournament/calendar).",
+                                "inline": false
+                            }
+                        ]
+                    }
+                ],
+                "period": 180000,
+                "page": 0,
+                "author": "333586342275710978"
+            },
+            "608222457635143699": {
+                "embedgroup": [
+                    {
+                        "title": "Profile for  Falcon#6507",
+                        "description": "",
+                        "color": 3447003,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "Falcon the one\nFalconPower",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Region: **Americas**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Jul 25 2018**\nThe House: **Jul 12 2019**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`471771674833059882`**\nPosition in Database: **997**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "4,778",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/471771674833059882/3f4d70904903d8922afcbf93431c008a.png?size=2048"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": "Profile for  Falcon#6507",
+                        "description": "",
+                        "color": 3447003,
+                        "fields": [
+                            {
+                                "name": "<:chesscom:430038158244184064> Chess.com",
+                                "value": "[FalconPower](https://www.chess.com/member/FalconPower)\nBullet: **1400**\nBlitz: **1500**\nCrazyhouse: **1717**\nBughouse: **1415**\nKing of the Hill: **1734**\nPuzzles: **1308**",
+                                "inline": true
+                            }
+                        ],
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 1,
+                "author": "515524778530963473"
             }
         },
         "election": {
