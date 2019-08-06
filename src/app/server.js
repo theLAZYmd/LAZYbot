@@ -59,7 +59,7 @@ app.get('/logs/debug.log', function (req, res) {
 		});
 		stream.on('open', () => res.status(200));
 		stream.on('data', (chunk) => {
-			res.write('2' + chunk);
+			res.write(('\n2' + chunk).trim());
 		});
 		stream.on('end', () => res.end());
 		stream.on('error', res.send);
