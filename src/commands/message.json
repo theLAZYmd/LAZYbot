@@ -1913,7 +1913,7 @@
                 "color",
                 "colour"
             ],
-            "description": "Sets your personal role colour to anything you want. Requires you to have bought the feature using `${nadeko}shop`. A colour is anything that fits [this criteria](https://discord.js.org/#/docs/main/stable/typedef/ColorResolvable).",
+            "description": "Sets your personal role colour to anything you want. Requires you to have bought the feature using `${nadeko}shop`. A colour is anything that fits [this criteria](https://discord.js.org/#/docs/main/stable/typedef/ColorResolvable). WARNING: can lead to dangerous permissions leaks if a malicious user has 'MANAGE_ROLES' permissions and an admin uses this command",
             "usage": [
                 "color #36393F",
                 "color 255, 26, 26",
