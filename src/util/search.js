@@ -48,6 +48,11 @@ class Search extends Parse {
 		const Message = require('../search/message');
 		return new Message(this.message);
 	}
+
+	get colors() {
+		const Colors = require('../search/colors');
+		return new Colors();
+	}
 }
 
 module.exports = Search;

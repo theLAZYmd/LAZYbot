@@ -54,11 +54,13 @@ class Message extends Search {
 	 * @public
 	 */
 	async extend(filter) {
+		let total = this.channel.messages;
 		for (let i = 0; i < 10 ; i++) {
 			let fetched = await this.channel.fetchMessages({
 				limit: 100,
 				before: this.channel.messages.last().id
 			});
+			total = total ? total.concat(fetched) : fetched;
 			let matched = fetched.filter(filter);
 			if (matched.size > 0) break;
 		}

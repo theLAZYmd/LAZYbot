@@ -1,12 +1,5 @@
 const Parse = require('../../util/parse');
-const Logger = require('../../util/logger');
-const Maths = require('../Calculation/maths');
 const Embed = require('../../util/embed');
-
-const regexes = {
-	rgb: /^([0-9]{1,3}),\s?([0-9]{1,3}),\s?([0-9]{1,3})$/,
-	hex: /(?:0x|#)?([0-9a-f]{1,6})$/,
-};
 
 class Color extends Parse {
 
@@ -54,62 +47,36 @@ class Color extends Parse {
 	}
 
 	/**
-	 * Parse a colour and set the user to that colour
+	 * Parse a colour and set the user to that colour. WARNING: can lead to dangerous permissions leaks if a malicious user has 'MANAGE_ROLES' permissions and an admin uses this command
 	 * @param {Member} member 
 	 * @param {string} argument 
 	 */
-	async set(member, argument) {
+	async set(member = this.member, argument = this.argument) {
 		try {
-			if (!member.roles.some(role => role.name.toLowerCase() === 'choosecolor')) throw this.Permissions.output('role');
-			let role = this.Search.roles.get(member.user.username + 'CustomColor');
-			if (!role) role = await this.guild.createRole(member.user.username + 'CustomColor');
-
-			let color, type;
-			const parser = [
-				['rgb', () => argument.match(regexes.rgb)],
-				['hex', () => argument.match(regexes.hex)],
-				['decimal', () => !isNaN(parseInt(argument, 16)) ? parseInt(argument, 16).match(regexes.hex) : null],
-				['null', () => null]
-			];
-			const mapper = {
-				rgb: val => val.slice(1).map(n => Number(n)),
-				hex: val => val[0],
-				decimal: val => val[0],
-			};
-			const functions = parser;
-			for (let i = 0; i < functions.length && !color; i++) color = functions[i][1](), type = functions[i][0];
-			if (color && mapper[type]) color = mapper[type](color);
+			let control = this.Search.roles.get('ChooseColor');
+			if (!control) control = await this.guild.createRole({
+				name: 'ChooseColor',
+				color: null,
+				hoist: false,
+				position: member.colorRole.position + 1,
+				mentionable: false
+			});
+			if (!this.member.roles.has(control.id)) throw this.Permissions.output('role');
+			let name = member.user.username + 'CustomColor';
+			let role = this.Search.roles.get(name);
+			if (!role) role = await this.guild.createRole({
+				name,
+				hoist: false,
+				position: control.position,
+				mentionable: false
+			});
+			let color = this.Search.colors.get(argument);
+			if (typeof color === 'undefined') throw 'Invalid colour input!';
 			await role.setColor(color);
 			this.get(member, 'Set');
 		} catch (e) {
 			if (e) this.Output.onError(e);
 		}
-	}
-
-	async add(member) {
-		try {
-			member.addRole(this.Search.roles.get('ChooseColor'));
-			let role = await this.guild.createRole({
-				name: member.user.username + 'CustomColor',
-				position: 70
-			});
-			member.addRole(role);
-			Logger.command(['Color', 'process', 'createRole', '[' + [role.name, member.user.tag].join(',') + ']']);
-		} catch (e) {
-			if (e) this.Output.onError(e);
-		}
-	}
-
-	static randDecimal() {
-		return Maths.randbetween(1, 16777215);
-	}
-
-	static randHex() {
-		let letters = '0123456789ABCDEF';
-		let color = '#';
-		for (let i = 0; i < 6; i++)
-			color += letters[Maths.randBetween(0, 17)];
-		return color;
 	}
 
 }
