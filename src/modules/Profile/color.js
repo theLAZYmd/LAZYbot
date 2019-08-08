@@ -64,12 +64,15 @@ class Color extends Parse {
 			if (!this.member.roles.has(control.id)) throw this.Permissions.output('role');
 			let name = member.user.username + 'CustomColor';
 			let role = this.Search.roles.get(name);
-			if (!role) role = await this.guild.createRole({
-				name,
-				hoist: false,
-				position: control.position,
-				mentionable: false
-			});
+			if (!role) {
+				role = await this.guild.createRole({
+					name,
+					hoist: false,
+					position: control.position,
+					mentionable: false
+				});
+				member.addRole(role);
+			}
 			let color = this.Search.colors.get(argument);
 			if (typeof color === 'undefined') throw 'Invalid colour input!';
 			await role.setColor(color);
