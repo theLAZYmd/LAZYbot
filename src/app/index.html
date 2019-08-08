@@ -11,7 +11,6 @@
 
 <body>
 	<link rel="stylesheet" type="text/css" href="css/main.css">
-	<script src="/scripts/commands.js" defer></script>
 	<script src="/scripts/logs.js" defer></script>
 	<div class="banner">
 		<div class="title" >
@@ -39,20 +38,38 @@
 			</div>
 		</div>
 	</div>
-	<div id="commands">
-		<h1 class="subtitle">Commands</h1>
-		<table>
-			<thead>
-				<tr>
-					<th scope="col">Command Name</th>
-					<th scope="col">Description</th>
-					<th scope="col">Usage</th>
-				</tr>
-			</thead>
-			<tbody id="commands_body">
-			</tbody>
-		</table>		
-	</div>
+	<h1 id="subtitles">
+		<a>Commands</a>&emsp;&emsp;<a>Donors</a>
+	</h1>
+	<div id="module"></div>
+	<script src="/scripts/jquery.js"></script>
+	<script>
+		let sections = $('#subtitles a').each(function () {
+			let section = $(this).text().toLowerCase();
+			let i = 0;
+			$.ajax({
+				url: '/pages/' + section + '.html',
+				success: function (html) {
+					$('#module').append(html);
+					window.location.hash = section
+				},
+				complete: () => {
+					//$('#module #' + section).hide();
+					$('#module table:not(:first-child)').hide();
+				}
+			})
+		});
+		$('#subtitles a').click(function () {
+			let txt = $(this).text();
+			let section = txt.toLowerCase();
+			let sections = $('#subtitles a').each(function () {
+				let s = $(this).text().toLowerCase();
+				if (s === section) return;
+				$('#module #' + s).hide();
+			});
+			$('#module #' + section).show();
+		});
+	</script>
 </body>
 
 </html>

@@ -8,11 +8,6 @@ h1 {
 	font-family: Didact Gothic, Muli, Lucida Sans, Sans Serif;
 }
 
-a {
-	text-decoration: none;
-	color: rgb(77, 73, 73);
-}
-
 .title {
 	font-size: 30px;
 	line-height: 57px;
@@ -25,20 +20,32 @@ a {
 	color:#ccc;
 }
 
-.subtitle {
+#container, #container a {
+	text-decoration: none !important;
 	color: rgb(77, 73, 73);
-	text-transform: lowercase;
+}
+
+#subtitles {
+	position: relative;
+	top: -80px;
+	color: rgb(136, 126, 126);
+	text-decoration: none;
+	cursor: pointer
+}
+
+#subtitles a:hover {
+	color: rgb(22, 22, 29)
 }
 
 /* TABLE */
 
-#commands {
+#module {
 	position: relative;
 	top: -80px;
 }
 
 table {
-	table-layout: fixed;
+	table-layout: fixed !important;
 	width: 98%; 
 	border: 3px solid black;
 	border-collapse: collapse;
@@ -46,7 +53,7 @@ table {
 	background-color: #c3c4df;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
-	background-position: center;
+	background-position: left top;
 }
 
 th, tr, td {
@@ -54,6 +61,7 @@ th, tr, td {
 	border: 1px solid black;
 	border-collapse: collapse;
 	padding: 10px;
+	overflow: hidden
 }
 
 thead {
