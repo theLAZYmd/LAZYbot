@@ -163,7 +163,7 @@ class Roles extends Parse {
 			if (!server.sars) server.sars = [];
 			for (let group = 0; group < server.sars.length; group++) {
 				if (server.sars[group].includes(role.id)) {
-					if (!this.member.roles.has(role.id)) {
+					if (this.member.roles.has(role.id)) {
 						if (this.command === 'iam') throw 'You already have role ' + role.name;
 						this.member.removeRole(role).catch(() => {});
 						this.Output.generic('You no longer have **' + role.name + '** role');
