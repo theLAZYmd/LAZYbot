@@ -144,10 +144,6 @@ class Roles extends Parse {
 				let index =  server.sars[group].indexOf(role.id);
 				if (index === -1) throw new Error(server.sars[group]);
 				server.sars[group].splice(index, 1);	
-			server.sars[group].splice(index, 1);
-				server.sars[group].splice(index, 1);	
-				this.server = server;			
-			this.server = server;
 				this.server = server;			
 				this.get(group);
 			}
@@ -168,9 +164,11 @@ class Roles extends Parse {
 			for (let group = 0; group < server.sars.length; group++) {
 				if (server.sars[group].includes(role.id)) {
 					if (this.member.roles.has(role.id)) {
+						if (this.command === 'iamn') throw 'You do not have role ' + role.name;
 						this.member.removeRole(role).catch(() => {});
-						this.Output.generic('You now longer have **' + role.name + '** role');
+						this.Output.generic('You no longer have **' + role.name + '** role');
 					} else {
+						if (this.command === 'iam') throw 'You already have role ' + role.name;
 						this.member.addRole(role).catch(() => {});
 						this.Output.generic('You now have **' + role.name + '** role');
 						if (group !== 0) for (let id of server.sars[group]) {
