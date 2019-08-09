@@ -64,7 +64,6 @@ class Roles extends Parse {
 			.setTitle('Self-assignable roles on ' + this.guild.name);			
 		//	.setTitle('Self-assignable roles on ' + this.guild.name + (group !== undefined ? ', for Group ' + group : ''));
 		//if (group !== undefined) server.sars = server.sars.map((r, i) => i === group ? r : []);
-		if (group !== undefined) server.sars = server.sars.filter((r, i) => i === group);
 		for (let i = 0; i < server.sars.length; i++) {
 			let key = '', value = '';
 			for (let id of server.sars[i]) {
