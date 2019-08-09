@@ -2031,7 +2031,8 @@
 		{
 			"aliases": [
 				"role",
-				"iam"
+				"iam",
+				"iamn"
 			],
 			"description": "Toggles your membership of a role. Removes all other roles of that group if you choose a role from an exclusive (>0) group",
 			"module": "Utility",
