@@ -61,7 +61,9 @@ class Roles extends Parse {
 		let server = this.server;
 		if (!server.sars) server.sars = [];
 		let embed = new Embed()
-			.setTitle('Self-assignable roles on ' + this.guild.name);
+			.setTitle('Self-assignable roles on ' + this.guild.name);			
+		//	.setTitle('Self-assignable roles on ' + this.guild.name + (group !== undefined ? ', for Group ' + group : ''));
+		//if (group !== undefined) server.sars = server.sars.map((r, i) => i === group ? r : []);
 		if (group !== undefined) server.sars = server.sars.filter((r, i) => i === group);
 		for (let i = 0; i < server.sars.length; i++) {
 			let key = '', value = '';
@@ -78,26 +80,38 @@ class Roles extends Parse {
 		this.Output.sender(embed);
 	}
 
-	async asar(group = parseInt(this.args[0]), argument = this.argument) {
+	async asar(group = Number(this.args[0]), argument = this.argument) {
 		try {
+			let server = this.server;
+			if (!server.sars) server.sars = [];
+
 			//Parse the values
 			if (isNaN(group)) group = 0;
 			else argument = argument.slice(group.toString().length).trim();
+			if (group < 0 || group > Math.max(server.sars.length, 1)) throw new RangeError('Group must be within 0 to ' + Math.max(server.sars.length, 1) + ' range');
 			if (!argument) argument = await this.Output.response({
 				description: 'Please specify a valid role',
 				filter: r => this.Search.roles.get(r)
 			});
-			let role = this.Search.roles.get(argument);
-			if (!role) throw 'Couldn\'t find role ' + argument;
-			let server = this.server;
-			if (!server.sars) server.sars = [];
-			if (server.sars.find(group => group.find(r => r === role.id))) throw 'Role **' + role.name + '** is already self-assignable';
+			let [roles, checksum] = argument.split(/\s+/).reduce((acc, curr) => {
+				let [list, stored] = acc;
+				let tmp = (stored + ' ' + curr).trim();
+				let role = this.Search.roles.get(tmp);
+				if (role) {
+					list.push(role);
+					return [list, ''];
+				} else return [list, tmp];
+			}, [[], '']);
+			if (checksum) throw 'Couldn\'t find role ' + checksum;
 
 			//Set the values
 			for (let i = 0; i <= group; i++) {
 				if (!server.sars[i]) server.sars[i] = [];
 			}
-			server.sars[group].push(role.id);
+			for (let role of roles) {
+				if (server.sars.find(group => group.find(r => r === role.id))) throw 'Role ' + role.name + ' is already self-assignable';
+				server.sars[group].push(role.id);
+			}
 			this.server = server;
 			this.get(group);
 		} catch (e) {
@@ -109,25 +123,35 @@ class Roles extends Parse {
 		try {
 			let server = this.server;
 			if (!argument) argument = await this.Output.response({
-				description: 'Please specify a valid role',
+				description: 'Please specify a valid role or group number',
 				filter: (r) => {
 					let role = this.Search.roles.get(r);
 					if (!role) return false;
+					if (server.sars[r]) return true;
 					if (server.sars.find(group => group.find(r => r === role.id))) return true;
 					return false;
 				}
 			});
-			let role = this.Search.roles.get(argument);
-			if (!role) throw 'Not a role';
-			let group = server.sars.findIndex((group) => group.indexOf(role.id) !== -1);
-			if (group === -1) throw 'No such self-assignable role';
-			let index =  server.sars[group].indexOf(role.id);
-			if (index === -1) throw new Error(server.sars[group]);
-			
-			//Set the values
+			if (!isNaN(Number(argument))) {
+				if (!server.sars[argument]) throw new RangeError('Group number must be from 0 to '  + (server.sars.length - 1));
+				server.sars[argument] = [];	
+				this.server = server;			
+				this.get();
+			} else {
+				let role = this.Search.roles.get(argument);
+				if (!role) throw 'Not a role';
+				let group = server.sars.findIndex((group) => group.indexOf(role.id) !== -1);
+				if (group === -1) throw 'No such self-assignable role';
+				let index =  server.sars[group].indexOf(role.id);
+				if (index === -1) throw new Error(server.sars[group]);
+				server.sars[group].splice(index, 1);	
 			server.sars[group].splice(index, 1);
+				server.sars[group].splice(index, 1);	
+				this.server = server;			
 			this.server = server;
-			this.get(group);
+				this.server = server;			
+				this.get(group);
+			}
 		} catch (e) {
 			if (e) this.Output.onError(e);
 		}

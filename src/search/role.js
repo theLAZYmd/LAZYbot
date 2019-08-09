@@ -7,7 +7,7 @@ class Role extends Search {
 
 	get(searchstring) {
 		let role;
-		if (searchstring.length >= 2) {
+		if (typeof searchstring === 'string' && searchstring.length >= 2) {
 			if (!role) role = this.byID(searchstring);
 			if (!role) role = this.byName(searchstring);
 		}
