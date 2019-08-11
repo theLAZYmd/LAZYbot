@@ -1,5 +1,5 @@
 const Logger = require('../util/logger');
-const Modmail = require('../modules/modmail/output');
+const Modmail = require('../modules/ModMail/output');
 
 class gMU {
 
