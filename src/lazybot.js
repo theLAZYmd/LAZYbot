@@ -1,12 +1,15 @@
+require('dotenv').config();
+require('./util/extensions');
+require('events').EventEmitter.prototype._maxListeners = 100;
+
 const Discord = require('discord.js');
 const fs = require('fs');
 const path = require('path');
 const client = new Discord.Client();
 
-const Logger = require('./util/logger');
+console.log(process.env.TOKEN_beta);
 
-require('./util/extensions');
-require('events').EventEmitter.prototype._maxListeners = 100;
+const Logger = require('./util/logger');
 process.on('unhandledRejection', (e) => {
 	if (e.message === 'Something took too long to do.') client.emit('error', e);
 	Logger.error(e);
@@ -87,7 +90,7 @@ fs.readdir(path.join(process.cwd(), 'src', 'router'), (err, _files) => {
 	}
 });
 
-client.login(require('./token.json').token);
+client.login(process.env['TOKEN' + (process.env.instance ? '_' + process.env.instance : '')]);
 require('./app/server');
 
 module.exports = client;

@@ -78,23 +78,6 @@ class Ready {
 		Logger.load(time, [[Array.from(sources.values()).filter(v => v).length, 'Online sources'], [Array.from(sources.values()).filter(v => !v).length, 'Offline sources']]);
 		this.sources = sources;
 	}
-	/*
-	async autoupdates() {
-		let TrackerConstructor = require("../modules/tracker/tracker.js");
-		for (let [id, server] of Object.entries(DataManager.getFile("./src/data/server.json"))) {
-			if (server.states.au) {
-				TrackerConstructor.initUpdateCycle(this.client, id)
-				return Logger.verbose("Beginning update cycle...");
-			}
-		}
-    }*/
-	/*  
-    async reddit() {
-        let str = Math.random().toString().replace(/[^a-z]+/g, '')
-        let url = config.urls.reddit.oauth.replace("this.client_ID", config.ids.reddit).replace("TYPE", token.reddit).replace("RANDOM_STRING", str).replace("URL", "http://localhost").replace("SCOPE_STRING", "identity");
-        Logger.verbose(await rp.get(url));
-    }
-    */
    
 	async setPresence() {
 		let name = '!h for help or DM me';
@@ -150,7 +133,6 @@ module.exports = async (client) => {
 			if (e) Logger.error(e);
 		}
 		Logger.verbose('bleep bloop! It\'s showtime.');
-		//require("./intervals.js")();
 		client.sources = ready.sources;
 		return client;
 	} catch (e) {
