@@ -19,6 +19,7 @@ const id = config.ids['lichess' + ext];
 const secret = process.env['LICHESS' + ext];
 const port = process.env['PORT' + ext];
 const redirectUri = config.sources.lichess['redirect' + ext];
+const ip = process.env.IP;
 
 const tokenHost = 'https://oauth.lichess.org';
 const authorizePath = '/oauth/authorize';
@@ -156,7 +157,7 @@ app.get('/profile', function (req, res) {
 app.get('/config.json', function (req, res) {
 	res.status(200).json({
 		callback: redirectUri,
-		id: betabot ? config.ids.lichess_beta : config.ids.lichess
+		id
 	});
 });
 
@@ -166,5 +167,6 @@ app.get('/', function (req, res) {
 	});
 });
 
-app.listen(port);
+if (betabot) app.listen(port);
+else app.listen(port, ip);
 Logger.info('Listening on port ' + port);

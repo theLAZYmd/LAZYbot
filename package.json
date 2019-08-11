@@ -41,6 +41,6 @@
         "request-promise": "^4.2.2",
         "simple-oauth2": "^2.2.1",
         "winston": "^3.1.0",
-        "yarn": "^1.10.1"
+        "yarn": "^1.17.3"
     }
 }
