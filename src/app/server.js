@@ -15,7 +15,7 @@ const auth = require('../modules/Chess/auth');
 
 const betabot = process.env.INSTANCE === 'BETA';
 const ext = process.env.INSTANCE ? '_' + process.env.INSTANCE.toLowerCase() : '';
-const id = config['ids' + ext];
+const id = config.ids['lichess' + ext];
 const secret = process.env['LICHESS' + ext];
 const port = process.env['PORT' + ext];
 const redirectUri = config.sources.lichess['redirect' + ext];
@@ -34,7 +34,6 @@ const credentials = {
 		authorizePath,
 	},
 };
-console.log(credentials);
 const oauth2 = simpleOauth.create(credentials);
 const cached = {};
 
