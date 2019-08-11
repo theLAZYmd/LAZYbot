@@ -2,7 +2,7 @@
     "name": "lazybot",
     "description": "Discord bot operating in the House server http://dscrd.me/housechessvariants just to further lazy's understanding of basic js. ",
     "main": "src/lazybot.js",
-    "version": "1.9.3",
+    "version": "1.10.0",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "node src/lazybot.js",
@@ -26,7 +26,9 @@
     "license": "MIT",
     "preinstall": "rm package-lock.json",
     "dependencies": {
+        "cheerio": "^1.0.0-rc.3",
         "discord.js": "^11.4.2",
+        "dotenv": "^8.0.0",
         "enmap": "^0.3.2",
         "es6": "0.0.7",
         "express": "^4.17.1",
