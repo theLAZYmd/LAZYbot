@@ -7,8 +7,6 @@ const fs = require('fs');
 const path = require('path');
 const client = new Discord.Client();
 
-console.log(process.env.TOKEN_beta);
-
 const Logger = require('./util/logger');
 process.on('unhandledRejection', (e) => {
 	if (e.message === 'Something took too long to do.') client.emit('error', e);

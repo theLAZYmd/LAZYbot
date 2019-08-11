@@ -34,6 +34,7 @@ const credentials = {
 		authorizePath,
 	},
 };
+console.log(credentials);
 const oauth2 = simpleOauth.create(credentials);
 const cached = {};
 
