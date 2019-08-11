@@ -40,6 +40,16 @@
             "errorlog": {
                 "type": "text",
                 "reaction": "http://lazybot.co.uk/logs/error.log",
+                "anyword": true
+            },
+            "github": {
+                "type": "text",
+                "reaction": "https://github.com/theLAZYmd/LAZYbot",
+                "anyword": false
+            },
+            "debuglog": {
+                "type": "text",
+                "reaction": "http://lazybot.co.uk/logs/debug.log",
                 "anyword": false
             }
         },
