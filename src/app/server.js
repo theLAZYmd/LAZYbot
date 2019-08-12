@@ -18,7 +18,7 @@ const ext = process.env.INSTANCE ? '_' + process.env.INSTANCE.toLowerCase() : ''
 const id = config.ids['lichess' + ext];
 const secret = process.env['LICHESS' + ext];
 const port = process.env['PORT' + ext];
-const redirectUri = config.sources.lichess['redirect' + ext];
+const redirectUri = config.sources.lichess.url['redirect' + ext];
 const ip = process.env.IP;
 
 const tokenHost = 'https://oauth.lichess.org';
