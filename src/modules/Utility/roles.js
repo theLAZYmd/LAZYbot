@@ -143,15 +143,28 @@ class Roles extends Parse {
 				this.server = server;			
 				this.get();
 			} else {
-				let role = this.Search.roles.get(argument);
-				if (!role) throw 'Not a role';
-				let group = server.sars.findIndex((group) => group.indexOf(role.id) !== -1);
-				if (group === -1) throw 'No such self-assignable role';
-				let index =  server.sars[group].indexOf(role.id);
-				if (index === -1) throw new Error(server.sars[group]);
-				server.sars[group].splice(index, 1);	
+				let [roles, checksum] = argument.split(/\s+/).reduce((acc, curr) => {
+					let [list, stored] = acc;
+					let tmp = (stored + ' ' + curr).trim();
+					let role = this.Search.roles.get(tmp);
+					if (role) {
+						list.push(role);
+						return [list, ''];
+					} else return [list, tmp];
+				}, [[], '']);
+				if (checksum) throw 'Couldn\'t find role ' + checksum;
+				for (let role of roles) try {
+					if (!role) throw 'Not a role ' + role;
+					let group = server.sars.findIndex((group) => group.indexOf(role.id) !== -1);
+					if (group === -1) throw 'No such self-assignable role';
+					let index =  server.sars[group].indexOf(role.id);
+					if (index === -1) throw new Error(server.sars[group]);
+					server.sars[group].splice(index, 1);
+				} catch (e) {
+					if (e) this.Output.onError(e);
+				}
 				this.server = server;			
-				this.get(group);
+				this.get();
 			}
 		} catch (e) {
 			if (e) this.Output.onError(e);
