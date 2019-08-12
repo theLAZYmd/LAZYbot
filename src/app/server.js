@@ -38,7 +38,7 @@ const credentials = {
 const oauth2 = simpleOauth.create(credentials);
 const cached = {};
 
-app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/commands', express.static(path.join(__dirname, '..', 'commands')));
 
@@ -167,6 +167,5 @@ app.get('/', function (req, res) {
 	});
 });
 
-if (betabot) app.listen(port);
-else app.listen(port, ip);
+app.listen(port);
 Logger.info('Listening on port ' + port);

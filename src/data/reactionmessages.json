@@ -207,6 +207,10 @@
             "608943798390620182": {
                 "tag": "Granach#4984",
                 "lastMail": 1565253915367
+            },
+            "610195700885618724": {
+                "tag": "Laminator#5892",
+                "lastMail": 1565552397564
             }
         },
         "paginator": {
@@ -13326,6 +13330,48 @@
                 "period": 30000,
                 "page": 1,
                 "author": "452913680208756736"
+            },
+            "610195984202596355": {
+                "embedgroup": [
+                    {
+                        "description": "Winner wins 50 :cherry_blossom: + VIP role as long as you keep the shield",
+                        "author": {
+                            "name": "Win a lichess shield to obtain the vip role and flowers!",
+                            "icon_url": "https://i.imgur.com/JbhAKpz.png"
+                        },
+                        "fields": [
+                            {
+                                "name": "Prizes for high performers",
+                                "value": "Top 3 win 40 :cherry_blossom:\nTop 10 win 30 🌸\nTop 20 win 20 🌸\nTop 30 win 10 🌸",
+                                "inline": false
+                            },
+                            {
+                                "name": "Date",
+                                "value": "Check out the upcoming Shield tournaments from [the tournament calendar](https://lichess.org/tournament/calendar).",
+                                "inline": false
+                            }
+                        ]
+                    }
+                ],
+                "period": 180000,
+                "page": 0,
+                "author": "346484064636895232"
+            },
+            "610196014132887582": {
+                "embedgroup": [
+                    {
+                        "title": "Chessvariants.training - The promised land of chess variant puzzles.",
+                        "url": "https://chessvariants.training",
+                        "description": "**Puzzles**\nFor years the chess community has been asking leading sites to add variant compatability to their tactics platforms, which never came to fruition, until now. Being the first of its kind, [chessvariants.training](https://chessvariants.training/) was created and is run by <@163325840136863744>. You can solve antichess, atomic, crazyhouse, king of the hill, three-check, horde, and racing kings puzzles, respectively.\n\n**Variant960**\nIn addition to its tactics trainer, the site also offers Variant960 games, which can be played [here](https://chessvariants.training/Variant960).",
+                        "color": 53380,
+                        "thumbnail": {
+                            "url": "https://chessvariants.training/images/icon.png"
+                        }
+                    }
+                ],
+                "period": 180000,
+                "page": 0,
+                "author": "519602977380761621"
             }
         },
         "election": {
