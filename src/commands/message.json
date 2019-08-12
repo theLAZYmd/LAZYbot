@@ -2096,6 +2096,24 @@
 			"requires": {
 				"role": "admin"
 			}
+		},
+		{
+			"aliases": [
+				"toggleexclusiveselfassign",
+				"tesar",
+				"tsar"
+			],
+			"description": "Toggles whether a group in the self-assignable roles category is exclusive. Default server settings is that 0 is non-exclusive and all else are exclusive.",
+			"module": "Utility",
+			"file": "roles",
+			"method": "tesar",
+			"prefix": "generic",
+			"usage": [
+				"tesar 1"
+			],
+			"requires": {
+				"role": "admin"
+			}
 		}
 	],
     "Trivia": [

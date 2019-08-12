@@ -48,8 +48,8 @@ class Output extends Parse {
 	 */
 	async editor(embed, msg) {
 		try {
-			if (!embed) throw 'this.Output.editor(): Embed object is undefined.';
-			if (!msg) throw 'this.Output.editor(): Couldn\'t find message to edit.';
+			if (!embed) throw new SyntaxError('Undefined embed parameter');
+			if (!msg) throw new SyntaxError('Undefined message parameter');
 			if (!embed.color) embed.color = config.colors.generic;
 			let content = embed.content;
 			embed = new Embed(embed);
