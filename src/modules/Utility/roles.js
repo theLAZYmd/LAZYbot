@@ -56,7 +56,7 @@ class Roles extends Parse {
 		this.Output.onError('Couldn\'t find matching role and user');
 	}
 
-
+	/*eslint-disable no-unused-vars*/
 	get(group) {
 		let server = this.server;
 		if (!server.sars) server.sars = [];
@@ -69,11 +69,11 @@ class Roles extends Parse {
 			if (server.tars[i] === undefined || server.tars[i] === null) server.tars[i] = false;
 			for (let id of server.sars[i]) {
 				let role = this.Search.roles.byID(id);
-				if (!role) continue;
+				if (!role) role = id;
 				value += role + '\n';
 				if (!key) key = 'Group ' + i + (server.tars[i] ? ' [Non-exclusive]' : '');
 			}
-			if (key) embed.addField(key, value, false);
+			if (key) embed.addField(key, value, true);
 		}
 		if (embed.fields.length === 0) embed.setDescription('No self-assignable roles in this server');
 		else embed.setFooter('Use \'' + this.prefix + 'role\' to assign yourself one of the following roles');
@@ -152,7 +152,12 @@ class Roles extends Parse {
 						return [list, ''];
 					} else return [list, tmp];
 				}, [[], '']);
-				if (checksum) throw 'Couldn\'t find role ' + checksum;
+				if (checksum) {
+					let group = server.sars.findIndex((group) => group.indexOf(checksum) !== -1);
+					if (group === -1) throw 'Couldn\'t find role ' + checksum;
+					let index =  server.sars[group].indexOf(checksum);
+					server.sars[group].slice(index, 1);					
+				}
 				for (let role of roles) try {
 					if (!role) throw 'Not a role ' + role;
 					let group = server.sars.findIndex((group) => group.indexOf(role.id) !== -1);
