@@ -155,7 +155,7 @@ class Roles extends Parse {
 				if (checksum) try {
 					let id = /[0-9]{18}/.test(checksum);
 					if (!id) throw '';
-					let group = server.sars.findIndex((group) => group.indexOf(checksum.match(/[0-9]{18}/)[0])) !== -1);
+					let group = server.sars.findIndex((group) => group.indexOf(checksum.match(/[0-9]{18}/)[0]) !== -1);
 					if (group === -1) throw '';
 					let index =  server.sars[group].indexOf(checksum);
 					server.sars[group].slice(index, 1);					
