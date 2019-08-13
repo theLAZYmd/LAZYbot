@@ -4,6 +4,10 @@ body {
 	font-family: Arial;
 }
 
+.banner {
+	/*display: inline-block;*/
+}
+
 h1 {
 	font-family: Didact Gothic, Muli, Lucida Sans, Sans Serif;
 }
@@ -13,11 +17,25 @@ h1 {
 	line-height: 57px;
 	color: #002147;
 	font-weight: bold;
-	margin-right: .5em
+	margin-right: .5em;
+    text-decoration: none !important;
 }
 
 .title span {
 	color:#ccc;
+}
+
+#github {
+	background-image:url('/images/github.png');
+	background-size: 120%;
+	top: -100px;
+	left: 50%;
+}
+
+#discord {
+	background-image:url('/images/discord.png');
+	top: -100px;
+	left: 50%;
 }
 
 #container, #container a {
@@ -227,17 +245,4 @@ tbody tr:hover {
     overflow: hidden;
     text-indent: 100%;
 	white-space:nowrap;
-}
-
-#github {
-	background-image:url('/images/github.png');
-	background-size: 120%;
-	top: -100px;
-	left: 50%;
-}
-
-#discord {
-	background-image:url('/images/discord.png');
-	top: -100px;
-	left: 50%;
 }

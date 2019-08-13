@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const simpleOauth = require('simple-oauth2');
@@ -19,7 +20,6 @@ const id = config.ids['lichess' + ext];
 const secret = process.env['LICHESS' + ext];
 const port = process.env['PORT' + ext];
 const redirectUri = config.sources.lichess.url['redirect' + ext];
-const ip = process.env.IP;
 
 const tokenHost = 'https://oauth.lichess.org';
 const authorizePath = '/oauth/authorize';
@@ -38,7 +38,7 @@ const credentials = {
 const oauth2 = simpleOauth.create(credentials);
 const cached = {};
 
-//app.use(express.static(path.join(__dirname, 'public')));
+if (betabot) app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/commands', express.static(path.join(__dirname, '..', 'commands')));
 
