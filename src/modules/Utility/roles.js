@@ -136,7 +136,7 @@ class Roles extends Parse {
 					return false;
 				}
 			});
-			if (!isNaN(Number(argument))) {
+			if (!isNaN(Number(argument)) && Number(argument) < server.sars.length + 5) {
 				if (!server.sars[argument]) throw new RangeError('Group number must be from 0 to '  + (server.sars.length - 1));
 				server.sars[argument] = [];
 				server.tars[argument] = argument === 0;
@@ -152,11 +152,15 @@ class Roles extends Parse {
 						return [list, ''];
 					} else return [list, tmp];
 				}, [[], '']);
-				if (checksum) {
-					let group = server.sars.findIndex((group) => group.indexOf(checksum) !== -1);
-					if (group === -1) throw 'Couldn\'t find role ' + checksum;
+				if (checksum) try {
+					let id = /[0-9]{18}/.test(checksum);
+					if (!id) throw '';
+					let group = server.sars.findIndex((group) => group.indexOf(checksum.match(/[0-9]{18}/)[0])) !== -1);
+					if (group === -1) throw '';
 					let index =  server.sars[group].indexOf(checksum);
 					server.sars[group].slice(index, 1);					
+				} catch (e) {
+					throw 'Couldn\'t find role ' + checksum;
 				}
 				for (let role of roles) try {
 					if (!role) throw 'Not a role ' + role;
