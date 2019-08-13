@@ -1,12 +1,17 @@
 LAZYbot.njsproj
 LAZYbot.njsproj.user
 
-#IDE
+# Linter
+.eslintrc.json
+
+# IDE
 obj/
 .idea/
 src/.vscode/
 .vs/
+.vscode/
 bin/
+LAZYbot.code-workspace
 
 # Git files
 .history/
