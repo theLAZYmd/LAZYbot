@@ -158,7 +158,7 @@ class Roles extends Parse {
 					let group = server.sars.findIndex((group) => group.indexOf(checksum.match(/[0-9]{18}/)[0]) !== -1);
 					if (group === -1) throw '';
 					let index =  server.sars[group].indexOf(checksum);
-					server.sars[group].slice(index, 1);					
+					server.sars[group].splice(index, 1);					
 				} catch (e) {
 					throw 'Couldn\'t find role ' + checksum;
 				}
