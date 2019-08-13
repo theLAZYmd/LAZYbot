@@ -51,7 +51,6 @@
 				url: '/pages/' + section + '.html',
 				success: function (html) {
 					$('#module').append(html);
-					window.location.hash = section
 				},
 				complete: () => {
 					//$('#module #' + section).hide();
@@ -68,6 +67,7 @@
 				$('#module #' + s).hide();
 			});
 			$('#module #' + section).show();
+			window.location.hash = section;
 		});
 	</script>
 </body>
