@@ -76,7 +76,7 @@ class Roles extends Parse {
 			if (key) embed.addField(key, value, true);
 		}
 		if (embed.fields.length === 0) embed.setDescription('No self-assignable roles in this server');
-		else embed.setFooter('Use \'' + this.prefix + 'role\' to assign yourself one of the following roles');
+		else embed.setFooter('Use \'' + this.prefix + 'role\' to assign yourself one of the above roles');
 		this.Output.sender(embed);
 	}
 
