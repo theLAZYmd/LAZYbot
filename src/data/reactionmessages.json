@@ -112,10 +112,6 @@
                 "tag": "hiiiii#7381",
                 "lastMail": 1551447900617
             },
-            "552536812556517376": {
-                "tag": "Ogul#1233",
-                "lastMail": 1551466678952
-            },
             "552536815022637078": {
                 "tag": "hauptschule#7105",
                 "lastMail": 1551452276119
@@ -140,10 +136,6 @@
                 "tag": "ObiWanBenoni#0116",
                 "lastMail": 1554851138145
             },
-            "565325634155446289": {
-                "tag": "theLAZYmd#2353",
-                "lastMail": 1554854534492
-            },
             "566712382571937821": {
                 "tag": "Musickn#8622",
                 "lastMail": 1555185161104
@@ -159,10 +151,6 @@
             "573865108405616640": {
                 "tag": "420Blaziken_it#4524",
                 "lastMail": 1556890503821
-            },
-            "575109444447502357": {
-                "tag": "Raven#9079",
-                "lastMail": 1553047111293
             },
             "575109446049595433": {
                 "tag": "hiya#0828",
@@ -188,10 +176,6 @@
                 "tag": "Murnau#4984",
                 "lastMail": 1560430402562
             },
-            "590474139567915039": {
-                "tag": "RacingKingsKing#2077",
-                "lastMail": 1560850504790
-            },
             "591828654493925376": {
                 "tag": "Illion#1918",
                 "lastMail": 1561173346963
@@ -204,13 +188,41 @@
                 "tag": "ijh#0966",
                 "lastMail": 1562182140334
             },
-            "608943798390620182": {
-                "tag": "Granach#4984",
-                "lastMail": 1565253915367
+            "610813490005016616": {
+                "tag": "RacingKingsKing#2077",
+                "lastMail": 1565699705914
             },
-            "610195700885618724": {
+            "610932722545983499": {
+                "tag": "Ogul#1233",
+                "lastMail": 1551466678952
+            },
+            "610934081336639488": {
+                "tag": "Raven#9079",
+                "lastMail": 1553047111293
+            },
+            "610939590710132758": {
+                "tag": "RoyalManiac#1918",
+                "lastMail": 1565729749223
+            },
+            "611254680743313433": {
+                "tag": "theLAZYmd#2353",
+                "lastMail": 1565808340955
+            },
+            "611261104596713472": {
+                "tag": "Areckx#9580",
+                "lastMail": 1565806404093
+            },
+            "611261473704116245": {
+                "tag": "SmashTimeFools#5458",
+                "lastMail": 1565806283979
+            },
+            "611264751351234581": {
+                "tag": "Granach#4984",
+                "lastMail": 1565807436916
+            },
+            "611274838388244484": {
                 "tag": "Laminator#5892",
-                "lastMail": 1565552397564
+                "lastMail": 1565809678584
             }
         },
         "paginator": {
@@ -13372,6 +13384,188 @@
                 "period": 180000,
                 "page": 0,
                 "author": "519602977380761621"
+            },
+            "611237437921820672": {
+                "embedgroup": [
+                    {
+                        "description": "**#1** gsvc777#3940 2612\n**#2** theLAZYmd#2353 2202\n**#3** PsyMar#2210 2079\n**#4** ObiWanBenoni#3488 1968\n**#5** Wildfire#9567 1928\n**#6** Illion#1918 1885\n**#7** mmorley#9802 1859\n**#8** crptone#1398 1838\n**#9** okei#1207 1772\n**#10** fairygirl#5809 1712\n",
+                        "fields": [],
+                        "title": " House leaderboard for Trivia players"
+                    },
+                    {
+                        "description": "**#11** Shortdood#4523 1621\n**#12** Laminator#5892 1591\n**#13** Musickn#8622 1486\n**#14** moonenane#3553 1387\n**#15** Falcon#6507 1372\n**#16** Babosos#4525 1267\n**#17** TJMorley#6331 774\n**#18** Ogul#1233 768\n**#19** Hypno#5680 492\n",
+                        "fields": [],
+                        "title": " House leaderboard for Trivia players"
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "452913680208756736"
+            },
+            "611266515475496973": {
+                "embedgroup": [
+                    {
+                        "title": "House Guide to Crazyhouse",
+                        "description": "\n__**ABOUT**__\n\n#zh\n\n**Crazyhouse** (ZH) is a chess variant in which an opponent's captured pieces can be dropped back on the board instead of moving a piece. Crazyhouse is a variant similar to bughouse chess, but with only two players.\n\nOther names for this variant are drop chess, mad chess, reinforcement chess, turnabout chess and schizo-chess. It’s also known as wild 23. \n\n__**RULES**__\n\nAll the rules and conventions of standard chess apply, with the addition of drops, as explained below.\n\n • A captured piece reverses colour and goes to the capturing player's pocket. At any time, instead of making a move with a piece on the board, a player can drop a piece from their pocket onto an empty square on the board.\n• Drops resulting in immediate checkmate are permitted.\n• Pawns may not be dropped on the players' 1st or 8th ranks.\n• Promoted but captured pawns are dropped as pawns.\n\nRules-page on lichess with video: https://lichess.org/variant/crazyhouse\n\n__**WHERE?**__\n\n● [lichess.org](https://lichess.org)\n● [chess.com](https://chess.com)\n● [Free Internet Chess Server](http://www.freechess.org/)\n● [Internet Chess Club](https://www.chessclub.com/)",
+                        "color": 14841132,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/pMkkATk.png"
+                        }
+                    },
+                    {
+                        "title": "House Guide to Crazyhouse",
+                        "description": "**__IMPROVE__**\n\nCrazyhouse is a fast-paced game that needs strong tactics and a good awareness of positional weaknesses. Unlike regular chess, draws are rare because new pieces keep being reintroduced to the board. Check out [crosky’s crazyhouse overview](http://bit.ly/2FfYYMX).\n\n• As GM Yasser Seirawan would say, **king safety** comes first and foremost. Ensure that your king's position is safe from attack; this does not necessarily imply castling – dropping pieces around your king can effectively guard it from serious threats.\n\n• **Develop** your pieces in the opening and **control key squares**, especially around your king.\n\n• Beware of **holes** in your position. A hole provides an opening for an opponent's piece which can lead to a strong attack. If pieces do enter, chase them away and secure your position. As helmsknight would say, “get out of my house!” Similarly, seek to exploit any holes your opponent leaves in their position.\n\n• Beware of **piece sacs** on [f2/f7](https://youtu.be/kZPSNF8XHQI) or [g2/g7](https://youtu.be/6Gh2n9kWdb8), especially if the opponent has many pieces in hand.\n\n• Often the best defence is **attack**, as any mating sequence threatened must be dealt; the majority of crazyhouse moves have an **attacking purpose**. As Vempele says, the best defence against @h3 might be @h6. Launch counter-attacks that are faster and cannot be ignored.\n\n• **Initiative** is more important than material. If a player has initiative they can drop their pieces in hand with check and threats and dominate the board. It’s important to utilise positional dominance because if the initiative runs out, the opponent can take back initiative with pieces in hand and reassert control.",
+                        "color": 14841132,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/pMkkATk.png"
+                        }
+                    },
+                    {
+                        "title": "House Guide to Crazyhouse",
+                        "description": "**__MATERIAL__**\n\n• **Pawns** are more valuable than in regular chess, because they can be dropped anywhere on the board including the seventh rank. A minor pieces can be happily traded for 2 pawns in most situations. Unlike chess, **Doubled Pawns** are less of a weakness because pawn structures can be fixed with pawns in hand, and a doubled pawn can even be a strength because it controls squares of both colours. \n\n• **Knights** are wonderful attackers because their threats can’t be blocked [...].\n\n• **Bishops** are strong defenders as they cover diagonals going backwards as well as forwards. A Bishop on g2, for instance, is able to take on h3 and still cover g2. They can also be good attackers because they control channels of a single colour. Pawns and Bishops are known as **\"diags”** because they can penetrate an opponent position along diagonals of a single colour. If all your pawns are on light squares for example, you must take care to defend dark square weaknesses. For more on the importance of colour complexes, check out [mastertan’s visual guide](http://bit.ly/2FQmVZn).\n\n• **Rooks** are useful to defend and attack open files. Dropping a rook on the back rank with check is a good way to force an opponent to “waste” a piece; combined with a pawn drop on the 7th exploiting the pin, this combination can have lethal effect. Rooks are often sacked on the backrank promoting a pawn to remove defenders. [Example](https://lichess.org/yUwqzUBO/black#27).\n\n• **Queens** are worth less in crazyhouse than in normal chess, because they can be hit with a tempo by minors, especially when dropped. Crazyhouse favors numeracy in pieces; a Bishop and Knight in hand have more versatility than a Queen. In general, Queens are worth about 2 minors.",
+                        "color": 14841132,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/pMkkATk.png"
+                        }
+                    },
+                    {
+                        "title": "House Guide to Crazyhouse",
+                        "description": "**__STRATEGY__**\n\n• Crazyhouse is still chess, so **common chess tactics** still apply: try not to hang pieces or block in your own pieces; trap opponent pieces and use forks, pins and discovered checks. Because pieces can land anywhere on the board, one must be even more alert.\n\n• **Defending**. Under heavy attack, it is important to evaluate your position. You usually have three options: **First**, you could take your opponent’s attackers, try to stay safe and hope the attack exhausts itself and they run out of material. You might try to limit the flow of exchanges to give time to get the king safe and not give pieces that the opponent needs to mate you. **Second**, if a sacrifice is too dangerous to take, you could focus on defending, dropping pieces near your king to cover important squares. One could also make luft, giving the king a flight path, or a safe square it can fall back or run up to. **The third option** is to ignore the threat and start an attack of your own: if you are the one getting to the opponent’s king first, go for it! Going all in can also be a last resort hoping your opponent makes a mistake.\n\n• **Attacking**. To keep initiative, it is common for mating sequences to comprise purely of checks: [drawing the king out and/or cornering it](https://goo.gl/QLp4DY), [picking up pieces needed for mate](https://goo.gl/uNPKqG), [cutting off escape squares](https://goo.gl/2okT35), [luring the king to a mating square](https://goo.gl/Dd4BvF), [deflecting defending pieces](https://goo.gl/hX6Q85), and [opening up a file, diagonal or key square](https://goo.gl/AqLN86).\n\n• It is important to be familiar with [common mating patterns](https://goo.gl/7ejioW).",
+                        "color": 14841132,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/pMkkATk.png"
+                        }
+                    },
+                    {
+                        "title": "House Guide to Crazyhouse",
+                        "description": "**__VIDEOS__**\n\nStreaming chess has become more popular in the past few years and crazyhouse has shared the fruits of this growing trend. The House presents to you the best and most famous streamers of crazyhouse.\n\n• **JannLee**: [YouTube](<https://www.youtube.com/channel/UCbo8-5AEH7u3lE-yOGeNW1Q>), [Twitch](<https://www.twitch.tv/jannleecrazyhouse>).\n• **Nikolas Theiss**: [YouTube](<https://www.youtube.com/channel/UCsjRN9g1AYODJZOPVJKzUmw/>).\n• **Thomas Crosky**: [YouTube](<https://www.youtube.com/channel/UCvowgcm56sLguWxYp8oqI1w>).\n• **Helmsknight**: [YouTube](<https://www.youtube.com/channel/UCcKXwA_lo3Zpz3_Mc-WVLtw>), [Twitch](<https://www.twitch.tv/helmsknight>).\n• **Okei**: [Twitch](<https://www.twitch.tv/okeizh>).\n• **Mugwort**: [YouTube](https://www.youtube.com/channel/UCNMhNQybeLGJHWJv5qT1liQ), [Twitch](https://www.twitch.tv/mugwortcrazyhouse).\n  \nWant your stream to appear here? Let the mods know.\nWhat to create a bio page for your stream? Type `... embedex` and design yourself a page; alternatively send one of the mods the details you want to be included.",
+                        "color": 14841132,
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/pMkkATk.png"
+                        }
+                    }
+                ],
+                "period": 180000,
+                "page": 0,
+                "author": "532443797397700608"
+            },
+            "611273093133893632": {
+                "embedgroup": [
+                    {
+                        "title": "Profile for  Granach#4984",
+                        "description": "```\nRemember to forget!```",
+                        "color": 7639709,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "Natso the Elder",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Region: **Europe**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Apr 26 2019**\nThe House: **Apr 26 2019**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`571351154739642380`**\nPosition in Database: **875**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "4,956",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://cdn.discordapp.com/avatars/571351154739642380/fafc69673ef8dd6b6ad862a4c59b720d.png?size=2048"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": "Profile for  Granach#4984",
+                        "description": "```\nRemember to forget!```",
+                        "color": 7639709,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org",
+                                "value": "[Granach](https://lichess.org/@/Granach)\n960: 1507?\nUltrabullet: **1421**\nBullet: **1537**\nBlitz: **1515**\nRapid: 1598?\nClassical: 1538?\nCorrespondence: 1922?\nCrazyhouse: **1436**\nKing of the Hill: **1573**\n3-check: **1663**\nAntichess: **1669**\nAtomic: **1874**\nHorde: **1532**\nRacing Kings: **2029**\nPuzzles: **2105**",
+                                "inline": true
+                            }
+                        ],
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "571351154739642380"
+            },
+            "611276869701992493": {
+                "embedgroup": [
+                    {
+                        "title": "<:housediscord:485510528769196068> House Discord Rules",
+                        "fields": [
+                            {
+                                "name": "Rule 1: Be civil",
+                                "value": "Be polite, courteous and respectful of others.\n​",
+                                "inline": false
+                            },
+                            {
+                                "name": "Rule 2: Don't be uncivil",
+                                "value": "Instances of uncivil behaviour include but are not limited to:\n- Repeated trolling\n- Belittling\n- Inciting hostility\n- Personal attacks\n- Harrassment (in server or through DMs)\n- Repeated user pinging\nand will not be tolerated.\n​",
+                                "inline": false
+                            },
+                            {
+                                "name": "Rule 3: Content control",
+                                "value": "The following content is not permitted:\n- graphic NSFW\n- information that could be used to dox another member, maintaining the presumption that they wish to stay anonymous unless explicitly stated otherwise\n- racism\n- sexism\n- homophobia\n- videos or images of gore and death\n- symbols of radical ideologies\n- links or instructions to content that could detrimentally harm an individual's computer or own person (computer viruses and the like)\n​",
+                                "inline": false
+                            },
+                            {
+                                "name": "Rule 4: Chess server bans",
+                                "value": "Anyone receiving a ban from a live chess is required to keep discussion of the ban to a minimum. Banned members from the following sites should be redirected to:\n- [Lichess Ban Appeal](https://lichess.org/contact#help-root)\n- [Chess.com support](https://support.chess.com/customer/portal/emails/new)\n​",
+                                "inline": false
+                            },
+                            {
+                                "name": "Rule 5: Incitement",
+                                "value": "Encouraging any of the actions outlined in rules 2, 3, or 4 is not permitted.\n​",
+                                "inline": false
+                            },
+                            {
+                                "name": "Rule 6: Be on-topic",
+                                "value": "Keep chat in each channel to its respective discussion guidelines as much as possible.\n​",
+                                "inline": false
+                            },
+                            {
+                                "name": "Rule 7: Don't spam",
+                                "value": "Exceptions are permitted in <#390273555084083210>, <#390259390709497857>. The ability of user discussion should never be impeded in any way.\n​",
+                                "inline": false
+                            },
+                            {
+                                "name": "Rule 8: Follow the Discord Community guidelines",
+                                "value": "[Available here](https://discordapp.com/guidelines)\n​",
+                                "inline": false
+                            },
+                            {
+                                "name": "Rule 9: No excessive advertising",
+                                "value": "Advertising of other servers or similar projects without asking an admin first, especially for non-established users, is highly frowned upon.\n​",
+                                "inline": false
+                            },
+                            {
+                                "name": "Rule 10: Respect moderator decisions",
+                                "value": "All the admins you see on this server contribute their time and effort for free, without asking for anything back. Be respectful to them. Any warning or decision enacted by them or through a bot should be engaged with in a polite and civil fashion.",
+                                "inline": false
+                            }
+                        ]
+                    }
+                ],
+                "period": 180000,
+                "page": 0,
+                "author": "346484064636895232"
             }
         },
         "election": {
