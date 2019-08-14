@@ -26,7 +26,8 @@ class Help extends Parse {
 					);
 				case (1): 
 					if (!this.guild) throw 'Cannot use this command outside of a server.';
-					this.cmdInfo = commands.get(args[0].slice(prefix.length));
+					this.cmdInfo = commands.get(args[0]);					
+					if (!this.cmdInfo) this.cmdInfo = commands.get(args[0].slice(prefix.length));
 					if (!this.cmdInfo) throw 'Couldn\'t find that command. Please verify that that command exists.';
 					if (this.cmdInfo.active === false) throw 'This command is no longer active. Commands get removed for maintenance/safety reasons periodically.\nPlease DM <@!338772451565502474> for more information.';
 					embed = ['title', 'color', 'thumbnail', 'description', 'fields', 'footer'].reduce((embed, property) => {
