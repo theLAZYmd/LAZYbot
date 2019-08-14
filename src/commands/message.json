@@ -1735,10 +1735,10 @@
             "module": "ModMail",
             "file": "input",
             "method": "outgoing",
-            "arguments": [
-                "args"
-            ],
-            "prefix": "generic"
+			"prefix": "generic",
+			"requires": {
+				"role": "admin"
+			}
         }
     ],
     "Help": [

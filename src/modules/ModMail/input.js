@@ -33,7 +33,7 @@ class Input extends Main {
 		}
 	}
 
-	async outgoing(args) {
+	async outgoing(args = this.args) {
 		try {
 			let data = {
 				command: 'send',
