@@ -73,6 +73,8 @@ class Color extends Parse {
 			if (!this.member.roles.has(role.id)) member.addRole(role);
 			let color = this.Search.colors.get(argument);
 			if (typeof color === 'undefined') throw 'Invalid colour input!';
+			if (Array.isArray(color)) color = color.reduce((acc, curr) => acc += curr, 0);
+			if (color === 0) color = 'BLACK';
 			await role.setColor(color);
 			this.get(member, 'Set');
 		} catch (e) {
