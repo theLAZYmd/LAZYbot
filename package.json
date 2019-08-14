@@ -27,7 +27,7 @@
     "preinstall": "rm package-lock.json",
     "dependencies": {
         "cheerio": "^1.0.0-rc.3",
-        "discord.js": "^11.4.2",
+        "discord.js": "^11.5.1",
         "dotenv": "^8.0.0",
         "enmap": "^0.3.2",
         "es6": "0.0.7",

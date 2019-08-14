@@ -31,6 +31,7 @@ class Color {
 		if (Color._strings) return Color._strings;
 		return Color._strings = [
 			'DEFAULT',
+			'BLACK',
 			'WHITE',
 			'AQUA',
 			'GREEN',
@@ -41,7 +42,6 @@ class Color {
 			'ORANGE',
 			'RED',
 			'GREY',
-			'DARKER_GREY',
 			'NAVY',
 			'DARK_AQUA',
 			'DARK_GREEN',
@@ -52,9 +52,13 @@ class Color {
 			'DARK_ORANGE',
 			'DARK_RED',
 			'DARK_GREY',
+			'DARKER_GREY',
 			'LIGHT_GREY',
 			'DARK_NAVY',
-			'RANDOM',
+			'BLURPLE',
+			'GREYPLE',
+			'DARK_BUT_NOT_BLACK',
+			'NOT_QUITE_BLACK'
 		];
 	}
 	
