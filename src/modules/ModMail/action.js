@@ -74,7 +74,7 @@ class Action extends Main {
 			data.command = 'reply';
 			this.output.amend(data);
 			this.output.send(data);
-			Logger.data(data);
+			this.log(data);
 		} catch (e) {
 			if (e) this.Output.onError(e);
 		}
@@ -100,7 +100,7 @@ class Action extends Main {
 			this.setData(this.modmail);
 			this.Output.generic('**' + data.mod.tag + '** closed the ModMail conversation for **' + data.user.tag + '**.');
 			data.command = 'close';
-			Logger.data(data);
+			this.log(data);
 		} catch (e) {
 			if (e) this.Output.onError(e);
 		}
@@ -120,7 +120,7 @@ class Action extends Main {
 			});
 			this.output.moderate(data);
 			this.output.send(data);
-			Logger.data(data);
+			this.log(data);
 		} catch (e) {
 			if (e) this.Output.onError(e);
 		}
@@ -143,7 +143,7 @@ class Action extends Main {
 			this.setData(this.modmail);
 			this.output.moderate(data);
 			this.output.send(data);
-			Logger.data(data);
+			this.log(data);
 		} catch (e) {
 			if (e) this.Output.onError(e);
 		}

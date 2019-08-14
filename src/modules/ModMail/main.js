@@ -49,7 +49,7 @@ class ModMail extends Parse {
 			if (data.mod && data.user) args.unshift(data.user.tag);
 			if (data.mod && data.users) args.unshift(...data.users.map(user => user.tag));
 			if (data.mod && /reply|send/.test(data.command)) args.unshift(data.mod.flair ? 'server' : 'self');
-			Logger.command(['Mod Mail', data.mod || data.user, data.command, '[' + args.join(', ') + ']']);
+			Logger.command(['ModMail', (data.mod ? data.mod.tag : null) || (data.user ? data.user.tag : null), data.command, '[' + args.join(', ') + ']']);
 		} catch (e) {
 			if (e) this.Output.onError('log ' + e);
 		}
@@ -65,6 +65,7 @@ class ModMail extends Parse {
 			});
 			if (!f) return await this.output.anew(data);
 			let [id, mailInfo] = f;
+			this.guild = this.mchannel.guild;
 			let modmail = await this.mchannel.fetchMessage(id)
 				.catch(async () => {
 					let user = data.mod || data.user;

@@ -26,7 +26,7 @@ class Input extends Main {
 				if (Date.now() - this.modmail._timeout[this.author.tag] < 86400000) return; //if so, return completely
 				delete this.modmail._timeout[this.author.tag]; //otherwise delete any old timeout
 			} else await this.sort(data);
-			await Logger.data(data);
+			this.log(data);
 			this.message.react('📨');
 		} catch (e) {
 			if (e) this.Output.onError(e);
@@ -64,7 +64,7 @@ class Input extends Main {
 			}, true);
 			data.content = msg.content + ' ' + msg.attachments.map(([,a]) => '[Attachment](' + a.url + ')').join(' ');
 			if (data.content.length > 1024) throw 'Your message must be less than 1024 characters!\nPlease shorten it by **' + (data.content.length - 1024) + '** characters.';
-			Logger.data(data);
+			await this.log(data);
 			for (let user of data.users) try {
 				data.user = user;
 				this.output.send(data);
