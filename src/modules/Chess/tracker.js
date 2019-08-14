@@ -293,7 +293,7 @@ class Tracker extends Parse {
 	 */
 	async updateAll() {
 		try {
-			if (!/^(?:-f|--force)$/.test(this.argument) && config.lastUpdate && Date.now() - config.lastUpdate < 3600000) return Logger.info('Already updated all Lichess data within the last hour. Use `-f | --force` flag to update all anyway');
+			if (!/^(?:-f|--force)$/.test(this.argument) && config.lastUpdate && Date.now() - config.lastUpdate < 3600000) return Logger[this.command ? 'error' : 'info']('Already updated all Lichess data within the last hour. Use `-f | --force` flag to update all anyway');
 			const lichess = Object.values(config.sources).find(s => s.key === 'lichess');
 			const accounts = Commands.accounts.accounts;
 			const ids = Array.from(accounts.keys());
