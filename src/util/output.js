@@ -272,6 +272,7 @@ class Output extends Parse {
 			const rfilter = (reaction, user) => {
 				if (!emojis.includes(reaction.emoji.name)) return false;
 				if (author.id === user.id) return true;
+				if (!this.member) this.member = this.Search.members.byUser(user);
 				if (role && this.Permissions.role(role, this)) return true;
 				return false;
 			};
