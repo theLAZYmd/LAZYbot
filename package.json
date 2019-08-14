@@ -35,7 +35,7 @@
         "from": "^0.1.7",
         "fs-reverse-modern": "^1.0.0",
         "lazy-aho-corasick": "^1.0.0",
-        "lichess": "^1.0.18",
+        "lichess": "^1.0.19",
         "opusscript": "0.0.6",
         "request": "^2.88.0",
         "request-promise": "^4.2.2",
