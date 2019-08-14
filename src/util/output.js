@@ -174,10 +174,14 @@ class Output extends Parse {
 					url = Package.branch + relativePath.split('\\').join('/') + '#L' + lineNumber;
 				}
 				title = error.name;
-				description = error.message.format();
-			} else description = error.toString();
+				description = error.message				
+					.slice(0, 2048)					
+					.format();
+			} else description = error
+				.toString()
+				.replace(/\${([a-z]+)}/gi, value => this.server.prefixes[value.match(/[a-z]+/i)]);
 			let embed = new Embed()
-				.setDescription(description.replace(/\${([a-z]+)}/gi, value => this.server.prefixes[value.match(/[a-z]+/i)]))
+				.setDescription(description)
 				.setColor(config.colors.error)
 				.setURL(url && !url.includes('node_modules') ? url : this.errorURL);
 			if (title) embed.setTitle(title);
