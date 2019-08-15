@@ -28,7 +28,7 @@ class Leaderboard extends Parse {
 				lichess: 'superblitz'
 			};
 			config.variants.ultra.lichess = 'ultrabullet';
-			variant = Object.values(config.variants).find(v => new RegExp(`${v.key}|${v.name}|${v.lichess}`, 'i').test(variant));
+			variant = Object.values(config.variants).find(v => new RegExp(`^(?:${v.key}|${v.name}|${v.lichess})$`, 'i').test(variant));
 			if (!variant) {
 				let values = Object.values(config.variants);
 				let index = await this.Output.choose({
