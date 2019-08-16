@@ -221,12 +221,11 @@ class Roles extends Parse {
 							this.Output.generic('You no longer have **' + role.name + '** role');
 						} else {
 							if (this.command === 'iamn') throw 'You do not have role ' + role.name;
-							this.member.addRole(role).catch(() => {});
 							this.Output.generic('You now have **' + role.name + '** role');
-							if (!server.tars[group]) for (let id of server.sars[group]) {
-								if (id === role.id) continue;
-								if (this.member.roles.has(id)) this.member.removeRole(id).catch(() => {});
-							}
+							if (!server.tars[group]) this.member.removeRoles(server.sars[group].filter(id => {
+								return id !== role.id && this.member.roles.has(id);
+							})).catch(() => {});
+							this.member.addRole(role).catch(() => {});
 						}
 						return;
 					}
@@ -241,25 +240,17 @@ class Roles extends Parse {
 					return !server.sars[group].every(id => this.member.roles.has(id));
 				})();
 				if (add && !server.tars[group]) throw 'Can\'t assign roles by group-number for an exclusive group';
-				let list = [];
-				for (let id of server.sars[group]) {
+				let list = server.sars[group].filter(id => add ? !this.member.roles.has(id) : this.member.roles.has(id));
+				if (add) this.member.addRoles(list);
+				else this.member.removeRoles(list);
+				let names = list.map((id) => {
 					let role = this.Search.roles.byID(id);
-					if (!role) continue;
-					if (add) {
-						if (!this.member.roles.has(id)) {
-							this.member.addRole(id);
-							list.push(role.name);
-						}
-					} else {
-						if (this.member.roles.has(id)) {
-							this.member.removeRole(id);
-							list.push(role.name);
-						}
-					}
-				}
+					if (!role) return id;
+					return role.name;
+				});
 				if (list.length) this.Output.sender(new Embed()
 					.setTitle((add ? 'Added' : 'Removed') + ' the following roles:')
-					.setDescription(list.join('\n'))
+					.setDescription(names.join('\n'))
 				);
 				else this.Output.onError(`You ${add ? 'already' : 'don\'t'} have ${add ? 'all' : 'any of'} the roles in group ${group}`);
 			}

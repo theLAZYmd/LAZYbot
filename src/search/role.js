@@ -15,11 +15,13 @@ class Role extends Search {
 	}
 
 	byID(snowflake) {
+		if (typeof snowflake !== 'string') return null;
 		let id = snowflake.match(/[0-9]{18}/);
 		return id ? this.guild.roles.find(role => id[0] === role.id) : null;
 	}
 
 	byName(name) {
+		if (typeof name !== 'string') return null;
 		return this.guild.roles.find(role => name.toLowerCase() === role.name.toLowerCase()) || null;
 	}
 

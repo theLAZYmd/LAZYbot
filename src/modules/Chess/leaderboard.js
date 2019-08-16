@@ -49,7 +49,7 @@ class Leaderboard extends Parse {
 
 	/**
 	 * Gets a leaderboard of results in a tournament on Lichess and filters them to players from the database
-	 * @param {string} id - The tournamnet ID on Lichess to get
+	 * @param {string} id - The tournament ID on Lichess to get
 	 * @param {Number} nb - The number of players to check against the database
 	 */
 	async tournament(id = this.args[0], nb = this.args[1] || 30) {
