@@ -46,11 +46,11 @@
     "states": {
         "debug": false
     },
-    "lastUpdate": 1565806555984,
+    "lastUpdate": 1565817719331,
     "backupdb": [
-        "Wed Aug 14 2019 20:21:25 GMT+00",
-        "Wed Aug 14 2019 20:21:25 GMT+00",
-        "Wed Aug 14 2019 16:28:19 GMT+00"
+        "Fri Aug 16 2019 08:13:41 GMT+00",
+        "Fri Aug 16 2019 08:13:41 GMT+00",
+        "Fri Aug 16 2019 08:13:41 GMT+00"
     ],
     "delays": {
         "repeat": 1800000
@@ -100,7 +100,7 @@
         },
         "ultra": {
             "name": "Ultrabullet",
-            "lichess": "ultraBullet",
+            "lichess": "ultrabullet",
             "key": "ultra"
         },
         "bullet": {

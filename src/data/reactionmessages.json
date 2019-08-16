@@ -13566,6 +13566,77 @@
                 "period": 180000,
                 "page": 0,
                 "author": "346484064636895232"
+            },
+            "611441561640763405": {
+                "embedgroup": [
+                    {
+                        "title": "Profile for  catask#3509",
+                        "description": "",
+                        "color": 15844367,
+                        "fields": [
+                            {
+                                "name": "a.k.a.",
+                                "value": "gsvcask\nlukasma",
+                                "inline": false
+                            },
+                            {
+                                "name": "Info",
+                                "value": "Region: **Americas**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Joined Date",
+                                "value": "Discord: **Jun 03 2018**\nThe House: **Apr 20 2019**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Index",
+                                "value": "UID: **`452913680208756736`**\nPosition in Database: **511**",
+                                "inline": true
+                            },
+                            {
+                                "name": "Messages Sent",
+                                "value": "14,740",
+                                "inline": true
+                            },
+                            {
+                                "name": "House Trophies",
+                                "value": ":trophy: **Summer Marathon Champion 2019**",
+                                "inline": true
+                            }
+                        ],
+                        "thumbnail": {
+                            "url": "https://i.imgur.com/EncsMs8.png"
+                        },
+                        "files": []
+                    },
+                    {
+                        "title": "Profile for  catask#3509",
+                        "description": "",
+                        "color": 15844367,
+                        "fields": [
+                            {
+                                "name": "<:lichess:430038207355420672> Lichess.org <:verified:431255003211104257>",
+                                "value": "[catask](https://lichess.org/@/catask)\nUltrabullet: **2274**\nBullet: **2758**\nBlitz: **2472**\nRapid: 1500?\nClassical: 1500?\nCorrespondence: 1500?\nCrazyhouse: **2691**\nRacing Kings: 1918?\nPuzzles: **2523**",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:chesscom:430038158244184064> Chess.com",
+                                "value": "[catask](https://www.chess.com/member/catask)\nBullet: **1800**\nBlitz: **2867**\nCrazyhouse: **2346**\nBughouse: **2705**",
+                                "inline": true
+                            },
+                            {
+                                "name": "<:chesscom:430038158244184064> Chess.com",
+                                "value": "[lukasma](https://www.chess.com/member/lukasma)\nBullet: **1952**\nRapid: 1000?\nBughouse: **2403**",
+                                "inline": true
+                            }
+                        ],
+                        "files": []
+                    }
+                ],
+                "period": 30000,
+                "page": 0,
+                "author": "452913680208756736"
             }
         },
         "election": {
