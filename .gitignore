@@ -1,5 +1,5 @@
-LAZYbot.njsproj
-LAZYbot.njsproj.user
+# Data
+src/data
 
 # Linter
 .eslintrc.json
@@ -11,7 +11,9 @@ src/.vscode/
 .vs/
 .vscode/
 bin/
-LAZYbot.code-workspace
+*.code-workspace
+*.njsproj
+*.njsproj.user
 
 # Git files
 .history/
