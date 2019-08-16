@@ -2,7 +2,7 @@
     "name": "lazybot",
     "description": "Discord bot operating in the House server http://dscrd.me/housechessvariants just to further lazy's understanding of basic js. ",
     "main": "src/lazybot.js",
-    "version": "1.10.0",
+    "version": "1.10.11",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "node src/lazybot.js",
@@ -15,7 +15,7 @@
         "utility"
     ],
     "branch": "https://github.com/theLAZYmd/LAZYbot/blob/master",
-    "homepage": "https://github.com/theLAZYmd/LAZYbot/blob/master/README.md",
+    "homepage": "https://LAZYbot.co.uk",
     "releases": "https://github.com/theLAZYmd/LAZYbot/releases",
     "contributors_page": "https://github.com/theLAZYmd/LAZYbot/graphs/contributors",
     "repository": {

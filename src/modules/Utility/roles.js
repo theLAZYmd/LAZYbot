@@ -70,7 +70,7 @@ class Roles extends Parse {
 			for (let id of server.sars[i]) {
 				let role = this.Search.roles.byID(id);
 				if (!role) role = id;
-				value += role + '\n';
+				value += role.color === 3553598 ? '@' + role.name + '\n' : role + '\n';
 				if (!key) key = 'Group ' + i + (server.tars[i] ? ' [Non-exclusive]' : '');
 			}
 			if (key) embed.addField(key, value, true);
