@@ -3,7 +3,8 @@
 		"module": "Profile",
 		"file": "messagecount",
 		"method": "count",
-		"arguments": []
+		"arguments": [],
+		"prefix": "any"
     },
     {
         "module": "Administration",
@@ -11,7 +12,8 @@
 		"method": "check",
 		"arguments": [
 			"message"
-		]
+		],
+		"prefix": "any"
     },
 	{
 		"module": "Custom Reactions",
@@ -19,7 +21,8 @@
 		"method": "check",
 		"arguments": [
             "content"
-        ]
+        ],
+		"prefix": "none"
 	},
 	{
 		"module": "Utility",
@@ -28,7 +31,8 @@
 		"arguments": [
 			"content"
 		],
-		"active": false
+		"active": false,
+		"prefix": "none"
 	},
 	{
 		"module": "Trivia",
@@ -38,7 +42,8 @@
 		"requires": {
 			"state": "trivia",
 			"channels": "trivia"
-		}
+		},
+		"prefix": "none"
 	},
 	{
 		"module": "Utility",
@@ -46,6 +51,7 @@
 		"method": "channel",
 		"requires": {
 			"channels": "reddit"
-		}
+		},
+		"prefix": "any"
 	}
 ]

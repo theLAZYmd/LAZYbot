@@ -32,7 +32,8 @@ class Message {
 		if (!cmdInfo) cmdInfo = aliases.get(this.argsInfo.message.content.toLowerCase());
 		if (!cmdInfo) return null;
 		if (cmdInfo.active === false) throw 'This command is no longer active. Commands get removed for maintenance/safety reasons periodically.\nPlease DM <@!338772451565502474> for more information.';
-		if (this.argsInfo.prefixes.get(cmdInfo.prefix) !== this.argsInfo.prefix) return null;
+		if (cmdInfo.prefix === 'none' && this.argsInfo.prefixes.get(cmdInfo.prefix)) return null;
+		else if (cmdInfo.prefix === 'any' || this.argsInfo.prefixes.get(cmdInfo.prefix) !== this.argsInfo.prefix) return null;
 		return cmdInfo;
 	}
 
@@ -47,7 +48,6 @@ class Message {
 
 	async all(argsInfo) {
 		for (let cmdInfo of Commands.all) {
-			cmdInfo.prefix = '';
 			Message.run(argsInfo, cmdInfo);
 		}
 	}
