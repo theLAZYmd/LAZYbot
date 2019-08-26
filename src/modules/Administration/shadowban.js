@@ -49,6 +49,14 @@ class Shadowban extends Parse {
 	 */
 	set shadowbanned (shadowbanned) {
 		let server = this.server;
+		for (let k of ['usernames', 'newMessages']) {
+			for (let i = 0; i < shadowbanned[k].length; i++) {
+				let str = shadowbanned[k][i];
+				if (typeof str !== 'string') {
+					shadowbanned[k][i] = str.toString();
+				}
+			}
+		}
 		server.shadowbanned = shadowbanned;
 		this._server = server;
 		this.server = server;
