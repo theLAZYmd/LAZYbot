@@ -128,6 +128,7 @@ class Shadowban extends Parse {
 	async sbusername({  user  }) {
 		try {
 			for (let r of this.shadowbanned.usernames) {
+				if (typeof r.test !== 'function') continue;
 				if (!r.test(user.username)) continue;
 				Logger.command(['auto', 'Shadowban', 'byUsername', '[' + [user.tag, r].join(', ') + ']']);
 				await this.guild.ban(user, {
@@ -190,6 +191,7 @@ class Shadowban extends Parse {
 		try {
 			if (/^!(?:sb|shadowban)/.test(message.content)) return false;
 			for (let r of this.shadowbanned.newMessages) {
+				if (typeof r.test !== 'function') continue;
 				if (!r.test(message.content)) continue;
 				Logger.command(['auto', 'Shadowban', 'byNewMessage', '[' + [message.author.tag, message.content].join(', ') + ']']);
 				if (Date.now() - this.member.joinedTimestamp < 48 * 60 * 60 * 1000) {
