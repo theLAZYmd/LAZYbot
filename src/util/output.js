@@ -472,7 +472,7 @@ class Output extends Parse {
 			};
 			const awaitOptions = {
 				max: 1,
-				time: time,
+				time,
 				errors: ['time']
 			};
 			try {

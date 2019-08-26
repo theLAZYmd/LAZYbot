@@ -33,7 +33,8 @@ class Leaderboard extends Parse {
 				let values = Object.values(config.variants);
 				let index = await this.Output.choose({
 					type: 'variant to get shield results',
-					options: values.map(v => v.key)
+					options: values.map(v => v.key),
+					time: 120000
 				});
 				variant = values[index];
 			}
