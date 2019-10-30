@@ -51,10 +51,13 @@ class Ballots extends Main {
 		}
 	}
 
-	async all() {
+	async all(argument = this.argument) {
 		try {
-			if (Permissions.state('voting', this)) throw 'This command cannot be used once voting has begun!'; //set to true at the end
-			await this.Output.confirm();
+			let real = argument === '--real' || argument === '-r';
+			if (real) {
+				if (Permissions.state('voting', this)) throw 'This command cannot be used once voting has begun!'; //set to true at the end
+				await this.Output.confirm();
+			}
 			let object = {};
 			if (this.election.elections) for (let [type, data] of Object.entries(this.election.elections)) { //for each election
 				if (type.startsWith('_')) continue;
@@ -64,15 +67,17 @@ class Ballots extends Main {
 				}
 			}
 			let array = Object.keys(object).map(id => this.Search.users.byID(id)); //then take the keys, and turn each id into a user object
-			this.server.states.election.voting = true; //so this command cannot be used more than once
-			DataManager.setServer(this.server);
-			this.send(array);
+			if (this.real) {
+				this.server.states.election.voting = true; //so this command cannot be used more than once
+				DataManager.setServer(this.server);
+			}
+			this.send(array, undefined, undefined, real);
 		} catch (e) {
 			if (e) this.Output.onError(e);
 		}
 	}
 
-	async send(users = [], mobile, voterChannels) {
+	async send(users = [], mobile, voterChannels, real = false) {
 		try {
 			let voterCount = users.length, ballotCount = 0;
 			let msg = await this.Output.sender(new Embed()
@@ -94,14 +99,14 @@ class Ballots extends Main {
 					try {
 						if (!mobile) {
 							let ballot = Ballots.gen(this.election, user, channels);  //generate the full ballot for desktop users
-							this.Output.sender(ballot, mobile === 0 ? this.channel : user);
+							if (this.real) this.Output.sender(ballot, mobile === 0 ? this.channel : user);
 						} else {
 							let ballots = Ballots.fields(this.election, user, channels);  //otherwise just generate the fields
 							for (let j = 0; j < ballots.length; j++) {
 								setTimeout(() => {
 									let ballot = ballots[j].value.slice(6, -3).trim();  //and send them individually
-									user.send(ballot);
-									setTimeout(() => {
+									if (this.real) user.send(ballot);
+									if (this.real) setTimeout(() => {
 										this.Output.generic('', user);  //with an empty embed to separate them
 									}, 1000);
 								}, 2000 * j);
@@ -126,9 +131,8 @@ class Ballots extends Main {
 							.setDescription(`Finished sending ${ballotRunning} ballots.`)
 							.setFooter(`Sent ${ballotRunning} / ${ballotCount} ballots to ${voterRunning} / ${voterCount} voters.`);
 						this.Output.editor(embed, msg);
-						if (mobile) this.Output.sender(embed, user);
+						if (real && mobile) this.Output.sender(embed, user);
 						else this.Output.data(string, this.Search.channels.get(this.server.channels.mod), 'css');
-
 					}, 30000);
 				}, 1000 * i * (mobile ? channels.length * 2 : 1));
 			}
