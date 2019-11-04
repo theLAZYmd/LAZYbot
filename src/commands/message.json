@@ -1706,7 +1706,7 @@
                 "IRV mock"
             ],
             "module": "Election",
-            "file": "electorals/irv",
+            "file": "irv",
             "method": "run",
             "prefix": "generic",
             "requires": {
