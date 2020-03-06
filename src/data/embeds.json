@@ -707,12 +707,12 @@
 					},
 					{
 						"name": "Crazyhouse World Championships",
-						"value": "Type `.iam CWC` to see the CWC channels on the left.\n\u200b",
+						"value": "Type `!iam CWC` to see the CWC channels on the left.\n\u200b",
 						"inline": false
 					},
 					{
 						"name": "Developers",
-						"value": "If you're a dev, type `@mods I'm a dev` and you'll be added to #devs.",
+						"value": "If you're a dev, type `@admin I'm a dev` and you'll be added to #devs.",
 						"inline": false
 					}
 				]
