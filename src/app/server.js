@@ -40,7 +40,7 @@ const cached = {};
 
 if (betabot) app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/commands', express.static(path.join(__dirname, '..', 'commands')));
+if (betabot) app.use('/commands', express.static(path.join(__dirname, '..', 'commands')));
 
 app.use('/config', (req, res) => res.json({
 	id,
