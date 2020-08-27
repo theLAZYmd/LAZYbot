@@ -6,6 +6,8 @@ Currently not available on multiple servers.
 
 This bot has also spawned off [LAZYmail](https://github.com/theLAZYmd/LAZYbot/tree/modmail), a version of the bot with just the below-mentioned ModMail module. This is in use in the official [IBO Discord server](https://discord.gg/IBO) and services over 13,800 members [March 2019]. 
 
+3.8.123.0
+
 ### Hosting
 - **Provider:** Amazon EC2 Instance
 - **Region:** eu-west-2a
