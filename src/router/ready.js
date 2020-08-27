@@ -43,7 +43,7 @@ class Ready {
 		Logger.load(this.client.readyTimestamp, [[A.length, 'Processes']], 'All');
 		let B = Commands.getBot(this.client.readyTimestamp);
 		Logger.load(this.client.readyTimestamp, [[B.size, 'Title Keys']], 'Bot');
-		let C = Commands.getMessage(this.client.readyTimestamp);
+		let C = await Commands.getMessage(this.client.readyTimestamp);
 		Logger.load(this.client.readyTimestamp, [[C.commands.size, 'Command Keys'], [C.aliases.size, 'Aliases']], 'Commands');
 		let D = Commands.getDM(this.client.readyTimestamp);
 		Logger.load(this.client.readyTimestamp, [[D.aliases.size, 'Command keys'], [D.regexes.size, 'Regexes']], 'DM');

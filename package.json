@@ -4,9 +4,9 @@
     "main": "src/lazybot.js",
     "version": "1.10.11",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "node src/lazybot.js",
-        "_start": "node --experimental-modules src/lazybot.mjs"
+        "start": "node dist/lazybot.js",
+        "src": "node src/lazybot.js",
+        "build": "tsc"
     },
     "keywords": [
         "lazy",
@@ -28,8 +28,7 @@
     "dependencies": {
         "discord.js": "^11.5.1",
         "dotenv": "^8.0.0",
-        "enmap": "^0.3.2",
-        "es6": "0.0.7",
+        "election-js": "^1.0.2",
         "express": "^4.17.1",
         "from": "^0.1.7",
         "fs-reverse-modern": "^1.0.0",
@@ -39,7 +38,12 @@
         "request": "^2.88.0",
         "request-promise": "^4.2.4",
         "simple-oauth2": "^2.2.1",
-        "winston": "^3.2.1",
+        "winston": "^3.2.1"
+    },
+    "devDependencies": {
+        "enmap": "^0.3.2",
+        "es6": "0.0.7",
+        "jsdoc": "^3.6.3",
         "yarn": "^1.17.3"
     }
 }

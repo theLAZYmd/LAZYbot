@@ -61,6 +61,11 @@
                 "type": "text",
                 "reaction": "https://challonge.com/noxtc1kv",
                 "anyword": false
+            },
+            "are you under 1900": {
+                "type": "text",
+                "reaction": "Are you a weak antichess player, are you under 1900? You can become strong, to reach the top 100, or top 50 if you play games with increment. Believe me, I was a 1700 player and I started playing with increment 1/4 +2 especially. In two months I reached 2050.",
+                "anyword": false
             }
         },
         "emoji": {

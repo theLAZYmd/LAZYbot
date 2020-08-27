@@ -1,5 +1,7 @@
 # Data
 src/data
+dist/
+data/
 
 # Linter
 .eslintrc.json

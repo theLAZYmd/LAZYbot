@@ -197,10 +197,6 @@ class Logger {
 		for (let a of Array.from(arguments)) {
 			let message = a;
 			if (typeof a === 'object') message = JSON.stringify(a, null, 4);
-			data.log({
-				level: 'data',
-				message
-			});
 		}
 	}
 

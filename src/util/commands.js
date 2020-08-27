@@ -100,7 +100,10 @@ class Commands {
      */
 	static get message () {
 		if (Commands._message) return Commands._message;
-		return Commands.getMessage();
+		return {
+			commands: new Map(),
+			aliases: new Map()
+		};
 	}
      
 	/**
@@ -134,7 +137,7 @@ class Commands {
 		return Commands._bot = map;
 	}
 
-	static getMessage () {
+	static async getMessage () {
 		let commands = new Map();
 		let aliases = new Map();
 		for (let c of Object.values(Message).flat()) {
@@ -152,6 +155,29 @@ class Commands {
 			for (let alias of c.aliases) {
 				if (alias.split(/\s/g).length < 2) commands.set(alias.toLowerCase(), info);
 				else aliases.set(alias.toLowerCase(), info);
+			}
+		}
+		let modules = fs.readdirSync(path.join('src', 'modules'));
+		modules = modules.filter(m => m.startsWith('#')); // for beta where we're still using a config.json
+		for (let m of modules) {
+			let files = fs.readdirSync(path.join('src', 'modules', m));
+			for (let f of files) try {
+				let pathname = ['.', 'modules', m, f].join('/');
+				let constructor = require.main.require(pathname);
+				if (!constructor.prototype) throw f;
+				for (let method of Object.getOwnPropertyNames(constructor.prototype)) {
+					if (typeof constructor.prototype[method] !== 'function') continue;
+					if (method.startsWith('#')) continue;
+					aliases.set(method.toLowerCase(), {
+						prefix: 'generic',
+						module: m,
+						file: f,
+						method,
+						description: 'This command is in beta'
+					});
+				}
+			} catch (e) {
+				Logger.error(e);
 			}
 		}
 		return Commands._message = {    commands, aliases    };

@@ -1,1 +1,55 @@
-{}
+{
+    "314155682033041408": {
+        "_id": "314155682033041408",
+        "prefix": {
+            "generic": "!",
+            "nadeko": "."
+        },
+        "states": {
+            "election": {
+                "register": false,
+                "candidates": false,
+                "voting": false,
+                "count": false,
+                "results": false
+            },
+            "trivia": false
+        },
+        "channels": {
+            "announcements": "announcements",
+            "bot": "bot",
+            "bot2": "bot",
+            "modmail": "modmail",
+            "log": "log",
+            "join": "join",
+            "leave": "leave",
+            "trivia": "trivia",
+            "welcome": "welcome"
+        },
+        "colors": {
+            "generic": 53380,
+            "error": 15406156,
+            "ratings": 9359868
+        },
+        "roles": {
+            "admin": "admin",
+            "mod": "mod",
+            "bot": "bot",
+            "muted": "muted",
+            "arena": "arena",
+            "beta": "",
+            "livenotifications": "live"
+        },
+        "modmail": {
+            "_timeout": {},
+            "725011540948025407": {
+                "tag": "Tornon#0288",
+                "lastMail": 1592926798702
+            },
+            "736581175648190547": {
+                "tag": "Speed-King#8379",
+                "lastMail": 1595685037614
+            }
+        }
+    }
+}
