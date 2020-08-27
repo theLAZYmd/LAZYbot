@@ -15,6 +15,7 @@
             },
             "trivia": false
         },
+        "paginator": {},
         "channels": {
             "announcements": "announcements",
             "bot": "bot",
@@ -39,17 +40,6 @@
             "arena": "arena",
             "beta": "",
             "livenotifications": "live"
-        },
-        "modmail": {
-            "_timeout": {},
-            "725011540948025407": {
-                "tag": "Tornon#0288",
-                "lastMail": 1592926798702
-            },
-            "736581175648190547": {
-                "tag": "Speed-King#8379",
-                "lastMail": 1595685037614
-            }
         }
     }
 }

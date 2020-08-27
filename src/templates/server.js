@@ -5,6 +5,7 @@ class Server {
 			generic: '!',
 			nadeko: '.'
 		},
+		this.paginator = {},
 		this.states = {
 			election: {
 				register: false,
